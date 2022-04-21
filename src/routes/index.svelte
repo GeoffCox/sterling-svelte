@@ -14,7 +14,12 @@
 				<Button on:click={() => sendNotification('Button clicked')}>Sterling</Button>
 			</ExampleCard>
 			<ExampleCard name="disabled">
-				<Button disabled on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+				<svelte:fragment>
+					<Button disabled on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+					<div class="checkered">
+						<Button disabled on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+					</div>
+				</svelte:fragment>
 			</ExampleCard>
 			<ExampleCard name="horizontal (with icon)">
 				<Button on:click={() => sendNotification('Button clicked')}>
@@ -65,5 +70,29 @@
 
 	.grid h2 {
 		font-size: 1rem;
+	}
+
+	.checkered {
+		background-color: #bfbfbf;
+		opacity: 1;
+		background-image: repeating-linear-gradient(
+				45deg,
+				rgba(227, 227, 227, 1) 25%,
+				transparent 25%,
+				transparent 75%,
+				rgba(227, 227, 227, 1) 75%,
+				rgba(227, 227, 227, 1)
+			),
+			repeating-linear-gradient(
+				45deg,
+				rgba(227, 227, 227, 1) 25%,
+				#bfbfbf 25%,
+				#bfbfbf 75%,
+				rgba(227, 227, 227, 1) 75%,
+				rgba(227, 227, 227, 1)
+			);
+		background-position: 0 0, 10px 10px;
+		background-size: 20px 20px;
+		padding: 20px;
 	}
 </style>

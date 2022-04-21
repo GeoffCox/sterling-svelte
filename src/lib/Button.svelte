@@ -33,7 +33,7 @@
 
 <style>
 	button {
-		background-color: var(--button__background-color, #efefef);
+		background-color: var(--button__background-color, #fafafa);
 		border-color: var(--button__border-color, #777);
 		border-radius: var(--button__border-radius, 0.5em);
 		border-style: var(--button__border-style, solid);
@@ -84,7 +84,7 @@
 	}
 
 	button:hover {
-		background-color: var(--button__background-color--hover, #eaeaea);
+		background-color: var(--button__background-color--hover, #f5f5f5);
 		border-color: var(--button__border-color--hover, #555);
 		color: var(--button__color--hover, #222);
 	}
@@ -99,13 +99,13 @@
 	}
 
 	button:active {
-		background-color: var(--button__background-color--active, #dcdcdc);
+		background-color: var(--button__background-color--active, #ebebeb);
 		border-color: var(--button__border-color--active, #444);
 		color: var(--button__color--active, #222);
 	}
 
 	button.ghost:active {
-		border-color: var(--button__background-color--hover, #eaeaea);
+		border-color: var(--button__background-color--hover, #ebebeb);
 	}
 
 	button.link:active {
@@ -133,9 +133,9 @@
 	}
 
 	button:disabled {
-		background-color: var(--button__background-color--disabled, rgba(0, 0, 0, 0.1));
-		border-color: var(--button__border-color--disabled, rgba(0, 0, 0, 0.25));
-		color: var(--button__color--disabled, rgba(0, 0, 0, 0.25));
+		background-color: var(--button__background-color--disabled, rgba(245, 245, 245, 0.7));
+		border-color: var(--button__border-color--disabled, rgba(85, 85, 85, 0.7));
+		color: var(--button__color--disabled, rgba(34, 34, 34, 0.7));
 	}
 
 	button.ghost:disabled {
