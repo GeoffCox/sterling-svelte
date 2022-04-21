@@ -1,2 +1,69 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import Button from '$lib/Button.svelte';
+	import ExampleCard from './_components/ExampleCard.svelte';
+	import SvelteIcon from './_components/SvelteIcon.svelte';
+	import { notification, sendNotification } from '../stores';
+</script>
+
+<div class="app">
+	<div class="notification">{$notification}</div>
+	<div class="section">
+		<h1>Button</h1>
+		<div class="grid">
+			<ExampleCard name="default">
+				<Button on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+			</ExampleCard>
+			<ExampleCard name="disabled">
+				<Button disabled on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+			</ExampleCard>
+			<ExampleCard name="horizontal (with icon)">
+				<Button on:click={() => sendNotification('Button clicked')}>
+					<SvelteIcon />
+					<span> Sterling </span>
+				</Button>
+			</ExampleCard>
+			<ExampleCard name="vertical (with icon)">
+				<Button vertical on:click={() => sendNotification('Button clicked')}>
+					<SvelteIcon />
+					<span> Sterling </span>
+				</Button>
+			</ExampleCard>
+			<ExampleCard name="outline">
+				<Button look="outline" on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+			</ExampleCard>
+			<ExampleCard name="ghost">
+				<Button look="ghost" on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+			</ExampleCard>
+			<ExampleCard name="link">
+				<Button look="link" on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+			</ExampleCard>
+		</div>
+	</div>
+</div>
+
+<style>
+	.section {
+		padding: 0 25px;
+	}
+	.notification {
+		width: 100%;
+		background: aliceblue;
+		color: steelblue;
+		font-size: 0.9rem;
+		text-align: center;
+		padding: 5px;
+		height: 0.9rem;
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, 300px);
+		grid-template-rows: 150px;
+		gap: 1em;
+		place-items: stretch;
+		place-content: stretch;
+	}
+
+	.grid h2 {
+		font-size: 1rem;
+	}
+</style>

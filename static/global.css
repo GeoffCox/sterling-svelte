@@ -1,0 +1,15 @@
+/* Sans-serif font for headings */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+/* Serif font for body text*/
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+
+/* Monospace font for code examples */
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+
+body {
+    color: black;
+    margin: 0;
+    padding: 0;
+    font-family: "Open+Sans", sans-serif;
+  }
