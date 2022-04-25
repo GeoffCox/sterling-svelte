@@ -24,7 +24,7 @@
 
 <style>
 	button {
-		background-color: var(--Button__background-color, #fafafa);
+		background-color: transparent;
 		border-color: var(--Button__border-color, #777);
 		border-radius: var(--Button__border-radius, 0.5em);
 		border-style: var(--Button__border-style, solid);
@@ -45,10 +45,6 @@
 		text-overflow: ellipsis;
 		transition: background-color 250ms, color 250ms, border-color 250ms;
 		white-space: nowrap;
-	}
-	button.vertical {
-		flex-direction: column;
-		row-gap: 0.15em;
 	}
 
 	button:hover {
@@ -71,7 +67,7 @@
 	}
 
 	button:disabled {
-		background-color: var(--Button__background-color--disabled, rgba(245, 245, 245, 0.7));
+		background-color: transparent;
 		border-color: var(--Button__border-color--disabled, rgba(85, 85, 85, 0.7));
 		color: var(--Button__color--disabled, rgba(34, 34, 34, 0.7));
 	}

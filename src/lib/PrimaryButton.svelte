@@ -24,13 +24,13 @@
 
 <style>
 	button {
-		background-color: var(--Button__background-color, #fafafa);
-		border-color: var(--Button__border-color, #777);
+		background-color: var(--PrimaryButton__background-color, hsl(206, 85%, 45%));
+		border-color: var(--PrimaryButton__border-color, hsl(206, 85%, 35%));
 		border-radius: var(--Button__border-radius, 0.5em);
 		border-style: var(--Button__border-style, solid);
 		border-width: var(--Button__border-width, 0.07em);
 		box-sizing: border-box;
-		color: var(--Button__color, #222);
+		color: var(--PrimaryButton__color, #fff);
 		cursor: pointer;
 		display: inline-flex;
 		flex-direction: row;
@@ -52,19 +52,19 @@
 	}
 
 	button:hover {
-		background-color: var(--Button__background-color--hover, #f5f5f5);
-		border-color: var(--Button__border-color--hover, #555);
-		color: var(--Button__color--hover, #222);
+		background-color: var(--PrimaryButton__background-color--hover, hsl(206, 85%, 42%));
+		border-color: var(--PrimaryButton__border-color--hover, hsl(206, 85%, 32%));
+		color: var(--Button__color--hover, #fff);
 	}
 
 	button:active {
-		background-color: var(--Button__background-color--active, #ebebeb);
-		border-color: var(--Button__border-color--active, #444);
-		color: var(--Button__color--active, #222);
+		background-color: var(--PrimaryButton__background-color--active, hsl(206, 85%, 35%));
+		border-color: var(--PrimaryButton__border-color--active, hsl(206, 85%, 25%));
+		color: var(--PrimaryButton__color--active, #fff);
 	}
 
 	button:focus-visible {
-		border-color: var(--Button__border-color--focus, black);
+		border-color: var(--PrimaryButton__border-color--focus, black);
 		outline-color: var(--Button__outline-color--focus, var(--Button__border-color--focus, black));
 		outline-style: var(--Button__outline-style--focus, var(--Button__border-style, solid));
 		outline-width: var(--Button__outline-width--focus, var(--Button__border-width, 0.07em));

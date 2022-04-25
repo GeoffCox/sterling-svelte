@@ -24,8 +24,8 @@
 
 <style>
 	button {
-		background-color: var(--Button__background-color, #fafafa);
-		border-color: var(--Button__border-color, #777);
+		background-color: transparent;
+		border-color: transparent;
 		border-radius: var(--Button__border-radius, 0.5em);
 		border-style: var(--Button__border-style, solid);
 		border-width: var(--Button__border-width, 0.07em);
@@ -53,18 +53,21 @@
 
 	button:hover {
 		background-color: var(--Button__background-color--hover, #f5f5f5);
-		border-color: var(--Button__border-color--hover, #555);
+		border-color: var(--Button__background-color--hover, #eaeaea);
 		color: var(--Button__color--hover, #222);
 	}
 
 	button:active {
 		background-color: var(--Button__background-color--active, #ebebeb);
-		border-color: var(--Button__border-color--active, #444);
+		border-color: var(--Button__background-color--hover, #ebebeb);
 		color: var(--Button__color--active, #222);
 	}
 
 	button:focus-visible {
 		border-color: var(--Button__border-color--focus, black);
+		border-radius: var(--Button__border-radius, 0.5em);
+		border-style: var(--Button__border-style, solid);
+		border-width: var(--Button__border-width, 0.07em);
 		outline-color: var(--Button__outline-color--focus, var(--Button__border-color--focus, black));
 		outline-style: var(--Button__outline-style--focus, var(--Button__border-style, solid));
 		outline-width: var(--Button__outline-width--focus, var(--Button__border-width, 0.07em));
@@ -72,7 +75,6 @@
 
 	button:disabled {
 		background-color: var(--Button__background-color--disabled, rgba(245, 245, 245, 0.7));
-		border-color: var(--Button__border-color--disabled, rgba(85, 85, 85, 0.7));
 		color: var(--Button__color--disabled, rgba(34, 34, 34, 0.7));
 	}
 </style>
