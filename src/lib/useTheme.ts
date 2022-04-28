@@ -1,14 +1,20 @@
-export const theme = (node: HTMLElement, theme: Record<string, string>) => {
-	const themeStyle = Object.keys(theme)
-		.map((key) => `${key}:${theme[key]}`)
-		.join(';');
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-	const style = node.getAttribute('style');
-	node?.setAttribute('style', themeStyle);
+import type { CSSVarSet } from './types';
+
+const applyTheme = (node: HTMLElement, cssVars: CSSVarSet) => {
+	Object.keys(cssVars).map((key) => {
+		node.style.setProperty(key, cssVars[key] ? `${cssVars[key]}` : null);
+	});
+	console.log('node', node.style);
+}
+
+export const theme = (node: HTMLElement, cssVars: CSSVarSet) => {
+	applyTheme(node, cssVars);
 
 	return {
-		destroy() {
-			style ? node.setAttribute('style', style): node.removeAttribute('style');
-		}
+		update: (newTheme : CSSVarSet) => {
+			applyTheme(node, newTheme);
+		},
 	};
 };

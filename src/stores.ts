@@ -15,3 +15,5 @@ export const sendNotification = (message: string) => {
         notification.set('');
     }, 3000);
 }
+
+export const themeStore = writable<string>('light');

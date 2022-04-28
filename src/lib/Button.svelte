@@ -1,3 +1,6 @@
+<!-- @component
+
+-->
 <button
 	class="sterling-button"
 	on:blur
@@ -24,7 +27,7 @@
 
 <style>
 	button {
-		background-color: var(--Button__background-color, #fafafa);
+		background-color: var(--Button__background-color, red);
 		border-color: var(--Button__border-color, #777);
 		border-radius: var(--Button__border-radius, 0.5em);
 		border-style: var(--Button__border-style, solid);
@@ -71,8 +74,8 @@
 	}
 
 	button:disabled {
-		background-color: var(--Button__background-color--disabled, rgba(245, 245, 245, 0.7));
-		border-color: var(--Button__border-color--disabled, rgba(85, 85, 85, 0.7));
-		color: var(--Button__color--disabled, rgba(34, 34, 34, 0.7));
+		background-color: var(--Button__background-color--disabled, #f5f5f5);
+		border-color: var(--Button__border-color--disabled, #AAA);
+		color: var(--Button__color--disabled, #CCC);
 	}
 </style>

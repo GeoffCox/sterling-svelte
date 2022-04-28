@@ -1,5 +1,5 @@
 <button
-	class="sterling-button"
+	class="sterling-ghost-button"
 	on:blur
 	on:click
 	on:dblclick
@@ -74,7 +74,8 @@
 	}
 
 	button:disabled {
-		background-color: var(--Button__background-color--disabled, rgba(245, 245, 245, 0.7));
-		color: var(--Button__color--disabled, rgba(34, 34, 34, 0.7));
+		background-color: var(--Button__background-color--disabled, #f5f5f5);
+		border-color: var(--Button__border-color--disabled, #f5f5f5);
+		color: var(--Button__color--disabled, #CCC);
 	}
 </style>

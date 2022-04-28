@@ -1,5 +1,5 @@
 <button
-	class="sterling-button"
+	class="sterling-link-button"
 	on:blur
 	on:click
 	on:dblclick
@@ -69,7 +69,7 @@
 	}
 
 	button:disabled {
-		border-bottom-color: var(--Button__border-color--disabled, rgba(85, 85, 85, 0.7));
-		color: var(--Button__color--disabled, rgba(34, 34, 34, 0.7));
+		border-bottom-color: var(--Button__border-color--disabled, #aaa);
+		color: var(--Button__color--disabled, #aaa);
 	}
 </style>

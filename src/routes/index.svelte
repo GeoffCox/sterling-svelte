@@ -4,193 +4,157 @@
 	import ExampleCard from './_components/ExampleCard.svelte';
 	import SvelteIcon from './_components/SvelteIcon.svelte';
 	import { notification, sendNotification } from '../stores';
-	import { theme } from '../lib/useTheme';
-	import { darkTheme, lightTheme } from './_components/themes';
+	import { buttonTheme } from '$lib/useButtonTheme';
+	import { currentTheme } from './_components/useCurrentTheme';
 	import OutlineButton from '$lib/OutlineButton.svelte';
 	import PrimaryButton from '$lib/PrimaryButton.svelte';
 	import GhostButton from '$lib/GhostButton.svelte';
+
+	let darkMode = false;
+
+	const toggleDarkMode = () => {
+		darkMode = !darkMode;
+	};
+
+	$: {
+		console.log(darkMode);
+	}
 </script>
 
-<div class="app">
+<div class="app" use:currentTheme={{ darkMode }} class:darkMode>
+	<div>
+		<label
+			>Dark Mode
+			<input type="checkbox" checked={darkMode} on:click={toggleDarkMode} />
+		</label>
+	</div>
 	<div class="notification">{$notification}</div>
-	<div class="section">
-		<h1>Button</h1>
-		<div class="grid">
-			<ExampleCard name="default">
-				<Button on:click={() => sendNotification('Button clicked')}>Sterling</Button>
-			</ExampleCard>
-			<ExampleCard name="disabled">
-				<svelte:fragment>
-					<Button disabled on:click={() => sendNotification('Button clicked')}>Sterling</Button>
-					<div class="checkered">
-						<Button disabled on:click={() => sendNotification('Button clicked')}>Sterling</Button>
-					</div>
-				</svelte:fragment>
-			</ExampleCard>
-			<ExampleCard name="with icon">
-				<Button on:click={() => sendNotification('Button clicked')}>
-					<SvelteIcon />
-					<span> Sterling </span>
-				</Button>
-			</ExampleCard>
-			<div use:theme={lightTheme}>
-				<ExampleCard name="light theme">
+	<div use:buttonTheme>
+		<div class="section">
+			<h1>Button</h1>
+			<div class="grid">
+				<ExampleCard name="default">
 					<Button on:click={() => sendNotification('Button clicked')}>Sterling</Button>
 				</ExampleCard>
-			</div>
-			<div use:theme={darkTheme}>
-				<ExampleCard name="dark theme">
-					<Button on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+				<ExampleCard name="disabled">
+					<svelte:fragment>
+						<Button disabled on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+						<div class="checkered">
+							<Button disabled on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+						</div>
+					</svelte:fragment>
+				</ExampleCard>
+				<ExampleCard name="with icon">
+					<Button on:click={() => sendNotification('Button clicked')}>
+						<SvelteIcon />
+						<span> Sterling </span>
+					</Button>
 				</ExampleCard>
 			</div>
 		</div>
-	</div>
-	<div class="section">
-		<h1>Outline Button</h1>
-		<div class="grid">
-			<ExampleCard name="default">
-				<OutlineButton on:click={() => sendNotification('Button clicked')}>Sterling</OutlineButton>
-			</ExampleCard>
-			<ExampleCard name="disabled">
-				<svelte:fragment>
-					<OutlineButton disabled on:click={() => sendNotification('Button clicked')}
-						>Sterling</OutlineButton
+		<div class="section">
+			<h1>Outline Button</h1>
+			<div class="grid">
+				<ExampleCard name="default">
+					<OutlineButton on:click={() => sendNotification('Button clicked')}>Sterling</OutlineButton
 					>
-					<div class="checkered">
+				</ExampleCard>
+				<ExampleCard name="disabled">
+					<svelte:fragment>
 						<OutlineButton disabled on:click={() => sendNotification('Button clicked')}
 							>Sterling</OutlineButton
 						>
-					</div>
-				</svelte:fragment>
-			</ExampleCard>
-			<ExampleCard name="with icon">
-				<OutlineButton on:click={() => sendNotification('Button clicked')}>
-					<SvelteIcon />
-					<span> Sterling </span>
-				</OutlineButton>
-			</ExampleCard>
-			<div use:theme={lightTheme}>
-				<ExampleCard name="light theme">
-					<OutlineButton on:click={() => sendNotification('Button clicked')}>Sterling</OutlineButton
-					>
+						<div class="checkered">
+							<OutlineButton disabled on:click={() => sendNotification('Button clicked')}
+								>Sterling</OutlineButton
+							>
+						</div>
+					</svelte:fragment>
 				</ExampleCard>
-			</div>
-			<div use:theme={darkTheme}>
-				<ExampleCard name="dark theme">
-					<OutlineButton on:click={() => sendNotification('Button clicked')}>Sterling</OutlineButton
-					>
+				<ExampleCard name="with icon">
+					<OutlineButton on:click={() => sendNotification('Button clicked')}>
+						<SvelteIcon />
+						<span> Sterling </span>
+					</OutlineButton>
 				</ExampleCard>
 			</div>
 		</div>
-	</div>
-	<div class="section">
-		<h1>Ghost Button</h1>
-		<div class="grid">
-			<ExampleCard name="default">
-				<GhostButton on:click={() => sendNotification('Button clicked')}>Sterling</GhostButton>
-			</ExampleCard>
-			<ExampleCard name="disabled">
-				<svelte:fragment>
-					<GhostButton disabled on:click={() => sendNotification('Button clicked')}
-						>Sterling</GhostButton
-					>
-					<div class="checkered">
+		<div class="section">
+			<h1>Ghost Button</h1>
+			<div class="grid">
+				<ExampleCard name="default">
+					<GhostButton on:click={() => sendNotification('Button clicked')}>Sterling</GhostButton>
+				</ExampleCard>
+				<ExampleCard name="disabled">
+					<svelte:fragment>
 						<GhostButton disabled on:click={() => sendNotification('Button clicked')}
 							>Sterling</GhostButton
 						>
-					</div>
-				</svelte:fragment>
-			</ExampleCard>
-			<ExampleCard name="with icon">
-				<GhostButton on:click={() => sendNotification('Button clicked')}>
-					<SvelteIcon />
-					<span> Sterling </span>
-				</GhostButton>
-			</ExampleCard>
-			<div use:theme={lightTheme}>
-				<ExampleCard name="light theme">
-					<GhostButton on:click={() => sendNotification('Button clicked')}>Sterling</GhostButton
-					>
+						<div class="checkered">
+							<GhostButton disabled on:click={() => sendNotification('Button clicked')}
+								>Sterling</GhostButton
+							>
+						</div>
+					</svelte:fragment>
 				</ExampleCard>
-			</div>
-			<div use:theme={darkTheme}>
-				<ExampleCard name="dark theme">
-					<GhostButton on:click={() => sendNotification('Button clicked')}>Sterling</GhostButton
-					>
+				<ExampleCard name="with icon">
+					<GhostButton on:click={() => sendNotification('Button clicked')}>
+						<SvelteIcon />
+						<span> Sterling </span>
+					</GhostButton>
 				</ExampleCard>
 			</div>
 		</div>
-	</div>
-	<div class="section">
-		<h1>Primary Button</h1>
-		<div class="grid">
-			<ExampleCard name="default">
-				<PrimaryButton on:click={() => sendNotification('Button clicked')}>Sterling</PrimaryButton>
-			</ExampleCard>
-			<ExampleCard name="disabled">
-				<svelte:fragment>
-					<PrimaryButton disabled on:click={() => sendNotification('Button clicked')}
-						>Sterling</PrimaryButton
+		<div class="section">
+			<h1>Primary Button</h1>
+			<div class="grid">
+				<ExampleCard name="default">
+					<PrimaryButton on:click={() => sendNotification('Button clicked')}>Sterling</PrimaryButton
 					>
-					<div class="checkered">
+				</ExampleCard>
+				<ExampleCard name="disabled">
+					<svelte:fragment>
 						<PrimaryButton disabled on:click={() => sendNotification('Button clicked')}
 							>Sterling</PrimaryButton
 						>
-					</div>
-				</svelte:fragment>
-			</ExampleCard>
-			<ExampleCard name="with icon">
-				<PrimaryButton on:click={() => sendNotification('Button clicked')}>
-					<SvelteIcon />
-					<span> Sterling </span>
-				</PrimaryButton>
-			</ExampleCard>
-			<div use:theme={lightTheme}>
-				<ExampleCard name="light theme">
-					<PrimaryButton on:click={() => sendNotification('Button clicked')}>Sterling</PrimaryButton
-					>
+						<div class="checkered">
+							<PrimaryButton disabled on:click={() => sendNotification('Button clicked')}
+								>Sterling</PrimaryButton
+							>
+						</div>
+					</svelte:fragment>
 				</ExampleCard>
-			</div>
-			<div use:theme={darkTheme}>
-				<ExampleCard name="dark theme">
-					<PrimaryButton on:click={() => sendNotification('Button clicked')}>Sterling</PrimaryButton
-					>
+				<ExampleCard name="with icon">
+					<PrimaryButton on:click={() => sendNotification('Button clicked')}>
+						<SvelteIcon />
+						<span> Sterling </span>
+					</PrimaryButton>
 				</ExampleCard>
 			</div>
 		</div>
-	</div>
-	<div class="section">
-		<h1>Link Button</h1>
-		<div class="grid">
-			<ExampleCard name="default">
-				<LinkButton on:click={() => sendNotification('Button clicked')}>Sterling</LinkButton>
-			</ExampleCard>
-			<ExampleCard name="disabled">
-				<svelte:fragment>
-					<LinkButton disabled on:click={() => sendNotification('Button clicked')}
-						>Sterling</LinkButton
-					>
-					<div class="checkered">
+		<div class="section">
+			<h1>Link Button</h1>
+			<div class="grid">
+				<ExampleCard name="default">
+					<LinkButton on:click={() => sendNotification('Button clicked')}>Sterling</LinkButton>
+				</ExampleCard>
+				<ExampleCard name="disabled">
+					<svelte:fragment>
 						<LinkButton disabled on:click={() => sendNotification('Button clicked')}
 							>Sterling</LinkButton
 						>
-					</div>
-				</svelte:fragment>
-			</ExampleCard>
-			<ExampleCard name="with icon">
-				<LinkButton on:click={() => sendNotification('Button clicked')}>
-					<SvelteIcon />
-					<span> Sterling </span>
-				</LinkButton>
-			</ExampleCard>
-			<div use:theme={lightTheme}>
-				<ExampleCard name="light theme">
-					<LinkButton on:click={() => sendNotification('Button clicked')}>Sterling</LinkButton>
+						<div class="checkered">
+							<LinkButton disabled on:click={() => sendNotification('Button clicked')}
+								>Sterling</LinkButton
+							>
+						</div>
+					</svelte:fragment>
 				</ExampleCard>
-			</div>
-			<div use:theme={darkTheme}>
-				<ExampleCard name="dark theme">
-					<LinkButton on:click={() => sendNotification('Button clicked')}>Sterling</LinkButton>
+				<ExampleCard name="with icon">
+					<LinkButton on:click={() => sendNotification('Button clicked')}>
+						<SvelteIcon />
+						<span> Sterling </span>
+					</LinkButton>
 				</ExampleCard>
 			</div>
 		</div>
@@ -226,26 +190,38 @@
 	}
 
 	.checkered {
-		background-color: #bfbfbf;
+		background-color: #ebebeb;
 		opacity: 1;
 		background-image: repeating-linear-gradient(
 				45deg,
-				rgba(227, 227, 227, 1) 25%,
+				#ffffff 25%,
 				transparent 25%,
 				transparent 75%,
-				rgba(227, 227, 227, 1) 75%,
-				rgba(227, 227, 227, 1)
+				#ffffff 75%,
+				#ffffff
 			),
-			repeating-linear-gradient(
+			repeating-linear-gradient(45deg, #ffffff 25%, #ebebeb 25%, #ebebeb 75%, #ffffff 75%, #ffffff);
+		background-position: 0 0, 11px 11px;
+		background-size: 22px 22px;
+
+		padding: 20px;
+	}
+
+	.darkMode .checkered {
+		background-color: #444;
+		opacity: 1;
+		background-image: repeating-linear-gradient(
 				45deg,
-				rgba(227, 227, 227, 1) 25%,
-				#bfbfbf 25%,
-				#bfbfbf 75%,
-				rgba(227, 227, 227, 1) 75%,
-				rgba(227, 227, 227, 1)
-			);
-		background-position: 0 0, 10px 10px;
-		background-size: 20px 20px;
+				#222 25%,
+				transparent 25%,
+				transparent 75%,
+				#222 75%,
+				#222
+			),
+			repeating-linear-gradient(45deg, #222 25%, #444 25%, #444 75%, #222 75%, #222);
+		background-position: 0 0, 11px 11px;
+		background-size: 22px 22px;
+
 		padding: 20px;
 	}
 </style>
