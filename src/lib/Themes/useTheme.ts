@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { CSSVarSet } from './types';
+import type { CSSVarSet } from '../types';
 
 const applyTheme = (node: HTMLElement, cssVars: CSSVarSet) => {
 	Object.keys(cssVars).map((key) => {

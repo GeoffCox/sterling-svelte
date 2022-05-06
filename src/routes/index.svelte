@@ -1,14 +1,17 @@
 <script lang="ts">
-	import Button from '$lib/Button.svelte';
-	import LinkButton from '$lib/LinkButton.svelte';
+	import Button from '$lib/Buttons/Button.svelte';
+	import LinkButton from '$lib/Buttons/LinkButton.svelte';
 	import ExampleCard from './_components/ExampleCard.svelte';
 	import SvelteIcon from './_components/SvelteIcon.svelte';
 	import { notification, sendNotification } from '../stores';
-	import { buttonTheme } from '$lib/useButtonTheme';
+	import { buttonTheme } from '$lib/Buttons/useButtonTheme';
 	import { currentTheme } from './_components/useCurrentTheme';
-	import OutlineButton from '$lib/OutlineButton.svelte';
-	import PrimaryButton from '$lib/PrimaryButton.svelte';
-	import GhostButton from '$lib/GhostButton.svelte';
+	import OutlineButton from '$lib/Buttons/OutlineButton.svelte';
+	import PrimaryButton from '$lib/Buttons/PrimaryButton.svelte';
+	import GhostButton from '$lib/Buttons/GhostButton.svelte';
+	import BaseLayer from '$lib/BaseLayer.svelte';
+	import TextInput from '$lib/Inputs/TextInput.svelte';
+	import { inputTheme } from '$lib/Inputs/useInputTheme';
 
 	let darkMode = false;
 
@@ -22,143 +25,130 @@
 </script>
 
 <div class="app" use:currentTheme={{ darkMode }} class:darkMode>
-	<div>
-		<label
-			>Dark Mode
-			<input type="checkbox" checked={darkMode} on:click={toggleDarkMode} />
-		</label>
-	</div>
-	<div class="notification">{$notification}</div>
-	<div use:buttonTheme>
-		<div class="section">
-			<h1>Button</h1>
-			<div class="grid">
-				<ExampleCard name="default">
-					<Button on:click={() => sendNotification('Button clicked')}>Sterling</Button>
-				</ExampleCard>
-				<ExampleCard name="disabled">
-					<svelte:fragment>
-						<Button disabled on:click={() => sendNotification('Button clicked')}>Sterling</Button>
-						<div class="checkered">
-							<Button disabled on:click={() => sendNotification('Button clicked')}>Sterling</Button>
-						</div>
-					</svelte:fragment>
-				</ExampleCard>
-				<ExampleCard name="with icon">
-					<Button on:click={() => sendNotification('Button clicked')}>
-						<SvelteIcon />
-						<span> Sterling </span>
-					</Button>
-				</ExampleCard>
+	<BaseLayer>
+		<div>
+			<label
+				>Dark Mode
+				<input type="checkbox" checked={darkMode} on:click={toggleDarkMode} />
+			</label>
+		</div>
+		<div class="notification">{$notification}</div>
+		<div>
+			<div class="section">
+				<h1>TextInput</h1>
+				<div class="grid">
+					<ExampleCard name="default">
+						<TextInput value="Sterling" />
+					</ExampleCard>
+					<ExampleCard name="disabled">
+						<TextInput disabled value="Sterling" />
+					</ExampleCard>
+					<ExampleCard name="with placeholder">
+						<TextInput disabled placeholder="Sterling" />
+					</ExampleCard>
+				</div>
 			</div>
 		</div>
-		<div class="section">
-			<h1>Outline Button</h1>
-			<div class="grid">
-				<ExampleCard name="default">
-					<OutlineButton on:click={() => sendNotification('Button clicked')}>Sterling</OutlineButton
-					>
-				</ExampleCard>
-				<ExampleCard name="disabled">
-					<svelte:fragment>
+		<div use:buttonTheme>
+			<div class="section">
+				<h1>Button</h1>
+				<div class="grid">
+					<ExampleCard name="default">
+						<Button on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+					</ExampleCard>
+					<ExampleCard name="disabled">
+						<Button disabled on:click={() => sendNotification('Button clicked')}>Sterling</Button>
+					</ExampleCard>
+					<ExampleCard name="with icon">
+						<Button on:click={() => sendNotification('Button clicked')}>
+							<SvelteIcon />
+							<span> Sterling </span>
+						</Button>
+					</ExampleCard>
+				</div>
+			</div>
+			<div class="section">
+				<h1>Outline Button</h1>
+				<div class="grid">
+					<ExampleCard name="default">
+						<OutlineButton on:click={() => sendNotification('Button clicked')}
+							>Sterling</OutlineButton
+						>
+					</ExampleCard>
+					<ExampleCard name="disabled">
 						<OutlineButton disabled on:click={() => sendNotification('Button clicked')}
 							>Sterling</OutlineButton
 						>
-						<div class="checkered">
-							<OutlineButton disabled on:click={() => sendNotification('Button clicked')}
-								>Sterling</OutlineButton
-							>
-						</div>
-					</svelte:fragment>
-				</ExampleCard>
-				<ExampleCard name="with icon">
-					<OutlineButton on:click={() => sendNotification('Button clicked')}>
-						<SvelteIcon />
-						<span> Sterling </span>
-					</OutlineButton>
-				</ExampleCard>
+					</ExampleCard>
+					<ExampleCard name="with icon">
+						<OutlineButton on:click={() => sendNotification('Button clicked')}>
+							<SvelteIcon />
+							<span> Sterling </span>
+						</OutlineButton>
+					</ExampleCard>
+				</div>
 			</div>
-		</div>
-		<div class="section">
-			<h1>Ghost Button</h1>
-			<div class="grid">
-				<ExampleCard name="default">
-					<GhostButton on:click={() => sendNotification('Button clicked')}>Sterling</GhostButton>
-				</ExampleCard>
-				<ExampleCard name="disabled">
-					<svelte:fragment>
+			<div class="section">
+				<h1>Ghost Button</h1>
+				<div class="grid">
+					<ExampleCard name="default">
+						<GhostButton on:click={() => sendNotification('Button clicked')}>Sterling</GhostButton>
+					</ExampleCard>
+					<ExampleCard name="disabled">
 						<GhostButton disabled on:click={() => sendNotification('Button clicked')}
 							>Sterling</GhostButton
 						>
-						<div class="checkered">
-							<GhostButton disabled on:click={() => sendNotification('Button clicked')}
-								>Sterling</GhostButton
-							>
-						</div>
-					</svelte:fragment>
-				</ExampleCard>
-				<ExampleCard name="with icon">
-					<GhostButton on:click={() => sendNotification('Button clicked')}>
-						<SvelteIcon />
-						<span> Sterling </span>
-					</GhostButton>
-				</ExampleCard>
+					</ExampleCard>
+					<ExampleCard name="with icon">
+						<GhostButton on:click={() => sendNotification('Button clicked')}>
+							<SvelteIcon />
+							<span> Sterling </span>
+						</GhostButton>
+					</ExampleCard>
+				</div>
 			</div>
-		</div>
-		<div class="section">
-			<h1>Primary Button</h1>
-			<div class="grid">
-				<ExampleCard name="default">
-					<PrimaryButton on:click={() => sendNotification('Button clicked')}>Sterling</PrimaryButton
-					>
-				</ExampleCard>
-				<ExampleCard name="disabled">
-					<svelte:fragment>
+			<div class="section">
+				<h1>Primary Button</h1>
+				<div class="grid">
+					<ExampleCard name="default">
+						<PrimaryButton on:click={() => sendNotification('Button clicked')}
+							>Sterling</PrimaryButton
+						>
+					</ExampleCard>
+					<ExampleCard name="disabled">
 						<PrimaryButton disabled on:click={() => sendNotification('Button clicked')}
 							>Sterling</PrimaryButton
 						>
-						<div class="checkered">
-							<PrimaryButton disabled on:click={() => sendNotification('Button clicked')}
-								>Sterling</PrimaryButton
-							>
-						</div>
-					</svelte:fragment>
-				</ExampleCard>
-				<ExampleCard name="with icon">
-					<PrimaryButton on:click={() => sendNotification('Button clicked')}>
-						<SvelteIcon />
-						<span> Sterling </span>
-					</PrimaryButton>
-				</ExampleCard>
+					</ExampleCard>
+					<ExampleCard name="with icon">
+						<PrimaryButton on:click={() => sendNotification('Button clicked')}>
+							<SvelteIcon />
+							<span> Sterling </span>
+						</PrimaryButton>
+					</ExampleCard>
+				</div>
 			</div>
-		</div>
-		<div class="section">
-			<h1>Link Button</h1>
-			<div class="grid">
-				<ExampleCard name="default">
-					<LinkButton on:click={() => sendNotification('Button clicked')}>Sterling</LinkButton>
-				</ExampleCard>
-				<ExampleCard name="disabled">
-					<svelte:fragment>
+			<div class="section">
+				<h1>Link Button</h1>
+				<div class="grid">
+					<ExampleCard name="default">
+						<LinkButton on:click={() => sendNotification('Button clicked')}>Sterling</LinkButton>
+					</ExampleCard>
+					<ExampleCard name="disabled">
 						<LinkButton disabled on:click={() => sendNotification('Button clicked')}
 							>Sterling</LinkButton
 						>
-						<div class="checkered">
-							<LinkButton disabled on:click={() => sendNotification('Button clicked')}
-								>Sterling</LinkButton
-							>
-						</div>
-					</svelte:fragment>
-				</ExampleCard>
-				<ExampleCard name="with icon">
-					<LinkButton on:click={() => sendNotification('Button clicked')}>
-						<SvelteIcon />
-						<span> Sterling </span>
-					</LinkButton>
-				</ExampleCard>
+					</ExampleCard>
+					<ExampleCard name="with icon">
+						<LinkButton on:click={() => sendNotification('Button clicked')}>
+							<SvelteIcon />
+							<span> Sterling </span>
+						</LinkButton>
+					</ExampleCard>
+				</div>
 			</div>
 		</div>
-	</div>
+	</BaseLayer>
 </div>
 
 <style>
@@ -183,6 +173,10 @@
 		gap: 1em;
 		place-items: stretch;
 		place-content: stretch;
+	}
+
+	h1 {
+		font-size: 1.1rem;
 	}
 
 	.grid h2 {

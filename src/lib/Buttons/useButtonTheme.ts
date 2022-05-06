@@ -4,7 +4,7 @@
  * Applies theme CSS vars used by Button 
  */
 export const buttonTheme = (node: HTMLElement) => {
-	node.style.setProperty('--Button__background-color','var(--Theme__control__background-color, green)');
+	node.style.setProperty('--Button__background-color','var(--Theme__control__background-color)');
 	node.style.setProperty('--Button__border-color','var(--Theme__control__border-color)');
 	node.style.setProperty('--Button__border-radius','var(--Theme__control__border-radius)');
 	node.style.setProperty('--Button__border-style','var(--Theme__control__border-style)');

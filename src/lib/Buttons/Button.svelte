@@ -27,7 +27,7 @@
 
 <style>
 	button {
-		background-color: var(--Button__background-color, red);
+		background-color: var(--Button__background-color, #fafafa);
 		border-color: var(--Button__border-color, #777);
 		border-radius: var(--Button__border-radius, 0.5em);
 		border-style: var(--Button__border-style, solid);

@@ -54,7 +54,7 @@
 	button:hover {
 		background-color: var(--PrimaryButton__background-color--hover, hsl(206, 85%, 42%));
 		border-color: var(--PrimaryButton__border-color--hover, hsl(206, 85%, 32%));
-		color: var(--Button__color--hover, #fff);
+		color: var(--PrimaryButton__color--hover, #fff);
 	}
 
 	button:active {
@@ -65,15 +65,15 @@
 
 	button:focus-visible {
 		border-color: var(--PrimaryButton__border-color--focus, black);
-		outline-color: var(--Button__outline-color--focus, var(--Button__border-color--focus, black));
-		outline-style: var(--Button__outline-style--focus, var(--Button__border-style, solid));
-		outline-width: var(--Button__outline-width--focus, var(--Button__border-width, 0.07em));
+		outline-color: var(--PrimaryButton__outline-color--focus, var(--Button__border-color--focus, black));
+		outline-style: var(--PrimaryButton__outline-style--focus, var(--Button__border-style, solid));
+		outline-width: var(--PrimaryButton__outline-width--focus, var(--Button__border-width, 0.07em));
 	}
 
 	button:disabled {
-		background-color: var(--PrimaryButton__background-color, hsl(206, 55%, 65%));
-		border-color: var(--PrimaryButton__border-color, hsl(206, 55%, 55%));
-		color: var(--PrimaryButton__color, hsl(0, 0%, 85%));
+		background-color: var(--PrimaryButton__background-color--disabled, hsl(206, 55%, 65%));
+		border-color: var(--PrimaryButton__border-color--disabled, hsl(206, 55%, 55%));
+		color: var(--PrimaryButton__color--disabled, hsl(0, 0%, 85%));
 	
 	}
 </style>

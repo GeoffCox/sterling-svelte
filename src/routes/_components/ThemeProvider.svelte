@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { darkTheme } from '$lib/useDarkTheme';
-	import { buttonTheme } from '$lib/useButtonTheme';
+	import { darkTheme } from '$lib/Themes/useDarkTheme';
+	import { buttonTheme } from '$lib/Buttons/useButtonTheme';
 	export let theme: string = 'light';
 </script>
 

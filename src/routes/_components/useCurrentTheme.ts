@@ -1,9 +1,9 @@
-import { darkTheme } from '$lib/useDarkTheme';
-import { lightTheme } from '$lib/useLightTheme';
+import { darkTheme } from '$lib/Themes/useDarkTheme';
+import { lightTheme } from '$lib/Themes/useLightTheme';
 
 
-import { buttonTheme } from '$lib/useButtonTheme';
-import { primaryButtonTheme } from '$lib/usePrimaryButtonTheme';
+import { buttonTheme } from '$lib/Buttons/useButtonTheme';
+import { primaryButtonTheme } from '$lib/Buttons/usePrimaryButtonTheme';
 
 
 export const currentTheme = (node: HTMLElement, params: { darkMode: boolean }) => {
