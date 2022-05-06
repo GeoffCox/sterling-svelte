@@ -31,9 +31,9 @@
 		border-radius: 0;
 		border-bottom-color: transparent;
 		border-bottom-style: var(--Button__border-style, solid);
-		border-bottom-width: var(--Button__border-width, 0.15em);
+		border-bottom-width: calc(var(--Button__border-width, 0.07em) * 2);
 		box-sizing: border-box;
-		color: var(--Button__color, #222);
+		color: var(--Button__color, black);
 		cursor: pointer;
 		display: inline-flex;
 		flex-direction: row;
@@ -52,11 +52,11 @@
 	}
 
 	button:hover {
-		border-bottom-color: var(--Button__border-color, #777);
+		border-bottom-color: var(--Button__border-color, black);
 	}
 
 	button:active {
-		border-bottom-color: var(--Button__color--active, #222);
+		border-bottom-color: var(--Button__color--active, black);
 	}
 
 	button:focus-visible {
@@ -69,7 +69,8 @@
 	}
 
 	button:disabled {
-		border-bottom-color: var(--Button__border-color--disabled, #aaa);
-		color: var(--Button__color--disabled, #aaa);
+		border-bottom-color: var(--Button__border-color--disabled, darkgrey);
+		color: var(--Button__color--disabled, darkgrey);
+		cursor: not-allowed;
 	}
 </style>

@@ -25,12 +25,12 @@
 <style>
 	button {
 		background-color: transparent;
-		border-color: var(--Button__border-color, #777);
-		border-radius: var(--Button__border-radius, 0.5em);
+		border-color: var(--Button__border-color, black);
+		border-radius: var(--Button__border-radius, 0.4em);
 		border-style: var(--Button__border-style, solid);
 		border-width: var(--Button__border-width, 0.07em);
 		box-sizing: border-box;
-		color: var(--Button__color, #222);
+		color: var(--Button__color, black);
 		cursor: pointer;
 		display: inline-flex;
 		flex-direction: row;
@@ -48,15 +48,15 @@
 	}
 
 	button:hover {
-		background-color: var(--Button__background-color--hover, #f5f5f5);
-		border-color: var(--Button__border-color--hover, #555);
-		color: var(--Button__color--hover, #222);
+		background-color: var(--Button__background-color--hover, whitesmoke);
+		border-color: var(--Button__border-color--hover, black);
+		color: var(--Button__color--hover, black);
 	}
 
 	button:active {
-		background-color: var(--Button__background-color--active, #ebebeb);
-		border-color: var(--Button__border-color--active, #444);
-		color: var(--Button__color--active, #222);
+		background-color: var(--Button__background-color--active, lightgrey);
+		border-color: var(--Button__border-color--active, black);
+		color: var(--Button__color--active, black);
 	}
 
 	button:focus-visible {
@@ -67,9 +67,9 @@
 	}
 
 	button:disabled {
-		background-color: transparent;
-		background-color: var(--Button__background-color--disabled, rgba(255, 255, 255, 0.7));
-		border-color: var(--Button__border-color--disabled, #AAA);
-		color: var(--Button__color--disabled, #CCC);
+		background-color: var(--Button__background-color--disabled, whitesmoke);
+		border-color: var(--Button__border-color--disabled, darkgrey);
+		color: var(--Button__color--disabled, darkgrey);
+		cursor: not-allowed;
 	}
 </style>

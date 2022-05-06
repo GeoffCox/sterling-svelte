@@ -24,13 +24,13 @@
 
 <style>
 	button {
-		background-color: var(--PrimaryButton__background-color, hsl(206, 85%, 45%));
-		border-color: var(--PrimaryButton__border-color, hsl(206, 85%, 35%));
+		background-color: var(--PrimaryButton__background-color, grey);
+		border-color: var(--PrimaryButton__border-color, black);
 		border-radius: var(--Button__border-radius, 0.5em);
 		border-style: var(--Button__border-style, solid);
 		border-width: var(--Button__border-width, 0.07em);
 		box-sizing: border-box;
-		color: var(--PrimaryButton__color, #fff);
+		color: var(--PrimaryButton__color, white);
 		cursor: pointer;
 		display: inline-flex;
 		flex-direction: row;
@@ -52,15 +52,15 @@
 	}
 
 	button:hover {
-		background-color: var(--PrimaryButton__background-color--hover, hsl(206, 85%, 42%));
-		border-color: var(--PrimaryButton__border-color--hover, hsl(206, 85%, 32%));
-		color: var(--PrimaryButton__color--hover, #fff);
+		background-color: var(--PrimaryButton__background-color--hover, darkgrey);
+		border-color: var(--PrimaryButton__border-color--hover, black);
+		color: var(--PrimaryButton__color--hover, white);
 	}
 
 	button:active {
-		background-color: var(--PrimaryButton__background-color--active, hsl(206, 85%, 35%));
-		border-color: var(--PrimaryButton__border-color--active, hsl(206, 85%, 25%));
-		color: var(--PrimaryButton__color--active, #fff);
+		background-color: var(--PrimaryButton__background-color--active, lightgrey);
+		border-color: var(--PrimaryButton__border-color--active, black);
+		color: var(--PrimaryButton__color--active, white);
 	}
 
 	button:focus-visible {
@@ -71,9 +71,9 @@
 	}
 
 	button:disabled {
-		background-color: var(--PrimaryButton__background-color--disabled, hsl(206, 55%, 65%));
-		border-color: var(--PrimaryButton__border-color--disabled, hsl(206, 55%, 55%));
-		color: var(--PrimaryButton__color--disabled, hsl(0, 0%, 85%));
-	
+		background-color: var(--PrimaryButton__background-color--disabled, lightgrey);
+		border-color: var(--PrimaryButton__border-color--disabled, whitesmoke);
+		color: var(--PrimaryButton__color--disabled, whitesmoke);
+		cursor: not-allowed;
 	}
 </style>

@@ -31,6 +31,7 @@
 		background-color: var(--Input__background-color--disabled, whitesmoke	);
 		border-color: var(---Input__border-color--disabled, darkgrey);
 		color: var(--Input__color--disabled, darkgrey);
+		cursor: not-allowed;
 	}
 
 	input::placeholder {
