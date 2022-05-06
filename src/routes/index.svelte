@@ -4,14 +4,12 @@
 	import ExampleCard from './_components/ExampleCard.svelte';
 	import SvelteIcon from './_components/SvelteIcon.svelte';
 	import { notification, sendNotification } from '../stores';
-	import { buttonTheme } from '$lib/Buttons/useButtonTheme';
 	import { currentTheme } from './_components/useCurrentTheme';
 	import OutlineButton from '$lib/Buttons/OutlineButton.svelte';
 	import PrimaryButton from '$lib/Buttons/PrimaryButton.svelte';
 	import GhostButton from '$lib/Buttons/GhostButton.svelte';
 	import BaseLayer from '$lib/BaseLayer.svelte';
 	import TextInput from '$lib/Inputs/TextInput.svelte';
-	import { inputTheme } from '$lib/Inputs/useInputTheme';
 
 	let darkMode = false;
 
@@ -33,23 +31,20 @@
 			</label>
 		</div>
 		<div class="notification">{$notification}</div>
-		<div>
-			<div class="section">
-				<h1>TextInput</h1>
-				<div class="grid">
-					<ExampleCard name="default">
-						<TextInput value="Sterling" />
-					</ExampleCard>
-					<ExampleCard name="disabled">
-						<TextInput disabled value="Sterling" />
-					</ExampleCard>
-					<ExampleCard name="with placeholder">
-						<TextInput disabled placeholder="Sterling" />
-					</ExampleCard>
-				</div>
+		<div class="section">
+			<h1>TextInput</h1>
+			<div class="grid">
+				<ExampleCard name="default">
+					<TextInput value="Sterling" />
+					<TextInput placeholder="Sterling" />
+				</ExampleCard>
+				<ExampleCard name="disabled">
+					<TextInput disabled value="Sterling" />
+					<TextInput disabled placeholder="Sterling" />
+				</ExampleCard>
 			</div>
 		</div>
-		<div use:buttonTheme>
+		<div>
 			<div class="section">
 				<h1>Button</h1>
 				<div class="grid">

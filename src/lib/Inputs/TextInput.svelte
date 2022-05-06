@@ -22,9 +22,9 @@
 		background-color: var(--Input__background-color--focus, white);
 		border-color: var(--Input__border-color--focus, black);
 		color: var(--Input__color--focus, black);
-		outline-color: var(--input__outline-color--focus, black);
-		outline-style: var(--input__outline-style--focus, solid);
-		outline-width: var(--input__outline-width--focus, 0.1em);
+		outline-color: var(--Input__outline-color--focus, black);
+		outline-style: var(--Input__outline-style--focus, solid);
+		outline-width: var(--Input__outline-width--focus, 0.1em);
 	}
 
 	input:disabled {
@@ -38,6 +38,6 @@
 	}
 
 	input:disabled::placeholder {
-		color: var(--Input__placeholder__color, lightgrey);
+		color: var(--Input__placeholder__color--disabled, lightgrey);
 	}
 </style>

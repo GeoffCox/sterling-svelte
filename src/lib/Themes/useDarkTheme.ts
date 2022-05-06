@@ -4,7 +4,7 @@ import type { CSSVarSet } from '../types';
 import { theme } from './useTheme';
 
 const darkCSSVars: CSSVarSet = {
-	// bases are used to theme surfaces
+	// ----- BaseLayer ---- //
 	'--Theme__base__background-color': '#222',
 	'--Theme__base__border-color': '#eee',
 	'--Theme__base__color': '#eee',
@@ -21,53 +21,91 @@ const darkCSSVars: CSSVarSet = {
 	'--Theme__base3__border-color': '#eee',
 	'--Theme__base3__color': '#eee',
 
-	// control values provide consistency across common controls
-	'--Theme__control__background-color': '#333',
-	'--Theme__control__border-color': '#ddd',
-	'--Theme__control__color': '#ddd',
+	// ----- Button ----- //
 
-	'--Theme__control__background-color--hover': '#444',
-	'--Theme__control__border-color--hover': '#eee',
-	'--Theme__control__color--hover': '#eee',
+	'--Button__background-color': '#333',
+	'--Button__border-radius': '0.5em',
+	'--Button__border-style': 'solid',
+	'--Button__border-width': '0.07em',
+	'--Button__border-color': '#ddd',
+	'--Button__color': '#ddd',
 
-	'--Theme__control__background-color--active': '#555',
-	'--Theme__control__border-color--active': '#fff',
-	'--Theme__control__color--active': '#fff',
+	// hover
+	'--Button__background-color--hover': '#444',
+	'--Button__border-color--hover': '#eee',
+	'--Button__color--hover': '#eee',
 
-	'--Theme__control__background-color--focus': '#fff',
-	'--Theme__control__border-color--focus': '#fff',
-	'--Theme__control__color--focus': '#ddd',
-	'--Theme__control__outline-color--focus': '#fff',
+	// active
+	'--Button__background-color--active': '#555',
+	'--Button__border-color--active': '#fff',
+	'--Button__color--active': '#fff',
 
-	'--Theme__control__background-color--disabled': '#ccc',
-	'--Theme__control__border-color--disabled': '#ddd',
-	'--Theme__control__color--disabled': '#ddd',
+	// focus
+	'--Button__background-color--focus': '#fff',
+	'--Button__border-color--focus': '#fff',
+	'--Button__color--focus': '#ddd',
+	'--Button__outline-color--focus': '#fff',
 
-	// common to primary controls
-	'--Theme__control__border-radius': '0.5em',
-	'--Theme__control__border-style': 'solid',
-	'--Theme__control__border-width': '0.07em',
+	// disabled
+	'--Button__background-color--disabled': '#555',
+	'--Button__border-color--disabled': '#777',
+	'--Button__color--disabled': '#777',
 
-	'--Theme__primary-control__background-color': 'hsl(206, 85%, 45%)',
-	'--Theme__primary-control__border-color': 'hsl(206, 85%, 35%)',
-	'--Theme__primary-control__color': '#fff',
+	// ----- Primary Button ----- //
 
-	'--Theme__primary-control__background-color--hover': 'hsl(206, 85%, 42%)',
-	'--Theme__primary-control__border-color--hover': 'hsl(206, 85%, 32%)',
-	'--Theme__primary-control__color--hover': '#fff',
+	'--PrimaryButton__background-color': 'hsl(206, 85%, 45%)',
+	'--PrimaryButton__border-color': 'hsl(206, 85%, 35%)',
+	'--PrimaryButton__color': '#fff',
 
-	'--Theme__primary-control__background-color--active': 'hsl(206, 85%, 35%)',
-	'--Theme__primary-control__border-color--active': 'hsl(206, 85%, 25%)',
-	'--Theme__primary-control__color--active': '#fff',
+	// hover
+	'--PrimaryButton__background-color--hover': 'hsl(206, 85%, 42%)',
+	'--PrimaryButton__border-color--hover': 'hsl(206, 85%, 32%)',
+	'--PrimaryButton__color--hover': '#fff',
 
-	'--Theme__primary-control__background-color--focus': '#fff',
-	'--Theme__primary-control__border-color--focus': '#000',
-	'--Theme__primary-control__color--focus': '#fff',
-	'--Theme__primary-control__outline-color--focus': '#000',
+	// active
+	'--PrimaryButton__background-color--active': 'hsl(206, 85%, 35%)',
+	'--PrimaryButton__border-color--active': 'hsl(206, 85%, 25%)',
+	'--PrimaryButton__color--active': '#fff',
 
-	'--Theme__primary-control__background-color--disabled': 'hsl(206, 55%, 65%)',
-	'--Theme__primary-control__border-color--disabled': 'hsl(206, 55%, 55%)',
-	'--Theme__primary-control__color--disabled': 'hsl(0, 0%, 85%)'
+	// focus
+	'--PrimaryButton__background-color--focus': '#fff',
+	'--PrimaryButton__border-color--focus': '#000',
+	'--PrimaryButton__color--focus': '#fff',
+	'--PrimaryButton__outline-color--focus': '#000',
+
+	// disabled
+	'--PrimaryButton__background-color--disabled': 'hsl(206, 55%, 65%)',
+	'--PrimaryButton__border-color--disabled': 'hsl(206, 55%, 55%)',
+	'--PrimaryButton__color--disabled': 'hsl(0, 0%, 85%)',
+
+	// ----- Input ----- //
+
+	'--Input__background-color': '#333',
+	'--Input__border-color': '#ddd',
+	'--Input__border-radius': '0.15em',
+	'--Input__border-style': 'solid',
+	'--Input__border-width': '0.07em',
+	'--Input__color': '#ddd',
+	'--Input__placeholder__color': 'lightgrey',
+
+	// hover
+	'--Input__background-color--hover': '#333',
+	'--Input__border-color--hover': '#eee',
+	'--Input__color--hover': '#eee',
+
+	// focus
+	'--Input__background-color--focus': '#333',
+	'--Input__border-color--focus': '#fff',
+	'--Input__color--focus': '#fff',
+	'--Input__outline-color--focus': '#fff',
+	'--Input__outline-style--focus': 'solid',
+	'--Input__outline-width--focus': '0.1em',
+
+	// disabled
+	'--Input__background-color--disabled': '#555',
+	'--Input__border-color--disabled': '#777',
+	'--Input__color--disabled': '#777',
+	'--Input__placeholder__color--disabled': '#666'
 };
 
 export const darkTheme = (node: HTMLElement) => {

@@ -33,8 +33,8 @@
         padding: 5px 0;
         align-self: center;
         display: flex;
-		flex-direction: row;
-		column-gap: 5px;
+		flex-direction: column;
+		row-gap: 5px;
         align-items: center;
     }
 </style>
