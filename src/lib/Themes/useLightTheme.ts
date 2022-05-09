@@ -3,23 +3,38 @@
 import type { CSSVarSet } from '../types';
 import { theme } from './useTheme';
 
+const palette = {
+	bg: 'white',
+	bg1: 'hsl(0,0%,98%)',
+	bg2: 'hsl(0,0%,96%)',
+	bg3: 'hsl(0,0%,92%)',
+	mid2: 'hsl(0,0%, 83%)',
+	mid: 'hsl(0,0%, 80%)',
+	mid1: 'hsl(0,0%, 66%)',
+	fg4: 'hsl(0,0%,47%)',
+	fg3: 'hsl(0,0%,33%)',
+	fg2: 'hsl(0,0%,27%)',
+	fg1: 'hsl(0,0%,13%)',
+	fg: 'black'
+}
+
 const lightCSSVars: CSSVarSet = {
 	// ----- BaseLayer ---- //
-	'--Theme__base__background-color': '#fff',
-	'--Theme__base__border-color': '#222',
-	'--Theme__base__color': '#222',
+	'--BaseLayer__background-color': '#fff',
+	'--BaseLayer__border-color': '#222',
+	'--BaseLayer__color': '#222',
 
-	'--Theme__base1__background-color': '#fff',
-	'--Theme__base1__border-color': '#222',
-	'--Theme__base1__color': '#222',
+	'--BaseLayer__background-color--1': 'hsl(0, 0%, 95%)',
+	'--BaseLayer__border-color--1': '#222',
+	'--BaseLayer__color--1': '#222',
 
-	'--Theme__base2__background-color': '#fff',
-	'--Theme__base2__border-color': '#222',
-	'--Theme__base2__color': '#222',
+	'--BaseLayer__background-color--2': 'hsl(0, 0%, 97%)',
+	'--BaseLayer__border-color--2': '#222',
+	'--BaseLayer__color--2': '#222',
 
-	'--Theme__base3__background-color': '#fff',
-	'--Theme__base3__border-color': '#222',
-	'--Theme__base3__color': '#222',
+	'--BaseLayer__background-color--3': 'hsl(0, 0%, 92%)',
+	'--BaseLayer__border-color--3': '#222',
+	'--BaseLayer__color--3': '#222',
 
 	// ----- Button ----- //
 

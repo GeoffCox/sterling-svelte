@@ -5,21 +5,21 @@ import { theme } from './useTheme';
 
 const darkCSSVars: CSSVarSet = {
 	// ----- BaseLayer ---- //
-	'--Theme__base__background-color': '#222',
-	'--Theme__base__border-color': '#eee',
-	'--Theme__base__color': '#eee',
+	'--BaseLayer__background-color': '#222',
+	'--BaseLayer__border-color': '#eee',
+	'--BaseLayer__color': '#eee',
 
-	'--Theme__base1__background-color': '#222',
-	'--Theme__base1__border-color': '#eee',
-	'--Theme__base1__color': '#eee',
+	'--BaseLayer__background-color--1': '#222',
+	'--BaseLayer__border-color--1': '#eee',
+	'--BaseLayer__color--1': '#eee',
 
-	'--Theme__base2__background-color': '#222',
-	'--Theme__base2__border-color': '#eee',
-	'--Theme__base2__color': '#eee',
+	'--BaseLayer__background-color--2': '#222',
+	'--BaseLayer__border-color--2': '#eee',
+	'--BaseLayer__color--2': '#eee',
 
-	'--Theme__base3__background-color': '#222',
-	'--Theme__base3__border-color': '#eee',
-	'--Theme__base3__color': '#eee',
+	'--BaseLayer__background-color--3': '#222',
+	'--BaseLayer__border-color--3': '#eee',
+	'--BaseLayer__color--3': '#eee',
 
 	// ----- Button ----- //
 

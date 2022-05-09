@@ -1,4 +1,31 @@
-<input class="sterling-input" {...$$restProps}/>
+<input class="sterling-input"
+	on:blur
+	on:click
+	on:change
+	on:copy
+	on:cut
+	on:paste
+	on:dblclick
+	on:focus
+	on:focusin
+	on:focusout
+	on:input
+	on:invalid
+	on:keydown
+	on:keypress
+	on:keyup
+	on:mousedown
+	on:mouseenter
+	on:mouseleave
+	on:mousemove
+	on:mouseover
+	on:mouseout
+	on:mouseup
+	on:select
+	on:submit
+	on:reset
+	on:wheel
+	{...$$restProps}/>
 
 <style>
 	input {
@@ -29,7 +56,7 @@
 
 	input:disabled {
 		background-color: var(--Input__background-color--disabled, whitesmoke	);
-		border-color: var(---Input__border-color--disabled, darkgrey);
+		border-color: var(---Input__border-color--disabled, #a9a9a9);
 		color: var(--Input__color--disabled, darkgrey);
 		cursor: not-allowed;
 	}
@@ -39,6 +66,6 @@
 	}
 
 	input:disabled::placeholder {
-		color: var(--Input__placeholder__color--disabled, lightgrey);
+		color: var(--Input__placeholder__color--disabled, #d3d3d3);
 	}
 </style>
