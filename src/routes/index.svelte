@@ -69,24 +69,20 @@
 			<h1>Checkbox</h1>
 			<div class="grid">
 				<ExampleCard name="default">
-					<div style="font-size:12px;">
-						<Checkbox>
-							<svelte:fragment slot="after">Hello</svelte:fragment>
-						</Checkbox>
-					</div>
-					<div style="font-size:24px;">
-						<Checkbox>
-							<svelte:fragment slot="after">Hello</svelte:fragment>
-						</Checkbox>
-					</div>
-					<div style="font-size:42px;">
-						<Checkbox>
-							<svelte:fragment slot="before">Hello</svelte:fragment>
-						</Checkbox>
-					</div>
+					<Checkbox />
 				</ExampleCard>
 				<ExampleCard name="disabled">
 					<Checkbox disabled />
+				</ExampleCard>
+				<ExampleCard name="before">
+					<Checkbox>
+						<svelte:fragment slot="before">Sterling</svelte:fragment>
+					</Checkbox>
+				</ExampleCard>
+				<ExampleCard name="after">
+					<Checkbox>
+						<svelte:fragment slot="after">Sterling</svelte:fragment>
+					</Checkbox>
 				</ExampleCard>
 			</div>
 		</div>

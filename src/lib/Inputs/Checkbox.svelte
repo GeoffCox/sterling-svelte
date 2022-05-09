@@ -1,5 +1,9 @@
+<script lang="ts">
+    export let tabindex : number | string | undefined | null = undefined;
+</script>
+
 <!-- svelte-ignore a11y-label-has-associated-control -->
-<label class="sterling-checkbox">
+<label class="sterling-checkbox" tabindex={typeof tabindex === 'string' ? parseInt(tabindex) : tabindex}>
 	<slot name="before" />
 	<span class="container">
 		<input
@@ -33,15 +37,15 @@
 <style>
 	.sterling-checkbox {
 		display: inline-flex;
-        align-items: center;
-        gap: 0.1em;
+		align-items: center;
+		gap: 0.4em;
 		font-size: inherit;
 		padding: 0;
 		margin: 0;
 	}
-    
+
 	.container {
-        position: relative;
+		position: relative;
 		font-size: inherit;
 		padding: 0.07em;
 		margin: 0;
@@ -51,13 +55,13 @@
 	}
 
 	.sterling-checkbox input {
-        position: absolute;
+		position: absolute;
 		font-size: inherit;
 		margin: 0;
 		padding: 0;
-        left: 0;
-        top: 0;
-        visibility: hidden;
+		left: 0;
+		top: 0;
+		visibility: hidden;
 	}
 
 	.sterling-checkbox input::before {
@@ -71,7 +75,7 @@
 		position: absolute;
 		top: 0;
 		width: 1em;
-        visibility: visible;
+		visibility: visible;
 	}
 
 	.sterling-checkbox input:checked::before {
@@ -85,8 +89,7 @@
 		position: absolute;
 		top: 0;
 		width: 1em;
-        visibility: visible;
-
+		visibility: visible;
 	}
 
 	.sterling-checkbox input:checked::after {
@@ -99,7 +102,6 @@
 		top: 0.05em;
 		transform: rotate(45deg);
 		width: 0.25em;
-        visibility: visible;
-
+		visibility: visible;
 	}
 </style>
