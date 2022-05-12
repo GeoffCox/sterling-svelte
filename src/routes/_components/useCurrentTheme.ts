@@ -1,5 +1,5 @@
-import { darkTheme } from '$lib/Themes/useDarkTheme';
-import { lightTheme } from '$lib/Themes/useLightTheme';
+import { darkTheme } from '$lib/themes/useDarkTheme';
+import { lightTheme } from '$lib/themes/useLightTheme';
 
 export const currentTheme = (node: HTMLElement, params: { darkMode: boolean }) => {
     

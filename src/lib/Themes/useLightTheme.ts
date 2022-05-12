@@ -3,21 +3,6 @@
 import type { CSSVarSet } from '../types';
 import { theme } from './useTheme';
 
-const palette = {
-	bg: 'white',
-	bg1: 'hsl(0,0%,98%)',
-	bg2: 'hsl(0,0%,96%)',
-	bg3: 'hsl(0,0%,92%)',
-	mid2: 'hsl(0,0%, 83%)',
-	mid: 'hsl(0,0%, 80%)',
-	mid1: 'hsl(0,0%, 66%)',
-	fg4: 'hsl(0,0%,47%)',
-	fg3: 'hsl(0,0%,33%)',
-	fg2: 'hsl(0,0%,27%)',
-	fg1: 'hsl(0,0%,13%)',
-	fg: 'black'
-}
-
 const lightCSSVars: CSSVarSet = {
 	// ----- BaseLayer ---- //
 	'--BaseLayer__background-color': '#fff',

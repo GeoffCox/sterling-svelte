@@ -1,16 +1,17 @@
 <script lang="ts">
-	import Button from '$lib/Buttons/Button.svelte';
-	import LinkButton from '$lib/Buttons/LinkButton.svelte';
+	import Button from '$lib/buttons/Button.svelte';
+	import LinkButton from '$lib/buttons/LinkButton.svelte';
 	import ExampleCard from './_components/ExampleCard.svelte';
 	import SvelteIcon from './_components/SvelteIcon.svelte';
 	import { notification, sendNotification } from '../stores';
 	import { currentTheme } from './_components/useCurrentTheme';
-	import OutlineButton from '$lib/Buttons/OutlineButton.svelte';
-	import PrimaryButton from '$lib/Buttons/PrimaryButton.svelte';
-	import GhostButton from '$lib/Buttons/GhostButton.svelte';
+	import OutlineButton from '$lib/buttons/OutlineButton.svelte';
+	import PrimaryButton from '$lib/buttons/PrimaryButton.svelte';
+	import GhostButton from '$lib/buttons/GhostButton.svelte';
 	import BaseLayer from '$lib/BaseLayer.svelte';
-	import TextInput from '$lib/Inputs/TextInput.svelte';
-	import Checkbox from '$lib/Inputs/Checkbox.svelte';
+	import TextInput from '$lib/inputs/TextInput.svelte';
+	import Checkbox from '$lib/inputs/Checkbox.svelte';
+import Radio from '$lib/inputs/Radio.svelte';
 
 	let darkMode = false;
 
@@ -27,6 +28,8 @@
 		const target = e.currentTarget as HTMLInputElement;
 		sendNotification(`TextInput on:input ${target.value}`);
 	};
+
+	let radioDefaultValue = 2;
 </script>
 
 <div class="app" use:currentTheme={{ darkMode }} class:darkMode>
@@ -66,23 +69,47 @@
 			</div>
 		</div>
 		<div class="section">
-			<h1>Checkbox</h1>
+			<h1>Radio</h1>
 			<div class="grid">
 				<ExampleCard name="default">
-					<Checkbox />
+					<Radio name="radioDefault" value={1}/>
+					<Radio name="radioDefault" value={2} />
+					<Radio name="radioDefault" value={3} />
+					<Radio name="radioDefault" value={4} />
 				</ExampleCard>
 				<ExampleCard name="disabled">
-					<Checkbox disabled />
+					<Radio disabled name="radioDisabled" value={1}/>
+					<Radio disabled name="radioDisabled" value={2} checked />
+					<Radio disabled name="radioDisabled" value={3} />
+					<Radio disabled name="radioDisabled" value={4} />
 				</ExampleCard>
 				<ExampleCard name="before">
-					<Checkbox>
-						<svelte:fragment slot="before">Sterling</svelte:fragment>
-					</Checkbox>
+					<Radio name="radioBefore" value={1}>
+						<svelte:fragment slot="before">Sterling 1</svelte:fragment>
+					</Radio>
+					<Radio name="radioBefore" value={2}>
+						<svelte:fragment slot="before">Sterling 2</svelte:fragment>
+					</Radio>
+					<Radio name="radioBefore" value={3}>
+						<svelte:fragment slot="before">Sterling 3</svelte:fragment>
+					</Radio>
+					<Radio name="radioBefore" value={4}>
+						<svelte:fragment slot="before">Sterling 4</svelte:fragment>
+					</Radio>
 				</ExampleCard>
 				<ExampleCard name="after">
-					<Checkbox>
-						<svelte:fragment slot="after">Sterling</svelte:fragment>
-					</Checkbox>
+					<Radio name="radioAfter" value={1}>
+						<svelte:fragment slot="after">Sterling 1</svelte:fragment>
+					</Radio>
+					<Radio name="radioAfter" value={2}>
+						<svelte:fragment slot="after">Sterling 2</svelte:fragment>
+					</Radio>
+					<Radio name="radioAfter" value={3}>
+						<svelte:fragment slot="after">Sterling 3</svelte:fragment>
+					</Radio>
+					<Radio name="radioAfter" value={4}>
+						<svelte:fragment slot="after">Sterling 4</svelte:fragment>
+					</Radio>
 				</ExampleCard>
 			</div>
 		</div>
@@ -191,6 +218,28 @@
 				<ExampleCard name="disabled">
 					<TextInput disabled value="Sterling" />
 					<TextInput disabled placeholder="Sterling" />
+				</ExampleCard>
+			</div>
+		</div>
+		<div class="section">
+			<h1>Checkbox</h1>
+			<div class="grid">
+				<ExampleCard name="default">
+					<Checkbox />
+				</ExampleCard>
+				<ExampleCard name="disabled">
+					<Checkbox disabled />
+					<Checkbox checked disabled />
+				</ExampleCard>
+				<ExampleCard name="before">
+					<Checkbox>
+						<svelte:fragment slot="before">Sterling</svelte:fragment>
+					</Checkbox>
+				</ExampleCard>
+				<ExampleCard name="after">
+					<Checkbox>
+						<svelte:fragment slot="after">Sterling</svelte:fragment>
+					</Checkbox>
 				</ExampleCard>
 			</div>
 		</div>

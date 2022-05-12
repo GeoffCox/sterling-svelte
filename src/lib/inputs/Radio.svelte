@@ -1,9 +1,9 @@
 <!-- svelte-ignore a11y-label-has-associated-control -->
-<label class="sterling-checkbox">
+<label class="sterling-radio">
 	<slot name="before" />
-	<div class="container">
+	<span class="container">
 		<input
-			type="checkbox"
+			type="radio"
 			on:blur
 			on:click
 			on:change
@@ -27,7 +27,7 @@
 			{...$$restProps}
 		/>
 		<div class="indicator" />
-	</div>
+	</span>
 	<slot name="after" />
 </label>
 
@@ -49,12 +49,12 @@
 		- prevents collisions with surrounding slots
 	 */
 	.container {
-		font-size: inherit;
 		position: relative;
+		font-size: inherit;
 	}
 
 	/*
-		The input is hidden since the built-in browser checkbox cannot be customized
+		The input is hidden since the built-in browser radio cannot be customized
 	*/
 	input {
 		margin: 0;
@@ -64,7 +64,7 @@
 	}
 
 	/*
-	 	The indicator handles both the box and the checkmark.
+	 	The indicator handles both the radio box and circle mark.
 	 	The box cannot be on the container since the adjacent sibling selector is needed
 		and there is not a parent CSS selector.
 	*/
@@ -73,6 +73,7 @@
 		border-color: var(--Input__border-color, black);
 		border-style: var(--Input__border-style, solid);
 		border-width: var(--Input__border-width, 0.07em);
+		border-radius: 10000px;
 		box-sizing: border-box;
 		display: inline-block;
 		height: 1em;
@@ -97,25 +98,26 @@
 	}
 
 	/*
-		The checkmark is a rotated L centered in the box.
+		The circle mark is a solid dot centered with the radio circular border
 	*/
 	input:checked + .indicator::after {
+		background-color: var(--Input__color, black);
 		border-color: var(--Input__color, black);
 		border-style: solid;
-		border-width: 0 0.2em 0.2em 0;
-		box-sizing: content-box;
+		border-width: 0.2em;
+		border-radius: 10000px;
 		content: '';
-		height: 0.6em;
+		height: 0.2em;
 		left: 50%;
 		position: absolute;
 		top: 50%;
-		transform: translate(-50%, -50%) rotate(45deg);
-		transform-origin: center;
-		width: 0.2em;
+		transform: translate(-50%, -50%);
+		width: 0.17em;
 		visibility: visible;
 	}
 
 	input:disabled + .indicator::after {
+		background-color: var(--Input__color--disabled, darkgrey);
 		border-color: var(--Input__color--disabled, darkgrey);
 	}
 </style>

@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { lightTheme } from '$lib/Themes/useLightTheme';
-	import { darkTheme } from '$lib/Themes/useDarkTheme';
-	export let theme: string = 'light';
+	import { lightTheme } from '$lib/themes/us$lib/themes/useLightThemearkTheme } from '$lib/themes/u$lib/themes/useDarkThemet theme: string = 'light';
 </script>
 
 <div class="theme-provider">
