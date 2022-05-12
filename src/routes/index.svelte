@@ -9,7 +9,7 @@
 	import PrimaryButton from '$lib/buttons/PrimaryButton.svelte';
 	import GhostButton from '$lib/buttons/GhostButton.svelte';
 	import BaseLayer from '$lib/BaseLayer.svelte';
-	import TextInput from '$lib/inputs/TextInput.svelte';
+	import Input from '$lib/inputs/Input.svelte';
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 import Radio from '$lib/inputs/Radio.svelte';
 
@@ -21,7 +21,7 @@ import Radio from '$lib/inputs/Radio.svelte';
 
 	const inputOnChange = (e: Event) => {
 		const target = e.currentTarget as HTMLInputElement;
-		sendNotification(`TextInput on:change ${target.value}`);
+		sendNotification(`Input on:change ${target.value}`);
 	};
 
 	const inputOnInput = (e: Event) => {
@@ -67,52 +67,7 @@ import Radio from '$lib/inputs/Radio.svelte';
 					</BaseLayer>
 				</ExampleCard>
 			</div>
-		</div>
-		<div class="section">
-			<h1>Radio</h1>
-			<div class="grid">
-				<ExampleCard name="default">
-					<Radio name="radioDefault" value={1}/>
-					<Radio name="radioDefault" value={2} />
-					<Radio name="radioDefault" value={3} />
-					<Radio name="radioDefault" value={4} />
-				</ExampleCard>
-				<ExampleCard name="disabled">
-					<Radio disabled name="radioDisabled" value={1}/>
-					<Radio disabled name="radioDisabled" value={2} checked />
-					<Radio disabled name="radioDisabled" value={3} />
-					<Radio disabled name="radioDisabled" value={4} />
-				</ExampleCard>
-				<ExampleCard name="before">
-					<Radio name="radioBefore" value={1}>
-						<svelte:fragment slot="before">Sterling 1</svelte:fragment>
-					</Radio>
-					<Radio name="radioBefore" value={2}>
-						<svelte:fragment slot="before">Sterling 2</svelte:fragment>
-					</Radio>
-					<Radio name="radioBefore" value={3}>
-						<svelte:fragment slot="before">Sterling 3</svelte:fragment>
-					</Radio>
-					<Radio name="radioBefore" value={4}>
-						<svelte:fragment slot="before">Sterling 4</svelte:fragment>
-					</Radio>
-				</ExampleCard>
-				<ExampleCard name="after">
-					<Radio name="radioAfter" value={1}>
-						<svelte:fragment slot="after">Sterling 1</svelte:fragment>
-					</Radio>
-					<Radio name="radioAfter" value={2}>
-						<svelte:fragment slot="after">Sterling 2</svelte:fragment>
-					</Radio>
-					<Radio name="radioAfter" value={3}>
-						<svelte:fragment slot="after">Sterling 3</svelte:fragment>
-					</Radio>
-					<Radio name="radioAfter" value={4}>
-						<svelte:fragment slot="after">Sterling 4</svelte:fragment>
-					</Radio>
-				</ExampleCard>
-			</div>
-		</div>
+		</div>	
 		<div class="section">
 			<h1>Button</h1>
 			<div class="grid">
@@ -209,15 +164,15 @@ import Radio from '$lib/inputs/Radio.svelte';
 			</div>
 		</div>
 		<div class="section">
-			<h1>TextInput</h1>
+			<h1>Input</h1>
 			<div class="grid">
 				<ExampleCard name="default">
-					<TextInput value="Sterling" on:input={inputOnInput} on:change={inputOnChange} />
-					<TextInput placeholder="Sterling" />
+					<Input value="Sterling" on:input={inputOnInput} on:change={inputOnChange} />
+					<Input placeholder="Sterling" />
 				</ExampleCard>
 				<ExampleCard name="disabled">
-					<TextInput disabled value="Sterling" />
-					<TextInput disabled placeholder="Sterling" />
+					<Input disabled value="Sterling" />
+					<Input disabled placeholder="Sterling" />
 				</ExampleCard>
 			</div>
 		</div>
@@ -240,6 +195,51 @@ import Radio from '$lib/inputs/Radio.svelte';
 					<Checkbox>
 						<svelte:fragment slot="after">Sterling</svelte:fragment>
 					</Checkbox>
+				</ExampleCard>
+			</div>
+		</div>
+		<div class="section">
+			<h1>Radio</h1>
+			<div class="grid">
+				<ExampleCard name="default">
+					<Radio name="radioDefault" value={1}/>
+					<Radio name="radioDefault" value={2} />
+					<Radio name="radioDefault" value={3} />
+					<Radio name="radioDefault" value={4} />
+				</ExampleCard>
+				<ExampleCard name="disabled">
+					<Radio disabled name="radioDisabled" value={1}/>
+					<Radio disabled name="radioDisabled" value={2} checked />
+					<Radio disabled name="radioDisabled" value={3} />
+					<Radio disabled name="radioDisabled" value={4} />
+				</ExampleCard>
+				<ExampleCard name="before">
+					<Radio name="radioBefore" value={1}>
+						<svelte:fragment slot="before">Sterling 1</svelte:fragment>
+					</Radio>
+					<Radio name="radioBefore" value={2}>
+						<svelte:fragment slot="before">Sterling 2</svelte:fragment>
+					</Radio>
+					<Radio name="radioBefore" value={3}>
+						<svelte:fragment slot="before">Sterling 3</svelte:fragment>
+					</Radio>
+					<Radio name="radioBefore" value={4}>
+						<svelte:fragment slot="before">Sterling 4</svelte:fragment>
+					</Radio>
+				</ExampleCard>
+				<ExampleCard name="after">
+					<Radio name="radioAfter" value={1}>
+						<svelte:fragment slot="after">Sterling 1</svelte:fragment>
+					</Radio>
+					<Radio name="radioAfter" value={2}>
+						<svelte:fragment slot="after">Sterling 2</svelte:fragment>
+					</Radio>
+					<Radio name="radioAfter" value={3}>
+						<svelte:fragment slot="after">Sterling 3</svelte:fragment>
+					</Radio>
+					<Radio name="radioAfter" value={4}>
+						<svelte:fragment slot="after">Sterling 4</svelte:fragment>
+					</Radio>
 				</ExampleCard>
 			</div>
 		</div>
