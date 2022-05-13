@@ -78,6 +78,7 @@
 		display: inline-block;
 		height: 1em;
 		position: relative;
+		transition: background-color 250ms, color 250ms, border-color 250ms;
 		width: 1em;
 	}
 
@@ -97,12 +98,9 @@
 		border-color: var(--Input__border-color--disabled, darkgrey);
 	}
 
-	/*
-		The circle mark is a solid dot centered with the radio circular border
-	*/
-	input:checked + .indicator::after {
-		background-color: var(--Input__color, black);
-		border-color: var(--Input__color, black);
+	.indicator::after {
+		background-color: transparent;
+		border-color: transparent;
 		border-style: solid;
 		border-width: 0.2em;
 		border-radius: 10000px;
@@ -112,8 +110,16 @@
 		position: absolute;
 		top: 50%;
 		transform: translate(-50%, -50%);
+		transition: background-color 200ms, border-color 250ms;
 		width: 0.17em;
-		visibility: visible;
+	}
+
+	/*
+		The circle mark is a solid dot centered with the radio circular border
+	*/
+	input:checked + .indicator::after {
+		background-color: var(--Input__color, black);
+		border-color: var(--Input__color, black);
 	}
 
 	input:disabled + .indicator::after {

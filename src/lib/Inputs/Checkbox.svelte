@@ -77,6 +77,7 @@
 		display: inline-block;
 		height: 1em;
 		position: relative;
+		transition: background-color 250ms, color 250ms, border-color 250ms;
 		width: 1em;
 	}
 
@@ -111,6 +112,7 @@
 		top: 50%;
 		transform: translate(-50%, -50%) rotate(45deg);
 		transform-origin: center;
+		transition: border-color 250ms;
 		width: 0.2em;
 		visibility: visible;
 	}

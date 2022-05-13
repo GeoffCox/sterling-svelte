@@ -36,7 +36,7 @@
 		border-width: var(--Input__border-width, 0.07em);
         color: var(--Input__color, black);
 		padding: 0.5em 0.5em;
-		transition: background 250ms, border 250ms, color 250ms;
+		transition: background-color 250ms, color 250ms, border-color 250ms;
 	}
 
 	input:hover {
