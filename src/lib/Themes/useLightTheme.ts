@@ -5,20 +5,16 @@ import { theme } from './useTheme';
 
 const lightCSSVars: CSSVarSet = {
 	// ----- BaseLayer ---- //
-	'--BaseLayer__background-color': '#fff',
-	'--BaseLayer__border-color': '#222',
+	'--BaseLayer__background-color': 'hsl(0, 0%, 100%)',
 	'--BaseLayer__color': '#222',
 
-	'--BaseLayer__background-color--1': 'hsl(0, 0%, 95%)',
-	'--BaseLayer__border-color--1': '#222',
+	'--BaseLayer__background-color--1': 'hsl(0, 0%, 98%)',
 	'--BaseLayer__color--1': '#222',
 
-	'--BaseLayer__background-color--2': 'hsl(0, 0%, 97%)',
-	'--BaseLayer__border-color--2': '#222',
+	'--BaseLayer__background-color--2': 'hsl(0, 0%, 95%)',
 	'--BaseLayer__color--2': '#222',
 
-	'--BaseLayer__background-color--3': 'hsl(0, 0%, 92%)',
-	'--BaseLayer__border-color--3': '#222',
+	'--BaseLayer__background-color--3': 'hsl(0, 0%, 90%)',
 	'--BaseLayer__color--3': '#222',
 
 	// ----- Button ----- //
@@ -100,11 +96,75 @@ const lightCSSVars: CSSVarSet = {
 	'--Input__outline-style--focus': 'solid',
 	'--Input__outline-width--focus': '0.1em',
 
+	// selected
+	'--Input__background-color--selected': '#ebebeb',
+	'--Input__border-color--selected': '#444',
+	'--Input__color--selected': '#222',
+
 	// disabled
 	'--Input__background-color--disabled': 'whitesmoke',
 	'--Input__border-color--disabled': 'darkgray',
 	'--Input__color--disabled': 'darkgray',
-	'--Input__placeholder__color--disabled': 'lightgrey'
+	'--Input__placeholder__color--disabled': 'lightgrey',
+
+	// ----- List ----- //
+	'--List__background-color': '#fff',
+	'--List__border-color': '#777',
+	'--List__border-radius': '0',
+	'--List__border-style': 'solid',
+	'--List__border-width': '0.07em',
+	'--List__color': '#222',
+
+	// hover
+	'--List__background-color--hover': '#fff',
+	'--List__border-color--hover': '#555',
+	'--List__color--hover': '#222',
+
+	// focus
+	'--List__background-color--focus': '#fff',
+	'--List__border-color--focus': '#222',
+	'--List__color--focus': '#222',
+	'--List__outline-color--focus': '#222',
+	'--List__outline-style--focus': 'solid',
+	'--List__outline-width--focus': '0.1em',
+
+	// disabled
+	'--List__background-color--disabled': 'whitesmoke',
+	'--List__border-color--disabled': 'darkgray',
+	'--List__color--disabled': 'darkgray',
+
+	// ----- ListItem ----- //
+	'--ListItem__background-color': '#fff',
+	'--ListItem__border-color': '#777',
+	'--ListItem__border-radius': '0',
+	'--ListItem__border-style': 'solid',
+	'--ListItem__border-width': '0.07em',
+	'--ListItem__color': '#222',
+
+	// hover
+	'--ListItem__background-color--hover': '#fff',
+	'--ListItem__border-color--hover': '#555',
+	'--ListItem__color--hover': '#222',
+
+	// focus
+	'--ListItem__background-color--focus': '#fff',
+	'--ListItem__border-color--focus': '#222',
+	'--ListItem__color--focus': '#222',
+	'--ListItem__outline-color--focus': '#222',
+	'--ListItem__outline-style--focus': 'solid',
+	'--ListItem__outline-width--focus': '0.1em',
+
+	// selected
+	'--ListItem__background-color--selected': '#ebebeb',
+	'--ListItem__border-color--selected': '#444',
+	'--ListItem__color--selected': '#222',
+
+	// disabled
+	'--ListItem__background-color--disabled': 'whitesmoke',
+	'--ListItem__border-color--disabled': 'darkgray',
+	'--ListItem__color--disabled': 'darkgray',
+	'--ListItem__placeholder__color--disabled': 'lightgrey',
+
 };
 
 export const lightTheme = (node: HTMLElement) => {

@@ -5,20 +5,16 @@ import { theme } from './useTheme';
 
 const darkCSSVars: CSSVarSet = {
 	// ----- BaseLayer ---- //
-	'--BaseLayer__background-color': '#222',
-	'--BaseLayer__border-color': '#eee',
+	'--BaseLayer__background-color': 'hsl(0, 0%, 0%)',
 	'--BaseLayer__color': '#eee',
 
-	'--BaseLayer__background-color--1': '#222',
-	'--BaseLayer__border-color--1': '#eee',
+	'--BaseLayer__background-color--1': 'hsl(0, 0%, 10%)',
 	'--BaseLayer__color--1': '#eee',
 
-	'--BaseLayer__background-color--2': '#222',
-	'--BaseLayer__border-color--2': '#eee',
+	'--BaseLayer__background-color--2': 'hsl(0, 0%, 20%)',
 	'--BaseLayer__color--2': '#eee',
 
-	'--BaseLayer__background-color--3': '#222',
-	'--BaseLayer__border-color--3': '#eee',
+	'--BaseLayer__background-color--3': 'hsl(0, 0%, 30%)',
 	'--BaseLayer__color--3': '#eee',
 
 	// ----- Button ----- //

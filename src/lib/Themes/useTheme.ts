@@ -6,7 +6,6 @@ const applyTheme = (node: HTMLElement, cssVars: CSSVarSet) => {
 	Object.keys(cssVars).map((key) => {
 		node.style.setProperty(key, cssVars[key] ? `${cssVars[key]}` : null);
 	});
-	console.log('node', node.style);
 }
 
 export const theme = (node: HTMLElement, cssVars: CSSVarSet) => {
