@@ -1,6 +1,14 @@
 <script lang="ts">
-	import { tick } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 
+	/**
+	 * Disables the list and all items
+	 */
+	export let disabled: boolean = false;
+
+	/**
+	 * The items to list.
+	 */
 	export let items: any[] = [];
 
 	/**
@@ -21,9 +29,31 @@
 
 	let listRef: HTMLDivElement;
 	let itemRefs: any = {};
+
 	let focusVisible = false;
 
+	const dispatch = createEventDispatcher();
+
+	const raiseItemSelected = (index: number, item: any) => {
+		dispatch('itemSelected', { index, item });
+	};
+
 	$: selectedItem = items[selectedIndex];
+
+	$: {
+		raiseItemSelected(selectedIndex, items[selectedIndex]);
+	}
+
+	// When using the Tab key for selecting items, the focus will be on the list item.
+	// :focus-visible won't be active on the list itself, so focusVisible is calculated to apply .focus-visible.
+	const updateFocusVisible = () => {
+		focusVisible = !disabled && listRef.querySelector('.list-item:focus-visible') !== null;
+	};
+
+	$: disabled,
+		() => {
+			updateFocusVisible();
+		};
 
 	// When the selectedIndex changes, scroll it into view
 	$: {
@@ -31,41 +61,36 @@
 		selectedRef?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
 	}
 
-	// When using Tab for selecting items, the focus will be on the list item.
-	// The focus-visible won't be active on the list itself,
-	// so we track focusVisible and apply .focus-visible to simulate it.
-	const updateFocusVisible = () => {
-		focusVisible = listRef.querySelector('.list-item:focus-visible') !== null;
-	};
-
-	const onListFocus = () => {
-		if (selectionKeys === 'tab') {
+	const onListFocus : svelte.JSX.FocusEventHandler<HTMLDivElement> = (event) => {
+		if (!disabled && selectionKeys === 'tab') {
 			const selectedRef = itemRefs[selectedIndex] as HTMLDivElement;
 			selectedRef?.focus();
-			selectedRef?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+			selectedRef?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
 			updateFocusVisible();
 		}
 	};
 
 	const onItemClick = (item: any, index: number) => {
-		selectedIndex = index;
+		if (!disabled) {
+			selectedIndex = index;
+		}
 	};
 
 	const onItemBlur = (item: any, index: number) => {
-		tick();
-		updateFocusVisible();
+		if (!disabled) {
+			updateFocusVisible();
+		}
 	};
 
 	const onItemFocus = (item: any, index: number) => {
-		if (selectionKeys === 'tab') {
+		if (!disabled && selectionKeys === 'tab') {
 			selectedIndex = index;
-			tick();
 			updateFocusVisible();
 		}
 	};
 
 	const onArrowSelectPrevious: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
-		if (items.length > 0 && selectedIndex !== 0) {
+		if (!disabled && items.length > 0 && selectedIndex !== 0) {
 			event.preventDefault();
 			event.stopPropagation();
 			selectedIndex = Math.max(0, selectedIndex - 1);
@@ -73,7 +98,7 @@
 	};
 
 	const onArrowSelectNext: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
-		if (items.length > 0 && selectedIndex !== items.length - 1) {
+		if (!disabled && items.length > 0 && selectedIndex !== items.length - 1) {
 			event.preventDefault();
 			event.stopPropagation();
 			selectedIndex = Math.min(items.length - 1, selectedIndex + 1);
@@ -114,43 +139,68 @@
 					break;
 			}
 		}
+
+		dispatch('keydown', event);
 	};
 </script>
 
 <div
 	bind:this={listRef}
 	class="sterling-list"
+	class:disabled
 	class:focus-visible={focusVisible}
 	class:horizontal
 	tabindex={0}
-	on:focus={(event) => onListFocus()}
+	on:blur
+	on:click
+	on:copy
+	on:cut
+	on:dblclick
+	on:focus={onListFocus}
+	on:focus
+	on:focusin
+	on:focusout
 	on:keydown={onKeydown}
+	on:keydown
+	on:keypress
+	on:keyup
+	on:mousedown
+	on:mouseenter
+	on:mouseleave
+	on:mousemove
+	on:mouseover
+	on:mouseout
+	on:mouseup
+	on:wheel
+	on:paste
+	{...$$restProps}
 >
 	{#each items as item, index (item)}
 		<div
 			bind:this={itemRefs[index]}
 			data-index={index + 1}
 			class="list-item"
+			class:disabled
 			class:selected={index === selectedIndex}
 			on:blur={() => onItemBlur(item, index)}
 			on:click={() => onItemClick(item, index)}
 			on:focus={(event) => onItemFocus(item, index)}
 			tabindex={selectionKeys === 'tab' ? 0 : undefined}
 		>
-			<slot {item} {selectedIndex} {selectedItem}>{item}</slot>
+			<slot {disabled} {index} {item} {selectedIndex} {selectedItem}>{item}</slot>
 		</div>
 	{/each}
 </div>
 
 <style>
 	.sterling-list {
-		background-color: var(--Input__background-color, white);
-		border-color: var(--Input__border-color, black);
-		border-radius: var(--Input__border-radius, 0.15em);
-		border-style: var(--Input__border-style, solid);
-		border-width: var(--Input__border-width, 0.07em);
+		background-color: var(--List__background-color, white);
+		border-color: var(--List__border-color, black);
+		border-radius: var(--List__border-radius, 0.15em);
+		border-style: var(--List__border-style, solid);
+		border-width: var(--List__border-width, 0.07em);
 		box-sizing: border-box;
-		color: var(--Input__color, black);
+		color: var(--List__color, black);
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -168,40 +218,45 @@
 	}
 
 	.sterling-list:hover {
-		background-color: var(--Input__background-color--hover, white);
-		border-color: var(--Input__border-color--hover, black);
-		color: var(--Input__color--hover, black);
+		background-color: var(--List__background-color--hover, white);
+		border-color: var(--List__border-color--hover, black);
+		color: var(--List__color--hover, black);
 	}
 
 	.sterling-list:focus-visible,
 	.sterling-list.focus-visible {
-		background-color: var(--Input__background-color--focus, white);
-		border-color: var(--Input__border-color--focus, black);
-		color: var(--Input__color--focus, black);
-		outline-color: var(--Input__outline-color--focus, black);
-		outline-style: var(--Input__outline-style--focus, solid);
-		outline-width: var(--Input__outline-width--focus, 0.1em);
+		background-color: var(--List__background-color--focus, white);
+		border-color: var(--List__border-color--focus, black);
+		color: var(--List__color--focus, black);
+		outline-color: var(--List__outline-color--focus, black);
+		outline-style: var(--List__outline-style--focus, solid);
+		outline-width: var(--List__outline-width--focus, 0.1em);
 	}
 
-	.sterling-list:disabled {
-		background-color: var(--Input__background-color--disabled, whitesmoke);
-		border-color: var(---Input__border-color--disabled, darkgrey);
-		color: var(--Input__color--disabled, darkgrey);
+	.sterling-list.disabled {
+		background-color: var(--List__background-color--disabled, whitesmoke);
+		border-color: var(---List__border-color--disabled, darkgrey);
+		color: var(--List__color--disabled, darkgrey);
 		cursor: not-allowed;
 	}
 
 	.list-item {
 		outline: none;
-		transition: background-color 250ms, color 250ms, border-color 250ms;
+		transition: background-color 150ms, color 150ms, border-color 150ms;
 	}
 
 	.list-item:hover {
-		background-color: var(--Button__background-color--hover, whitesmoke);
-		color: var(--Input__color--hover, black);
+		background-color: var(--ListItem__background-color--hover, whitesmoke);
+		color: var(--ListItem__color--hover, black);
 	}
 
 	.list-item.selected {
-		background-color: var(--Button__background-color--active, lightgrey);
-		color: var(--Input__color--selected, black);
+		background-color: var(--ListItem__background-color--active, lightgrey);
+		color: var(--ListItem__color--selected, black);
+	}
+
+	.list-item.disabled {
+		background-color: var(--ListItem__background-color--disabled, whitesmoke);
+		color: var(--ListItem__color--disabled, darkgrey);
 	}
 </style>
