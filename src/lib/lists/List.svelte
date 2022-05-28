@@ -65,7 +65,7 @@
 		if (!disabled && selectionKeys === 'tab') {
 			const selectedRef = itemRefs[selectedIndex] as HTMLDivElement;
 			selectedRef?.focus();
-			selectedRef?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+			selectedRef?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
 			updateFocusVisible();
 		}
 	};

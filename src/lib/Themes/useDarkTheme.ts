@@ -101,7 +101,61 @@ const darkCSSVars: CSSVarSet = {
 	'--Input__background-color--disabled': '#555',
 	'--Input__border-color--disabled': '#777',
 	'--Input__color--disabled': '#777',
-	'--Input__placeholder__color--disabled': '#666'
+	'--Input__placeholder__color--disabled': '#666',
+
+	// ----- List ----- //
+
+	'--List__background-color': '#333',
+	'--List__border-color': '#ddd',
+	'--List__border-radius': '0',
+	'--List__border-style': 'solid',
+	'--List__border-width': '0.07em',
+	'--List__color': '#ddd',
+
+	// hover
+	'--List__background-color--hover': '#333',
+	'--List__border-color--hover': '#eee',
+	'--List__color--hover': '#eee',
+
+	// focus
+	'--List__background-color--focus': '#333',
+	'--List__border-color--focus': '#fff',
+	'--List__color--focus': '#fff',
+	'--List__outline-color--focus': '#fff',
+	'--List__outline-style--focus': 'solid',
+	'--List__outline-width--focus': '0.1em',
+
+	// disabled
+	'--List__background-color--disabled': '#555',
+	'--List__border-color--disabled': '#777',
+	'--List__color--disabled': '#777',
+
+		// ----- ListItem ----- //
+
+		'----ListItem__background-color': '#333',
+		'----ListItem__border-color': '#ddd',
+		'----ListItem__border-radius': '0',
+		'----ListItem__border-style': 'solid',
+		'----ListItem__border-width': '0.07em',
+		'----ListItem__color': '#ddd',
+	
+		// hover
+		'----ListItem__background-color--hover': '#333',
+		'----ListItem__border-color--hover': '#eee',
+		'----ListItem__color--hover': '#eee',
+	
+		// focus
+		'----ListItem__background-color--focus': '#333',
+		'----ListItem__border-color--focus': '#fff',
+		'----ListItem__color--focus': '#fff',
+		'----ListItem__outline-color--focus': '#fff',
+		'----ListItem__outline-style--focus': 'solid',
+		'----ListItem__outline-width--focus': '0.1em',
+	
+		// disabled
+		'----ListItem__background-color--disabled': '#555',
+		'----ListItem__border-color--disabled': '#777',
+		'----ListItem__color--disabled': '#777',
 };
 
 export const darkTheme = (node: HTMLElement) => {
