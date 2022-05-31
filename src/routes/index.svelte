@@ -8,6 +8,7 @@
 	import CheckboxExamples from './_examples/CheckboxExamples.svelte';
 	import InputExamples from './_examples/InputExamples.svelte';
 	import RadioExamples from './_examples/RadioExamples.svelte';
+	import SelectExamples from './_examples/SelectExample.svelte';
 	import ButtonExamples from './_examples/ButtonExamples.svelte';
 	import BaseLayerExamples from './_examples/BaseLayerExamples.svelte';
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
@@ -28,12 +29,14 @@ import ListExamples from './_examples/ListExamples.svelte';
 				><div slot="after">Dark Mode</div></Checkbox
 			>
 		</div>
+		<SelectExamples />
 		<ListExamples />
 		<BaseLayerExamples />
 		<ButtonExamples />
 		<CheckboxExamples />
 		<InputExamples />
 		<RadioExamples />
+
 	</BaseLayer>
 </div>
 

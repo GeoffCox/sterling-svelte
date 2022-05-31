@@ -50,6 +50,14 @@
 		focusVisible = !disabled && listRef.querySelector('.list-item:focus-visible') !== null;
 	};
 
+	export const focusSelectedItem = () => {
+		listRef.focus();
+		const selectedRef = itemRefs[selectedIndex] as HTMLDivElement;
+		selectedRef?.focus();
+		selectedRef?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+		updateFocusVisible();
+	};
+
 	$: disabled,
 		() => {
 			updateFocusVisible();
@@ -61,12 +69,9 @@
 		selectedRef?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
 	}
 
-	const onListFocus : svelte.JSX.FocusEventHandler<HTMLDivElement> = (event) => {
+	const onListFocus: svelte.JSX.FocusEventHandler<HTMLDivElement> = (event) => {
 		if (!disabled && selectionKeys === 'tab') {
-			const selectedRef = itemRefs[selectedIndex] as HTMLDivElement;
-			selectedRef?.focus();
-			selectedRef?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-			updateFocusVisible();
+			focusSelectedItem();
 		}
 	};
 
@@ -187,7 +192,7 @@
 			on:focus={(event) => onItemFocus(item, index)}
 			tabindex={selectionKeys === 'tab' ? 0 : undefined}
 		>
-			<slot {disabled} {index} {item} {selectedIndex} {selectedItem}>{item}</slot>
+			<slot {disabled} {index} {item} selected={selectedIndex === index}>{item}</slot>
 		</div>
 	{/each}
 </div>
