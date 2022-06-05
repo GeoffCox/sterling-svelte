@@ -144,8 +144,6 @@
 					break;
 			}
 		}
-
-		dispatch('keydown', event);
 	};
 </script>
 
@@ -256,7 +254,7 @@
 	}
 
 	.list-item.selected {
-		background-color: var(--ListItem__background-color--active, lightgrey);
+		background-color: var(--ListItem__background-color--selected, lightgrey);
 		color: var(--ListItem__color--selected, black);
 	}
 

@@ -93,7 +93,10 @@ const darkCSSVars: CSSVarSet = {
 	'--Input__background-color--focus': '#333',
 	'--Input__border-color--focus': '#fff',
 	'--Input__color--focus': '#fff',
+
+	// outline
 	'--Input__outline-color--focus': '#fff',
+	'--Input__outline-offset--focus': '0',
 	'--Input__outline-style--focus': 'solid',
 	'--Input__outline-width--focus': '0.1em',
 

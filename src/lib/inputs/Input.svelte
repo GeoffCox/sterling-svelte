@@ -35,6 +35,8 @@
 		border-style: var(--Input__border-style, solid);
 		border-width: var(--Input__border-width, 0.07em);
         color: var(--Input__color, black);
+		font: inherit;
+		margin: 0;
 		padding: 0.5em 0.5em;
 		transition: background-color 250ms, color 250ms, border-color 250ms;
 	}
@@ -50,6 +52,7 @@
 		border-color: var(--Input__border-color--focus, black);
 		color: var(--Input__color--focus, black);
 		outline-color: var(--Input__outline-color--focus, black);
+		outline-offset: var(--Input__outline-offset--focus, 0);
 		outline-style: var(--Input__outline-style--focus, solid);
 		outline-width: var(--Input__outline-width--focus, 0.1em);
 	}

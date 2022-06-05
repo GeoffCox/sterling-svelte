@@ -13,7 +13,7 @@
 </script>
 
 <div>
-	<ExampleSection title="List">
+	<ExampleSection title="Select">
 		<ExampleCard name="default">
 			<div class="vertical">
 				<Select

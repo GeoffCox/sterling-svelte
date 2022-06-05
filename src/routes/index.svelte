@@ -30,11 +30,11 @@ import ListExamples from './_examples/ListExamples.svelte';
 			>
 		</div>
 		<SelectExamples />
+		<InputExamples />
 		<ListExamples />
 		<BaseLayerExamples />
 		<ButtonExamples />
 		<CheckboxExamples />
-		<InputExamples />
 		<RadioExamples />
 
 	</BaseLayer>

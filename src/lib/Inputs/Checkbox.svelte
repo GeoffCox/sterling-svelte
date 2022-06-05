@@ -36,7 +36,6 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 0.4em;
-		font-size: inherit;
 		outline: none;
 		padding: 0;
 		margin: 0;
@@ -57,6 +56,8 @@
 		The input is hidden since the built-in browser checkbox cannot be customized
 	*/
 	input {
+		color: inherit;
+		font: inherit;
 		margin: 0;
 		padding: 0;
 		position: absolute;

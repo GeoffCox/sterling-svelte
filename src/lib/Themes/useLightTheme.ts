@@ -92,7 +92,10 @@ const lightCSSVars: CSSVarSet = {
 	'--Input__background-color--focus': '#fff',
 	'--Input__border-color--focus': '#222',
 	'--Input__color--focus': '#222',
+
+	// outline
 	'--Input__outline-color--focus': '#222',
+	'--Input__outline-offset--focus': '0',
 	'--Input__outline-style--focus': 'solid',
 	'--Input__outline-width--focus': '0.1em',
 
@@ -142,7 +145,7 @@ const lightCSSVars: CSSVarSet = {
 	'--ListItem__color': '#222',
 
 	// hover
-	'--ListItem__background-color--hover': '#fff',
+	'--ListItem__background-color--hover': '#ebebeb',
 	'--ListItem__border-color--hover': '#555',
 	'--ListItem__color--hover': '#222',
 
@@ -155,7 +158,7 @@ const lightCSSVars: CSSVarSet = {
 	'--ListItem__outline-width--focus': '0.1em',
 
 	// selected
-	'--ListItem__background-color--selected': '#ebebeb',
+	'--ListItem__background-color--selected': 'lightgrey',
 	'--ListItem__border-color--selected': '#444',
 	'--ListItem__color--selected': '#222',
 
