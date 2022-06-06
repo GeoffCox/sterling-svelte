@@ -206,6 +206,7 @@
 		color: var(--List__color, black);
 		display: flex;
 		flex-direction: column;
+		flex-wrap: nowrap;
 		height: 100%;
 		overflow-x: hidden;
 		overflow-y: auto;
@@ -245,6 +246,8 @@
 
 	.list-item {
 		outline: none;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 		transition: background-color 150ms, color 150ms, border-color 150ms;
 	}
 

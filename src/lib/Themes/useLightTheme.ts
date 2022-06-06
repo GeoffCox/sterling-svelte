@@ -166,8 +166,7 @@ const lightCSSVars: CSSVarSet = {
 	'--ListItem__background-color--disabled': 'whitesmoke',
 	'--ListItem__border-color--disabled': 'darkgray',
 	'--ListItem__color--disabled': 'darkgray',
-	'--ListItem__placeholder__color--disabled': 'lightgrey',
-
+	'--ListItem__placeholder__color--disabled': 'lightgrey'
 };
 
 export const lightTheme = (node: HTMLElement) => {

@@ -9,12 +9,12 @@
 </div>
 
 <style>
-    .palette {
-        display: flex;
-    }
+	.palette {
+		display: flex;
+	}
 
-    .palette > div {
-        width: 20px;
-        height: 20px;
-    }
+	.palette > div {
+		width: 20px;
+		height: 20px;
+	}
 </style>

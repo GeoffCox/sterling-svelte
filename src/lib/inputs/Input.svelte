@@ -1,4 +1,5 @@
-<input class="sterling-input"
+<input
+	class="sterling-input"
 	on:blur
 	on:click
 	on:change
@@ -25,7 +26,8 @@
 	on:submit
 	on:reset
 	on:wheel
-	{...$$restProps}/>
+	{...$$restProps}
+/>
 
 <style>
 	input {
@@ -34,7 +36,7 @@
 		border-radius: var(--Input__border-radius, 0.15em);
 		border-style: var(--Input__border-style, solid);
 		border-width: var(--Input__border-width, 0.07em);
-        color: var(--Input__color, black);
+		color: var(--Input__color, black);
 		font: inherit;
 		margin: 0;
 		padding: 0.5em 0.5em;
@@ -58,7 +60,7 @@
 	}
 
 	input:disabled {
-		background-color: var(--Input__background-color--disabled, whitesmoke	);
+		background-color: var(--Input__background-color--disabled, whitesmoke);
 		border-color: var(---Input__border-color--disabled, darkgrey);
 		color: var(--Input__color--disabled, darkgrey);
 		cursor: not-allowed;

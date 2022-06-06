@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { sendNotification } from '../../stores';
-	
+
 	import ExampleCard from '../_components/ExampleCard.svelte';
 	import ExampleSection from '../_components/ExampleSection.svelte';
-	
+
 	import Input from '$lib/inputs/Input.svelte';
 
 	const inputOnChange = (e: Event) => {

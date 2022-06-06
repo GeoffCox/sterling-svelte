@@ -2,7 +2,7 @@
 	import { lightTheme } from '$lib/themes/useLightTheme';
 	import { darkTheme } from '$lib/themes/useDarkTheme';
 
-	export let theme: string = "light";
+	export let theme: string = 'light';
 </script>
 
 <div class="theme-provider">

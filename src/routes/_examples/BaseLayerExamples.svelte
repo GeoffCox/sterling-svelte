@@ -1,11 +1,8 @@
 <script lang="ts">
 	import BaseLayer from '$lib/BaseLayer.svelte';
 
-	import { sendNotification } from '../../stores';
-
 	import ExampleCard from '../_components/ExampleCard.svelte';
 	import ExampleSection from '../_components/ExampleSection.svelte';
-	import SvelteIcon from '../_components/SvelteIcon.svelte';
 </script>
 
 <div>

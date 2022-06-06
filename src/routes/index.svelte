@@ -2,7 +2,6 @@
 	import { notification } from '../stores';
 	import { currentTheme } from './_components/useCurrentTheme';
 
-	import ExampleCard from './_components/ExampleCard.svelte';
 	import BaseLayer from '$lib/BaseLayer.svelte';
 
 	import CheckboxExamples from './_examples/CheckboxExamples.svelte';
@@ -12,7 +11,7 @@
 	import ButtonExamples from './_examples/ButtonExamples.svelte';
 	import BaseLayerExamples from './_examples/BaseLayerExamples.svelte';
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
-import ListExamples from './_examples/ListExamples.svelte';
+	import ListExamples from './_examples/ListExamples.svelte';
 
 	let darkMode = false;
 
@@ -36,7 +35,6 @@ import ListExamples from './_examples/ListExamples.svelte';
 		<ButtonExamples />
 		<CheckboxExamples />
 		<RadioExamples />
-
 	</BaseLayer>
 </div>
 

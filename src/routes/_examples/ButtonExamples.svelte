@@ -75,8 +75,7 @@
 	</ExampleSection>
 	<ExampleSection title="PrimaryButton">
 		<ExampleCard name="default">
-			<PrimaryButton on:click={() => sendNotification('Button clicked')}>Sterling</PrimaryButton
-			>
+			<PrimaryButton on:click={() => sendNotification('Button clicked')}>Sterling</PrimaryButton>
 		</ExampleCard>
 		<ExampleCard name="disabled">
 			<PrimaryButton disabled on:click={() => sendNotification('Button clicked')}

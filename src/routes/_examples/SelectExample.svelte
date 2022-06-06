@@ -20,7 +20,9 @@
 					{items}
 					let:item
 					on:itemSelected={(event) => {
-						sendNotification(`List item selected [${event.detail.index}] 'Item ${event.detail.item}'`);
+						sendNotification(
+							`List item selected [${event.detail.index}] 'Item ${event.detail.item}'`
+						);
 					}}
 				>
 					<div class="list-item">Item {item}</div>

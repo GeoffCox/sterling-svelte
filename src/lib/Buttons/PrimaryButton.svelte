@@ -65,7 +65,10 @@
 
 	button:focus-visible {
 		border-color: var(--PrimaryButton__border-color--focus, black);
-		outline-color: var(--PrimaryButton__outline-color--focus, var(--Button__border-color--focus, black));
+		outline-color: var(
+			--PrimaryButton__outline-color--focus,
+			var(--Button__border-color--focus, black)
+		);
 		outline-style: var(--PrimaryButton__outline-style--focus, var(--Button__border-style, solid));
 		outline-width: var(--PrimaryButton__outline-width--focus, var(--Button__border-width, 0.07em));
 	}
