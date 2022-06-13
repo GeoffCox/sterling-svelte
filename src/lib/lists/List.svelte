@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
+	/*--------------------
+		Properties
+	  --------------------*/
+
 	/**
 	 * Disables the list and all items
 	 */
@@ -21,47 +25,57 @@
 	 */
 	export let selectedIndex = -1;
 
-	/**
-	 * If the selection of items should use tabs or arrows.
-	 * @default 'arrows'
-	 */
-	export let selectionKeys: 'tab' | 'arrows' = 'arrows';
+	/*--------------------
+		State
+	  --------------------*/
 
 	let listRef: HTMLDivElement;
 	let itemRefs: any = {};
 
 	let focusVisible = false;
 
+	/*--------------------
+		Events
+	  --------------------*/
 	const dispatch = createEventDispatcher();
 
-	const raiseItemSelected = (index: number, item: any) => {
-		dispatch('itemSelected', { index, item });
+	const raiseItemSelected = (index: number) => {
+		dispatch('itemSelected', { index, item: items[index] });
 	};
 
-	$: selectedItem = items[selectedIndex];
-
-	$: {
-		raiseItemSelected(selectedIndex, items[selectedIndex]);
-	}
-
-	// When using the Tab key for selecting items, the focus will be on the list item.
-	// :focus-visible won't be active on the list itself, so focusVisible is calculated to apply .focus-visible.
-	const updateFocusVisible = () => {
-		focusVisible = !disabled && listRef.querySelector('.list-item:focus-visible') !== null;
-	};
+	/*--------------------
+		Methods
+	  --------------------*/
 
 	export const focusSelectedItem = () => {
 		listRef.focus();
 		const selectedRef = itemRefs[selectedIndex] as HTMLDivElement;
 		selectedRef?.focus();
 		selectedRef?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-		updateFocusVisible();
 	};
 
-	$: disabled,
-		() => {
-			updateFocusVisible();
-		};
+	$: canSelectPreviousItem = items.length > 0 && selectedIndex !== 0;
+	$: canSelectNextItem = items.length > 0 && selectedIndex !== items.length - 1;
+
+	export const selectPreviousItem = () => {
+		if (canSelectPreviousItem) {
+			selectedIndex = Math.max(0, selectedIndex - 1);
+		}
+	};
+
+	export const selectNextItem = () => {
+		if (canSelectNextItem) {
+			selectedIndex = Math.min(items.length - 1, selectedIndex + 1);
+		}
+	};
+
+	/*--------------------
+		Reactions
+	  --------------------*/
+
+	$: {
+		raiseItemSelected(selectedIndex);
+	}
 
 	// When the selectedIndex changes, scroll it into view
 	$: {
@@ -69,11 +83,9 @@
 		selectedRef?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
 	}
 
-	const onListFocus: svelte.JSX.FocusEventHandler<HTMLDivElement> = (event) => {
-		if (!disabled && selectionKeys === 'tab') {
-			focusSelectedItem();
-		}
-	};
+	/*--------------------
+		Event Handlers
+	  --------------------*/
 
 	const onItemClick = (item: any, index: number) => {
 		if (!disabled) {
@@ -81,44 +93,25 @@
 		}
 	};
 
-	const onItemBlur = (item: any, index: number) => {
-		if (!disabled) {
-			updateFocusVisible();
-		}
-	};
-
-	const onItemFocus = (item: any, index: number) => {
-		if (!disabled && selectionKeys === 'tab') {
-			selectedIndex = index;
-			updateFocusVisible();
-		}
-	};
-
 	const onArrowSelectPrevious: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
-		if (!disabled && items.length > 0 && selectedIndex !== 0) {
+		if (!disabled) {
 			event.preventDefault();
 			event.stopPropagation();
-			selectedIndex = Math.max(0, selectedIndex - 1);
+			selectPreviousItem();
 		}
 	};
 
 	const onArrowSelectNext: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
-		if (!disabled && items.length > 0 && selectedIndex !== items.length - 1) {
+		if (!disabled) {
 			event.preventDefault();
 			event.stopPropagation();
-			selectedIndex = Math.min(items.length - 1, selectedIndex + 1);
+			selectNextItem();
 		}
 	};
 
 	const onKeydown: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
 		// if using arrows, only move when there are no modifier keys
-		if (
-			selectionKeys === 'arrows' &&
-			!event.ctrlKey &&
-			!event.shiftKey &&
-			!event.altKey &&
-			!event.metaKey
-		) {
+		if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
 			switch (event.key) {
 				case 'ArrowLeft':
 					if (horizontal) {
@@ -147,19 +140,23 @@
 	};
 </script>
 
+<!--
+@component
+A list of items where a single item can be selected.
+  -->
 <div
 	bind:this={listRef}
 	class="sterling-list"
 	class:disabled
 	class:focus-visible={focusVisible}
 	class:horizontal
-	tabindex={0}
+	role="listbox"
+	tabindex={!disabled ? 0 : undefined}
 	on:blur
 	on:click
 	on:copy
 	on:cut
 	on:dblclick
-	on:focus={onListFocus}
 	on:focus
 	on:focusin
 	on:focusout
@@ -174,23 +171,26 @@
 	on:mouseover
 	on:mouseout
 	on:mouseup
+	on:scroll
 	on:wheel
 	on:paste
 	{...$$restProps}
 >
 	{#each items as item, index (item)}
+		{@const selected = selectedIndex === index}
 		<div
 			bind:this={itemRefs[index]}
-			data-index={index + 1}
+			aria-selected={disabled ? undefined : selected}
 			class="list-item"
+			class:selected
 			class:disabled
-			class:selected={index === selectedIndex}
-			on:blur={() => onItemBlur(item, index)}
+			data-index={index + 1}
+			role="option"
 			on:click={() => onItemClick(item, index)}
-			on:focus={(event) => onItemFocus(item, index)}
-			tabindex={selectionKeys === 'tab' ? 0 : undefined}
 		>
-			<slot {disabled} {index} {item} selected={selectedIndex === index}>{item}</slot>
+			<slot {disabled} {index} {item} {selected}>
+				{item}
+			</slot>
 		</div>
 	{/each}
 </div>
@@ -208,11 +208,12 @@
 		flex-direction: column;
 		flex-wrap: nowrap;
 		height: 100%;
+		margin: 0;
 		overflow-x: hidden;
-		overflow-y: auto;
+		overflow-y: scroll;
+		padding: 0;
 		position: relative;
 		transition: background-color 250ms, color 250ms, border-color 250ms;
-		width: 100%;
 	}
 
 	.sterling-list.horizontal {
@@ -245,10 +246,15 @@
 	}
 
 	.list-item {
+		background-color: var(--ListItem__background-color, white);
+		box-sizing: border-box;
+		color: var(--ListItem__color, black);
+		margin: 0;
+		padding: 0.5em;
 		outline: none;
 		text-overflow: ellipsis;
-		white-space: nowrap;
 		transition: background-color 150ms, color 150ms, border-color 150ms;
+		white-space: nowrap;
 	}
 
 	.list-item:hover {

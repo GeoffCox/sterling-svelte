@@ -3,6 +3,11 @@
 import type { CSSVarSet } from '../types';
 import { theme } from './useTheme';
 
+// background, color, border
+// rest, hover, focus, active, selected, disabled
+// button, input, container, item
+// default, accent
+
 const lightCSSVars: CSSVarSet = {
 	// ----- BaseLayer ---- //
 	'--BaseLayer__background-color': 'hsl(0, 0%, 100%)',

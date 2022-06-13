@@ -1,8 +1,13 @@
 <script lang="ts">
-	import { onMount, tick } from 'svelte';
+	import { createEventDispatcher, onMount, tick } from 'svelte';
+	import { v4 as uuidv4, v4 } from 'uuid';
 	import { computePosition, flip, offset, shift, autoUpdate } from '@floating-ui/dom';
 	import { clickOutside } from '$lib/actions/clickOutside';
 	import List from '$lib/lists/List.svelte';
+
+	/*--------------------
+		Properties
+	  --------------------*/
 
 	/**
 	 * Disables the list and all items
@@ -15,17 +20,51 @@
 	export let items: any[] = [];
 
 	/**
-	 * The index of the selected item
-	 */
-	export let selectedIndex = 0;
-
-	/**
 	 * Opens the popup to select from the items
 	 */
 	export let open = false;
 
+	/**
+	 * The index of the selected item
+	 */
+	export let selectedIndex = 0;
+
+	export let popupWidth: CSSStyleDeclaration['width'] = 'fit-content';
+	export let popupHeight: CSSStyleDeclaration['height'] = '15em'; //7ish items with 0.5em padding top & bottom
+
+	/*--------------------
+		State
+	  --------------------*/
+
 	// Tracks the pending selected index
 	let pendingSelectedIndex = selectedIndex;
+
+	let selectRef: HTMLDivElement;
+	let popupRef: HTMLDivElement;
+	let listRef: List;
+
+	const popupId = uuidv4();
+	let popupPosition: { x?: number; y?: number } = {
+		x: undefined,
+		y: undefined
+	};
+
+	/*--------------------
+		Events
+	  --------------------*/
+	const dispatch = createEventDispatcher();
+
+	const raiseItemSelected = (index: number) => {
+		dispatch('itemSelected', { index, item: items[index] });
+	};
+
+	const raisePendingItemSelected = (index: number) => {
+		dispatch('pendingItemSelect', { index, item: items[index] });
+	};
+
+	/*--------------------
+		Reactions
+	  --------------------*/
 
 	$: selectedIndex,
 		() => {
@@ -33,19 +72,24 @@
 		};
 
 	$: {
-		console.log(`pending: ${pendingSelectedIndex} selected: ${selectedIndex}`);
+		raiseItemSelected(selectedIndex);
 	}
 
-	let selectRef: HTMLDivElement;
-	let popupRef: HTMLDivElement;
-	let listRef: List;
+	$: {
+		raisePendingItemSelected(pendingSelectedIndex);
+	}
 
-	let selectWidth: number = 0;
+	$: {
+		if (open) {
+			tick().then(() => listRef?.focusSelectedItem());
+		} else {
+			tick().then(() => selectRef?.focus());
+		}
+	}
 
-	let popupPosition: { x?: number; y?: number } = {
-		x: undefined,
-		y: undefined
-	};
+	/*--------------------
+		Event Handlers
+	  --------------------*/
 
 	onMount(() => {
 		const cleanup = autoUpdate(selectRef, popupRef, async () => {
@@ -63,43 +107,66 @@
 	});
 
 	const onSelectClick: svelteHTML.MouseEventHandler<HTMLDivElement> = (event) => {
-		open = !open;
-		event.preventDefault();
-		event.stopPropagation();
+		if (!disabled) {
+			open = !open;
+			event.preventDefault();
+			event.stopPropagation();
+		}
 	};
 
 	const onSelectKeydown: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
-		if (event.key === ' ') {
-			open = !open;
-			event.preventDefault();
-			event.stopPropagation();
+		if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
+			switch (event.key) {
+				case ' ':
+					{
+						open = !open;
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					break;
+				case 'ArrowUp':
+					{
+						listRef.selectPreviousItem();
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					break;
+				case 'ArrowDown':
+					{
+						listRef.selectNextItem();
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					break;
+			}
 		}
-	};
-
-	const onListBlur: svelteHTML.FocusEventHandler<any> = (event) => {
-		// if (event.relatedTarget === undefined) {
-		// 	open = false;
-		// 	pendingSelectedIndex = selectedIndex;
-		// }
 	};
 
 	const onListKeydown: svelteHTML.KeyboardEventHandler<any> = (event) => {
-		if (event.key === 'Enter') {
-			selectedIndex = pendingSelectedIndex;
-			open = !open;
-			event.preventDefault();
-			event.stopPropagation();
-		}
-		if (event.key === 'Escape') {
-			pendingSelectedIndex = selectedIndex;
-			open = !open;
-			event.preventDefault();
-			event.stopPropagation();
+		if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
+			switch (event.key) {
+				case 'Enter':
+					{
+						selectedIndex = pendingSelectedIndex;
+						open = !open;
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					break;
+				case 'Escape':
+					{
+						pendingSelectedIndex = selectedIndex;
+						open = !open;
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					break;
+			}
 		}
 	};
 
 	const onListClick: svelteHTML.MouseEventHandler<any> = (event) => {
-		if (!event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
+		if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
 			selectedIndex = pendingSelectedIndex;
 			open = false;
 			event.preventDefault();
@@ -107,59 +174,103 @@
 		}
 	};
 
-	$: {
-		if (open) {
-			tick().then(() => listRef?.focusSelectedItem());
-			// setTimeout(() => {
-			// }, 100);
-		} else {
-			tick().then(() => selectRef?.focus());
+	const onPendingItemSelected = (event: CustomEvent<{ index: number; item: any }>) => {
+		pendingSelectedIndex = event.detail.index;
+		if (!open) {
+			selectedIndex = pendingSelectedIndex;
 		}
-	}
+	};
 </script>
 
+<!--
+@component
+Pops up a list of items when clicked. 
+A single item can be selected and is displayed as the value.
+  -->
 <div
-	bind:clientWidth={selectWidth}
 	bind:this={selectRef}
-	class="sterling-select"
-	on:click={onSelectClick}
-	on:keydown={onSelectKeydown}
-	tabindex="0"
 	use:clickOutside
+	aria-controls={popupId}
+	aria-haspopup="listbox"
+	aria-expanded={open}
+	class="sterling-select"
+	class:disabled
+	role="combobox"
+	tabindex="0"
 	on:click_outside={() => (open = false)}
+	on:click={onSelectClick}
+	on:blur
+	on:click
+	on:copy
+	on:cut
+	on:dblclick
+	on:focus
+	on:focusin
+	on:focusout
+	on:keydown={onSelectKeydown}
+	on:keydown
+	on:keypress
+	on:keyup
+	on:mousedown
+	on:mouseenter
+	on:mouseleave
+	on:mousemove
+	on:mouseover
+	on:mouseout
+	on:mouseup
+	on:wheel
+	on:paste
+	{...$$restProps}
 >
-	<div class="input">
-		<slot name="input">
+	<div class="value">
+		<slot name="value">
 			{items[selectedIndex]}
 		</slot>
 	</div>
-	<div class="button">
+	<div class="icon">
 		<slot name="button">
-			<button />
+			<div class="chevron" />
 		</slot>
 	</div>
 	<div
 		bind:this={popupRef}
 		class="popup"
 		class:open
-		style="left:{popupPosition.x}px; top:{popupPosition.y}px;--Select__popup__width:{selectWidth}px;}"
+		id={popupId}
+		style="left:{popupPosition.x}px; top:{popupPosition.y}px; width:{popupWidth}; height:{popupHeight};"
 	>
 		<slot name="list">
-			<List
-				bind:this={listRef}
-				bind:selectedIndex={pendingSelectedIndex}
-				{items}
-				{disabled}
-				let:disabled
-				let:index
-				let:item
-				let:selected
-				on:blur={onListBlur}
-				on:click={onListClick}
-				on:keydown={onListKeydown}
-			>
-				<slot {disabled} {index} {item} {selected} />
-			</List>
+			{#if $$slots.default === true}
+				<List
+					bind:this={listRef}
+					selectedIndex={pendingSelectedIndex}
+					{items}
+					{disabled}
+					let:disabled
+					let:index
+					let:item
+					let:selected
+					on:click={onListClick}
+					on:keydown={onListKeydown}
+					on:itemSelected={onPendingItemSelected}
+				>
+					<slot {disabled} {index} {item} {selected} />
+				</List>
+			{:else}
+				<List
+					bind:this={listRef}
+					selectedIndex={pendingSelectedIndex}
+					{items}
+					{disabled}
+					let:disabled
+					let:index
+					let:item
+					let:selected
+					on:click={onListClick}
+					on:keydown={onListKeydown}
+					on:itemSelected={onPendingItemSelected}
+				/>
+			{/if}
 		</slot>
 	</div>
 </div>
@@ -197,51 +308,37 @@
 		outline-width: var(--Input__outline-width--focus, 0.1em);
 	}
 
-	.sterling-select:disabled {
+	.sterling-select.disabled {
 		background-color: var(--Input__background-color--disabled, whitesmoke);
 		border-color: var(---Input__border-color--disabled, darkgrey);
 		color: var(--Input__color--disabled, darkgrey);
 		cursor: not-allowed;
-	}
-
-	input {
-		background-color: var(--Input__background-color, white);
-		border: none;
-		color: inherit;
-		font: inherit;
-		margin: 0;
 		outline: none;
-		padding: 0.5em 0.5em;
 	}
 
-	input::placeholder {
-		color: var(--Input__placeholder__color, lightgrey);
+	.value {
+		padding: 0.5em;
 	}
 
-	input:disabled::placeholder {
-		color: var(--Input__placeholder__color--disabled, #d3d3d3);
-	}
-
-	button {
+	.chevron {
 		display: block;
 		position: relative;
 		border: none;
 		background: none;
-		color: inherit;
 		margin: 0;
 		height: 100%;
 		width: 2em;
 	}
 
-	button::after {
+	.chevron::after {
 		position: absolute;
 		content: '';
 		top: 50%;
 		left: 50%;
 		width: 0.4em;
 		height: 0.4em;
-		border-right: 0.2em solid black;
-		border-top: 0.2em solid black;
+		border-right: 0.2em solid currentColor;
+		border-top: 0.2em solid currentColor;
 		/* 
 			The chevron is a right triangle, rotated to face down.
 			It should be moved up so it is centered vertically after rotation.
@@ -262,11 +359,11 @@
 	.popup {
 		box-sizing: border-box;
 		display: none;
-		height: 200px;
 		overflow: hidden;
 		position: absolute;
-		width: var(--Select__popup__width);
-		min-width: fit-content;
+		box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
+			rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+		z-index: 1;
 	}
 
 	.popup.open {

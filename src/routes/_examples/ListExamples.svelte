@@ -7,7 +7,7 @@
 
 	const items = Array(500)
 		.fill(1)
-		.map((x, i) => i + 1);
+		.map((x, i) => `Item ${i + 1}`);
 
 	let disabled = true;
 </script>
@@ -24,31 +24,23 @@
 							`List item selected [${event.detail.index}] 'Item ${event.detail.item}'`
 						);
 					}}
-				>
-					<div class="list-item">Item {item}</div>
-				</List>
+				/>
 			</div>
 		</ExampleCard>
 		<ExampleCard name="disabled">
 			<div class="vertical">
-				<List {items} let:item {disabled}>
-					<div class="list-item">Item {item}</div>
-				</List>
+				<List {items} let:item {disabled} />
 			</div>
 			<button on:click={() => (disabled = !disabled)}>toggle</button>
 		</ExampleCard>
 		<ExampleCard name="tab key for item selection">
 			<div class="vertical">
-				<List {items} let:item selectionKeys="tab">
-					<div class="list-item">Item {item}</div>
-				</List>
+				<List {items} let:item selectionKeys="tab" />
 			</div>
 		</ExampleCard>
 		<ExampleCard name="horizontal">
 			<div class="horizontal">
-				<List {items} let:item horizontal>
-					<div class="list-item">Item {item}</div>
-				</List>
+				<List {items} let:item horizontal />
 			</div>
 		</ExampleCard>
 	</ExampleSection>
