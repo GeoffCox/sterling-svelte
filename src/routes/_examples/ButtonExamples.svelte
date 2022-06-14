@@ -9,7 +9,6 @@
 	import OutlineButton from '$lib/buttons/OutlineButton.svelte';
 	import LinkButton from '$lib/buttons/LinkButton.svelte';
 	import GhostButton from '$lib/buttons/GhostButton.svelte';
-	import PrimaryButton from '$lib/buttons/PrimaryButton.svelte';
 </script>
 
 <div>
@@ -71,22 +70,6 @@
 				<SvelteIcon />
 				<span> Sterling </span>
 			</LinkButton>
-		</ExampleCard>
-	</ExampleSection>
-	<ExampleSection title="PrimaryButton">
-		<ExampleCard name="default">
-			<PrimaryButton on:click={() => sendNotification('Button clicked')}>Sterling</PrimaryButton>
-		</ExampleCard>
-		<ExampleCard name="disabled">
-			<PrimaryButton disabled on:click={() => sendNotification('Button clicked')}
-				>Sterling</PrimaryButton
-			>
-		</ExampleCard>
-		<ExampleCard name="with icon">
-			<PrimaryButton on:click={() => sendNotification('Button clicked')}>
-				<SvelteIcon />
-				<span> Sterling </span>
-			</PrimaryButton>
 		</ExampleCard>
 	</ExampleSection>
 </div>

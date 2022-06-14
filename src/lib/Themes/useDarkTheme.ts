@@ -20,9 +20,9 @@ const darkCSSVars: CSSVarSet = {
 	// ----- Button ----- //
 
 	'--Button__background-color': '#333',
-	'--Button__border-radius': '0.5em',
+	'--Button__border-radius': '8px',
 	'--Button__border-style': 'solid',
-	'--Button__border-width': '0.125em',
+	'--Button__border-width': '2px',
 	'--Button__border-color': '#ddd',
 	'--Button__color': '#ddd',
 
@@ -47,40 +47,13 @@ const darkCSSVars: CSSVarSet = {
 	'--Button__border-color--disabled': '#777',
 	'--Button__color--disabled': '#777',
 
-	// ----- Primary Button ----- //
-
-	'--PrimaryButton__background-color': 'hsl(206, 85%, 45%)',
-	'--PrimaryButton__border-color': 'hsl(206, 85%, 35%)',
-	'--PrimaryButton__color': '#fff',
-
-	// hover
-	'--PrimaryButton__background-color--hover': 'hsl(206, 85%, 42%)',
-	'--PrimaryButton__border-color--hover': 'hsl(206, 85%, 32%)',
-	'--PrimaryButton__color--hover': '#fff',
-
-	// active
-	'--PrimaryButton__background-color--active': 'hsl(206, 85%, 35%)',
-	'--PrimaryButton__border-color--active': 'hsl(206, 85%, 25%)',
-	'--PrimaryButton__color--active': '#fff',
-
-	// focus
-	'--PrimaryButton__background-color--focus': '#fff',
-	'--PrimaryButton__border-color--focus': '#000',
-	'--PrimaryButton__color--focus': '#fff',
-	'--PrimaryButton__outline-color--focus': '#000',
-
-	// disabled
-	'--PrimaryButton__background-color--disabled': 'hsl(206, 55%, 65%)',
-	'--PrimaryButton__border-color--disabled': 'hsl(206, 55%, 55%)',
-	'--PrimaryButton__color--disabled': 'hsl(0, 0%, 85%)',
-
 	// ----- Input ----- //
 
 	'--Input__background-color': '#333',
 	'--Input__border-color': '#ddd',
-	'--Input__border-radius': '0.15em',
+	'--Input__border-radius': '3px',
 	'--Input__border-style': 'solid',
-	'--Input__border-width': '0.125em',
+	'--Input__border-width': '2px',
 	'--Input__color': '#ddd',
 	'--Input__placeholder__color': 'lightgrey',
 
@@ -98,7 +71,7 @@ const darkCSSVars: CSSVarSet = {
 	'--Input__outline-color--focus': '#fff',
 	'--Input__outline-offset--focus': '0',
 	'--Input__outline-style--focus': 'solid',
-	'--Input__outline-width--focus': '0.1em',
+	'--Input__outline-width--focus': '2px',
 
 	// disabled
 	'--Input__background-color--disabled': '#555',
@@ -112,7 +85,7 @@ const darkCSSVars: CSSVarSet = {
 	'--List__border-color': '#ddd',
 	'--List__border-radius': '0',
 	'--List__border-style': 'solid',
-	'--List__border-width': '0.125em',
+	'--List__border-width': '2px',
 	'--List__color': '#ddd',
 
 	// hover
@@ -126,7 +99,7 @@ const darkCSSVars: CSSVarSet = {
 	'--List__color--focus': '#fff',
 	'--List__outline-color--focus': '#fff',
 	'--List__outline-style--focus': 'solid',
-	'--List__outline-width--focus': '0.1em',
+	'--List__outline-width--focus': '2px',
 
 	// disabled
 	'--List__background-color--disabled': '#555',
@@ -139,7 +112,7 @@ const darkCSSVars: CSSVarSet = {
 	'----ListItem__border-color': '#ddd',
 	'----ListItem__border-radius': '0',
 	'----ListItem__border-style': 'solid',
-	'----ListItem__border-width': '0.125em',
+	'----ListItem__border-width': '2px',
 	'----ListItem__color': '#ddd',
 
 	// hover
@@ -153,7 +126,7 @@ const darkCSSVars: CSSVarSet = {
 	'----ListItem__color--focus': '#fff',
 	'----ListItem__outline-color--focus': '#fff',
 	'----ListItem__outline-style--focus': 'solid',
-	'----ListItem__outline-width--focus': '0.1em',
+	'----ListItem__outline-width--focus': '2px',
 
 	// disabled
 	'----ListItem__background-color--disabled': '#555',

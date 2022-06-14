@@ -13,17 +13,17 @@
 	}
 
 	.base-layer-1 {
-		background-color: var(--BaseLayer__background-color--1, white);
-		color: var(--BaseLayer__color--1, black);
+		background-color: var(--BaseLayer__background-color--1);
+		color: var(--BaseLayer__color--1);
 	}
 
 	.base-layer-2 {
-		background-color: var(--BaseLayer__background-color--2, white);
-		color: var(--BaseLayer__color--2, black);
+		background-color: var(--BaseLayer__background-color--2);
+		color: var(--BaseLayer__color--2);
 	}
 
 	.base-layer-3 {
-		background-color: var(--BaseLayer__background-color--3, white);
-		color: var(--BaseLayer__color--3, black);
+		background-color: var(--BaseLayer__background-color--3);
+		color: var(--BaseLayer__color--3);
 	}
 </style>

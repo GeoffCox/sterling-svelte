@@ -14,6 +14,7 @@
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 	import ListExamples from './_examples/ListExamples.svelte';
 	import List from '$lib/lists/List.svelte';
+	import ProgressExamples from './_examples/ProgressExamples.svelte';
 
 	let darkMode = false;
 
@@ -49,6 +50,10 @@
 		radio: {
 			name: 'Radio',
 			component: RadioExamples
+		},
+		progress: {
+			name: 'Progress',
+			component: ProgressExamples
 		}
 	};
 
