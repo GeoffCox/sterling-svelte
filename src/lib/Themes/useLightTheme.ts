@@ -28,7 +28,7 @@ const lightCSSVars: CSSVarSet = {
 	'--Button__border-color': '#777',
 	'--Button__border-radius': '0.5em',
 	'--Button__border-style': 'solid',
-	'--Button__border-width': '0.07em',
+	'--Button__border-width': '0.125em',
 	'--Button__color': '#222',
 
 	// hover
@@ -84,7 +84,7 @@ const lightCSSVars: CSSVarSet = {
 	'--Input__border-color': '#777',
 	'--Input__border-radius': '0.15em',
 	'--Input__border-style': 'solid',
-	'--Input__border-width': '0.07em',
+	'--Input__border-width': '0.125em',
 	'--Input__color': '#222',
 	'--Input__placeholder__color': 'lightgrey',
 
@@ -120,7 +120,7 @@ const lightCSSVars: CSSVarSet = {
 	'--List__border-color': '#777',
 	'--List__border-radius': '0',
 	'--List__border-style': 'solid',
-	'--List__border-width': '0.07em',
+	'--List__border-width': '0.075em',
 	'--List__color': '#222',
 
 	// hover
@@ -146,7 +146,7 @@ const lightCSSVars: CSSVarSet = {
 	'--ListItem__border-color': '#777',
 	'--ListItem__border-radius': '0',
 	'--ListItem__border-style': 'solid',
-	'--ListItem__border-width': '0.07em',
+	'--ListItem__border-width': '0.125em',
 	'--ListItem__color': '#222',
 
 	// hover

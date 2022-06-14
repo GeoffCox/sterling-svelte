@@ -13,8 +13,8 @@
 
 <style>
 	.card {
-		background-color: var(--BaseLayer__background-color, #fbfdfd);
-		color: var(--BaseLayer__color, #222);
+		background-color: var(--BaseLayer__background-color);
+		color: var(--BaseLayer__color);
 		border: 1px dashed lightgray;
 		border-radius: 10px;
 		padding: 15px;

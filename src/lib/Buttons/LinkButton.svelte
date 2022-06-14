@@ -30,13 +30,14 @@
 		border-right: none;
 		border-radius: 0;
 		border-bottom-color: transparent;
-		border-bottom-style: var(--Button__border-style, solid);
-		border-bottom-width: calc(var(--Button__border-width, 0.07em) * 2);
+		border-bottom-style: var(--Button__border-style);
+		border-bottom-width: calc(var(--Button__border-width) * 2);
 		box-sizing: border-box;
-		color: var(--Button__color, black);
+		color: var(--Button__color);
 		cursor: pointer;
 		display: inline-flex;
 		flex-direction: row;
+		font: inherit;
 		align-content: center;
 		align-items: center;
 		justify-content: center;
@@ -52,25 +53,23 @@
 	}
 
 	button:hover {
-		border-bottom-color: var(--Button__border-color, black);
+		border-bottom-color: var(--Button__border-color);
 	}
 
 	button:active {
-		border-bottom-color: var(--Button__color--active, black);
+		border-bottom-color: var(--Button__color--active);
 	}
 
 	button:focus-visible {
-		border-bottom-color: var(--Button__border-color--focus, black);
-		outline-color: var(--Button__outline-color--focus, var(--Button__border-color--focus, black));
-		outline-style: var(--Button__outline-style--focus, var(--Button__border-style, solid));
-		outline-width: calc(
-			var(--Button__outline-width--focus, var(--Button__border-width, 0.07em)) * 2
-		);
+		border-bottom-color: var(--Button__border-color--focus);
+		outline-color: var(--Button__outline-color--focus, var(--Button__border-color--focus));
+		outline-style: var(--Button__outline-style--focus, var(--Button__border-style));
+		outline-width: calc(var(--Button__outline-width--focus, var(--Button__border-width)) * 2);
 	}
 
 	button:disabled {
-		border-bottom-color: var(--Button__border-color--disabled, darkgrey);
-		color: var(--Button__color--disabled, darkgrey);
+		border-bottom-color: var(--Button__border-color--disabled);
+		color: var(--Button__color--disabled);
 		cursor: not-allowed;
 	}
 </style>

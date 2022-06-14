@@ -31,12 +31,12 @@
 
 <style>
 	input {
-		background-color: var(--Input__background-color, white);
-		border-color: var(--Input__border-color, black);
-		border-radius: var(--Input__border-radius, 0.15em);
-		border-style: var(--Input__border-style, solid);
-		border-width: var(--Input__border-width, 0.07em);
-		color: var(--Input__color, black);
+		background-color: var(--Input__background-color);
+		border-color: var(--Input__border-color);
+		border-radius: var(--Input__border-radius);
+		border-style: var(--Input__border-style);
+		border-width: var(--Input__border-width);
+		color: var(--Input__color);
 		font: inherit;
 		margin: 0;
 		padding: 0.5em 0.5em;
@@ -44,33 +44,33 @@
 	}
 
 	input:hover {
-		background-color: var(--Input__background-color--hover, white);
-		border-color: var(--Input__border-color--hover, black);
-		color: var(--Input__color--hover, black);
+		background-color: var(--Input__background-color--hover);
+		border-color: var(--Input__border-color--hover);
+		color: var(--Input__color--hover);
 	}
 
 	input:focus {
-		background-color: var(--Input__background-color--focus, white);
-		border-color: var(--Input__border-color--focus, black);
-		color: var(--Input__color--focus, black);
-		outline-color: var(--Input__outline-color--focus, black);
-		outline-offset: var(--Input__outline-offset--focus, 0);
-		outline-style: var(--Input__outline-style--focus, solid);
-		outline-width: var(--Input__outline-width--focus, 0.1em);
+		background-color: var(--Input__background-color--focus);
+		border-color: var(--Input__border-color--focus);
+		color: var(--Input__color--focus);
+		outline-color: var(--Input__outline-color--focus);
+		outline-offset: var(--Input__outline-offset--focus);
+		outline-style: var(--Input__outline-style--focus);
+		outline-width: var(--Input__outline-width--focus);
 	}
 
 	input:disabled {
-		background-color: var(--Input__background-color--disabled, whitesmoke);
-		border-color: var(---Input__border-color--disabled, darkgrey);
-		color: var(--Input__color--disabled, darkgrey);
+		background-color: var(--Input__background-color--disabled);
+		border-color: var(---Input__border-color--disabled);
+		color: var(--Input__color--disabled);
 		cursor: not-allowed;
 	}
 
 	input::placeholder {
-		color: var(--Input__placeholder__color, lightgrey);
+		color: var(--Input__placeholder__color);
 	}
 
 	input:disabled::placeholder {
-		color: var(--Input__placeholder__color--disabled, #d3d3d3);
+		color: var(--Input__placeholder__color--disabled);
 	}
 </style>

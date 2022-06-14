@@ -24,16 +24,17 @@
 
 <style>
 	button {
-		background-color: var(--PrimaryButton__background-color, grey);
-		border-color: var(--PrimaryButton__border-color, black);
-		border-radius: var(--Button__border-radius, 0.5em);
-		border-style: var(--Button__border-style, solid);
-		border-width: var(--Button__border-width, 0.07em);
+		background-color: var(--PrimaryButton__background-color);
+		border-color: var(--PrimaryButton__border-color);
+		border-radius: var(--Button__border-radius);
+		border-style: var(--Button__border-style);
+		border-width: var(--Button__border-width);
 		box-sizing: border-box;
-		color: var(--PrimaryButton__color, white);
+		color: var(--PrimaryButton__color);
 		cursor: pointer;
 		display: inline-flex;
 		flex-direction: row;
+		font: inherit;
 		align-content: center;
 		align-items: center;
 		justify-content: center;
@@ -52,31 +53,28 @@
 	}
 
 	button:hover {
-		background-color: var(--PrimaryButton__background-color--hover, darkgrey);
-		border-color: var(--PrimaryButton__border-color--hover, black);
-		color: var(--PrimaryButton__color--hover, white);
+		background-color: var(--PrimaryButton__background-color--hover);
+		border-color: var(--PrimaryButton__border-color--hover);
+		color: var(--PrimaryButton__color--hover);
 	}
 
 	button:active {
-		background-color: var(--PrimaryButton__background-color--active, lightgrey);
-		border-color: var(--PrimaryButton__border-color--active, black);
-		color: var(--PrimaryButton__color--active, white);
+		background-color: var(--PrimaryButton__background-color--active);
+		border-color: var(--PrimaryButton__border-color--active);
+		color: var(--PrimaryButton__color--active);
 	}
 
 	button:focus-visible {
-		border-color: var(--PrimaryButton__border-color--focus, black);
-		outline-color: var(
-			--PrimaryButton__outline-color--focus,
-			var(--Button__border-color--focus, black)
-		);
-		outline-style: var(--PrimaryButton__outline-style--focus, var(--Button__border-style, solid));
-		outline-width: var(--PrimaryButton__outline-width--focus, var(--Button__border-width, 0.07em));
+		border-color: var(--PrimaryButton__border-color--focus);
+		outline-color: var(--PrimaryButton__outline-color--focus, var(--Button__border-color--focus));
+		outline-style: var(--PrimaryButton__outline-style--focus, var(--Button__border-style));
+		outline-width: var(--PrimaryButton__outline-width--focus, var(--Button__border-width));
 	}
 
 	button:disabled {
-		background-color: var(--PrimaryButton__background-color--disabled, lightgrey);
-		border-color: var(--PrimaryButton__border-color--disabled, whitesmoke);
-		color: var(--PrimaryButton__color--disabled, whitesmoke);
+		background-color: var(--PrimaryButton__background-color--disabled);
+		border-color: var(--PrimaryButton__border-color--disabled);
+		color: var(--PrimaryButton__color--disabled);
 		cursor: not-allowed;
 	}
 </style>

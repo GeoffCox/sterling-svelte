@@ -35,6 +35,7 @@
 	label {
 		display: inline-flex;
 		align-items: center;
+		font: inherit;
 		gap: 0.4em;
 		outline: none;
 		padding: 0;
@@ -70,55 +71,55 @@
 		and there is not a parent CSS selector.
 	*/
 	.indicator {
-		background-color: var(--Input__background-color, white);
-		border-color: var(--Input__border-color, black);
-		border-style: var(--Input__border-style, solid);
-		border-width: var(--Input__border-width, 0.07em);
+		background-color: var(--Input__background-color);
+		border-color: var(--Input__border-color);
+		border-style: var(--Input__border-style);
+		border-width: var(--Input__border-width);
 		box-sizing: border-box;
 		display: inline-block;
-		height: 1em;
+		height: 20px;
 		position: relative;
 		transition: background-color 250ms, color 250ms, border-color 250ms;
-		width: 1em;
+		width: 20px;
 	}
 
 	input:checked + .indicator {
-		background-color: var(--Input__background-color, white);
-		border-color: var(--Input__border-color, black);
+		background-color: var(--Input__background-color);
+		border-color: var(--Input__border-color);
 	}
 
 	input:focus-visible + .indicator {
-		outline-color: var(--Input__outline-color--focus, black);
-		outline-style: var(--Input__outline-style--focus, solid);
-		outline-width: var(--Input__outline-width--focus, 0.1em);
+		outline-color: var(--Input__outline-color--focus);
+		outline-style: var(--Input__outline-style--focus);
+		outline-width: var(--Input__outline-width--focus);
 	}
 
 	input:disabled + .indicator {
-		background-color: var(--Input__background-color--disabled, whitesmoke);
-		border-color: var(--Input__border-color--disabled, darkgrey);
+		background-color: var(--Input__background-color--disabled);
+		border-color: var(--Input__border-color--disabled);
 	}
 
 	/*
 		The checkmark is a rotated L centered in the box.
 	*/
 	input:checked + .indicator::after {
-		border-color: var(--Input__color, black);
+		border-color: var(--Input__color);
 		border-style: solid;
-		border-width: 0 0.2em 0.2em 0;
-		box-sizing: content-box;
+		border-width: 0 3px 3px 0;
+		box-sizing: border-box;
 		content: '';
-		height: 0.6em;
+		height: 14px;
 		left: 50%;
 		position: absolute;
 		top: 50%;
 		transform: translate(-50%, -50%) rotate(45deg);
 		transform-origin: center;
 		transition: border-color 250ms;
-		width: 0.2em;
+		width: 7px;
 		visibility: visible;
 	}
 
-	input:disabled + .indicator::after {
-		border-color: var(--Input__color--disabled, darkgrey);
+	input:checked:disabled + .indicator::after {
+		border-color: var(--Input__color--disabled);
 	}
 </style>

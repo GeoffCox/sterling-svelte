@@ -8,8 +8,8 @@
 
 <style>
 	.base-layer-0 {
-		background-color: var(--BaseLayer__background-color, white);
-		color: var(--BaseLayer__color, black);
+		background-color: var(--BaseLayer__background-color);
+		color: var(--BaseLayer__color);
 	}
 
 	.base-layer-1 {

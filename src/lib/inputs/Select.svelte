@@ -278,12 +278,12 @@ A single item can be selected and is displayed as the value.
 <style>
 	.sterling-select {
 		align-items: stretch;
-		background-color: var(--Input__background-color, white);
-		border-color: var(--Input__border-color, black);
-		border-radius: var(--Input__border-radius, 0.15em);
-		border-style: var(--Input__border-style, solid);
-		border-width: var(--Input__border-width, 0.07em);
-		color: var(--Input__color, black);
+		background-color: var(--Input__background-color);
+		border-color: var(--Input__border-color);
+		border-radius: var(--Input__border-radius);
+		border-style: var(--Input__border-style);
+		border-width: var(--Input__border-width);
+		color: var(--Input__color);
 		display: flex;
 		flex-direction: row;
 		padding: 0;
@@ -292,26 +292,26 @@ A single item can be selected and is displayed as the value.
 	}
 
 	.sterling-select:hover {
-		background-color: var(--Input__background-color--hover, white);
-		border-color: var(--Input__border-color--hover, black);
-		color: var(--Input__color--hover, black);
+		background-color: var(--Input__background-color--hover);
+		border-color: var(--Input__border-color--hover);
+		color: var(--Input__color--hover);
 	}
 
 	.sterling-select:focus,
 	.sterling-select:focus-within {
-		background-color: var(--Input__background-color--focus, white);
-		border-color: var(--Input__border-color--focus, black);
-		color: var(--Input__color--focus, black);
-		outline-color: var(--Input__outline-color--focus, black);
-		outline-offset: var(--Input__outline-offset--focus, 0);
-		outline-style: var(--Input__outline-style--focus, solid);
-		outline-width: var(--Input__outline-width--focus, 0.1em);
+		background-color: var(--Input__background-color--focus);
+		border-color: var(--Input__border-color--focus);
+		color: var(--Input__color--focus);
+		outline-color: var(--Input__outline-color--focus);
+		outline-offset: var(--Input__outline-offset--focus);
+		outline-style: var(--Input__outline-style--focus);
+		outline-width: var(--Input__outline-width--focus);
 	}
 
 	.sterling-select.disabled {
-		background-color: var(--Input__background-color--disabled, whitesmoke);
-		border-color: var(---Input__border-color--disabled, darkgrey);
-		color: var(--Input__color--disabled, darkgrey);
+		background-color: var(--Input__background-color--disabled);
+		border-color: var(---Input__border-color--disabled);
+		color: var(--Input__color--disabled);
 		cursor: not-allowed;
 		outline: none;
 	}
@@ -327,7 +327,7 @@ A single item can be selected and is displayed as the value.
 		background: none;
 		margin: 0;
 		height: 100%;
-		width: 2em;
+		width: 32px;
 	}
 
 	.chevron::after {
@@ -335,10 +335,10 @@ A single item can be selected and is displayed as the value.
 		content: '';
 		top: 50%;
 		left: 50%;
-		width: 0.4em;
-		height: 0.4em;
-		border-right: 0.2em solid currentColor;
-		border-top: 0.2em solid currentColor;
+		width: 7px;
+		height: 7px;
+		border-right: 3px solid currentColor;
+		border-top: 3px solid currentColor;
 		/* 
 			The chevron is a right triangle, rotated to face down.
 			It should be moved up so it is centered vertically after rotation.

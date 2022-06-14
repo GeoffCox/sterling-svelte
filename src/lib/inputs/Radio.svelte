@@ -70,61 +70,53 @@
 		and there is not a parent CSS selector.
 	*/
 	.indicator {
-		background-color: var(--Input__background-color, white);
-		border-color: var(--Input__border-color, black);
-		border-style: var(--Input__border-style, solid);
-		border-width: var(--Input__border-width, 0.07em);
+		background-color: var(--Input__background-color);
+		border-color: var(--Input__border-color);
+		border-style: var(--Input__border-style);
+		border-width: var(--Input__border-width);
 		border-radius: 10000px;
 		box-sizing: border-box;
 		display: inline-block;
-		height: 1em;
+		height: 20px;
 		position: relative;
 		transition: background-color 250ms, color 250ms, border-color 250ms;
-		width: 1em;
+		width: 20px;
 	}
 
 	input:checked + .indicator {
-		background-color: var(--Input__background-color, white);
-		border-color: var(--Input__border-color, black);
+		background-color: var(--Input__background-color);
+		border-color: var(--Input__border-color);
 	}
 
 	input:focus-visible + .indicator {
-		outline-color: var(--Input__outline-color--focus, black);
-		outline-style: var(--Input__outline-style--focus, solid);
-		outline-width: var(--Input__outline-width--focus, 0.1em);
+		outline-color: var(--Input__outline-color--focus);
+		outline-style: var(--Input__outline-style--focus);
+		outline-width: var(--Input__outline-width--focus);
 	}
 
 	input:disabled + .indicator {
-		background-color: var(--Input__background-color--disabled, whitesmoke);
-		border-color: var(--Input__border-color--disabled, darkgrey);
+		background-color: var(--Input__background-color--disabled);
+		border-color: var(--Input__border-color--disabled);
 	}
 
 	.indicator::after {
 		background-color: transparent;
-		border-color: transparent;
-		border-style: solid;
-		border-width: 0.2em;
 		border-radius: 10000px;
 		content: '';
-		height: 0.2em;
+		height: 9px;
 		left: 50%;
 		position: absolute;
 		top: 50%;
 		transform: translate(-50%, -50%);
-		transition: background-color 200ms, border-color 250ms;
-		width: 0.17em;
+		transition: background-color 250ms;
+		width: 9px;
 	}
 
-	/*
-		The circle mark is a solid dot centered with the radio circular border
-	*/
 	input:checked + .indicator::after {
-		background-color: var(--Input__color, black);
-		border-color: var(--Input__color, black);
+		background-color: var(--Input__color);
 	}
 
-	input:disabled + .indicator::after {
-		background-color: var(--Input__color--disabled, darkgrey);
-		border-color: var(--Input__color--disabled, darkgrey);
+	input:checked:disabled + .indicator::after {
+		background-color: var(--Input__color--disabled);
 	}
 </style>

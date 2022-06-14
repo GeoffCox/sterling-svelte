@@ -22,7 +22,7 @@ const darkCSSVars: CSSVarSet = {
 	'--Button__background-color': '#333',
 	'--Button__border-radius': '0.5em',
 	'--Button__border-style': 'solid',
-	'--Button__border-width': '0.07em',
+	'--Button__border-width': '0.125em',
 	'--Button__border-color': '#ddd',
 	'--Button__color': '#ddd',
 
@@ -80,7 +80,7 @@ const darkCSSVars: CSSVarSet = {
 	'--Input__border-color': '#ddd',
 	'--Input__border-radius': '0.15em',
 	'--Input__border-style': 'solid',
-	'--Input__border-width': '0.07em',
+	'--Input__border-width': '0.125em',
 	'--Input__color': '#ddd',
 	'--Input__placeholder__color': 'lightgrey',
 
@@ -112,7 +112,7 @@ const darkCSSVars: CSSVarSet = {
 	'--List__border-color': '#ddd',
 	'--List__border-radius': '0',
 	'--List__border-style': 'solid',
-	'--List__border-width': '0.07em',
+	'--List__border-width': '0.125em',
 	'--List__color': '#ddd',
 
 	// hover
@@ -139,7 +139,7 @@ const darkCSSVars: CSSVarSet = {
 	'----ListItem__border-color': '#ddd',
 	'----ListItem__border-radius': '0',
 	'----ListItem__border-style': 'solid',
-	'----ListItem__border-width': '0.07em',
+	'----ListItem__border-width': '0.125em',
 	'----ListItem__color': '#ddd',
 
 	// hover

@@ -94,19 +94,15 @@
 	};
 
 	const onArrowSelectPrevious: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
-		if (!disabled) {
-			event.preventDefault();
-			event.stopPropagation();
-			selectPreviousItem();
-		}
+		event.preventDefault();
+		event.stopPropagation();
+		selectPreviousItem();
 	};
 
 	const onArrowSelectNext: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
-		if (!disabled) {
-			event.preventDefault();
-			event.stopPropagation();
-			selectNextItem();
-		}
+		event.preventDefault();
+		event.stopPropagation();
+		selectNextItem();
 	};
 
 	const onKeydown: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
@@ -197,13 +193,13 @@ A list of items where a single item can be selected.
 
 <style>
 	.sterling-list {
-		background-color: var(--List__background-color, white);
-		border-color: var(--List__border-color, black);
-		border-radius: var(--List__border-radius, 0.15em);
-		border-style: var(--List__border-style, solid);
-		border-width: var(--List__border-width, 0.07em);
+		background-color: var(--List__background-color);
+		border-color: var(--List__border-color);
+		border-radius: var(--List__border-radius);
+		border-style: var(--List__border-style);
+		border-width: var(--List__border-width);
 		box-sizing: border-box;
-		color: var(--List__color, black);
+		color: var(--List__color);
 		display: flex;
 		flex-direction: column;
 		flex-wrap: nowrap;
@@ -218,57 +214,57 @@ A list of items where a single item can be selected.
 
 	.sterling-list.horizontal {
 		flex-direction: row;
-		overflow-x: auto;
+		overflow-x: scroll;
 		overflow-y: hidden;
 	}
 
 	.sterling-list:hover {
-		background-color: var(--List__background-color--hover, white);
-		border-color: var(--List__border-color--hover, black);
-		color: var(--List__color--hover, black);
+		background-color: var(--List__background-color--hover);
+		border-color: var(--List__border-color--hover);
+		color: var(--List__color--hover);
 	}
 
 	.sterling-list:focus-visible,
 	.sterling-list.focus-visible {
-		background-color: var(--List__background-color--focus, white);
-		border-color: var(--List__border-color--focus, black);
-		color: var(--List__color--focus, black);
-		outline-color: var(--List__outline-color--focus, black);
-		outline-style: var(--List__outline-style--focus, solid);
-		outline-width: var(--List__outline-width--focus, 0.1em);
+		background-color: var(--List__background-color--focus);
+		border-color: var(--List__border-color--focus);
+		color: var(--List__color--focus);
+		outline-color: var(--List__outline-color--focus);
+		outline-style: var(--List__outline-style--focus);
+		outline-width: var(--List__outline-width--focus);
 	}
 
 	.sterling-list.disabled {
-		background-color: var(--List__background-color--disabled, whitesmoke);
-		border-color: var(---List__border-color--disabled, darkgrey);
-		color: var(--List__color--disabled, darkgrey);
+		background-color: var(--List__background-color--disabled);
+		border-color: var(---List__border-color--disabled);
+		color: var(--List__color--disabled);
 		cursor: not-allowed;
 	}
 
 	.list-item {
-		background-color: var(--ListItem__background-color, white);
+		background-color: var(--ListItem__background-color);
 		box-sizing: border-box;
-		color: var(--ListItem__color, black);
+		color: var(--ListItem__color);
 		margin: 0;
 		padding: 0.5em;
 		outline: none;
 		text-overflow: ellipsis;
-		transition: background-color 150ms, color 150ms, border-color 150ms;
+		transition: background-color 150ms, color 150ms;
 		white-space: nowrap;
 	}
 
 	.list-item:hover {
-		background-color: var(--ListItem__background-color--hover, whitesmoke);
-		color: var(--ListItem__color--hover, black);
+		background-color: var(--ListItem__background-color--hover);
+		color: var(--ListItem__color--hover);
 	}
 
 	.list-item.selected {
-		background-color: var(--ListItem__background-color--selected, lightgrey);
-		color: var(--ListItem__color--selected, black);
+		background-color: var(--ListItem__background-color--selected);
+		color: var(--ListItem__color--selected);
 	}
 
 	.list-item.disabled {
-		background-color: var(--ListItem__background-color--disabled, whitesmoke);
-		color: var(--ListItem__color--disabled, darkgrey);
+		background-color: var(--ListItem__background-color--disabled);
+		color: var(--ListItem__color--disabled);
 	}
 </style>

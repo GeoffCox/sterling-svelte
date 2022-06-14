@@ -27,16 +27,17 @@
 
 <style>
 	button {
-		background-color: var(--Button__background-color, white);
-		border-color: var(--Button__border-color, black);
-		border-radius: var(--Button__border-radius, 0.4em);
-		border-style: var(--Button__border-style, solid);
-		border-width: var(--Button__border-width, 0.07em);
+		background-color: var(--Button__background-color);
+		border-color: var(--Button__border-color);
+		border-radius: var(--Button__border-radius);
+		border-style: var(--Button__border-style);
+		border-width: var(--Button__border-width);
 		box-sizing: border-box;
-		color: var(--Button__color, black);
+		color: var(--Button__color);
 		cursor: pointer;
 		display: inline-flex;
 		flex-direction: row;
+		font: inherit;
 		align-content: center;
 		align-items: center;
 		justify-content: center;
@@ -55,28 +56,28 @@
 	}
 
 	button:hover {
-		background-color: var(--Button__background-color--hover, whitesmoke);
-		border-color: var(--Button__border-color--hover, black);
-		color: var(--Button__color--hover, black);
+		background-color: var(--Button__background-color--hover);
+		border-color: var(--Button__border-color--hover);
+		color: var(--Button__color--hover);
 	}
 
 	button:active {
-		background-color: var(--Button__background-color--active, lightgrey);
-		border-color: var(--Button__border-color--active, black);
-		color: var(--Button__color--active, black);
+		background-color: var(--Button__background-color--active);
+		border-color: var(--Button__border-color--active);
+		color: var(--Button__color--active);
 	}
 
 	button:focus-visible {
-		border-color: var(--Button__border-color--focus, black);
-		outline-color: var(--Button__outline-color--focus, var(--Button__border-color--focus, black));
-		outline-style: var(--Button__outline-style--focus, var(--Button__border-style, solid));
-		outline-width: var(--Button__outline-width--focus, var(--Button__border-width, 0.07em));
+		border-color: var(--Button__border-color--focus);
+		outline-color: var(--Button__outline-color--focus, var(--Button__border-color--focus));
+		outline-style: var(--Button__outline-style--focus, var(--Button__border-style));
+		outline-width: var(--Button__outline-width--focus, var(--Button__border-width));
 	}
 
 	button:disabled {
-		background-color: var(--Button__background-color--disabled, whitesmoke);
-		border-color: var(--Button__border-color--disabled, darkgrey);
-		color: var(--Button__color--disabled, darkgrey);
+		background-color: var(--Button__background-color--disable);
+		border-color: var(--Button__border-color--disabled);
+		color: var(--Button__color--disabled);
 		cursor: not-allowed;
 	}
 </style>
