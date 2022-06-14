@@ -55,7 +55,6 @@
 		box-sizing: border-box;
 		height: 100%;
 		min-height: 1px;
-		transition: height 500ms, width 500ms;
 	}
 
 	.sterling-progress.vertical .indicator {
