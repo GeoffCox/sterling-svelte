@@ -1,4 +1,7 @@
 <script lang="ts">
+	export let value = 0;
+	export let max = 100;
+
 	export let percent = 0;
 
 	export let vertical: boolean = false;
@@ -6,14 +9,36 @@
 	let clientHeight: number;
 	let clientWidth: number;
 
-	$: clampedPercent = Math.max(0, Math.min(percent, 100));
-	$: percentHeight = (clientHeight * clampedPercent) / 100;
-	$: percentWidth = (clientWidth * clampedPercent) / 100;
+	$: clampMax = Math.max(1, max);
+	$: clampValue = Math.max(0, Math.min(value, clampMax));
+	$: ratio = clampValue / clampMax;
+	$: {
+		percent = Math.round(ratio * 100);
+	}
+
+	$: percentHeight = clientHeight * ratio;
+	$: percentWidth = clientWidth * ratio;
 
 	$: indicatorStyle = vertical ? `height: ${percentHeight}px` : `width: ${percentWidth}px`;
 </script>
 
-<div class="sterling-progress" class:vertical {...$$restProps}>
+<div
+	class="sterling-progress"
+	class:vertical
+	on:click
+	on:dblclick
+	on:focus
+	on:blur
+	on:mousedown
+	on:mouseenter
+	on:mouseleave
+	on:mousemove
+	on:mouseover
+	on:mouseout
+	on:mouseup
+	on:wheel
+	{...$$restProps}
+>
 	<div class="container" bind:clientWidth bind:clientHeight>
 		<div class="indicator" style={indicatorStyle} />
 	</div>
@@ -59,8 +84,8 @@
 
 	.sterling-progress.vertical .indicator {
 		height: unset;
-		min-height: 1px;
-		min-width: unset;
+		min-height: unset;
+		min-width: 1px;
 		width: 100%;
 	}
 </style>

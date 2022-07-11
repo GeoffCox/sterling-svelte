@@ -4,22 +4,24 @@
 
 	import Progress from '$lib/display/Progress.svelte';
 
-	let percent = 35;
+	let value = 35;
+	let percent: number;
 </script>
 
 <div>
 	<ExampleSection title="Progress">
 		<ExampleCard name="default">
 			<div class="progress-container">
-				<Progress {percent} />
+				<Progress {value} bind:percent />
+				{percent}
 			</div>
 		</ExampleCard>
 		<ExampleCard name="vertical">
 			<div class="progress-container">
-				<Progress {percent} vertical />
+				<Progress {value} vertical />
 			</div>
 		</ExampleCard>
-		<input type="range" bind:value={percent} min={0} max={100} step={1} />
+		<input type="range" bind:value min={0} max={100} step={1} />
 	</ExampleSection>
 </div>
 

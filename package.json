@@ -17,6 +17,7 @@
 		"@playwright/test": "^1.21.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
+		"@types/lodash-es": "^4.17.6",
 		"@types/uuid": "^8.3.4",
 		"@typescript-eslint/eslint-plugin": "^5.10.1",
 		"@typescript-eslint/parser": "^5.10.1",
@@ -34,6 +35,7 @@
 	"type": "module",
 	"dependencies": {
 		"@floating-ui/dom": "^0.5.1",
+		"lodash-es": "^4.17.21",
 		"uuid": "^8.3.2"
 	}
 }

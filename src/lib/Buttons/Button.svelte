@@ -19,6 +19,14 @@
 	on:mouseover
 	on:mouseout
 	on:mouseup
+	on:pointercancel
+	on:pointerdown
+	on:pointerenter
+	on:pointerleave
+	on:pointermove
+	on:pointerover
+	on:pointerout
+	on:pointerup
 	on:wheel
 	{...$$restProps}
 >

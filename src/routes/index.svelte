@@ -15,6 +15,7 @@
 	import ListExamples from './_examples/ListExamples.svelte';
 	import List from '$lib/lists/List.svelte';
 	import ProgressExamples from './_examples/ProgressExamples.svelte';
+	import SliderExamples from './_examples/SliderExamples.svelte';
 
 	let darkMode = false;
 
@@ -23,6 +24,10 @@
 	};
 
 	const examples: Record<string, { name: string; component: typeof SvelteComponent }> = {
+		slider: {
+			name: 'Slider',
+			component: SliderExamples
+		},
 		select: {
 			name: 'Select',
 			component: SelectExamples

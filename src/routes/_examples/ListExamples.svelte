@@ -60,8 +60,4 @@
 		flex-direction: row;
 		justify-items: stretch;
 	}
-
-	.list-item {
-		padding: 5px 15px 5px 10px;
-	}
 </style>
