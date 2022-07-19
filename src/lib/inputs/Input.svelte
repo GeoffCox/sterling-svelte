@@ -53,10 +53,10 @@
 		background-color: var(--Input__background-color--focus);
 		border-color: var(--Input__border-color--focus);
 		color: var(--Input__color--focus);
-		outline-color: var(--Input__outline-color--focus);
-		outline-offset: var(--Input__outline-offset--focus);
-		outline-style: var(--Input__outline-style--focus);
-		outline-width: var(--Input__outline-width--focus);
+		outline-color: var(--Common__outline-color);
+		outline-offset: var(--Common__outline-offset);
+		outline-style: var(--Common__outline-style);
+		outline-width: var(--Common__outline-width);
 	}
 
 	input:disabled {

@@ -4,6 +4,7 @@
 	import { notification } from '../stores';
 	import { currentTheme } from './_components/useCurrentTheme';
 
+	import ThemeExamples from './_examples/ThemeExamples.svelte';
 	import BaseLayer from '$lib/BaseLayer.svelte';
 	import CheckboxExamples from './_examples/CheckboxExamples.svelte';
 	import InputExamples from './_examples/InputExamples.svelte';
@@ -24,6 +25,10 @@
 	};
 
 	const examples: Record<string, { name: string; component: typeof SvelteComponent }> = {
+		palette: {
+			name: 'Themes',
+			component: ThemeExamples
+		},
 		slider: {
 			name: 'Slider',
 			component: SliderExamples

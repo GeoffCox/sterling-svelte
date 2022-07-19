@@ -47,12 +47,14 @@
 <style>
 	.sterling-progress {
 		display: block;
-		background: var(--List__background-color);
+		background: var(--Common__background-color);
 		box-sizing: border-box;
 		height: 16px;
 		padding: 0.2em;
-		border: var(--List__border-width) var(--List__border-style) var(--List__border-color);
-		border-radius: var(--List__border-radius);
+		border-width: var(--Common__border-width);
+		border-style: var(--Common__border-style);
+		border-color: var(--Common__border-color);
+		border-radius: var(--Common__border-radius);
 	}
 
 	.sterling-progress.vertical {
@@ -76,7 +78,7 @@
 	}
 
 	.indicator {
-		background-color: var(--ListItem__color);
+		background-color: var(--Display__color);
 		box-sizing: border-box;
 		height: 100%;
 		min-height: 1px;

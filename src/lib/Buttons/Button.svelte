@@ -77,13 +77,14 @@
 
 	button:focus-visible {
 		border-color: var(--Button__border-color--focus);
-		outline-color: var(--Button__outline-color--focus, var(--Button__border-color--focus));
-		outline-style: var(--Button__outline-style--focus, var(--Button__border-style));
-		outline-width: var(--Button__outline-width--focus, var(--Button__border-width));
+		outline-color: var(--Common__outline-color);
+		outline-offset: var(--Common__outline-offset);
+		outline-style: var(--Common__outline-style);
+		outline-width: var(--Common__outline-width);
 	}
 
 	button:disabled {
-		background-color: var(--Button__background-color--disable);
+		background-color: var(--Button__background-color--disabled);
 		border-color: var(--Button__border-color--disabled);
 		color: var(--Button__color--disabled);
 		cursor: not-allowed;

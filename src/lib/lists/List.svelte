@@ -193,13 +193,13 @@ A list of items where a single item can be selected.
 
 <style>
 	.sterling-list {
-		background-color: var(--List__background-color);
-		border-color: var(--List__border-color);
-		border-radius: var(--List__border-radius);
-		border-style: var(--List__border-style);
-		border-width: var(--List__border-width);
+		background-color: var(--Common__background-color);
+		border-color: var(--Common__border-color);
+		border-radius: var(--Common__border-radius);
+		border-style: var(--Common__border-style);
+		border-width: var(--Common__border-width);
 		box-sizing: border-box;
-		color: var(--List__color);
+		color: var(--Common__color);
 		display: flex;
 		flex-direction: column;
 		flex-wrap: nowrap;
@@ -219,19 +219,20 @@ A list of items where a single item can be selected.
 	}
 
 	.sterling-list:hover {
-		background-color: var(--List__background-color--hover);
-		border-color: var(--List__border-color--hover);
-		color: var(--List__color--hover);
+		background-color: var(--Common__background-color--hover);
+		border-color: var(--Common__border-color--hover);
+		color: var(--Common__color--hover);
 	}
 
 	.sterling-list:focus-visible,
 	.sterling-list.focus-visible {
-		background-color: var(--List__background-color--focus);
-		border-color: var(--List__border-color--focus);
-		color: var(--List__color--focus);
-		outline-color: var(--List__outline-color--focus);
-		outline-style: var(--List__outline-style--focus);
-		outline-width: var(--List__outline-width--focus);
+		background-color: var(--Common__background-color--focus);
+		border-color: var(--Common__border-color--focus);
+		color: var(--Common__color--focus);
+		outline-color: var(--Common__outline-color);
+		outline-offset: var(--Common__outline-offset);
+		outline-style: var(--Common__outline-style);
+		outline-width: var(--Common__outline-width);
 	}
 
 	.sterling-list.disabled {

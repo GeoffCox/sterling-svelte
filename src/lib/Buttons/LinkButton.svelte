@@ -62,9 +62,7 @@
 
 	button:focus-visible {
 		border-bottom-color: var(--Button__border-color--focus);
-		outline-color: var(--Button__outline-color--focus, var(--Button__border-color--focus));
-		outline-style: var(--Button__outline-style--focus, var(--Button__border-style));
-		outline-width: calc(var(--Button__outline-width--focus, var(--Button__border-width)) * 2);
+		outline: none;
 	}
 
 	button:disabled {
