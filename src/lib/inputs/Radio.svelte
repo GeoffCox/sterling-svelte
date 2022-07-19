@@ -77,10 +77,10 @@
 		border-radius: 10000px;
 		box-sizing: border-box;
 		display: inline-block;
-		height: 20px;
+		height: 21px;
 		position: relative;
 		transition: background-color 250ms, color 250ms, border-color 250ms;
-		width: 20px;
+		width: 21px;
 	}
 
 	input:checked + .indicator {

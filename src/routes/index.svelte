@@ -96,6 +96,10 @@
 </div>
 
 <style>
+	.app {
+		background-color: var(--Common__background-color);
+		min-height: 100vh;
+	}
 	.notification {
 		width: 100%;
 		background: aliceblue;
