@@ -111,77 +111,11 @@ export const darkThemeVars: CSSVarSet = {
 	'--Display__border-color': neutrals.neutral92,
 	'--Display__color': neutrals.neutral100,
 
-	'--Display__background-color--info': neutrals.neutral60,
-	'--Display__border-color--info': neutrals.neutral92,
 	'--Display__color--info': '#025E73',
-
-	'--Display__background-color--progress': neutrals.neutral60,
-	'--Display__border-color--progress': neutrals.neutral92,
 	'--Display__color--progress': '#0099DD',
-
-	'--Display__background-color--success': neutrals.neutral60,
-	'--Display__border-color--success': neutrals.neutral92,
 	'--Display__color--success': '#03A64A',
-
-	'--Display__background-color--warning': neutrals.neutral60,
-	'--Display__border-color--warning': neutrals.neutral92,
 	'--Display__color--warning': '#F2A71B',
-
-	'--Display__background-color--error': neutrals.neutral60,
-	'--Display__border-color--error': neutrals.neutral92,
-	'--Display__color--error': '#A62B1F',
-
-	// ----- List ----- //
-	'--List__background-color': neutrals.neutral15,
-	'--List__border-color': neutrals.neutral92,
-	'--List__border-radius': '0',
-	'--List__border-style': 'solid',
-	'--List__border-width': '2px',
-	'--List__color': neutrals.neutral100,
-
-	// hover
-	'--List__background-color--hover': neutrals.neutral15,
-	'--List__border-color--hover': neutrals.neutral96,
-	'--List__color--hover': neutrals.neutral100,
-
-	// focus
-	'--List__background-color--focus': neutrals.neutral15,
-	'--List__border-color--focus': neutrals.neutral100,
-	'--List__color--focus': neutrals.neutral100,
-
-	// disabled
-	'--List__background-color--disabled': neutrals.neutral45,
-	'--List__border-color--disabled': neutrals.neutral85,
-	'--List__color--disabled': neutrals.neutral85,
-
-	// ----- ListItem ----- //
-	'--ListItem__background-color': neutrals.neutral15,
-	'--ListItem__border-color': neutrals.neutral92,
-	'--ListItem__border-radius': '0',
-	'--ListItem__border-style': 'solid',
-	'--ListItem__border-width': '2px',
-	'--ListItem__color': neutrals.neutral100,
-
-	// hover
-	'--ListItem__background-color--hover': neutrals.neutral60,
-	'--ListItem__border-color--hover': neutrals.neutral96,
-	'--ListItem__color--hover': neutrals.neutral100,
-
-	// focus
-	'--ListItem__background-color--focus': neutrals.neutral15,
-	'--ListItem__border-color--focus': neutrals.neutral100,
-	'--ListItem__color--focus': neutrals.neutral100,
-
-	// selected
-	'--ListItem__background-color--selected': neutrals.neutral75,
-	'--ListItem__border-color--selected': neutrals.neutral98,
-	'--ListItem__color--selected': neutrals.neutral100,
-
-	// disabled
-	'--ListItem__background-color--disabled': neutrals.neutral45,
-	'--ListItem__border-color--disabled': neutrals.neutral85,
-	'--ListItem__color--disabled': neutrals.neutral85,
-	'--ListItem__placeholder__color--disabled': neutrals.neutral75
+	'--Display__color--error': '#A62B1F'
 };
 
 export const darkTheme = (node: HTMLElement) => {

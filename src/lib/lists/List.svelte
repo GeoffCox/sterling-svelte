@@ -219,7 +219,6 @@ A list of items where a single item can be selected.
 	}
 
 	.sterling-list:hover {
-		background-color: var(--Common__background-color--hover);
 		border-color: var(--Common__border-color--hover);
 		color: var(--Common__color--hover);
 	}
@@ -236,16 +235,15 @@ A list of items where a single item can be selected.
 	}
 
 	.sterling-list.disabled {
-		background-color: var(--List__background-color--disabled);
-		border-color: var(---List__border-color--disabled);
-		color: var(--List__color--disabled);
+		background-color: var(--Common__background-color--disabled);
+		border-color: var(---Common__border-color--disabled);
+		color: var(--Common__color--disabled);
 		cursor: not-allowed;
 	}
 
 	.list-item {
-		background-color: var(--ListItem__background-color);
 		box-sizing: border-box;
-		color: var(--ListItem__color);
+		color: var(--Input__color);
 		margin: 0;
 		padding: 0.5em;
 		outline: none;
@@ -255,17 +253,16 @@ A list of items where a single item can be selected.
 	}
 
 	.list-item:hover {
-		background-color: var(--ListItem__background-color--hover);
-		color: var(--ListItem__color--hover);
+		background-color: var(--Button__background-color--hover);
+		color: var(--Button__color--hover);
 	}
 
 	.list-item.selected {
-		background-color: var(--ListItem__background-color--selected);
-		color: var(--ListItem__color--selected);
+		background-color: var(--Input__background-color--selected);
+		color: var(--Input__color--selected);
 	}
 
 	.list-item.disabled {
-		background-color: var(--ListItem__background-color--disabled);
-		color: var(--ListItem__color--disabled);
+		color: var(--Input__color--disabled);
 	}
 </style>
