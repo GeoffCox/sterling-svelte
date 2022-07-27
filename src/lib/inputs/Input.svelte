@@ -1,3 +1,7 @@
+<script lang="ts">
+	export let value: string = '';
+</script>
+
 <input
 	class="sterling-input"
 	on:blur
@@ -26,6 +30,7 @@
 	on:submit
 	on:reset
 	on:wheel
+	bind:value
 	{...$$restProps}
 />
 

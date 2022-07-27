@@ -1,3 +1,7 @@
+<script lang="ts">
+	export let group: string;
+</script>
+
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <label class="sterling-radio">
 	<slot name="before" />
@@ -24,6 +28,7 @@
 			on:mouseup
 			on:toggle
 			on:wheel
+			bind:group
 			{...$$restProps}
 		/>
 		<div class="indicator" />

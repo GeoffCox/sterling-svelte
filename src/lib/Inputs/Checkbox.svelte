@@ -1,3 +1,7 @@
+<script lang="ts">
+	export let checked: boolean = false;
+</script>
+
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <label class="sterling-checkbox">
 	<slot name="before" />
@@ -24,6 +28,7 @@
 			on:mouseup
 			on:toggle
 			on:wheel
+			bind:checked
 			{...$$restProps}
 		/>
 		<div class="indicator" />
