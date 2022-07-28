@@ -54,13 +54,11 @@
 
 	button:hover {
 		background-color: var(--Button__background-color--hover);
-		border-color: var(--Button__border-color--hover);
 		color: var(--Button__color--hover);
 	}
 
 	button:active {
 		background-color: var(--Button__background-color--active);
-		border-color: var(--Button__border-color--active);
 		color: var(--Button__color--active);
 	}
 
@@ -74,7 +72,6 @@
 
 	button:disabled {
 		background-color: var(--Button__background-color--disabled);
-		border-color: transparent;
 		color: var(--Button__color--disabled);
 		cursor: not-allowed;
 	}
