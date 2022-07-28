@@ -121,4 +121,8 @@
 	.example-list {
 		align-self: flex-start;
 	}
+
+	.example {
+		padding: 20px;
+	}
 </style>

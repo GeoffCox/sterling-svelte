@@ -3,96 +3,116 @@
 	import ExampleSection from '../_components/ExampleSection.svelte';
 
 	import Slider from '$lib/inputs/Slider.svelte';
+	import Checkbox from '$lib/inputs/Checkbox.svelte';
+	import Input from '$lib/inputs/Input.svelte';
+	import BaseLayer from '$lib/BaseLayer.svelte';
+	import Example from '../_components/Example.svelte';
 
-	let valueX = -20;
-	let value1 = 35;
-	let value2 = 80;
-	let value3 = 80;
-	let value4 = -20;
-	let value5 = 0;
+	let value = 0;
+	let disabled = false;
+	let min = 0;
+	let max = 100;
+	let step: number | undefined = undefined;
+	let precision: number = 0;
+	let vertical = false;
+
+	// This helps fix the lost typing of forwarded events on Input
+	type FormEvent<E extends Event = Event, T extends EventTarget = HTMLElement> = E & {
+		currentTarget: EventTarget & T;
+	};
+
+	const _onMinChange: svelteHTML.FormEventHandler<HTMLInputElement> = (e) => {
+		const target = e.target as HTMLInputElement;
+		const parsedValue = Number.parseFloat(target.value);
+		min = isNaN(parsedValue) ? 0 : parsedValue;
+	};
+
+	const onMinChange = (e: Event): any => {
+		_onMinChange(e as FormEvent<Event, HTMLInputElement>);
+	};
+
+	const _onMaxChange: svelteHTML.FormEventHandler<HTMLInputElement> = (e) => {
+		const target = e.target as HTMLInputElement;
+		const parsedValue = Number.parseFloat(target.value);
+		max = isNaN(parsedValue) ? 0 : parsedValue;
+	};
+
+	const onMaxChange = (e: Event): any => {
+		_onMaxChange(e as FormEvent<Event, HTMLInputElement>);
+	};
+
+	const _onStepChange: svelteHTML.FormEventHandler<HTMLInputElement> = (e) => {
+		const target = e.target as HTMLInputElement;
+		if (target.value) {
+			const parsedValue = Number.parseFloat(target.value);
+			step = isNaN(parsedValue) ? 0 : parsedValue;
+		} else {
+			step = undefined;
+		}
+	};
+
+	const onStepChange = (e: Event): any => {
+		_onStepChange(e as FormEvent<Event, HTMLInputElement>);
+	};
+
+	const _onPrecisionChange: svelteHTML.FormEventHandler<HTMLInputElement> = (e) => {
+		const target = e.target as HTMLInputElement;
+		const parsedValue = Number.parseFloat(target.value);
+		precision = isNaN(parsedValue) ? 0 : parsedValue;
+	};
+
+	const onPrecisionChange = (e: Event): any => {
+		_onPrecisionChange(e as FormEvent<Event, HTMLInputElement>);
+	};
 </script>
 
-<div>
-	<ExampleSection title="Slider">
-		<ExampleCard name="default">
-			<div class="horizontal-container">
-				<Slider bind:value={value1} />
-				{value1}
+<Example name="Slider">
+	<svelte:fragment slot="component">
+		<div class="container" class:vertical>
+			<Slider bind:value bind:min bind:max bind:precision bind:step bind:vertical {disabled} />
+			<div>value: {value}</div>
+		</div>
+	</svelte:fragment>
+	<svelte:fragment slot="options">
+		<div class="property-grid">
+			<div>min</div>
+			<div><Input value={min.toString()} on:change={onMinChange} /></div>
+			<div>max</div>
+			<div><Input value={max.toString()} on:change={onMaxChange} /></div>
+			<div>step</div>
+			<div><Input value={step?.toString()} on:change={onStepChange} /></div>
+			<div>precision</div>
+			<div><Input value={precision.toString()} on:change={onPrecisionChange} /></div>
+			<div />
+			<div>
+				<Checkbox bind:checked={vertical}>
+					<svelte:fragment slot="after">vertical</svelte:fragment>
+				</Checkbox>
 			</div>
-		</ExampleCard>
-		<ExampleCard name="disabled">
-			<div class="horizontal-container">
-				<Slider value={55} disabled />
-				{55}
+			<div />
+			<div>
+				<Checkbox bind:checked={disabled}>
+					<svelte:fragment slot="after">disabled</svelte:fragment>
+				</Checkbox>
 			</div>
-		</ExampleCard>
-		<ExampleCard name="range from 75 to 150">
-			<div class="horizontal-container">
-				<Slider bind:value={value2} min={75} max={150} />
-				{value2}
-			</div>
-		</ExampleCard>
-		<ExampleCard name="range from -30 to -15">
-			<div class="horizontal-container">
-				<Slider bind:value={value3} min={-30} max={-15} />
-				{value3}
-			</div>
-		</ExampleCard>
-		<ExampleCard name="step by 7">
-			<div class="horizontal-container">
-				<Slider bind:value={value4} step={7} max={77} />
-				{value4}
-			</div>
-		</ExampleCard>
-		<ExampleCard name="precision 2">
-			<div class="horizontal-container">
-				<Slider bind:value={value5} precision={2} />
-				{value5}
-			</div>
-		</ExampleCard>
-	</ExampleSection>
-	<ExampleSection title="Slider (vertical)">
-		<ExampleCard name="default">
-			<div class="vertical-container">
-				<Slider bind:value={value1} vertical />
-				{value1}
-			</div>
-		</ExampleCard>
-		<ExampleCard name="disabled">
-			<div class="vertical-container">
-				<Slider value={55} disabled vertical />
-				{55}
-			</div>
-		</ExampleCard>
-		<ExampleCard name="range from 75 to 150">
-			<div class="vertical-container">
-				<Slider bind:value={value2} min={75} max={150} vertical />
-				{value2}
-			</div>
-		</ExampleCard>
-		<ExampleCard name="range from -30 to -15">
-			<div class="vertical-container">
-				<Slider bind:value={value3} min={-30} max={-15} vertical />
-				{value3}
-			</div>
-		</ExampleCard>
-		<ExampleCard name="step by 7">
-			<div class="vertical-container">
-				<Slider bind:value={value4} step={7} max={77} vertical />
-				{value4}
-			</div>
-		</ExampleCard>
-		<ExampleCard name="precision 2">
-			<div class="vertical-container">
-				<Slider bind:value={value5} precision={2} vertical />
-				{value5}
-			</div>
-		</ExampleCard>
-	</ExampleSection>
-</div>
+		</div>
+	</svelte:fragment>
+</Example>
 
 <style>
-	.horizontal-container {
+	.example {
+		padding: 20px;
+	}
+	.property-grid {
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-gap: 1rem;
+		margin-bottom: 1rem;
+		width: max-content;
+		padding: 50px;
+	}
+
+	.container {
 		box-sizing: border-box;
 		display: grid;
 		grid-template-columns: 1fr;
@@ -102,11 +122,7 @@
 		padding: 0;
 	}
 
-	.vertical-container {
-		box-sizing: border-box;
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: 1fr;
+	.container.vertical {
 		height: 450px;
 		width: 10px;
 		padding: 0;

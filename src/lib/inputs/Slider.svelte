@@ -45,6 +45,7 @@
 	// The current min and max ensuring min <= max
 	$: currentMin = Math.min(min, max);
 	$: currentMax = Math.max(min, max);
+					return fraction.length;
 
 	// The current value ensuring that currentMin <= value <= currentMax
 	// and rounded to the precision.
