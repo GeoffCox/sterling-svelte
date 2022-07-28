@@ -1,12 +1,10 @@
 <script lang="ts">
-	import ExampleCard from '../_components/ExampleCard.svelte';
-	import ExampleSection from '../_components/ExampleSection.svelte';
-
 	import Slider from '$lib/inputs/Slider.svelte';
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 	import Input from '$lib/inputs/Input.svelte';
 	import BaseLayer from '$lib/BaseLayer.svelte';
 	import Example from '../_components/Example.svelte';
+	import { sendNotification } from '../../stores';
 
 	let value = 0;
 	let disabled = false;
@@ -67,43 +65,45 @@
 </script>
 
 <Example name="Slider">
-	<svelte:fragment slot="component">
-		<div class="container" class:vertical>
-			<Slider bind:value bind:min bind:max bind:precision bind:step bind:vertical {disabled} />
-			<div>value: {value}</div>
+	<div slot="component" class="component" class:vertical>
+		<Slider
+			bind:value
+			bind:min
+			bind:max
+			bind:precision
+			bind:step
+			bind:vertical
+			{disabled}
+			on:change={(e) => sendNotification(`Slider value changed: ${e.detail.value}`)}
+		/>
+		<div>value: {value}</div>
+	</div>
+	<div slot="options" class="options">
+		<div>min</div>
+		<div><Input value={min.toString()} on:change={onMinChange} /></div>
+		<div>max</div>
+		<div><Input value={max.toString()} on:change={onMaxChange} /></div>
+		<div>step</div>
+		<div><Input value={step?.toString()} on:change={onStepChange} /></div>
+		<div>precision</div>
+		<div><Input value={precision.toString()} on:change={onPrecisionChange} /></div>
+		<div />
+		<div>
+			<Checkbox bind:checked={vertical}>
+				<svelte:fragment slot="after">vertical</svelte:fragment>
+			</Checkbox>
 		</div>
-	</svelte:fragment>
-	<svelte:fragment slot="options">
-		<div class="property-grid">
-			<div>min</div>
-			<div><Input value={min.toString()} on:change={onMinChange} /></div>
-			<div>max</div>
-			<div><Input value={max.toString()} on:change={onMaxChange} /></div>
-			<div>step</div>
-			<div><Input value={step?.toString()} on:change={onStepChange} /></div>
-			<div>precision</div>
-			<div><Input value={precision.toString()} on:change={onPrecisionChange} /></div>
-			<div />
-			<div>
-				<Checkbox bind:checked={vertical}>
-					<svelte:fragment slot="after">vertical</svelte:fragment>
-				</Checkbox>
-			</div>
-			<div />
-			<div>
-				<Checkbox bind:checked={disabled}>
-					<svelte:fragment slot="after">disabled</svelte:fragment>
-				</Checkbox>
-			</div>
+		<div />
+		<div>
+			<Checkbox bind:checked={disabled}>
+				<svelte:fragment slot="after">disabled</svelte:fragment>
+			</Checkbox>
 		</div>
-	</svelte:fragment>
+	</div>
 </Example>
 
 <style>
-	.example {
-		padding: 20px;
-	}
-	.property-grid {
+	.options {
 		display: grid;
 		grid-template-columns: auto auto;
 		grid-gap: 1rem;
@@ -112,7 +112,7 @@
 		padding: 50px;
 	}
 
-	.container {
+	.component {
 		box-sizing: border-box;
 		display: grid;
 		grid-template-columns: 1fr;
@@ -122,7 +122,7 @@
 		padding: 0;
 	}
 
-	.container.vertical {
+	.component.vertical {
 		height: 450px;
 		width: 10px;
 		padding: 0;

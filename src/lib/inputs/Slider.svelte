@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { round } from 'lodash-es';
+	import { createEventDispatcher } from 'svelte';
 
 	// ----- Props ----- //
 
@@ -41,6 +42,14 @@
 
 	let sliderRef: HTMLDivElement;
 
+	// -----Events----- //
+
+	const dispatch = createEventDispatcher();
+
+	const raiseChange = (index: number) => {
+		dispatch('change', { value });
+	};
+
 	// ----- Value tracking ----- //
 
 	const getPrecision = (value?: number): number => {
@@ -65,6 +74,10 @@
 		getPrecision(step)
 	);
 
+	const setValue = (newValue: number) => {
+		value = round(Math.max(min, Math.min(max, newValue)), highestPrecision);
+	};
+
 	// ensure min <= max
 	$: {
 		if (min > max) {
@@ -77,7 +90,7 @@
 	// ensure that value is rounded to highestPrecision
 	$: {
 		if (value < min || value > max || value !== round(value, highestPrecision)) {
-			value = round(Math.max(min, Math.min(max, value)), highestPrecision);
+			setValue(value);
 		}
 	}
 
@@ -87,7 +100,7 @@
 			let stepValue = Math.max(min, Math.min(value, max));
 			stepValue = Math.round(stepValue / step) * step + min;
 			if (stepValue !== value) {
-				value = stepValue;
+				setValue(stepValue);
 			}
 		}
 	}
@@ -96,10 +109,6 @@
 	$: ratio = (value - min) / (max - min);
 	$: changeBy = step ? step : 1;
 
-	const setValue = (newValue: number) => {
-		value = round(Math.max(min, Math.min(max, newValue)), highestPrecision);
-	};
-
 	const setValueByOffset = (offset: number) => {
 		if (sliderSize > 0) {
 			const positionRatio = Math.max(0, Math.min(1, offset / sliderSize));
@@ -107,6 +116,11 @@
 			setValue(newValue);
 		}
 	};
+
+	// Raise change event when value changes
+	$: {
+		raiseChange(value);
+	}
 
 	// ----- Size tracking ----- //
 
