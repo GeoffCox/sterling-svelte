@@ -39,6 +39,7 @@
 <style>
 	label {
 		display: inline-flex;
+		align-content: center;
 		align-items: center;
 		font: inherit;
 		gap: 0.4em;
@@ -56,6 +57,8 @@
 	.container {
 		font-size: inherit;
 		position: relative;
+		display: grid;
+		align-items: center;
 	}
 
 	/*
