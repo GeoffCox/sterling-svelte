@@ -104,6 +104,7 @@
 
 <style>
 	.options {
+		align-items: center;
 		display: grid;
 		grid-template-columns: auto auto;
 		grid-gap: 1rem;
