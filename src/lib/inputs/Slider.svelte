@@ -25,6 +25,7 @@
 
 	/**
 	 * The number of decimal places to round the value to.
+	 * If min, max, or step have higher precision (more decimal places), that precision will be used.
 	 */
 	export let precision: number = 0;
 
@@ -42,20 +43,49 @@
 
 	// ----- Value tracking ----- //
 
-	// The current min and max ensuring min <= max
-	$: currentMin = Math.min(min, max);
-	$: currentMax = Math.max(min, max);
+	const getPrecision = (value?: number): number => {
+		if (value !== undefined && Number !== null && !Number.isNaN(value)) {
+			const text = value.toString();
+			const position = text.indexOf('.');
+			if (position !== -1) {
+				const fraction = text.substring(position + 1);
+				if (fraction) {
 					return fraction.length;
+				}
+			}
+		}
+		return 0;
+	};
 
-	// The current value ensuring that currentMin <= value <= currentMax
-	// and rounded to the precision.
-	$: currentValue = round(Math.max(currentMin, Math.min(currentMax, value)), precision);
+	// use the highest precision
+	$: highestPrecision = Math.max(
+		precision,
+		getPrecision(min),
+		getPrecision(max),
+		getPrecision(step)
+	);
 
-	// Enforce the value snaps to the step
+	// ensure min <= max
+	$: {
+		if (min > max) {
+			console.log('adjusting min/max');
+			min = max;
+		}
+	}
+
+	// ensure min <= value <= max
+	// ensure that value is rounded to highestPrecision
+	$: {
+		if (value < min || value > max || value !== round(value, highestPrecision)) {
+			value = round(Math.max(min, Math.min(max, value)), highestPrecision);
+		}
+	}
+
+	// Ensure value snaps to the step
 	$: {
 		if (step) {
-			let stepValue = Math.max(currentMin, Math.min(value, currentMax));
-			stepValue = Math.round(stepValue / step) * step + currentMin;
+			let stepValue = Math.max(min, Math.min(value, max));
+			stepValue = Math.round(stepValue / step) * step + min;
 			if (stepValue !== value) {
 				value = stepValue;
 			}
@@ -63,17 +93,19 @@
 	}
 
 	// Compute the ratio of the value to the range
-	$: ratio = (currentValue - currentMin) / (currentMax - currentMin);
-
-	$: changeBy = step ? step : precision > 0 ? 1 / Math.pow(10, precision) : 1;
+	$: ratio = (value - min) / (max - min);
+	$: changeBy = step ? step : 1;
 
 	const setValue = (newValue: number) => {
-		value = round(Math.max(currentMin, Math.min(currentMax, newValue)), precision);
+		value = round(Math.max(min, Math.min(max, newValue)), highestPrecision);
 	};
 
 	const setValueByOffset = (offset: number) => {
-		const positionRatio = Math.max(0, Math.min(1, offset / sliderSize));
-		value = round(currentMin + positionRatio * (currentMax - currentMin), precision);
+		if (sliderSize > 0) {
+			const positionRatio = Math.max(0, Math.min(1, offset / sliderSize));
+			const newValue = min + positionRatio * (max - min);
+			setValue(newValue);
+		}
 	};
 
 	// ----- Size tracking ----- //
@@ -134,6 +166,9 @@
 	};
 </script>
 
+<!-- @component
+Slider lets the user chose a value within a min/max range by dragging a thumb button.
+-->
 <div
 	class="sterling-slider"
 	class:disabled
