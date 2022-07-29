@@ -20,6 +20,7 @@
 		border-radius: 10px;
 		display: flex;
 		flex-direction: row;
+		flex-wrap: wrap;
 		padding: 15px;
 	}
 
@@ -39,6 +40,6 @@
 	.options {
 		background-color: var(--BaseLayer__background-color--2);
 		color: var(--BaseLayer__color--2);
-		margin-left: 50px;
+		margin: 20px;
 	}
 </style>
