@@ -29,8 +29,7 @@
 	 */
 	export let selectedIndex = 0;
 
-	export let popupWidth: CSSStyleDeclaration['width'] = 'fit-content';
-	export let popupHeight: CSSStyleDeclaration['height'] = '15em'; //7ish items with 0.5em padding top & bottom
+	//TODO: Allow callers to control the popup width and height
 
 	/*--------------------
 		State
@@ -237,41 +236,43 @@ A single item can be selected and is displayed as the value.
 		class="popup"
 		class:open
 		id={popupId}
-		style="left:{popupPosition.x}px; top:{popupPosition.y}px; width:{popupWidth}; height:{popupHeight};"
+		style="left:{popupPosition.x}px; top:{popupPosition.y}px"
 	>
-		<slot name="list">
-			{#if $$slots.default === true}
-				<List
-					bind:this={listRef}
-					selectedIndex={pendingSelectedIndex}
-					{items}
-					{disabled}
-					let:disabled
-					let:index
-					let:item
-					let:selected
-					on:click={onListClick}
-					on:keydown={onListKeydown}
-					on:itemSelected={onPendingItemSelected}
-				>
-					<slot {disabled} {index} {item} {selected} />
-				</List>
-			{:else}
-				<List
-					bind:this={listRef}
-					selectedIndex={pendingSelectedIndex}
-					{items}
-					{disabled}
-					let:disabled
-					let:index
-					let:item
-					let:selected
-					on:click={onListClick}
-					on:keydown={onListKeydown}
-					on:itemSelected={onPendingItemSelected}
-				/>
-			{/if}
-		</slot>
+		<div class="popup-content">
+			<slot name="list">
+				{#if $$slots.default === true}
+					<List
+						bind:this={listRef}
+						selectedIndex={pendingSelectedIndex}
+						{items}
+						{disabled}
+						let:disabled
+						let:index
+						let:item
+						let:selected
+						on:click={onListClick}
+						on:keydown={onListKeydown}
+						on:itemSelected={onPendingItemSelected}
+					>
+						<slot {disabled} {index} {item} {selected} />
+					</List>
+				{:else}
+					<List
+						bind:this={listRef}
+						selectedIndex={pendingSelectedIndex}
+						{items}
+						{disabled}
+						let:disabled
+						let:index
+						let:item
+						let:selected
+						on:click={onListClick}
+						on:keydown={onListKeydown}
+						on:itemSelected={onPendingItemSelected}
+					/>
+				{/if}
+			</slot>
+		</div>
 	</div>
 </div>
 
@@ -297,7 +298,6 @@ A single item can be selected and is displayed as the value.
 		color: var(--Input__color--hover);
 	}
 
-	.sterling-select:focus,
 	.sterling-select:focus-within {
 		background-color: var(--Input__background-color--focus);
 		border-color: var(--Input__border-color--focus);
@@ -363,10 +363,18 @@ A single item can be selected and is displayed as the value.
 		position: absolute;
 		box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
 			rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+		width: fit-content;
+		height: fit-content;
 		z-index: 1;
 	}
 
 	.popup.open {
-		display: block;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
+	}
+
+	.popup-content {
+		max-height: 15em;
 	}
 </style>
