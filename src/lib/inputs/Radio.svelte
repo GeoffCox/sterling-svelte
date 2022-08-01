@@ -1,16 +1,48 @@
 <script lang="ts">
-	export let group: string;
+	import { onMount } from 'svelte';
+
+	/*
+	 * bind:group doesn't seem to work properly (yet) in a nested radio.
+	 * The workaround is to export `checked` and `group` properties
+	 * and implement the same behavior.
+	 */
+	export let checked: boolean = false;
+	export let group: any | undefined | null = undefined;
+
+	const onChange: svelteHTML.FormEventHandler<HTMLInputElement> = (e) => {
+		if (e.currentTarget.checked) {
+			console.log('onChange setting group value');
+			group = $$restProps.value;
+		}
+	};
+
+	let mounted = false;
+	onMount(() => {
+		console.log('onMount');
+		if (checked) {
+			console.log('onMount setting group value');
+			group = $$restProps.value;
+		}
+		mounted = true;
+	});
+
+	$: {
+		if (mounted) {
+			console.log('updating checked');
+			checked = group === $$restProps.value;
+		}
+	}
 </script>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <label class="sterling-radio">
-	<slot name="before" />
 	<span class="container">
 		<input
 			type="radio"
 			on:blur
 			on:click
 			on:change
+			on:change={onChange}
 			on:dblclick
 			on:focus
 			on:focusin
@@ -28,12 +60,12 @@
 			on:mouseup
 			on:toggle
 			on:wheel
-			bind:group
+			checked={group === $$restProps.value}
 			{...$$restProps}
 		/>
 		<div class="indicator" />
 	</span>
-	<slot name="after" />
+	<slot />
 </label>
 
 <style>

@@ -1,51 +1,53 @@
 <script lang="ts">
-	import ExampleCard from '../_components/ExampleCard.svelte';
-	import ExampleSection from '../_components/ExampleSection.svelte';
+	import { sendNotification } from '../../stores';
 
 	import Radio from '$lib/inputs/Radio.svelte';
+	import Example from '../_components/Example.svelte';
+	import Checkbox from '$lib/inputs/Checkbox.svelte';
+
+	const possibleValues = ['Sterling 1', 'Sterling 2', 'Sterling 3', 'Sterling 4', 'Sterling 5'];
+
+	let selectedValue = '(none)';
+	let disabled = false;
+
+	$: {
+		sendNotification(`Radio changed to ${selectedValue}`);
+	}
 </script>
 
-<div>
-	<ExampleSection title="Radio">
-		<ExampleCard name="default">
-			<Radio name="radioDefault" value={1} />
-			<Radio name="radioDefault" value={2} />
-			<Radio name="radioDefault" value={3} />
-			<Radio name="radioDefault" value={4} />
-		</ExampleCard>
-		<ExampleCard name="disabled">
-			<Radio disabled name="radioDisabled" value={1} />
-			<Radio disabled name="radioDisabled" value={2} checked />
-			<Radio disabled name="radioDisabled" value={3} />
-			<Radio disabled name="radioDisabled" value={4} />
-		</ExampleCard>
-		<ExampleCard name="before">
-			<Radio name="radioBefore" value={1}>
-				<svelte:fragment slot="before">Sterling 1</svelte:fragment>
-			</Radio>
-			<Radio name="radioBefore" value={2}>
-				<svelte:fragment slot="before">Sterling 2</svelte:fragment>
-			</Radio>
-			<Radio name="radioBefore" value={3}>
-				<svelte:fragment slot="before">Sterling 3</svelte:fragment>
-			</Radio>
-			<Radio name="radioBefore" value={4}>
-				<svelte:fragment slot="before">Sterling 4</svelte:fragment>
-			</Radio>
-		</ExampleCard>
-		<ExampleCard name="after">
-			<Radio name="radioAfter" value={1}>
-				<svelte:fragment slot="after">Sterling 1</svelte:fragment>
-			</Radio>
-			<Radio name="radioAfter" value={2}>
-				<svelte:fragment slot="after">Sterling 2</svelte:fragment>
-			</Radio>
-			<Radio name="radioAfter" value={3}>
-				<svelte:fragment slot="after">Sterling 3</svelte:fragment>
-			</Radio>
-			<Radio name="radioAfter" value={4}>
-				<svelte:fragment slot="after">Sterling 4</svelte:fragment>
-			</Radio>
-		</ExampleCard>
-	</ExampleSection>
-</div>
+<Example name="Radio">
+	<div class="component" slot="component">
+		{#each possibleValues as possibleValue}
+			<Radio bind:group={selectedValue} {disabled} name="choices" value={possibleValue}
+				>{possibleValue}</Radio
+			>
+		{/each}
+		<div>selected value: {selectedValue}</div>
+	</div>
+	<div slot="options" class="options">
+		<div />
+		<div>
+			<Checkbox bind:checked={disabled}>disabled</Checkbox>
+		</div>
+		<div />
+	</div>
+</Example>
+
+<style>
+	.options {
+		align-items: center;
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-gap: 1rem;
+		margin-bottom: 1rem;
+		width: max-content;
+		padding: 50px;
+	}
+
+	.component {
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+	}
+</style>
