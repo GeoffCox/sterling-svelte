@@ -4,7 +4,6 @@
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <label class="sterling-checkbox">
-	<slot name="before" />
 	<div class="container">
 		<input
 			type="checkbox"
@@ -33,7 +32,7 @@
 		/>
 		<div class="indicator" />
 	</div>
-	<slot name="after" />
+	<slot />
 </label>
 
 <style>
