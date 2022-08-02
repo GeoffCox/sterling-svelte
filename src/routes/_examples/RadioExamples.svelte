@@ -7,7 +7,7 @@
 
 	const possibleValues = ['Sterling 1', 'Sterling 2', 'Sterling 3', 'Sterling 4', 'Sterling 5'];
 
-	let selectedValue = '(none)';
+	let selectedValue = 'Sterling 2';
 	let disabled = false;
 
 	$: {

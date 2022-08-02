@@ -37,21 +37,15 @@
 		<div class="options" slot="options">
 			<div />
 			<div>
-				<Checkbox bind:checked={buttonDisabled}>
-					<svelte:fragment slot="after">disabled</svelte:fragment>
-				</Checkbox>
+				<Checkbox bind:checked={buttonDisabled}>disabled</Checkbox>
 			</div>
 			<div />
 			<div>
-				<Checkbox bind:checked={buttonWithText}>
-					<svelte:fragment slot="after">with text</svelte:fragment>
-				</Checkbox>
+				<Checkbox bind:checked={buttonWithText}>with text</Checkbox>
 			</div>
 			<div />
 			<div>
-				<Checkbox bind:checked={buttonWithIcon}>
-					<svelte:fragment slot="after">with icon</svelte:fragment>
-				</Checkbox>
+				<Checkbox bind:checked={buttonWithIcon}>with icon</Checkbox>
 			</div>
 		</div>
 	</Example>
@@ -72,21 +66,15 @@
 		<div class="options" slot="options">
 			<div />
 			<div>
-				<Checkbox bind:checked={outlineButtonDisabled}>
-					<svelte:fragment slot="after">disabled</svelte:fragment>
-				</Checkbox>
+				<Checkbox bind:checked={outlineButtonDisabled}>disabled</Checkbox>
 			</div>
 			<div />
 			<div>
-				<Checkbox bind:checked={outlineButtonWithText}>
-					<svelte:fragment slot="after">with text</svelte:fragment>
-				</Checkbox>
+				<Checkbox bind:checked={outlineButtonWithText}>with text</Checkbox>
 			</div>
 			<div />
 			<div>
-				<Checkbox bind:checked={outlineButtonWithIcon}>
-					<svelte:fragment slot="after">with icon</svelte:fragment>
-				</Checkbox>
+				<Checkbox bind:checked={outlineButtonWithIcon}>with icon</Checkbox>
 			</div>
 		</div>
 	</Example>
@@ -107,21 +95,15 @@
 		<div class="options" slot="options">
 			<div />
 			<div>
-				<Checkbox bind:checked={ghostButtonDisabled}>
-					<svelte:fragment slot="after">disabled</svelte:fragment>
-				</Checkbox>
+				<Checkbox bind:checked={ghostButtonDisabled}>disabled</Checkbox>
 			</div>
 			<div />
 			<div>
-				<Checkbox bind:checked={ghostButtonWithIcon}>
-					<svelte:fragment slot="after">with icon</svelte:fragment>
-				</Checkbox>
+				<Checkbox bind:checked={ghostButtonWithIcon}>with icon</Checkbox>
 			</div>
 			<div />
 			<div>
-				<Checkbox bind:checked={ghostButtonWithText}>
-					<svelte:fragment slot="after">with text</svelte:fragment>
-				</Checkbox>
+				<Checkbox bind:checked={ghostButtonWithText}>with text</Checkbox>
 			</div>
 		</div>
 	</Example>

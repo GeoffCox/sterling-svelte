@@ -11,16 +11,13 @@
 
 	const onChange: svelteHTML.FormEventHandler<HTMLInputElement> = (e) => {
 		if (e.currentTarget.checked) {
-			console.log('onChange setting group value');
 			group = $$restProps.value;
 		}
 	};
 
 	let mounted = false;
 	onMount(() => {
-		console.log('onMount');
 		if (checked) {
-			console.log('onMount setting group value');
 			group = $$restProps.value;
 		}
 		mounted = true;
@@ -28,7 +25,6 @@
 
 	$: {
 		if (mounted) {
-			console.log('updating checked');
 			checked = group === $$restProps.value;
 		}
 	}

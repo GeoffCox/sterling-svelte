@@ -38,15 +38,11 @@
 		<div><Input value={max.toString()} on:change={onMaxChange} /></div>
 		<div />
 		<div>
-			<Checkbox bind:checked={disabled}>
-				<svelte:fragment slot="after">disabled</svelte:fragment>
-			</Checkbox>
+			<Checkbox bind:checked={disabled}>disabled</Checkbox>
 		</div>
 		<div />
 		<div>
-			<Checkbox bind:checked={vertical}>
-				<svelte:fragment slot="after">vertical</svelte:fragment>
-			</Checkbox>
+			<Checkbox bind:checked={vertical}>vertical</Checkbox>
 		</div>
 		<div>value</div>
 		<div class="slider">

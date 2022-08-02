@@ -4,12 +4,14 @@
 	import { neutrals } from '$lib/themes/colors';
 
 	import ExampleSection from '../_components/ExampleSection.svelte';
+	import Example from '../_components/Example.svelte';
 
 	$: themeKeys = Object.keys(lightThemeVars);
 </script>
 
-<div>
-	<ExampleSection title="Light Theme Neutrals">
+<Example name="Theme">
+	<div class="component" slot="component">
+		<h3>Neutral Colors</h3>
 		<div class="color-items">
 			{#each Object.keys(neutrals) as key}
 				<div class="color-item">
@@ -18,8 +20,7 @@
 				</div>
 			{/each}
 		</div>
-	</ExampleSection>
-	<ExampleSection title="Themes">
+		<h3>Theme Colors</h3>
 		<div class="theme-items">
 			<div class="theme-header">Key</div>
 			<div class="theme-header">Light</div>
@@ -30,10 +31,18 @@
 				<div class="color-block" style="background-color: {darkThemeVars[key]}" />
 			{/each}
 		</div>
-	</ExampleSection>
-</div>
+	</div>
+</Example>
 
 <style>
+	.component {
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		justify-items: stretch;
+	}
+
 	.color-items {
 		display: flex;
 		flex-direction: column;

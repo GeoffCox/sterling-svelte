@@ -2,7 +2,6 @@
 	import Slider from '$lib/inputs/Slider.svelte';
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 	import Input from '$lib/inputs/Input.svelte';
-	import BaseLayer from '$lib/BaseLayer.svelte';
 	import Example from '../_components/Example.svelte';
 	import { sendNotification } from '../../stores';
 
@@ -89,15 +88,11 @@
 		<div><Input value={precision.toString()} on:change={onPrecisionChange} /></div>
 		<div />
 		<div>
-			<Checkbox bind:checked={vertical}>
-				<svelte:fragment slot="after">vertical</svelte:fragment>
-			</Checkbox>
+			<Checkbox bind:checked={vertical}>vertical</Checkbox>
 		</div>
 		<div />
 		<div>
-			<Checkbox bind:checked={disabled}>
-				<svelte:fragment slot="after">disabled</svelte:fragment>
-			</Checkbox>
+			<Checkbox bind:checked={disabled}>disabled</Checkbox>
 		</div>
 	</div>
 </Example>

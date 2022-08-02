@@ -81,7 +81,6 @@
 	// ensure min <= max
 	$: {
 		if (min > max) {
-			console.log('adjusting min/max');
 			min = max;
 		}
 	}

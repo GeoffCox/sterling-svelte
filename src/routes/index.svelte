@@ -5,13 +5,11 @@
 	import { currentTheme } from './_components/useCurrentTheme';
 
 	import ThemeExamples from './_examples/ThemeExamples.svelte';
-	import BaseLayer from '$lib/BaseLayer.svelte';
 	import CheckboxExamples from './_examples/CheckboxExamples.svelte';
 	import InputExamples from './_examples/InputExamples.svelte';
 	import RadioExamples from './_examples/RadioExamples.svelte';
 	import SelectExamples from './_examples/SelectExample.svelte';
 	import ButtonExamples from './_examples/ButtonExamples.svelte';
-	import BaseLayerExamples from './_examples/BaseLayerExamples.svelte';
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 	import ListExamples from './_examples/ListExamples.svelte';
 	import List from '$lib/lists/List.svelte';
@@ -45,10 +43,6 @@
 			name: 'List',
 			component: ListExamples
 		},
-		baseLayer: {
-			name: 'BaseLayer',
-			component: BaseLayerExamples
-		},
 		button: {
 			name: 'Button',
 			component: ButtonExamples
@@ -75,7 +69,7 @@
 </script>
 
 <div class="app" use:currentTheme={{ darkMode }} class:darkMode>
-	<BaseLayer>
+	<div>
 		<div class="notification">{$notification}</div>
 		<div>
 			<Checkbox checked={darkMode} on:click={toggleDarkMode}><div>Dark Mode</div></Checkbox>
@@ -90,7 +84,7 @@
 				<svelte:component this={selectedExample} />
 			</div>
 		</div>
-	</BaseLayer>
+	</div>
 </div>
 
 <style>

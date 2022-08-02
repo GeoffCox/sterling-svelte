@@ -15,7 +15,7 @@
 	let horizontal = false;
 </script>
 
-<Example name="Input">
+<Example name="List">
 	<div class="component" class:horizontal slot="component">
 		<List
 			{items}

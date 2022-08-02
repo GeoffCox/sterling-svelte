@@ -1,9 +1,8 @@
 <script lang="ts">
-	import ExampleCard from '../_components/ExampleCard.svelte';
-	import ExampleSection from '../_components/ExampleSection.svelte';
-
 	import Select from '$lib/inputs/Select.svelte';
 	import { sendNotification } from '../../stores';
+	import Example from '../_components/Example.svelte';
+	import Checkbox from '$lib/inputs/Checkbox.svelte';
 
 	const items = [
 		'Alabama',
@@ -58,42 +57,50 @@
 		'Wyoming'
 	];
 
-	let disabled = true;
+	let disabled = false;
 </script>
 
-<div>
-	<ExampleSection title="Select">
-		<ExampleCard name="default">
-			<Select
-				{items}
-				let:item
-				on:itemSelected={(event) => {
-					sendNotification(
-						`Select: on:select [${event.detail.index}] ${items[event.detail.index]}`
-					);
-				}}
-				on:pendingItemSelected={(event) => {
-					sendNotification(
-						`Select: on:pendingSelect [${event.detail.index}] ${items[event.detail.index]}`
-					);
-				}}
-			/>
-		</ExampleCard>
-		<ExampleCard name="disabled">
-			<Select {items} disabled let:item>
-				<div class="item">{item}</div>
-			</Select>
-		</ExampleCard>
-		<ExampleCard name="custom popup size">
-			<Select {items} let:item popupWidth="50ch" popupHeight="7rem">
-				<div class="item">{item}</div>
-			</Select>
-		</ExampleCard>
-	</ExampleSection>
-</div>
+<Example name="Select">
+	<div class="component" slot="component">
+		<Select
+			{items}
+			{disabled}
+			let:item
+			on:itemSelected={(event) => {
+				sendNotification(`Select: on:select [${event.detail.index}] ${items[event.detail.index]}`);
+			}}
+			on:pendingItemSelected={(event) => {
+				sendNotification(
+					`Select: on:pendingSelect [${event.detail.index}] ${items[event.detail.index]}`
+				);
+			}}
+		/>
+	</div>
+	<div slot="options" class="options">
+		<div />
+		<div>
+			<Checkbox bind:checked={disabled}>disabled</Checkbox>
+		</div>
+	</div>
+</Example>
 
 <style>
-	.item {
-		padding: 0.5em 15px 0.5em 10px;
+	.options {
+		align-items: center;
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-gap: 1rem;
+		margin-bottom: 1rem;
+		width: max-content;
+		padding: 50px;
+	}
+
+	.component {
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		height: 410px;
+		justify-items: stretch;
 	}
 </style>
