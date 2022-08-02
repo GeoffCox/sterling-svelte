@@ -38,7 +38,6 @@
 		<div>
 			<Input bind:value={placeholder} />
 		</div>
-		<div />
 	</div>
 </Example>
 
