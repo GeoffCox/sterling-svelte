@@ -3,6 +3,7 @@
 	import { sendNotification } from '../../stores';
 	import Example from '../_components/Example.svelte';
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
+	import Input from '$lib/inputs/Input.svelte';
 
 	const items = [
 		'Alabama',
@@ -58,28 +59,53 @@
 	];
 
 	let disabled = false;
+	let label = 'U.S. STATES';
 </script>
 
 <Example name="Select">
 	<div class="component" slot="component">
-		<Select
-			{items}
-			{disabled}
-			let:item
-			on:itemSelected={(event) => {
-				sendNotification(`Select: on:select [${event.detail.index}] ${items[event.detail.index]}`);
-			}}
-			on:pendingItemSelected={(event) => {
-				sendNotification(
-					`Select: on:pendingSelect [${event.detail.index}] ${items[event.detail.index]}`
-				);
-			}}
-		/>
+		{#if label}
+			<Select
+				{items}
+				{disabled}
+				on:itemSelected={(event) => {
+					sendNotification(
+						`Select: on:select [${event.detail.index}] ${items[event.detail.index]}`
+					);
+				}}
+				on:pendingItemSelected={(event) => {
+					sendNotification(
+						`Select: on:pendingSelect [${event.detail.index}] ${items[event.detail.index]}`
+					);
+				}}
+			>
+				<svelte:fragment slot="label">{label}</svelte:fragment>
+			</Select>
+		{:else}
+			<Select
+				{items}
+				{disabled}
+				on:itemSelected={(event) => {
+					sendNotification(
+						`Select: on:select [${event.detail.index}] ${items[event.detail.index]}`
+					);
+				}}
+				on:pendingItemSelected={(event) => {
+					sendNotification(
+						`Select: on:pendingSelect [${event.detail.index}] ${items[event.detail.index]}`
+					);
+				}}
+			/>
+		{/if}
 	</div>
 	<div slot="options" class="options">
 		<div />
 		<div>
 			<Checkbox bind:checked={disabled}>disabled</Checkbox>
+		</div>
+		<div />
+		<div>
+			<Input bind:value={label}>label</Input>
 		</div>
 	</div>
 </Example>

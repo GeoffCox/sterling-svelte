@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount, tick } from 'svelte';
-	import { v4 as uuidv4, v4 } from 'uuid';
+	import { v4 as uuidv4 } from 'uuid';
 	import { computePosition, flip, offset, shift, autoUpdate } from '@floating-ui/dom';
 	import { clickOutside } from '$lib/actions/clickOutside';
 	import List from '$lib/lists/List.svelte';
@@ -34,6 +34,9 @@
 	/*--------------------
 		State
 	  --------------------*/
+
+	// Tracks the previous open statue
+	let prevOpen = false;
 
 	// Tracks the pending selected index
 	let pendingSelectedIndex = selectedIndex;
@@ -79,9 +82,11 @@
 	}
 
 	$: {
-		if (open) {
+		if (open && !prevOpen) {
+			prevOpen = true;
 			tick().then(() => listRef?.focusSelectedItem());
-		} else {
+		} else if (prevOpen) {
+			prevOpen = false;
 			tick().then(() => selectRef?.focus());
 		}
 	}
@@ -101,7 +106,6 @@
 				popupPosition = { x, y };
 			}
 		});
-
 		return cleanup;
 	});
 
@@ -221,16 +225,26 @@ A single item can be selected and is displayed as the value.
 	on:paste
 	{...$$restProps}
 >
-	<div class="value">
-		<slot name="value">
-			{items[selectedIndex]}
-		</slot>
-	</div>
-	<div class="icon">
-		<slot name="button">
-			<div class="chevron" />
-		</slot>
-	</div>
+	<!-- svelte-ignore a11y-label-has-associated-control -->
+	<label class="sterling-select-label">
+		{#if $$slots.label}
+			<div class="label-content">
+				<slot name="label" />
+			</div>
+		{/if}
+		<div class="input">
+			<div class="value">
+				<slot name="value">
+					{items[selectedIndex]}
+				</slot>
+			</div>
+			<div class="button">
+				<slot name="button">
+					<div class="chevron" />
+				</slot>
+			</div>
+		</div>
+	</label>
 	<div
 		bind:this={popupRef}
 		class="popup"
@@ -278,7 +292,6 @@ A single item can be selected and is displayed as the value.
 
 <style>
 	.sterling-select {
-		align-items: stretch;
 		background-color: var(--Input__background-color);
 		border-color: var(--Input__border-color);
 		border-radius: var(--Input__border-radius);
@@ -314,6 +327,23 @@ A single item can be selected and is displayed as the value.
 		color: var(--Input__color--disabled);
 		cursor: not-allowed;
 		outline: none;
+	}
+
+	.label {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.label-content {
+		font-size: 0.7em;
+		margin: 0.5em 0 0 0.7em;
+		color: var(--Display__color--subtle);
+	}
+
+	.input {
+		display: flex;
+		flex-direction: row;
+		align-items: stretch;
 	}
 
 	.value {

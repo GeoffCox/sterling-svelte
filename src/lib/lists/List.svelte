@@ -48,6 +48,7 @@
 	  --------------------*/
 
 	export const focusSelectedItem = () => {
+		console.log('focusing selected item');
 		listRef.focus();
 		const selectedRef = itemRefs[selectedIndex] as HTMLDivElement;
 		selectedRef?.focus();
@@ -225,7 +226,6 @@ A list of items where a single item can be selected.
 
 	.sterling-list:focus-visible,
 	.sterling-list.focus-visible {
-		background-color: var(--Common__background-color--focus);
 		border-color: var(--Common__border-color--focus);
 		color: var(--Common__color--focus);
 		outline-color: var(--Common__outline-color);

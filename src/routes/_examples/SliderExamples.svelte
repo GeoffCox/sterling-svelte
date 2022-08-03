@@ -78,14 +78,14 @@
 		<div>value: {value}</div>
 	</div>
 	<div slot="options" class="options">
-		<div>min</div>
-		<div><Input value={min.toString()} on:change={onMinChange} /></div>
-		<div>max</div>
-		<div><Input value={max.toString()} on:change={onMaxChange} /></div>
-		<div>step</div>
-		<div><Input value={step?.toString()} on:change={onStepChange} /></div>
-		<div>precision</div>
-		<div><Input value={precision.toString()} on:change={onPrecisionChange} /></div>
+		<div />
+		<div><Input value={min.toString()} on:change={onMinChange}>min</Input></div>
+		<div />
+		<div><Input value={max.toString()} on:change={onMaxChange}>max</Input></div>
+		<div />
+		<div><Input value={step?.toString()} on:change={onStepChange}>step</Input></div>
+		<div />
+		<div><Input value={precision.toString()} on:change={onPrecisionChange}>precision</Input></div>
 		<div />
 		<div>
 			<Checkbox bind:checked={vertical}>vertical</Checkbox>
