@@ -6,7 +6,8 @@
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 
 	let disabled = false;
-	let placeholder = '';
+	let label = 'NAME';
+	let placeholder = 'Placeholder';
 
 	const inputOnChange = (e: Event) => {
 		const target = e.currentTarget as HTMLInputElement;
@@ -21,22 +22,36 @@
 
 <Example name="Input">
 	<div class="component" slot="component">
-		<Input
-			value="Sterling"
-			{disabled}
-			{placeholder}
-			on:input={inputOnInput}
-			on:change={inputOnChange}
-		/>
+		{#if label.length > 0}
+			<Input
+				value="Sterling"
+				{disabled}
+				{placeholder}
+				on:input={inputOnInput}
+				on:change={inputOnChange}>{label}</Input
+			>
+		{:else}
+			<Input
+				value="Sterling"
+				{disabled}
+				{placeholder}
+				on:input={inputOnInput}
+				on:change={inputOnChange}
+			/>
+		{/if}
 	</div>
 	<div slot="options" class="options">
 		<div />
 		<div>
 			<Checkbox bind:checked={disabled}>disabled</Checkbox>
 		</div>
-		<div>Placeholder</div>
+		<div />
 		<div>
-			<Input bind:value={placeholder} />
+			<Input bind:value={label}>label</Input>
+		</div>
+		<div />
+		<div>
+			<Input bind:value={placeholder}>placeholder</Input>
 		</div>
 	</div>
 </Example>

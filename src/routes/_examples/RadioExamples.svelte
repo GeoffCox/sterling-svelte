@@ -4,11 +4,15 @@
 	import Radio from '$lib/inputs/Radio.svelte';
 	import Example from '../_components/Example.svelte';
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
+	import Input from '$lib/inputs/Input.svelte';
 
-	const possibleValues = ['Sterling 1', 'Sterling 2', 'Sterling 3', 'Sterling 4', 'Sterling 5'];
+	const seed = [...Array(5).keys()];
 
-	let selectedValue = 'Sterling 2';
 	let disabled = false;
+	let label = 'Sterling';
+	let selectedValue = '';
+
+	$: possibleValues = seed.map((x) => `${label} ${x}`);
 
 	$: {
 		sendNotification(`Radio changed to ${selectedValue}`);
@@ -30,6 +34,9 @@
 			<Checkbox bind:checked={disabled}>disabled</Checkbox>
 		</div>
 		<div />
+		<div>
+			<Input bind:value={label}>label (prefix)</Input>
+		</div>
 	</div>
 </Example>
 

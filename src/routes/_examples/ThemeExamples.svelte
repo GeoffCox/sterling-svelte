@@ -16,7 +16,7 @@
 			{#each Object.keys(neutrals) as key}
 				<div class="color-item">
 					<div class="color-block" style="background-color: {neutrals[key]}" />
-					<div>{key}: {neutrals[key]}</div>
+					<div class="color-name">{key}: {neutrals[key]}</div>
 				</div>
 			{/each}
 		</div>
@@ -51,13 +51,16 @@
 	.color-item {
 		display: flex;
 		align-items: center;
-		font-size: 12px;
 	}
 	.color-block {
 		width: 24px;
 		height: 24px;
 		margin: 2px;
 		border: 1px dashed #000;
+	}
+
+	.color-name {
+		margin-left: 5px;
 	}
 
 	.theme-items {
@@ -68,7 +71,6 @@
 		row-gap: 5px;
 		column-gap: 20px;
 		width: max-content;
-		font-size: 12px;
 	}
 
 	.theme-header {

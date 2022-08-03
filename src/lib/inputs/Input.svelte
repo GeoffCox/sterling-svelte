@@ -2,40 +2,91 @@
 	export let value: string = '';
 </script>
 
-<input
-	class="sterling-input"
-	on:blur
-	on:click
-	on:change
-	on:copy
-	on:cut
-	on:paste
-	on:dblclick
-	on:focus
-	on:focusin
-	on:focusout
-	on:input
-	on:invalid
-	on:keydown
-	on:keypress
-	on:keyup
-	on:mousedown
-	on:mouseenter
-	on:mouseleave
-	on:mousemove
-	on:mouseover
-	on:mouseout
-	on:mouseup
-	on:select
-	on:submit
-	on:reset
-	on:wheel
-	bind:value
-	{...$$restProps}
-/>
+<!-- svelte-ignore a11y-label-has-associated-control -->
+{#if $$slots.default}
+	<label class="sterling-input-label">
+		<div class="label-content">
+			<slot />
+		</div>
+		<input
+			class="sterling-input labeled"
+			bind:value
+			on:blur
+			on:click
+			on:change
+			on:copy
+			on:cut
+			on:paste
+			on:dblclick
+			on:focus
+			on:focusin
+			on:focusout
+			on:input
+			on:invalid
+			on:keydown
+			on:keypress
+			on:keyup
+			on:mousedown
+			on:mouseenter
+			on:mouseleave
+			on:mousemove
+			on:mouseover
+			on:mouseout
+			on:mouseup
+			on:select
+			on:submit
+			on:reset
+			on:wheel
+			{...$$restProps}
+		/>
+	</label>
+{:else}
+	<input
+		class="sterling-input"
+		bind:value
+		on:blur
+		on:click
+		on:change
+		on:copy
+		on:cut
+		on:paste
+		on:dblclick
+		on:focus
+		on:focusin
+		on:focusout
+		on:input
+		on:invalid
+		on:keydown
+		on:keypress
+		on:keyup
+		on:mousedown
+		on:mouseenter
+		on:mouseleave
+		on:mousemove
+		on:mouseover
+		on:mouseout
+		on:mouseup
+		on:select
+		on:submit
+		on:reset
+		on:wheel
+		{...$$restProps}
+	/>
+{/if}
 
 <style>
-	input {
+	.sterling-input-label {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.sterling-input-label > .label-content {
+		font-size: 0.7em;
+		margin: 0.5em 0 0 0.7em;
+		color: var(--Display__color--subtle);
+	}
+	.sterling-input-label,
+	.sterling-input {
 		background-color: var(--Input__background-color);
 		border-color: var(--Input__border-color);
 		border-radius: var(--Input__border-radius);
@@ -44,17 +95,18 @@
 		color: var(--Input__color);
 		font: inherit;
 		margin: 0;
-		padding: 0.5em 0.5em;
 		transition: background-color 250ms, color 250ms, border-color 250ms;
 	}
 
-	input:hover {
+	.sterling-input-label:hover,
+	.sterling-input:hover {
 		background-color: var(--Input__background-color--hover);
 		border-color: var(--Input__border-color--hover);
 		color: var(--Input__color--hover);
 	}
 
-	input:focus {
+	.sterling-input-label:focus-within,
+	.sterling-input:focus-within {
 		background-color: var(--Input__background-color--focus);
 		border-color: var(--Input__border-color--focus);
 		color: var(--Input__color--focus);
@@ -64,18 +116,33 @@
 		outline-width: var(--Common__outline-width);
 	}
 
-	input:disabled {
+	.sterling-input-label:disabled,
+	.sterling-input:disabled {
 		background-color: var(--Input__background-color--disabled);
 		border-color: var(---Input__border-color--disabled);
 		color: var(--Input__color--disabled);
 		cursor: not-allowed;
 	}
 
-	input::placeholder {
-		color: var(--Input__placeholder__color);
+	.sterling-input {
+		padding: 0.5em 0.5em;
+		transition: background-color 250ms, color 250ms, border-color 250ms;
 	}
 
-	input:disabled::placeholder {
-		color: var(--Input__placeholder__color--disabled);
+	.sterling-input.labeled,
+	.sterling-input.labeled:hover,
+	.sterling-input.labeled:focus-within,
+	.sterling-input.labeled:disabled {
+		background-color: transparent;
+		border: none;
+		outline: none;
+	}
+
+	.sterling-input::placeholder {
+		color: var(--Display__color--faint);
+	}
+
+	.sterling-input:disabled::placeholder {
+		color: var(--Display__color--disabled);
 	}
 </style>

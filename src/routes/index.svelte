@@ -23,17 +23,13 @@
 	};
 
 	const examples: Record<string, { name: string; component: typeof SvelteComponent }> = {
-		palette: {
-			name: 'Themes',
-			component: ThemeExamples
+		button: {
+			name: 'Button',
+			component: ButtonExamples
 		},
-		slider: {
-			name: 'Slider',
-			component: SliderExamples
-		},
-		select: {
-			name: 'Select',
-			component: SelectExamples
+		checkbox: {
+			name: 'Checkbox',
+			component: CheckboxExamples
 		},
 		input: {
 			name: 'Input',
@@ -43,21 +39,25 @@
 			name: 'List',
 			component: ListExamples
 		},
-		button: {
-			name: 'Button',
-			component: ButtonExamples
-		},
-		checkbox: {
-			name: 'Checkbox',
-			component: CheckboxExamples
+		progress: {
+			name: 'Progress',
+			component: ProgressExamples
 		},
 		radio: {
 			name: 'Radio',
 			component: RadioExamples
 		},
-		progress: {
-			name: 'Progress',
-			component: ProgressExamples
+		select: {
+			name: 'Select',
+			component: SelectExamples
+		},
+		slider: {
+			name: 'Slider',
+			component: SliderExamples
+		},
+		theme: {
+			name: 'Theme',
+			component: ThemeExamples
 		}
 	};
 

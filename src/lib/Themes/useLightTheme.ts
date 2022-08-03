@@ -88,7 +88,6 @@ export const lightThemeVars: CSSVarSet = {
 	'--Input__border-style': 'solid',
 	'--Input__border-width': '2px',
 	'--Input__color': neutrals.neutral15,
-	'--Input__placeholder__color': neutrals.neutral85,
 
 	// hover
 	'--Input__background-color--hover': neutrals.neutral100,
@@ -109,12 +108,15 @@ export const lightThemeVars: CSSVarSet = {
 	'--Input__background-color--disabled': neutrals.neutral96,
 	'--Input__border-color--disabled': neutrals.neutral75,
 	'--Input__color--disabled': neutrals.neutral75,
-	'--Input__placeholder__color--disabled': neutrals.neutral85,
 
 	// ----- Display ----- //
 	'--Display__background-color': neutrals.neutral92,
 	'--Display__border-color': neutrals.neutral60,
 	'--Display__color': neutrals.neutral15,
+
+	'--Display__color--subtle': neutrals.neutral30,
+	'--Display__color--faint': neutrals.neutral85,
+	'--Display__color--disabled': neutrals.neutral85,
 
 	'--Display__color--info': '#025E73',
 	'--Display__color--progress': '#0099DD',

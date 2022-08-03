@@ -3,18 +3,24 @@
 
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 	import Example from '../_components/Example.svelte';
+	import Input from '$lib/inputs/Input.svelte';
 
 	let disabled = false;
+	let label = 'Sterling';
 </script>
 
 <Example name="Checkbox">
 	<div slot="component" class="component">
-		<Checkbox {disabled}>Sterling</Checkbox>
+		<Checkbox {disabled}>{label}</Checkbox>
 	</div>
 	<div slot="options" class="options">
 		<div />
 		<div>
 			<Checkbox bind:checked={disabled}>disabled</Checkbox>
+		</div>
+		<div />
+		<div>
+			<Input bind:value={label}>label</Input>
 		</div>
 	</div>
 </Example>
