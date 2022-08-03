@@ -111,6 +111,10 @@ export const darkThemeVars: CSSVarSet = {
 	'--Display__border-color': neutrals.neutral92,
 	'--Display__color': neutrals.neutral100,
 
+	'--Display__color--subtle': neutrals.neutral96,
+	'--Display__color--faint': neutrals.neutral45,
+	'--Display__color--disabled': neutrals.neutral45,
+
 	'--Display__color--info': '#025E73',
 	'--Display__color--progress': '#0099DD',
 	'--Display__color--success': '#03A64A',

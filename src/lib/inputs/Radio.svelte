@@ -61,7 +61,9 @@
 		/>
 		<div class="indicator" />
 	</span>
-	<slot />
+	<div class="label-content">
+		<slot />
+	</div>
 </label>
 
 <style>
@@ -82,14 +84,13 @@
 	 */
 	.container {
 		position: relative;
-		font-size: inherit;
+		font: inherit;
 	}
 
 	/*
 		The input is hidden since the built-in browser radio cannot be customized
 	*/
 	input {
-		color: inherit;
 		font: inherit;
 		margin: 0;
 		padding: 0;
@@ -152,5 +153,9 @@
 
 	input:checked:disabled + .indicator::after {
 		background-color: var(--Input__color--disabled);
+	}
+
+	.label-content {
+		color: var(--Common__color);
 	}
 </style>

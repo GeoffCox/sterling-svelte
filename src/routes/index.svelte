@@ -72,7 +72,7 @@
 	<div>
 		<div class="notification">{$notification}</div>
 		<div>
-			<Checkbox checked={darkMode} on:click={toggleDarkMode}><div>Dark Mode</div></Checkbox>
+			<Checkbox checked={darkMode} on:click={toggleDarkMode}>Dark Mode</Checkbox>
 		</div>
 		<div class="examples">
 			<div class="example-list">
