@@ -7,15 +7,15 @@
 	import Select from '$lib/inputs/Select.svelte';
 	import type { ButtonType } from '$lib/buttons/Button.types';
 
-	const buttonTypes: ButtonType[] = ['default', 'outline', 'ghost'];
-	let buttonType: ButtonType = 'default';
+	let exampleRef: any;
 
+	const buttonTypes: ButtonType[] = ['default', 'outline', 'ghost'];
+
+	let buttonType: ButtonType = 'default';
 	let circular = false;
 	let buttonDisabled = false;
 	let buttonWithText = true;
 	let buttonWithIcon = true;
-
-	let exampleRef: any;
 </script>
 
 <div>

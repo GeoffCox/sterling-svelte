@@ -1,41 +1,31 @@
 <script lang="ts">
-	import { sendNotification } from '../../stores';
-
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 	import Example from '../_components/Example.svelte';
 	import Input from '$lib/inputs/Input.svelte';
 
+	let exampleRef: any;
+
 	let disabled = false;
+	let checked = false;
 	let label = 'Sterling';
 </script>
 
-<Example name="Checkbox">
+<Example name="Checkbox" bind:this={exampleRef}>
 	<div slot="component" class="component">
-		<Checkbox {disabled}>{label}</Checkbox>
+		<Checkbox {disabled} bind:checked on:change={() => exampleRef.recordEvent('change')}
+			>{label}</Checkbox
+		>
 	</div>
-	<div slot="options" class="options">
-		<div />
-		<div>
-			<Checkbox bind:checked={disabled}>disabled</Checkbox>
-		</div>
-		<div />
-		<div>
-			<Input bind:value={label}>label</Input>
-		</div>
-	</div>
+	<svelte:fragment slot="options">
+		<Checkbox bind:checked={disabled}>disabled</Checkbox>
+		<Input bind:value={label}>label</Input>
+	</svelte:fragment>
+	<svelte:fragment slot="status">
+		<div>checked: {checked}</div>
+	</svelte:fragment>
 </Example>
 
 <style>
-	.options {
-		align-items: center;
-		display: grid;
-		grid-template-columns: auto auto;
-		grid-gap: 1rem;
-		margin-bottom: 1rem;
-		width: max-content;
-		padding: 50px;
-	}
-
 	.component {
 		box-sizing: border-box;
 		display: grid;
