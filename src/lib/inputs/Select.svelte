@@ -29,6 +29,15 @@
 	 */
 	export let selectedIndex = 0;
 
+	/**
+	 * The selected item (read only)
+	 */
+	export let selectedItem: any = undefined;
+
+	$: {
+		selectedItem = items[selectedIndex];
+	}
+
 	//TODO: Allow callers to control the popup width and height
 
 	/*--------------------

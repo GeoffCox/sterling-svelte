@@ -1,5 +1,11 @@
 <script lang="ts">
 	export let name: string;
+
+	let messages: string[] = [];
+
+	export const recordEvent = (message: string) => {
+		messages = [...messages.slice(-2), `[${new Date().toISOString()}] ${message}`];
+	};
 </script>
 
 <div class="example">
@@ -10,15 +16,17 @@
 	<div class="panel">
 		<div class="options">
 			<h2>Options</h2>
-			<slot name="options" />
+			<slot name="options">(none)</slot>
 		</div>
 		<div class="status">
 			<h2>Status</h2>
-			<slot name="status" />
+			<slot name="status">(none)</slot>
 		</div>
 		<div class="events">
 			<h2>Events</h2>
-			<slot name="events" />
+			{#each messages as message}
+				<div>{message}</div>
+			{/each}
 		</div>
 	</div>
 </div>
