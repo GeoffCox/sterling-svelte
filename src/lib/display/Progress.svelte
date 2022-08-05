@@ -1,10 +1,14 @@
 <script lang="ts">
+	import type { ProgressColorful } from './Progress.types';
+
 	export let value = 0;
 	export let max = 100;
 
 	export let percent = 0;
 
 	export let vertical: boolean = false;
+
+	export let colorful: ProgressColorful;
 
 	let clientHeight: number;
 	let clientWidth: number;
@@ -20,6 +24,7 @@
 	$: percentWidth = clientWidth * ratio;
 
 	$: indicatorStyle = vertical ? `height: ${percentHeight}px` : `width: ${percentWidth}px`;
+	$: indicatorColor = colorful === 'auto' ? (percent === 100 ? 'success' : 'progress') : colorful;
 </script>
 
 <div
@@ -40,7 +45,14 @@
 	{...$$restProps}
 >
 	<div class="container" bind:clientWidth bind:clientHeight>
-		<div class="indicator" style={indicatorStyle} />
+		<div
+			class="indicator"
+			class:progress={indicatorColor === 'progress'}
+			class:success={indicatorColor === 'success'}
+			class:warning={indicatorColor === 'warning'}
+			class:error={indicatorColor === 'error'}
+			style={indicatorStyle}
+		/>
 	</div>
 </div>
 
@@ -82,6 +94,22 @@
 		box-sizing: border-box;
 		height: 100%;
 		min-height: 1px;
+	}
+
+	.indicator.progress {
+		background-color: var(--Display__color--progress);
+	}
+
+	.indicator.success {
+		background-color: var(--Display__color--success);
+	}
+
+	.indicator.warning {
+		background-color: var(--Display__color--warning);
+	}
+
+	.indicator.error {
+		background-color: var(--Display__color--error);
 	}
 
 	.sterling-progress.vertical .indicator {

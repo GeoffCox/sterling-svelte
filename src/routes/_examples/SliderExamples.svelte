@@ -75,39 +75,25 @@
 			{disabled}
 			on:change={(e) => sendNotification(`Slider value changed: ${e.detail.value}`)}
 		/>
+	</div>
+	<div slot="status">
 		<div>value: {value}</div>
 	</div>
-	<div slot="options" class="options">
-		<div />
+	<svelte:fragment slot="options">
 		<div><Input value={min.toString()} on:change={onMinChange}>min</Input></div>
-		<div />
 		<div><Input value={max.toString()} on:change={onMaxChange}>max</Input></div>
-		<div />
 		<div><Input value={step?.toString()} on:change={onStepChange}>step</Input></div>
-		<div />
 		<div><Input value={precision.toString()} on:change={onPrecisionChange}>precision</Input></div>
-		<div />
 		<div>
 			<Checkbox bind:checked={vertical}>vertical</Checkbox>
 		</div>
-		<div />
 		<div>
 			<Checkbox bind:checked={disabled}>disabled</Checkbox>
 		</div>
-	</div>
+	</svelte:fragment>
 </Example>
 
 <style>
-	.options {
-		align-items: center;
-		display: grid;
-		grid-template-columns: auto auto;
-		grid-gap: 1rem;
-		margin-bottom: 1rem;
-		width: max-content;
-		padding: 50px;
-	}
-
 	.component {
 		box-sizing: border-box;
 		display: grid;

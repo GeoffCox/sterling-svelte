@@ -3,7 +3,6 @@
 	import { lightThemeVars } from '$lib/themes/useLightTheme';
 	import { neutrals } from '$lib/themes/colors';
 
-	import ExampleSection from '../_components/ExampleSection.svelte';
 	import Example from '../_components/Example.svelte';
 
 	$: themeKeys = Object.keys(lightThemeVars);

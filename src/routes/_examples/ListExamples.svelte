@@ -1,7 +1,4 @@
 <script lang="ts">
-	import ExampleCard from '../_components/ExampleCard.svelte';
-	import ExampleSection from '../_components/ExampleSection.svelte';
-
 	import List from '$lib/lists/List.svelte';
 	import { sendNotification } from '../../stores';
 	import Example from '../_components/Example.svelte';

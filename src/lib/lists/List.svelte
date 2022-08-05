@@ -48,7 +48,6 @@
 	  --------------------*/
 
 	export const focusSelectedItem = () => {
-		console.log('focusing selected item');
 		listRef.focus();
 		const selectedRef = itemRefs[selectedIndex] as HTMLDivElement;
 		selectedRef?.focus();

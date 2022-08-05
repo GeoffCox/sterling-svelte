@@ -5,7 +5,13 @@
 
 	import Example from '../_components/Example.svelte';
 	import Input from '$lib/inputs/Input.svelte';
+	import Select from '$lib/inputs/Select.svelte';
+	import type { ProgressColorful } from '$lib/display/Progress.types';
 
+	const colorfulStates = ['none', 'auto', 'progress', 'success', 'warning', 'error'];
+
+	let colorfulStateIndex = 0;
+	$: colorful = colorfulStates[colorfulStateIndex] as ProgressColorful;
 	let value = 35;
 	let max = 100;
 	let percent: number;
@@ -30,10 +36,16 @@
 
 <Example name="Progress">
 	<div class="component" class:vertical slot="component">
-		<Progress {value} {max} bind:percent {vertical} />
+		<Progress {colorful} {value} {max} bind:percent {vertical} />
 		<div>{value} ({percent}%)</div>
 	</div>
 	<div class="options" slot="options">
+		<div />
+		<div>
+			<Select items={colorfulStates} bind:selectedIndex={colorfulStateIndex}>
+				<svelte:fragment slot="label">colorful</svelte:fragment>
+			</Select>
+		</div>
 		<div>max</div>
 		<div><Input value={max.toString()} on:change={onMaxChange} /></div>
 		<div />
@@ -53,6 +65,7 @@
 
 <style>
 	.options {
+		justify-items: start;
 		align-items: center;
 		display: grid;
 		grid-template-columns: auto auto;
