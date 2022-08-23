@@ -46,8 +46,8 @@
 
 	const dispatch = createEventDispatcher();
 
-	const raiseChange = (index: number) => {
-		dispatch('change', { value });
+	const raiseChange = (newValue: number) => {
+		dispatch('change', { value: newValue });
 	};
 
 	// ----- Value tracking ----- //

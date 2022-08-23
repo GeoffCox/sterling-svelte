@@ -126,7 +126,6 @@
 		display: flex;
 		flex-direction: column;
 		padding: 0;
-		height: 410px;
 		justify-items: stretch;
 	}
 </style>

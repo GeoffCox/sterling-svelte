@@ -25,6 +25,12 @@
 	 */
 	export let selectedIndex = -1;
 
+	export let selectedItem: any = undefined;
+
+	$: {
+		selectedItem = items[selectedIndex];
+	}
+
 	/*--------------------
 		State
 	  --------------------*/
@@ -87,7 +93,7 @@
 		Event Handlers
 	  --------------------*/
 
-	const onItemClick = (item: any, index: number) => {
+	const onItemClick = (index: number) => {
 		if (!disabled) {
 			selectedIndex = index;
 		}
@@ -182,7 +188,7 @@ A list of items where a single item can be selected.
 			class:disabled
 			data-index={index + 1}
 			role="option"
-			on:click={() => onItemClick(item, index)}
+			on:click={() => onItemClick(index)}
 		>
 			<slot {disabled} {index} {item} {selected}>
 				{item}
