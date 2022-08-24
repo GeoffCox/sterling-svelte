@@ -4,7 +4,7 @@
 	let messages: string[] = [];
 
 	export const recordEvent = (message: string) => {
-		messages = [...messages.slice(-2), `[${new Date().toISOString()}] ${message}`];
+		messages = [...messages.slice(-2), message];
 	};
 </script>
 

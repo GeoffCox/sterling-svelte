@@ -10,6 +10,8 @@
 
 	export let colorful: ProgressColorful;
 
+	export let disabled = false;
+
 	let clientHeight: number;
 	let clientWidth: number;
 
@@ -29,6 +31,7 @@
 
 <div
 	class="sterling-progress"
+	class:disabled
 	class:vertical
 	on:click
 	on:dblclick
@@ -110,6 +113,10 @@
 
 	.indicator.error {
 		background-color: var(--Display__color--error);
+	}
+
+	.sterling-progress.disabled .indicator {
+		background-color: var(--Display__color--disabled);
 	}
 
 	.sterling-progress.vertical .indicator {

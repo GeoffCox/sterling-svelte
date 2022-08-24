@@ -69,8 +69,8 @@
 		dispatch('itemSelected', { index, item: items[index] });
 	};
 
-	const raisePendingItemSelected = (index: number) => {
-		dispatch('pendingItemSelect', { index, item: items[index] });
+	const raiseItemSelectPending = (index: number) => {
+		dispatch('itemSelectPending', { index, item: items[index] });
 	};
 
 	/*--------------------
@@ -87,7 +87,9 @@
 	}
 
 	$: {
-		raisePendingItemSelected(pendingSelectedIndex);
+		console.log('raise pendingSelectedIndex changed');
+
+		raiseItemSelectPending(pendingSelectedIndex);
 	}
 
 	$: {
@@ -188,6 +190,7 @@
 
 	const onPendingItemSelected = (event: CustomEvent<{ index: number; item: any }>) => {
 		pendingSelectedIndex = event.detail.index;
+		console.log('pendingSelectedIndex changed');
 		if (!open) {
 			selectedIndex = pendingSelectedIndex;
 		}

@@ -76,9 +76,6 @@
 			on:change={(e) => sendNotification(`Slider value changed: ${e.detail.value}`)}
 		/>
 	</div>
-	<div slot="status">
-		<div>value: {value}</div>
-	</div>
 	<svelte:fragment slot="options">
 		<div><Input value={min.toString()} on:change={onMinChange}>min</Input></div>
 		<div><Input value={max.toString()} on:change={onMaxChange}>max</Input></div>
@@ -91,6 +88,9 @@
 			<Checkbox bind:checked={disabled}>disabled</Checkbox>
 		</div>
 	</svelte:fragment>
+	<div slot="status">
+		<div>value: {value}</div>
+	</div>
 </Example>
 
 <style>

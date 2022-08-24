@@ -1,81 +1,33 @@
 <script lang="ts">
 	import Select from '$lib/inputs/Select.svelte';
-	import { sendNotification } from '../../stores';
 	import Example from '../_components/Example.svelte';
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 	import Input from '$lib/inputs/Input.svelte';
+	import { countries } from '../_data/countries';
 
-	const items = [
-		'Alabama',
-		'Alaska',
-		'Arizona',
-		'Arkansas',
-		'California',
-		'Colorado',
-		'Connecticut',
-		'Delaware',
-		'Florida',
-		'Georgia',
-		'Hawaii',
-		'Idaho',
-		'Illinois',
-		'Indiana',
-		'Iowa',
-		'Kansas',
-		'Kentucky',
-		'Louisiana',
-		'Maine',
-		'Maryland',
-		'Massachusetts',
-		'Michigan',
-		'Minnesota',
-		'Mississippi',
-		'Missouri',
-		'Montana',
-		'Nebraska',
-		'Nevada',
-		'New Hampshire',
-		'New Jersey',
-		'New Mexico',
-		'New York',
-		'North Carolina',
-		'North Dakota',
-		'Ohio',
-		'Oklahoma',
-		'Oregon',
-		'Pennsylvania',
-		'Rhode Island',
-		'South Carolina',
-		'South Dakota',
-		'Tennessee',
-		'Texas',
-		'Utah',
-		'Vermont',
-		'Virginia',
-		'Washington',
-		'West Virginia',
-		'Wisconsin',
-		'Wyoming'
-	];
+	let exampleRef: any;
 
+	let items = countries;
+	let selectedIndex: number;
+	let selectedItem: any;
 	let disabled = false;
-	let label = 'U.S. STATES';
+	let label = 'COUNTRIES';
 </script>
 
-<Example name="Select">
+<Example name="Select" bind:this={exampleRef}>
 	<div class="component" slot="component">
 		{#if label}
 			<Select
+				bind:selectedIndex
+				bind:selectedItem
 				{items}
 				{disabled}
 				on:itemSelected={(event) => {
-					sendNotification(
-						`Select: on:select [${event.detail.index}] ${items[event.detail.index]}`
-					);
+					exampleRef.recordEvent(`selected [${event.detail.index}] ${items[event.detail.index]}`);
 				}}
-				on:pendingItemSelected={(event) => {
-					sendNotification(
-						`Select: on:pendingSelect [${event.detail.index}] ${items[event.detail.index]}`
+				on:itemSelectPending={(event) => {
+					exampleRef.recordEvent(
+						`select pending [${event.detail.index}] ${items[event.detail.index]}`
 					);
 				}}
 			>
@@ -83,16 +35,16 @@
 			</Select>
 		{:else}
 			<Select
+				bind:selectedIndex
+				bind:selectedItem
 				{items}
 				{disabled}
 				on:itemSelected={(event) => {
-					sendNotification(
-						`Select: on:select [${event.detail.index}] ${items[event.detail.index]}`
-					);
+					exampleRef.recordEvent(`select [${event.detail.index}] ${items[event.detail.index]}`);
 				}}
-				on:pendingItemSelected={(event) => {
-					sendNotification(
-						`Select: on:pendingSelect [${event.detail.index}] ${items[event.detail.index]}`
+				on:itemSelectPending={(event) => {
+					exampleRef.recordEvent(
+						`select pending [${event.detail.index}] ${items[event.detail.index]}`
 					);
 				}}
 			/>
@@ -108,6 +60,10 @@
 			<Input bind:value={label}>label</Input>
 		</div>
 	</div>
+	<svelte:fragment slot="status">
+		<div>selectedIndex: {selectedIndex}</div>
+		<div>selectedItem: {selectedItem}</div>
+	</svelte:fragment>
 </Example>
 
 <style>

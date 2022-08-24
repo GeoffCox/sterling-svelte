@@ -3,14 +3,12 @@
 	import Example from '../_components/Example.svelte';
 	import List from '$lib/lists/List.svelte';
 	import Input from '$lib/inputs/Input.svelte';
+	import { countries } from '../_data/countries';
 
 	let exampleRef: any;
 
-	const items = Array(500)
-		.fill(1)
-		.map((_, i) => `Item ${i + 1}`);
-
-	let label = 'List Items';
+	const items = countries;
+	let label = 'COUNTRIES';
 	let selectedIndex = 0;
 	let selectedItem = items[0];
 	let disabled = false;

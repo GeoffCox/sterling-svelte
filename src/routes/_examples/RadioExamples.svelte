@@ -26,7 +26,6 @@
 				>{possibleValue}</Radio
 			>
 		{/each}
-		<div>selected value: {selectedValue}</div>
 	</div>
 	<div slot="options" class="options">
 		<div />
@@ -38,6 +37,9 @@
 			<Input bind:value={label}>label (prefix)</Input>
 		</div>
 	</div>
+	<svelte:fragment slot="status">
+		<div>selectedValue: {selectedValue}</div>
+	</svelte:fragment>
 </Example>
 
 <style>
@@ -56,5 +58,6 @@
 		display: flex;
 		flex-direction: column;
 		padding: 0;
+		column-gap: 15px;
 	}
 </style>

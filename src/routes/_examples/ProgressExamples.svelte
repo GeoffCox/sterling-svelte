@@ -36,45 +36,27 @@
 
 <Example name="Progress">
 	<div class="component" class:vertical slot="component">
-		<Progress {colorful} {value} {max} bind:percent {vertical} />
-		<div>{value} ({percent}%)</div>
+		<Progress {colorful} {disabled} {value} {max} bind:percent {vertical} />
 	</div>
 	<div class="options" slot="options">
-		<div />
-		<div>
-			<Select items={colorfulStates} bind:selectedIndex={colorfulStateIndex}>
-				<svelte:fragment slot="label">colorful</svelte:fragment>
-			</Select>
-		</div>
-		<div>max</div>
-		<div><Input value={max.toString()} on:change={onMaxChange} /></div>
-		<div />
-		<div>
-			<Checkbox bind:checked={disabled}>disabled</Checkbox>
-		</div>
-		<div />
-		<div>
-			<Checkbox bind:checked={vertical}>vertical</Checkbox>
-		</div>
-		<div>value</div>
 		<div class="slider">
-			<Slider bind:value min={0} {max} />
+			<Slider bind:value min={0} {max}><svelte:fragment slot="label">value</svelte:fragment></Slider
+			>
 		</div>
+		<Input value={max.toString()} on:change={onMaxChange}>max</Input>
+		<Select items={colorfulStates} bind:selectedIndex={colorfulStateIndex}>
+			<svelte:fragment slot="label">colorful</svelte:fragment>
+		</Select>
+		<Checkbox bind:checked={disabled}>disabled</Checkbox>
+		<Checkbox bind:checked={vertical}>vertical</Checkbox>
+	</div>
+	<div slot="status">
+		<div>value: {value}</div>
+		<div>percent: {percent}%</div>
 	</div>
 </Example>
 
 <style>
-	.options {
-		justify-items: start;
-		align-items: center;
-		display: grid;
-		grid-template-columns: auto auto;
-		grid-gap: 1rem;
-		margin-bottom: 1rem;
-		width: max-content;
-		padding: 50px;
-	}
-
 	.component {
 		box-sizing: border-box;
 		display: grid;
@@ -83,6 +65,13 @@
 		place-content: center;
 		place-items: center;
 		padding: 0;
+	}
+
+	.options {
+		align-items: start;
+		display: flex;
+		flex-direction: column;
+		row-gap: 15px;
 	}
 
 	.slider {
