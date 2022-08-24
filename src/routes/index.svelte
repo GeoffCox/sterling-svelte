@@ -1,20 +1,21 @@
 <script lang="ts">
-	import type { SvelteComponent } from 'svelte';
+	import { onMount, type SvelteComponent } from 'svelte';
 
 	import { notification } from '../stores';
 	import { currentTheme } from './_components/useCurrentTheme';
 
-	import ThemeExamples from './_examples/ThemeExamples.svelte';
+	import Checkbox from '$lib/inputs/Checkbox.svelte';
+	import List from '$lib/lists/List.svelte';
+
+	import ButtonExamples from './_examples/ButtonExamples.svelte';
 	import CheckboxExamples from './_examples/CheckboxExamples.svelte';
 	import InputExamples from './_examples/InputExamples.svelte';
+	import ListExamples from './_examples/ListExamples.svelte';
+	import ProgressExamples from './_examples/ProgressExamples.svelte';
 	import RadioExamples from './_examples/RadioExamples.svelte';
 	import SelectExamples from './_examples/SelectExample.svelte';
-	import ButtonExamples from './_examples/ButtonExamples.svelte';
-	import Checkbox from '$lib/inputs/Checkbox.svelte';
-	import ListExamples from './_examples/ListExamples.svelte';
-	import List from '$lib/lists/List.svelte';
-	import ProgressExamples from './_examples/ProgressExamples.svelte';
 	import SliderExamples from './_examples/SliderExamples.svelte';
+	import ThemeExamples from './_examples/ThemeExamples.svelte';
 
 	let darkMode = false;
 
@@ -66,6 +67,16 @@
 	let selectedExampleIndex = 0;
 	$: selectedExampleKey = exampleKeys[selectedExampleIndex];
 	$: selectedExample = examples[selectedExampleKey].component;
+
+	let mounted = false;
+
+	// There is something wrong where the forwarded slots in nested components
+	// fail to bind let:item when the component loads too quickly.
+	// Delaying the load of the component until the main UI is mounted prevents
+	// the error.
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <div class="app" use:currentTheme={{ darkMode }} class:darkMode>
@@ -76,12 +87,14 @@
 		</div>
 		<div class="examples">
 			<div class="example-list">
-				<List items={exampleKeys} bind:selectedIndex={selectedExampleIndex} let:item let:index>
-					{examples[exampleKeys[index]].name}
+				<List items={exampleKeys} bind:selectedIndex={selectedExampleIndex} let:item>
+					{examples[item].name}
 				</List>
 			</div>
 			<div class="example">
-				<svelte:component this={selectedExample} />
+				{#if mounted}
+					<svelte:component this={selectedExample} />
+				{/if}
 			</div>
 		</div>
 	</div>

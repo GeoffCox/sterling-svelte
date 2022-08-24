@@ -146,58 +146,118 @@
 @component
 A list of items where a single item can be selected.
   -->
-<div
-	bind:this={listRef}
-	class="sterling-list"
-	class:disabled
-	class:focus-visible={focusVisible}
-	class:horizontal
-	role="listbox"
-	tabindex={!disabled ? 0 : undefined}
-	on:blur
-	on:click
-	on:copy
-	on:cut
-	on:dblclick
-	on:focus
-	on:focusin
-	on:focusout
-	on:keydown={onKeydown}
-	on:keydown
-	on:keypress
-	on:keyup
-	on:mousedown
-	on:mouseenter
-	on:mouseleave
-	on:mousemove
-	on:mouseover
-	on:mouseout
-	on:mouseup
-	on:scroll
-	on:wheel
-	on:paste
-	{...$$restProps}
->
-	{#each items as item, index (item)}
-		{@const selected = selectedIndex === index}
-		<div
-			bind:this={itemRefs[index]}
-			aria-selected={disabled ? undefined : selected}
-			class="list-item"
-			class:selected
-			class:disabled
-			data-index={index + 1}
-			role="option"
-			on:click={() => onItemClick(index)}
-		>
-			<slot {disabled} {index} {item} {selected}>
-				{item}
-			</slot>
+{#if $$slots.label}
+	<!-- svelte-ignore a11y-label-has-associated-control -->
+	<label class="sterling-list-label" class:horizontal class:disabled>
+		<div class="label-content">
+			<slot name="label" />
 		</div>
-	{/each}
-</div>
+		<div
+			bind:this={listRef}
+			class="sterling-list labeled"
+			class:disabled
+			class:focus-visible={focusVisible}
+			class:horizontal
+			role="listbox"
+			tabindex={!disabled ? 0 : undefined}
+			on:blur
+			on:click
+			on:copy
+			on:cut
+			on:dblclick
+			on:focus
+			on:focusin
+			on:focusout
+			on:keydown={onKeydown}
+			on:keydown
+			on:keypress
+			on:keyup
+			on:mousedown
+			on:mouseenter
+			on:mouseleave
+			on:mousemove
+			on:mouseover
+			on:mouseout
+			on:mouseup
+			on:scroll
+			on:wheel
+			on:paste
+			{...$$restProps}
+		>
+			{#each items as item, index (item)}
+				{@const selected = selectedIndex === index}
+				<div
+					bind:this={itemRefs[index]}
+					aria-selected={disabled ? undefined : selected}
+					class="list-item"
+					class:selected
+					class:disabled
+					data-index={index + 1}
+					role="option"
+					on:click={() => onItemClick(index)}
+				>
+					<slot {disabled} {index} {item} {selected}>
+						{item}
+					</slot>
+				</div>
+			{/each}
+		</div>
+	</label>
+{:else}
+	<div
+		bind:this={listRef}
+		class="sterling-list"
+		class:disabled
+		class:focus-visible={focusVisible}
+		class:horizontal
+		role="listbox"
+		tabindex={!disabled ? 0 : undefined}
+		on:blur
+		on:click
+		on:copy
+		on:cut
+		on:dblclick
+		on:focus
+		on:focusin
+		on:focusout
+		on:keydown={onKeydown}
+		on:keydown
+		on:keypress
+		on:keyup
+		on:mousedown
+		on:mouseenter
+		on:mouseleave
+		on:mousemove
+		on:mouseover
+		on:mouseout
+		on:mouseup
+		on:scroll
+		on:wheel
+		on:paste
+		{...$$restProps}
+	>
+		{#each items as item, index (item)}
+			{@const selected = selectedIndex === index}
+			<div
+				bind:this={itemRefs[index]}
+				aria-selected={disabled ? undefined : selected}
+				class="list-item"
+				class:selected
+				class:disabled
+				data-index={index + 1}
+				role="option"
+				on:click={() => onItemClick(index)}
+			>
+				<slot {disabled} {index} {item} {selected}>
+					{item}
+				</slot>
+			</div>
+		{/each}
+	</div>
+{/if}
 
 <style>
+	.sterling-list-label,
 	.sterling-list {
 		background-color: var(--Common__background-color);
 		border-color: var(--Common__border-color);
@@ -211,11 +271,20 @@ A list of items where a single item can be selected.
 		flex-wrap: nowrap;
 		height: 100%;
 		margin: 0;
+		padding: 0;
+		transition: background-color 250ms, color 250ms, border-color 250ms;
+	}
+
+	.sterling-list-label.horizontal,
+	.sterling-list.horizontal {
+		height: unset;
+		width: 100%;
+	}
+
+	.sterling-list {
 		overflow-x: hidden;
 		overflow-y: scroll;
-		padding: 0;
 		position: relative;
-		transition: background-color 250ms, color 250ms, border-color 250ms;
 	}
 
 	.sterling-list.horizontal {
@@ -224,11 +293,14 @@ A list of items where a single item can be selected.
 		overflow-y: hidden;
 	}
 
+	.sterling-list-label:hover,
 	.sterling-list:hover {
 		border-color: var(--Common__border-color--hover);
 		color: var(--Common__color--hover);
 	}
 
+	.sterling-list-label:focus-visible,
+	.sterling-list-label.focus-visible,
 	.sterling-list:focus-visible,
 	.sterling-list.focus-visible {
 		border-color: var(--Common__border-color--focus);
@@ -239,11 +311,33 @@ A list of items where a single item can be selected.
 		outline-width: var(--Common__outline-width);
 	}
 
+	.sterling-list-label.disabled,
 	.sterling-list.disabled {
 		background-color: var(--Common__background-color--disabled);
 		border-color: var(---Common__border-color--disabled);
 		color: var(--Common__color--disabled);
 		cursor: not-allowed;
+	}
+
+	.sterling-list.labeled,
+	.sterling-list.labeled:hover,
+	.sterling-list.labeled:focus-visible,
+	.sterling-list.labeled.focus-visible,
+	.sterling-list.labeled:disabled {
+		background-color: transparent;
+		border: none;
+		outline: none;
+	}
+	.label {
+		display: flex;
+		flex-direction: column;
+		box-sizing: border-box;
+	}
+
+	.label-content {
+		font-size: 0.7em;
+		margin: 0.5em 0.7em;
+		color: var(--Display__color--subtle);
 	}
 
 	.list-item {

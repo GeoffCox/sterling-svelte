@@ -85,6 +85,7 @@
 		margin: 0.5em 0 0 0.7em;
 		color: var(--Display__color--subtle);
 	}
+
 	.sterling-input-label,
 	.sterling-input {
 		background-color: var(--Input__background-color);

@@ -345,7 +345,7 @@ A single item can be selected and is displayed as the value.
 
 	.label-content {
 		font-size: 0.7em;
-		margin: 0.5em 0 0 0.7em;
+		margin: 0.5em 0.7em 0 0.7em;
 		color: var(--Display__color--subtle);
 	}
 

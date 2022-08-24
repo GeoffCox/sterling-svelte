@@ -2,6 +2,7 @@
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 	import Example from '../_components/Example.svelte';
 	import List from '$lib/lists/List.svelte';
+	import Input from '$lib/inputs/Input.svelte';
 
 	let exampleRef: any;
 
@@ -9,6 +10,7 @@
 		.fill(1)
 		.map((_, i) => `Item ${i + 1}`);
 
+	let label = 'List Items';
 	let selectedIndex = 0;
 	let selectedItem = items[0];
 	let disabled = false;
@@ -17,22 +19,42 @@
 
 <Example name="List" bind:this={exampleRef}>
 	<div class="component" class:horizontal slot="component">
-		<List
-			bind:selectedIndex
-			bind:selectedItem
-			{items}
-			let:item
-			{disabled}
-			selectionKeys="tab"
-			{horizontal}
-			on:itemSelected={(event) => {
-				exampleRef.recordEvent(`List item selected [${event.detail.index}] '${event.detail.item}'`);
-			}}
-		/>
+		{#if label}
+			<List
+				bind:selectedIndex
+				bind:selectedItem
+				{items}
+				{disabled}
+				selectionKeys="tab"
+				{horizontal}
+				on:itemSelected={(event) => {
+					exampleRef.recordEvent(
+						`List item selected [${event.detail.index}] '${event.detail.item}'`
+					);
+				}}
+			>
+				<svelte:fragment slot="label">{label}</svelte:fragment>
+			</List>
+		{:else}
+			<List
+				bind:selectedIndex
+				bind:selectedItem
+				{items}
+				{disabled}
+				selectionKeys="tab"
+				{horizontal}
+				on:itemSelected={(event) => {
+					exampleRef.recordEvent(
+						`List item selected [${event.detail.index}] '${event.detail.item}'`
+					);
+				}}
+			/>
+		{/if}
 	</div>
 	<svelte:fragment slot="options">
 		<Checkbox bind:checked={disabled}>disabled</Checkbox>
 		<Checkbox bind:checked={horizontal}>horizontal</Checkbox>
+		<Input bind:value={label}>label</Input>
 	</svelte:fragment>
 	<svelte:fragment slot="status">
 		<div>selectedIndex: {selectedIndex}</div>
