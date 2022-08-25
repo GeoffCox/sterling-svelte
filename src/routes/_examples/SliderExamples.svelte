@@ -74,7 +74,7 @@
 			bind:step
 			bind:vertical
 			{disabled}
-			on:change={(e) => exampleRef.recordEvent(`change: ${e.detail.value}`)}
+			on:change={(e) => exampleRef.recordEvent(`change value:${e.detail.value}`)}
 		/>
 	</div>
 	<svelte:fragment slot="options">

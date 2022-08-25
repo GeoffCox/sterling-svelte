@@ -23,11 +23,13 @@
 				{items}
 				{disabled}
 				on:itemSelected={(event) => {
-					exampleRef.recordEvent(`selected [${event.detail.index}] ${items[event.detail.index]}`);
+					exampleRef.recordEvent(
+						`itemSelected index:[${event.detail.index}] item:${items[event.detail.index]}`
+					);
 				}}
 				on:itemSelectPending={(event) => {
 					exampleRef.recordEvent(
-						`select pending [${event.detail.index}] ${items[event.detail.index]}`
+						`itemSelectPending index:[${event.detail.index}] item:${items[event.detail.index]}`
 					);
 				}}
 			>
@@ -40,11 +42,13 @@
 				{items}
 				{disabled}
 				on:itemSelected={(event) => {
-					exampleRef.recordEvent(`select [${event.detail.index}] ${items[event.detail.index]}`);
+					exampleRef.recordEvent(
+						`itemSelected index:[${event.detail.index}] item:${items[event.detail.index]}`
+					);
 				}}
 				on:itemSelectPending={(event) => {
 					exampleRef.recordEvent(
-						`select pending [${event.detail.index}] ${items[event.detail.index]}`
+						`itemSelectPending index:[${event.detail.index}] item:${items[event.detail.index]}`
 					);
 				}}
 			/>

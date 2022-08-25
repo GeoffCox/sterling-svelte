@@ -27,7 +27,7 @@
 				{horizontal}
 				on:itemSelected={(event) => {
 					exampleRef.recordEvent(
-						`List item selected [${event.detail.index}] '${event.detail.item}'`
+						`itemSelected index:[${event.detail.index}] item:${event.detail.item}`
 					);
 				}}
 			>
@@ -43,7 +43,7 @@
 				{horizontal}
 				on:itemSelected={(event) => {
 					exampleRef.recordEvent(
-						`List item selected [${event.detail.index}] '${event.detail.item}'`
+						`itemSelected index:[${event.detail.index}] item:${event.detail.item}`
 					);
 				}}
 			/>
