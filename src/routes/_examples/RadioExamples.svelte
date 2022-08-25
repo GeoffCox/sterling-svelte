@@ -23,7 +23,8 @@
 				{disabled}
 				name="choices"
 				value={possibleValue}
-				on:change={() => exampleRef.recordEvent('change')}>{possibleValue}</Radio
+				on:change={() => exampleRef.recordEvent(`change value:${possibleValue}`)}
+				>{possibleValue}</Radio
 			>
 		{/each}
 	</div>
