@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount, type SvelteComponent } from 'svelte';
 
-	import { notification } from '../stores';
 	import { currentTheme } from './_components/useCurrentTheme';
 
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
@@ -81,21 +80,18 @@
 
 <div class="app" use:currentTheme={{ darkMode }} class:darkMode>
 	<div>
-		<div class="notification">{$notification}</div>
-		<div>
-			<Checkbox checked={darkMode} on:click={toggleDarkMode}>Dark Mode</Checkbox>
+		<Checkbox checked={darkMode} on:click={toggleDarkMode}>Dark Mode</Checkbox>
+	</div>
+	<div class="examples">
+		<div class="example-list">
+			<List items={exampleKeys} bind:selectedIndex={selectedExampleIndex} let:item>
+				{examples[item].name}
+			</List>
 		</div>
-		<div class="examples">
-			<div class="example-list">
-				<List items={exampleKeys} bind:selectedIndex={selectedExampleIndex} let:item>
-					{examples[item].name}
-				</List>
-			</div>
-			<div class="example">
-				{#if mounted}
-					<svelte:component this={selectedExample} />
-				{/if}
-			</div>
+		<div class="example">
+			{#if mounted}
+				<svelte:component this={selectedExample} />
+			{/if}
 		</div>
 	</div>
 </div>
@@ -104,18 +100,6 @@
 	.app {
 		background-color: var(--Common__background-color);
 		min-height: 100vh;
-	}
-	.notification {
-		width: 100%;
-		background: aliceblue;
-		color: steelblue;
-		font-size: 0.9rem;
-		text-align: center;
-		padding: 5px;
-		position: sticky;
-		top: 0;
-		height: 0.9rem;
-		z-index: 1;
 	}
 
 	.examples {

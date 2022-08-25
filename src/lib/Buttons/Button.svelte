@@ -64,6 +64,7 @@
 		text-overflow: ellipsis;
 		transition: background-color 250ms, color 250ms, border-color 250ms;
 		white-space: nowrap;
+		user-select: none;
 	}
 
 	button.vertical {

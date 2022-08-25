@@ -3,7 +3,8 @@
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 	import Input from '$lib/inputs/Input.svelte';
 	import Example from '../_components/Example.svelte';
-	import { sendNotification } from '../../stores';
+
+	let exampleRef: any;
 
 	let value = 0;
 	let disabled = false;
@@ -63,7 +64,7 @@
 	};
 </script>
 
-<Example name="Slider">
+<Example name="Slider" bind:this={exampleRef}>
 	<div slot="component" class="component" class:vertical>
 		<Slider
 			bind:value
@@ -73,7 +74,7 @@
 			bind:step
 			bind:vertical
 			{disabled}
-			on:change={(e) => sendNotification(`Slider value changed: ${e.detail.value}`)}
+			on:change={(e) => exampleRef.recordEvent(`change: ${e.detail.value}`)}
 		/>
 	</div>
 	<svelte:fragment slot="options">

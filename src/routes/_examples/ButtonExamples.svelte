@@ -18,34 +18,32 @@
 	let buttonWithIcon = true;
 </script>
 
-<div>
-	<Example name="Button" bind:this={exampleRef}>
-		<div class="component" slot="component">
-			<Button
-				{circular}
-				disabled={buttonDisabled}
-				type={buttonType}
-				on:click={() => exampleRef.recordEvent('click')}
-			>
-				{#if buttonWithIcon}
-					<SvelteIcon />
-				{/if}
-				{#if buttonWithText}
-					Sterling
-				{/if}
-			</Button>
-		</div>
-		<div class="options" slot="options">
-			<Checkbox bind:checked={circular}>circular</Checkbox>
-			<Checkbox bind:checked={buttonDisabled}>disabled</Checkbox>
-			<Checkbox bind:checked={buttonWithText}>with text</Checkbox>
-			<Checkbox bind:checked={buttonWithIcon}>with icon</Checkbox>
-			<Select items={buttonTypes} bind:selectedItem={buttonType}>
-				<svelte:fragment slot="label">type</svelte:fragment>
-			</Select>
-		</div>
-	</Example>
-</div>
+<Example name="Button" bind:this={exampleRef}>
+	<div class="component" slot="component">
+		<Button
+			{circular}
+			disabled={buttonDisabled}
+			type={buttonType}
+			on:click={() => exampleRef.recordEvent('click')}
+		>
+			{#if buttonWithIcon}
+				<SvelteIcon />
+			{/if}
+			{#if buttonWithText}
+				Sterling
+			{/if}
+		</Button>
+	</div>
+	<div class="options" slot="options">
+		<Checkbox bind:checked={circular}>circular</Checkbox>
+		<Checkbox bind:checked={buttonDisabled}>disabled</Checkbox>
+		<Checkbox bind:checked={buttonWithText}>with text</Checkbox>
+		<Checkbox bind:checked={buttonWithIcon}>with icon</Checkbox>
+		<Select items={buttonTypes} bind:selectedItem={buttonType}>
+			<svelte:fragment slot="label">type</svelte:fragment>
+		</Select>
+	</div>
+</Example>
 
 <style>
 	.options {

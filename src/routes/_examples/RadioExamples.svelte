@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { sendNotification } from '../../stores';
-
 	import Radio from '$lib/inputs/Radio.svelte';
 	import Example from '../_components/Example.svelte';
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 	import Input from '$lib/inputs/Input.svelte';
+
+	let exampleRef: any;
 
 	const seed = [...Array(5).keys()];
 
@@ -13,16 +13,17 @@
 	let selectedValue = '';
 
 	$: possibleValues = seed.map((x) => `${label} ${x}`);
-
-	$: {
-		sendNotification(`Radio changed to ${selectedValue}`);
-	}
 </script>
 
-<Example name="Radio">
+<Example name="Radio" bind:this={exampleRef}>
 	<div class="component" slot="component">
 		{#each possibleValues as possibleValue}
-			<Radio bind:group={selectedValue} {disabled} name="choices" value={possibleValue}
+			<Radio
+				bind:group={selectedValue}
+				{disabled}
+				name="choices"
+				value={possibleValue}
+				on:change={(e) => exampleRef.recordEvent(`radio changed ${e.currentTarget.checked}`)}
 				>{possibleValue}</Radio
 			>
 		{/each}
@@ -58,6 +59,6 @@
 		display: flex;
 		flex-direction: column;
 		padding: 0;
-		column-gap: 15px;
+		row-gap: 5px;
 	}
 </style>

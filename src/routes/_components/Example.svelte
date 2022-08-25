@@ -4,7 +4,7 @@
 	let messages: string[] = [];
 
 	export const recordEvent = (message: string) => {
-		messages = [...messages.slice(-2), message];
+		messages = [...messages.slice(-4), message];
 	};
 </script>
 
@@ -88,9 +88,10 @@
 	}
 
 	h1 {
-		margin: 10px;
+		margin: 10px 10px 20px 10px;
 	}
 	h2 {
 		margin: 5px;
+		font-size: 1.2em;
 	}
 </style>

@@ -134,5 +134,6 @@
 
 	.label-content {
 		color: var(--Common__color);
+		user-select: none;
 	}
 </style>

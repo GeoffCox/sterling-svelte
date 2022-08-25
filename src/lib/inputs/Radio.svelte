@@ -32,7 +32,7 @@
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <label class="sterling-radio">
-	<span class="container">
+	<div class="container">
 		<input
 			type="radio"
 			on:blur
@@ -60,7 +60,7 @@
 			{...$$restProps}
 		/>
 		<div class="indicator" />
-	</span>
+	</div>
 	<div class="label-content">
 		<slot />
 	</div>
@@ -83,8 +83,11 @@
 		- prevents collisions with surrounding slots
 	 */
 	.container {
+		box-sizing: border-box;
 		position: relative;
 		font: inherit;
+		display: flex;
+		align-items: center;
 	}
 
 	/*
