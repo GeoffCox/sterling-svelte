@@ -2,6 +2,7 @@
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 	import Example from '../_components/Example.svelte';
 	import Input from '$lib/inputs/Input.svelte';
+	import Documentation from '../_components/Documentation.svelte';
 
 	let exampleRef: any;
 
@@ -10,7 +11,7 @@
 	let label = 'Sterling';
 </script>
 
-<Example name="Checkbox" bind:this={exampleRef}>
+<Example bind:this={exampleRef}>
 	<div slot="component" class="component">
 		<Checkbox {disabled} bind:checked on:change={() => exampleRef.recordEvent('change')}
 			>{label}</Checkbox

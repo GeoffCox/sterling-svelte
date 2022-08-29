@@ -11,7 +11,7 @@
 	let value = 'Sterling';
 </script>
 
-<Example name="Input" bind:this={exampleRef}>
+<Example bind:this={exampleRef}>
 	<div class="component" slot="component">
 		<Input
 			bind:value

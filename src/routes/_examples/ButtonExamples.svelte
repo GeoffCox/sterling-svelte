@@ -18,7 +18,7 @@
 	let buttonWithIcon = true;
 </script>
 
-<Example name="Button" bind:this={exampleRef}>
+<Example bind:this={exampleRef}>
 	<div class="component" slot="component">
 		<Button
 			{circular}

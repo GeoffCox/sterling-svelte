@@ -1,3 +1,16 @@
+<!-- <script context="module">
+	export async function load({ fetch, routeId }) {
+		console.log(routeId);
+		const response = await fetch(`../Button.md`); // stored in static folder
+		const posts = await response.text();
+		console.log(posts);
+		return {
+			props: {
+				posts: posts
+			}
+		};
+	}
+</script> -->
 <script lang="ts">
 	import { onMount, type SvelteComponent } from 'svelte';
 

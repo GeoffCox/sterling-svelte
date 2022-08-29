@@ -1,34 +1,53 @@
 <script lang="ts">
-	export let name: string;
+	import { onDestroy, onMount } from 'svelte';
+
+	export let name: string = '';
+	export let description: string = '';
 
 	let messages: string[] = [];
 
 	export const recordEvent = (message: string) => {
 		messages = [...messages.slice(-4), message];
 	};
+
+	let mounted = false;
+
+	onMount(() => {
+		mounted = true;
+	});
+
+	onDestroy(() => {
+		mounted = false;
+	});
 </script>
 
 <div class="example">
 	<h1>{name}</h1>
-	<div class="component">
-		<slot name="component" />
-	</div>
-	<div class="panel">
-		<div class="options">
-			<h2>Options</h2>
-			<slot name="options">(none)</slot>
+	<div class="description">{description}</div>
+	{#if mounted}
+		<div class="component">
+			<slot name="component" />
 		</div>
-		<div class="status">
-			<h2>Status</h2>
-			<slot name="status">(none)</slot>
+		<div class="panel">
+			<div class="options">
+				<h2>Options</h2>
+				<slot name="options">(none)</slot>
+			</div>
+			<div class="status">
+				<h2>Status</h2>
+				<slot name="status">(none)</slot>
+			</div>
+			<div class="events">
+				<h2>Events</h2>
+				{#each messages as message}
+					<div>{message}</div>
+				{/each}
+			</div>
+			<div class="documentation">
+				<slot name="documentation" />
+			</div>
 		</div>
-		<div class="events">
-			<h2>Events</h2>
-			{#each messages as message}
-				<div>{message}</div>
-			{/each}
-		</div>
-	</div>
+	{/if}
 </div>
 
 <style>
@@ -38,6 +57,10 @@
 		display: flex;
 		flex-direction: column;
 		align-items: start;
+	}
+
+	.description {
+		padding: 0 0 15px 0;
 	}
 
 	.component {
@@ -88,7 +111,7 @@
 	}
 
 	h1 {
-		margin: 10px 10px 20px 10px;
+		margin: 10px;
 	}
 	h2 {
 		margin: 5px;

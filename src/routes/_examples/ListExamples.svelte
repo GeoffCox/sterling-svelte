@@ -15,7 +15,7 @@
 	let horizontal = false;
 </script>
 
-<Example name="List" bind:this={exampleRef}>
+<Example bind:this={exampleRef}>
 	<div class="component" class:horizontal slot="component">
 		{#if label}
 			<List

@@ -15,7 +15,7 @@
 	$: possibleValues = seed.map((x) => `${label} ${x}`);
 </script>
 
-<Example name="Radio" bind:this={exampleRef}>
+<Example bind:this={exampleRef}>
 	<div class="component" slot="component">
 		{#each possibleValues as possibleValue}
 			<Radio

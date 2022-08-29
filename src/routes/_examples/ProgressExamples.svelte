@@ -34,7 +34,7 @@
 	};
 </script>
 
-<Example name="Progress">
+<Example>
 	<div class="component" class:vertical slot="component">
 		<Progress {colorful} {disabled} {value} {max} bind:percent {vertical} />
 	</div>
