@@ -3,7 +3,7 @@
 Button provides a styled HTML button element.
 
 <script>
-    import ButtonExample from '../_examples/ButtonExamples.svelte';
+    import ButtonExample from '../_examples/ButtonExample.svelte';
 </script>
 
 <ButtonExample />

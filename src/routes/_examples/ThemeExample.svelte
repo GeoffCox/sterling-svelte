@@ -3,13 +3,11 @@
 	import { lightThemeVars } from '$lib/themes/useLightTheme';
 	import { neutrals } from '$lib/themes/colors';
 
-	import Example from '../_components/Example.svelte';
-
 	$: themeKeys = Object.keys(lightThemeVars);
 </script>
 
-<Example name="Theme">
-	<div class="component" slot="component">
+<div>
+	<div class="component">
 		<h3>Neutral Colors</h3>
 		<div class="color-items">
 			{#each Object.keys(neutrals) as key}
@@ -22,16 +20,14 @@
 		<h3>Theme Colors</h3>
 		<div class="theme-items">
 			<div class="theme-header">Key</div>
-			<div class="theme-header">Light</div>
-			<div class="theme-header">Dark</div>
+			<div class="theme-header">Color</div>
 			{#each themeKeys as key}
 				<div>{key}</div>
-				<div class="color-block" style="background-color: {lightThemeVars[key]}" />
-				<div class="color-block" style="background-color: {darkThemeVars[key]}" />
+				<div class="color-block" style="background-color: var({key})" />
 			{/each}
 		</div>
 	</div>
-</Example>
+</div>
 
 <style>
 	.component {
@@ -55,7 +51,7 @@
 		width: 24px;
 		height: 24px;
 		margin: 2px;
-		border: 1px dashed #000;
+		border: 1px dashed var(--Common__border-color);
 	}
 
 	.color-name {
@@ -64,7 +60,7 @@
 
 	.theme-items {
 		display: grid;
-		grid-template-columns: auto auto auto;
+		grid-template-columns: auto auto;
 		align-items: center;
 		justify-items: end;
 		row-gap: 5px;

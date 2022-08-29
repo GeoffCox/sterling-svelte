@@ -3,7 +3,7 @@
 Checkbox provides a styled HTML input element with type=checkbox.
 
 <script>
-    import Example from '../_examples/CheckboxExamples.svelte';
+    import Example from '../_examples/CheckboxExample.svelte';
 </script>
 
 <Example />

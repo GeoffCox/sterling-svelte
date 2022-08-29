@@ -1,6 +1,6 @@
 # Select
 
-Select provides a list of items that dropdown when clicked and single selection.
+Select provides a dropdown list of options allowing one to be selected.
 
 <script>
     import Example from '../_examples/SelectExample.svelte';

@@ -1,9 +1,9 @@
 # Slider
 
-Slider provides a settable value between minimum and maximum values.
+Slider allows users to set a value between a minimum and maximum by moving a visual 'thumb' along a line.
 
 <script>
-    import Example from '../_examples/SliderExamples.svelte';
+    import Example from '../_examples/SliderExample.svelte';
 </script>
 
 <Example />

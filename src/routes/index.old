@@ -19,15 +19,15 @@
 	import Checkbox from '$lib/inputs/Checkbox.svelte';
 	import List from '$lib/lists/List.svelte';
 
-	import ButtonExamples from './_examples/ButtonExamples.svelte';
-	import CheckboxExamples from './_examples/CheckboxExamples.svelte';
-	import InputExamples from './_examples/InputExamples.svelte';
-	import ListExamples from './_examples/ListExamples.svelte';
-	import ProgressExamples from './_examples/ProgressExamples.svelte';
-	import RadioExamples from './_examples/RadioExamples.svelte';
+	import ButtonExamples from './_examples/ButtonExample.svelte';
+	import CheckboxExamples from './_examples/CheckboxExample.svelte';
+	import InputExamples from './_examples/InputExample.svelte';
+	import ListExamples from './_examples/ListExample.svelte';
+	import ProgressExamples from './_examples/ProgressExample.svelte';
+	import RadioExamples from './_examples/RadioExample.svelte';
 	import SelectExamples from './_examples/SelectExample.svelte';
-	import SliderExamples from './_examples/SliderExamples.svelte';
-	import ThemeExamples from './_examples/ThemeExamples.svelte';
+	import SliderExamples from './_examples/SliderExample.svelte';
+	import ThemeExamples from './_examples/ThemeExample.svelte';
 
 	let darkMode = false;
 

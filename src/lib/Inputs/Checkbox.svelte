@@ -40,8 +40,9 @@
 <style>
 	.sterling-checkbox {
 		display: inline-flex;
-		align-content: center;
-		align-items: center;
+		align-content: stretch;
+		align-items: stretch;
+		box-sizing: border-box;
 		font: inherit;
 		gap: 0.4em;
 		outline: none;
@@ -135,5 +136,6 @@
 	.label-content {
 		color: var(--Common__color);
 		user-select: none;
+		margin-top: 0.25em;
 	}
 </style>
