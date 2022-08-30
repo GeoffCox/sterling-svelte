@@ -1,64 +1,30 @@
 <script lang="ts">
 	import { darkThemeVars } from '$lib/themes/useDarkTheme';
 	import { lightThemeVars } from '$lib/themes/useLightTheme';
-	import { neutrals } from '$lib/themes/colors';
 
-	$: themeKeys = Object.keys(lightThemeVars);
+	const lightThemeKeys = Object.keys(lightThemeVars);
+	const darkThemeKeys = Object.keys(darkThemeVars);
+
+	const keysMatch = lightThemeKeys.every((key, i) => key === darkThemeKeys[i]);
+	const themeKeys = lightThemeKeys;
 </script>
 
 <div>
-	<div class="component">
-		<h3>Neutral Colors</h3>
-		<div class="color-items">
-			{#each Object.keys(neutrals) as key}
-				<div class="color-item">
-					<div class="color-block" style="background-color: {neutrals[key]}" />
-					<div class="color-name">{key}: {neutrals[key]}</div>
-				</div>
-			{/each}
-		</div>
-		<h3>Theme Colors</h3>
-		<div class="theme-items">
-			<div class="theme-header">Key</div>
-			<div class="theme-header">Color</div>
-			{#each themeKeys as key}
-				<div>{key}</div>
-				<div class="color-block" style="background-color: var({key})" />
-			{/each}
-		</div>
+	{#if !keysMatch}
+		<div class="error">Uh oh! The keys between the light and dark themes DO NOT MATCH!</div>
+	{/if}
+	<div class="theme">
+		<div class="header">Key</div>
+		<div class="header">Color</div>
+		{#each themeKeys as key}
+			<div class="color-name">{key}</div>
+			<div class="color-block" style="background-color: var({key})" />
+		{/each}
 	</div>
 </div>
 
 <style>
-	.component {
-		box-sizing: border-box;
-		display: flex;
-		flex-direction: column;
-		padding: 0;
-		justify-items: stretch;
-	}
-
-	.color-items {
-		display: flex;
-		flex-direction: column;
-		flex-wrap: wrap;
-	}
-	.color-item {
-		display: flex;
-		align-items: center;
-	}
-	.color-block {
-		width: 24px;
-		height: 24px;
-		margin: 2px;
-		border: 1px dashed var(--Common__border-color);
-	}
-
-	.color-name {
-		margin-left: 5px;
-	}
-
-	.theme-items {
+	.theme {
 		display: grid;
 		grid-template-columns: auto auto;
 		align-items: center;
@@ -67,8 +33,19 @@
 		column-gap: 20px;
 		width: max-content;
 	}
-
-	.theme-header {
+	.header {
 		font-weight: bold;
+	}
+
+	.color-block {
+		width: 24px;
+		height: 24px;
+		margin: 2px;
+		border: 1px dashed var(--Common__border-color);
+	}
+
+	.error {
+		color: var(--Display__color--error);
+		font-size: 1.5em;
 	}
 </style>

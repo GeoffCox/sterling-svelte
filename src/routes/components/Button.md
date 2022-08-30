@@ -29,24 +29,24 @@ Button provides a styled HTML button element.
 
 ## Theme Variables
 
-```
---Button**background-color
---Button**background-color--active
---Button**background-color--disabled
---Button**background-color--hover
---Button**border-color
---Button**border-color--active
---Button**border-color--disabled
---Button**border-color--focus
---Button**border-color--hover
---Button**border-radius
---Button**border-style
---Button**border-width
---Button**color
---Button**color--active
---Button**color--disabled
---Common**outline-color
---Common**outline-offset
---Common**outline-style
---Common\_\_outline-width
-```
+| Name                                   | Used when/for  |
+| -------------------------------------- | -------------- |
+| --Button\_\_background-color           |                |
+| --Button\_\_background-color--active   | active         |
+| --Button\_\_background-color--disabled | disabled       |
+| --Button\_\_background-color--hover    | hover          |
+| --Button\_\_border-color               |                |
+| --Button\_\_border-color--active       | active         |
+| --Button\_\_border-color--disabled     | disabled       |
+| --Button\_\_border-color--focus        | focus          |
+| --Button\_\_border-color--hover        | hover          |
+| --Button\_\_border-radius              |                |
+| --Button\_\_border-style               |                |
+| --Button\_\_border-width               |                |
+| --Button\_\_color                      |                |
+| --Button\_\_color--active              | active         |
+| --Button\_\_color--disabled            | disabled       |
+| --Common\_\_outline-color              | keyboard focus |
+| --Common\_\_outline-offset             | keyboard focus |
+| --Common\_\_outline-style              | keyboard focus |
+| --Common\_\_outline-width              | keyboard focus |

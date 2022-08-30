@@ -83,7 +83,6 @@ export const darkThemeVars: CSSVarSet = {
 	'--Input__border-style': 'solid',
 	'--Input__border-width': '2px',
 	'--Input__color': neutrals.neutral100,
-	'--Input__placeholder__color': neutrals.neutral75,
 
 	// hover
 	'--Input__background-color--hover': neutrals.neutral15,
@@ -104,7 +103,6 @@ export const darkThemeVars: CSSVarSet = {
 	'--Input__background-color--disabled': neutrals.neutral45,
 	'--Input__border-color--disabled': neutrals.neutral85,
 	'--Input__color--disabled': neutrals.neutral85,
-	'--Input__placeholder__color--disabled': neutrals.neutral75,
 
 	// ----- Display ----- //
 	'--Display__background-color': neutrals.neutral60,

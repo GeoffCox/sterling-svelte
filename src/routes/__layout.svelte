@@ -91,8 +91,13 @@
 		font-weight: normal;
 	}
 
+	.component :global(pre) {
+		background: var(--Display__background-color);
+		padding: 1em;
+	}
+
 	.component :global(table) {
-		border: 1px solid black;
+		border: 1px solid var(--Common__border-color);
 		width: max-content;
 		border-collapse: collapse;
 	}
@@ -100,16 +105,16 @@
 	.component :global(th) {
 		font-weight: lighter;
 		font-size: 1.1em;
-		background: #efefef;
+		background: var(--Display__background-color);
 		padding: 0.5em;
 		text-align: start;
-		border: 1px solid black;
+		border: 1px solid var(--Common__border-color);
 	}
 
 	.component :global(td) {
 		padding: 0.5em;
 		text-align: start;
-		border: 1px solid black;
+		border: 1px solid var(--Common__border-color);
 	}
 
 	.component :global(li) {
