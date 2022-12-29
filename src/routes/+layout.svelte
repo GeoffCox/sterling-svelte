@@ -25,7 +25,27 @@
 		<input type="checkbox" checked={dark} bind:this={darkModeCheckbox} on:click={onDarkModeClick} />
 		Dark Mode (indeterminate => follow OS/browser setting)
 	</label>
-	<slot />
+	<div class="content">
+		<div class="nav">
+			<h3>Library</h3>
+			<a href="/">Overview</a>
+			<a href="/components/theme">Theme</a>
+			<h3>Components - Coming soon!</h3>
+			<!-- <div class="component-list">
+				<a href="/components/Button">Button</a>
+				<a href="/components/Checkbox">Checkbox</a>
+				<a href="/components/Input">Input</a>
+				<a href="/components/List">List</a>
+				<a href="/components/Progress">Progress</a>
+				<a href="/components/Radio">Radio</a>
+				<a href="/components/Select">Select</a>
+				<a href="/components/Slider">Slider</a>
+			</div> -->
+		</div>
+		<div class="component">
+			<slot />
+		</div>
+	</div>
 </div>
 
 <style>
@@ -69,5 +89,40 @@
 
 	.layout {
 		padding: 3em;
+	}
+
+	.content {
+		display: grid;
+		grid-template-columns: auto 1fr;
+	}
+
+	.nav {
+		display: flex;
+		flex-direction: column;
+		background-color: var(--Common__background-color);
+		border-right: 1px solid var(--Common__border-color);
+		padding: 1em;
+	}
+
+	.component-list {
+		margin-left: 1em;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.component-list a,
+	.nav a {
+		text-decoration: none;
+		margin: 0.5em 0;
+		font-size: 1em;
+		color: var(--Common__color);
+	}
+
+	.component {
+		display: flex;
+		flex-direction: column;
+		place-content: start;
+		place-items: start;
+		padding: 0 20px;
 	}
 </style>

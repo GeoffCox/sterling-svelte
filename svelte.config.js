@@ -1,6 +1,9 @@
-import adapter from '@sveltejs/adapter-auto';
+import autoAdapter from '@sveltejs/adapter-auto';
+import staticAdapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 import { mdsvex } from 'mdsvex';
+
+const dev = process.env.NODE_ENV === 'development';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -14,7 +17,7 @@ const config = {
 	],
 	extensions: ['.svelte', '.md'],
 	kit: {
-		adapter: adapter()
+		adapter: dev ? autoAdapter() : staticAdapter()
 	}
 };
 

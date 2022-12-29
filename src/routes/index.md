@@ -1,6 +1,6 @@
 # Overview
 
-**sterling-svelte** is a modern, accessible, and lightweight component library for Svelte.
+**sterling-svelte** is a modern, accessible, and lightweight UI component library for Svelte.
 
 ## Why yet another component library?
 
