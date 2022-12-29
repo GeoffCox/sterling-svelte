@@ -43,7 +43,7 @@ Components that wrap an HTML element will forward props to the element and bubbl
 native element type is not suitable, a component may avoid using the native element in favor of its own behavior
 and style via div elements.
 
-## Dependencies
+### Dependencies
 
 Dependencies are kept to an absolute minimum. All dependencies are reviewed as the library evolves to determine if
 they should be inlined or can be removed.
@@ -51,34 +51,3 @@ they should be inlined or can be removed.
 - uuid to create element identifiers
 - floating-ui to position popups and overlays
 - lodash-es for data utility functions
-
-## Roadmap
-
-The library will be published first with only the theme infrastructure, light theme, and dark theme.
-
-This will be followed by basic components that wrap native HTML elements.
-
-- Button
-- Input
-- Checkbox
-- Radio
-- Slider
-
-Then display components.
-
-- Progress
-- Notification
-- TBD
-
-Then container components.
-
-- Select
-- List
-- Menu
-- Tree
-
-Then overlay components
-
-- Tooltip
-- Panel
-- TBD
