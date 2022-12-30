@@ -5,6 +5,12 @@ import { darkTheme } from './darkTheme';
 /**
  * Applies the default dark theme.
  */
-export const applyDarkTheme = (node: HTMLElement, params?: Omit<ThemeActionParams, 'theme'>) => {
-	return applyTheme(node, { ...params, theme: darkTheme });
+export const applyDarkTheme = (
+	node: HTMLElement,
+	params?: Omit<ThemeActionParams, 'theme' | 'context'>
+) => {
+	return applyTheme(node, {
+		...params,
+		theme: darkTheme
+	});
 };

@@ -5,6 +5,12 @@ import { lightTheme } from './lightTheme';
 /**
  * Applies the default light theme.
  */
-export const applyLightTheme = (node: HTMLElement, params?: Omit<ThemeActionParams, 'theme'>) => {
-	return applyTheme(node, { ...params, theme: lightTheme });
+export const applyLightTheme = (
+	node: HTMLElement,
+	params?: Omit<ThemeActionParams, 'theme' | 'context'>
+) => {
+	return applyTheme(node, {
+		...params,
+		theme: lightTheme
+	});
 };

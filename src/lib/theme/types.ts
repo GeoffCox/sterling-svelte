@@ -20,12 +20,4 @@ export type ThemeActionParams = {
 	 * Otherwise applies the theme to the element where this action was used.
 	 */
 	atDocumentRoot?: boolean;
-
-	/**
-	 * When specified, theme information is set on Svelte context.
-	 */
-	themeContext?: {
-		name: string;
-		isDark: boolean;
-	};
 };
