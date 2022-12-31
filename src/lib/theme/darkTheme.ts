@@ -31,18 +31,15 @@ export const darkTheme: Theme = {
 	'--Common__border-color--disabled': neutrals.neutral92,
 	'--Common__color--disabled': neutrals.neutral92,
 
-	// ----- BaseLayer ---- //
-	'--BaseLayer__background-color': neutrals.neutral15,
-	'--BaseLayer__color': neutrals.neutral100,
+	// ----- Layer ---- //
+	'--Layer__background-color--1': neutrals.neutral30,
+	'--Layer__color--1': neutrals.neutral100,
 
-	'--BaseLayer__background-color--1': neutrals.neutral30,
-	'--BaseLayer__color--1': neutrals.neutral100,
+	'--Layer__background-color--2': neutrals.neutral45,
+	'--Layer__color--2': neutrals.neutral100,
 
-	'--BaseLayer__background-color--2': neutrals.neutral45,
-	'--BaseLayer__color--2': neutrals.neutral100,
-
-	'--BaseLayer__background-color--3': neutrals.neutral60,
-	'--BaseLayer__color--3': neutrals.neutral100,
+	'--Layer__background-color--3': neutrals.neutral60,
+	'--Layer__color--3': neutrals.neutral100,
 
 	// ----- Button ----- //
 

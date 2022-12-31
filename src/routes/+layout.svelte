@@ -3,6 +3,8 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { setContext } from 'svelte';
+	import { base } from '$app/paths';
+
 	let dark: boolean | undefined;
 	let darkModeCheckbox: HTMLInputElement;
 
@@ -44,22 +46,25 @@
 </script>
 
 <div class="layout" use:toggleDarkTheme={{ dark, atDocumentRoot: true }}>
-	<h1>sterling-svelte</h1>
+	<div class="header">
+		<label>
+			<input
+				type="checkbox"
+				checked={dark}
+				bind:this={darkModeCheckbox}
+				on:click={onDarkModeClick}
+				title="indeterminate => follow OS/browser setting"
+			/>
+			Dark Mode
+		</label>
+	</div>
+	<h1>sterling-svelte (in progress)</h1>
 	<h3>A modern, accessible, and lightweight UI component library for Svelte.</h3>
-	<label>
-		<input
-			type="checkbox"
-			checked={dark}
-			bind:this={darkModeCheckbox}
-			on:click={onDarkModeClick}
-			title="indeterminate => follow OS/browser setting"
-		/>
-		Dark Mode
-	</label>
 	<div class="content">
 		<div class="nav">
-			<a href="/">Overview</a>
-			<a href="/theme">Theme</a>
+			<a href="{base}/">Overview</a>
+			<a href="{base}/theme">Theme</a>
+			<a href="{base}/components/button">Button</a>
 			<!-- <div class="component-list">
 				<a href="/components/Button">Button</a>
 				<a href="/components/Checkbox">Checkbox</a>
@@ -100,8 +105,8 @@
 	:global(pre),
 	:global(code) {
 		font-family: 'FiraMono', monospace;
-		background-color: var(--BaseLayer__background-color--2);
-		color: var(--BaseLayer__color--2);
+		background-color: var(--Layer__background-color--1);
+		color: var(--Layer__color--1);
 	}
 
 	:global(pre) {
@@ -109,14 +114,46 @@
 	}
 
 	:global(blockquote) {
-		background-color: var(--BaseLayer__background-color--1);
+		background-color: var(--Layer__background-color--1);
 		color: var(--Display__color--info);
 		padding: 1em;
 		margin: 0;
 	}
 
+	:global(table) {
+		border: 1px solid var(--Common__border-color);
+		width: max-content;
+		border-collapse: collapse;
+	}
+
+	:global(th) {
+		font-weight: lighter;
+		font-size: 1.1em;
+		background: var(--Display__background-color);
+		padding: 0.5em;
+		text-align: start;
+		border: 1px solid var(--Common__border-color);
+	}
+
+	:global(td) {
+		padding: 0.5em;
+		text-align: start;
+		border: 1px solid var(--Common__border-color);
+	}
+
+	:global(li) {
+		margin-bottom: 0.5em;
+	}
+
 	.layout {
 		padding: 0 3em;
+	}
+
+	.header {
+		display: flex;
+		justify-content: flex-end;
+		justify-items: flex-end;
+		padding: 5px;
 	}
 
 	.content {
@@ -133,18 +170,15 @@
 		padding: 1em;
 	}
 
-	.component-list {
-		margin-left: 1em;
-		display: flex;
-		flex-direction: column;
-	}
-
-	.component-list a,
 	.nav a {
 		text-decoration: none;
 		margin: 0.5em 0;
 		font-size: 1em;
 		color: var(--Common__color);
+	}
+
+	.nav a:hover {
+		text-decoration: underline;
 	}
 
 	.component {

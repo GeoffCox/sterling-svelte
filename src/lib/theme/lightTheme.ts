@@ -31,18 +31,15 @@ export const lightTheme: Theme = {
 	'--Common__border-color--disabled': neutrals.neutral60,
 	'--Common__color--disabled': neutrals.neutral60,
 
-	// ----- BaseLayer ---- //
-	'--BaseLayer__background-color': neutrals.neutral100,
-	'--BaseLayer__color': neutrals.neutral15,
+	// ----- Layer ---- //
+	'--Layer__background-color--1': neutrals.neutral98,
+	'--Layer__color--1': neutrals.neutral15,
 
-	'--BaseLayer__background-color--1': neutrals.neutral98,
-	'--BaseLayer__color--1': neutrals.neutral15,
+	'--Layer__background-color--2': neutrals.neutral96,
+	'--Layer__color--2': neutrals.neutral15,
 
-	'--BaseLayer__background-color--2': neutrals.neutral96,
-	'--BaseLayer__color--2': neutrals.neutral15,
-
-	'--BaseLayer__background-color--3': neutrals.neutral92,
-	'--BaseLayer__color--3': neutrals.neutral15,
+	'--Layer__background-color--3': neutrals.neutral92,
+	'--Layer__color--3': neutrals.neutral15,
 
 	// ----- Button ----- //
 

@@ -19,10 +19,9 @@
 	{#if !keysMatch}
 		<div class="error">Uh oh! The keys between the light and dark themes DO NOT MATCH!</div>
 	{/if}
-	<div class="theme-name">{themeName} theme</div>
 	<div class="theme">
 		<div class="header">Key</div>
-		<div class="header">Color</div>
+		<div class="header">{themeName} value</div>
 		{#each themeKeys as key}
 			<div class="key-name">{key}</div>
 			{#if key.includes('color')}
@@ -43,10 +42,6 @@
 		row-gap: 5px;
 		column-gap: 20px;
 		width: max-content;
-	}
-
-	.theme-name {
-		font-size: 1.2em;
 	}
 
 	.header {
