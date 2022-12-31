@@ -99,7 +99,7 @@ export const darkTheme: Theme = {
 	'--Input__color--disabled': neutrals.neutral85,
 
 	// ----- Display ----- //
-	'--Display__background-color': neutrals.neutral60,
+	'--Display__background-color': neutrals.neutral30,
 	'--Display__border-color': neutrals.neutral92,
 	'--Display__color': neutrals.neutral100,
 

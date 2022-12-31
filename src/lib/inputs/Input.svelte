@@ -3,10 +3,10 @@
 </script>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
-{#if $$slots.default}
+{#if $$slots.label}
 	<label class="sterling-input-label">
 		<div class="label-content">
-			<slot />
+			<slot name="label" />
 		</div>
 		<input
 			class="sterling-input labeled"

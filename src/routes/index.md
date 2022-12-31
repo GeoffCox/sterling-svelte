@@ -52,31 +52,18 @@ they should be inlined or can be removed.
 
 ## Roadmap
 
-The library will be published first with only the theme infrastructure, light theme, and dark theme.
-
-This will be followed by basic components that wrap native HTML elements.
-
-- Button
-- Input
-- Checkbox
-- Radio
-- Slider
-
-Then display components.
-
-- Progress
-- Notification
-- TBD
-
-Then container components.
-
-- Select
-- List
-- Menu
-- Tree
-
-Then overlay components
-
-- Tooltip
-- Panel
-- TBD
+| Component | Published in Version |
+| --------- | -------------------- |
+| (theme)   | 0.0.1                |
+| Button    | 0.0.3                |
+| Input     | 0.0.4                |
+| Checkbox  |                      |
+| Radio     |                      |
+| Slider    |                      |
+| Progress  |                      |
+| List      |                      |
+| Select    |                      |
+| Menu      |                      |
+| Tree      |                      |
+| Tooltip   |                      |
+| Dialog    |                      |

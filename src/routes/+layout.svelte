@@ -65,6 +65,7 @@
 			<a href="{base}/">Overview</a>
 			<a href="{base}/theme">Theme</a>
 			<a href="{base}/components/button">Button</a>
+			<a href="{base}/components/input">Input</a>
 			<!-- <div class="component-list">
 				<a href="/components/Button">Button</a>
 				<a href="/components/Checkbox">Checkbox</a>
@@ -130,6 +131,7 @@
 		font-weight: lighter;
 		font-size: 1.1em;
 		background: var(--Display__background-color);
+		color: var(----Display__color);
 		padding: 0.5em;
 		text-align: start;
 		border: 1px solid var(--Common__border-color);

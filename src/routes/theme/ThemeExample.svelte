@@ -3,6 +3,7 @@
 	import { lightTheme } from '$lib';
 	import { getContext } from 'svelte';
 	import type { Readable } from 'svelte/store';
+	import ThemeSwatch from '../components/ThemeSwatch.svelte';
 
 	const darkThemeKeys = Object.keys(darkTheme);
 	const lightThemeKeys = Object.keys(lightTheme);

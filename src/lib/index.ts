@@ -10,4 +10,5 @@ export { toggleDarkTheme } from './theme/toggleDarkTheme';
 export { type ButtonVariant, type ButtonShape } from './buttons/types';
 
 import Button from './buttons/Button.svelte';
-export { Button };
+import Input from './inputs/Input.svelte';
+export { Button, Input };

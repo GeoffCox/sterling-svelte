@@ -4,14 +4,11 @@
 	export let name: string = '';
 	export let description: string = '';
 
-	let messages: string[] = [];
+	let events: { message: string; timestamp: Date }[] = [];
 
 	export const recordEvent = (message: string) => {
 		const now = new Date();
-		messages = [
-			...messages.slice(-4),
-			`${message} (${now.getSeconds()}s ${now.getMilliseconds()}ms)`
-		];
+		events = [...events.slice(-4), { message, timestamp: now }];
 	};
 
 	let mounted = false;
@@ -43,8 +40,11 @@
 			</div>
 			<div class="events">
 				<h2>Events</h2>
-				{#each messages as message}
-					<div>{message}</div>
+				{#each events as event}
+					<div class="event">
+						<div class="event-message">{event.message}</div>
+						<div class="event-timestamp">&nbsp;@:{event.timestamp.getMilliseconds()}</div>
+					</div>
 				{/each}
 			</div>
 			<div class="documentation">
@@ -95,6 +95,19 @@
 		flex-direction: column;
 		row-gap: 10px;
 		align-items: flex-start;
+	}
+
+	.event {
+		display: inline-block;
+	}
+
+	.event-message,
+	.event-timestamp {
+		display: inline;
+	}
+
+	.event-timestamp {
+		color: var(--Display__color--info);
 	}
 
 	.options {
