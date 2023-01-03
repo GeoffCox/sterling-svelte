@@ -2,6 +2,10 @@
 	export let value: string = '';
 </script>
 
+<!--
+	@component
+	A styled HTML input element with optional label.
+-->
 <!-- svelte-ignore a11y-label-has-associated-control -->
 {#if $$slots.label}
 	<label class="sterling-input-label">

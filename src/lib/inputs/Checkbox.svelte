@@ -1,7 +1,12 @@
 <script lang="ts">
 	export let checked: boolean = false;
+	export let disabled: boolean = false;
 </script>
 
+<!--
+	@component
+	A styled HTML input type=checkbox element.
+-->
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <label class="sterling-checkbox">
 	<div class="container">
@@ -29,10 +34,11 @@
 			on:wheel
 			bind:checked
 			{...$$restProps}
+			{disabled}
 		/>
 		<div class="indicator" />
 	</div>
-	<div class="label-content">
+	<div class="label-content" class:disabled>
 		<slot />
 	</div>
 </label>
@@ -134,8 +140,13 @@
 	}
 
 	.label-content {
-		color: var(--Common__color);
+		color: var(--Input__color);
 		user-select: none;
 		margin-top: 0.25em;
+		transition: background-color 250ms, color 250ms, border-color 250ms;
+	}
+
+	.label-content.disabled {
+		color: var(--Input__color--disabled);
 	}
 </style>

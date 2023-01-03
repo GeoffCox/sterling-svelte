@@ -7,7 +7,7 @@
 
 <!--
 	@component
-	provides a styled HTML button element.
+	A styled HTML button element.
 -->
 <button
 	class="sterling-button"

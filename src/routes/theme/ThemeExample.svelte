@@ -3,7 +3,7 @@
 	import { lightTheme } from '$lib';
 	import { getContext } from 'svelte';
 	import type { Readable } from 'svelte/store';
-	import ThemeSwatch from '../components/ThemeSwatch.svelte';
+	import ThemePropCard from '../components/ThemePropCard.svelte';
 
 	const darkThemeKeys = Object.keys(darkTheme);
 	const lightThemeKeys = Object.keys(lightTheme);
@@ -21,15 +21,8 @@
 		<div class="error">Uh oh! The keys between the light and dark themes DO NOT MATCH!</div>
 	{/if}
 	<div class="theme">
-		<div class="header">Key</div>
-		<div class="header">{themeName} value</div>
 		{#each themeKeys as key}
-			<div class="key-name">{key}</div>
-			{#if key.includes('color')}
-				<div class="color-block" style="background-color: var({key})" />
-			{:else}
-				<div>{currentTheme[key]}</div>
-			{/if}
+			<ThemePropCard name={key} />
 		{/each}
 	</div>
 </div>
@@ -37,23 +30,11 @@
 <style>
 	.theme {
 		display: grid;
-		grid-template-columns: auto auto;
+		grid-template-columns: auto;
+		grid-template-rows: auto;
+		gap: 0.5em;
 		align-items: center;
-		justify-items: end;
-		row-gap: 5px;
-		column-gap: 20px;
 		width: max-content;
-	}
-
-	.header {
-		font-weight: bold;
-	}
-
-	.color-block {
-		width: 24px;
-		height: 24px;
-		margin: 2px;
-		border: 1px dashed var(--Common__border-color);
 	}
 
 	.error {

@@ -65,10 +65,10 @@
 			<a href="{base}/">Overview</a>
 			<a href="{base}/theme">Theme</a>
 			<a href="{base}/components/button">Button</a>
+			<a href="{base}/components/checkbox">Checkbox</a>
 			<a href="{base}/components/input">Input</a>
 			<!-- <div class="component-list">
 				<a href="/components/Button">Button</a>
-				<a href="/components/Checkbox">Checkbox</a>
 				<a href="/components/Input">Input</a>
 				<a href="/components/List">List</a>
 				<a href="/components/Progress">Progress</a>

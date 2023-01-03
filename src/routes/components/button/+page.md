@@ -1,10 +1,11 @@
+<script>
+    import Example from './ButtonExample.svelte';
+    import ThemePropCard from '../ThemePropCard.svelte';
+</script>
+
 # Button
 
 A styled HTML button element.
-
-<script>
-    import Example from './ButtonExample.svelte';
-</script>
 
 <Example />
 
@@ -32,30 +33,29 @@ A styled HTML button element.
 
 ## Theming
 
-| Part       | State         | Theme variable                         |
-| ---------- | ------------- | -------------------------------------- |
-| background |               | --Button\_\_background-color           |
-| border     |               | --Button\_\_border-color               |
-| border     |               | --Button\_\_border-radius              |
-| border     |               | --Button\_\_border-style               |
-| border     |               | --Button\_\_border-width               |
-| foreground |               | --Button\_\_color                      |
-|            |               |                                        |
-| background | hover         | --Button\_\_background-color--hover    |
-| border     | hover         | --Button\_\_border-color--hover        |
-| foreground | hover         | --Button\_\_color--hover               |
-|            |               |                                        |
-| background | active        | --Button\_\_background-color--active   |
-| border     | active        | --Button\_\_border-color--active       |
-| foreground | active        | --Button\_\_color--active              |
-|            |               |                                        |
-| border     | focus-visible | --Button\_\_border-color--focus        |
-|            |               |                                        |
-| outline    | focus-visible | --Common\_\_outline-color              |
-| outline    | focus-visible | --Common\_\_outline-offset             |
-| outline    | focus-visible | --Common\_\_outline-style              |
-| outline    | focus-visible | --Common\_\_outline-width              |
-|            |               |                                        |
-| background | disabled      | --Button\_\_background-color--disabled |
-| border     | disabled      | --Button\_\_border-color--disabled     |
-| foreground | disabled      | --Button\_\_color--disabled            |
+| Part       | State         | Theme variable                                               |
+| ---------- | ------------- | ------------------------------------------------------------ |
+| background |               | <ThemePropCard name='--Button__background-color'/>           |
+| border     |               | <ThemePropCard name='--Button__border-color'/>               |
+| border     |               | <ThemePropCard name='--Button__border-radius'/>              |
+| border     |               | <ThemePropCard name='--Button__border-style'/>               |
+| border     |               | <ThemePropCard name='--Button__border-width'/>               |
+| foreground |               | <ThemePropCard name='--Button__color'/>                      |
+|            |               |                                                              |
+| background | hover         | <ThemePropCard name='--Button__background-color--hover'/>    |
+| border     | hover         | <ThemePropCard name='--Button__border-color--hover'/>        |
+| foreground | hover         | <ThemePropCard name='--Button__color--hover'/>               |
+|            |               |                                                              |
+| background | active        | <ThemePropCard name='--Button__background-color--active'/>   |
+| border     | active        | <ThemePropCard name='--Button__border-color--active'/>       |
+| foreground | active        | <ThemePropCard name='--Button__color--active'/>              |
+|            |               |                                                              |
+| border     | focus-visible | <ThemePropCard name='--Button__border-color--focus'/>        |
+| outline    | focus-visible | <ThemePropCard name='--Common__outline-color'/>              |
+| outline    | focus-visible | <ThemePropCard name='--Common__outline-offset'/>             |
+| outline    | focus-visible | <ThemePropCard name='--Common__outline-style'/>              |
+| outline    | focus-visible | <ThemePropCard name='--Common__outline-width'/>              |
+|            |               |                                                              |
+| background | disabled      | <ThemePropCard name='--Button__background-color--disabled'/> |
+| border     | disabled      | <ThemePropCard name='--Button__border-color--disabled'/>     |
+| foreground | disabled      | <ThemePropCard name='--Button__color--disabled'/>            |

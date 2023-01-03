@@ -11,4 +11,5 @@ export { type ButtonVariant, type ButtonShape } from './buttons/types';
 
 import Button from './buttons/Button.svelte';
 import Input from './inputs/Input.svelte';
-export { Button, Input };
+import Checkbox from './inputs/Checkbox.svelte';
+export { Button, Checkbox, Input };

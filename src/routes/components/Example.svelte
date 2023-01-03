@@ -43,7 +43,7 @@
 				{#each events as event}
 					<div class="event">
 						<div class="event-message">{event.message}</div>
-						<div class="event-timestamp">&nbsp;@:{event.timestamp.getMilliseconds()}</div>
+						<div class="event-timestamp">&nbsp;@{event.timestamp.getMilliseconds()}</div>
 					</div>
 				{/each}
 			</div>

@@ -1,11 +1,11 @@
+<script>
+    import Example from './InputExample.svelte';
+    import ThemePropCard from '../ThemePropCard.svelte';
+</script>
+
 # Input
 
 A styled HTML input element.
-
-<script>
-    import Example from './InputExample.svelte';
-    import ThemeSwatch from '../ThemeSwatch.svelte';
-</script>
 
 <Example />
 
@@ -30,31 +30,29 @@ A styled HTML input element.
 
 | Part        | State        | Theme variable                                               |
 | ----------- | ------------ | ------------------------------------------------------------ |
-| background  |              | <ThemeSwatch name='--Input__background-color' />             |
-| border      |              | <ThemeSwatch name='--Input\_\_border-color' />               |
-| border      |              | <ThemeSwatch name='--Input\_\_border-radius' />              |
-| border      |              | <ThemeSwatch name='--Input\_\_border-style' />               |
-| border      |              | <ThemeSwatch name='--Input\_\_border-width' />               |
-| foreground  |              | <ThemeSwatch name='--Input\_\_color' />                      |
+| background  |              | <ThemePropCard name='--Input__background-color' />           |
+| border      |              | <ThemePropCard name='--Input__border-color' />               |
+| border      |              | <ThemePropCard name='--Input__border-radius' />              |
+| border      |              | <ThemePropCard name='--Input__border-style' />               |
+| border      |              | <ThemePropCard name='--Input__border-width' />               |
+| foreground  |              | <ThemePropCard name='--Input__color' />                      |
+| placeholder |              | <ThemePropCard name='--Display__color--faint' />             |
+| label slot  |              | <ThemePropCard name='--Display__color--subtle' />            |
 |             |              |                                                              |
-| background  | hover        | <ThemeSwatch name='--Input\_\_background-color--hover' />    |
-| border      | hover        | <ThemeSwatch name='--Input\_\_border-color--hover' />        |
-| foreground  | hover        | <ThemeSwatch name='--Input\_\_color--hover' />               |
+| background  | hover        | <ThemePropCard name='--Input__background-color--hover' />    |
+| border      | hover        | <ThemePropCard name='--Input__border-color--hover' />        |
+| foreground  | hover        | <ThemePropCard name='--Input__color--hover' />               |
 |             |              |                                                              |
-| background  | focus-within | <ThemeSwatch name='--Input\_\_background-color--focus' />    |
-| border      | focus-within | <ThemeSwatch name='--Input\_\_border-color--focus' />        |
-| foreground  | focus-within | <ThemeSwatch name='--Input\_\_color--focus' />               |
+| background  | focus-within | <ThemePropCard name='--Input__background-color--focus' />    |
+| border      | focus-within | <ThemePropCard name='--Input__border-color--focus' />        |
+| foreground  | focus-within | <ThemePropCard name='--Input__color--focus' />               |
+| outline     | focus-within | <ThemePropCard name='--Common__outline-color' />             |
+| outline     | focus-within | <ThemePropCard name='--Common__outline-offset' />            |
+| outline     | focus-within | <ThemePropCard name='--Common__outline-style' />             |
+| outline     | focus-within | <ThemePropCard name='--Common__outline-width' />             |
 |             |              |                                                              |
-| outline     | focus-within | <ThemeSwatch name='--Common\_\_outline-color' />             |
-| outline     | focus-within | <ThemeSwatch name='--Common\_\_outline-offset' />            |
-| outline     | focus-within | <ThemeSwatch name='--Common\_\_outline-style' />             |
-| outline     | focus-within | <ThemeSwatch name='--Common\_\_outline-width' />             |
+| background  | disabled     | <ThemePropCard name='--Input__background-color--disabled' /> |
+| border      | disabled     | <ThemePropCard name='--Input__border-color--disabled' />     |
+| foreground  | disabled     | <ThemePropCard name='--Input__color--disabled' />            |
+| placeholder | disabled     | <ThemePropCard name='--Display__color--disabled' />          |
 |             |              |                                                              |
-| background  | disabled     | <ThemeSwatch name='--Input\_\_background-color--disabled' /> |
-| border      | disabled     | <ThemeSwatch name='--Input\_\_border-color--disabled' />     |
-| foreground  | disabled     | <ThemeSwatch name='--Input\_\_color--disabled' />            |
-|             |              |                                                              |
-| placeholder |              | <ThemeSwatch name='--Display\_\_color--faint' />             |
-| placeholder | disabled     | <ThemeSwatch name='--Display\_\_color--disabled' />          |
-|             |              |                                                              |
-| label slot  | label        | <ThemeSwatch name='--Display\_\_color--subtle' />            |
