@@ -13,12 +13,12 @@
 <Example bind:this={exampleRef}>
 	<div slot="component" class="component">
 		<Checkbox {disabled} bind:checked on:change={() => exampleRef.recordEvent('change')}
-			>{label}</Checkbox
+			><span slot="label">{label}</span></Checkbox
 		>
 	</div>
 	<svelte:fragment slot="options">
-		<Checkbox bind:checked={disabled}>disabled</Checkbox>
-		<Input bind:value={label}>label</Input>
+		<Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
+		<Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
 	</svelte:fragment>
 	<svelte:fragment slot="status">
 		<div>checked: {checked}</div>

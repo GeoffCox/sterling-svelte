@@ -8,8 +8,9 @@
 	 */
 	export let checked: boolean = false;
 	export let group: any | undefined | null = undefined;
+	export let disabled: boolean = false;
 
-	const onChange: svelteHTML.FormEventHandler<HTMLInputElement> = (e) => {
+	const onChange: svelte.JSX.ChangeEventHandler<HTMLInputElement> = (e) => {
 		if (e.currentTarget.checked) {
 			group = $$restProps.value;
 		}
@@ -62,11 +63,12 @@
 			on:wheel
 			checked={group === $$restProps.value}
 			{...$$restProps}
+			{disabled}
 		/>
 		<div class="indicator" />
 	</div>
-	<div class="label-content">
-		<slot />
+	<div class="label-content" class:disabled>
+		<slot name="label" />
 	</div>
 </label>
 
@@ -163,6 +165,10 @@
 	}
 
 	.label-content {
-		color: var(--Common__color);
+		color: var(--Input__color);
+	}
+
+	.label-content.disabled {
+		color: var(--Input__color--disabled);
 	}
 </style>

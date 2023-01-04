@@ -11,16 +11,15 @@ A styled HTML button element.
 
 ## Design
 
-- The button size and padding are based on the inherited font
-- HTML button props are forwarded and events are bubbled
+- The button size and padding are based on the inherited font.
+- HTML button props are forwarded and events are bubbled.
 
 ## Props
 
-| Name     | Type          | Description                                             |
-| -------- | ------------- | ------------------------------------------------------- |
-| disabled | boolean       | When true, disables the button and prevents interaction |
-| shape    | ButtonShape   | Changes the shape of the button                         |
-| variant  | ButtonVariant | Changes the style of the button                         |
+| Name    | Type          | Description                     |
+| ------- | ------------- | ------------------------------- |
+| shape   | ButtonShape   | Changes the shape of the button |
+| variant | ButtonVariant | Changes the style of the button |
 
 - ButtonVariant: 'regular' | 'outline' | 'ghost'
 - ButtonShape: 'circular' | 'rounded' | 'square'

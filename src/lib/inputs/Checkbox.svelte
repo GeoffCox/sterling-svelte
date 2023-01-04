@@ -39,7 +39,7 @@
 		<div class="indicator" />
 	</div>
 	<div class="label-content" class:disabled>
-		<slot />
+		<slot name="label" />
 	</div>
 </label>
 

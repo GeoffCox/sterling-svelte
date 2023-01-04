@@ -1,5 +1,6 @@
 <script lang="ts">
 	export let value: string = '';
+	export let disabled: boolean = false;
 </script>
 
 <!--
@@ -9,7 +10,7 @@
 <!-- svelte-ignore a11y-label-has-associated-control -->
 {#if $$slots.label}
 	<label class="sterling-input-label">
-		<div class="label-content">
+		<div class="label-content" class:disabled>
 			<slot name="label" />
 		</div>
 		<input
@@ -42,6 +43,7 @@
 			on:reset
 			on:wheel
 			{...$$restProps}
+			{disabled}
 		/>
 	</label>
 {:else}
@@ -75,6 +77,7 @@
 		on:reset
 		on:wheel
 		{...$$restProps}
+		{disabled}
 	/>
 {/if}
 
@@ -84,10 +87,14 @@
 		flex-direction: column;
 	}
 
-	.sterling-input-label > .label-content {
+	.label-content {
 		font-size: 0.7em;
 		margin: 0.5em 0 0 0.7em;
 		color: var(--Display__color--subtle);
+	}
+
+	.label-content.disabled {
+		color: var(--Display__color--disabled);
 	}
 
 	.sterling-input-label,

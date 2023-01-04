@@ -39,14 +39,14 @@
 		</Button>
 	</div>
 	<div class="options" slot="options">
-		<Checkbox bind:checked={buttonDisabled}>disabled</Checkbox>
-		<Checkbox bind:checked={buttonWithText}>with text</Checkbox>
-		<Checkbox bind:checked={buttonWithIcon}>with icon</Checkbox>
+		<Checkbox bind:checked={buttonDisabled}><span slot="label">disabled</span></Checkbox>
+		<Checkbox bind:checked={buttonWithText}><span slot="label">with text</span></Checkbox>
+		<Checkbox bind:checked={buttonWithIcon}><span slot="label">with icon</span></Checkbox>
 		<Select items={buttonShapes} bind:selectedIndex={buttonShapeIndex}>
-			<svelte:fragment slot="label">shape</svelte:fragment>
+			<span>shape</span>
 		</Select>
 		<Select items={buttonVariants} bind:selectedIndex={buttonVariantIndex}>
-			<svelte:fragment slot="label">variant</svelte:fragment>
+			<span slot="label">variant</span>
 		</Select>
 	</div>
 </Example>

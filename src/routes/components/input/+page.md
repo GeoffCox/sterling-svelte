@@ -11,14 +11,12 @@ A styled HTML input element.
 
 ## Design
 
-- The input size and padding are based on the inherited font
-- HTML input props are forwarded and events are bubbled
+- The input size and padding are based on the inherited font.
+- HTML input props are forwarded and events are bubbled.
 
 ## Props
 
-| Name     | Type    | Description                                            |
-| -------- | ------- | ------------------------------------------------------ |
-| disabled | boolean | When true, disables the input and prevents interaction |
+No additional properties beyond those for the native element.
 
 ## Slots
 

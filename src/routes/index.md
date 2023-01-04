@@ -58,7 +58,7 @@ they should be inlined or can be removed.
 | Button    | 0.0.3                |
 | Input     | 0.0.4                |
 | Checkbox  | 0.0.5                |
-| Radio     |                      |
+| Radio     | 0.0.6                |
 | Slider    |                      |
 | Progress  |                      |
 | List      |                      |

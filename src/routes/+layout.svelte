@@ -67,6 +67,7 @@
 			<a href="{base}/components/button">Button</a>
 			<a href="{base}/components/checkbox">Checkbox</a>
 			<a href="{base}/components/input">Input</a>
+			<a href="{base}/components/radio">Radio</a>
 			<!-- <div class="component-list">
 				<a href="/components/Button">Button</a>
 				<a href="/components/Input">Input</a>

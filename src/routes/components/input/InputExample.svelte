@@ -7,8 +7,8 @@
 
 	let disabled = false;
 	let label = 'NAME';
-	let placeholder = 'Placeholder';
-	let value = 'Sterling';
+	let placeholder = 'Type your name here';
+	let value = '';
 </script>
 
 <Example bind:this={exampleRef}>
@@ -24,8 +24,9 @@
 		</Input>
 	</div>
 	<svelte:fragment slot="options">
-		<Checkbox bind:checked={disabled}>disabled</Checkbox>
+		<Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
 		<Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
+		<Input bind:value={placeholder}><span slot="label">PLACEHOLDER</span></Input>
 	</svelte:fragment>
 	<svelte:fragment slot="status">
 		<div>value: {value}</div>
