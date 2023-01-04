@@ -11,20 +11,23 @@
 	export let disabled: boolean = false;
 
 	/**
-	 * The items to list.
+	 * The items to put in the list.
 	 */
 	export let items: any[] = [];
 
 	/**
-	 * Lay out items horizontally
+	 * Controls if the list is laid out horizontally.
 	 */
 	export let horizontal = false;
 
 	/**
-	 * The index of the selected item
+	 * The index of the selected item.
 	 */
 	export let selectedIndex = -1;
 
+	/**
+	 * The selected item (readonly).
+	 */
 	export let selectedItem: any = undefined;
 
 	$: {
@@ -99,19 +102,19 @@
 		}
 	};
 
-	const onArrowSelectPrevious: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
+	const onArrowSelectPrevious: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
 		event.preventDefault();
 		event.stopPropagation();
 		selectPreviousItem();
 	};
 
-	const onArrowSelectNext: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
+	const onArrowSelectNext: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
 		event.preventDefault();
 		event.stopPropagation();
 		selectNextItem();
 	};
 
-	const onKeydown: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
+	const onKeydown: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
 		// if using arrows, only move when there are no modifier keys
 		if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
 			switch (event.key) {
@@ -149,7 +152,7 @@ A list of items where a single item can be selected.
 {#if $$slots.label}
 	<!-- svelte-ignore a11y-label-has-associated-control -->
 	<label class="sterling-list-label" class:horizontal class:disabled>
-		<div class="label-content">
+		<div class="label-content" class:disabled>
 			<slot name="label" />
 		</div>
 		<div
@@ -321,6 +324,7 @@ A list of items where a single item can be selected.
 		cursor: not-allowed;
 	}
 
+	/* The background, border, and outline are removed when labeled as the label provides them  */
 	.sterling-list.labeled,
 	.sterling-list.labeled:hover,
 	.sterling-list.labeled:focus-visible,
@@ -340,6 +344,13 @@ A list of items where a single item can be selected.
 		font-size: 0.7em;
 		margin: 0.5em 0.7em;
 		color: var(--Display__color--subtle);
+		transition: background-color 250ms, color 250ms, border-color 250ms;
+	}
+
+	.label-content.disabled {
+		font-size: 0.7em;
+		margin: 0.5em 0.7em;
+		color: var(--Display__color--disabled);
 	}
 
 	.list-item {
@@ -349,7 +360,7 @@ A list of items where a single item can be selected.
 		padding: 0.5em;
 		outline: none;
 		text-overflow: ellipsis;
-		transition: background-color 150ms, color 150ms;
+		transition: background-color 250ms, color 250ms, border-color 250ms;
 		white-space: nowrap;
 	}
 

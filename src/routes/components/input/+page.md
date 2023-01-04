@@ -11,7 +11,7 @@ A styled HTML input element.
 
 ## Design
 
-- The input size and padding are based on the inherited font.
+- Size and padding are based on the inherited font.
 - HTML input props are forwarded and events are bubbled.
 
 ## Props
@@ -34,8 +34,8 @@ No additional properties beyond those for the native element.
 | border      |              | <ThemePropCard name='--Input__border-style' />               |
 | border      |              | <ThemePropCard name='--Input__border-width' />               |
 | foreground  |              | <ThemePropCard name='--Input__color' />                      |
-| placeholder |              | <ThemePropCard name='--Display__color--faint' />             |
 | label slot  |              | <ThemePropCard name='--Display__color--subtle' />            |
+| placeholder |              | <ThemePropCard name='--Display__color--faint' />             |
 |             |              |                                                              |
 | background  | hover        | <ThemePropCard name='--Input__background-color--hover' />    |
 | border      | hover        | <ThemePropCard name='--Input__border-color--hover' />        |
@@ -52,5 +52,6 @@ No additional properties beyond those for the native element.
 | background  | disabled     | <ThemePropCard name='--Input__background-color--disabled' /> |
 | border      | disabled     | <ThemePropCard name='--Input__border-color--disabled' />     |
 | foreground  | disabled     | <ThemePropCard name='--Input__color--disabled' />            |
+| label slot  | disabled     | <ThemePropCard name='--Display__color--disabled' />          |
 | placeholder | disabled     | <ThemePropCard name='--Display__color--disabled' />          |
 |             |              |                                                              |

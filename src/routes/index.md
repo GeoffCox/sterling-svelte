@@ -59,10 +59,10 @@ they should be inlined or can be removed.
 | Input     | 0.0.4                |
 | Checkbox  | 0.0.5                |
 | Radio     | 0.0.6                |
+| List      | 0.0.7                |
+| Select    |                      |
 | Slider    |                      |
 | Progress  |                      |
-| List      |                      |
-| Select    |                      |
 | Menu      |                      |
 | Tree      |                      |
 | Tooltip   |                      |

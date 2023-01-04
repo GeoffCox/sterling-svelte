@@ -91,6 +91,7 @@
 		font-size: 0.7em;
 		margin: 0.5em 0 0 0.7em;
 		color: var(--Display__color--subtle);
+		transition: background-color 250ms, color 250ms, border-color 250ms;
 	}
 
 	.label-content.disabled {
@@ -152,6 +153,7 @@
 
 	.sterling-input::placeholder {
 		color: var(--Display__color--faint);
+		transition: background-color 250ms, color 250ms, border-color 250ms;
 	}
 
 	.sterling-input:disabled::placeholder {

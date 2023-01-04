@@ -28,7 +28,7 @@
 			>
 		{/each}
 	</div>
-	<div slot="options" class="options">
+	<svelte:fragment slot="options">
 		<div />
 		<div>
 			<Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
@@ -37,23 +37,13 @@
 		<div>
 			<Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
 		</div>
-	</div>
+	</svelte:fragment>
 	<svelte:fragment slot="status">
 		<div>selectedValue: {selectedValue}</div>
 	</svelte:fragment>
 </Example>
 
 <style>
-	.options {
-		align-items: center;
-		display: grid;
-		grid-template-columns: auto auto;
-		grid-gap: 1rem;
-		margin-bottom: 1rem;
-		width: max-content;
-		padding: 50px;
-	}
-
 	.component {
 		box-sizing: border-box;
 		display: flex;

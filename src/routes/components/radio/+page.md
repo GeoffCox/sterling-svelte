@@ -49,6 +49,6 @@ A styled HTML input type=radio element.
 |            |               |                                                             |
 | background | disabled      | <ThemePropCard name='--Input__background-color--disabled'/> |
 | border     | disabled      | <ThemePropCard name='--Input__border-color--disabled'/>     |
-| foreground | disabled      | <ThemePropCard name='--Input__color--disabled'/>            |
 | dot        | disabled      | <ThemePropCard name='---Input__color--disabled'/>           |
+| foreground | disabled      | <ThemePropCard name='--Input__color--disabled'/>            |
 | label slot | disabled      | <ThemePropCard name='--Input__color--disabled'/>            |

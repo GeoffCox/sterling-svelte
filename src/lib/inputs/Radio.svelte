@@ -166,6 +166,7 @@
 
 	.label-content {
 		color: var(--Input__color);
+		transition: background-color 250ms, color 250ms, border-color 250ms;
 	}
 
 	.label-content.disabled {

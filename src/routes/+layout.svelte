@@ -67,11 +67,11 @@
 			<a href="{base}/components/button">Button</a>
 			<a href="{base}/components/checkbox">Checkbox</a>
 			<a href="{base}/components/input">Input</a>
+			<a href="{base}/components/list">List</a>
 			<a href="{base}/components/radio">Radio</a>
 			<!-- <div class="component-list">
 				<a href="/components/Button">Button</a>
 				<a href="/components/Input">Input</a>
-				<a href="/components/List">List</a>
 				<a href="/components/Progress">Progress</a>
 				<a href="/components/Radio">Radio</a>
 				<a href="/components/Select">Select</a>
