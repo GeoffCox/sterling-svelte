@@ -1,11 +1,11 @@
-# List
-
-A list of items where a single item can be selected.
-
 <script>
     import Example from './ListExample.svelte';
     import ThemePropCard from '../ThemePropCard.svelte';
 </script>
+
+# List
+
+A list of items where a single item can be selected.
 
 <Example />
 

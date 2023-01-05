@@ -122,7 +122,7 @@
 		return cleanup;
 	});
 
-	const onSelectClick: svelteHTML.MouseEventHandler<HTMLDivElement> = (event) => {
+	const onSelectClick: svelte.JSX.MouseEventHandler<HTMLDivElement> = (event) => {
 		if (!disabled) {
 			open = !open;
 			event.preventDefault();
@@ -130,7 +130,7 @@
 		}
 	};
 
-	const onSelectKeydown: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
+	const onSelectKeydown: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
 		if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
 			switch (event.key) {
 				case ' ':
@@ -158,7 +158,7 @@
 		}
 	};
 
-	const onListKeydown: svelteHTML.KeyboardEventHandler<any> = (event) => {
+	const onListKeydown: svelte.JSX.KeyboardEventHandler<any> = (event) => {
 		if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
 			switch (event.key) {
 				case 'Enter':
@@ -181,7 +181,7 @@
 		}
 	};
 
-	const onListClick: svelteHTML.MouseEventHandler<any> = (event) => {
+	const onListClick: svelte.JSX.MouseEventHandler<any> = (event) => {
 		if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
 			selectedIndex = pendingSelectedIndex;
 			open = false;
@@ -201,8 +201,7 @@
 
 <!--
 @component
-Pops up a list of items when clicked. 
-A single item can be selected and is displayed as the value.
+A single item that can be selected from a popup list of items.
   -->
 <div
 	bind:this={selectRef}
@@ -242,7 +241,7 @@ A single item can be selected and is displayed as the value.
 	<!-- svelte-ignore a11y-label-has-associated-control -->
 	<label class="sterling-select-label">
 		{#if $$slots.label}
-			<div class="label-content">
+			<div class="label-content" class:disabled>
 				<slot name="label" />
 			</div>
 		{/if}
@@ -253,7 +252,7 @@ A single item can be selected and is displayed as the value.
 				</slot>
 			</div>
 			<div class="button">
-				<slot name="button">
+				<slot name="button" {open}>
 					<div class="chevron" />
 				</slot>
 			</div>
@@ -305,6 +304,15 @@ A single item can be selected and is displayed as the value.
 </div>
 
 <style>
+	/* 
+		sterling-select
+			sterling-select-label
+				label-content
+			input
+				value
+				button
+			(popup)
+	 */
 	.sterling-select {
 		background-color: var(--Input__background-color);
 		border-color: var(--Input__border-color);
@@ -312,10 +320,7 @@ A single item can be selected and is displayed as the value.
 		border-style: var(--Input__border-style);
 		border-width: var(--Input__border-width);
 		color: var(--Input__color);
-		display: flex;
-		flex-direction: row;
 		padding: 0;
-		position: relative;
 		transition: background-color 250ms, color 250ms, border-color 250ms;
 	}
 
@@ -343,21 +348,23 @@ A single item can be selected and is displayed as the value.
 		outline: none;
 	}
 
-	.label {
-		display: flex;
-		flex-direction: column;
-	}
-
 	.label-content {
 		font-size: 0.7em;
 		margin: 0.5em 0.7em 0 0.7em;
 		color: var(--Display__color--subtle);
+		transition: background-color 250ms, color 250ms, border-color 250ms;
+	}
+
+	.label-content.disabled {
+		color: var(--Display__color--disabled);
 	}
 
 	.input {
-		display: flex;
-		flex-direction: row;
-		align-items: stretch;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		grid-template-rows: auto;
+		align-content: center;
+		align-items: center;
 	}
 
 	.value {
@@ -405,8 +412,7 @@ A single item can be selected and is displayed as the value.
 		display: none;
 		overflow: hidden;
 		position: absolute;
-		box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
-			rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+		box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 4px -1px;
 		width: fit-content;
 		height: fit-content;
 		z-index: 1;

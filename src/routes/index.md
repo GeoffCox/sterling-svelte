@@ -60,7 +60,7 @@ they should be inlined or can be removed.
 | Checkbox  | 0.0.5                |
 | Radio     | 0.0.6                |
 | List      | 0.0.7                |
-| Select    |                      |
+| Select    | 0.0.7                |
 | Slider    |                      |
 | Progress  |                      |
 | Menu      |                      |

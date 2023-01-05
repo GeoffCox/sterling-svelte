@@ -9,8 +9,12 @@ export { toggleDarkTheme } from './theme/toggleDarkTheme';
 
 export { type ButtonVariant, type ButtonShape } from './buttons/types';
 
+export { clickOutside } from './clickOutside';
+
 import Button from './buttons/Button.svelte';
 import Input from './inputs/Input.svelte';
+import List from './lists/List.svelte';
 import Checkbox from './inputs/Checkbox.svelte';
 import Radio from './inputs/Radio.svelte';
-export { Button, Checkbox, Input, Radio };
+import Select from './inputs/Select.svelte';
+export { Button, Checkbox, Input, List, Radio, Select };
