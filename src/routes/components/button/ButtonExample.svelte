@@ -43,7 +43,7 @@
 		<Checkbox bind:checked={buttonWithText}><span slot="label">with text</span></Checkbox>
 		<Checkbox bind:checked={buttonWithIcon}><span slot="label">with icon</span></Checkbox>
 		<Select items={buttonShapes} bind:selectedIndex={buttonShapeIndex}>
-			<span>shape</span>
+			<span slot="label">shape</span>
 		</Select>
 		<Select items={buttonVariants} bind:selectedIndex={buttonVariantIndex}>
 			<span slot="label">variant</span>
