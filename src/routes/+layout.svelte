@@ -68,15 +68,10 @@
 			<a href="{base}/components/checkbox">Checkbox</a>
 			<a href="{base}/components/input">Input</a>
 			<a href="{base}/components/list">List</a>
+			<a href="{base}/components/progress">Progress</a>
 			<a href="{base}/components/radio">Radio</a>
 			<a href="{base}/components/select">Select</a>
-			<!-- <div class="component-list">
-				<a href="/components/Button">Button</a>
-				<a href="/components/Input">Input</a>
-				<a href="/components/Progress">Progress</a>
-				<a href="/components/Radio">Radio</a>
-				<a href="/components/Slider">Slider</a>
-			</div> -->
+			<a href="{base}/components/slider">Slider</a>
 		</div>
 		<div class="component">
 			<slot />

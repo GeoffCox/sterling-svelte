@@ -28,8 +28,8 @@ export const lightTheme: Theme = {
 
 	// disabled
 	'--Common__background-color--disabled': neutrals.neutral96,
-	'--Common__border-color--disabled': neutrals.neutral60,
-	'--Common__color--disabled': neutrals.neutral60,
+	'--Common__border-color--disabled': neutrals.neutral75,
+	'--Common__color--disabled': neutrals.neutral75,
 
 	// ----- Layer ---- //
 	'--Layer__background-color--1': neutrals.neutral98,

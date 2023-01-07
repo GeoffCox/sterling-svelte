@@ -61,8 +61,8 @@ they should be inlined or can be removed.
 | Radio     | 0.0.6                |
 | List      | 0.0.7                |
 | Select    | 0.0.7                |
-| Slider    |                      |
-| Progress  |                      |
+| Progress  | 0.0.8                |
+| Slider    | 0.0.8                |
 | Menu      |                      |
 | Tree      |                      |
 | Tooltip   |                      |

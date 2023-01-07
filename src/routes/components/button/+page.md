@@ -9,7 +9,7 @@ A styled HTML button element.
 
 <Example />
 
-## Design
+## Features
 
 - The button size and padding are based on the inherited font.
 - HTML button props are forwarded and events are bubbled.

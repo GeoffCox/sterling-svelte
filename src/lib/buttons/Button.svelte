@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ButtonShape, ButtonVariant } from './types';
+	import type { ButtonShape, ButtonVariant } from './Button.types';
 
 	export let variant: ButtonVariant = 'regular';
 	export let shape: ButtonShape = 'rounded';

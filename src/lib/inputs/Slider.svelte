@@ -132,7 +132,7 @@
 
 	// ----- Event handlers ----- //
 
-	const onPointerDown: svelteHTML.PointerEventHandler<HTMLDivElement> = (event) => {
+	const onPointerDown: svelte.JSX.PointerEventHandler<HTMLDivElement> = (event) => {
 		if (!disabled) {
 			event.currentTarget.setPointerCapture(event.pointerId);
 			if (vertical) {
@@ -143,7 +143,7 @@
 		}
 	};
 
-	const onPointerMove: svelteHTML.PointerEventHandler<HTMLDivElement> = (event) => {
+	const onPointerMove: svelte.JSX.PointerEventHandler<HTMLDivElement> = (event) => {
 		if (!disabled && event.currentTarget.hasPointerCapture(event.pointerId)) {
 			if (vertical) {
 				setValueByOffset(sliderRef.getBoundingClientRect().bottom - event.y);
@@ -153,13 +153,13 @@
 		}
 	};
 
-	const onPointerUp: svelteHTML.PointerEventHandler<HTMLDivElement> = (event) => {
+	const onPointerUp: svelte.JSX.PointerEventHandler<HTMLDivElement> = (event) => {
 		if (!disabled) {
 			event.currentTarget.releasePointerCapture(event.pointerId);
 		}
 	};
 
-	const onKeyDown: svelteHTML.KeyboardEventHandler<HTMLDivElement> = (event) => {
+	const onKeyDown: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
 		if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey) {
 			switch (event.code) {
 				case 'ArrowDown':
@@ -182,64 +182,112 @@
 <!-- @component
 Slider lets the user chose a value within a min/max range by dragging a thumb button.
 -->
-<div
-	class="sterling-slider"
-	class:disabled
-	class:horizontal={!vertical}
-	class:vertical
-	tabindex={!disabled ? 0 : undefined}
-	{...$$restProps}
-	on:keydown={onKeyDown}
-	on:pointerdown={onPointerDown}
-	on:pointermove={onPointerMove}
-	on:pointerup={onPointerUp}
->
+{#if $$slots.label}
+	<label class="sterling-slider-label" class:vertical>
+		<div class="label-content" class:disabled>
+			<slot name="label" />
+		</div>
+		<div
+			class="sterling-slider labeled"
+			class:disabled
+			class:horizontal={!vertical}
+			class:vertical
+			role="slider"
+			aria-valuemin={0}
+			aria-valuenow={value}
+			aria-valuemax={max}
+			tabindex={!disabled ? 0 : undefined}
+			{...$$restProps}
+			on:keydown={onKeyDown}
+			on:pointerdown={onPointerDown}
+			on:pointermove={onPointerMove}
+			on:pointerup={onPointerUp}
+		>
+			<div
+				class="container"
+				bind:this={sliderRef}
+				bind:clientWidth={sliderWidth}
+				bind:clientHeight={sliderHeight}
+			>
+				<div class="track" />
+				<div
+					class="fill"
+					style={vertical ? `height: ${valueOffset}px` : `width: ${valueOffset}px`}
+				/>
+				<div
+					class="thumb"
+					style={vertical ? `bottom: ${valueOffset}px` : `left: ${valueOffset}px`}
+				/>
+			</div>
+		</div>
+	</label>
+{:else}
 	<div
-		class="container"
-		bind:this={sliderRef}
-		bind:clientWidth={sliderWidth}
-		bind:clientHeight={sliderHeight}
+		class="sterling-slider"
+		class:disabled
+		class:horizontal={!vertical}
+		class:vertical
+		role="slider"
+		aria-valuemin={0}
+		aria-valuenow={value}
+		aria-valuemax={max}
+		tabindex={!disabled ? 0 : undefined}
+		{...$$restProps}
+		on:keydown={onKeyDown}
+		on:pointerdown={onPointerDown}
+		on:pointermove={onPointerMove}
+		on:pointerup={onPointerUp}
 	>
-		<div class="track" />
-		<div class="fill" style={vertical ? `height: ${valueOffset}px` : `width: ${valueOffset}px`} />
-		<div class="thumb" style={vertical ? `bottom: ${valueOffset}px` : `left: ${valueOffset}px`} />
+		<div
+			class="container"
+			bind:this={sliderRef}
+			bind:clientWidth={sliderWidth}
+			bind:clientHeight={sliderHeight}
+		>
+			<div class="track" />
+			<div class="fill" style={vertical ? `height: ${valueOffset}px` : `width: ${valueOffset}px`} />
+			<div class="thumb" style={vertical ? `bottom: ${valueOffset}px` : `left: ${valueOffset}px`} />
+		</div>
 	</div>
-</div>
+{/if}
 
 <style>
+	.sterling-slider-label {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr;
+	}
+
+	.sterling-slider-label.vertical {
+		justify-items: center;
+		height: 100%;
+	}
+
+	.label-content {
+		font-size: 0.7em;
+		color: var(--Display__color--subtle);
+		transition: background-color 250ms, color 250ms, border-color 250ms;
+	}
+
+	.label-content.disabled {
+		color: var(--Display__color--disabled);
+	}
+
 	.sterling-slider {
 		box-sizing: border-box;
 		outline: none;
 		padding: 0;
 		overflow: visible;
 		display: grid;
+		height: 100%;
 	}
 
-	.sterling-slider.horizontal {
-		height: 2em;
-	}
-
-	.sterling-slider.vertical {
-		width: 2em;
-	}
-
-	.sterling-slider:focus-visible {
-		outline-color: var(--Common__outline-color);
-		outline-offset: var(--Common__outline-offset);
-		outline-style: var(--Common__outline-style);
-		outline-width: var(--Common__outline-width);
+	.sterling-slider.labeled {
+		height: unset;
 	}
 
 	.container {
 		position: relative;
-	}
-
-	.sterling-slider.horizontal .container {
-		margin: 0 0.75em;
-	}
-
-	.sterling-slider.vertical .container {
-		margin: 0.75em 0;
 	}
 
 	.track {
@@ -247,46 +295,9 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
 		background: var(--Display__background-color);
 	}
 
-	.sterling-slider.horizontal .track {
-		left: 0;
-		right: 0;
-		top: 50%;
-		height: 3px;
-		transform: translate(0, -50%);
-	}
-
-	.sterling-slider.vertical .track {
-		bottom: 0;
-		left: 50%;
-		top: 0;
-		transform: translate(-50%, 0);
-		width: 3px;
-	}
-
-	.sterling-slider.disabled .track {
-		background: var(--Common__background-color--disabled);
-	}
-
 	.fill {
 		background: var(--Display__color);
 		position: absolute;
-	}
-
-	.sterling-slider.horizontal .fill {
-		height: 3px;
-		top: 50%;
-		transform: translate(0, -50%);
-	}
-
-	.sterling-slider.vertical .fill {
-		bottom: 0;
-		left: 50%;
-		transform: translate(-50%, 0);
-		width: 3px;
-	}
-
-	.sterling-slider.disabled .fill {
-		background: var(--Common__color--disabled);
 	}
 
 	.thumb {
@@ -310,9 +321,57 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
 		width: 1.5em;
 	}
 
+	/* ----- horizontal ----- */
+
+	.sterling-slider.horizontal {
+		height: 2em;
+	}
+
+	.sterling-slider.horizontal .container {
+		margin: 0 0.75em;
+	}
+
+	.sterling-slider.horizontal .track {
+		left: 0;
+		right: 0;
+		top: 50%;
+		height: 3px;
+		transform: translate(0, -50%);
+	}
+
+	.sterling-slider.horizontal .fill {
+		height: 3px;
+		top: 50%;
+		transform: translate(0, -50%);
+	}
+
 	.sterling-slider.horizontal .thumb {
 		top: 50%;
 		transform: translate(-50%, -50%);
+	}
+
+	/* ----- vertical ----- */
+
+	.sterling-slider.vertical {
+		width: 2em;
+	}
+	.sterling-slider.vertical .container {
+		margin: 0.75em 0;
+	}
+
+	.sterling-slider.vertical .track {
+		bottom: 0;
+		left: 50%;
+		top: 0;
+		transform: translate(-50%, 0);
+		width: 3px;
+	}
+
+	.sterling-slider.vertical .fill {
+		bottom: 0;
+		left: 50%;
+		transform: translate(-50%, 0);
+		width: 3px;
 	}
 
 	.sterling-slider.vertical .thumb {
@@ -320,16 +379,37 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
 		transform: translate(-50%, 50%);
 	}
 
+	/* ----- hover ----- */
+
 	.thumb:hover {
 		background-color: var(--Button__background-color--hover);
 		border-color: var(--Button__border-color--hover);
 		color: var(--Button__color--hover);
 	}
 
+	/* ----- active ----- */
+
 	.thumb:active {
 		background-color: var(--Button__background-color--active);
 		border-color: var(--Button__border-color--active);
 		color: var(--Button__color--active);
+	}
+
+	/* ----- focus ----- */
+	.sterling-slider:focus-visible {
+		outline-color: var(--Common__outline-color);
+		outline-offset: var(--Common__outline-offset);
+		outline-style: var(--Common__outline-style);
+		outline-width: var(--Common__outline-width);
+	}
+	/* ----- disabled ----- */
+
+	.sterling-slider.disabled .track {
+		background: var(--Common__background-color--disabled);
+	}
+
+	.sterling-slider.disabled .fill {
+		background: var(--Common__color--disabled);
 	}
 
 	.sterling-slider.disabled .thumb {
