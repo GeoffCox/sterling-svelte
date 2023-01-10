@@ -38,7 +38,11 @@
 <Example bind:this={exampleRef}>
   <div class="component" slot="component">
     <Button on:click={() => showDialog()}>Open dialog</Button>
-    <Dialog bind:open>
+    <Dialog
+      bind:open
+      on:cancel={() => exampleRef.recordEvent('cancel')}
+      on:close={() => exampleRef.recordEvent('close')}
+    >
       <div slot="title">How would you like your product delivered?</div>
       <div slot="body">
         <div class="mail-options">
@@ -60,7 +64,6 @@
       </div>
     </Dialog>
   </div>
-  <div class="options" slot="options" />
 </Example>
 
 <style>

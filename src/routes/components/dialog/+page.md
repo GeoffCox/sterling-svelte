@@ -39,9 +39,8 @@ Instead, `on:click` handlers take action.
 
 1. Declare a `Dialog` and bind `open` to a variable.
 2. Fill in slots with the content you want to display.
-   3a. Add buttons with `type="submit"` and `value`.
-   3b. Add buttons with `on:click` handlers to take action.
-3. When you want to show the dialog, set `open` to true.
+3. Add buttons with `type="submit"` and `value` **or** Add buttons with `on:click` handlers to take action.
+4. When you want to show the dialog, set `open` to true.
 
 ```ts
 let open = false;
