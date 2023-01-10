@@ -1,6 +1,8 @@
 export const neutrals: Record<string, string> = {
 	neutral0: 'hsl(0, 0%, 0%)',
+	neutral10: 'hsl(0, 0%, 12%)',
 	neutral15: 'hsl(0, 0%, 15%)',
+	neutral20: 'hsl(0, 0%, 20%)',
 	neutral30: 'hsl(0, 0%, 30%)',
 	neutral45: 'hsl(0, 0%, 45%)',
 	neutral60: 'hsl(0, 0%, 60%)',

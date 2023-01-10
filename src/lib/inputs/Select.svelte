@@ -44,7 +44,7 @@
 		State
 	  --------------------*/
 
-	// Tracks the previous open statue
+	// Tracks the previous open state
 	let prevOpen = false;
 
 	// Tracks the pending selected index
@@ -87,8 +87,6 @@
 	}
 
 	$: {
-		console.log('raise pendingSelectedIndex changed');
-
 		raiseItemSelectPending(pendingSelectedIndex);
 	}
 
@@ -304,15 +302,6 @@ A single item that can be selected from a popup list of items.
 </div>
 
 <style>
-	/* 
-		sterling-select
-			sterling-select-label
-				label-content
-			input
-				value
-				button
-			(popup)
-	 */
 	.sterling-select {
 		background-color: var(--Input__background-color);
 		border-color: var(--Input__border-color);
@@ -426,5 +415,12 @@ A single item that can be selected from a popup list of items.
 
 	.popup-content {
 		max-height: 15em;
+	}
+
+	@media (prefers-reduced-motion) {
+		.sterling-select,
+		.label-content {
+			transition: none;
+		}
 	}
 </style>

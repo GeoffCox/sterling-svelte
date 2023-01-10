@@ -377,4 +377,13 @@ A list of items where a single item can be selected.
 	.list-item.disabled {
 		color: var(--Input__color--disabled);
 	}
+
+	@media (prefers-reduced-motion) {
+		.sterling-list-label,
+		.sterling-list,
+		.list-item,
+		.label-content {
+			transition: none;
+		}
+	}
 </style>

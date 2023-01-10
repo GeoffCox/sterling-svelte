@@ -14,9 +14,11 @@ export { clickOutside } from './clickOutside';
 
 import Button from './buttons/Button.svelte';
 import Checkbox from './inputs/Checkbox.svelte';
+import Dialog from './surfaces/Dialog.svelte';
 import Input from './inputs/Input.svelte';
 import List from './lists/List.svelte';
 import Progress from './display/Progress.svelte';
 import Radio from './inputs/Radio.svelte';
 import Select from './inputs/Select.svelte';
-export { Button, Checkbox, Input, List, Progress, Radio, Select };
+import Slider from './inputs/Slider.svelte';
+export { Button, Checkbox, Dialog, Input, List, Progress, Radio, Select, Slider };

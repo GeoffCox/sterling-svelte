@@ -13,7 +13,6 @@ Slider allows users to set a value between a minimum and maximum by moving a vis
 
 - User can change value by dragging the thumb.
 - Arrow keys increment value up or down.
--
 - Horizontal or vertical layout
 - An optional label can be specified.
 - Callers can get the percentage (readonly) based on the value and max.

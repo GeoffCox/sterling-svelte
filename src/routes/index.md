@@ -52,18 +52,26 @@ they should be inlined or can be removed.
 
 ## Roadmap
 
-| Component | Published in Version |
-| --------- | -------------------- |
-| (theme)   | 0.0.1                |
-| Button    | 0.0.3                |
-| Input     | 0.0.4                |
-| Checkbox  | 0.0.5                |
-| Radio     | 0.0.6                |
-| List      | 0.0.7                |
-| Select    | 0.0.7                |
-| Progress  | 0.0.8                |
-| Slider    | 0.0.8                |
-| Menu      |                      |
-| Tree      |                      |
-| Tooltip   |                      |
-| Dialog    |                      |
+| Component     | Published in Version |
+| ------------- | -------------------- |
+| (theme)       | 0.0.1                |
+| Button        | 0.0.3                |
+| Input         | 0.0.4                |
+| Checkbox      | 0.0.5                |
+| Radio         | 0.0.6                |
+| List          | 0.0.7                |
+| Select        | 0.0.7                |
+| Progress      | 0.0.8                |
+| Slider        | 0.0.8                |
+| Dialog        | 0.0.9                |
+| Menu          |                      |
+| Tree          |                      |
+| Tooltip       |                      |
+| Dialog        |                      |
+| Switch        |                      |
+| TextArea      |                      |
+| Toggle/Choice |                      |
+| Accordion     |                      |
+| Notifications |                      |
+| Drawer        |                      |
+| Tabs          |                      |

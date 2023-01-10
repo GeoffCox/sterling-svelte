@@ -149,4 +149,12 @@
 	.label-content.disabled {
 		color: var(--Input__color--disabled);
 	}
+
+	@media (prefers-reduced-motion) {
+		.indicator,
+		input:checked + .indicator::after,
+		.label-content {
+			transition: none;
+		}
+	}
 </style>

@@ -139,7 +139,6 @@
 
 	.sterling-input {
 		padding: 0.5em 0.5em;
-		transition: background-color 250ms, color 250ms, border-color 250ms;
 	}
 
 	.sterling-input.labeled,
@@ -158,5 +157,14 @@
 
 	.sterling-input:disabled::placeholder {
 		color: var(--Display__color--disabled);
+	}
+
+	@media (prefers-reduced-motion) {
+		.sterling-input-label,
+		.sterling-input,
+		.label-content,
+		.sterling-input::placeholder {
+			transition: none;
+		}
 	}
 </style>

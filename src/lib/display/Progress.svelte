@@ -98,6 +98,7 @@
 		border-style: var(--Common__border-style);
 		border-color: var(--Common__border-color);
 		border-radius: var(--Common__border-radius);
+		transition: background-color 250ms, color 250ms, border-color 250ms;
 	}
 
 	.container {
@@ -113,6 +114,7 @@
 		box-sizing: border-box;
 		height: 100%;
 		min-height: 1px;
+		transition: background-color 250ms, color 250ms, border-color 250ms;
 	}
 
 	/* ----- Vertical ----- */
@@ -172,5 +174,13 @@
 
 	.sterling-progress.disabled .indicator {
 		background-color: var(--Display__color--disabled);
+	}
+
+	@media (prefers-reduced-motion) {
+		.progress-bar,
+		.indicator,
+		.label-content {
+			transition: none;
+		}
 	}
 </style>
