@@ -1,6 +1,10 @@
 <script lang="ts">
-  import { round } from 'lodash-es';
   import { createEventDispatcher } from 'svelte';
+
+  import { round } from 'lodash-es';
+  import { v4 as uuid } from 'uuid';
+
+  import Label from '../display/Label.svelte';
 
   // ----- Props ----- //
 
@@ -39,6 +43,8 @@
    * If the slider is disabled.
    */
   export let disabled: boolean = false;
+
+  const inputId = uuid();
 
   let sliderRef: HTMLDivElement;
 
@@ -182,51 +188,20 @@
 <!-- @component
 Slider lets the user chose a value within a min/max range by dragging a thumb button.
 -->
-{#if $$slots.label}
-  <label class="sterling-slider-label" class:vertical>
-    <div class="label-content" class:disabled>
-      <slot name="label" />
+<div class="sterling-slider" class:vertical>
+  {#if $$slots.label}
+    <div class="label">
+      <Label {disabled} for={inputId}>
+        <slot name="label" />
+      </Label>
     </div>
-    <div
-      class="sterling-slider labeled"
-      class:disabled
-      class:horizontal={!vertical}
-      class:vertical
-      role="slider"
-      aria-valuemin={0}
-      aria-valuenow={value}
-      aria-valuemax={max}
-      tabindex={!disabled ? 0 : undefined}
-      {...$$restProps}
-      on:keydown={onKeyDown}
-      on:pointerdown={onPointerDown}
-      on:pointermove={onPointerMove}
-      on:pointerup={onPointerUp}
-    >
-      <div
-        class="container"
-        bind:this={sliderRef}
-        bind:clientWidth={sliderWidth}
-        bind:clientHeight={sliderHeight}
-      >
-        <div class="track" />
-        <div
-          class="fill"
-          style={vertical ? `height: ${valueOffset}px` : `width: ${valueOffset}px`}
-        />
-        <div
-          class="thumb"
-          style={vertical ? `bottom: ${valueOffset}px` : `left: ${valueOffset}px`}
-        />
-      </div>
-    </div>
-  </label>
-{:else}
+  {/if}
   <div
-    class="sterling-slider"
+    class="slider"
     class:disabled
     class:horizontal={!vertical}
     class:vertical
+    id={inputId}
     role="slider"
     aria-valuemin={0}
     aria-valuenow={value}
@@ -249,41 +224,31 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
       <div class="thumb" style={vertical ? `bottom: ${valueOffset}px` : `left: ${valueOffset}px`} />
     </div>
   </div>
-{/if}
+</div>
 
 <style>
-  .sterling-slider-label {
+  .sterling-slider {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
   }
 
-  .sterling-slider-label.vertical {
+  .sterling-slider.vertical {
     justify-items: center;
     height: 100%;
   }
 
-  .label-content {
+  .label {
     font-size: 0.7em;
-    color: var(--Display__color--subtle);
-    transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
-  .label-content.disabled {
-    color: var(--Display__color--disabled);
-  }
-
-  .sterling-slider {
+  .slider {
     box-sizing: border-box;
     outline: none;
     padding: 0;
     overflow: visible;
     display: grid;
-    height: 100%;
-  }
-
-  .sterling-slider.labeled {
-    height: unset;
+    transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
   .container {
@@ -293,11 +258,13 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   .track {
     position: absolute;
     background: var(--Display__background-color);
+    transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
   .fill {
     background: var(--Display__color);
     position: absolute;
+    transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
   .thumb {
@@ -323,15 +290,15 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
 
   /* ----- horizontal ----- */
 
-  .sterling-slider.horizontal {
+  .slider.horizontal {
     height: 2em;
   }
 
-  .sterling-slider.horizontal .container {
+  .slider.horizontal .container {
     margin: 0 0.75em;
   }
 
-  .sterling-slider.horizontal .track {
+  .slider.horizontal .track {
     left: 0;
     right: 0;
     top: 50%;
@@ -339,27 +306,27 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     transform: translate(0, -50%);
   }
 
-  .sterling-slider.horizontal .fill {
+  .slider.horizontal .fill {
     height: 3px;
     top: 50%;
     transform: translate(0, -50%);
   }
 
-  .sterling-slider.horizontal .thumb {
+  .slider.horizontal .thumb {
     top: 50%;
     transform: translate(-50%, -50%);
   }
 
   /* ----- vertical ----- */
 
-  .sterling-slider.vertical {
+  .slider.vertical {
     width: 2em;
   }
-  .sterling-slider.vertical .container {
+  .slider.vertical .container {
     margin: 0.75em 0;
   }
 
-  .sterling-slider.vertical .track {
+  .slider.vertical .track {
     bottom: 0;
     left: 50%;
     top: 0;
@@ -367,14 +334,14 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     width: 3px;
   }
 
-  .sterling-slider.vertical .fill {
+  .slider.vertical .fill {
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 0);
     width: 3px;
   }
 
-  .sterling-slider.vertical .thumb {
+  .slider.vertical .thumb {
     left: 50%;
     transform: translate(-50%, 50%);
   }
@@ -396,7 +363,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   }
 
   /* ----- focus ----- */
-  .sterling-slider:focus-visible {
+  .slider:focus-visible {
     outline-color: var(--Common__outline-color);
     outline-offset: var(--Common__outline-offset);
     outline-style: var(--Common__outline-style);
@@ -404,15 +371,15 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   }
   /* ----- disabled ----- */
 
-  .sterling-slider.disabled .track {
+  .slider.disabled .track {
     background: var(--Common__background-color--disabled);
   }
 
-  .sterling-slider.disabled .fill {
+  .slider.disabled .fill {
     background: var(--Common__color--disabled);
   }
 
-  .sterling-slider.disabled .thumb {
+  .slider.disabled .thumb {
     background-color: var(--Common__background-color--disabled);
     border-color: var(--Common__border-color--disabled);
     color: var(--Common__color--disabled);
@@ -420,8 +387,10 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   }
 
   @media (prefers-reduced-motion) {
-    .thumb,
-    .label-content {
+    .slider,
+    .track,
+    .fill,
+    .thumb {
       transition: none;
     }
   }

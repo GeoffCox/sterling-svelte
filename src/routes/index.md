@@ -64,6 +64,7 @@ they should be inlined or can be removed.
 | Progress      | 0.0.8                |
 | Slider        | 0.0.8                |
 | Dialog        | 0.0.9                |
+| Label         | 0.0.10               |
 | Menu          |                      |
 | Tree          |                      |
 | Tooltip       |                      |

@@ -13,7 +13,7 @@
 <Example bind:this={exampleRef}>
   <div slot="component" class="component">
     <Checkbox {disabled} bind:checked on:change={() => exampleRef.recordEvent('change')}
-      ><span slot="label">{label}</span></Checkbox
+      ><svelte:fragment slot="label">{label}</svelte:fragment></Checkbox
     >
   </div>
   <svelte:fragment slot="options">

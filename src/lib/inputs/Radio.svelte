@@ -1,34 +1,39 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+  import { onMount } from 'svelte';
+  import { v4 as uuid } from 'uuid';
 
-	/*
-	 * bind:group doesn't seem to work properly (yet) in a nested radio.
-	 * The workaround is to export `checked` and `group` properties
-	 * and implement the same behavior.
-	 */
-	export let checked: boolean = false;
-	export let group: any | undefined | null = undefined;
-	export let disabled: boolean = false;
+  import Label from '../display/Label.svelte';
 
-	const onChange: svelte.JSX.ChangeEventHandler<HTMLInputElement> = (e) => {
-		if (e.currentTarget.checked) {
-			group = $$restProps.value;
-		}
-	};
+  /*
+   * bind:group doesn't seem to work properly (yet) in a nested radio.
+   * The workaround is to export `checked` and `group` properties
+   * and implement the same behavior.
+   */
+  export let checked: boolean = false;
+  export let group: any | undefined | null = undefined;
+  export let disabled: boolean = false;
 
-	let mounted = false;
-	onMount(() => {
-		if (checked) {
-			group = $$restProps.value;
-		}
-		mounted = true;
-	});
+  const inputId = uuid();
 
-	$: {
-		if (mounted) {
-			checked = group === $$restProps.value;
-		}
-	}
+  const onChange: svelte.JSX.ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (e.currentTarget.checked) {
+      group = $$restProps.value;
+    }
+  };
+
+  let mounted = false;
+  onMount(() => {
+    if (checked) {
+      group = $$restProps.value;
+    }
+    mounted = true;
+  });
+
+  $: {
+    if (mounted) {
+      checked = group === $$restProps.value;
+    }
+  }
 </script>
 
 <!--
@@ -36,148 +41,153 @@
 	A styled HTML input type=radio element with optional label.
 -->
 <!-- svelte-ignore a11y-label-has-associated-control -->
-<label class="sterling-radio">
-	<div class="container">
-		<input
-			type="radio"
-			on:blur
-			on:click
-			on:change
-			on:change={onChange}
-			on:dblclick
-			on:focus
-			on:focusin
-			on:focusout
-			on:keydown
-			on:keypress
-			on:keyup
-			on:input
-			on:mousedown
-			on:mouseenter
-			on:mouseleave
-			on:mousemove
-			on:mouseover
-			on:mouseout
-			on:mouseup
-			on:toggle
-			on:wheel
-			checked={group === $$restProps.value}
-			{...$$restProps}
-			{disabled}
-		/>
-		<div class="indicator" />
-	</div>
-	<div class="label-content" class:disabled>
-		<slot name="label" />
-	</div>
-</label>
+<div class="sterling-radio">
+  <div class="container">
+    <input
+      type="radio"
+      on:blur
+      on:click
+      on:change
+      on:change={onChange}
+      on:dblclick
+      on:focus
+      on:focusin
+      on:focusout
+      on:keydown
+      on:keypress
+      on:keyup
+      on:input
+      on:mousedown
+      on:mouseenter
+      on:mouseleave
+      on:mousemove
+      on:mouseover
+      on:mouseout
+      on:mouseup
+      on:toggle
+      on:wheel
+      checked={group === $$restProps.value}
+      {...$$restProps}
+      {disabled}
+      id={inputId}
+    />
+    <div class="indicator" />
+  </div>
+  {#if $$slots.label}
+    <div class="label">
+      <Label {disabled} for={inputId}>
+        <slot name="label" />
+      </Label>
+    </div>
+  {/if}
+</div>
 
 <style>
-	label {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.4em;
-		outline: none;
-		padding: 0;
-		margin: 0;
-	}
-
-	/* 
+  .sterling-radio {
+    display: inline-flex;
+    align-content: stretch;
+    align-items: stretch;
+    box-sizing: border-box;
+    font: inherit;
+    gap: 0.4em;
+    outline: none;
+    padding: 0;
+    margin: 0;
+  }
+  /* 
 		The container 
 		- allows the input to be hidden
 		- avoids input participating in layout
 		- prevents collisions with surrounding slots
 	 */
-	.container {
-		box-sizing: border-box;
-		position: relative;
-		font: inherit;
-		display: flex;
-		align-items: center;
-	}
+  .container {
+    box-sizing: border-box;
+    position: relative;
+    font: inherit;
+    display: flex;
+    align-items: center;
+  }
 
-	/*
+  /*
 		The input is hidden since the built-in browser radio cannot be customized
 	*/
-	input {
-		font: inherit;
-		margin: 0;
-		padding: 0;
-		position: absolute;
-		opacity: 0;
-	}
+  input {
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    opacity: 0;
+    height: 21px;
+    width: 21px;
+  }
 
-	/*
+  /*
 	 	The indicator handles both the radio box and circle mark.
 	 	The box cannot be on the container since the adjacent sibling selector is needed
 		and there is not a parent CSS selector.
 	*/
-	.indicator {
-		background-color: var(--Input__background-color);
-		border-color: var(--Input__border-color);
-		border-style: var(--Input__border-style);
-		border-width: var(--Input__border-width);
-		border-radius: 10000px;
-		box-sizing: border-box;
-		display: inline-block;
-		height: 21px;
-		position: relative;
-		transition: background-color 250ms, color 250ms, border-color 250ms;
-		width: 21px;
-	}
+  .indicator {
+    background-color: var(--Input__background-color);
+    border-color: var(--Input__border-color);
+    border-style: var(--Input__border-style);
+    border-width: var(--Input__border-width);
+    border-radius: 10000px;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 21px;
+    position: relative;
+    pointer-events: none;
+    transition: background-color 250ms, color 250ms, border-color 250ms;
+    width: 21px;
+  }
 
-	input:checked + .indicator {
-		background-color: var(--Input__background-color);
-		border-color: var(--Input__border-color);
-	}
+  input:checked + .indicator {
+    background-color: var(--Input__background-color);
+    border-color: var(--Input__border-color);
+  }
 
-	input:focus-visible + .indicator {
-		outline-color: var(--Common__outline-color);
-		outline-offset: var(--Common__outline-offset);
-		outline-style: var(--Common__outline-style);
-		outline-width: var(--Common__outline-width);
-	}
+  input:focus-visible + .indicator {
+    outline-color: var(--Common__outline-color);
+    outline-offset: var(--Common__outline-offset);
+    outline-style: var(--Common__outline-style);
+    outline-width: var(--Common__outline-width);
+  }
 
-	input:disabled + .indicator {
-		background-color: var(--Input__background-color--disabled);
-		border-color: var(--Input__border-color--disabled);
-	}
+  input:disabled + .indicator {
+    background-color: var(--Input__background-color--disabled);
+    border-color: var(--Input__border-color--disabled);
+  }
 
-	.indicator::after {
-		background-color: transparent;
-		border-radius: 10000px;
-		content: '';
-		height: 9px;
-		left: 50%;
-		position: absolute;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		transition: background-color 250ms;
-		width: 9px;
-	}
+  .indicator::after {
+    background-color: transparent;
+    border-radius: 10000px;
+    content: '';
+    height: 9px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: background-color 250ms;
+    width: 9px;
+  }
 
-	input:checked + .indicator::after {
-		background-color: var(--Input__color);
-	}
+  input:checked + .indicator::after {
+    background-color: var(--Input__color);
+  }
 
-	input:checked:disabled + .indicator::after {
-		background-color: var(--Input__color--disabled);
-	}
+  input:checked:disabled + .indicator::after {
+    background-color: var(--Input__color--disabled);
+  }
 
-	.label-content {
-		color: var(--Input__color);
-		transition: background-color 250ms, color 250ms, border-color 250ms;
-	}
+  .label {
+    user-select: none;
+    margin-top: 0.25em;
+  }
 
-	.label-content.disabled {
-		color: var(--Input__color--disabled);
-	}
-
-	@media (prefers-reduced-motion) {
-		.indicator,
-		.indicator::after,
-		.label-content {
-			transition: none;
-		}
-	}
+  @media (prefers-reduced-motion) {
+    .indicator,
+    .indicator::after {
+      transition: none;
+    }
+  }
 </style>

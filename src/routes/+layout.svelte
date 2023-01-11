@@ -68,6 +68,7 @@
       <a href="{base}/components/checkbox">Checkbox</a>
       <a href="{base}/components/dialog">Dialog</a>
       <a href="{base}/components/input">Input</a>
+      <a href="{base}/components/label">Label</a>
       <a href="{base}/components/list">List</a>
       <a href="{base}/components/progress">Progress</a>
       <a href="{base}/components/radio">Radio</a>
