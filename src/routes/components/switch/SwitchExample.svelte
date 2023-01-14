@@ -35,6 +35,9 @@
       <Switch bind:checked {disabled} {vertical} {onText} {offText} />
     {/if}
   </div>
+  <svelte:fragment slot="status">
+    <div>checked: {checked}</div>
+  </svelte:fragment>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
     <Checkbox bind:checked={vertical}><span slot="label">vertical</span></Checkbox>

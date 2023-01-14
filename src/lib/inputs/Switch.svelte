@@ -19,7 +19,7 @@
 
   $: switchSize = vertical ? switchHeight : switchWidth;
   $: thumbSize = vertical ? thumbHeight : thumbWidth;
-  $: ratio = checked ? 1 : 0;
+  $: ratio = vertical ? (checked ? 0 : 1) : checked ? 1 : 0;
   $: valueOffset = (switchSize - thumbSize) * ratio;
 </script>
 
