@@ -7,14 +7,18 @@
 
 A styled HTML input type=checkbox element.
 
+## Playground
+
 <Example />
 
-## Design
+## Anatomy
 
-- The checkbox, checkmark, and label sizes are based on the inherited font.
-- The checkmark is pure CSS rather than an SVG or font icon.
-- The HTML input is rendered but not visible in order to apply styles.
-- HTML input props are forwarded and events bubbled.
+```
+checkbox
+  HTML input (hidden)
+  checkmark
+label slot
+```
 
 ## Props
 

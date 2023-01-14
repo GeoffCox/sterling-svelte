@@ -8,7 +8,7 @@
 
 A styled HTML `<dialog>` element for modal dialogs.
 
-## Example
+## Playground
 
 ### Form Submit
 
@@ -28,12 +28,31 @@ IMPORTANT!
 
 <FormExample />
 
-### Manual Alternative Example
+### Manual Action Buttons
 
 This example demonstrates buttons that do not submit the form.
 Instead, `on:click` handlers take action.
 
 <Example />
+
+## Features
+
+- Bind the `open` prop to open or close the dialog.
+- The `title`, `body`, and `footer` slots are provided for for typical dialog content layout.
+- The `header` slot allows replacing both the title and close button.
+- The `content` slot allows replacing the header, body, and footer.
+- A `form` wraps the content to support dialog form submission.
+- The `backdropCloses` closes the dialog when the backdrop is clicked.
+- The dialog size is based on the content.
+- Padding is based on the inherited font.
+- HTML dialog props are forwarded and events are bubbled.
+
+IMPORTANT!
+
+- While the open prop on the native `dialog` creates a modeless window, this `Dialog` is **always modal**.
+  Other components should be used for modeless windows.
+- Because the `open` prop causes the dialog to be modeless, it is not forwarded to the `dialog` element.
+- The `cancel` event is bubbled, but it is only raised when the escape key is pressed. It is not raised when the close button or any button with `value=''` is pressed.
 
 ## Usage
 
@@ -66,29 +85,10 @@ const deleteProduct = () => {
 <Button on:click={() => (open = true)}>Delete</Button>
 ```
 
-## Features
-
-- Bind the `open` prop to open or close the dialog.
-- The `title`, `body`, and `footer` slots are provided for for typical dialog content layout.
-- The `header` slot allows replacing both the title and close button.
-- The `content` slot allows replacing the header, body, and footer.
-- A `form` wraps the content to support dialog form submission.
-- The `backdropCloses` closes the dialog when the backdrop is clicked.
-- The dialog size is based on the content.
-- Padding is based on the inherited font.
-- HTML dialog props are forwarded and events are bubbled.
-
-IMPORTANT!
-
-- While the open prop on the native `dialog` creates a modeless window, this `Dialog` is **always modal**.
-  Other components should be used for modeless windows.
-- Because the `open` prop causes the dialog to be modeless, it is not forwarded to the `dialog` element.
-- The `cancel` event is bubbled, but it is only raised when the escape key is pressed. It is not raised when the close button or any button with `value=''` is pressed.
-
 ## Anatomy
 
 ```
-dialog
+HTML dialog
   content slot
     header slot
       title slot

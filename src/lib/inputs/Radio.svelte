@@ -40,7 +40,6 @@
 	@component
 	A styled HTML input type=radio element with optional label.
 -->
-<!-- svelte-ignore a11y-label-has-associated-control -->
 <div class="sterling-radio">
   <div class="container">
     <input

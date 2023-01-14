@@ -1,136 +1,120 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
 
-	export let name: string = '';
-	export let description: string = '';
+  let events: { message: string; timestamp: Date }[] = [];
 
-	let events: { message: string; timestamp: Date }[] = [];
+  export const recordEvent = (message: string) => {
+    const now = new Date();
+    events = [...events.slice(-4), { message, timestamp: now }];
+  };
 
-	export const recordEvent = (message: string) => {
-		const now = new Date();
-		events = [...events.slice(-4), { message, timestamp: now }];
-	};
+  let mounted = false;
 
-	let mounted = false;
+  onMount(() => {
+    mounted = true;
+  });
 
-	onMount(() => {
-		mounted = true;
-	});
-
-	onDestroy(() => {
-		mounted = false;
-	});
+  onDestroy(() => {
+    mounted = false;
+  });
 </script>
 
 <div class="example">
-	<h1>{name}</h1>
-	<div class="description">{description}</div>
-	{#if mounted}
-		<div class="component">
-			<slot name="component" />
-		</div>
-		<div class="panel">
-			<div class="options">
-				<h2>Options</h2>
-				<slot name="options">(none)</slot>
-			</div>
-			<div class="status">
-				<h2>Status</h2>
-				<slot name="status">(none)</slot>
-			</div>
-			<div class="events">
-				<h2>Events</h2>
-				{#each events as event}
-					<div class="event">
-						<div class="event-message">{event.message}</div>
-						<div class="event-timestamp">&nbsp;@{event.timestamp.getMilliseconds()}</div>
-					</div>
-				{/each}
-			</div>
-			<div class="documentation">
-				<slot name="documentation" />
-			</div>
-		</div>
-	{/if}
+  {#if mounted}
+    <div class="component">
+      <slot name="component" />
+    </div>
+    <div class="status panel">
+      <h2>Status</h2>
+      <slot name="status">(none)</slot>
+    </div>
+    <div class="options panel">
+      <h2>Options</h2>
+      <slot name="options">(none)</slot>
+    </div>
+    <div class="events panel">
+      <h2>Events</h2>
+      {#each events as event}
+        <div class="event">
+          <div class="event-message">{event.message}</div>
+          <div class="event-timestamp">&nbsp;@{event.timestamp.getMilliseconds()}</div>
+        </div>
+      {/each}
+    </div>
+  {/if}
 </div>
 
 <style>
-	.example {
-		display: flex;
-		flex-direction: column;
-		align-items: start;
-		padding: 15px;
-	}
+  .example {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    align-items: flex-start;
+    justify-items: stretch;
+    column-gap: 2em;
+    padding: 2em;
+  }
 
-	.description {
-		padding: 0 0 15px 0;
-	}
+  .component {
+    grid-row: 1 / span 3;
+    grid-column: 2 / span 1;
+    border: 1px dashed lightgray;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    align-items: start;
+  }
 
-	.component {
-		border: 1px dashed lightgray;
-		border-radius: 10px;
-		padding: 15px;
-		display: flex;
-		flex-direction: column;
-		row-gap: 5px;
-		align-items: start;
-	}
+  .options {
+    grid-row: 2 / span 1;
+    grid-column: 1 / span 1;
+  }
 
-	.panel {
-		display: grid;
-		gap: 20px;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: auto auto;
-		align-self: stretch;
-		margin: 20px 0;
-	}
+  .status {
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 1;
+  }
 
-	.options,
-	.status,
-	.events {
-		background-color: var(--Layer__background-color--1);
-		color: var(--Layer__color--1);
-		padding: 10px;
-		display: flex;
-		flex-direction: column;
-		row-gap: 10px;
-		align-items: flex-start;
-	}
+  .events {
+    grid-row: 3 / span 1;
+    grid-column: 1 / span 1;
+  }
 
-	.event {
-		display: inline-block;
-	}
+  .panel {
+    border: 2px double var(--Common__border-color);
+    color: var(--Layer__color--1);
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    align-items: flex-start;
+    margin-bottom: 1em;
+    min-width: 350px;
+  }
 
-	.event-message,
-	.event-timestamp {
-		display: inline;
-	}
+  .event {
+    display: inline-block;
+  }
 
-	.event-timestamp {
-		color: var(--Display__color--info);
-	}
+  .event-message,
+  .event-timestamp {
+    display: inline;
+  }
 
-	.options {
-		grid-row-start: 1;
-		grid-row-end: 3;
-	}
+  .event-timestamp {
+    color: var(--Display__color--info);
+  }
 
-	h1,
-	h2 {
-		margin-block-start: 0;
-		margin-block-end: 0;
-		margin-inline-start: 0;
-		margin-inline-end: 0;
-		margin: 0;
-		padding: 0;
-		font-weight: normal;
-	}
-
-	h1 {
-		margin: 10px;
-	}
-	h2 {
-		margin: 5px;
-		font-size: 1.2em;
-	}
+  h2 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+    font-weight: normal;
+  }
 </style>

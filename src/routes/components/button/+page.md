@@ -7,12 +7,21 @@
 
 A styled HTML button element.
 
+## Playground
+
 <Example />
 
 ## Features
 
-- The button size and padding are based on the inherited font.
-- HTML button props are forwarded and events are bubbled.
+- You can choose the shape of the button.
+- You can choose the appearance of the button.
+
+## Anatomy
+
+```
+HTML button
+  _default_ slot
+```
 
 ## Props
 
@@ -28,7 +37,7 @@ A styled HTML button element.
 
 | Name      | Description                                 |
 | --------- | ------------------------------------------- |
-| (default) | Content within the button (e.g. text, icon) |
+| _default_ | Content within the button (e.g. text, icon) |
 
 ## Theming
 

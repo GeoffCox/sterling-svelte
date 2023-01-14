@@ -7,15 +7,23 @@
 
 A list of items where a single item can be selected.
 
+## Playground
+
 <Example />
 
 ## Features
 
-- Layout can be a vertical or horizontal list.
+- Choose between a vertical or horizontal list.
 - Arrow keys selected the next or previous item.
-- An optional label can be specified to identify the list of items.
-- Size and padding are based on the inherited font.
-- HTML div props are forwarded and events are bubbled.
+- Identify the list of items with an associated label.
+
+## Anatomy
+
+```
+  label slot
+  list of items
+    _default_ slot (item template)
+```
 
 ## Props
 
@@ -45,7 +53,7 @@ A list of items where a single item can be selected.
 
 | Name      | Description                                                                                  |
 | --------- | -------------------------------------------------------------------------------------------- |
-| (default) | A template for rendering each item. Item is passed disabled, index, item, and selected props |
+| _default_ | A template for rendering each item. Item is passed disabled, index, item, and selected props |
 | label     | The label associated with the input                                                          |
 
 ## Theming

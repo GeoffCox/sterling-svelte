@@ -7,12 +7,20 @@
 
 A styled HTML input element.
 
+## Playground
+
 <Example />
 
-## Design
+## Features
 
-- Size and padding are based on the inherited font.
-- HTML input props are forwarded and events are bubbled.
+- Identify the value with an associated label.
+
+## Anatomy
+
+```
+  label slot
+  HTML input
+```
 
 ## Props
 

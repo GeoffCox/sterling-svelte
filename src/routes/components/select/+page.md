@@ -7,9 +7,13 @@
 
 A single item that can be selected from a popup list of items.
 
+## Playground
+
 <Example />
 
 ## Features
+
+- Identify the value and list of items with an associated label.
 
 ### Mouse
 
@@ -23,14 +27,21 @@ A single item that can be selected from a popup list of items.
 - Escape key closes the popup without changing selection.
 - Enter key selects the current item in the popup and closes the popup.
 
-### Misc
+### Popup
 
-- An optional label can be specified to identify the list of items.
-- The popup will dynamically position itself based on avaiable screen space.
-- The popup is given a unique ID per instance of select.
-- Chevron is pure CSS rather than an SVG or font icon.
-- Size and padding are based on the inherited font.
-- HTML div props are forwarded and events are bubbled.
+- The popup is dynamically positioned based on avaiable screen space.
+
+## Anatomy
+
+```
+  label slot
+  value
+  button
+  popup
+  list slot
+    List
+    _default_ slot (item template)
+```
 
 ## Props
 
@@ -53,7 +64,7 @@ A single item that can be selected from a popup list of items.
 
 | Name      | Description                                                                                  |
 | --------- | -------------------------------------------------------------------------------------------- |
-| (default) | A template for rendering each item. Item is passed disabled, index, item, and selected props |
+| _default_ | A template for rendering each item. Item is passed disabled, index, item, and selected props |
 | button    | The button that opens and closes the popup. `Button` by default.                             |
 | label     | The label associated with the input. The selected item as text by default.                   |
 | list      | The list containing items within the popup. `List` by default.                               |

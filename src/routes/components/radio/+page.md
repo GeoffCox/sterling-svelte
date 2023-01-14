@@ -7,14 +7,16 @@ A styled HTML input type=radio element.
     import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
+## Playground
+
 <Example />
 
-## Design
+## Anatomy
 
-- The radio circle, dot, and label sizes are based on the inherited font.
-- The radio dot is pure CSS rather than an SVG or font icon.
-- The HTML input is rendered but not visible in order to apply styles.
-- HTML input props are forwarded and events are bubbled.
+`radio
+  HTML input (hidden)
+  dot
+label slot`
 
 ## Props
 

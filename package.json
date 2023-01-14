@@ -1,6 +1,22 @@
 {
   "name": "@geoffcox/sterling-svelte",
-  "version": "0.0.10",
+  "version": "0.0.11",
+  "author": "Geoff Cox",
+  "description": "A modern, accessible, and lightweight component library for Svelte.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GeoffCox/sterling-svelte/issues"
+  },
+  "homepage": "https://github.com/GeoffCox/sterling-svelte/blob/main/README.md",
+  "keywords": [
+    "svelte",
+    "design system",
+    "component",
+    "controls",
+    "sveltekit",
+    "typescript",
+    "javascript"
+  ],
   "scripts": {
     "dev": "vite dev",
     "build:docs": "vite build",

@@ -74,6 +74,7 @@
       <a href="{base}/components/radio">Radio</a>
       <a href="{base}/components/select">Select</a>
       <a href="{base}/components/slider">Slider</a>
+      <a href="{base}/components/switch">Switch</a>
     </div>
     <div class="component">
       <slot />

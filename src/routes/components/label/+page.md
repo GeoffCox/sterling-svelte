@@ -7,12 +7,21 @@ A styled HTML label element.
     import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
+## Playground
+
 <Example />
 
 ## Features
 
 - The label inherits color, when disabled opacity is set to 0.5.
 - HTML label props are forwarded and events are bubbled.
+
+## Anatomy
+
+```
+HTML label
+   _default_ slot
+```
 
 ## Props
 
@@ -24,4 +33,4 @@ A styled HTML label element.
 
 | Name      | Description                             |
 | --------- | --------------------------------------- |
-| (default) | The content to display within the label |
+| _default_ | The content to display within the label |

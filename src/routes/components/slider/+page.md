@@ -7,17 +7,33 @@ Slider allows users to set a value between a minimum and maximum by moving a vis
     import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
+## Playground
+
 <Example />
 
 ## Features
 
+- Choose between a horizontal or vertical slider.
 - User can change value by dragging the thumb.
 - Arrow keys increment value up or down.
-- Horizontal or vertical layout
-- An optional label can be specified.
-- Callers can get the percentage (readonly) based on the value and max.
-- The progress size and padding are based on the inherited font.
-- HTML div props are forwarded and events are bubbled.
+- Identify the value with an associated label.
+- Bind to the calculated percentage.
+
+## Anatomy
+
+```
+  label slot
+  slider
+    track
+    fill
+    thumb
+```
+
+- label (optional): describes the slider value
+- slider: contains the track, fill, and thumb
+- track: displays the range between min and max
+- fill: displays filling betweenmin and value
+- thumb: a draggable button for changing the value
 
 ## Props
 
@@ -42,14 +58,6 @@ Slider allows users to set a value between a minimum and maximum by moving a vis
 | Name   | Event.detail | Description                           |
 | ------ | ------------ | ------------------------------------- |
 | change | `{ value }`  | Raised when the slider value changes. |
-
-## Anatomy
-
-- label (optional): describes the slider value
-- slider: contains the track, fill, and thumb
-- track: displays the range between min and max
-- fill: displays filling betweenmin and value
-- thumb: a draggable button for changing the value
 
 ## Theming
 

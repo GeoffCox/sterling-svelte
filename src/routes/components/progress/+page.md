@@ -7,16 +7,23 @@ An indicator of a value between 0 and a maximum value.
     import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
+## Playground
+
 <Example />
 
 ## Features
 
-- The progress bar can be horizontal or vertical.
-- An optional label can be specified.
-- The indicator can display semantic colors.
-- Callers can get the percentage (readonly) based on the value and max.
-- The progress size and padding are based on the inherited font.
-- HTML div props are forwarded and events are bubbled.
+- Choose between a horizontal or vertical progress bar.
+- Identify the value with an associated label.
+- Give meaning to the value with semantic colors.
+- Bind to the calculated percentage.
+
+## Anatomy
+
+```
+  label slot
+  indicator
+```
 
 ## Props
 

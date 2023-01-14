@@ -12,7 +12,6 @@
 	@component
 	A styled HTML input type=checkbox element.
 -->
-<!-- svelte-ignore a11y-label-has-associated-control -->
 <div class="sterling-checkbox">
   <div class="container">
     <input

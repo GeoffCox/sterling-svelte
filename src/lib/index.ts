@@ -22,4 +22,5 @@ import Progress from './display/Progress.svelte';
 import Radio from './inputs/Radio.svelte';
 import Select from './inputs/Select.svelte';
 import Slider from './inputs/Slider.svelte';
-export { Button, Checkbox, Dialog, Input, Label, List, Progress, Radio, Select, Slider };
+import Switch from './inputs/Switch.svelte';
+export { Button, Checkbox, Dialog, Input, Label, List, Progress, Radio, Select, Slider, Switch };
