@@ -165,7 +165,7 @@ A list of items where a single item can be selected.
   {/if}
   <div
     bind:this={listRef}
-    class="list labeled"
+    class="list"
     class:disabled
     class:focus-visible={focusVisible}
     class:horizontal
@@ -225,9 +225,9 @@ A list of items where a single item can be selected.
     border-width: var(--Common__border-width);
     box-sizing: border-box;
     color: var(--Common__color);
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -262,6 +262,10 @@ A list of items where a single item can be selected.
   }
 
   .list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    grid-row: 2 / span 1;
     overflow-x: hidden;
     overflow-y: scroll;
     position: relative;
