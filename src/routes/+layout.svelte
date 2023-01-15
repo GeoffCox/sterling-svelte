@@ -102,6 +102,19 @@
     margin: 0;
   }
 
+  :global(h1),
+  :global(h2),
+  :global(h3) {
+    margin-block-start: 0.7em;
+    margin-block-end: 0.25em;
+  }
+
+  :global(p) {
+    margin-block-start: 0.25em;
+    margin-block-end: 0.25em;
+    line-height: 1.6em;
+  }
+
   :global(pre),
   :global(code) {
     font-family: 'FiraMono', monospace;

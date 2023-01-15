@@ -113,18 +113,3 @@ HTML dialog
 | title    |                            | The dialog title              |
 | body     |                            | The dialog body               |
 | footer   |                            | The dialog footer             |
-
-## Theming
-
-| Part                 | Theme variable                                      |
-| -------------------- | --------------------------------------------------- |
-| content background   | <ThemePropCard name='--Common__background-color'/>  |
-| content border       | <ThemePropCard name='--Common__border-color'/>      |
-| content border       | <ThemePropCard name='--Common__border-radius'/>     |
-| content border       | <ThemePropCard name='--Common__border-style'/>      |
-| content border       | <ThemePropCard name='--Common__border-width'/>      |
-| content foreground   | <ThemePropCard name='--Common__color'/>             |
-| header background    | <ThemePropCard name='--Display__background-color'/> |
-| separator background | <ThemePropCard name='--Display__background-color'/> |
-| separator thickness  | <ThemePropCard name='--Common__border-width'/>      |
-| close button         | `<Button variant="ghost" shape="circular">`         |

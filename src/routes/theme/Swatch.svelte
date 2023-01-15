@@ -1,0 +1,129 @@
+<script lang="ts">
+  import { lightTheme } from '$lib';
+
+  export let backgroundColor: string;
+  export let borderColor: string;
+  export let borderRadius: string;
+  export let borderStyle: string;
+  export let borderWidth: string;
+  export let color: string;
+
+  const getCssValue = (value: string) => {
+    if (value.startsWith('--')) {
+      return `var(${value})`;
+    }
+    return value;
+  };
+
+  $: style =
+    `--swatch__background-color: ${getCssValue(backgroundColor)};` +
+    `--swatch__border-color: ${getCssValue(borderColor)};` +
+    `--swatch__border-radius: ${getCssValue(borderRadius)};` +
+    `--swatch__border-style: ${getCssValue(borderStyle)};` +
+    `--swatch__border-width: ${getCssValue(borderWidth)};` +
+    `--swatch__color: ${getCssValue(color)};`;
+</script>
+
+<div class="swatch" {style}>
+  <div class="color-block-background" />
+  <div class="color-block"><span>T</span></div>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    version="1.1"
+    viewBox="0 0 450 150"
+    xml:space="preserve"
+    class="diagram"
+  >
+    <text class="text" x="110" y="20">{backgroundColor}</text>
+    <line class="line" x1="100" y1="5" x2="100" y2="25" />
+    <line class="line" x1="100" y1="15" x2="60" y2="60" />
+    <circle class="dot" cx="60" cy="60" r="3" />
+
+    <text class="text" x="110" y="50">{borderColor}</text>
+    <text class="text" x="110" y="70">{borderRadius}</text>
+    <text class="text" x="110" y="90">{borderStyle}</text>
+    <text class="text" x="110" y="110">{borderWidth}</text>
+    <line class="line" x1="100" y1="35" x2="100" y2="115" />
+    <line class="line" x1="100" y1="75" x2="73" y2="75" />
+    <circle class="dot" cx="73" cy="75" r="3" />
+
+    <text class="text" x="110" y="140">{color}</text>
+    <line class="line" x1="100" y1="125" x2="100" y2="145" />
+    <line class="line" x1="100" y1="135" x2="47" y2="87" />
+    <circle class="dot" cx="47" cy="87" r="3" />
+  </svg>
+</div>
+
+<style>
+  .swatch {
+    width: 450px;
+    height: 150px;
+    position: relative;
+  }
+
+  .diagram {
+    font: inherit;
+    position: relative;
+  }
+
+  text {
+    font-size: 16px;
+    fill: var(--Common__color);
+  }
+
+  .line {
+    stroke: var(--Common__color);
+    stroke-width: 1px;
+  }
+
+  .dot {
+    fill: var(--Common__color);
+  }
+
+  .color-block-background {
+    background-color: transparent;
+    background-image: repeating-linear-gradient(
+        45deg,
+        var(--Common__color) 25%,
+        transparent 25%,
+        transparent 75%,
+        var(--Common__color) 75%,
+        var(--Common__color)
+      ),
+      repeating-linear-gradient(
+        45deg,
+        var(--Common__color) 25%,
+        var(--Common__background-color) 25%,
+        var(--Common__background-color) 75%,
+        var(--Common__color) 75%,
+        var(--Common__color)
+      );
+    background-position: 0 0, 4px 4px;
+    background-size: 8px 8px;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 95px;
+  }
+
+  .color-block {
+    position: absolute;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    font-size: 16px;
+    top: 50px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--swatch__background-color);
+    border-color: var(--swatch__border-color);
+    border-radius: var(--swatch__border-radius);
+    border-style: var(--swatch__border-style);
+    border-width: var(--swatch__border-width);
+    color: var(--swatch__color);
+  }
+</style>

@@ -2,80 +2,82 @@
 
 ## Why yet another component library?
 
-You can choose from a wide spectrum of rich and powerful component libraries.
-They vary between the unopinionated that require significant configuration to look decent and the opinionated ones that start great out-of-the-box, but
-offer little customization. As Svelte is the new kid on the block, most are built for other frameworks like
-React or Angular.
+Many component libraries for Svelte are ports of libraries from React or Angular.
+Others are CSS ported from design systems like Material UI or Bootstrap.
 
-I want components designed and built to take full advantage of Svelte. I try to balance consistency and customization
-with global, usage, and component-specific theme properties. Since Svelte naturally builds self-contained
-components the layout, behavior, and style, components will be opinionated. I kept the design minimal and neutral to
-allow custom themes to shine.
+Svelte builds components that encapsulate behavior, layout, and style.
+This can make it difficult to provide component style customization.
+Most existing libraries are either strictly opinionated and offer little customization,
+or have an overwhelming number of specialty customization knobs.
 
-sterling-svelte is:
+I needed a component library built to take full advantage of Svelte.
+I wanted a consistent minimalist style with a practical style customization.
 
-- razor thin
-- minimal and classically styled
-- ideomatically Svelte
-- for modern, evergreen browsers
-- accessible
+**_sterling-svelte_**:
+
+- is thin and lightweight
+- is minimal and classically styled
+- is ideomatic Svelte
+- targets modern, evergreen browsers
+- meets latest accessibility standards
 
 ## Design
 
 ### Theme and Styles
 
-Components have a neutral color scheme with high contrast ratios.
-Borders are medium weight.
-To be responsive, each component scales its padding and layout based on font ems.
-In some cases, pixel spacing or thickness is used but only after verifying it looks correct and multiple sizes.
-
-The theme is implemented using CSS variables.
-Care was taken to balance between too few and generic variables and an overwhelming number of component-specific variables.
-Sets of variables are defined for common usage, buttons (i.e. clickable things), form inputs, containers/lists, and information display.
-Additionally, a set of semantic colors display information, success, and errors states.
+- Built in themes have a neutral color palette with high contrast ratios.
+  This keeps the focus on the content of your application.
+- Size, spacing, and borders are medium weight to make visual separation easy to see while maintaining a clean look.
+- Each component scales its padding and layout based on font EMs to remain responsive and avoid hard-coded pixel values.
+- The theme is applied as CSS variables to allow theme switching without re-rendering.
+- The theme balances general purpose and component-specific variables to provide customization with the minimal performance cost.
 
 ### Slots
 
-Components leverage Svelte's slots for customization and replacement of component parts.
-For example, input components have a label slot for changing the label component rather than only providing a string value.
+- Components use slots for customization and replacement of parts.
+  For example, input components have a label slot for changing the label component rather than only providing a string value.
+- The default slot is reserved for transclusion where the slot represents the content typically between the open and close tags.
+  Named slots provide better semantic meaning and extensibility without breaking changes.
 
-### Native Element Components
+### Native HTML Element Components
 
-Components that wrap an HTML element will forward props to the element and bubble events from the element.
-If the native element type is not suitable, a component may avoid using the native element in favor of its own behavior
-and style via div elements.
+- Components that render or wrap an HTML element will forward props and bubble events.
 
 ## Dependencies
 
-Dependencies are kept to an absolute minimum.
-All dependencies are reviewed as the library evolves to determine if they should be inlined or can be removed.
+- Dependencies are kept to an absolute minimum and the build tree-shakes out unused code.
+  They are regularly reviewed as the library evolves.
 
-- uuid to create element identifiers
-- floating-ui to position popups and overlays
-- lodash-es for data utility functions
+| Library     | Usage                           |
+| ----------- | ------------------------------- |
+| uuid        | to create element identifiers   |
+| floating-ui | to position popups and overlays |
+| lodash-es   | for data utility functions      |
 
 ## Roadmap
 
-| Component     | Published in Version |
-| ------------- | -------------------- |
-| (theme)       | 0.0.1                |
-| Button        | 0.0.3                |
-| Input         | 0.0.4                |
-| Checkbox      | 0.0.5                |
-| Radio         | 0.0.6                |
-| List          | 0.0.7                |
-| Select        | 0.0.7                |
-| Progress      | 0.0.8                |
-| Slider        | 0.0.8                |
-| Dialog        | 0.0.9                |
-| Label         | 0.0.10               |
-| Switch        | 0.0.11               |
-| Menu          |                      |
-| Tree          |                      |
-| Tooltip       |                      |
-| TextArea      |                      |
-| Toggle/Choice |                      |
-| Accordion     |                      |
-| Notifications |                      |
-| Drawer        |                      |
-| Tabs          |                      |
+The library is in alpha - anything and everything may change at any time.
+
+| Component     | Introduced in Version |
+| ------------- | --------------------- |
+| (theme)       | 0.0.1                 |
+| Button        | 0.0.3                 |
+| Input         | 0.0.4                 |
+| Checkbox      | 0.0.5                 |
+| Radio         | 0.0.6                 |
+| List          | 0.0.7                 |
+| Select        | 0.0.7                 |
+| Progress      | 0.0.8                 |
+| Slider        | 0.0.8                 |
+| Dialog        | 0.0.9                 |
+| Label         | 0.0.10                |
+| Switch        | 0.0.11                |
+| Menu          |                       |
+| Tree          |                       |
+| Tooltip       |                       |
+| TextArea      |                       |
+| Toggle/Choice |                       |
+| Accordion     |                       |
+| Notifications |                       |
+| Drawer        |                       |
+| Tabs          |                       |

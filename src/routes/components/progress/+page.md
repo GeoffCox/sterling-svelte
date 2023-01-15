@@ -44,27 +44,3 @@ An indicator of a value between 0 and a maximum value.
 | Name  | Description                            |
 | ----- | -------------------------------------- |
 | label | The label associated with the progress |
-
-## Theming
-
-| Part       | State                         | Theme variable                                               |
-| ---------- | ----------------------------- | ------------------------------------------------------------ |
-| background |                               | <ThemePropCard name='--Common__background-color'/>           |
-| border     |                               | <ThemePropCard name='--Common__border-color'/>               |
-| border     |                               | <ThemePropCard name='--Common__border-radius'/>              |
-| border     |                               | <ThemePropCard name='--Common__border-style'/>               |
-| border     |                               | <ThemePropCard name='--Common__border-width'/>               |
-| label slot |                               | <ThemePropCard name='--Display__color--subtle' />            |
-| indicator  |                               | <ThemePropCard name='--Display__color'/>                     |
-|            |                               |                                                              |
-| indicator  | colorful=auto, less than 100% | <ThemePropCard name='--Display__color--progress'/>           |
-| indicator  | colorful=auto, equals 100%    | <ThemePropCard name='--Display__color--success'/>            |
-| indicator  | colorful=progress             | <ThemePropCard name='--Display__color--progress'/>           |
-| indicator  | colorful=success              | <ThemePropCard name='--Display__color--success'/>            |
-| indicator  | colorful=warning              | <ThemePropCard name='--Display__color--warning'/>            |
-| indicator  | colorful=error                | <ThemePropCard name='--Display__color--error'/>              |
-|            |                               |                                                              |
-| background | disabled                      | <ThemePropCard name='--Common__background-color--disabled'/> |
-| border     | disabled                      | <ThemePropCard name='--Common__border-color--disabled'/>     |
-| label slot | disabled                      | <ThemePropCard name='--Display__color--disabled' />          |
-| indicator  | disabled                      | <ThemePropCard name='--Display__color--disabled'/>           |
