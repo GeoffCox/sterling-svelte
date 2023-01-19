@@ -1,18 +1,34 @@
 <script lang="ts">
   import { v4 as uuid } from 'uuid';
   import Label from '../display/Label.svelte';
+  import type { TextAreaResize } from './TextArea.types';
 
-  export let value: string = '';
-  export let disabled: boolean = false;
+  export let value: string;
+  export let resize: TextAreaResize = 'none';
+  export let disabled = false;
+  export let autoHeight = false;
 
   const inputId = uuid();
+
+  let textAreaRef: HTMLTextAreaElement;
+
+  const autoSetHeight = () => {
+    if (autoHeight && textAreaRef) {
+      // the style must be directly set to avoid re-rendering looping latency
+      // setting to auto for a moment allows the textarea to shrink
+      textAreaRef.style.height = 'auto';
+      textAreaRef.style.height = `${textAreaRef.scrollHeight}px`;
+    }
+  };
+
+  const onInput = () => {
+    autoSetHeight();
+  };
+
+  $: autoHeight, autoSetHeight();
 </script>
 
-<!--
-	@component
-	A styled HTML input element with optional label.
--->
-<div class="sterling-input">
+<div class="sterling-text-area" style={`--TextArea__resize: ${resize};`}>
   {#if $$slots.label}
     <div class="label">
       <Label {disabled} for={inputId}>
@@ -20,7 +36,9 @@
       </Label>
     </div>
   {/if}
-  <input
+  <textarea
+    {...$$restProps}
+    bind:this={textAreaRef}
     bind:value
     on:blur
     on:click
@@ -32,6 +50,7 @@
     on:focus
     on:focusin
     on:focusout
+    on:input={onInput}
     on:input
     on:invalid
     on:keydown
@@ -48,34 +67,39 @@
     on:submit
     on:reset
     on:wheel
-    {...$$restProps}
     {disabled}
-    id={inputId}
+    rows="1"
+    {...$$restProps}
   />
 </div>
 
 <style>
-  .sterling-input {
-    display: flex;
-    flex-direction: column;
+  .sterling-text-area {
     background-color: var(--Input__background-color);
     border-color: var(--Input__border-color);
     border-radius: var(--Input__border-radius);
     border-style: var(--Input__border-style);
     border-width: var(--Input__border-width);
+    box-sizing: border-box;
     color: var(--Input__color);
-    font: inherit;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    padding: 0;
     margin: 0;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
-  .sterling-input:hover {
+  .sterling-text-area:hover {
     background-color: var(--Input__background-color--hover);
     border-color: var(--Input__border-color--hover);
     color: var(--Input__color--hover);
   }
 
-  .sterling-input:focus-within {
+  .sterling-text-area:focus-wthin {
     background-color: var(--Input__background-color--focus);
     border-color: var(--Input__border-color--focus);
     color: var(--Input__color--focus);
@@ -85,34 +109,41 @@
     outline-width: var(--Common__outline-width);
   }
 
-  .sterling-input:disabled {
+  .sterling-text-area:disabled {
     background-color: var(--Input__background-color--disabled);
     border-color: var(---Input__border-color--disabled);
     color: var(--Input__color--disabled);
     cursor: not-allowed;
   }
 
-  .sterling-input input {
-    font: inherit;
+  textarea {
+    background: none;
+    box-sizing: border-box;
     color: inherit;
-    padding: 0.5em;
+    font: inherit;
+    line-height: inherit;
+    padding: 0 0.5em 0.5em 0.5em;
+    min-height: 3em;
+    margin: 0.5em 0 0 0;
+    resize: var(--TextArea__resize, none);
+    width: 100%;
   }
 
-  .sterling-input input,
-  .sterling-input input:hover,
-  .sterling-input input:focus-within,
-  .sterling-input input:disabled {
+  textarea,
+  textarea:hover,
+  textarea:focus-within,
+  textarea:disabled {
     background-color: transparent;
     border: none;
     outline: none;
   }
 
-  .sterling-input input::placeholder {
+  textarea::placeholder {
     color: var(--Display__color--faint);
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
-  .sterling-input input:disabled::placeholder {
+  textarea:disabled::placeholder {
     color: var(--Display__color--disabled);
   }
 
@@ -122,8 +153,8 @@
   }
 
   @media (prefers-reduced-motion) {
-    .sterling-input,
-    .sterling-input input::placeholder {
+    .sterling-text-area,
+    .sterling-text-area textarea::placeholder {
       transition: none;
     }
   }

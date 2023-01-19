@@ -72,10 +72,10 @@ The library is in alpha - anything and everything may change at any time.
 | Dialog        | 0.0.9                 |
 | Label         | 0.0.10                |
 | Switch        | 0.0.11                |
+| TextArea      | 0.0.13                |
 | Menu          |                       |
 | Tree          |                       |
 | Tooltip       |                       |
-| TextArea      |                       |
 | Toggle/Choice |                       |
 | Accordion     |                       |
 | Notifications |                       |

@@ -75,6 +75,7 @@
       <a href="{base}/components/select">Select</a>
       <a href="{base}/components/slider">Slider</a>
       <a href="{base}/components/switch">Switch</a>
+      <a href="{base}/components/textarea">TextArea</a>
     </div>
     <div class="component">
       <slot />
