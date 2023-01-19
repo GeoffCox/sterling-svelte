@@ -9,6 +9,7 @@ export { toggleDarkTheme } from './theme/toggleDarkTheme';
 
 export { type ButtonVariant, type ButtonShape } from './buttons/Button.types';
 export { type ProgressColorful } from './display/Progress.types';
+export { type TextAreaResize } from './inputs/TextArea.types';
 
 export { clickOutside } from './clickOutside';
 
@@ -23,4 +24,19 @@ import Radio from './inputs/Radio.svelte';
 import Select from './inputs/Select.svelte';
 import Slider from './inputs/Slider.svelte';
 import Switch from './inputs/Switch.svelte';
-export { Button, Checkbox, Dialog, Input, Label, List, Progress, Radio, Select, Slider, Switch };
+import TextArea from './inputs/TextArea.svelte';
+
+export {
+  Button,
+  Checkbox,
+  Dialog,
+  Input,
+  Label,
+  List,
+  Progress,
+  Radio,
+  Select,
+  Slider,
+  Switch,
+  TextArea
+};
