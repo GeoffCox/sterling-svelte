@@ -20,20 +20,25 @@ A list of items where a single item can be selected.
 ## Anatomy
 
 ```
+List
   label slot
   list of items
-    _default_ slot (item template)
+    item slot
+      ListItem
+        _default_ slot
 ```
 
 ## Props
 
-| Name                    | Type    | Description                              |
-| ----------------------- | ------- | ---------------------------------------- |
-| disabled                | boolean | Disables the list and items              |
-| items                   | any[]   | The items in the list                    |
-| horizontal              | boolean | If the list layout should be horizontal  |
-| selectedIndex           | number  | The index of the currently selected item |
-| selectedItem (readonly) | any     | The currently selected item              |
+| Name                    | Type    | Description                                              |
+| ----------------------- | ------- | -------------------------------------------------------- |
+| composed                | boolean | Indicates the list is composed within another component. |
+|                         |         | Removes background, border, and outline styles.          |
+| disabled                | boolean | Disables the list and items                              |
+| items                   | any[]   | The items in the list                                    |
+| horizontal              | boolean | If the list layout should be horizontal                  |
+| selectedIndex           | number  | The index of the currently selected item                 |
+| selectedItem (readonly) | any     | The currently selected item                              |
 
 ## Events
 
@@ -43,15 +48,18 @@ A list of items where a single item can be selected.
 
 ## Methods
 
-| Name               | Parameters | Description                                        |
-| ------------------ | ---------- | -------------------------------------------------- |
-| focusSelectedItem  |            | Focuses the selected item and scrolls it into view |
-| selectPreviousItem |            | Selected the previous item                         |
-| selectNextItem     |            | Selected the next item                             |
+| Name               | Description                                        |
+| ------------------ | -------------------------------------------------- |
+| focusSelectedItem  | Focuses the selected item and scrolls it into view |
+| selectPreviousItem | Selected the previous item                         |
+| selectNextItem     | Selected the next item                             |
 
 ## Slots
 
-| Name      | Description                                                                                  |
-| --------- | -------------------------------------------------------------------------------------------- |
-| _default_ | A template for rendering each item. Item is passed disabled, index, item, and selected props |
-| label     | The label associated with the input                                                          |
+| Name      | `let` params | Description                             |
+| --------- | ------------ | --------------------------------------- |
+| _default_ | (multiple)\* | Each item wrapped in a ListItem         |
+| item      | (multiple)\* | Each item without the ListItem wrapper. |
+| label     |              | The label associated with the input     |
+
+\* `disabled`, `index`, `item` and `selected`

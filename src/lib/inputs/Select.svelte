@@ -4,7 +4,7 @@
   import { computePosition, flip, offset, shift, autoUpdate } from '@floating-ui/dom';
   import { clickOutside } from '../clickOutside';
   import Label from '../display/Label.svelte';
-  import List from '$lib/lists/List.svelte';
+  import List from '$lib/containers/List.svelte';
   import Input from './Input.svelte';
 
   /*--------------------
@@ -241,11 +241,9 @@ A single item that can be selected from a popup list of items.
   {...$$restProps}
 >
   {#if $$slots.label}
-    <div class="label">
-      <Label {disabled} for={inputId}>
-        <slot name="label" />
-      </Label>
-    </div>
+    <Label {disabled} for={inputId}>
+      <slot name="label" />
+    </Label>
   {/if}
   <div class="input" id={inputId}>
     <div class="value">
@@ -340,9 +338,13 @@ A single item that can be selected from a popup list of items.
     outline: none;
   }
 
-  .label {
+  .sterling-select > :global(label) {
     font-size: 0.7em;
     margin: 0.5em 0.7em 0 0.7em;
+  }
+
+  .sterling-select > :global(label):empty {
+    margin: 0;
   }
 
   .input {

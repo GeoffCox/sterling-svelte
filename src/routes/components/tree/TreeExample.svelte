@@ -1,45 +1,38 @@
 <script lang="ts">
   import Checkbox from '$lib/inputs/Checkbox.svelte';
   import Example from '../Example.svelte';
-  import List from '$lib/containers/List.svelte';
+  import Tree from '$lib/containers/Tree.svelte';
   import Input from '$lib/inputs/Input.svelte';
-  import { countries } from '../../_sampleData/countries';
+  import { treeOfLife } from '../../_sampleData/treeOfLife';
 
   let exampleRef: any;
 
-  const items = countries;
+  const nodes = treeOfLife;
   let label = 'COUNTRIES';
   let selectedIndex = 0;
-  let selectedItem = items[0];
+  let selectedItem: any = undefined;
   let disabled = false;
   let horizontal = false;
-  let composed = false;
+
+  let itemExpanded = false;
+  let itemSelected = false;
 </script>
 
 <Example bind:this={exampleRef}>
   <div class="component" class:horizontal slot="component">
-    <List
-      bind:selectedIndex
-      bind:selectedItem
-      {composed}
-      {disabled}
-      {items}
-      {horizontal}
-      selectionKeys="tab"
-      on:itemSelected={(event) => {
-        exampleRef.recordEvent(
-          `itemSelected index:[${event.detail.index}] item:${event.detail.item}`
-        );
-      }}
-    >
-      <svelte:fragment slot="label">{label}</svelte:fragment>
-    </List>
+    <Tree {nodes} let:item let:index>
+      <div style={`padding-left:calc(${item.level} * 5px)`}>
+        {index}
+        {item?.item?.name}
+      </div>
+    </Tree>
   </div>
   <svelte:fragment slot="options">
+    <Checkbox bind:checked={itemExpanded}><span slot="label">itemExpanded</span></Checkbox>
+    <Checkbox bind:checked={itemSelected}><span slot="label">itemSelected</span></Checkbox>
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
     <Checkbox bind:checked={horizontal}><span slot="label">horizontal</span></Checkbox>
-    <Checkbox bind:checked={composed}><span slot="label">composed</span></Checkbox>
-    <Input bind:value={label}><span slot="label">label</span></Input>
+    <Input bind:value={label}>label</Input>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedIndex: {selectedIndex}</div>

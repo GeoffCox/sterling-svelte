@@ -14,11 +14,9 @@
 -->
 <div class="sterling-input">
   {#if $$slots.label}
-    <div class="label">
-      <Label {disabled} for={inputId}>
-        <slot name="label" />
-      </Label>
-    </div>
+    <Label {disabled} for={inputId}>
+      <slot name="label" />
+    </Label>
   {/if}
   <input
     bind:value
@@ -116,9 +114,13 @@
     color: var(--Display__color--disabled);
   }
 
-  .label {
+  .sterling-input > :global(label) {
     font-size: 0.7em;
     margin: 0.5em 0 0 0.7em;
+  }
+
+  .sterling-input > :global(label):empty {
+    margin: 0;
   }
 
   @media (prefers-reduced-motion) {

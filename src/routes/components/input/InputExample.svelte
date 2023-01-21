@@ -20,7 +20,7 @@
       on:input={() => exampleRef.recordEvent('input')}
       on:change={() => exampleRef.recordEvent('change')}
     >
-      <span slot="label">{label}</span>
+      <svelte:fragment slot="label">{label}</svelte:fragment>
     </Input>
   </div>
   <svelte:fragment slot="options">

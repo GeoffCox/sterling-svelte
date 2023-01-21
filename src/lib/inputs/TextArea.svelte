@@ -30,11 +30,9 @@
 
 <div class="sterling-text-area" style={`--TextArea__resize: ${resize};`}>
   {#if $$slots.label}
-    <div class="label">
-      <Label {disabled} for={inputId}>
-        <slot name="label" />
-      </Label>
-    </div>
+    <Label {disabled} for={inputId}>
+      <slot name="label" />
+    </Label>
   {/if}
   <textarea
     {...$$restProps}
@@ -147,9 +145,13 @@
     color: var(--Display__color--disabled);
   }
 
-  .label {
+  .sterling-text-area > :global(label) {
     font-size: 0.7em;
     margin: 0.5em 0 0 0.7em;
+  }
+
+  .sterling-text-area > :global(label):empty {
+    margin: 0;
   }
 
   @media (prefers-reduced-motion) {

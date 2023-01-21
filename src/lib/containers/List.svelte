@@ -1,13 +1,11 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-
   import { v4 as uuid } from 'uuid';
 
   import Label from '../display/Label.svelte';
+  import ListItem from './ListItem.svelte';
 
-  /*--------------------
-		Properties
-	  --------------------*/
+  type T = $$Generic;
 
   /**
    * Disables the list and all items
@@ -17,7 +15,7 @@
   /**
    * The items to put in the list.
    */
-  export let items: any[] = [];
+  export let items: T[] = [];
 
   /**
    * Controls if the list is laid out horizontally.
@@ -32,7 +30,13 @@
   /**
    * The selected item (readonly).
    */
-  export let selectedItem: any = undefined;
+  export let selectedItem: T | undefined = undefined;
+
+  /**
+   * If the list is composed within another container
+   * and should not show borders or background.
+   */
+  export let composed = false;
 
   $: {
     selectedItem = items[selectedIndex];
@@ -40,27 +44,14 @@
 
   const inputId = uuid();
 
-  /*--------------------
-		State
-	  --------------------*/
-
   let listRef: HTMLDivElement;
-  let itemRefs: any = {};
+  let itemRefs: Record<number, HTMLDivElement> = {};
 
-  let focusVisible = false;
-
-  /*--------------------
-		Events
-	  --------------------*/
   const dispatch = createEventDispatcher();
 
   const raiseItemSelected = (index: number) => {
     dispatch('itemSelected', { index, item: items[index] });
   };
-
-  /*--------------------
-		Methods
-	  --------------------*/
 
   export const focusSelectedItem = () => {
     listRef.focus();
@@ -84,10 +75,6 @@
     }
   };
 
-  /*--------------------
-		Reactions
-	  --------------------*/
-
   $: {
     raiseItemSelected(selectedIndex);
   }
@@ -97,10 +84,6 @@
     const selectedRef = itemRefs[selectedIndex] as HTMLDivElement;
     selectedRef?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
   }
-
-  /*--------------------
-		Event Handlers
-	  --------------------*/
 
   const onItemClick = (index: number) => {
     if (!disabled) {
@@ -155,19 +138,17 @@
 @component
 A list of items where a single item can be selected.
   -->
-<div class="sterling-list" class:horizontal class:disabled>
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<div class="sterling-list" class:horizontal class:disabled class:composed tabindex={0}>
   {#if $$slots.label}
-    <div class="label">
-      <Label {disabled} for={inputId}>
-        <slot name="label" />
-      </Label>
-    </div>
+    <Label {disabled} for={inputId}>
+      <slot name="label" />
+    </Label>
   {/if}
   <div
     bind:this={listRef}
     class="list"
     class:disabled
-    class:focus-visible={focusVisible}
     class:horizontal
     role="listbox"
     tabindex={!disabled ? 0 : undefined}
@@ -202,14 +183,16 @@ A list of items where a single item can be selected.
         bind:this={itemRefs[index]}
         aria-selected={disabled ? undefined : selected}
         class="list-item"
-        class:selected
-        class:disabled
         data-index={index + 1}
         role="option"
         on:click={() => onItemClick(index)}
       >
-        <slot {disabled} {index} {item} {selected}>
-          {item}
+        <slot name="item" {disabled} {index} {item} {selected}>
+          <ListItem {disabled} {selected}>
+            <slot {disabled} {index} {item} {selected}>
+              {item}
+            </slot>
+          </ListItem>
         </slot>
       </div>
     {/each}
@@ -230,6 +213,7 @@ A list of items where a single item can be selected.
     grid-template-rows: auto 1fr;
     height: 100%;
     margin: 0;
+    overflow: hidden;
     padding: 0;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
@@ -244,8 +228,7 @@ A list of items where a single item can be selected.
     color: var(--Common__color--hover);
   }
 
-  .sterling-list:focus-visible,
-  .sterling-list.focus-visible {
+  .sterling-list:focus-within {
     border-color: var(--Common__border-color--focus);
     color: var(--Common__color--focus);
     outline-color: var(--Common__outline-color);
@@ -261,6 +244,15 @@ A list of items where a single item can be selected.
     cursor: not-allowed;
   }
 
+  .sterling-list.composed,
+  .sterling-list:hover.composed,
+  .sterling-list:focus-visible.composed,
+  .sterling-list.disabled.composed {
+    background: none;
+    border: none;
+    outline: none;
+  }
+
   .list {
     display: flex;
     flex-direction: column;
@@ -268,6 +260,7 @@ A list of items where a single item can be selected.
     grid-row: 2 / span 1;
     overflow-x: hidden;
     overflow-y: scroll;
+    outline: none;
     position: relative;
   }
 
@@ -277,39 +270,17 @@ A list of items where a single item can be selected.
     overflow-y: hidden;
   }
 
-  .label {
+  .sterling-list > :global(label) {
     font-size: 0.7em;
     margin: 0.5em 0.7em;
   }
 
-  .list-item {
-    box-sizing: border-box;
-    color: var(--Input__color);
+  .sterling-list > :global(label):empty {
     margin: 0;
-    padding: 0.5em;
-    outline: none;
-    text-overflow: ellipsis;
-    transition: background-color 250ms, color 250ms, border-color 250ms;
-    white-space: nowrap;
-  }
-
-  .list-item:hover {
-    background-color: var(--Button__background-color--hover);
-    color: var(--Button__color--hover);
-  }
-
-  .list-item.selected {
-    background-color: var(--Input__background-color--selected);
-    color: var(--Input__color--selected);
-  }
-
-  .list-item.disabled {
-    color: var(--Input__color--disabled);
   }
 
   @media (prefers-reduced-motion) {
-    .sterling-list,
-    .list-item {
+    .sterling-list {
       transition: none;
     }
   }

@@ -60,11 +60,9 @@
   {...$$restProps}
 >
   {#if $$slots.label}
-    <div class="label">
-      <Label {disabled} for={inputId}>
-        <slot name="label" />
-      </Label>
-    </div>
+    <Label {disabled} for={inputId}>
+      <slot name="label" />
+    </Label>
   {/if}
   <div class="progress-bar" id={inputId}>
     <div class="container" bind:clientWidth bind:clientHeight>
@@ -88,9 +86,13 @@
     align-items: flex-start;
   }
 
-  .label {
+  .sterling-progress > :global(label) {
     font-size: 0.7em;
-    margin: 0.5em 0;
+    margin: 0.5em 0 0 0.7em;
+  }
+
+  .sterling-progress > :global(label):empty {
+    margin: 0;
   }
 
   .progress-bar {

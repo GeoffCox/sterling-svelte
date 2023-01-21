@@ -37,15 +37,11 @@
 
 <Example>
   <div class="component" class:vertical slot="component">
-    {#if label.length > 0}
-      <Progress {colorful} {disabled} {value} {max} bind:percent {vertical}>
-        <span slot="label">{label}</span>
-      </Progress>
-    {:else}
-      <Progress {colorful} {disabled} {value} {max} bind:percent {vertical} />
-    {/if}
+    <Progress {colorful} {disabled} {value} {max} bind:percent {vertical}>
+      <svelte:fragment slot="label">{label}</svelte:fragment>
+    </Progress>
   </div>
-  <div class="options" slot="options">
+  <svelte:fragment slot="options">
     <div class="slider">
       <Slider bind:value min={0} {max} />
     </div>
@@ -62,11 +58,11 @@
     <Checkbox bind:checked={vertical}>
       <svelte:fragment slot="label">vertical</svelte:fragment>
     </Checkbox>
-  </div>
-  <div slot="status">
+  </svelte:fragment>
+  <svelte:fragment slot="status">
     <div>value: {value}</div>
     <div>percent: {percent}%</div>
-  </div>
+  </svelte:fragment>
 </Example>
 
 <style>
@@ -78,13 +74,6 @@
     place-content: center;
     place-items: center;
     padding: 0;
-  }
-
-  .options {
-    align-items: start;
-    display: flex;
-    flex-direction: column;
-    row-gap: 15px;
   }
 
   .slider {

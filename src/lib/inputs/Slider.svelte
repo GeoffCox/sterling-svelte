@@ -190,11 +190,9 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
 -->
 <div class="sterling-slider" class:vertical>
   {#if $$slots.label}
-    <div class="label">
-      <Label {disabled} for={inputId}>
-        <slot name="label" />
-      </Label>
-    </div>
+    <Label {disabled} for={inputId}>
+      <slot name="label" />
+    </Label>
   {/if}
   <div
     class="slider"
@@ -238,7 +236,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     height: 100%;
   }
 
-  .label {
+  .sterling-slider > :global(label) {
     font-size: 0.7em;
   }
 

@@ -16,45 +16,26 @@
   let label = 'COUNTRIES';
 </script>
 
-<Example name="Select" bind:this={exampleRef}>
+<Example bind:this={exampleRef}>
   <div class="component" slot="component">
-    {#if label}
-      <Select
-        bind:selectedIndex
-        bind:selectedItem
-        {items}
-        {disabled}
-        on:itemSelected={(event) => {
-          exampleRef.recordEvent(
-            `itemSelected index:[${event.detail.index}] item:${items[event.detail.index]}`
-          );
-        }}
-        on:itemSelectPending={(event) => {
-          exampleRef.recordEvent(
-            `itemSelectPending index:[${event.detail.index}] item:${items[event.detail.index]}`
-          );
-        }}
-      >
-        <svelte:fragment slot="label">{label}</svelte:fragment>
-      </Select>
-    {:else}
-      <Select
-        bind:selectedIndex
-        bind:selectedItem
-        {items}
-        {disabled}
-        on:itemSelected={(event) => {
-          exampleRef.recordEvent(
-            `itemSelected index:[${event.detail.index}] item:${items[event.detail.index]}`
-          );
-        }}
-        on:itemSelectPending={(event) => {
-          exampleRef.recordEvent(
-            `itemSelectPending index:[${event.detail.index}] item:${items[event.detail.index]}`
-          );
-        }}
-      />
-    {/if}
+    <Select
+      bind:selectedIndex
+      bind:selectedItem
+      {items}
+      {disabled}
+      on:itemSelected={(event) => {
+        exampleRef.recordEvent(
+          `itemSelected index:[${event.detail.index}] item:${items[event.detail.index]}`
+        );
+      }}
+      on:itemSelectPending={(event) => {
+        exampleRef.recordEvent(
+          `itemSelectPending index:[${event.detail.index}] item:${items[event.detail.index]}`
+        );
+      }}
+    >
+      <svelte:fragment slot="label">{label}</svelte:fragment>
+    </Select>
   </div>
   <svelte:fragment slot="options">
     <div />

@@ -76,6 +76,8 @@
       <a href="{base}/components/slider">Slider</a>
       <a href="{base}/components/switch">Switch</a>
       <a href="{base}/components/textarea">TextArea</a>
+      <a href="{base}/components/tree">Tree</a>
+      <a href="{base}/components/treeitem">TreeItem</a>
     </div>
     <div class="component">
       <slot />
