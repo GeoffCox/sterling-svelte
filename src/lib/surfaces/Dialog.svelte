@@ -87,7 +87,6 @@
   };
 
   const onSubmit: svelte.JSX.EventHandler<Event, HTMLFormElement> = (event) => {
-    console.log(event);
     // Submitting a form instantly hides the dialog.
     // The dialog.close event is not cancellable, but form.submit is.
     // To allow animation with closeDialog, this event is canceled.
@@ -103,7 +102,6 @@
         return false;
       }
     } else {
-      console.log('cancelling');
       event.preventDefault();
       return false;
     }

@@ -194,7 +194,6 @@
 
   const onPendingItemSelected = (event: CustomEvent<{ index: number; item: any }>) => {
     pendingSelectedIndex = event.detail.index;
-    console.log('pendingSelectedIndex changed');
     if (!open) {
       selectedIndex = pendingSelectedIndex;
     }

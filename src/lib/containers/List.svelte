@@ -75,6 +75,13 @@
     }
   };
 
+  export const selectItem = (item: T) => {
+    const index = items.indexOf(item);
+    if (index !== -1) {
+      selectedIndex = index;
+    }
+  };
+
   $: {
     raiseItemSelected(selectedIndex);
   }

@@ -77,10 +77,6 @@ export const treeOfLife = [
                 name: 'Perissodactyla [order]',
                 children: [
                   {
-                    name: '',
-                    children: []
-                  },
-                  {
                     name: 'Equidae [family]',
                     children: [
                       {

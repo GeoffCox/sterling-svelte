@@ -1,7 +1,11 @@
 <script lang="ts">
+  import TreeItemChevron from './TreeItemChevron.svelte';
+
   export let disabled = false;
   export let expanded = false;
+  export let hasChildren = false;
   export let selected = false;
+  export let level = 0;
 </script>
 
 <div
@@ -9,6 +13,7 @@
   class:disabled
   class:expanded
   class:selected
+  style={`--level: ${level + 1}`}
   on:blur
   on:click
   on:dblclick
@@ -36,7 +41,7 @@
   on:wheel
   {...$$restProps}
 >
-  <div class="chevron" />
+  <TreeItemChevron {expanded} {hasChildren} />
   <slot />
 </div>
 
@@ -49,9 +54,11 @@
     color: var(--Input__color);
     display: grid;
     grid-template-columns: auto 1fr;
+    column-gap: 0.25em;
     margin: 0;
     outline: none;
     padding: 0.5em;
+    padding-left: calc(0.35em * var(--level, 1));
     text-overflow: ellipsis;
     transition: background-color 250ms, color 250ms, border-color 250ms;
     white-space: nowrap;
@@ -71,85 +78,19 @@
     color: var(--Input__color--disabled);
   }
 
-  .chevron {
-    display: block;
-    position: relative;
+  .leaf {
     border: none;
-    background: none;
-    margin: 0 0.5em 0 0;
-    height: 100%;
-    width: 1em;
+    background: currentColor;
+    border-radius: 50%;
+    height: 0.5em;
+    width: 0.5em;
+    margin: 0.5;
     transform-origin: 50% 50%;
-  }
-
-  @keyframes rotate-expand {
-    from {
-      transform: translate(-50%, -50%) rotate(45deg);
-    }
-    to {
-      transform: translate(-50%, -60%) rotate(135deg);
-    }
-  }
-
-  @keyframes rotate-collapse {
-    from {
-      transform: translate(-50%, -60%) rotate(135deg);
-    }
-    to {
-      transform: translate(-50%, -50%) rotate(45deg);
-    }
-  }
-
-  .chevron::after {
-    position: absolute;
-    content: '';
-    top: 50%;
-    left: 50%;
-    width: 7px;
-    height: 7px;
-    border-right: 3px solid currentColor;
-    border-top: 3px solid currentColor;
-    /* 
-			The chevron is a right triangle, rotated to face down.
-			It should be moved up so it is centered vertically after rotation.
-			The amount to move is the hypotenuse of the right triangle of the chevron.
-		    For a right triangle with equal a and b where c=1
-			a^2 + b^2 = c^2 	
-		    a^2 + a^2 = c^2 
-		    2a^2 = c^2
-			2a^2 = 1
-			a^2 = 0.5
-			a = sqrt(0.5)
-			a = 0.707
-		*/
-    transform: translate(-50%, -50%) rotate(45deg);
-    animation-name: rotate-collapse;
-    animation-duration: 100ms;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-  }
-
-  .sterling-tree-item.expanded .chevron::after {
-    animation-name: rotate-expand;
-    animation-duration: 100ms;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
   }
 
   @media (prefers-reduced-motion) {
     .sterling-tree-item {
       transition: none;
-    }
-
-    .chevron::after {
-      animation: none;
-    }
-
-    .sterling-tree-item.expanded .chevron::after {
-      transform: translate(-50%, calc(-50% / 0.707)) rotate(135deg);
-      animation: none;
     }
   }
 </style>

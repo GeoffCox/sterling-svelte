@@ -7,9 +7,10 @@ export { lightTheme } from './theme/lightTheme';
 export { neutrals } from './theme/colors';
 export { toggleDarkTheme } from './theme/toggleDarkTheme';
 
-export { type ButtonVariant, type ButtonShape } from './buttons/Button.types';
-export { type ProgressColorful } from './display/Progress.types';
-export { type TextAreaResize } from './inputs/TextArea.types';
+export type { ButtonVariant, ButtonShape } from './buttons/Button.types';
+export type { ProgressColorful } from './display/Progress.types';
+export type { TextAreaResize } from './inputs/TextArea.types';
+export type { TreeNode, TreeItem as FlatTreeNode } from './containers/Tree.types';
 
 export { clickOutside } from './clickOutside';
 
@@ -25,6 +26,7 @@ import Select from './inputs/Select.svelte';
 import Slider from './inputs/Slider.svelte';
 import Switch from './inputs/Switch.svelte';
 import TextArea from './inputs/TextArea.svelte';
+import Tree from './containers/Tree.svelte';
 
 export {
   Button,
@@ -38,5 +40,6 @@ export {
   Select,
   Slider,
   Switch,
-  TextArea
+  TextArea,
+  Tree
 };

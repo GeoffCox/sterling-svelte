@@ -5,7 +5,7 @@
 
   export const recordEvent = (message: string) => {
     const now = new Date();
-    events = [...events.slice(-4), { message, timestamp: now }];
+    events = [{ message, timestamp: now }, ...events.slice(0, 4)];
   };
 
   let mounted = false;
@@ -33,13 +33,13 @@
       <slot name="options">(none)</slot>
     </div>
     <div class="events panel">
-      <h2>Events</h2>
-      {#each events as event}
-        <div class="event">
+      <h2>Events <small>(newest to oldest)</small></h2>
+      <div class="event-list">
+        {#each events as event}
           <div class="event-message">{event.message}</div>
           <div class="event-timestamp">&nbsp;@{event.timestamp.getMilliseconds()}</div>
-        </div>
-      {/each}
+        {/each}
+      </div>
     </div>
   {/if}
 </div>
@@ -94,8 +94,10 @@
     min-width: 350px;
   }
 
-  .event {
-    display: inline-block;
+  .event-list {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    width: 100%;
   }
 
   .event-message,

@@ -5,8 +5,7 @@
 
 # Tree
 
-A tree of nodes where a single node can be selected.
-Each tree node can be expanded to show children or collpsed to hide children.
+A hierarchy of items (a.k.a. nodes)
 
 ## Playground
 
@@ -14,45 +13,50 @@ Each tree node can be expanded to show children or collpsed to hide children.
 
 ## Features
 
-- Up/Down arrow keys selected the next or previous item.
-- Left/Right arrow keys expand or collapse the current node.
-- Identify the tree of nodes with an associated label.
+- A single node can be selected (focus follows selection)
+- Nodes with children can be expanded or collapsed.
+- The previous/next visible node can be selected with the up/down arrow keys.
+- A node can be expanded/collapsed with the right/left arrow keys.
+- If the node is already collpased, the left arrow key navigates to the previous node.
+- The tree can have a label to identify its contents.
 
 ## Anatomy
 
 ```
   label slot
-  list of nodes
-    _default_ slot (item template)
+  List (hierarchy of nodes flattened into a list)
+    item slot**
+      TreeItem
+        default slot
 ```
+
+### Slot let params
+
+- label: `disabled`
+- item, _default_: `disabled`, `expanded`, `hasChildren`, `index`, `item`, `level`, `selected`
 
 ## Props
 
-| Name                    | Type    | Description                              |
-| ----------------------- | ------- | ---------------------------------------- |
-| disabled                | boolean | Disables the list and items              |
-| items                   | any[]   | The items in the list                    |
-| horizontal              | boolean | If the list layout should be horizontal  |
-| selectedIndex           | number  | The index of the currently selected item |
-| selectedItem (readonly) | any     | The currently selected item              |
+| Name         | Type            | Description                             |
+| ------------ | --------------- | --------------------------------------- |
+| disabled     | `boolean`       | Disables the tree and nodes             |
+| nodes        | `TreeNode<T>[]` | The tree node hierarchy                 |
+| selectedNode | `TreeNode<T>`   | The currently selected node (readonly). |
 
 ## Events
 
-| Name         | Event.detail      | Description                      |
-| ------------ | ----------------- | -------------------------------- |
-| itemSelected | `{ index, item }` | Raised when an item is selected. |
+- `nodeCollapsed { node: TreeNode<T> }`
+- `nodeExpanded { node: TreeNode<T> }`
+- `nodeSelected { node: TreeNode<T> }`
 
 ## Methods
 
-| Name               | Parameters | Description                                        |
-| ------------------ | ---------- | -------------------------------------------------- |
-| focusSelectedItem  |            | Focuses the selected item and scrolls it into view |
-| selectPreviousItem |            | Selected the previous item                         |
-| selectNextItem     |            | Selected the next item                             |
+- `collapseNode(node: TreeItem<T>) : boolean`
+- `expandNode(node: TreeItem<T>) : boolean`
 
-## Slots
+  Only expands the specified node. Does not ensure node is visible by expanding parents.
 
-| Name      | Description                                                                                  |
-| --------- | -------------------------------------------------------------------------------------------- |
-| _default_ | A template for rendering each item. Item is passed disabled, index, item, and selected props |
-| label     | The label associated with the input                                                          |
+- `focusSelectedNode()`
+- `selectPreviousNode()`
+- `selectNextNode()`
+- `toggleNode(node: TreeItem<T>) : boolean`
