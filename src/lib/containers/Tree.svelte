@@ -145,7 +145,6 @@
   };
 
   const onKeydown = (event: KeyboardEvent) => {
-    console.log(event.key);
     if (selectedItem && !event.altKey && !event.ctrlKey && !event.shiftKey) {
       switch (event.key) {
         case 'Enter':
