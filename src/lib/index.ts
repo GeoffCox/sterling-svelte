@@ -10,7 +10,12 @@ export { toggleDarkTheme } from './theme/toggleDarkTheme';
 export type { ButtonVariant, ButtonShape } from './buttons/Button.types';
 export type { ProgressColorful } from './display/Progress.types';
 export type { TextAreaResize } from './inputs/TextArea.types';
-export type { TreeNode, TreeItem as FlatTreeNode } from './containers/Tree.types';
+export type {
+  TreeContext,
+  TreeNodeContext,
+  TreeNodeData,
+  TreeSelectMode
+} from './containers/Tree.types';
 
 export { clickOutside } from './clickOutside';
 
@@ -27,6 +32,8 @@ import Slider from './inputs/Slider.svelte';
 import Switch from './inputs/Switch.svelte';
 import TextArea from './inputs/TextArea.svelte';
 import Tree from './containers/Tree.svelte';
+import TreeNode from './containers/TreeNode.svelte';
+import TreeNodeChevron from './containers/TreeNodeChevron.svelte';
 
 export {
   Button,

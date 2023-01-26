@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TreeItemChevron from './TreeItemChevron.svelte';
+  import TreeItemChevron from '../../../../src/lib/containers/TreeNodeChevron.svelte';
 
   export let disabled = false;
   export let expanded = false;

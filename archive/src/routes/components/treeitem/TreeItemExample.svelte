@@ -1,8 +1,8 @@
 <script lang="ts">
   import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import Example from '../Example.svelte';
+  import Example from '../../../../../src/routes/components/Example.svelte';
   import Input from '$lib/inputs/Input.svelte';
-  import TreeItem from '$lib/containers/TreeItem.svelte';
+  import TreeItem from 'archive/src/lib/containers/TreeItem.svelte';
 
   let exampleRef: any;
 

@@ -1,55 +1,39 @@
 <script lang="ts">
+  import { type CoffeeNode, coffeeTree } from '../../_sampleData/coffeeTree';
+
   import Checkbox from '$lib/inputs/Checkbox.svelte';
   import Example from '../Example.svelte';
-  import Tree from '$lib/containers/Tree.svelte';
-  import type { FlatTreeNode, TreeNode } from '$lib';
   import Input from '$lib/inputs/Input.svelte';
-  import { treeOfLife } from '../../_sampleData/treeOfLife';
+
+  import Tree from '$lib/containers/Tree.svelte';
+  import TreeNode from '$lib/containers/TreeNode.svelte';
+  import type { TreeNodeData } from '$lib/containers/Tree.types';
 
   let exampleRef: any;
 
-  const nodes = treeOfLife;
-  let label = 'TREE OF LIFE';
-  let selectedIndex = 0;
+  let label = 'Coffee Menu';
   let selectedNode: any = undefined;
   let disabled = false;
-  let horizontal = false;
+  let selectedNodeId: string | undefined = undefined;
 
-  type LifeData = { name: string };
+  const nodes = coffeeTree as TreeNodeData<CoffeeNode>[];
 
-  $: treeNodes = nodes as TreeNode<LifeData>[];
-
-  const getTreeItem = (item: any) => item as FlatTreeNode<LifeData>;
+  const getNodeId = (node: TreeNodeData<CoffeeNode>) => node.name;
 </script>
 
 <Example bind:this={exampleRef}>
-  <div class="component" class:horizontal slot="component">
-    <Tree
-      bind:selectedNode
-      nodes={treeNodes}
-      {disabled}
-      let:item
-      let:index
-      on:nodeCollapsed={(event) => {
-        exampleRef.recordEvent(`nodeCollapsed: ${event.detail.node.name}`);
-      }}
-      on:nodeExpanded={(event) => {
-        exampleRef.recordEvent(`nodeExpanded: ${event.detail.node.name}`);
-      }}
-      on:nodeSelected={(event) => {
-        exampleRef.recordEvent(`nodeSelected: ${event.detail.node.name}`);
-      }}
-    >
-      <div style="padding-top:0.25em">
-        {index}
-        {item.node.name}
-      </div>
+  <div class="component" slot="component">
+    <Tree bind:selectedNodeId {disabled} {getNodeId} {nodes}>
       <svelte:fragment slot="label">{label}</svelte:fragment>
+      <svelte:fragment slot="nodeLabel" let:nodeId>{nodeId}</svelte:fragment>
     </Tree>
   </div>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
-    <Input bind:value={label}>label</Input>
+    <Input bind:value={label}><span slot="label">label slot</span></Input>
+    <div>
+      <Input bind:value={selectedNodeId}><span slot="label">selectedNodeId</span></Input>
+    </div>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedNode: {selectedNode?.name}</div>
@@ -64,11 +48,5 @@
     padding: 0;
     height: 410px;
     justify-items: stretch;
-  }
-
-  .component.horizontal {
-    width: 410px;
-    height: unset;
-    flex-direction: row;
   }
 </style>

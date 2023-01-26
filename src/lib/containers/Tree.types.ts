@@ -1,22 +1,17 @@
 import type { Writable } from 'svelte/store';
-import type Tree2 from './Tree2.svelte';
 
-/**
- * The generic node type for nodes in a Tree.
- */
-export type TreeNode<T> = T & {
-  children?: TreeNode<T>[];
+export type TreeNodeData<T> = T & {
+  nodeId?: string;
+  children?: TreeNodeData<T>[];
 };
 
-export type TreeSelectMode = 'single' | 'multiple';
-
-export type TreeContext = {
+export type TreeContext<T> = {
+  getNodeId: (node: TreeNodeData<T>) => string;
   expandedNodeIds: Writable<string[]>;
-  selectMode: Writable<TreeSelectMode>;
-  selectedNodeIds: Writable<string[]>;
+  selectedNodeId: Writable<string | undefined>;
 };
 
-export type TreeItemContext = {
+export type TreeNodeContext = {
   parentNodeId?: string;
   level: number;
 };

@@ -1,5 +1,5 @@
 <script>
-    import Example from './Tree2Example.svelte';
+    import Example from './TreeExample.svelte';
     import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
