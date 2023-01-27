@@ -11,9 +11,9 @@
 
   let exampleRef: any;
 
+  let disabled = false;
   let label = 'Coffee Menu';
   let selectedNode: any = undefined;
-  let disabled = false;
   let selectedNodeId: string | undefined = undefined;
 
   const nodes = coffeeTree as TreeNodeData<CoffeeNode>[];

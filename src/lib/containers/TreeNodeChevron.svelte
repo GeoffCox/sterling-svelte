@@ -23,11 +23,7 @@
   }
 </script>
 
-{#if hasChildren}
-  <div class="tree-item-chevron" class:animate class:expanded />
-{:else}
-  <div class="tree-item-leaf" />
-{/if}
+<div class="tree-item-chevron" class:leaf={!hasChildren} class:animate class:expanded />
 
 <style>
   .tree-item-chevron {
@@ -92,15 +88,8 @@
     animation-fill-mode: forwards;
   }
 
-  .tree-item-leaf {
-    border: none;
-    background: none;
-    height: 1em;
-    width: 1em;
-    position: relative;
-  }
-
-  .tree-item-leaf::after {
+  .tree-item-chevron.leaf::after {
+    animation: none;
     content: '';
     position: absolute;
     font: inherit;
@@ -110,6 +99,7 @@
     height: 0.35em;
     background: currentColor;
     border-radius: 50%;
+    transform: translate(-50%, -50%);
   }
 
   @media (prefers-reduced-motion) {

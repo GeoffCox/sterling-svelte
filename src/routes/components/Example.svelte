@@ -24,21 +24,23 @@
     <div class="component">
       <slot name="component" />
     </div>
-    <div class="status panel">
-      <h2>Status</h2>
-      <slot name="status">(none)</slot>
-    </div>
-    <div class="options panel">
-      <h2>Options</h2>
-      <slot name="options">(none)</slot>
-    </div>
-    <div class="events panel">
-      <h2>Events <small>(newest to oldest)</small></h2>
-      <div class="event-list">
-        {#each events as event}
-          <div class="event-message">{event.message}</div>
-          <div class="event-timestamp">&nbsp;@{event.timestamp.getMilliseconds()}</div>
-        {/each}
+    <div class="configuration">
+      <div class="status panel">
+        <h2>Status</h2>
+        <slot name="status">(none)</slot>
+      </div>
+      <div class="options panel">
+        <h2>Options</h2>
+        <slot name="options">(none)</slot>
+      </div>
+      <div class="events panel">
+        <h2>Events <small>(newest to oldest)</small></h2>
+        <div class="event-list">
+          {#each events as event}
+            <div class="event-message">{event.message}</div>
+            <div class="event-timestamp">&nbsp;@{event.timestamp.getMilliseconds()}</div>
+          {/each}
+        </div>
       </div>
     </div>
   {/if}
@@ -67,19 +69,11 @@
     align-items: start;
   }
 
-  .options {
-    grid-row: 2 / span 1;
-    grid-column: 1 / span 1;
-  }
-
-  .status {
-    grid-row: 1 / span 1;
-    grid-column: 1 / span 1;
-  }
-
-  .events {
-    grid-row: 3 / span 1;
-    grid-column: 1 / span 1;
+  .configuration {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    justify-items: stretch;
   }
 
   .panel {

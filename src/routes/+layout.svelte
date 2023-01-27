@@ -77,6 +77,9 @@
       <a href="{base}/components/switch">Switch</a>
       <a href="{base}/components/textarea">TextArea</a>
       <a href="{base}/components/tree">Tree</a>
+      <a href="{base}/components/treenode">TreeNode</a>
+      <a href="{base}/components/treenodechevron">TreeNodeChevron</a>
+      <a href="{base}/components/treenodeitem">TreeNodeItem</a>
     </div>
     <div class="component">
       <slot />
@@ -202,6 +205,6 @@
     flex-direction: column;
     place-content: start;
     place-items: start;
-    padding: 0 20px;
+    padding: 0 20px 150px 20px;
   }
 </style>

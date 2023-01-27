@@ -1,6 +1,8 @@
 <script>
-    import Example from './TreeExample.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
+    import Playground from './TreePlayground.svelte';
+    import ItemSlotExample from './ItemSlotExample.svelte';
+    import LabelSlotExample from './LabelSlotExample.svelte';
+    import DeclarativeExample from './DeclarativeExample.svelte';
 </script>
 
 # Tree
@@ -9,7 +11,7 @@ A hierarchy of items (a.k.a. nodes)
 
 ## Playground
 
-<Example />
+<Playground />
 
 ## Features
 
@@ -23,11 +25,31 @@ A hierarchy of items (a.k.a. nodes)
 ## Anatomy
 
 ```
+Tree
   label slot
-  List (hierarchy of nodes flattened into a list)
-    item slot**
-      TreeItem
-        default slot
+  tree
+      TreeNode
+        item slot
+          nodeLabel slot => label slot
+      TreeNode
+      ...
+```
+
+```
+  TreeNode
+    item slot
+      TreeNodeItem
+        label slot
+    children slot
+      TreeNode (child)
+      TreeNode (child)
+      ...
+```
+
+```
+TreeNodeItem
+  TreeNodeChevron
+  slot
 ```
 
 ### Slot let params
@@ -60,3 +82,35 @@ A hierarchy of items (a.k.a. nodes)
 - `selectPreviousNode()`
 - `selectNextNode()`
 - `toggleNode(node: TreeItem<T>) : boolean`
+
+## Examples
+
+### Custom `item` slot
+
+<ItemSlotExample/>
+
+### Custom `label` slot
+
+<LabelSlotExample/>
+
+### Declarative Tree
+
+You can create trees by declaring them in your HTML.
+This tree mimics the data-bound tree by declaring a `Tree` containing a hierarchy of `TreeNode`s.
+
+```svelte
+<Tree>
+  <TreeNode nodeId="Coffees">
+    <TreeNode nodeId="Americano" />
+    <TreeNode nodeId="Brewed">
+      <TreeNode nodeId="Light roast" />
+      <TreeNode nodeId="Medium roast" />
+      <TreeNode nodeId="Dark roast" />
+      <TreeNode nodeId="House blend" />
+    </TreeNode>
+    <TreeNode nodeId="Cappuccino" />
+    <!-- ... -->
+</Tree>
+```
+
+<DeclarativeExample/>

@@ -5,9 +5,11 @@
   import { writable } from 'svelte/store';
 
   import type { TreeNodeData } from './Tree.types';
+  import { treeContextKey, treeNodeContextKey } from './Tree.constants';
   import Label from '$lib/display/Label.svelte';
   import TreeNode from './TreeNode.svelte';
   import TreeItemChevron from './TreeNodeChevron.svelte';
+  import TreeNodeItem from './TreeNodeItem.svelte';
 
   const inputId = uuid();
 
@@ -43,19 +45,18 @@
   const expandedNodeIdsStore = writable<string[]>([]);
   const selectedNodeIdStore = writable<string | undefined>(selectedNodeId);
 
-  setContext('sterling-tree', {
+  setContext(treeContextKey, {
     getNodeId,
     expandedNodeIds: expandedNodeIdsStore,
     selectedNodeId: selectedNodeIdStore
   });
-  setContext('sterling-tree-item', { parentNodeId: undefined, level: 1 });
+  setContext(treeNodeContextKey, { parentNodeId: undefined, depth: 0 });
 
   $: {
     selectedNodeIdStore.set(selectedNodeId);
   }
 
   $: {
-    console.log('$selectedNodIdStore changed');
     selectedNodeId = $selectedNodeIdStore;
   }
 
@@ -72,35 +73,56 @@
   <div class="tree">
     {#if nodes}
       {#each nodes as node}
-        <TreeNode nodeId={getNodeId(node)} {node} {disabled}>
-          <slot
-            name="item"
+        <TreeNode {disabled} {node} nodeId={getNodeId(node)}>
+          <svelte:fragment
             slot="item"
             let:disabled
             let:expanded
             let:hasChildren
+            let:depth
             let:node
             let:nodeId
-            {disabled}
-            {expanded}
-            {hasChildren}
-            {node}
-            {nodeId}
+            let:selected
           >
-            <TreeItemChevron {expanded} {hasChildren} />
-            <slot name="nodeLabel" {disabled} {expanded} {hasChildren} {node} {nodeId}
-              >{nodeId}</slot
+            <slot
+              name="item"
+              {disabled}
+              {expanded}
+              {hasChildren}
+              {depth}
+              {node}
+              {nodeId}
+              {selected}
             >
-          </slot>
+              <TreeNodeItem {disabled} {expanded} {hasChildren} {depth} {node} {nodeId} {selected}>
+                <svelte:fragment
+                  let:disabled
+                  let:expanded
+                  let:hasChildren
+                  let:depth
+                  let:node
+                  let:nodeId
+                  let:selected
+                >
+                  <slot
+                    name="nodeLabel"
+                    {disabled}
+                    {expanded}
+                    {hasChildren}
+                    {depth}
+                    {node}
+                    {nodeId}
+                    {selected}>{nodeId}</slot
+                  >
+                </svelte:fragment>
+              </TreeNodeItem>
+            </slot>
+          </svelte:fragment>
         </TreeNode>
       {/each}
     {/if}
+    <slot />
   </div>
-  {#if $$slots.default}
-    <div class="children">
-      <slot />
-    </div>
-  {/if}
 </div>
 
 <style>

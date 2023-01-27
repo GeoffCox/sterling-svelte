@@ -3,6 +3,7 @@
   import { slide } from 'svelte/transition';
 
   import type { TreeNodeContext, TreeContext, TreeNodeData } from './Tree.types';
+  import { treeContextKey, treeNodeContextKey } from './Tree.constants';
   import TreeNodeItem from './TreeNodeItem.svelte';
 
   // ----- Props ----- //
@@ -14,9 +15,8 @@
   // ----- Get Context ----- //
 
   // The parentNodeId must be retrieved before setting it for the children
-  const { parentNodeId, level } = getContext<TreeNodeContext>('sterling-tree-item');
-  const { getNodeId, expandedNodeIds, selectedNodeId } =
-    getContext<TreeContext<T>>('sterling-tree');
+  const { getNodeId, expandedNodeIds, selectedNodeId } = getContext<TreeContext<T>>(treeContextKey);
+  const { parentNodeId, depth } = getContext<TreeNodeContext>(treeNodeContextKey);
 
   // ----- Check nodeId ----- //
 
@@ -32,13 +32,13 @@
 
   // ----- Set Context ----- //
 
-  setContext('sterling-tree-item', { parentNodeId: nodeId, level: level + 1 });
+  setContext('sterlingTreeNode', { parentNodeId: nodeId, depth: depth + 1 });
 
   // ----- State ----- //
 
   let treeItemRef: HTMLDivElement;
   let itemRef: HTMLDivElement;
-  $: hasChildren = (node?.children?.length || 0) > 0 || $$slots.children;
+  $: hasChildren = (node?.children?.length || 0) > 0 || $$slots.children || $$slots.default;
   $: expanded = $expandedNodeIds.includes(nodeId);
   $: selected = $selectedNodeId === nodeId;
 
@@ -125,7 +125,6 @@
         nextNodeId = treeItemRef.nextElementSibling?.getAttribute('data-node-id');
       }
 
-      //let ancestor = parentNodeId && treeItemRef.closest<Element>(`[data-node-id=${parentNodeId}]`);
       if (!nextNodeId) {
         let ancestor: Element | null | undefined =
           treeItemRef.closest<Element>('.sterling-tree-item');
@@ -226,13 +225,7 @@
 @component
 A node in a Tree displaying the item and children.
   -->
-<div
-  class="sterling-tree-item"
-  class:disabled
-  bind:this={treeItemRef}
-  data-node-id={nodeId}
-  style={`--level: ${level}`}
->
+<div class="sterling-tree-item" class:disabled bind:this={treeItemRef} data-node-id={nodeId}>
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <div
     class="item"
@@ -242,11 +235,21 @@ A node in a Tree displaying the item and children.
     bind:this={itemRef}
     tabindex={!disabled ? 0 : undefined}
   >
-    <slot name="item" {disabled} {expanded} {hasChildren} {level} {node} {nodeId} {selected}>
-      <TreeNodeItem {disabled} {expanded} {hasChildren} {level} {selected}>
-        <slot name="label" {disabled} {expanded} {hasChildren} {level} {node} {nodeId} {selected}
-          >{nodeId}</slot
+    <slot name="item" {disabled} {expanded} {hasChildren} {depth} {node} {nodeId} {selected}>
+      <TreeNodeItem {disabled} {expanded} {hasChildren} {depth} {node} {nodeId} {selected}>
+        <svelte:fragment
+          let:disabled
+          let:expanded
+          let:hasChildren
+          let:depth
+          let:node
+          let:nodeId
+          let:selected
         >
+          <slot name="label" {disabled} {expanded} {hasChildren} {depth} {node} {nodeId} {selected}
+            >{nodeId}</slot
+          >
+        </svelte:fragment>
       </TreeNodeItem>
     </slot>
   </div>
@@ -256,82 +259,69 @@ A node in a Tree displaying the item and children.
         {#if node?.children}
           {#each node.children as child}
             <svelte:self {disabled} node={child} nodeId={child.nodeId}>
-              <slot
-                name="item"
+              <svelte:fragment
                 slot="item"
                 let:disabled
                 let:expanded
                 let:hasChildren
-                let:level
+                let:depth
                 let:node
                 let:nodeId
                 let:selected
-                {disabled}
-                {expanded}
-                {hasChildren}
-                {level}
-                {node}
-                {nodeId}
-                {selected}
               >
-                <TreeNodeItem {disabled} {expanded} {hasChildren} {level} {selected}>
-                  <slot
-                    name="label"
+                <slot
+                  name="item"
+                  {disabled}
+                  {expanded}
+                  {hasChildren}
+                  {depth}
+                  {node}
+                  {nodeId}
+                  {selected}
+                >
+                  <TreeNodeItem
                     {disabled}
                     {expanded}
                     {hasChildren}
-                    {level}
+                    {depth}
                     {node}
                     {nodeId}
-                    {selected}>{nodeId}</slot
+                    {selected}
                   >
-                </TreeNodeItem>
-              </slot>
+                    <svelte:fragment
+                      let:disabled
+                      let:expanded
+                      let:hasChildren
+                      let:depth
+                      let:node
+                      let:nodeId
+                      let:selected
+                    >
+                      <slot
+                        name="label"
+                        {disabled}
+                        {expanded}
+                        {hasChildren}
+                        {depth}
+                        {node}
+                        {nodeId}
+                        {selected}>{nodeId}</slot
+                      >
+                    </svelte:fragment>
+                  </TreeNodeItem>
+                </slot>
+              </svelte:fragment>
             </svelte:self>
           {/each}
         {/if}
       </slot>
+      <slot />
     </div>
   {/if}
-  <slot />
 </div>
 
 <style>
   .item {
-    align-content: center;
-    align-items: center;
-    background-color: transparent;
-    box-sizing: border-box;
-    color: var(--Input__color);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 0.25em;
-    margin: 0;
     outline: none;
-    padding: 0.5em;
-    padding-left: calc(0.35em * var(--level, 1));
-    text-overflow: ellipsis;
-    transition: background-color 250ms, color 250ms, border-color 250ms;
-    white-space: nowrap;
-  }
-
-  .item:hover {
-    background-color: var(--Button__background-color--hover);
-    color: var(--Button__color--hover);
-  }
-
-  .item.selected {
-    background-color: var(--Input__background-color--selected);
-    color: var(--Input__color--selected);
-  }
-
-  .sterling-tree-item.disabled .item {
-    color: var(--Input__color--disabled);
-  }
-
-  @media (prefers-reduced-motion) {
-    .sterling-tree-item {
-      transition: none;
-    }
   }
 </style>

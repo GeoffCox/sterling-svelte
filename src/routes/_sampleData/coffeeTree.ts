@@ -5,7 +5,7 @@ export type CoffeeNode = {
 
 export const coffeeTree: CoffeeNode[] = [
   {
-    name: 'Coffees',
+    name: 'Coffee',
     children: [
       {
         name: 'Americano'
@@ -61,7 +61,7 @@ export const coffeeTree: CoffeeNode[] = [
       {
         name: 'Milks',
         children: [
-          { name: 'Almond mile' },
+          { name: 'Almond Milk' },
           { name: 'Fat Free  Milk' },
           { name: 'Non-dairy Creamer' },
           { name: 'Soy Milk' },
