@@ -259,6 +259,11 @@ A node in a Tree displaying the item and children.
         {#if node?.children}
           {#each node.children as child}
             <svelte:self {disabled} node={child} nodeId={child.nodeId}>
+              <!-- 
+              Forward the item slot into each tree node.
+              It is cleanest to have a fragment for the TreeNode item slot to 
+              capture the let params, then apply them to the Tree item slot. 
+              -->
               <svelte:fragment
                 slot="item"
                 let:disabled
@@ -279,6 +284,11 @@ A node in a Tree displaying the item and children.
                   {nodeId}
                   {selected}
                 >
+                  <!-- 
+                  Svelte prevents conditionally applying slots.
+                  This repeats exact same item slot default for this child
+                  so the item slot is passed down the tree.
+                  -->
                   <TreeNodeItem
                     {disabled}
                     {expanded}
@@ -297,6 +307,7 @@ A node in a Tree displaying the item and children.
                       let:nodeId
                       let:selected
                     >
+                      <!-- This uses the label slot for the TreeNodeItem default slot. -->
                       <slot
                         name="label"
                         {disabled}

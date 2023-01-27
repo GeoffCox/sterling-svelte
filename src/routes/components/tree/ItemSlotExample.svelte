@@ -25,21 +25,23 @@
 
 <div class="example">
   <Tree {nodes} {getNodeId}>
-    <div slot="item" let:expanded let:hasChildren let:node let:depth>
+    <div slot="item" let:depth let:expanded let:hasChildren let:node let:selected>
       {@const padding = Array(depth).fill(' ')}
-      {#each padding as pad}
-        &nbsp;
-      {/each}
-      {#if hasChildren}
-        {#if expanded}
-          <span>&#128071;</span>
+      <div class="item" class:selected>
+        {#each padding as pad}
+          &nbsp;
+        {/each}
+        {#if hasChildren}
+          {#if expanded}
+            <span>&#128071;</span>
+          {:else}
+            <span>&#128073;</span>
+          {/if}
         {:else}
-          <span>&#128073;</span>
+          <span>&#9749;</span>
         {/if}
-      {:else}
-        <span>&#9749;</span>
-      {/if}
-      {node.name}
+        {node.name}
+      </div>
     </div>
   </Tree>
 </div>
@@ -47,5 +49,17 @@
 <style>
   .example {
     width: 350px;
+  }
+
+  .item {
+    padding: 0.1em;
+  }
+
+  .item:hover {
+    background-color: rgba(120, 85, 20, 0.2);
+  }
+  .selected,
+  .selected:hover {
+    background-color: rgb(120, 85, 20);
   }
 </style>

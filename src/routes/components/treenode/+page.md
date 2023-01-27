@@ -1,6 +1,5 @@
 <script>
     import Playground from './TreeNodePlayground.svelte';
-    import CustomItemSlotExample from './TreeNodeCustomItemExample.svelte';
 </script>
 
 # TreeNode
@@ -52,9 +51,3 @@ TreeNodeItem
 | -------------------- | -------------------- | -------------------------------------------------- |
 | `'sterlingTree'`     | `TreeContext<T>`     | `getNodeId()`, `expandedNodeIds`, `selectedNodeId` |
 | `'sterlingTreeNode'` | `TreeNodeContext<T>` | `parentNodeId`, `depth`                            |
-
-## Other Examples
-
-### Custom item slot
-
-<CustomItemSlotExample/>

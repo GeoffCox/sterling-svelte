@@ -8,7 +8,6 @@
   import { treeContextKey, treeNodeContextKey } from './Tree.constants';
   import Label from '$lib/display/Label.svelte';
   import TreeNode from './TreeNode.svelte';
-  import TreeItemChevron from './TreeNodeChevron.svelte';
   import TreeNodeItem from './TreeNodeItem.svelte';
 
   const inputId = uuid();
@@ -31,16 +30,7 @@
   export let selectedNodeId: string | undefined = undefined;
   export let getNodeId = getDefaultNodeId;
 
-  // ----- Events ----- //
-  const dispatch = createEventDispatcher();
-
-  const raiseExpandedChanged = () => {
-    dispatch('expandedChanged');
-  };
-
-  const raiseSelectedChanged = () => {
-    dispatch('selectedChanged');
-  };
+  // ----- Context ----- //
 
   const expandedNodeIdsStore = writable<string[]>([]);
   const selectedNodeIdStore = writable<string | undefined>(selectedNodeId);
@@ -60,8 +50,19 @@
     selectedNodeId = $selectedNodeIdStore;
   }
 
-  $: $expandedNodeIdsStore, raiseExpandedChanged();
-  $: $selectedNodeIdStore, raiseSelectedChanged();
+  // ----- Events ----- //
+  const dispatch = createEventDispatcher();
+
+  const raiseExpandedChanged = (expandedNodeIds: string[]) => {
+    dispatch('expandedChanged', { expandedNodeIds });
+  };
+
+  const raiseSelectedChanged = (selectedNodeId: string | undefined) => {
+    dispatch('selectedChanged', { selectedNodeId });
+  };
+
+  $: raiseExpandedChanged($expandedNodeIdsStore);
+  $: raiseSelectedChanged($selectedNodeIdStore);
 </script>
 
 <div class="sterling-tree" class:disabled class:composed>
@@ -74,6 +75,11 @@
     {#if nodes}
       {#each nodes as node}
         <TreeNode {disabled} {node} nodeId={getNodeId(node)}>
+          <!-- 
+          Forward the item slot into each tree node.
+          It is cleanest to have a fragment for the TreeNode item slot to 
+          capture the let params, then apply them to the Tree item slot. 
+          -->
           <svelte:fragment
             slot="item"
             let:disabled
@@ -94,6 +100,11 @@
               {nodeId}
               {selected}
             >
+              <!-- 
+              Svelte prevents conditionally applying slots.
+              This repeats exact same item slot default for this node
+              so the item slot is passed down the tree.
+              -->
               <TreeNodeItem {disabled} {expanded} {hasChildren} {depth} {node} {nodeId} {selected}>
                 <svelte:fragment
                   let:disabled
@@ -104,6 +115,7 @@
                   let:nodeId
                   let:selected
                 >
+                  <!-- This uses the nodeLabel slot for the TreeNodeItem default slot. -->
                   <slot
                     name="nodeLabel"
                     {disabled}

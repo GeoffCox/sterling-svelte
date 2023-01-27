@@ -30,44 +30,31 @@ Tree
   tree
       TreeNode
         item slot
-          nodeLabel slot => label slot
+          TreeNodeItem
+            nodeLabel slot
       TreeNode
       ...
-```
-
-```
-  TreeNode
-    item slot
-      TreeNodeItem
-        label slot
-    children slot
-      TreeNode (child)
-      TreeNode (child)
-      ...
-```
-
-```
-TreeNodeItem
-  TreeNodeChevron
-  slot
+      default slot
 ```
 
 ### Slot let params
 
-- label: `disabled`
-- item, _default_: `disabled`, `expanded`, `hasChildren`, `index`, `item`, `level`, `selected`
+- item, nodeLabel, default: `disabled`, `expanded`, `hasChildren`, `depth`, `node`, `nodeId`, `selected`
 
 ## Props
 
-| Name         | Type            | Description                             |
-| ------------ | --------------- | --------------------------------------- |
-| disabled     | `boolean`       | Disables the tree and nodes             |
-| nodes        | `TreeNode<T>[]` | The tree node hierarchy                 |
-| selectedNode | `TreeNode<T>`   | The currently selected node (readonly). |
+| Name            | Type                                 | Description                                              |
+| --------------- | ------------------------------------ | -------------------------------------------------------- |
+| composed        | `boolean`                            | Indicates the tree is composed within another component. |
+|                 |                                      | Removes background, border, and outline styles.          |
+| disabled        | `boolean`                            | Disables the tree and nodes                              |
+| nodes           | `TreeNode<T>[]`                      | The tree node hierarchy                                  |
+| selectedNodeId  | `string` <b>&#10072;</b> `undefined` | The ID of the selected node                              |
+| expandedNodeIds | `string[]`                           | The IDs of expanded nodes                                |
 
 ## Events
 
-- `nodeCollapsed { node: TreeNode<T> }`
+- `expandedChanged { node: TreeNode<T> }`
 - `nodeExpanded { node: TreeNode<T> }`
 - `nodeSelected { node: TreeNode<T> }`
 
@@ -100,7 +87,7 @@ This tree mimics the data-bound tree by declaring a `Tree` containing a hierarch
 
 ```svelte
 <Tree>
-  <TreeNode nodeId="Coffees">
+  <TreeNode nodeId="Coffee">
     <TreeNode nodeId="Americano" />
     <TreeNode nodeId="Brewed">
       <TreeNode nodeId="Light roast" />
