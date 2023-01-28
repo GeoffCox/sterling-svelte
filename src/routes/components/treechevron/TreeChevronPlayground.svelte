@@ -2,7 +2,7 @@
   import Checkbox from '$lib/inputs/Checkbox.svelte';
   import Example from '../Example.svelte';
 
-  import TreeNodeChevron from '$lib/containers/TreeNodeChevron.svelte';
+  import TreeNodeChevron from '$lib/containers/TreeChevron.svelte';
 
   let exampleRef: any;
 

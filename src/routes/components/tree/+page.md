@@ -15,12 +15,14 @@ A hierarchy of items (a.k.a. nodes)
 
 ## Features
 
-- A single node can be selected (focus follows selection)
-- Nodes with children can be expanded or collapsed.
-- The previous/next visible node can be selected with the up/down arrow keys.
-- A node can be expanded/collapsed with the right/left arrow keys.
-- If the node is already collpased, the left arrow key navigates to the previous node.
-- The tree can have a label to identify its contents.
+- A single node can be selected. Focus follows selection.
+- Nodes can be expanded to show children or collapsed to hide children.
+- You can choose to have nodes expanded or collapsed by default.
+- Users can select the previous/next visible node with the up/down arrow keys.
+- Users can expand/collpase expanded/collapse nodes with the right/left arrow keys.
+- If the node is already expanded, the right arrow key selects the next node.
+- If the node is already collpased, the left arrow key selects the previous node.
+- You can identify the tree's content with the optional label.
 
 ## Anatomy
 
@@ -30,53 +32,64 @@ Tree
   tree
       TreeNode
         item slot
-          TreeNodeItem
+          TreeItem
             nodeLabel slot
-      TreeNode
-      ...
       default slot
 ```
 
-### Slot let params
+- Tree renders a TreeNode for each of the nodes.
+- TreeNode renders its item slot and then its TreeNode children.
+- Tree and TreeNode work together to recursively render the hierarchy of items. They coordinate through svelte context.
 
-- item, nodeLabel, default: `disabled`, `expanded`, `hasChildren`, `depth`, `node`, `nodeId`, `selected`
+### Slots
+
+| Slot      | Description                                      |
+| --------- | ------------------------------------------------ |
+| label     | The tree label                                   |
+| item      | The template for each item, defaults to TreeItem |
+| nodeLabel | The template for the label within each TreeItem  |
+| default   | Any declared TreeNode children                   |
+
+#### let params
+
+The item and nodeLabel slots are passed the following `let` parameters.
+
+| Let Param   | Type          | Description                                 |
+| ----------- | ------------- | ------------------------------------------- |
+| depth       | `number`      | The depth of this node in the tree          |
+| disabled    | `boolean`     | True if the tree and this node are disabled |
+| expanded    | `boolean`     | True if this node is expanded               |
+| hasChildren | `boolean`     | True if this node has children              |
+| node        | `TreeNode<T>` | The node data for this node                 |
+| nodeID      | `string`      | The ID of this node                         |
+| selected    | `boolean`     | True if this node is selected               |
 
 ## Props
 
-| Name            | Type                                 | Description                                              |
-| --------------- | ------------------------------------ | -------------------------------------------------------- |
-| composed        | `boolean`                            | Indicates the tree is composed within another component. |
-|                 |                                      | Removes background, border, and outline styles.          |
-| disabled        | `boolean`                            | Disables the tree and nodes                              |
-| nodes           | `TreeNode<T>[]`                      | The tree node hierarchy                                  |
-| selectedNodeId  | `string` <b>&#10072;</b> `undefined` | The ID of the selected node                              |
-| expandedNodeIds | `string[]`                           | The IDs of expanded nodes                                |
+| Prop            | Type                                 | Description                                             |
+| --------------- | ------------------------------------ | ------------------------------------------------------- |
+| composed        | `boolean`                            | Indicates the tree is composed within another component |
+| disabled        | `boolean`                            | Disables the tree and nodes                             |
+| expandedNodeIds | `string[]`                           | The IDs of expanded nodes                               |
+| nodes           | `TreeNode<T>[]`                      | The list of top level nodes in the hierarchy            |
+| selectedNodeId  | `string` <b>&#10072;</b> `undefined` | The ID of the selected node                             |
 
 ## Events
 
-- `expandedChanged { node: TreeNode<T> }`
-- `nodeExpanded { node: TreeNode<T> }`
-- `nodeSelected { node: TreeNode<T> }`
+| Event          | Detail                           | Description                                 |
+| -------------- | -------------------------------- | ------------------------------------------- |
+| select         | `{ selectedNodeId: string; }`    | Raised when a node is selected              |
+| expandCollapse | `{ expandedNodeIds: string[]; }` | Raised when a node is expanded or collapsed |
 
 ## Methods
 
-- `collapseNode(node: TreeItem<T>) : boolean`
-- `expandNode(node: TreeItem<T>) : boolean`
-
-  Only expands the specified node. Does not ensure node is visible by expanding parents.
-
-- `focusSelectedNode()`
-- `selectPreviousNode()`
-- `selectNextNode()`
-- `toggleNode(node: TreeItem<T>) : boolean`
-
 ## Examples
 
-### Custom `item` slot
+### Custom item slot
 
 <ItemSlotExample/>
 
-### Custom `label` slot
+### Custom label slot
 
 <LabelSlotExample/>
 

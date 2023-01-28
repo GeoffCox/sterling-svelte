@@ -4,7 +4,7 @@
   import Input from '$lib/inputs/Input.svelte';
   import Slider from '$lib/inputs/Slider.svelte';
 
-  import TreeNodeItem from '$lib/containers/TreeNodeItem.svelte';
+  import TreeItem from '$lib/containers/TreeItem.svelte';
 
   let exampleRef: any;
 
@@ -18,9 +18,9 @@
 
 <Example bind:this={exampleRef}>
   <div class="component" slot="component">
-    <TreeNodeItem {depth} {disabled} {expanded} {hasChildren} {selected}>
+    <TreeItem nodeId="nodeId" {depth} {disabled} {expanded} {hasChildren} {selected}>
       <svelte:fragment>{label}</svelte:fragment>
-    </TreeNodeItem>
+    </TreeItem>
   </div>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>

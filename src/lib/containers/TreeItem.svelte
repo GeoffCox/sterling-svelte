@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { TreeNodeData } from './Tree.types';
-  import TreeNodeChevron from './TreeNodeChevron.svelte';
+  import TreeChevron from './TreeChevron.svelte';
 
   type T = $$Generic;
 
@@ -46,7 +46,7 @@
   on:wheel
   {...$$restProps}
 >
-  <TreeNodeChevron {expanded} {hasChildren} />
+  <TreeChevron {expanded} {hasChildren} />
   <slot {depth} {disabled} {expanded} {hasChildren} {selected} {node} {nodeId} />
 </div>
 

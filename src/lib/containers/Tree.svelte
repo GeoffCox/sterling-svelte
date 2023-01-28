@@ -4,11 +4,11 @@
   import { createEventDispatcher, setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
-  import type { TreeNodeData } from './Tree.types';
+  import type { TreeNodeData, TreeForwardedEventHandlers } from './Tree.types';
   import { treeContextKey, treeNodeContextKey } from './Tree.constants';
   import Label from '$lib/display/Label.svelte';
   import TreeNode from './TreeNode.svelte';
-  import TreeNodeItem from './TreeNodeItem.svelte';
+  import TreeItem from './TreeItem.svelte';
 
   const inputId = uuid();
 
@@ -24,23 +24,40 @@
 
   type T = $$Generic;
 
-  export let disabled = false;
   export let composed = false;
+  export let disabled = false;
+  export let getNodeId = getDefaultNodeId;
   export let nodes: TreeNodeData<T>[] | undefined = undefined;
   export let selectedNodeId: string | undefined = undefined;
-  export let getNodeId = getDefaultNodeId;
+  export let expandedNodeIds: string[] = [];
 
   // ----- Context ----- //
 
-  const expandedNodeIdsStore = writable<string[]>([]);
   const selectedNodeIdStore = writable<string | undefined>(selectedNodeId);
+  const expandedNodeIdStore = writable<string[]>(expandedNodeIds);
+  const selectedNodeEventHandlersStore = writable<TreeForwardedEventHandlers>();
 
   setContext(treeContextKey, {
+    expandedNodeIds: expandedNodeIdStore,
     getNodeId,
-    expandedNodeIds: expandedNodeIdsStore,
-    selectedNodeId: selectedNodeIdStore
+    selectedNodeId: selectedNodeIdStore,
+    selectedNodeEventHandlers: selectedNodeEventHandlersStore
   });
   setContext(treeNodeContextKey, { parentNodeId: undefined, depth: 0 });
+
+  // ----- Events ----- //
+
+  const dispatch = createEventDispatcher();
+
+  const raiseExpandCollapse = (expandedNodeIds: string[]) => {
+    dispatch('expandCollapse', { expandedNodeIds });
+  };
+
+  const raiseSelect = (selectedNodeId: string | undefined) => {
+    dispatch('select', { selectedNodeId });
+  };
+
+  // ----- Reactions ----- //
 
   $: {
     selectedNodeIdStore.set(selectedNodeId);
@@ -48,30 +65,60 @@
 
   $: {
     selectedNodeId = $selectedNodeIdStore;
+    raiseSelect($selectedNodeIdStore);
   }
 
-  // ----- Events ----- //
-  const dispatch = createEventDispatcher();
+  $: {
+    expandedNodeIdStore.set(expandedNodeIds);
+  }
 
-  const raiseExpandedChanged = (expandedNodeIds: string[]) => {
-    dispatch('expandedChanged', { expandedNodeIds });
+  $: {
+    expandedNodeIds = $expandedNodeIdStore;
+    raiseExpandCollapse($expandedNodeIdStore);
+  }
+
+  // ----- Methods ----- //
+
+  const getAllNodeIds = (node: TreeNodeData<T>, nodeIds: string[]) => {
+    nodeIds.push(getNodeId(node));
+    node.children?.forEach((child) => getAllNodeIds(child, nodeIds));
   };
 
-  const raiseSelectedChanged = (selectedNodeId: string | undefined) => {
-    dispatch('selectedChanged', { selectedNodeId });
+  const setToggleNodeIdsToAll = () => {
+    const nodeIds: string[] = [];
+    nodes?.forEach((node) => getAllNodeIds(node, nodeIds));
+    expandedNodeIds = nodeIds;
   };
 
-  $: raiseExpandedChanged($expandedNodeIdsStore);
-  $: raiseSelectedChanged($selectedNodeIdStore);
+  export const collapseAll = () => {
+    expandedNodeIds = [];
+  };
+
+  export const expandAll = () => {
+    setToggleNodeIdsToAll();
+  };
+
+  const onKeydown: TreeForwardedEventHandlers['onKeydown'] = (event) => {
+    // Forward events from this tree to the selected tree node.
+    // The selected tree node is best suited handle keyboard events.
+    return $selectedNodeEventHandlersStore?.onKeydown?.(event);
+  };
 </script>
 
-<div class="sterling-tree" class:disabled class:composed>
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<div
+  class="sterling-tree"
+  class:disabled
+  class:composed
+  tabindex={!disabled ? 0 : undefined}
+  on:keydown={onKeydown}
+>
   {#if $$slots.label}
     <Label {disabled} for={inputId}>
       <slot name="label" />
     </Label>
   {/if}
-  <div class="tree">
+  <div class="tree" role="tree">
     {#if nodes}
       {#each nodes as node}
         <TreeNode {disabled} {node} nodeId={getNodeId(node)}>
@@ -105,7 +152,7 @@
               This repeats exact same item slot default for this node
               so the item slot is passed down the tree.
               -->
-              <TreeNodeItem {disabled} {expanded} {hasChildren} {depth} {node} {nodeId} {selected}>
+              <TreeItem {disabled} {expanded} {hasChildren} {depth} {node} {nodeId} {selected}>
                 <svelte:fragment
                   let:disabled
                   let:expanded
@@ -115,7 +162,7 @@
                   let:nodeId
                   let:selected
                 >
-                  <!-- This uses the nodeLabel slot for the TreeNodeItem default slot. -->
+                  <!-- This uses the nodeLabel slot for the TreeItem default slot. -->
                   <slot
                     name="nodeLabel"
                     {disabled}
@@ -127,7 +174,7 @@
                     {selected}>{nodeId}</slot
                   >
                 </svelte:fragment>
-              </TreeNodeItem>
+              </TreeItem>
             </slot>
           </svelte:fragment>
         </TreeNode>
@@ -161,7 +208,7 @@
     color: var(--Common__color--hover);
   }
 
-  .sterling-tree:focus-within {
+  .sterling-tree:focus-visible {
     border-color: var(--Common__border-color--focus);
     color: var(--Common__color--focus);
     outline-color: var(--Common__outline-color);

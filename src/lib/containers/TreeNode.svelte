@@ -4,7 +4,7 @@
 
   import type { TreeNodeContext, TreeContext, TreeNodeData } from './Tree.types';
   import { treeContextKey, treeNodeContextKey } from './Tree.constants';
-  import TreeNodeItem from './TreeNodeItem.svelte';
+  import TreeItem from './TreeItem.svelte';
 
   // ----- Props ----- //
   type T = $$Generic;
@@ -15,7 +15,8 @@
   // ----- Get Context ----- //
 
   // The parentNodeId must be retrieved before setting it for the children
-  const { getNodeId, expandedNodeIds, selectedNodeId } = getContext<TreeContext<T>>(treeContextKey);
+  const { getNodeId, expandedNodeIds, selectedNodeId, selectedNodeEventHandlers } =
+    getContext<TreeContext<T>>(treeContextKey);
   const { parentNodeId, depth } = getContext<TreeNodeContext>(treeNodeContextKey);
 
   // ----- Check nodeId ----- //
@@ -36,7 +37,7 @@
 
   // ----- State ----- //
 
-  let treeItemRef: HTMLDivElement;
+  let treeNodeRef: HTMLDivElement;
   let itemRef: HTMLDivElement;
   $: hasChildren = (node?.children?.length || 0) > 0 || $$slots.children || $$slots.default;
   $: expanded = $expandedNodeIds.includes(nodeId);
@@ -44,9 +45,9 @@
 
   // ----- Expand/Collapse ----- //
 
-  const collapseNode = () => {
+  const collapseNode = (index?: number) => {
     if (!disabled) {
-      const index = $expandedNodeIds.findIndex((id) => id === nodeId);
+      index = index ?? $expandedNodeIds.findIndex((id) => id === nodeId);
       if (index !== -1) {
         expandedNodeIds.set([
           ...$expandedNodeIds.slice(0, index),
@@ -56,9 +57,9 @@
     }
   };
 
-  const expandNode = () => {
+  const expandNode = (index?: number) => {
     if (!disabled) {
-      const index = $expandedNodeIds.findIndex((id) => id === nodeId);
+      index = index ?? $expandedNodeIds.findIndex((id) => id === nodeId);
       if (index === -1) {
         expandedNodeIds.set([...$expandedNodeIds, nodeId]);
       }
@@ -68,14 +69,7 @@
   const toggleExpanded = () => {
     if (!disabled) {
       const index = $expandedNodeIds.findIndex((id) => id === nodeId);
-      if (index !== -1) {
-        expandedNodeIds.set([
-          ...$expandedNodeIds.slice(0, index),
-          ...$expandedNodeIds.slice(index + 1)
-        ]);
-      } else {
-        expandedNodeIds.set([...$expandedNodeIds, nodeId]);
-      }
+      index !== -1 ? collapseNode(index) : expandNode(index);
     }
   };
 
@@ -84,20 +78,6 @@
   const selectNodeById = (nodeId: string) => {
     if (!disabled) {
       selectedNodeId.set(nodeId);
-    }
-  };
-
-  const deselectNodeById = (nodeId: string) => {
-    if (!disabled && $selectedNodeId === nodeId) {
-      selectedNodeId.set(undefined);
-    }
-  };
-
-  const toggleSelectedById = (nodeId: string) => {
-    if (!disabled && $selectedNodeId !== nodeId) {
-      selectedNodeId.set(nodeId);
-    } else {
-      selectedNodeId.set(undefined);
     }
   };
 
@@ -117,20 +97,20 @@
     if (!disabled) {
       let nextNodeId: string | null | undefined = undefined;
 
-      const decendants = treeItemRef.getElementsByClassName('sterling-tree-item');
+      const decendants = treeNodeRef.getElementsByClassName('sterling-tree-node');
       const last = decendants.length > 0 ? decendants.item(0) : undefined;
       nextNodeId = last?.getAttribute('data-node-id');
 
       if (!nextNodeId) {
-        nextNodeId = treeItemRef.nextElementSibling?.getAttribute('data-node-id');
+        nextNodeId = treeNodeRef.nextElementSibling?.getAttribute('data-node-id');
       }
 
       if (!nextNodeId) {
         let ancestor: Element | null | undefined =
-          treeItemRef.closest<Element>('.sterling-tree-item');
+          treeNodeRef.closest<Element>('.sterling-tree-node');
         while (ancestor && !nextNodeId) {
           nextNodeId = ancestor?.nextElementSibling?.getAttribute('data-node-id');
-          ancestor = ancestor.parentElement?.closest<Element>('.sterling-tree-item');
+          ancestor = ancestor.parentElement?.closest<Element>('.sterling-tree-node');
         }
       }
 
@@ -143,7 +123,7 @@
   const selectPreviousNode = () => {
     if (!disabled) {
       let prevNodeId: string | null | undefined = undefined;
-      const previousSibling = treeItemRef?.previousElementSibling;
+      const previousSibling = treeNodeRef?.previousElementSibling;
 
       // find the node immediately preceding this node
       // this will either be
@@ -151,7 +131,7 @@
       //  - the previous sibling
       //  - or the parent
       if (previousSibling) {
-        const decendants = previousSibling.getElementsByClassName('sterling-tree-item');
+        const decendants = previousSibling.getElementsByClassName('sterling-tree-node');
         const last =
           decendants.length > 0 ? decendants.item(decendants.length - 1) : previousSibling;
         prevNodeId = last?.getAttribute('data-node-id');
@@ -166,13 +146,6 @@
       }
     }
   };
-
-  $: {
-    if (selected) {
-      itemRef?.focus();
-    }
-  }
-
   // ----- Event Handlers ----- //
 
   const onItemClick = () => {
@@ -181,8 +154,7 @@
     selectNode();
   };
 
-  const onKeydown = (event: KeyboardEvent) => {
-    console.log('onKeydown');
+  const onKeydown: svelte.JSX.KeyboardEventHandler<Element> = (event) => {
     if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
       switch (event.key) {
         case 'Enter':
@@ -191,8 +163,10 @@
           event.preventDefault();
           return false;
         case 'ArrowRight':
-          if (hasChildren) {
+          if (!expanded && hasChildren) {
             expandNode();
+          } else {
+            selectNextNode();
           }
           // left arrow on an expanded node selects the next visible item
           //listRef?.selectNextItem();
@@ -201,8 +175,10 @@
         case 'ArrowLeft':
           if (expanded && hasChildren) {
             collapseNode();
-          } else {
+          } else if (parentNodeId) {
             selectParentNode();
+          } else {
+            selectPreviousNode();
           }
           // left arrow on a collapsed node select the previous visible item
           //listRef.selectPreviousItem();
@@ -219,24 +195,32 @@
       }
     }
   };
+
+  $: {
+    if (selected) {
+      selectedNodeEventHandlers.set({ onKeydown });
+      treeNodeRef?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+    }
+  }
 </script>
 
 <!--
 @component
 A node in a Tree displaying the item and children.
   -->
-<div class="sterling-tree-item" class:disabled bind:this={treeItemRef} data-node-id={nodeId}>
-  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-  <div
-    class="item"
-    class:selected
-    on:click={onItemClick}
-    on:keydown={onKeydown}
-    bind:this={itemRef}
-    tabindex={!disabled ? 0 : undefined}
-  >
+<div
+  aria-selected={selected ? true : undefined}
+  aria-expanded={expanded}
+  class="sterling-tree-node"
+  class:disabled
+  bind:this={treeNodeRef}
+  data-node-id={nodeId}
+  role="treeitem"
+>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div bind:this={itemRef} class="item" class:selected on:click={onItemClick}>
     <slot name="item" {disabled} {expanded} {hasChildren} {depth} {node} {nodeId} {selected}>
-      <TreeNodeItem {disabled} {expanded} {hasChildren} {depth} {node} {nodeId} {selected}>
+      <TreeItem {disabled} {expanded} {hasChildren} {depth} {node} {nodeId} {selected}>
         <svelte:fragment
           let:disabled
           let:expanded
@@ -250,11 +234,11 @@ A node in a Tree displaying the item and children.
             >{nodeId}</slot
           >
         </svelte:fragment>
-      </TreeNodeItem>
+      </TreeItem>
     </slot>
   </div>
   {#if expanded && hasChildren}
-    <div class="children" transition:slide={{ duration: 200 }}>
+    <div class="children" transition:slide={{ duration: 200 }} role="group">
       <slot name="children">
         {#if node?.children}
           {#each node.children as child}
@@ -289,15 +273,7 @@ A node in a Tree displaying the item and children.
                   This repeats exact same item slot default for this child
                   so the item slot is passed down the tree.
                   -->
-                  <TreeNodeItem
-                    {disabled}
-                    {expanded}
-                    {hasChildren}
-                    {depth}
-                    {node}
-                    {nodeId}
-                    {selected}
-                  >
+                  <TreeItem {disabled} {expanded} {hasChildren} {depth} {node} {nodeId} {selected}>
                     <svelte:fragment
                       let:disabled
                       let:expanded
@@ -307,7 +283,7 @@ A node in a Tree displaying the item and children.
                       let:nodeId
                       let:selected
                     >
-                      <!-- This uses the label slot for the TreeNodeItem default slot. -->
+                      <!-- This uses the label slot for the TreeItem default slot. -->
                       <slot
                         name="label"
                         {disabled}
@@ -319,7 +295,7 @@ A node in a Tree displaying the item and children.
                         {selected}>{nodeId}</slot
                       >
                     </svelte:fragment>
-                  </TreeNodeItem>
+                  </TreeItem>
                 </slot>
               </svelte:fragment>
             </svelte:self>
@@ -334,5 +310,9 @@ A node in a Tree displaying the item and children.
 <style>
   .item {
     outline: none;
+  }
+
+  .item:focus-visible {
+    border: 1px solid blue;
   }
 </style>

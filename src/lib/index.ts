@@ -33,7 +33,7 @@ import Switch from './inputs/Switch.svelte';
 import TextArea from './inputs/TextArea.svelte';
 import Tree from './containers/Tree.svelte';
 import TreeNode from './containers/TreeNode.svelte';
-import TreeNodeChevron from './containers/TreeNodeChevron.svelte';
+import TreeNodeChevron from './containers/TreeChevron.svelte';
 
 export {
   Button,

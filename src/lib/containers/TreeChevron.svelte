@@ -23,10 +23,10 @@
   }
 </script>
 
-<div class="tree-item-chevron" class:leaf={!hasChildren} class:animate class:expanded />
+<div class="tree-chevron" class:leaf={!hasChildren} class:animate class:expanded />
 
 <style>
-  .tree-item-chevron {
+  .tree-chevron {
     position: relative;
     border: none;
     background: none;
@@ -35,7 +35,7 @@
     transform-origin: 50% 50%;
   }
 
-  .tree-item-chevron::after {
+  .tree-chevron::after {
     position: absolute;
     content: '';
     top: 50%;
@@ -88,7 +88,7 @@
     animation-fill-mode: forwards;
   }
 
-  .tree-item-chevron.leaf::after {
+  .tree-chevron.leaf::after {
     animation: none;
     content: '';
     position: absolute;

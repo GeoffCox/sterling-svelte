@@ -1,9 +1,9 @@
 <script>
-    import Playground from './TreeNodeChevronPlayground.svelte';
+    import Playground from './TreeChevronPlayground.svelte';
     import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
-# TreeNodeChevron
+# TreeChevron
 
 A chevron indicating expanded/collapsed state for nodes in a Tree.
 
@@ -20,7 +20,7 @@ A chevron indicating expanded/collapsed state for nodes in a Tree.
 ## Anatomy
 
 ```
-TreeNodeChevron
+TreeChevron
 ```
 
 ## Props

@@ -77,9 +77,8 @@
       <a href="{base}/components/switch">Switch</a>
       <a href="{base}/components/textarea">TextArea</a>
       <a href="{base}/components/tree">Tree</a>
-      <a href="{base}/components/treenode">TreeNode</a>
-      <a href="{base}/components/treenodechevron">TreeNodeChevron</a>
-      <a href="{base}/components/treenodeitem">TreeNodeItem</a>
+      <a href="{base}/components/treechevron">TreeChevron</a>
+      <a href="{base}/components/treeitem">TreeItem</a>
     </div>
     <div class="component">
       <slot />
