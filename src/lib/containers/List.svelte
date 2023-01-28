@@ -195,7 +195,7 @@ A list of items where a single item can be selected.
         on:click={() => onItemClick(index)}
       >
         <slot name="item" {disabled} {index} {item} {selected}>
-          <ListItem {disabled} {selected}>
+          <ListItem {disabled} {selected} {index} {item}>
             <slot {disabled} {index} {item} {selected}>
               {item}
             </slot>

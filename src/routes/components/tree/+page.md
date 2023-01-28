@@ -83,6 +83,11 @@ The item and nodeLabel slots are passed the following `let` parameters.
 
 ## Methods
 
+| Method      | Parameters | Description                         |
+| ----------- | ---------- | ----------------------------------- |
+| expandAll   |            | Expands all the nodes in the tree   |
+| collapseAll |            | Collapses all the nodes in the tree |
+
 ## Examples
 
 ### Custom item slot

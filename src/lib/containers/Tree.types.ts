@@ -1,5 +1,4 @@
-import { svelte } from '@sveltejs/vite-plugin-svelte';
-import type { Readable, Writable } from 'svelte/store';
+import type { Writable } from 'svelte/store';
 
 export type TreeNodeData<T> = T & {
   nodeId?: string;

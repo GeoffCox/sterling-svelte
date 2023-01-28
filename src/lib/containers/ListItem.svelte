@@ -1,6 +1,10 @@
 <script lang="ts">
+  type T = $$Generic;
+
   export let disabled = false;
   export let selected = false;
+  export let index = -1;
+  export let item: T | undefined = undefined;
 </script>
 
 <div
@@ -9,7 +13,7 @@
   class:disabled
   class:selected
 >
-  <slot />
+  <slot {disabled} {selected} {index} {item} />
 </div>
 
 <style>

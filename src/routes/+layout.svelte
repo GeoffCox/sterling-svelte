@@ -1,89 +1,135 @@
 <script lang="ts">
-  import { toggleDarkTheme } from '$lib';
+  import { applyDarkTheme, applyLightTheme, applyTheme, Select, toggleDarkTheme } from '$lib';
   import { onMount } from 'svelte';
-  import { writable } from 'svelte/store';
-  import { setContext } from 'svelte';
   import { base } from '$app/paths';
+  import { oceanTheme } from './oceanTheme';
 
-  let dark: boolean | undefined;
-  let darkModeCheckbox: HTMLInputElement;
+  const themeNames: string[] = ['automatic (light/dark)', 'light', 'dark', 'ocean (dark)'];
+  let themeIndex = 0;
 
-  const onDarkModeClick = () => {
-    if (dark === undefined) {
-      dark = true;
-    } else if (dark === true) {
-      dark = false;
-    } else {
-      dark = undefined;
-      darkModeCheckbox.indeterminate = true;
+  let mounted = false;
+
+  const setTheme = (node: HTMLElement, index: number) => {
+    const themeParams = { atDocumentRoot: true };
+    switch (index) {
+      case 1:
+        applyLightTheme(node, themeParams);
+        break;
+      case 2:
+        applyDarkTheme(node, themeParams);
+        break;
+      case 3:
+        applyTheme(node, { ...themeParams, theme: oceanTheme });
+        break;
+      case 0:
+      default:
+        toggleDarkTheme(node, themeParams);
+        break;
     }
   };
 
-  let prefersColorSchemeDark = false;
-
-  const onPrefersColorSchemeDarkChanged = (e: MediaQueryListEvent) => {
-    prefersColorSchemeDark = e.matches;
+  const applyCurrentTheme = (node: HTMLElement, params: { index: number }) => {
+    setTheme(node, params.index);
+    return {
+      destroy() {},
+      update(params: { index: number }) {
+        setTheme(node, params.index);
+      }
+    };
   };
 
+  const parseCookie = () => {
+    const pairs = document.cookie.split(';');
+
+    const result: Record<string, string> = {};
+
+    pairs.forEach((pair) => {
+      const nameValue = pair.split('=');
+      if (nameValue[0]) {
+        result[nameValue[0]] = nameValue[1] ?? '';
+      }
+    });
+
+    return result;
+  };
+
+  const defaultCookieExpiresMs = 30 * 24 * 60 * 60 * 1000;
+  const setCookie = (name: string, value: string, expiresMs: number = defaultCookieExpiresMs) => {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + expiresMs);
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+  };
+
+  const getThemeCookie = () => {
+    if (document) {
+      const cookies = parseCookie();
+      return cookies['sterling-docs-theme'];
+    }
+    return '';
+  };
+
+  const setThemeCookie = (themeName: string) => {
+    if (document) {
+      setCookie('sterling-docs-theme', themeName);
+    }
+  };
+
+  const loadThemeFromCookie = () => {
+    const index = themeNames.indexOf(getThemeCookie());
+    if (index !== -1) {
+      themeIndex = index;
+    }
+  };
+
+  $: mounted && setThemeCookie(themeNames[themeIndex]);
+
   onMount(() => {
-    darkModeCheckbox.indeterminate = true;
-
-    const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
-    prefersColorSchemeDark = matchMedia.matches;
-    matchMedia.addEventListener('change', onPrefersColorSchemeDarkChanged);
-
-    return () => {
-      matchMedia.removeEventListener('change', onPrefersColorSchemeDarkChanged);
-    };
+    mounted = true;
+    loadThemeFromCookie();
   });
-
-  let darkModeStore = writable<boolean>(dark);
-  setContext('sterlingDarkMode', darkModeStore);
-
-  $: {
-    darkModeStore.set(dark === undefined ? prefersColorSchemeDark : dark);
-  }
 </script>
 
-<div class="layout" use:toggleDarkTheme={{ dark, atDocumentRoot: true }}>
-  <div class="header">
-    <label>
-      <input
-        type="checkbox"
-        checked={dark}
-        bind:this={darkModeCheckbox}
-        on:click={onDarkModeClick}
-        title="indeterminate => follow OS/browser setting"
-      />
-      Dark Mode
-    </label>
-  </div>
-  <h1>sterling-svelte (in progress)</h1>
-  <h3>A modern, accessible, and lightweight UI component library for Svelte.</h3>
-  <div class="content">
-    <div class="nav">
-      <a href="{base}/">Overview</a>
-      <a href="{base}/theme">Theme</a>
-      <a href="{base}/components/button">Button</a>
-      <a href="{base}/components/checkbox">Checkbox</a>
-      <a href="{base}/components/dialog">Dialog</a>
-      <a href="{base}/components/input">Input</a>
-      <a href="{base}/components/label">Label</a>
-      <a href="{base}/components/list">List</a>
-      <a href="{base}/components/progress">Progress</a>
-      <a href="{base}/components/radio">Radio</a>
-      <a href="{base}/components/select">Select</a>
-      <a href="{base}/components/slider">Slider</a>
-      <a href="{base}/components/switch">Switch</a>
-      <a href="{base}/components/textarea">TextArea</a>
-      <a href="{base}/components/tree">Tree</a>
-      <a href="{base}/components/treechevron">TreeChevron</a>
-      <a href="{base}/components/treeitem">TreeItem</a>
+<div>
+  {#if mounted}
+    <div class="layout" use:applyCurrentTheme={{ index: themeIndex }}>
+      <div class="header">
+        <div class="title">sterling-svelte (in progress)</div>
+        <div class="subtitle">
+          A modern, accessible, and lightweight UI component library for Svelte.
+        </div>
+        <div class="select-theme">
+          <Select items={themeNames} bind:selectedIndex={themeIndex}>
+            <svelte:fragment slot="label">Theme</svelte:fragment>
+          </Select>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="nav">
+          <a href="{base}/">Overview</a>
+          <a href="{base}/theme">Theme</a>
+          <a href="{base}/components/button">Button</a>
+          <a href="{base}/components/checkbox">Checkbox</a>
+          <a href="{base}/components/dialog">Dialog</a>
+          <a href="{base}/components/input">Input</a>
+          <a href="{base}/components/label">Label</a>
+          <a href="{base}/components/list">List</a>
+          <a href="{base}/components/progress">Progress</a>
+          <a href="{base}/components/radio">Radio</a>
+          <a href="{base}/components/select">Select</a>
+          <a href="{base}/components/slider">Slider</a>
+          <a href="{base}/components/switch">Switch</a>
+          <a href="{base}/components/textarea">TextArea</a>
+          <a href="{base}/components/tree">Tree</a>
+          <a href="{base}/components/treechevron">TreeChevron</a>
+          <a href="{base}/components/treeitem">TreeItem</a>
+        </div>
+        <div class="component">
+          <slot />
+        </div>
+      </div>
     </div>
-    <div class="component">
-      <slot />
-    </div>
-  </div>
+  {/if}
 </div>
 
 <style>
@@ -168,10 +214,31 @@
   }
 
   .header {
-    display: flex;
-    justify-content: flex-end;
-    justify-items: flex-end;
-    padding: 5px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 3em;
+    padding: 2em 0;
+    width: fit-content;
+  }
+
+  .header .title {
+    font-size: 1.6em;
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 1;
+  }
+
+  .header .subtitle {
+    font-size: 1.2em;
+    grid-row: 2 / span 1;
+    grid-column: 1 / span 1;
+  }
+
+  .header .select-theme {
+    min-width: 250px;
+    justify-self: flex-end;
+    grid-row: 1 / span 2;
+    grid-column: 2 / span 1;
   }
 
   .content {

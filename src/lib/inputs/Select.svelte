@@ -11,6 +11,8 @@
 		Properties
 	  --------------------*/
 
+  type T = $$Generic;
+
   /**
    * Disables the list and all items
    */
@@ -19,7 +21,7 @@
   /**
    * The items to list.
    */
-  export let items: any[] = [];
+  export let items: T[] = [];
 
   /**
    * Opens the popup to select from the items
@@ -34,7 +36,7 @@
   /**
    * The selected item (read only)
    */
-  export let selectedItem: any = undefined;
+  export let selectedItem: T | undefined = undefined;
 
   $: {
     selectedItem = items[selectedIndex];
@@ -56,7 +58,7 @@
 
   let selectRef: HTMLDivElement;
   let popupRef: HTMLDivElement;
-  let listRef: List;
+  let listRef: List<T>;
 
   const popupId = uuid();
   let popupPosition: { x?: number; y?: number } = {
@@ -241,7 +243,14 @@ A single item that can be selected from a popup list of items.
 >
   {#if $$slots.label}
     <Label {disabled} for={inputId}>
-      <slot name="label" />
+      <!-- BUGBUG: Problem with slot let params conflict
+        It seems that when a default slot is used multiple times in a module,
+        the first time sets the possible let params.
+        If we don't define the same let params on this label slot that 
+        is the default slot for label, then using the default slot for list
+        will error saying the property is not defined.
+      -->
+      <slot name="label" index={0} item={undefined} selected={false} />
     </Label>
   {/if}
   <div class="input" id={inputId}>
@@ -265,21 +274,19 @@ A single item that can be selected from a popup list of items.
   >
     <div class="popup-content">
       <slot name="list">
-        {#if $$slots.default === true}
+        {#if $$slots.default}
           <List
             bind:this={listRef}
             selectedIndex={pendingSelectedIndex}
             {items}
             {disabled}
-            let:disabled
-            let:index
-            let:item
-            let:selected
             on:click={onListClick}
             on:keydown={onListKeydown}
             on:itemSelected={onPendingItemSelected}
           >
-            <slot {disabled} {index} {item} {selected} />
+            <svelte:fragment let:disabled let:index let:item let:selected>
+              <slot {disabled} {index} {item} {selected} />
+            </svelte:fragment>
           </List>
         {:else}
           <List
@@ -287,10 +294,6 @@ A single item that can be selected from a popup list of items.
             selectedIndex={pendingSelectedIndex}
             {items}
             {disabled}
-            let:disabled
-            let:index
-            let:item
-            let:selected
             on:click={onListClick}
             on:keydown={onListKeydown}
             on:itemSelected={onPendingItemSelected}
