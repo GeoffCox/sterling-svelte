@@ -1,6 +1,6 @@
 <script lang="ts">
   import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
   import Input from '$lib/inputs/Input.svelte';
   import Slider from '$lib/inputs/Slider.svelte';
 
@@ -16,7 +16,7 @@
   let depth = 0;
 </script>
 
-<Example bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     <TreeItem nodeId="nodeId" {depth} {disabled} {expanded} {hasChildren} {selected}>
       <svelte:fragment>{label}</svelte:fragment>
@@ -32,7 +32,7 @@
     </div>
     <Input bind:value={label}><span slot="label">label slot</span></Input>
   </svelte:fragment>
-</Example>
+</Playground>
 
 <style>
   .slider {

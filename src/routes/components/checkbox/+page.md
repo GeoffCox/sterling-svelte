@@ -11,6 +11,10 @@ A styled HTML input type=checkbox element.
 
 <Example />
 
+## Props
+
+No additional properties beyond those for the native element.
+
 ## Anatomy
 
 ```
@@ -19,10 +23,6 @@ checkbox
   checkmark
 label slot
 ```
-
-## Props
-
-No additional properties beyond those for the native element.
 
 ## Slots
 

@@ -31,18 +31,6 @@ A single item that can be selected from a popup list of items.
 
 - The popup is dynamically positioned based on avaiable screen space.
 
-## Anatomy
-
-```
-  label slot
-  value
-  button
-  popup
-  list slot
-    List
-    _default_ slot (item template)
-```
-
 ## Props
 
 | Name                    | Type    | Description                              |
@@ -59,6 +47,18 @@ A single item that can be selected from a popup list of items.
 | ----------------- | ----------------- | ----------------------------------------------------- |
 | itemSelectPending | `{ index, item }` | Raised as items are selected while the popup is open. |
 | itemSelected      | `{ index, item }` | Raised when an item is selected.                      |
+
+## Anatomy
+
+```
+  label slot
+  value
+  button
+  popup
+  list slot
+    List
+    _default_ slot (item template)
+```
 
 ## Slots
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Radio from '$lib/inputs/Radio.svelte';
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
   import Checkbox from '$lib/inputs/Checkbox.svelte';
   import Input from '$lib/inputs/Input.svelte';
 
@@ -15,7 +15,7 @@
   $: possibleValues = seed.map((x) => `${label}-${x}`);
 </script>
 
-<Example bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     {#each possibleValues as possibleValue}
       <Radio
@@ -41,7 +41,7 @@
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>
   </svelte:fragment>
-</Example>
+</Playground>
 
 <style>
   .component {

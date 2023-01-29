@@ -1,7 +1,7 @@
 <script lang="ts">
   import Input from '$lib/inputs/Input.svelte';
   import TextArea from '$lib/inputs/TextArea.svelte';
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
   import Checkbox from '$lib/inputs/Checkbox.svelte';
   import type { TextAreaResize } from '$lib/inputs/TextArea.types';
   import Select from '$lib/inputs/Select.svelte';
@@ -19,7 +19,7 @@
   $: resize = resizeValues[resizeIndex];
 </script>
 
-<Example bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     <TextArea
       bind:value
@@ -45,7 +45,7 @@
   <svelte:fragment slot="status">
     <div class="value">value: {value}</div>
   </svelte:fragment>
-</Example>
+</Playground>
 
 <style>
   .value {

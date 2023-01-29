@@ -1,6 +1,6 @@
 <script lang="ts">
   import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
   import Label from '$lib/display/Label.svelte';
   import Input from '$lib/inputs/Input.svelte';
 
@@ -8,7 +8,7 @@
   let labelText = 'This is a label';
 </script>
 
-<Example>
+<Playground>
   <div slot="component">
     <Label {disabled}>{labelText}</Label>
   </div>
@@ -18,4 +18,4 @@
     </Checkbox>
     <Input bind:value={labelText}><span slot="label">LABEL TEXT</span></Input>
   </div>
-</Example>
+</Playground>

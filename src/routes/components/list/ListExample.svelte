@@ -1,6 +1,6 @@
 <script lang="ts">
   import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
   import List from '$lib/containers/List.svelte';
   import Input from '$lib/inputs/Input.svelte';
   import { countries } from '../../_sampleData/countries';
@@ -16,7 +16,7 @@
   let composed = false;
 </script>
 
-<Example bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div class="component" class:horizontal slot="component">
     <List
       bind:selectedIndex
@@ -45,7 +45,7 @@
     <div>selectedIndex: {selectedIndex}</div>
     <div>selectedItem: {selectedItem}</div>
   </svelte:fragment>
-</Example>
+</Playground>
 
 <style>
   .component {

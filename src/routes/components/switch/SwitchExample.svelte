@@ -3,7 +3,7 @@
   import Checkbox from '$lib/inputs/Checkbox.svelte';
   import Input from '$lib/inputs/Input.svelte';
   import Switch from '$lib/inputs/Switch.svelte';
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
   import ChillIcon from './ChillIcon.svelte';
   import HeatIcon from './HeatIcon.svelte';
 
@@ -16,7 +16,7 @@
   let customLabels = false;
 </script>
 
-<Example bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div slot="component">
     {#if customLabels}
       <Switch bind:checked {disabled} {vertical}>
@@ -45,7 +45,7 @@
     <Input bind:value={onText}><span slot="label">onText</span></Input>
     <Checkbox bind:checked={customLabels}><span slot="label">custom labels</span></Checkbox>
   </svelte:fragment>
-</Example>
+</Playground>
 
 <style>
   .chill,

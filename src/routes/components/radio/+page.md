@@ -11,18 +11,18 @@ A styled HTML input type=radio element.
 
 <Example />
 
+## Props
+
+| Name  | Type | Description                                          |
+| ----- | ---- | ---------------------------------------------------- |
+| group | any  | Use with bind to set the value as a radio is checked |
+
 ## Anatomy
 
 `radio
   HTML input (hidden)
   dot
 label slot`
-
-## Props
-
-| Name  | Type | Description                                          |
-| ----- | ---- | ---------------------------------------------------- |
-| group | any  | Use with bind to set the value as a radio is checked |
 
 ## Slots
 

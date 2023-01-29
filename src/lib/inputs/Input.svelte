@@ -116,7 +116,7 @@
 
   .sterling-input > :global(label) {
     font-size: 0.7em;
-    margin: 0.5em 0.7em;
+    margin: 0.5em 0 0 0.7em;
   }
 
   .sterling-input > :global(label):empty {

@@ -17,6 +17,13 @@ A styled HTML textarea element.
 - Choose to automatically adjust the height to fit content.
 - Add a resize handle to the corner of the text area.
 
+## Props
+
+| Name       | Type       | Default | Description                                |
+| ---------- | ---------- | ------- | ------------------------------------------ |
+| autoHeight | boolean    | false   | Automatically adjust height to fit content |
+| resize     | CSS resize | 'none'  | Sets the textarea resize CSS property      |
+
 ## Anatomy
 
 ```
@@ -24,13 +31,6 @@ TextArea
   label slot
   HTML textarea
 ```
-
-## Props
-
-| Name       | Type       | Default | Description                                |
-| ---------- | ---------- | ------- | ------------------------------------------ |
-| autoHeight | boolean    | false   | Automatically adjust height to fit content |
-| resize     | CSS resize | 'none'  | Sets the textarea resize CSS property      |
 
 ## Slots
 

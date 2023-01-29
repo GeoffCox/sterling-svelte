@@ -15,16 +15,16 @@ A styled HTML input element.
 
 - Identify the value with an associated label.
 
+## Props
+
+No additional properties beyond those for the native element.
+
 ## Anatomy
 
 ```
   label slot
   HTML input
 ```
-
-## Props
-
-No additional properties beyond those for the native element.
 
 ## Slots
 

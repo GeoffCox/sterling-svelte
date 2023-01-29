@@ -24,46 +24,6 @@ A hierarchy of items (a.k.a. nodes)
 - If the node is already collpased, the left arrow key selects the previous node.
 - You can identify the tree's content with the optional label.
 
-## Anatomy
-
-```
-Tree
-  label slot
-  tree
-      TreeNode
-        item slot
-          TreeItem
-            nodeLabel slot
-      default slot
-```
-
-- Tree renders a TreeNode for each of the nodes.
-- TreeNode renders its item slot and then its TreeNode children.
-- Tree and TreeNode work together to recursively render the hierarchy of items. They coordinate through svelte context.
-
-### Slots
-
-| Slot      | Description                                      |
-| --------- | ------------------------------------------------ |
-| label     | The tree label                                   |
-| item      | The template for each item, defaults to TreeItem |
-| nodeLabel | The template for the label within each TreeItem  |
-| default   | Any declared TreeNode children                   |
-
-#### let params
-
-The item and nodeLabel slots are passed the following `let` parameters.
-
-| Let Param   | Type          | Description                                 |
-| ----------- | ------------- | ------------------------------------------- |
-| depth       | `number`      | The depth of this node in the tree          |
-| disabled    | `boolean`     | True if the tree and this node are disabled |
-| expanded    | `boolean`     | True if this node is expanded               |
-| hasChildren | `boolean`     | True if this node has children              |
-| node        | `TreeNode<T>` | The node data for this node                 |
-| nodeID      | `string`      | The ID of this node                         |
-| selected    | `boolean`     | True if this node is selected               |
-
 ## Props
 
 | Prop            | Type                                 | Description                                             |
@@ -87,6 +47,46 @@ The item and nodeLabel slots are passed the following `let` parameters.
 | ----------- | ---------- | ----------------------------------- |
 | expandAll   |            | Expands all the nodes in the tree   |
 | collapseAll |            | Collapses all the nodes in the tree |
+
+## Anatomy
+
+```
+Tree
+  label slot
+  tree
+      TreeNode
+        item slot
+          TreeItem
+            nodeLabel slot
+      default slot
+```
+
+- Tree renders a TreeNode for each of the nodes.
+- TreeNode renders its item slot and then its TreeNode children.
+- Tree and TreeNode work together to recursively render the hierarchy of items. They coordinate through svelte context.
+
+## Slots
+
+| Slot      | Description                                      |
+| --------- | ------------------------------------------------ |
+| default   | Any declared TreeNode children                   |
+| item      | The template for each item, defaults to TreeItem |
+| label     | The tree label                                   |
+| nodeLabel | The template for the label within each TreeItem  |
+
+### let params
+
+The item and nodeLabel slots are passed the following `let` parameters.
+
+| Let Param   | Type          | Description                                 |
+| ----------- | ------------- | ------------------------------------------- |
+| depth       | `number`      | The depth of this node in the tree          |
+| disabled    | `boolean`     | True if the tree and this node are disabled |
+| expanded    | `boolean`     | True if this node is expanded               |
+| hasChildren | `boolean`     | True if this node has children              |
+| node        | `TreeNode<T>` | The node data for this node                 |
+| nodeID      | `string`      | The ID of this node                         |
+| selected    | `boolean`     | True if this node is selected               |
 
 ## Examples
 

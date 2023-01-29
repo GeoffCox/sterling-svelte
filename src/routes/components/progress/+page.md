@@ -18,13 +18,6 @@ An indicator of a value between 0 and a maximum value.
 - Give meaning to the value with semantic colors.
 - Bind to the calculated percentage.
 
-## Anatomy
-
-```
-  label slot
-  indicator
-```
-
 ## Props
 
 | Name                | Type             | Description                                    |
@@ -38,6 +31,13 @@ An indicator of a value between 0 and a maximum value.
 
 - ProgressColorful: 'none' | 'auto' | 'progress' | 'success' | 'warning' | 'error'
   - auto: Set to 'progress' when value less than max and 'success' when value equals max.
+
+## Anatomy
+
+```
+  label slot
+  indicator
+```
 
 ## Slots
 

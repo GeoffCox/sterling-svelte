@@ -17,19 +17,6 @@ A styled HTML input type=checkbox element.
 - Identify the switch positions with the offText or onText
 - Customize labels by filling the off-label and on-label slot
 
-## Anatomy
-
-```
-Switch
-  HTML input (hidden)
-  off-label slot
-    Label with offText (default)
-  switch
-    thumb
-  on-label slot
-    Label with onText (default)
-```
-
 ## Props
 
 | Name     | Type    | Default   | Description                                               |
@@ -43,9 +30,25 @@ Switch
 - \* When the off-label slot is not filled, the OFF position is labeled with offText
 - \*\* When the on-label slot is not filled, the ON position is labeled with onText
 
+## Anatomy
+
+```
+Switch
+  HTML input (hidden)
+  off-label slot
+    Label with offText (default)
+  switch
+    thumb
+  on-label slot
+    Label with onText (default)
+```
+
 ## Slots
 
 | Name      | let params                                    | Description                                          |
 | --------- | --------------------------------------------- | ---------------------------------------------------- |
 | off-label | checked, disabled, inputId, offText, vertical | Content appearing nearest the OFF side of the switch |
 | on-label  | checked, disabled, inputId, offText, vertical | Content appearing nearest the ON side of the switch  |
+
+- off-label `let` params: checked, disabled, inputId, off-label, vertical
+- on-label slot `let` params: checked, disabled, inputId, on-label, vertical

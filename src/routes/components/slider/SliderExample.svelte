@@ -2,7 +2,7 @@
   import Slider from '$lib/inputs/Slider.svelte';
   import Checkbox from '$lib/inputs/Checkbox.svelte';
   import Input from '$lib/inputs/Input.svelte';
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
 
   let exampleRef: any;
 
@@ -65,7 +65,7 @@
   };
 </script>
 
-<Example name="Slider" bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div slot="component" class="component" class:vertical>
     {#if label.length > 0}
       <Slider
@@ -120,7 +120,7 @@
   <div slot="status">
     <div>value: {value}</div>
   </div>
-</Example>
+</Playground>
 
 <style>
   .component {

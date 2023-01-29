@@ -17,15 +17,15 @@ A chevron indicating expanded/collapsed state for nodes in a Tree.
 - Chevron points right when node collapsed, points down when expanded.
 - Chevron changes are animated as rotation. No animation when prefers-reduced motion.
 
-## Anatomy
-
-```
-TreeChevron
-```
-
 ## Props
 
 | Name        | Type      | Description                          |
 | ----------- | --------- | ------------------------------------ |
 | expanded    | `boolean` | If the associated node is expanded.  |
 | hasChildren | `boolean` | If the associated node has children. |
+
+## Anatomy
+
+```
+TreeChevron
+```

@@ -3,7 +3,7 @@
   import Progress from '$lib/display/Progress.svelte';
   import Slider from '$lib/inputs/Slider.svelte';
 
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
   import Input from '$lib/inputs/Input.svelte';
   import Select from '$lib/inputs/Select.svelte';
   import type { ProgressColorful } from '$lib/display/Progress.types';
@@ -35,7 +35,7 @@
   };
 </script>
 
-<Example>
+<Playground>
   <div class="component" class:vertical slot="component">
     <Progress {colorful} {disabled} {value} {max} bind:percent {vertical}>
       <svelte:fragment slot="label">{label}</svelte:fragment>
@@ -63,7 +63,7 @@
     <div>value: {value}</div>
     <div>percent: {percent}%</div>
   </svelte:fragment>
-</Example>
+</Playground>
 
 <style>
   .component {

@@ -25,6 +25,8 @@ import Radio from './inputs/Radio.svelte';
 import Select from './inputs/Select.svelte';
 import Slider from './inputs/Slider.svelte';
 import Switch from './inputs/Switch.svelte';
+import Tab from './containers/Tab.svelte';
+import TabList from './containers/TabList.svelte';
 import TextArea from './inputs/TextArea.svelte';
 import Tree from './containers/Tree.svelte';
 import TreeChevron from './containers/TreeChevron.svelte';
@@ -42,6 +44,8 @@ export {
   Select,
   Slider,
   Switch,
+  Tab,
+  TabList,
   TextArea,
   Tree,
   TreeChevron,

@@ -85,6 +85,13 @@ const deleteProduct = () => {
 <Button on:click={() => (open = true)}>Delete</Button>
 ```
 
+## Props
+
+| Name           | Type    | Default | Description                                      |
+| -------------- | ------- | ------- | ------------------------------------------------ |
+| open           | boolean | false   | If the dialog is open (i.e. visible)             |
+| backdropCloses | boolean | false   | If clicking outside the dialog should cancel it. |
+
 ## Anatomy
 
 ```
@@ -96,13 +103,6 @@ HTML dialog
     body slot
     footer slot
 ```
-
-## Props
-
-| Name           | Type    | Default | Description                                      |
-| -------------- | ------- | ------- | ------------------------------------------------ |
-| open           | boolean | false   | If the dialog is open (i.e. visible)             |
-| backdropCloses | boolean | false   | If clicking outside the dialog should cancel it. |
 
 ## Slots
 

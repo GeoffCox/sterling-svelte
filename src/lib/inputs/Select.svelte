@@ -342,7 +342,7 @@ A single item that can be selected from a popup list of items.
 
   .sterling-select > :global(label) {
     font-size: 0.7em;
-    margin: 0.5em 0.7em;
+    margin: 0.5em 0 0 0.7em;
   }
 
   .sterling-select > :global(label):empty {

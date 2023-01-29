@@ -119,6 +119,8 @@
           <a href="{base}/components/select">Select</a>
           <a href="{base}/components/slider">Slider</a>
           <a href="{base}/components/switch">Switch</a>
+          <a href="{base}/components/tab">Tab</a>
+          <a href="{base}/components/tablist">TabList</a>
           <a href="{base}/components/textarea">TextArea</a>
           <a href="{base}/components/tree">Tree</a>
           <a href="{base}/components/treechevron">TreeChevron</a>

@@ -3,7 +3,7 @@
   import Select from '$lib/inputs/Select.svelte';
   import Input from '$lib/inputs/Input.svelte';
 
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
 
   import { countries } from '../../_sampleData/countries';
 
@@ -16,7 +16,7 @@
   let label = 'COUNTRIES';
 </script>
 
-<Example bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     <Select
       bind:selectedIndex
@@ -51,7 +51,7 @@
     <div>selectedIndex: {selectedIndex}</div>
     <div>selectedItem: {selectedItem}</div>
   </svelte:fragment>
-</Example>
+</Playground>
 
 <style>
   .component {

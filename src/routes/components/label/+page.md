@@ -16,18 +16,18 @@ A styled HTML label element.
 - The label inherits color, when disabled opacity is set to 0.5.
 - HTML label props are forwarded and events are bubbled.
 
+## Props
+
+| Name     | Type    | Description                                |
+| -------- | ------- | ------------------------------------------ |
+| disabled | boolean | Disables the label making it look inactive |
+
 ## Anatomy
 
 ```
 HTML label
    _default_ slot
 ```
-
-## Props
-
-| Name     | Type    | Description                                |
-| -------- | ------- | ------------------------------------------ |
-| disabled | boolean | Disables the label making it look inactive |
 
 ## Slots
 

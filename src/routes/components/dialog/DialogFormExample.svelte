@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
 
   import Button from '$lib/buttons/Button.svelte';
   import Dialog from '$lib/surfaces/Dialog.svelte';
@@ -23,7 +23,7 @@
   };
 </script>
 
-<Example bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     <Button on:click={() => showDialog()}>Open dialog</Button>
     <Dialog
@@ -49,7 +49,7 @@
   <svelte:fragment slot="status">
     <div>returnValue: '{returnValue}'</div>
   </svelte:fragment>
-</Example>
+</Playground>
 
 <style>
   .content {

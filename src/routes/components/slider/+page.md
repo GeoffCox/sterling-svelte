@@ -19,6 +19,18 @@ Slider allows users to set a value between a minimum and maximum by moving a vis
 - Identify the value with an associated label.
 - Bind to the calculated percentage.
 
+## Props
+
+| Name      | Type    | Default   | Description                                          |
+| --------- | ------- | --------- | ---------------------------------------------------- |
+| disabled  | boolean | false     | Disables the progress making it look inactive        |
+| max       | number  | 100       | The maximum value.                                   |
+| min       | number  | 0         | The minimal value. .                                 |
+| precision | number  | 0         | The number of decimal places allowed for the value.  |
+| step      | number  | undefined | The optional allowed increments between min and max. |
+| value     | number  | 0         | The current value                                    |
+| vertical  | boolean | false     | If the slider should be vertical.                    |
+
 ## Anatomy
 
 ```
@@ -34,18 +46,6 @@ Slider allows users to set a value between a minimum and maximum by moving a vis
 - track: displays the range between min and max
 - fill: displays filling betweenmin and value
 - thumb: a draggable button for changing the value
-
-## Props
-
-| Name      | Type    | Default   | Description                                          |
-| --------- | ------- | --------- | ---------------------------------------------------- |
-| disabled  | boolean | false     | Disables the progress making it look inactive        |
-| max       | number  | 100       | The maximum value.                                   |
-| min       | number  | 0         | The minimal value. .                                 |
-| precision | number  | 0         | The number of decimal places allowed for the value.  |
-| step      | number  | undefined | The optional allowed increments between min and max. |
-| value     | number  | 0         | The current value                                    |
-| vertical  | boolean | false     | If the slider should be vertical.                    |
 
 ## Slots
 

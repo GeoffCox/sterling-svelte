@@ -1,6 +1,6 @@
 <script lang="ts">
   import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
 
   import TreeNodeChevron from '$lib/containers/TreeChevron.svelte';
 
@@ -10,7 +10,7 @@
   let hasChildren = true;
 </script>
 
-<Example bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div slot="component">
     <TreeNodeChevron {expanded} {hasChildren} />
   </div>
@@ -18,4 +18,4 @@
     <Checkbox bind:checked={expanded}><span slot="label">expanded</span></Checkbox>
     <Checkbox bind:checked={hasChildren}><span slot="label">hasChildren</span></Checkbox>
   </svelte:fragment>
-</Example>
+</Playground>

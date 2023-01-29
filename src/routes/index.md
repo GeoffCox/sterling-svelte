@@ -74,10 +74,10 @@ The library is in alpha - anything and everything may change at any time.
 | Switch        | 0.0.11                |
 | TextArea      | 0.0.13                |
 | Tree          | 0.0.14                |
+| Tabs          | 0.0.15                |
 | Menu          |                       |
 | Tooltip       |                       |
 | Toggle/Choice |                       |
 | Accordion     |                       |
 | Notifications |                       |
 | Drawer        |                       |
-| Tabs          |                       |

@@ -17,6 +17,16 @@ Displays a chevron and a label for an item in a tree.
 - Visual indicates when the node is selected.
 - The content can be customized with the default slot.
 
+## Props
+
+| Name        | Type      | Description                                      |
+| ----------- | --------- | ------------------------------------------------ |
+| depth       | `number`  | The depth of the associated node witin the tree. |
+| disabled    | `boolean` | Disables the item                                |
+| expanded    | `boolean` | If the associated node is expanded.              |
+| hasChildren | `boolean` | If the associated node has children.             |
+| selected    | `boolean` | If the associated node has is selected.          |
+
 ## Anatomy
 
 ```
@@ -25,13 +35,13 @@ TreeItem
   default slot
 ```
 
-### Slots
+## Slots
 
 | Slot    | Description                   |
 | ------- | ----------------------------- |
 | default | The content after the chevron |
 
-#### let params
+### let params
 
 The default slot is passed the following `let` parameters.
 
@@ -44,13 +54,3 @@ The default slot is passed the following `let` parameters.
 | node        | `TreeNode<T>` | The node data for this node                 |
 | nodeID      | `string`      | The ID of this node                         |
 | selected    | `boolean`     | True if this node is selected               |
-
-## Props
-
-| Name        | Type      | Description                                      |
-| ----------- | --------- | ------------------------------------------------ |
-| depth       | `number`  | The depth of the associated node witin the tree. |
-| disabled    | `boolean` | Disables the item                                |
-| expanded    | `boolean` | If the associated node is expanded.              |
-| hasChildren | `boolean` | If the associated node has children.             |
-| selected    | `boolean` | If the associated node has is selected.          |

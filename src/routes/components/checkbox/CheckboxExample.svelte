@@ -1,6 +1,6 @@
 <script lang="ts">
   import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
   import Input from '$lib/inputs/Input.svelte';
 
   let exampleRef: any;
@@ -10,7 +10,7 @@
   let label = 'Sterling';
 </script>
 
-<Example bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div slot="component" class="component">
     <Checkbox {disabled} bind:checked on:change={() => exampleRef.recordEvent('change')}
       ><svelte:fragment slot="label">{label}</svelte:fragment></Checkbox
@@ -23,7 +23,7 @@
   <svelte:fragment slot="status">
     <div>checked: {checked}</div>
   </svelte:fragment>
-</Example>
+</Playground>
 
 <style>
   .component {

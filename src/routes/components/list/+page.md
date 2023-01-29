@@ -17,17 +17,6 @@ A list of items where a single item can be selected.
 - Arrow keys selected the next or previous item.
 - Identify the list of items with an associated label.
 
-## Anatomy
-
-```
-List
-  label slot
-  list of items
-    item slot
-      ListItem
-        _default_ slot
-```
-
 ## Props
 
 | Name                    | Type    | Description                                              |
@@ -53,6 +42,17 @@ List
 | focusSelectedItem  | Focuses the selected item and scrolls it into view |
 | selectPreviousItem | Selected the previous item                         |
 | selectNextItem     | Selected the next item                             |
+
+## Anatomy
+
+```
+List
+  label slot
+  list of items
+    item slot
+      ListItem
+        _default_ slot
+```
 
 ## Slots
 

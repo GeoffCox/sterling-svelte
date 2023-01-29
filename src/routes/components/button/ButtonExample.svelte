@@ -1,6 +1,6 @@
 <script lang="ts">
   import SvelteIcon from '../../SvelteIcon.svelte';
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
 
   import type { ButtonShape, ButtonVariant } from '$lib';
   import Button from '$lib/buttons/Button.svelte';
@@ -22,7 +22,7 @@
   let buttonWithIcon = true;
 </script>
 
-<Example bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     <Button
       disabled={buttonDisabled}
@@ -49,7 +49,7 @@
       <span slot="label">variant</span>
     </Select>
   </div>
-</Example>
+</Playground>
 
 <style>
   .options {

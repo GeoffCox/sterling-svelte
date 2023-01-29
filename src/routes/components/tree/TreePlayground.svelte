@@ -2,7 +2,7 @@
   import { type CoffeeNode, coffeeTree } from '../../_sampleData/coffeeTree';
 
   import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
   import Input from '$lib/inputs/Input.svelte';
 
   import Tree from '$lib/containers/Tree.svelte';
@@ -34,7 +34,7 @@
   const expandAll = () => treeRef?.expandAll();
 </script>
 
-<Example bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     <Tree
       bind:this={treeRef}
@@ -70,7 +70,7 @@
       expandedNodeIds: {expandedNodeIds.join(',')}
     </div>
   </svelte:fragment>
-</Example>
+</Playground>
 
 <style>
   .component {

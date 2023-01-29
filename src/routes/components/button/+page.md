@@ -16,13 +16,6 @@ A styled HTML button element.
 - You can choose the shape of the button.
 - You can choose the appearance of the button.
 
-## Anatomy
-
-```
-HTML button
-  default slot
-```
-
 ## Props
 
 | Name    | Type          | Description                     |
@@ -32,6 +25,13 @@ HTML button
 
 - ButtonVariant: 'regular' | 'outline' | 'ghost'
 - ButtonShape: 'circular' | 'rounded' | 'square'
+
+## Anatomy
+
+```
+HTML button
+  default slot
+```
 
 ## Slots
 

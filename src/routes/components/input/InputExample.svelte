@@ -1,6 +1,6 @@
 <script lang="ts">
   import Input from '$lib/inputs/Input.svelte';
-  import Example from '../Example.svelte';
+  import Playground from '../Playground.svelte';
   import Checkbox from '$lib/inputs/Checkbox.svelte';
 
   let exampleRef: any;
@@ -11,7 +11,7 @@
   let value = '';
 </script>
 
-<Example bind:this={exampleRef}>
+<Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     <Input
       bind:value
@@ -31,7 +31,7 @@
   <svelte:fragment slot="status">
     <div>value: {value}</div>
   </svelte:fragment>
-</Example>
+</Playground>
 
 <style>
   .component {
