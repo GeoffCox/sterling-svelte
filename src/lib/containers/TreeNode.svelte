@@ -149,7 +149,6 @@
   // ----- Event Handlers ----- //
 
   const onItemClick = () => {
-    console.log('onItemClick');
     toggleExpanded();
     selectNode();
   };
