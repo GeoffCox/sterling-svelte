@@ -10,6 +10,7 @@ export { toggleDarkTheme } from './theme/toggleDarkTheme';
 export type { ButtonVariant, ButtonShape } from './buttons/Button.types';
 export type { ProgressColorful } from './display/Progress.types';
 export type { TextAreaResize } from './inputs/TextArea.types';
+export type { TabData } from './containers/Tabs.types';
 export type { TreeNodeData } from './containers/Tree.types';
 
 export { clickOutside } from './clickOutside';
