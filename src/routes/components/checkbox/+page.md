@@ -1,27 +1,30 @@
 <script>
-    import Example from './CheckboxExample.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
+    import Playground from './CheckboxPlayground.svelte';
 </script>
 
 # Checkbox
 
-A styled HTML input type=checkbox element.
+A styled HTML input (type=checkbox).
 
 ## Playground
 
-<Example />
+<Playground />
 
 ## Props
 
-No additional properties beyond those for the native element.
+## Props
+
+| Name    | Type             | Default | Description              |
+| ------- | ---------------- | ------- | ------------------------ |
+| (input) | HTMLInputElement |         | Built in HTML properties |
 
 ## Anatomy
 
 ```
-checkbox
-  HTML input (hidden)
+Checkbox
+  input type=checkbox
   checkmark
-label slot
+  label slot
 ```
 
 ## Slots
@@ -29,3 +32,5 @@ label slot
 | Name  | Description                          |
 | ----- | ------------------------------------ |
 | label | Content appearing after the checkbox |
+
+- label slot `let` params: disabled, checked

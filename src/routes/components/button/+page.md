@@ -1,15 +1,14 @@
 <script>
-    import Example from './ButtonExample.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
+    import Playground from './ButtonPlayground.svelte';
 </script>
 
 # Button
 
-A styled HTML button element.
+A styled HTML button.
 
 ## Playground
 
-<Example />
+<Playground />
 
 ## Features
 
@@ -18,10 +17,11 @@ A styled HTML button element.
 
 ## Props
 
-| Name    | Type          | Description                     |
-| ------- | ------------- | ------------------------------- |
-| shape   | ButtonShape   | Changes the shape of the button |
-| variant | ButtonVariant | Changes the style of the button |
+| Name     | Type              | Default   | Description                     |
+| -------- | ----------------- | --------- | ------------------------------- |
+| (button) | HTMLButtonElement |           | Built in HTML properties        |
+| shape    | ButtonShape       | 'rounded' | Changes the shape of the button |
+| variant  | ButtonVariant     | 'regular' | Changes the style of the button |
 
 - ButtonVariant: 'regular' | 'outline' | 'ghost'
 - ButtonShape: 'circular' | 'rounded' | 'square'
@@ -29,12 +29,14 @@ A styled HTML button element.
 ## Anatomy
 
 ```
-HTML button
+Button (HTML button)
   default slot
 ```
 
 ## Slots
 
-| Name      | Description                                 |
-| --------- | ------------------------------------------- |
-| _default_ | Content within the button (e.g. text, icon) |
+| Name      | Description               |
+| --------- | ------------------------- |
+| _default_ | Content within the button |
+
+- default slot `let` params: shape, variant

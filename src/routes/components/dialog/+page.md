@@ -1,7 +1,6 @@
 <script>
-    import Example from './DialogManualExample.svelte';
-    import FormExample from './DialogFormExample.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
+    import ManualPlayground from './DialogManualPlayground.svelte';
+    import FormPlayground from './DialogFormPlayground.svelte';
 </script>
 
 # Dialog
@@ -26,14 +25,14 @@ IMPORTANT!
 - HTML button has a default `type="submit"`. Clicking it submits the form.
 - This library's `Button` has a default `type="button"`. You will need to set `type="submit"` if you to submit the form.
 
-<FormExample />
+<FormPlayground />
 
 ### Manual Action Buttons
 
 This example demonstrates buttons that do not submit the form.
 Instead, `on:click` handlers take action.
 
-<Example />
+<ManualPlayground />
 
 ## Features
 

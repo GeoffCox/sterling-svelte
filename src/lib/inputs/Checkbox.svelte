@@ -46,7 +46,7 @@
   {#if $$slots.label}
     <div class="label">
       <Label {disabled} for={inputId}>
-        <slot name="label" />
+        <slot name="label" {checked} {disabled} />
       </Label>
     </div>
   {/if}

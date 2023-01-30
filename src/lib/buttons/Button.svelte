@@ -43,7 +43,7 @@
   on:wheel
   {...$$restProps}
 >
-  <slot />
+  <slot {shape} {variant} />
 </button>
 
 <style>
