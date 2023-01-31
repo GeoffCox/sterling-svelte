@@ -108,23 +108,26 @@
         <div class="nav">
           <a href="{base}/">Overview</a>
           <a href="{base}/theme">Theme</a>
-          <a href="{base}/components/button">Button</a>
-          <a href="{base}/components/checkbox">Checkbox</a>
-          <a href="{base}/components/dialog">Dialog</a>
-          <a href="{base}/components/input">Input</a>
-          <a href="{base}/components/label">Label</a>
-          <a href="{base}/components/list">List</a>
-          <a href="{base}/components/progress">Progress</a>
-          <a href="{base}/components/radio">Radio</a>
-          <a href="{base}/components/select">Select</a>
-          <a href="{base}/components/slider">Slider</a>
-          <a href="{base}/components/switch">Switch</a>
-          <a href="{base}/components/tab">Tab</a>
-          <a href="{base}/components/tablist">TabList</a>
-          <a href="{base}/components/textarea">TextArea</a>
-          <a href="{base}/components/tree">Tree</a>
-          <a href="{base}/components/treechevron">TreeChevron</a>
-          <a href="{base}/components/treeitem">TreeItem</a>
+          <div class="nav-header">Components</div>
+          <div class="nav-section">
+            <a href="{base}/components/button">Button</a>
+            <a href="{base}/components/checkbox">Checkbox</a>
+            <a href="{base}/components/dialog">Dialog</a>
+            <a href="{base}/components/input">Input</a>
+            <a href="{base}/components/label">Label</a>
+            <a href="{base}/components/list">List</a>
+            <a href="{base}/components/progress">Progress</a>
+            <a href="{base}/components/radio">Radio</a>
+            <a href="{base}/components/select">Select</a>
+            <a href="{base}/components/slider">Slider</a>
+            <a href="{base}/components/switch">Switch</a>
+            <a href="{base}/components/tab">Tab</a>
+            <a href="{base}/components/tablist">TabList</a>
+            <a href="{base}/components/textarea">TextArea</a>
+            <a href="{base}/components/tree">Tree</a>
+            <a href="{base}/components/treechevron">TreeChevron</a>
+            <a href="{base}/components/treeitem">TreeItem</a>
+          </div>
         </div>
         <div class="component">
           <slot />
@@ -257,7 +260,18 @@
     padding: 1em;
   }
 
+  .nav-section {
+    padding-left: 0.25em;
+  }
+
+  .nav-header {
+    font-size: 0.8em;
+    font-variant: small-caps;
+    margin-top: 2em;
+  }
+
   .nav a {
+    display: block;
     text-decoration: none;
     margin: 0.5em 0;
     font-size: 1em;
