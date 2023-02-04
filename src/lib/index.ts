@@ -21,6 +21,7 @@ import Dialog from './surfaces/Dialog.svelte';
 import Input from './inputs/Input.svelte';
 import Label from './display/Label.svelte';
 import List from './containers/List.svelte';
+import MenuItem from './containers/MenuItem.svelte';
 import Progress from './display/Progress.svelte';
 import Radio from './inputs/Radio.svelte';
 import Select from './inputs/Select.svelte';
@@ -40,6 +41,7 @@ export {
   Input,
   Label,
   List,
+  MenuItem,
   Progress,
   Radio,
   Select,

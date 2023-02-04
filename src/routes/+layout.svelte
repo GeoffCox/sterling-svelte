@@ -116,6 +116,7 @@
             <a href="{base}/components/input">Input</a>
             <a href="{base}/components/label">Label</a>
             <a href="{base}/components/list">List</a>
+            <a href="{base}/components/menuitem">MenuItem</a>
             <a href="{base}/components/progress">Progress</a>
             <a href="{base}/components/radio">Radio</a>
             <a href="{base}/components/select">Select</a>
@@ -140,6 +141,10 @@
 <style>
   @import '@fontsource/overpass';
   @import '@fontsource/fira-mono';
+
+  :global(#SterlingMenuPortal .sterling-menu-item) {
+    font-style: italic;
+  }
 
   :global(:root) {
     color: var(--Common__color);

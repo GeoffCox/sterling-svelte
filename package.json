@@ -1,6 +1,6 @@
 {
   "name": "@geoffcox/sterling-svelte",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "author": "Geoff Cox",
   "description": "A modern, accessible, and lightweight component library for Svelte.",
   "license": "MIT",
@@ -58,6 +58,7 @@
   "dependencies": {
     "@floating-ui/dom": "^1.1.0",
     "lodash-es": "^4.17.21",
+    "svelte-portal": "^2.2.0",
     "uuid": "^9.0.0"
   }
 }

@@ -75,7 +75,7 @@ The library is in alpha - anything and everything may change at any time.
 | TextArea      | 0.0.13                |
 | Tree          | 0.0.14                |
 | Tabs          | 0.0.15                |
-| Menu          |                       |
+| Menu          | 0.0.16                |
 | Tooltip       |                       |
 | Toggle/Choice |                       |
 | Accordion     |                       |
