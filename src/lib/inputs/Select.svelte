@@ -208,7 +208,6 @@ A single item that can be selected from a popup list of items.
   -->
 <div
   bind:this={selectRef}
-  use:clickOutside
   aria-controls={popupId}
   aria-haspopup="listbox"
   aria-expanded={open}
@@ -216,8 +215,7 @@ A single item that can be selected from a popup list of items.
   class:disabled
   role="combobox"
   tabindex="0"
-  on:click_outside={() => (open = false)}
-  on:click={onSelectClick}
+  use:clickOutside
   on:blur
   on:click
   on:copy
@@ -226,7 +224,6 @@ A single item that can be selected from a popup list of items.
   on:focus
   on:focusin
   on:focusout
-  on:keydown={onSelectKeydown}
   on:keydown
   on:keypress
   on:keyup
@@ -239,6 +236,9 @@ A single item that can be selected from a popup list of items.
   on:mouseup
   on:wheel
   on:paste
+  on:click={onSelectClick}
+  on:click_outside={() => (open = false)}
+  on:keydown={onSelectKeydown}
   {...$$restProps}
 >
   {#if $$slots.label}

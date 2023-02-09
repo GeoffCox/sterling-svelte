@@ -2,10 +2,9 @@
   import { portal } from '../portal';
 
   export let target: HTMLElement = document.body;
-  export let condition: boolean = true;
 </script>
 
-<div class="portal" use:portal={{ target, condition }}>
+<div class="portal" use:portal={{ target }}>
   <slot {...$$restProps} />
 </div>
 

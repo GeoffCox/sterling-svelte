@@ -167,7 +167,6 @@ A list of items where a single item can be selected.
     on:focus
     on:focusin
     on:focusout
-    on:keydown={onKeydown}
     on:keydown
     on:keypress
     on:keyup
@@ -181,6 +180,7 @@ A list of items where a single item can be selected.
     on:scroll
     on:wheel
     on:paste
+    on:keydown={onKeydown}
     {...$$restProps}
   >
     {#each items as item, index (item)}

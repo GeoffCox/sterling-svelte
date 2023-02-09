@@ -142,10 +142,6 @@
   @import '@fontsource/overpass';
   @import '@fontsource/fira-mono';
 
-  :global(#SterlingMenuPortal .sterling-menu-item) {
-    font-style: italic;
-  }
-
   :global(:root) {
     color: var(--Common__color);
     background-color: var(--Common__background-color);

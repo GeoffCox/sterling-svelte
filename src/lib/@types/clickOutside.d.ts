@@ -1,5 +1,11 @@
 declare namespace svelte.JSX {
-	interface DOMAttributes<T> {
-		onclick_outside?: (e: CustomEvent) => void;
-	}
+  type ClickOutsideEventDetail = {
+    mouseEvent: MouseEvent;
+  };
+
+  type ClickOutsideEvent = CustomEvent<ClickOutsideEventDetail>;
+
+  interface DOMAttributes<T> {
+    onclick_outside?: (e: ClickOutsideEvent) => void;
+  }
 }

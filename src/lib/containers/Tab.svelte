@@ -200,14 +200,11 @@
   tabindex={selected ? 0 : -1}
   type="button"
   on:blur
-  on:click={onClick}
   on:click
   on:dblclick
-  on:focus={onFocus}
   on:focus
   on:focusin
   on:focusout
-  on:keydown={onKeydown}
   on:keydown
   on:keypress
   on:keyup
@@ -227,6 +224,9 @@
   on:pointerout
   on:pointerup
   on:wheel
+  on:click={onClick}
+  on:focus={onFocus}
+  on:keydown={onKeydown}
 >
   <div class="content">
     <slot {data} disabled={_disabled} {selected} tabId={_tabId} text={_text}>

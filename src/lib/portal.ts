@@ -1,12 +1,9 @@
-export const portal = (node: HTMLElement, params: { target: HTMLElement; condition?: boolean }) => {
+export const portal = (node: HTMLElement, params: { target: HTMLElement }) => {
   const child = node;
   let portaled = false;
 
-  const createPortal = (
-    node: HTMLElement,
-    params: { target: HTMLElement; condition?: boolean }
-  ) => {
-    if (params.target && node && params.condition) {
+  const createPortal = (node: HTMLElement, params: { target: HTMLElement }) => {
+    if (!portaled && params.target && node) {
       params.target.appendChild(node);
       portaled = true;
     }
@@ -17,7 +14,9 @@ export const portal = (node: HTMLElement, params: { target: HTMLElement; conditi
   return {
     update: (params: { target: HTMLElement }) => createPortal(child, params),
     destroy() {
-      child?.parentNode?.removeChild(child);
+      if (portaled) {
+        child?.parentNode?.removeChild(child);
+      }
     }
   };
 };

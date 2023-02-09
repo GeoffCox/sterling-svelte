@@ -48,7 +48,6 @@
     on:focus
     on:focusin
     on:focusout
-    on:input={onInput}
     on:input
     on:invalid
     on:keydown
@@ -65,6 +64,7 @@
     on:submit
     on:reset
     on:wheel
+    on:input={onInput}
     {disabled}
     rows="1"
     {...$$restProps}
