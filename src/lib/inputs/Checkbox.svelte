@@ -139,7 +139,7 @@
     height: 14px;
     left: 50%;
     position: absolute;
-    top: 50%;
+    top: 45%;
     transform: translate(-50%, -50%) rotate(45deg);
     transform-origin: center;
     transition: border-color 250ms;
