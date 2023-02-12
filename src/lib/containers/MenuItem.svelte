@@ -10,34 +10,27 @@
 
   import { portal } from '../portal';
   import { clickOutside } from '../clickOutside';
-  import { custom_event } from 'svelte/internal';
-  import { forwardEvents } from '$lib/forwardEvents';
+  import { createEventDispatcher, custom_event } from 'svelte/internal';
+  import MenuItemDisplay from './MenuItemDisplay.svelte';
+  import { menuItemContextKey } from './Menus.constants';
 
   // ----- Props ----- //
 
   type T = $$Generic;
 
+  export let checked = false;
   export let disabled = false;
   export let open = false;
   export let menuItemId: string;
+  export let role: 'menuitem' | 'menuitemcheckbox' | 'menuitemradio' = 'menuitem';
   export let selected = false;
   export let text: string;
 
   // ----- Events ----- //
 
-  const raiseSelected = (targetMenuItemId: string) => {
-    console.log('raiseSelected', targetMenuItemId, menuItemId);
-    menuItemRef.dispatchEvent(
-      custom_event<svelte.JSX.MenuItemSelectedEventDetail>(
-        'menuitem_selected',
-        { menuItemId: targetMenuItemId },
-        { bubbles: true, cancelable: true }
-      )
-    );
-  };
+  const dispatch = createEventDispatcher();
 
   // ----- State ----- //
-  const popupId = uuid();
 
   let menuItemRef: HTMLButtonElement;
   let popupRef: HTMLDivElement;
@@ -50,16 +43,51 @@
   let insideMenu = false;
 
   $: hasChildren = $$slots.default;
+  $: submenu = insideMenu && hasChildren;
 
-  const context = getContext<MenuItemContext>('sterlingMenuItem');
+  const instanceId = uuid();
+
+  $: displayId = `${menuItemId}-display-${instanceId}`;
+  $: portalId = `${menuItemId}-portal-${instanceId}`;
+  $: popupId = `${menuItemId}-popup-${instanceId}`;
+
+  const rootMovePreviousMenu = () => {
+    console.log('move prev menu', menuItemId, rootMenuItemId);
+    open = false;
+    focusPreviousItem();
+  };
+
+  const rootMoveNextMenu = () => {
+    console.log('move next menu', menuItemId, rootMenuItemId);
+    open = false;
+    focusNextItem();
+  };
+
+  const temp = getContext<MenuItemContext>(menuItemContextKey) || {};
+  console.log('key', menuItemId, temp.moveNextMenu);
+
+  // ----- Context ----- //
 
   const {
     closeParent = undefined,
     closeMenu = undefined,
-    rootMenuItemId = menuItemId
-  } = getContext<MenuItemContext>('sterlingMenuItem') || {};
+    movePreviousMenu = rootMovePreviousMenu,
+    moveNextMenu = rootMoveNextMenu,
+    rootMenuItemId = menuItemId,
+    onSelect = undefined
+  } = getContext<MenuItemContext>(menuItemContextKey) || {};
 
-  setContext('sterlingMenuItem', {
+  console.log('init', menuItemId, rootMenuItemId);
+
+  // dispatches the event and bubbles it up the context
+  // so that higher level components can subscribe to select
+  // events for children.
+  const raiseSelect = (menuItemId: string) => {
+    dispatch('select', { menuItemId });
+    onSelect?.(menuItemId);
+  };
+
+  setContext(menuItemContextKey, {
     rootMenuItemId: rootMenuItemId,
     closeMenu: () => {
       open = false;
@@ -68,31 +96,25 @@
     closeParent: () => {
       open = false;
       menuItemRef.focus();
-    }
+    },
+    movePreviousMenu,
+    moveNextMenu,
+    onSelect: raiseSelect
   });
 
-  let usingKeyboard = false;
+  // ----- Keyborg ----- //
+
   let keyborg: Keyborg = createKeyborg(window);
 
+  let usingKeyboard = keyborg.isNavigatingWithKeyboard();
   const keyborgHandler = (value: boolean) => {
     usingKeyboard = value;
   };
 
-  onMount(() => {
-    mounted = true;
-    insideMenu = !!menuItemRef.parentElement?.closest('.popup');
-    keyborg.subscribe(keyborgHandler);
-    return () => {
-      keyborg.unsubscribe(keyborgHandler);
-    };
-  });
-
-  $: submenu = insideMenu && $$slots.default;
-
   // ----- Popup Position ----- //
 
   $: popupPlacement = (insideMenu ? 'right-start' : 'bottom-start') as Placement;
-  const middleware = [offset({ mainAxis: -5 }), flip(), shift({ padding: 0 })];
+  const middleware = [offset({ mainAxis: -2 }), flip(), shift({ padding: 0 })];
 
   const computePopupPosition = async () => {
     popupPosition = await computePosition(menuItemRef, popupRef, {
@@ -101,6 +123,7 @@
     });
   };
 
+  // whenever a popup is portaled it needs resubscription to auto-update
   let cleanupAutoUpdate = () => {};
   const autoUpdatePopupPosition = () => {
     cleanupAutoUpdate();
@@ -111,69 +134,71 @@
 
   $: mounted, open, menuItemRef, popupRef, autoUpdatePopupPosition();
 
-  // ----- Selection ----- //
+  // ----- Focus ----- //
 
   const focusPreviousItem = () => {
     // previousSibling or previousElementSibling are not used as other siblings may not be menu items
-    const menuItemCollection =
-      menuItemRef?.parentElement?.getElementsByClassName('sterling-menu-item');
-
-    const menuItems = menuItemCollection ? Array.from(menuItemCollection) : [];
-    const index = menuItems.findIndex((x) => x.getAttribute('data-menu-item-id') === menuItemId);
+    const menuItems = menuItemRef?.parentElement?.querySelectorAll('[data-menu-item-id]');
+    const menuItemArray = menuItems ? Array.from(menuItems) : [];
+    const index = menuItemArray.findIndex(
+      (x) => x.getAttribute('data-menu-item-id') === menuItemId
+    );
     if (index !== -1) {
-      const focusIndex = index === 0 ? menuItems.length - 1 : index - 1;
-      (<HTMLButtonElement>menuItems[focusIndex])?.focus();
+      const focusIndex = index === 0 ? menuItemArray.length - 1 : index - 1;
+      (<HTMLButtonElement>menuItemArray[focusIndex])?.focus();
     }
   };
 
-  const focusNextItem = () => {
+  const focusNextItem = (test?: boolean) => {
     // nextSibling or nextElementSibling are not used as other siblings may not be menu items
-    const menuItemCollection =
-      menuItemRef?.parentElement?.getElementsByClassName('sterling-menu-item');
-
-    const menuItems = menuItemCollection ? Array.from(menuItemCollection) : [];
-    const index = menuItems.findIndex((x) => x.getAttribute('data-menu-item-id') === menuItemId);
+    const menuItems = menuItemRef?.parentElement?.querySelectorAll('[data-menu-item-id]');
+    const menuItemArray = menuItems ? Array.from(menuItems) : [];
+    const index = menuItemArray.findIndex(
+      (x) => x.getAttribute('data-menu-item-id') === menuItemId
+    );
     if (index !== -1) {
-      const focusIndex = (index + 1) % menuItems.length;
-      (<HTMLButtonElement>menuItems[focusIndex])?.focus();
+      const focusIndex = (index + 1) % menuItemArray.length;
+      (<HTMLButtonElement>menuItemArray[focusIndex])?.focus();
+      // if (test && menuItemArray[focusIndex]) {
+      //   (menuItemArray[focusIndex] as unknown as HTMLButtonElement).setAttribute('open', true);
+      // }
     }
   };
 
   const focusFirstChild = () => {
-    const portal = document.querySelector(`#${menuItemId}-portal`);
-    const children = portal?.querySelector('.children');
-    const menuItemCollection = children?.getElementsByClassName('sterling-menu-item');
-    const menuItems = menuItemCollection ? Array.from(menuItemCollection) : [];
-    const firstChild = menuItems[0] as HTMLButtonElement;
-    console.log(
-      'focusFirstChild',
-      !!portal,
-      !!children,
-      !!menuItemCollection,
-      !!menuItems,
-      !!firstChild
-    );
-    firstChild?.focus();
+    const portal = document.querySelector(`#${portalId}`);
+    const menuItems = portal?.querySelectorAll('[data-menu-item-id]');
+    const menuItemArray = menuItems ? Array.from(menuItems) : [];
+    if (menuItemArray.length > 0) {
+      (<HTMLButtonElement>menuItemArray[0])?.focus();
+    }
   };
 
-  // $: {
-  //   if (open && $$slots.default) {
-  //     setTimeout(() => {
-  //       focusFirstChild();
-  //     }, 10);
-  //   }
-  // }
+  const autoFocusFirstChild = (open: boolean, insideMenu: boolean) => {
+    if (open && insideMenu) {
+      console.log('focus first child');
+      setTimeout(() => {
+        focusFirstChild();
+      }, 10);
+    }
+  };
+
+  $: autoFocusFirstChild(open, insideMenu);
 
   // ----- Event Handlers ----- //
 
+  onMount(() => {
+    mounted = true;
+    insideMenu = !!menuItemRef.parentElement?.closest('.popup');
+    keyborg.subscribe(keyborgHandler);
+    return () => {
+      keyborg.unsubscribe(keyborgHandler);
+    };
+  });
+
   const onKeyDown: svelte.JSX.KeyboardEventHandler<Element> = (event) => {
-    console.log(event.key);
     if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
       switch (event.key) {
-        case 'Escape':
-          closeMenu?.();
-          event.preventDefault();
-          return false;
         case 'ArrowDown':
           if (insideMenu) {
             focusNextItem();
@@ -186,23 +211,34 @@
             return false;
           }
         case 'ArrowLeft':
-          if (open) {
-            open = false;
+          if (insideMenu) {
+            if (open) {
+              open = false;
+            } else {
+              closeParent?.();
+            }
           } else {
-            closeParent?.();
+            movePreviousMenu();
           }
+
           event.preventDefault();
           return false;
         case 'ArrowRight':
-          if (hasChildren) {
+          if (insideMenu && hasChildren) {
             open = true;
             setTimeout(focusFirstChild, 10);
-            event.preventDefault();
-            return false;
+          } else {
+            moveNextMenu();
           }
+          event.preventDefault();
+          return false;
           break;
         case 'ArrowUp':
           focusPreviousItem();
+          event.preventDefault();
+          return false;
+        case 'Escape':
+          closeMenu?.();
           event.preventDefault();
           return false;
       }
@@ -223,7 +259,7 @@
         event.stopPropagation();
         return false;
       } else {
-        raiseSelected(menuItemId);
+        raiseSelect(menuItemId);
         closeMenu?.();
       }
     }
@@ -263,8 +299,10 @@
 
 <button
   aria-controls={popupId}
+  aria-disabled={disabled}
   aria-expanded={open}
-  aria-haspopup="menu"
+  aria-haspopup={hasChildren}
+  aria-owns={popupId}
   bind:this={menuItemRef}
   class="sterling-menu-item"
   class:disabled
@@ -273,8 +311,8 @@
   class:using-keyboard={usingKeyboard}
   data-menu-item-id={menuItemId}
   data-root-menu-item-id={rootMenuItemId}
-  role="menuitem"
-  tabindex="0"
+  {role}
+  tabindex={insideMenu ? -1 : 0}
   type="button"
   use:clickOutside
   on:blur
@@ -306,27 +344,26 @@
   on:click_outside={onClickOutside}
   on:keydown={onKeyDown}
   on:mouseenter={onMouseEnter}
-  on:menuitem_selected
   {...$$restProps}
 >
-  <div class="item">
-    <slot name="text" {disabled} {menuItemId} {text}>
-      <div>{text}</div>
+  <div class="item" id={displayId}>
+    <slot name="item" {disabled} {menuItemId} {text}>
+      <MenuItemDisplay {checked} hasChildren={hasChildren && submenu} menuItemRole={role}
+        >{text}</MenuItemDisplay
+      >
     </slot>
-    <div class="chevron" />
   </div>
   {#if open && $$slots.default}
-    <div class="portal" id={`${menuItemId}-portal`} use:portal={{ target: portalTarget }}>
+    <div class="portal" id={portalId} use:portal={{ target: portalTarget }}>
       <div
         bind:this={popupRef}
         class="popup"
         class:open
-        id={`${menuItemId}-${popupId}`}
+        id={popupId}
         style="left:{popupPosition.x}px; top:{popupPosition.y}px"
-        use:forwardEvents={{ target: menuItemRef, customEvents: ['menuitem_selected'] }}
       >
         {#if $$slots.default}
-          <div class="children" bind:this={childrenRef}>
+          <div bind:this={childrenRef} class="children" role="group">
             <slot />
           </div>
         {/if}
@@ -347,7 +384,7 @@
     cursor: pointer;
     font: inherit;
     margin: 0;
-    padding: 0.5em;
+    padding: 0;
     position: relative;
     outline: none;
     overflow: hidden;
@@ -367,7 +404,7 @@
     outline: none;
   }
 
-  .sterling-menu-item.using-keyboard:focus-visible {
+  .sterling-menu-item.using-keyboard:focus {
     border-color: var(--Button__border-color--focus);
     outline-color: var(--Common__outline-color);
     outline-offset: var(--Common__outline-offset);
@@ -386,40 +423,6 @@
 
   .sterling-menu-item.disabled {
     color: var(--Input__color--disabled);
-  }
-
-  .item {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    justify-content: flex-start;
-    justify-items: flex-start;
-    column-gap: 0.25em;
-  }
-
-  .chevron {
-    position: relative;
-    border: none;
-    background: none;
-    height: 1em;
-    width: 1em;
-    transform-origin: 50% 50%;
-    visibility: hidden;
-  }
-
-  .chevron::after {
-    position: absolute;
-    content: '';
-    top: 50%;
-    left: 50%;
-    width: 7px;
-    height: 7px;
-    border-right: 3px solid currentColor;
-    border-top: 3px solid currentColor;
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-
-  .sterling-menu-item.submenu .chevron {
-    visibility: visible;
   }
 
   .portal {

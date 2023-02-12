@@ -39,7 +39,7 @@
       {tabs}
       {selectionFollowsFocus}
       {vertical}
-      on:selected={(event) => {
+      on:select={(event) => {
         exampleRef.recordEvent(`selected: ${event.detail.selectedTabId}`);
       }}
     />
