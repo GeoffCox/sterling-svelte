@@ -24,7 +24,6 @@
   export let open = false;
   export let menuItemId: string;
   export let role: 'menuitem' | 'menuitemcheckbox' | 'menuitemradio' = 'menuitem';
-  export let selected = false;
   export let text: string;
 
   // ----- State ----- //
@@ -56,7 +55,7 @@
 
   const {
     rootMenuItemId = menuItemId,
-    level = 0,
+    depth = 0,
     register = undefined,
     unregister = undefined,
     closeMenu = undefined,
@@ -84,8 +83,14 @@
     onOpen?.(menuItemId);
   };
 
+  const raiseOpenClose = (open: boolean, menuItemId: string) => {
+    open ? raiseOpen(menuItemId) : raiseClose(menuItemId);
+  };
+
+  $: raiseOpenClose(open, menuItemId);
+
   // dispatches the event and bubbles it up the context
-  // so that higher level components can subscribe to select
+  // so that container components can subscribe to select
   // events for children.
   const raiseSelect = (menuItemId: string) => {
     dispatch('select', { menuItemId });
@@ -203,7 +208,7 @@
           }
           break;
         case 'ArrowLeft':
-          if (level > 1 && insideMenu) {
+          if (depth > 1 && insideMenu) {
             // When inside non-top-level menu, close the containing menu
             closeMenu?.();
           } else {
@@ -215,7 +220,7 @@
           event.preventDefault();
           return false;
         case 'ArrowRight':
-          if (level > 0 && hasChildren) {
+          if (depth > 0 && hasChildren) {
             // When inside a menu, show the subment
             open = true;
             setTimeout(focusFirstChild, 10);
@@ -306,7 +311,7 @@
 
   setContext<MenuItemContext>(menuItemContextKey, {
     rootMenuItemId: rootMenuItemId,
-    level: level + 1,
+    depth: depth + 1,
     register: (menuItem: MenuItem) => {
       children.set([...$children, menuItem]);
     },
@@ -339,7 +344,6 @@
   class="sterling-menu-item"
   class:disabled
   class:submenu
-  class:selected
   class:using-keyboard={usingKeyboard}
   data-menu-item-id={menuItemId}
   data-root-menu-item-id={rootMenuItemId}
@@ -379,7 +383,7 @@
   {...$$restProps}
 >
   <div class="item" id={displayId}>
-    <slot name="item" {disabled} {menuItemId} {text}>
+    <slot name="item" {checked} {disabled} {hasChildren} {depth} {menuItemId} {open} {role} {text}>
       <MenuItemDisplay {checked} hasChildren={hasChildren && submenu} menuItemRole={role}
         >{text}</MenuItemDisplay
       >
@@ -451,11 +455,6 @@
 
   .sterling-menu-item:focus {
     background-color: var(--Input__background-color--selected);
-  }
-
-  .sterling-menu-item.selected {
-    background-color: var(--Input__background-color--selected);
-    color: var(--Input__color--selected);
   }
 
   .sterling-menu-item.disabled {

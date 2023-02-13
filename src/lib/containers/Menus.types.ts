@@ -14,7 +14,7 @@ export type MenuBarContext = {
 
 export type MenuItemContext = {
   rootMenuItemId?: string;
-  level?: number;
+  depth?: number;
 
   register?: (menuItem: MenuItem) => void;
   unregister?: (menuItem: MenuItem) => void;

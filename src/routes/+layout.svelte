@@ -116,7 +116,7 @@
             <a href="{base}/components/input">Input</a>
             <a href="{base}/components/label">Label</a>
             <a href="{base}/components/list">List</a>
-            <a href="{base}/components/menuitem">MenuItem</a>
+            <a href="{base}/components/menuitem">Menu Item</a>
             <a href="{base}/components/progress">Progress</a>
             <a href="{base}/components/radio">Radio</a>
             <a href="{base}/components/select">Select</a>
@@ -213,6 +213,7 @@
 
   :global(li) {
     margin-bottom: 0.5em;
+    margin-block-start: 0.5em;
   }
 
   .layout {

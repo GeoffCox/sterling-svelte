@@ -4,7 +4,7 @@
 
   import MenuItem from '$lib/containers/MenuItem.svelte';
   import MenuBar from '$lib/containers/MenuBar.svelte';
-  import MenuItemSeparator from '$lib/containers/MenuItemSeparator.svelte';
+  import MenuSeparator from '$lib/containers/MenuSeparator.svelte';
 
   let exampleRef: any;
 
@@ -27,7 +27,7 @@
           <MenuItem menuItemId="recent-1" text="My document 1" />
           <MenuItem menuItemId="recent-2" text="My document 2" />
           <MenuItem menuItemId="recent-3" text="My document 3" />
-          <MenuItemSeparator />
+          <MenuSeparator />
           <MenuItem menuItemId="recent-4" text="My document 4" />
           <MenuItem menuItemId="recent-5" text="My document 5" />
           <MenuItem menuItemId="open-recent-others" text="Open Less Recent">
