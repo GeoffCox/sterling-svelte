@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Placement } from '@floating-ui/dom';
   import type { Keyborg } from 'keyborg';
-  import type { MenuItemContext } from './Menus.types';
+  import type { MenuBarContext, MenuItem, MenuItemContext } from './Menus.types';
 
   import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
   import { createKeyborg } from 'keyborg';
@@ -12,7 +12,8 @@
   import { clickOutside } from '../clickOutside';
   import { createEventDispatcher, custom_event } from 'svelte/internal';
   import MenuItemDisplay from './MenuItemDisplay.svelte';
-  import { menuItemContextKey } from './Menus.constants';
+  import { menuBarContextKey, menuItemContextKey } from './Menus.constants';
+  import { writable } from 'svelte/store';
 
   // ----- Props ----- //
 
@@ -26,24 +27,7 @@
   export let selected = false;
   export let text: string;
 
-  // ----- Events ----- //
-
-  const dispatch = createEventDispatcher();
-
   // ----- State ----- //
-
-  let menuItemRef: HTMLButtonElement;
-  let popupRef: HTMLDivElement;
-  let childrenRef: HTMLDivElement;
-  let popupPosition: { x?: number; y?: number } = {
-    x: undefined,
-    y: undefined
-  };
-  let mounted = false;
-  let insideMenu = false;
-
-  $: hasChildren = $$slots.default;
-  $: submenu = insideMenu && hasChildren;
 
   const instanceId = uuid();
 
@@ -51,33 +35,54 @@
   $: portalId = `${menuItemId}-portal-${instanceId}`;
   $: popupId = `${menuItemId}-popup-${instanceId}`;
 
-  const rootMovePreviousMenu = () => {
-    console.log('move prev menu', menuItemId, rootMenuItemId);
-    open = false;
-    focusPreviousItem();
+  let menuItemRef: HTMLButtonElement;
+  let popupRef: HTMLDivElement;
+  let childrenRef: HTMLDivElement;
+
+  let popupPosition: { x?: number; y?: number } = {
+    x: undefined,
+    y: undefined
   };
 
-  const rootMoveNextMenu = () => {
-    console.log('move next menu', menuItemId, rootMenuItemId);
-    open = false;
-    focusNextItem();
-  };
+  const children = writable<MenuItem[]>([]);
 
-  const temp = getContext<MenuItemContext>(menuItemContextKey) || {};
-  console.log('key', menuItemId, temp.moveNextMenu);
+  let mounted = false;
+  let insideMenu = false;
 
-  // ----- Context ----- //
+  $: hasChildren = $$slots.default;
+  $: submenu = insideMenu && hasChildren;
+
+  // ----- Get Context ----- //
 
   const {
-    closeParent = undefined,
-    closeMenu = undefined,
-    movePreviousMenu = rootMovePreviousMenu,
-    moveNextMenu = rootMoveNextMenu,
     rootMenuItemId = menuItemId,
+    level = 0,
+    register = undefined,
+    unregister = undefined,
+    closeMenu = undefined,
+    focusPrevious = undefined,
+    focusNext = undefined,
+    onOpen = undefined,
+    onClose = undefined,
     onSelect = undefined
   } = getContext<MenuItemContext>(menuItemContextKey) || {};
 
-  console.log('init', menuItemId, rootMenuItemId);
+  const { openPreviousMenu = undefined, openNextMenu = undefined } =
+    getContext<MenuBarContext>(menuBarContextKey) || {};
+
+  // ----- Events ----- //
+
+  const dispatch = createEventDispatcher();
+
+  const raiseClose = (menuItemId: string) => {
+    dispatch('close', { menuItemId });
+    onClose?.(menuItemId);
+  };
+
+  const raiseOpen = (menuItemId: string) => {
+    dispatch('open', { menuItemId });
+    onOpen?.(menuItemId);
+  };
 
   // dispatches the event and bubbles it up the context
   // so that higher level components can subscribe to select
@@ -86,21 +91,6 @@
     dispatch('select', { menuItemId });
     onSelect?.(menuItemId);
   };
-
-  setContext(menuItemContextKey, {
-    rootMenuItemId: rootMenuItemId,
-    closeMenu: () => {
-      open = false;
-      closeMenu?.();
-    },
-    closeParent: () => {
-      open = false;
-      menuItemRef.focus();
-    },
-    movePreviousMenu,
-    moveNextMenu,
-    onSelect: raiseSelect
-  });
 
   // ----- Keyborg ----- //
 
@@ -136,50 +126,33 @@
 
   // ----- Focus ----- //
 
-  const focusPreviousItem = () => {
-    // previousSibling or previousElementSibling are not used as other siblings may not be menu items
-    const menuItems = menuItemRef?.parentElement?.querySelectorAll('[data-menu-item-id]');
-    const menuItemArray = menuItems ? Array.from(menuItems) : [];
-    const index = menuItemArray.findIndex(
-      (x) => x.getAttribute('data-menu-item-id') === menuItemId
-    );
+  const focusPreviousChild = (fromMenuItemId: string) => {
+    const index = $children?.findIndex((menuItem) => menuItem.id === fromMenuItemId);
     if (index !== -1) {
-      const focusIndex = index === 0 ? menuItemArray.length - 1 : index - 1;
-      (<HTMLButtonElement>menuItemArray[focusIndex])?.focus();
+      const focusIndex = index === 0 ? $children.length - 1 : index - 1;
+      $children[focusIndex].focus();
     }
   };
 
-  const focusNextItem = (test?: boolean) => {
-    // nextSibling or nextElementSibling are not used as other siblings may not be menu items
-    const menuItems = menuItemRef?.parentElement?.querySelectorAll('[data-menu-item-id]');
-    const menuItemArray = menuItems ? Array.from(menuItems) : [];
-    const index = menuItemArray.findIndex(
-      (x) => x.getAttribute('data-menu-item-id') === menuItemId
-    );
+  const focusNextChild = (fromMenuItemId: string) => {
+    const index = $children?.findIndex((menuItem) => menuItem.id === fromMenuItemId);
     if (index !== -1) {
-      const focusIndex = (index + 1) % menuItemArray.length;
-      (<HTMLButtonElement>menuItemArray[focusIndex])?.focus();
-      // if (test && menuItemArray[focusIndex]) {
-      //   (menuItemArray[focusIndex] as unknown as HTMLButtonElement).setAttribute('open', true);
-      // }
+      const focusIndex = (index + 1) % $children.length;
+      $children[focusIndex].focus();
     }
   };
 
   const focusFirstChild = () => {
-    const portal = document.querySelector(`#${portalId}`);
-    const menuItems = portal?.querySelectorAll('[data-menu-item-id]');
-    const menuItemArray = menuItems ? Array.from(menuItems) : [];
-    if (menuItemArray.length > 0) {
-      (<HTMLButtonElement>menuItemArray[0])?.focus();
-    }
+    $children[0]?.focus();
+  };
+
+  const focusLastChild = () => {
+    $children[$children.length - 1]?.focus();
   };
 
   const autoFocusFirstChild = (open: boolean, insideMenu: boolean) => {
     if (open && insideMenu) {
-      console.log('focus first child');
-      setTimeout(() => {
-        focusFirstChild();
-      }, 10);
+      setTimeout(focusFirstChild, 10);
     }
   };
 
@@ -189,10 +162,26 @@
 
   onMount(() => {
     mounted = true;
-    insideMenu = !!menuItemRef.parentElement?.closest('.popup');
+    insideMenu = !!menuItemRef.parentElement?.closest('[role="menu"]');
     keyborg.subscribe(keyborgHandler);
+
+    const menuItemSelf = {
+      id: menuItemId,
+      open: () => {
+        open = true;
+      },
+      close: () => {
+        open = false;
+      },
+      focus: () => {
+        menuItemRef?.focus();
+      }
+    };
+
+    register?.(menuItemSelf);
     return () => {
       keyborg.unsubscribe(keyborgHandler);
+      unregister?.(menuItemSelf);
     };
   });
 
@@ -201,44 +190,60 @@
       switch (event.key) {
         case 'ArrowDown':
           if (insideMenu) {
-            focusNextItem();
+            // When inside a menu, focus next sibling menu item.
+            focusNext?.(menuItemId);
             event.preventDefault();
             return false;
           } else if (hasChildren) {
+            // When inside a menubar, open and focus first child.
             open = true;
             setTimeout(focusFirstChild, 10);
             event.preventDefault();
             return false;
           }
+          break;
         case 'ArrowLeft':
-          if (insideMenu) {
-            if (open) {
-              open = false;
-            } else {
-              closeParent?.();
-            }
+          if (level > 1 && insideMenu) {
+            // When inside non-top-level menu, close the containing menu
+            closeMenu?.();
           } else {
-            movePreviousMenu();
+            // When in a top-level menu, open the previous top-level menu
+            open = false;
+            closeMenu?.(true);
+            openPreviousMenu?.(rootMenuItemId);
           }
-
           event.preventDefault();
           return false;
         case 'ArrowRight':
-          if (insideMenu && hasChildren) {
+          if (level > 0 && hasChildren) {
+            // When inside a menu, show the subment
             open = true;
             setTimeout(focusFirstChild, 10);
           } else {
-            moveNextMenu();
+            // When not inside a menu, or when there are not children
+            // open the next top-level menu
+            open = false;
+            closeMenu?.(true);
+            openNextMenu?.(rootMenuItemId);
           }
           event.preventDefault();
           return false;
-          break;
         case 'ArrowUp':
-          focusPreviousItem();
-          event.preventDefault();
-          return false;
+          if (insideMenu) {
+            // When inside a menu focus the previous item
+            focusPrevious?.(menuItemId);
+            event.preventDefault();
+            return false;
+          } else if (hasChildren) {
+            // When inside a menubar, open and focus last child.
+            open = true;
+            setTimeout(focusLastChild, 10);
+            event.preventDefault();
+            return false;
+          }
         case 'Escape':
-          closeMenu?.();
+          open = false;
+          closeMenu?.(true);
           event.preventDefault();
           return false;
       }
@@ -260,7 +265,7 @@
         return false;
       } else {
         raiseSelect(menuItemId);
-        closeMenu?.();
+        closeMenu?.(true);
       }
     }
   };
@@ -278,7 +283,8 @@
       element = element.parentElement;
     }
 
-    closeMenu?.();
+    console.log('clicked outside menu');
+    closeMenu?.(true);
   };
 
   // ----- Portal Host ----- //
@@ -295,6 +301,32 @@
   };
 
   const portalTarget = ensurePortalHost();
+
+  // ----- Set Context ----- //
+
+  setContext<MenuItemContext>(menuItemContextKey, {
+    rootMenuItemId: rootMenuItemId,
+    level: level + 1,
+    register: (menuItem: MenuItem) => {
+      children.set([...$children, menuItem]);
+    },
+    unregister: (menuItem: MenuItem) => {
+      children.set($children.filter((x) => x.id !== menuItem.id));
+    },
+    closeMenu: (recursive?: boolean) => {
+      open = false;
+      if (recursive) {
+        closeMenu?.(recursive);
+      } else {
+        menuItemRef?.focus();
+      }
+    },
+    focusPrevious: focusPreviousChild,
+    focusNext: focusNextChild,
+    onOpen: raiseOpen,
+    onClose: raiseClose,
+    onSelect: raiseSelect
+  });
 </script>
 
 <button
@@ -354,7 +386,12 @@
     </slot>
   </div>
   {#if open && $$slots.default}
-    <div class="portal" id={portalId} use:portal={{ target: portalTarget }}>
+    <div
+      class="portal"
+      data-root-menu-id={rootMenuItemId}
+      id={portalId}
+      use:portal={{ target: portalTarget }}
+    >
       <div
         bind:this={popupRef}
         class="popup"
@@ -363,7 +400,7 @@
         style="left:{popupPosition.x}px; top:{popupPosition.y}px"
       >
         {#if $$slots.default}
-          <div bind:this={childrenRef} class="children" role="group">
+          <div bind:this={childrenRef} class="children" role="menu">
             <slot />
           </div>
         {/if}
@@ -374,7 +411,7 @@
 
 <style>
   .sterling-menu-item {
-    background-color: var(--Common__background-color);
+    background-color: transparent;
     border-color: transparent;
     border-radius: var(--Button__border-radius);
     border-style: none;

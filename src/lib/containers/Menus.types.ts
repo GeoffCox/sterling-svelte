@@ -1,11 +1,30 @@
+import type { Writable } from 'svelte/store';
+
+export type MenuItem = {
+  id: string;
+  open: () => void;
+  close: () => void;
+  focus: () => void;
+};
+
 export type MenuBarContext = {
-  openPreviousMenu: () => void;
-  openNextMenu: () => void;
+  openPreviousMenu?: (fromMenuItemId: string) => void;
+  openNextMenu?: (fromMenuItemId: string) => void;
 };
 
 export type MenuItemContext = {
-  rootMenuItemId: string;
-  closeMenu: () => void;
-  closeParent: () => void;
-  onSelect: (menuItemId: string) => void;
+  rootMenuItemId?: string;
+  level?: number;
+
+  register?: (menuItem: MenuItem) => void;
+  unregister?: (menuItem: MenuItem) => void;
+
+  focusPrevious?: (fromMenuItemId: string) => void;
+  focusNext?: (fromMenuItemId: string) => void;
+
+  closeMenu?: (recursive?: boolean) => void;
+
+  onOpen?: (menuItemId: string) => void;
+  onClose?: (menuItemId: string) => void;
+  onSelect?: (menuItemId: string) => void;
 };
