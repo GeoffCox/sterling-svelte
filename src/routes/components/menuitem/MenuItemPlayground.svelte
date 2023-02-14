@@ -3,58 +3,62 @@
   import Playground from '../Playground.svelte';
 
   import MenuItem from '$lib/containers/MenuItem.svelte';
-  import MenuBar from '$lib/containers/MenuBar.svelte';
   import MenuSeparator from '$lib/containers/MenuSeparator.svelte';
 
   let exampleRef: any;
-
   let disabled = false;
+
+  let renderChoice: 'performance' | 'quality' = 'performance';
+  let autoSave: boolean = false;
 </script>
 
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
-    <MenuBar>
+    <MenuItem
+      menuItemId="file"
+      {disabled}
+      text="File"
+      on:close={(event) => exampleRef.recordEvent(`close '${event.detail.menuItemId}'`)}
+      on:open={(event) => exampleRef.recordEvent(`open '${event.detail.menuItemId}'`)}
+      on:select={(event) => exampleRef.recordEvent(`select '${event.detail.menuItemId}'`)}
+    >
+      <MenuItem menuItemId="file-new" text="New" />
+      <MenuItem menuItemId="file-open" text="Open..." />
+      <MenuItem menuItemId="file-save" text="Save" />
+      <MenuItem menuItemId="file-save-as" text="Save As..." disabled />
+      <MenuSeparator />
       <MenuItem
-        menuItemId="file"
-        {disabled}
-        text="File"
-        on:select={(event) => exampleRef.recordEvent(`selected ${event.detail.menuItemId}`)}
-      >
-        <MenuItem menuItemId="new-file" text="New File..." />
-        <MenuItem menuItemId="open-file" text="Open..." />
-        <MenuItem menuItemId="open-folder" text="Open Folder..." />
-        <MenuItem menuItemId="open-recent" text="Open Recent">
-          <MenuItem menuItemId="recent-1" text="My document 1" />
-          <MenuItem menuItemId="recent-2" text="My document 2" />
-          <MenuItem menuItemId="recent-3" text="My document 3" />
-          <MenuSeparator />
-          <MenuItem menuItemId="recent-4" text="My document 4" />
-          <MenuItem menuItemId="recent-5" text="My document 5" />
-          <MenuItem menuItemId="open-recent-others" text="Open Less Recent">
-            <MenuItem menuItemId="recent-6" text="My document 6" />
-            <MenuItem menuItemId="recent-7" text="My document 7" />
-            <MenuItem menuItemId="open-recent-old" text="Open Ancient">
-              <MenuItem menuItemId="recent-1000" text="My document 1000" />
-              <MenuItem menuItemId="recent-1001" text="My document 1001" />
-            </MenuItem>
-            <MenuItem menuItemId="recent-8" text="My document 8" />
-            <MenuItem menuItemId="recent-9" text="My document 9" />
-          </MenuItem>
-        </MenuItem>
-        <MenuItem menuItemId="save" text="Save" />
-        <MenuItem menuItemId="save-all" text="Save All" />
-        <MenuItem menuItemId="close-file" text="Close File" />
-        <MenuItem menuItemId="close-folder" text="Close Folder" />
-        <MenuItem menuItemId="quit" text="Quit" />
+        menuItemId="auto-save"
+        role="menuitemcheckbox"
+        text="Auto Save"
+        checked={autoSave}
+        on:select={() => (autoSave = !autoSave)}
+      />
+      <MenuSeparator />
+      <MenuItem
+        menuItemId="prefer-performance"
+        role="menuitemradio"
+        text="Performance Mode"
+        checked={renderChoice === 'performance'}
+        on:select={() => (renderChoice = 'performance')}
+      />
+      <MenuItem
+        menuItemId="prefer-quality"
+        role="menuitemradio"
+        text="Quality Mode"
+        checked={renderChoice === 'quality'}
+        on:select={() => (renderChoice = 'quality')}
+      />
+      <MenuSeparator />
+      <MenuItem menuItemId="file-share" text="Share">
+        <MenuItem menuItemId="file-share-email" text="E-mail" />
+        <MenuItem menuItemId="file-share-text" text="Text Messaging" />
+        <MenuItem menuItemId="file-share-internet" text="Entire Internet" />
       </MenuItem>
-      <MenuItem menuItemId="edit" {disabled} text="Edit">
-        <MenuItem menuItemId="undo" text="Undo" role="menuitemcheckbox" checked />
-        <MenuItem menuItemId="redo" text="Redo" role="menuitemradio" checked />
-        <MenuItem menuItemId="cut" text="Cut" />
-        <MenuItem menuItemId="copy" text="Copy" />
-        <MenuItem menuItemId="paste" text="Paste" />
-      </MenuItem>
-    </MenuBar>
+
+      <MenuSeparator />
+      <MenuItem menuItemId="file-quit" text="Quit" />
+    </MenuItem>
   </svelte:fragment>>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>

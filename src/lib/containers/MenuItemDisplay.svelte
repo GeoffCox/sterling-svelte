@@ -30,7 +30,7 @@
     display: grid;
     grid-template-columns: 1em 1fr 1em;
     column-gap: 0.5em;
-    padding: 0.5em;
+    padding: 0.25em;
   }
 
   .check {

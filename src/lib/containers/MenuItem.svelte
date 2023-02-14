@@ -10,7 +10,7 @@
 
   import { portal } from '../portal';
   import { clickOutside } from '../clickOutside';
-  import { createEventDispatcher, custom_event } from 'svelte/internal';
+  import { afterUpdate, createEventDispatcher, custom_event } from 'svelte/internal';
   import MenuItemDisplay from './MenuItemDisplay.svelte';
   import { menuBarContextKey, menuItemContextKey } from './Menus.constants';
   import { writable } from 'svelte/store';
@@ -47,9 +47,16 @@
 
   let mounted = false;
   let insideMenu = false;
+  let prevOpen = open;
 
   $: hasChildren = $$slots.default;
   $: submenu = insideMenu && hasChildren;
+
+  $: {
+    if (menuItemId === 'file') {
+      console.log('slots.default', $$slots.default, hasChildren);
+    }
+  }
 
   // ----- Get Context ----- //
 
@@ -83,11 +90,12 @@
     onOpen?.(menuItemId);
   };
 
-  const raiseOpenClose = (open: boolean, menuItemId: string) => {
-    open ? raiseOpen(menuItemId) : raiseClose(menuItemId);
-  };
-
-  $: raiseOpenClose(open, menuItemId);
+  $: {
+    if (hasChildren && open !== prevOpen) {
+      open ? raiseOpen(menuItemId) : raiseClose(menuItemId);
+    }
+    prevOpen = open;
+  }
 
   // dispatches the event and bubbles it up the context
   // so that container components can subscribe to select
@@ -188,6 +196,10 @@
       keyborg.unsubscribe(keyborgHandler);
       unregister?.(menuItemSelf);
     };
+  });
+
+  afterUpdate(() => {
+    prevOpen = open;
   });
 
   const onKeyDown: svelte.JSX.KeyboardEventHandler<Element> = (event) => {
@@ -322,7 +334,9 @@
       open = false;
       if (recursive) {
         closeMenu?.(recursive);
-      } else {
+      }
+
+      if (!recursive || depth === 0) {
         menuItemRef?.focus();
       }
     },

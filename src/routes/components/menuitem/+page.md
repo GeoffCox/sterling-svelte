@@ -16,6 +16,7 @@ A clickable item within a menu.
 - Menu items can contain other menu items to display a submenu when clicked.
 - Submenus are shown in popovers above other content.
 - The select event is raised when a menu item or any of its children are clicked.
+- A submenu can contain MenuItem and non-MenuItem components.
 - Users can navigate menus using the keyboard:
 
   - Click/select a menu with enter or spacebar keys.
@@ -76,9 +77,7 @@ MenuItem
 portal
   popup
     children
-        MenuItem
-        MenuItem
-        ...
+        default slot
 ```
 
 - MenuItemDisplay is the default for the item slot
@@ -95,13 +94,13 @@ portal
 
 The item slot is passed the following `let` parameters.
 
-| Let Param   | Type      | Description                                         |
-| ----------- | --------- | --------------------------------------------------- | --- |
-| checked     | `boolean` | True if the item is checked.                        |
-| depth       | `number`  | The menu depth of the item starting at 0.           |
-| disabled    | `boolean` | True if the item is disabled                        |
-| hasChildren | `boolean` | True if the item has children                       |
-| open        | `boolean` | True if the submenu is open                         |
-| menuItemId  | `string`  | The unique ID of the item within the menu hierarchy |     |
-| role        | `string`  | The aria role of the menu item                      |
-| text        | `string`  | The text to display                                 |
+| Let Param   | Type      | Description                                     |
+| ----------- | --------- | ----------------------------------------------- |
+| checked     | `boolean` | True if the item is checked.                    |
+| depth       | `number`  | Menu depth of the item starting at 0            |
+| disabled    | `boolean` | True if the item is disabled                    |
+| hasChildren | `boolean` | True if the item has children                   |
+| open        | `boolean` | True if the submenu is open                     |
+| menuItemId  | `string`  | Unique ID of the item within the menu hierarchy |
+| role        | `string`  | Aria role of the menu item                      |
+| text        | `string`  | Text to display                                 |
