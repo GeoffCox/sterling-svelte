@@ -75,13 +75,13 @@ MenuItem
     MenuItemDisplay
 
 portal
-  popup
+  menu
     children
         default slot
 ```
 
 - MenuItemDisplay is the default for the item slot
-- The portal and popup display submenus floating above other page content
+- The portal and menu display submenus floating above other page content
 
 ## Slots
 

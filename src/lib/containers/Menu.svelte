@@ -9,11 +9,10 @@
   import { menuItemContextKey } from './Menus.constants';
 
   export let reference: HTMLElement;
-  export let id: string;
   export let open: boolean = false;
 
-  let popupRef: HTMLDivElement;
-  let popupPosition: { x?: number; y?: number } = { x: 0, y: 0 };
+  let menuRef: HTMLDivElement;
+  let menuPosition: { x?: number; y?: number } = { x: 0, y: 0 };
 
   // ----- Get Context ----- //
 
@@ -34,45 +33,45 @@
 
   const portalTarget = ensurePortalHost();
 
-  // ----- Popup Position ----- //
+  // ----- Position ----- //
 
-  const popupPlacement = (depth > 1 ? 'right-start' : 'bottom-start') as Placement;
+  const menuPlacement = (depth > 1 ? 'right-start' : 'bottom-start') as Placement;
   const middleware = [offset({ mainAxis: -2 }), flip(), shift({ padding: 0 })];
 
-  const computePopupPosition = async () => {
-    if (reference && popupRef) {
-      popupPosition = await computePosition(reference, popupRef, {
-        placement: popupPlacement,
+  const computeMenuPosition = async () => {
+    if (reference && menuRef) {
+      menuPosition = await computePosition(reference, menuRef, {
+        placement: menuPlacement,
         middleware
       });
     } else {
-      popupPosition = { x: 0, y: 0 };
+      menuPosition = { x: 0, y: 0 };
     }
   };
 
-  // whenever a popup is portaled it needs resubscription to auto-update
+  // whenever a menu is portaled it needs resubscription to auto-update
   let cleanupAutoUpdate = () => {};
-  const autoUpdatePopupPosition = () => {
+  const autoUpdateMenuPosition = () => {
     cleanupAutoUpdate();
-    if (reference && popupRef) {
-      cleanupAutoUpdate = autoUpdate(reference, popupRef, computePopupPosition);
+    if (reference && menuRef) {
+      cleanupAutoUpdate = autoUpdate(reference, menuRef, computeMenuPosition);
     }
   };
 
-  $: open, reference, popupRef, autoUpdatePopupPosition();
+  $: open, reference, menuRef, autoUpdateMenuPosition();
 </script>
 
 {#if open}
   <div class="portal" data-root-menu-id={rootMenuItemId} use:portal={{ target: portalTarget }}>
     <div
-      bind:this={popupRef}
-      class="popup"
+      bind:this={menuRef}
+      class="menu"
       class:open
-      {id}
       {...$$restProps}
-      style="left:{popupPosition.x}px; top:{popupPosition.y}px"
+      style="left:{menuPosition.x}px; top:{menuPosition.y}px"
     >
       {#if $$slots.default}
+        <!-- TODO: Remove this extra children div.  Probably not needed -->
         <div class="children" role="menu">
           <slot />
         </div>
@@ -87,7 +86,7 @@
     overflow: visible;
   }
 
-  .popup {
+  .menu {
     background-color: var(--Common__background-color);
     border-color: var(--Common__border-color);
     border-radius: var(--Common__border-radius);
@@ -104,7 +103,7 @@
     left: 0;
   }
 
-  .popup.open {
+  .menu.open {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;

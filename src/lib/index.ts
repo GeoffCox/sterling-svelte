@@ -1,4 +1,5 @@
 export { type Theme, type ThemeActionParams } from './theme/types';
+
 export { applyDarkTheme } from './theme/applyDarkTheme';
 export { applyLightTheme } from './theme/applyLightTheme';
 export { applyTheme } from './theme/applyTheme';
@@ -7,13 +8,19 @@ export { lightTheme } from './theme/lightTheme';
 export { neutrals } from './theme/colors';
 export { toggleDarkTheme } from './theme/toggleDarkTheme';
 
+export { clickOutside } from './clickOutside';
+export { menuBarContextKey, menuItemContextKey } from './containers/Menus.constants';
+
 export type { ButtonVariant, ButtonShape } from './buttons/Button.types';
+export type {
+  MenuItemRegistration,
+  MenuBarContext,
+  MenuItemContext
+} from './containers/Menus.types';
 export type { ProgressColorful } from './display/Progress.types';
 export type { TextAreaResize } from './inputs/TextArea.types';
 export type { TabData } from './containers/Tabs.types';
 export type { TreeNodeData } from './containers/Tree.types';
-
-export { clickOutside } from './clickOutside';
 
 import Button from './buttons/Button.svelte';
 import Checkbox from './inputs/Checkbox.svelte';
@@ -21,7 +28,11 @@ import Dialog from './surfaces/Dialog.svelte';
 import Input from './inputs/Input.svelte';
 import Label from './display/Label.svelte';
 import List from './containers/List.svelte';
+import Menu from './containers/Menu.svelte';
+import MenuBar from './containers/MenuBar.svelte';
+import MenuButton from './buttons/MenuButton.svelte';
 import MenuItem from './containers/MenuItem.svelte';
+import MenuSeparator from './containers/MenuSeparator.svelte';
 import Progress from './display/Progress.svelte';
 import Radio from './inputs/Radio.svelte';
 import Select from './inputs/Select.svelte';
@@ -41,7 +52,11 @@ export {
   Input,
   Label,
   List,
+  Menu,
+  MenuBar,
+  MenuButton,
   MenuItem,
+  MenuSeparator,
   Progress,
   Radio,
   Select,

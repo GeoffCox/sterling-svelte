@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { MenuItemContext, MenuItem, MenuBarContext } from './Menus.types';
+  import type { MenuItemContext, MenuItemRegistration, MenuBarContext } from './Menus.types';
 
   import { createEventDispatcher, setContext } from 'svelte';
 
@@ -20,7 +20,7 @@
     dispatch('select', { menuItemId });
   };
 
-  const children = writable<MenuItem[]>([]);
+  const children = writable<MenuItemRegistration[]>([]);
 
   const openPreviousChild = (fromMenuItemId: string) => {
     const index = $children?.findIndex((menuItem) => menuItem.id === fromMenuItemId);
@@ -48,10 +48,10 @@
   };
 
   setContext<MenuItemContext>(menuItemContextKey, {
-    register: (menuItem: MenuItem) => {
+    register: (menuItem: MenuItemRegistration) => {
       children.set([...$children, menuItem]);
     },
-    unregister: (menuItem: MenuItem) => {
+    unregister: (menuItem: MenuItemRegistration) => {
       children.set($children.filter((x) => x.id !== menuItem.id));
     },
     closeMenu: (recursive?: boolean) => {},

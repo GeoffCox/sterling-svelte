@@ -58,26 +58,29 @@ I wanted a consistent minimalist style with a practical style customization.
 
 The library is in alpha - anything and everything may change at any time.
 
-| Component     | Introduced in Version |
-| ------------- | --------------------- |
-| (theme)       | 0.0.1                 |
-| Button        | 0.0.3                 |
-| Input         | 0.0.4                 |
-| Checkbox      | 0.0.5                 |
-| Radio         | 0.0.6                 |
-| List          | 0.0.7                 |
-| Select        | 0.0.7                 |
-| Progress      | 0.0.8                 |
-| Slider        | 0.0.8                 |
-| Dialog        | 0.0.9                 |
-| Label         | 0.0.10                |
-| Switch        | 0.0.11                |
-| TextArea      | 0.0.13                |
-| Tree          | 0.0.14                |
-| Tabs          | 0.0.15                |
-| Menu          | 0.0.16                |
-| Tooltip       |                       |
-| Toggle/Choice |                       |
-| Accordion     |                       |
-| Notifications |                       |
-| Drawer        |                       |
+| Component | Introduced in Version |
+| --------- | --------------------- |
+| (theme)   | 0.0.1                 |
+| Button    | 0.0.3                 |
+| Input     | 0.0.4                 |
+| Checkbox  | 0.0.5                 |
+| Radio     | 0.0.6                 |
+| List      | 0.0.7                 |
+| Select    | 0.0.7                 |
+| Progress  | 0.0.8                 |
+| Slider    | 0.0.8                 |
+| Dialog    | 0.0.9                 |
+| Label     | 0.0.10                |
+| Switch    | 0.0.11                |
+| TextArea  | 0.0.13                |
+| Tree      | 0.0.14                |
+| Tabs      | 0.0.15                |
+| Menus     | 0.0.16                |
+
+| Possible Future Components |
+| -------------------------- |
+| Tooltip                    |
+| Toggle/Choice              |
+| Accordion                  |
+| Notifications              |
+| Drawer                     |

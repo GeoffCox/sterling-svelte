@@ -116,6 +116,7 @@
             <a href="{base}/components/input">Input</a>
             <a href="{base}/components/label">Label</a>
             <a href="{base}/components/list">List</a>
+            <a href="{base}/components/menu">Menu</a>
             <a href="{base}/components/menubar">MenuBar</a>
             <a href="{base}/components/menubutton">MenuButton</a>
             <a href="{base}/components/menuitem">MenuItem</a>

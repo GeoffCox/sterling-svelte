@@ -1,6 +1,6 @@
-import type { MenuItem } from './Menus.types';
+import type { MenuItemRegistration } from './Menus.types';
 
-export const focusPreviousChild = (children: MenuItem[], fromMenuItemId: string) => {
+export const focusPreviousChild = (children: MenuItemRegistration[], fromMenuItemId: string) => {
   const index = children?.findIndex((menuItem) => menuItem.id === fromMenuItemId);
   if (index !== -1) {
     const focusIndex = index === 0 ? children.length - 1 : index - 1;
@@ -8,7 +8,7 @@ export const focusPreviousChild = (children: MenuItem[], fromMenuItemId: string)
   }
 };
 
-export const focusNextChild = (children: MenuItem[], fromMenuItemId: string) => {
+export const focusNextChild = (children: MenuItemRegistration[], fromMenuItemId: string) => {
   const index = children?.findIndex((menuItem) => menuItem.id === fromMenuItemId);
   if (index !== -1) {
     const focusIndex = (index + 1) % children.length;
@@ -16,10 +16,10 @@ export const focusNextChild = (children: MenuItem[], fromMenuItemId: string) => 
   }
 };
 
-export const focusFirstChild = (children: MenuItem[]) => {
+export const focusFirstChild = (children: MenuItemRegistration[]) => {
   children[0]?.focus();
 };
 
-export const focusLastChild = (children: MenuItem[]) => {
+export const focusLastChild = (children: MenuItemRegistration[]) => {
   children[children.length - 1]?.focus();
 };

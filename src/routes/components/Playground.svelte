@@ -65,7 +65,7 @@
 
   .component {
     grid-row: 1 / span 3;
-    grid-column: 2 / span 1;
+    grid-column: 1 / span 1;
     border: 1px dashed lightgray;
     border-radius: 10px;
     padding: 15px;

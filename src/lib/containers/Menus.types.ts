@@ -1,6 +1,4 @@
-import type { Writable } from 'svelte/store';
-
-export type MenuItem = {
+export type MenuItemRegistration = {
   id: string;
   open: () => void;
   close: () => void;
@@ -16,8 +14,8 @@ export type MenuItemContext = {
   rootMenuItemId?: string;
   depth?: number;
 
-  register?: (menuItem: MenuItem) => void;
-  unregister?: (menuItem: MenuItem) => void;
+  register?: (menuItem: MenuItemRegistration) => void;
+  unregister?: (menuItem: MenuItemRegistration) => void;
 
   focusPrevious?: (fromMenuItemId: string) => void;
   focusNext?: (fromMenuItemId: string) => void;

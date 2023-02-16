@@ -1,7 +1,7 @@
 <script lang="ts">
   // import type { Placement } from '@floating-ui/dom';
   import type { Keyborg } from 'keyborg';
-  import type { MenuBarContext, MenuItem, MenuItemContext } from './Menus.types';
+  import type { MenuBarContext, MenuItemRegistration, MenuItemContext } from './Menus.types';
 
   // import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
   import { createKeyborg } from 'keyborg';
@@ -15,7 +15,7 @@
   import { afterUpdate, createEventDispatcher } from 'svelte/internal';
   import MenuItemDisplay from './MenuItemDisplay.svelte';
   import { menuBarContextKey, menuItemContextKey } from './Menus.constants';
-  import MenuPopup from './MenuPopup.svelte';
+  import Menu from './Menu.svelte';
   import {
     focusFirstChild,
     focusLastChild,
@@ -69,11 +69,11 @@
   const instanceId = uuid();
 
   $: displayId = `${menuItemId}-display-${instanceId}`;
-  $: popupId = `${menuItemId}-popup-${instanceId}`;
+  $: menuId = `${menuItemId}-menu-${instanceId}`;
 
   let menuItemRef: HTMLButtonElement;
 
-  const children = writable<MenuItem[]>([]);
+  const children = writable<MenuItemRegistration[]>([]);
 
   let mounted = false;
   let prevOpen = open;
@@ -262,10 +262,10 @@
   setContext<MenuItemContext>(menuItemContextKey, {
     rootMenuItemId: rootMenuItemId,
     depth: depth + 1,
-    register: (menuItem: MenuItem) => {
+    register: (menuItem: MenuItemRegistration) => {
       children.set([...$children, menuItem]);
     },
-    unregister: (menuItem: MenuItem) => {
+    unregister: (menuItem: MenuItemRegistration) => {
       children.set($children.filter((x) => x.id !== menuItem.id));
     },
     closeMenu: (recursive?: boolean) => {
@@ -287,11 +287,11 @@
 </script>
 
 <button
-  aria-controls={popupId}
+  aria-controls={menuId}
   aria-disabled={disabled}
   aria-expanded={open}
   aria-haspopup={hasChildren}
-  aria-owns={popupId}
+  aria-owns={menuId}
   bind:this={menuItemRef}
   class="sterling-menu-item"
   class:composed
@@ -342,9 +342,9 @@
     </slot>
   </div>
   {#if menuItemRef && open && $$slots.default}
-    <MenuPopup id={popupId} {open} reference={menuItemRef}>
+    <Menu id={menuId} {open} reference={menuItemRef}>
       <slot />
-    </MenuPopup>
+    </Menu>
   {/if}
 </button>
 

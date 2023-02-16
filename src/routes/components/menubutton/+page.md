@@ -63,7 +63,7 @@ const onSelect = (event) => {
 ```
 Button
   default slot
-  MenuPopup
+  Menu
     items slot
 ```
 

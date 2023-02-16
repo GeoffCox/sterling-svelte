@@ -1,13 +1,13 @@
 <script lang="ts">
   import type { ButtonShape, ButtonVariant } from './Button.types';
-  import type { MenuItem, MenuItemContext } from '../containers/Menus.types';
+  import type { MenuItemRegistration, MenuItemContext } from '../containers/Menus.types';
 
   import { v4 as uuid } from 'uuid';
   import { createEventDispatcher, getContext, setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
   import Button from './Button.svelte';
-  import MenuPopup from '../containers/MenuPopup.svelte';
+  import Menu from '../containers/Menu.svelte';
   import { menuItemContextKey } from '../containers/Menus.constants';
   import { focusFirstChild, focusNextChild, focusPreviousChild } from '../containers/Menus.utils';
 
@@ -23,10 +23,10 @@
   const instanceId = uuid();
 
   let reference: HTMLDivElement;
-  $: popupId = `${menuItemId}-popup-${instanceId}`;
+  $: menuId = `${menuItemId}-menu-${instanceId}`;
   $: hasChildren = $$slots.items;
 
-  const children = writable<MenuItem[]>([]);
+  const children = writable<MenuItemRegistration[]>([]);
 
   // ----- Events ----- //
 
@@ -56,10 +56,10 @@
   setContext<MenuItemContext>(menuItemContextKey, {
     rootMenuItemId: menuItemId,
     depth: 1,
-    register: (menuItem: MenuItem) => {
+    register: (menuItem: MenuItemRegistration) => {
       children.set([...$children, menuItem]);
     },
-    unregister: (menuItem: MenuItem) => {
+    unregister: (menuItem: MenuItemRegistration) => {
       children.set($children.filter((x) => x.id !== menuItem.id));
     },
     closeMenu: (recursive?: boolean) => {
@@ -78,10 +78,10 @@
       A Button that displays a context menu when clicked.
   -->
 <Button
-  aria-controls={popupId}
+  aria-controls={menuId}
   aria-expanded={open}
   aria-haspopup={hasChildren}
-  aria-owns={popupId}
+  aria-owns={menuId}
   data-menu-item-id={menuItemId}
   data-root-menu-item-id={menuItemId}
   {variant}
@@ -116,8 +116,8 @@
 >
   <div bind:this={reference}>
     <slot />
-    <MenuPopup id={popupId} {reference} {open}>
+    <Menu id={menuId} {reference} {open}>
       <slot name="items" />
-    </MenuPopup>
+    </Menu>
   </div>
 </Button>
