@@ -116,9 +116,10 @@
             <a href="{base}/components/input">Input</a>
             <a href="{base}/components/label">Label</a>
             <a href="{base}/components/list">List</a>
-            <a href="{base}/components/menubar">Menu Bar</a>
-            <a href="{base}/components/menuitem">Menu Item</a>
-            <a href="{base}/components/menuseparator">Menu Separator</a>
+            <a href="{base}/components/menubar">MenuBar</a>
+            <a href="{base}/components/menubutton">MenuButton</a>
+            <a href="{base}/components/menuitem">MenuItem</a>
+            <a href="{base}/components/menuseparator">MenuSeparator</a>
             <a href="{base}/components/progress">Progress</a>
             <a href="{base}/components/radio">Radio</a>
             <a href="{base}/components/select">Select</a>

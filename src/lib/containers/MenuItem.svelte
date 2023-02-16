@@ -1,62 +1,37 @@
 <script lang="ts">
-  import type { Placement } from '@floating-ui/dom';
+  // import type { Placement } from '@floating-ui/dom';
   import type { Keyborg } from 'keyborg';
   import type { MenuBarContext, MenuItem, MenuItemContext } from './Menus.types';
 
-  import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+  // import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
   import { createKeyborg } from 'keyborg';
-  import { getContext, onMount, setContext, tick } from 'svelte';
   import { v4 as uuid } from 'uuid';
 
-  import { portal } from '../portal';
+  import { getContext, onMount, setContext } from 'svelte';
+  import { writable } from 'svelte/store';
+
+  // import { portal } from '../portal';
   import { clickOutside } from '../clickOutside';
-  import { afterUpdate, createEventDispatcher, custom_event } from 'svelte/internal';
+  import { afterUpdate, createEventDispatcher } from 'svelte/internal';
   import MenuItemDisplay from './MenuItemDisplay.svelte';
   import { menuBarContextKey, menuItemContextKey } from './Menus.constants';
-  import { writable } from 'svelte/store';
+  import MenuPopup from './MenuPopup.svelte';
+  import {
+    focusFirstChild,
+    focusLastChild,
+    focusNextChild,
+    focusPreviousChild
+  } from './Menus.utils';
 
   // ----- Props ----- //
 
-  type T = $$Generic;
-
   export let checked = false;
+  export let composed = false;
   export let disabled = false;
   export let open = false;
   export let menuItemId: string;
   export let role: 'menuitem' | 'menuitemcheckbox' | 'menuitemradio' = 'menuitem';
-  export let text: string;
-
-  // ----- State ----- //
-
-  const instanceId = uuid();
-
-  $: displayId = `${menuItemId}-display-${instanceId}`;
-  $: portalId = `${menuItemId}-portal-${instanceId}`;
-  $: popupId = `${menuItemId}-popup-${instanceId}`;
-
-  let menuItemRef: HTMLButtonElement;
-  let popupRef: HTMLDivElement;
-  let childrenRef: HTMLDivElement;
-
-  let popupPosition: { x?: number; y?: number } = {
-    x: undefined,
-    y: undefined
-  };
-
-  const children = writable<MenuItem[]>([]);
-
-  let mounted = false;
-  let insideMenu = false;
-  let prevOpen = open;
-
-  $: hasChildren = $$slots.default;
-  $: submenu = insideMenu && hasChildren;
-
-  $: {
-    if (menuItemId === 'file') {
-      console.log('slots.default', $$slots.default, hasChildren);
-    }
-  }
+  export let text: string | undefined = undefined;
 
   // ----- Get Context ----- //
 
@@ -73,8 +48,37 @@
     onSelect = undefined
   } = getContext<MenuItemContext>(menuItemContextKey) || {};
 
+  console.log({
+    rootMenuItemId,
+    depth,
+    register,
+    unregister,
+    closeMenu,
+    focusPrevious,
+    focusNext,
+    onOpen,
+    onClose,
+    onSelect
+  });
+
   const { openPreviousMenu = undefined, openNextMenu = undefined } =
     getContext<MenuBarContext>(menuBarContextKey) || {};
+
+  // ----- State ----- //
+
+  const instanceId = uuid();
+
+  $: displayId = `${menuItemId}-display-${instanceId}`;
+  $: popupId = `${menuItemId}-popup-${instanceId}`;
+
+  let menuItemRef: HTMLButtonElement;
+
+  const children = writable<MenuItem[]>([]);
+
+  let mounted = false;
+  let prevOpen = open;
+
+  $: hasChildren = $$slots.default;
 
   // ----- Events ----- //
 
@@ -114,68 +118,20 @@
     usingKeyboard = value;
   };
 
-  // ----- Popup Position ----- //
-
-  $: popupPlacement = (insideMenu ? 'right-start' : 'bottom-start') as Placement;
-  const middleware = [offset({ mainAxis: -2 }), flip(), shift({ padding: 0 })];
-
-  const computePopupPosition = async () => {
-    popupPosition = await computePosition(menuItemRef, popupRef, {
-      placement: popupPlacement,
-      middleware
-    });
-  };
-
-  // whenever a popup is portaled it needs resubscription to auto-update
-  let cleanupAutoUpdate = () => {};
-  const autoUpdatePopupPosition = () => {
-    cleanupAutoUpdate();
-    if (menuItemRef && popupRef) {
-      cleanupAutoUpdate = autoUpdate(menuItemRef, popupRef, computePopupPosition);
-    }
-  };
-
-  $: mounted, open, menuItemRef, popupRef, autoUpdatePopupPosition();
-
   // ----- Focus ----- //
-
-  const focusPreviousChild = (fromMenuItemId: string) => {
-    const index = $children?.findIndex((menuItem) => menuItem.id === fromMenuItemId);
-    if (index !== -1) {
-      const focusIndex = index === 0 ? $children.length - 1 : index - 1;
-      $children[focusIndex].focus();
-    }
-  };
-
-  const focusNextChild = (fromMenuItemId: string) => {
-    const index = $children?.findIndex((menuItem) => menuItem.id === fromMenuItemId);
-    if (index !== -1) {
-      const focusIndex = (index + 1) % $children.length;
-      $children[focusIndex].focus();
-    }
-  };
-
-  const focusFirstChild = () => {
-    $children[0]?.focus();
-  };
-
-  const focusLastChild = () => {
-    $children[$children.length - 1]?.focus();
-  };
 
   const autoFocusFirstChild = (open: boolean, insideMenu: boolean) => {
     if (open && insideMenu) {
-      setTimeout(focusFirstChild, 10);
+      setTimeout(() => focusFirstChild($children), 10);
     }
   };
 
-  $: autoFocusFirstChild(open, insideMenu);
+  $: autoFocusFirstChild(open, depth > 0);
 
   // ----- Event Handlers ----- //
 
   onMount(() => {
     mounted = true;
-    insideMenu = !!menuItemRef.parentElement?.closest('[role="menu"]');
     keyborg.subscribe(keyborgHandler);
 
     const menuItemSelf = {
@@ -206,39 +162,38 @@
     if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
       switch (event.key) {
         case 'ArrowDown':
-          if (insideMenu) {
-            // When inside a menu, focus next sibling menu item.
-            focusNext?.(menuItemId);
+          if (depth === 0 && hasChildren) {
+            // When a top menu item, open and focus first child.
+            open = true;
+            setTimeout(() => focusFirstChild($children), 10);
             event.preventDefault();
             return false;
-          } else if (hasChildren) {
-            // When inside a menubar, open and focus first child.
-            open = true;
-            setTimeout(focusFirstChild, 10);
+          } else if (depth > 0) {
+            // When inside a menu, focus next sibling menu item.
+            focusNext?.(menuItemId);
             event.preventDefault();
             return false;
           }
           break;
         case 'ArrowLeft':
-          if (depth > 1 && insideMenu) {
-            // When inside non-top-level menu, close the containing menu
-            closeMenu?.();
-          } else {
-            // When in a top-level menu, open the previous top-level menu
+          if (depth < 2) {
+            // When a top menu item, open the previous top-level menu
             open = false;
             closeMenu?.(true);
             openPreviousMenu?.(rootMenuItemId);
+          } else {
+            // When inside a menu, close the containing menu
+            closeMenu?.();
           }
           event.preventDefault();
           return false;
         case 'ArrowRight':
           if (depth > 0 && hasChildren) {
-            // When inside a menu, show the subment
+            // When inside a menu, show the submenu
             open = true;
             setTimeout(focusFirstChild, 10);
           } else {
-            // When not inside a menu, or when there are not children
-            // open the next top-level menu
+            // Otherwise open the next top-level menu
             open = false;
             closeMenu?.(true);
             openNextMenu?.(rootMenuItemId);
@@ -246,15 +201,15 @@
           event.preventDefault();
           return false;
         case 'ArrowUp':
-          if (insideMenu) {
-            // When inside a menu focus the previous item
-            focusPrevious?.(menuItemId);
+          if (depth === 0 && hasChildren) {
+            // When a top menu item, open and focus first child.
+            open = true;
+            setTimeout(() => focusLastChild($children), 10);
             event.preventDefault();
             return false;
-          } else if (hasChildren) {
-            // When inside a menubar, open and focus last child.
-            open = true;
-            setTimeout(focusLastChild, 10);
+          } else if (depth > 0) {
+            // When inside a menu ,focus the previous item
+            focusPrevious?.(menuItemId);
             event.preventDefault();
             return false;
           }
@@ -299,25 +254,8 @@
       }
       element = element.parentElement;
     }
-
-    console.log('clicked outside menu');
     closeMenu?.(true);
   };
-
-  // ----- Portal Host ----- //
-
-  const ensurePortalHost = () => {
-    let host = document.querySelector('#SterlingMenuPortal') as HTMLElement;
-    if (!host) {
-      host = document.createElement('div');
-      host.id = 'SterlingMenuPortal';
-      host.style.overflow = 'visible';
-      document.body.append(host);
-    }
-    return host;
-  };
-
-  const portalTarget = ensurePortalHost();
 
   // ----- Set Context ----- //
 
@@ -340,8 +278,8 @@
         menuItemRef?.focus();
       }
     },
-    focusPrevious: focusPreviousChild,
-    focusNext: focusNextChild,
+    focusPrevious: (fromMenuItemId) => focusPreviousChild($children, fromMenuItemId),
+    focusNext: (fromMenuItemId) => focusNextChild($children, fromMenuItemId),
     onOpen: raiseOpen,
     onClose: raiseClose,
     onSelect: raiseSelect
@@ -356,13 +294,13 @@
   aria-owns={popupId}
   bind:this={menuItemRef}
   class="sterling-menu-item"
+  class:composed
   class:disabled
-  class:submenu
   class:using-keyboard={usingKeyboard}
   data-menu-item-id={menuItemId}
   data-root-menu-item-id={rootMenuItemId}
   {role}
-  tabindex={insideMenu ? -1 : 0}
+  tabindex={0}
   type="button"
   use:clickOutside
   on:blur
@@ -398,32 +336,15 @@
 >
   <div class="item" id={displayId}>
     <slot name="item" {checked} {disabled} {hasChildren} {depth} {menuItemId} {open} {role} {text}>
-      <MenuItemDisplay {checked} hasChildren={hasChildren && submenu} menuItemRole={role}
+      <MenuItemDisplay {checked} hasChildren={depth > 0 && hasChildren} menuItemRole={role}
         >{text}</MenuItemDisplay
       >
     </slot>
   </div>
-  {#if open && $$slots.default}
-    <div
-      class="portal"
-      data-root-menu-id={rootMenuItemId}
-      id={portalId}
-      use:portal={{ target: portalTarget }}
-    >
-      <div
-        bind:this={popupRef}
-        class="popup"
-        class:open
-        id={popupId}
-        style="left:{popupPosition.x}px; top:{popupPosition.y}px"
-      >
-        {#if $$slots.default}
-          <div bind:this={childrenRef} class="children" role="menu">
-            <slot />
-          </div>
-        {/if}
-      </div>
-    </div>
+  {#if menuItemRef && open && $$slots.default}
+    <MenuPopup id={popupId} {open} reference={menuItemRef}>
+      <slot />
+    </MenuPopup>
   {/if}
 </button>
 
@@ -475,40 +396,13 @@
     color: var(--Input__color--disabled);
   }
 
-  .portal {
-    position: relative;
-    overflow: visible;
-  }
-
-  .popup {
-    background-color: var(--Common__background-color);
-    border-color: var(--Common__border-color);
-    border-radius: var(--Common__border-radius);
-    border-style: var(--Common__border-style);
-    border-width: var(--Common__border-width);
-    box-sizing: border-box;
-    position: absolute;
-    box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 4px -1px;
-    overflow: hidden;
-    width: max-content;
-    height: fit-content;
-    z-index: 1;
-    top: 0;
-    left: 0;
-  }
-
-  .popup.open {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-  }
-
-  .children {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    row-gap: calc(2 * var(--Common__outline-width));
-    padding: 0.25em;
+  .sterling-menu-item.composed,
+  .sterling-menu-item.composed:focus,
+  .sterling-menu-item.composed:hover {
+    border-width: 0;
+    border-color: transparent;
+    outline: none;
+    background-color: transparent;
   }
 
   @media (prefers-reduced-motion) {
