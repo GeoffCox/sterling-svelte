@@ -107,7 +107,7 @@
     box-sizing: border-box;
     display: grid;
     margin: 0;
-    padding: calc(2 * var(--Common__outline-width));
+    padding: calc(2 * var(--stsv-Common__outline-width));
   }
 
   .sterling-tab-list:not(.vertical) {
@@ -129,7 +129,7 @@
   }
 
   .sterling-tab-list:hover {
-    color: var(--Common__color--hover);
+    color: var(--stsv-Common__color--hover);
   }
 
   .sterling-tab-list.vertical .text {

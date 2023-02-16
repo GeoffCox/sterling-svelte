@@ -97,14 +97,14 @@
 
   .progress-bar {
     display: block;
-    background: var(--Common__background-color);
+    background: var(--stsv-Common__background-color);
     box-sizing: border-box;
     height: 1em;
     padding: 0.2em;
-    border-width: var(--Common__border-width);
-    border-style: var(--Common__border-style);
-    border-color: var(--Common__border-color);
-    border-radius: var(--Common__border-radius);
+    border-width: var(--stsv-Common__border-width);
+    border-style: var(--stsv-Common__border-style);
+    border-color: var(--stsv-Common__border-color);
+    border-radius: var(--stsv-Common__border-radius);
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
@@ -117,7 +117,7 @@
   }
 
   .indicator {
-    background-color: var(--Display__color);
+    background-color: var(--stsv-Display__color);
     box-sizing: border-box;
     height: 100%;
     min-height: 1px;
@@ -153,30 +153,30 @@
   /* ----- Colorful ----- */
 
   .indicator.progress {
-    background-color: var(--Display__color--progress);
+    background-color: var(--stsv-Display__color--progress);
   }
 
   .indicator.success {
-    background-color: var(--Display__color--success);
+    background-color: var(--stsv-Display__color--success);
   }
 
   .indicator.warning {
-    background-color: var(--Display__color--warning);
+    background-color: var(--stsv-Display__color--warning);
   }
 
   .indicator.error {
-    background-color: var(--Display__color--error);
+    background-color: var(--stsv-Display__color--error);
   }
 
   /* ----- Disabled ----- */
 
   .sterling-progress.disabled .progress-bar {
-    background: var(--Common__background-color--disabled);
-    border-color: var(--Common__border-color--disabled);
+    background: var(--stsv-Common__background-color--disabled);
+    border-color: var(--stsv-Common__border-color--disabled);
   }
 
   .sterling-progress.disabled .indicator {
-    background-color: var(--Display__color--disabled);
+    background-color: var(--stsv-Display__color--disabled);
   }
 
   @media (prefers-reduced-motion) {

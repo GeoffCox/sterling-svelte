@@ -1,6 +1,5 @@
 <script>
     import Example from './TextAreaExample.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
 # TextArea

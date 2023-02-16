@@ -87,11 +87,11 @@
   }
 
   .menu {
-    background-color: var(--Common__background-color);
-    border-color: var(--Common__border-color);
-    border-radius: var(--Common__border-radius);
-    border-style: var(--Common__border-style);
-    border-width: var(--Common__border-width);
+    background-color: var(--stsv-Common__background-color);
+    border-color: var(--stsv-Common__border-color);
+    border-radius: var(--stsv-Common__border-radius);
+    border-style: var(--stsv-Common__border-style);
+    border-width: var(--stsv-Common__border-width);
     box-sizing: border-box;
     position: absolute;
     box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 4px -1px;
@@ -113,7 +113,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    row-gap: calc(2 * var(--Common__outline-width));
+    row-gap: calc(2 * var(--stsv-Common__outline-width));
     padding: 0.25em;
   }
 </style>

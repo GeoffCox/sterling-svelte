@@ -2,13 +2,14 @@
 
 Each theme consists of a set of CSS variables.
 Components use these in styles to follow the theme and respond to theme changes.
+Each CSS variable that is a part of the sterling-svelte design is prefixed with stsv.
 
 <script>
-    import ThemeExample from './ThemeExample.svelte';
     import PaletteExample from './NeutralColorsExample.svelte';
     import Swatch from './Swatch.svelte';
     import OutlineSwatch from './OutlineSwatch.svelte';
     import DisplaySwatch from './DisplaySwatch.svelte';
+    import LayerSwatch from './LayerSwatch.svelte';
 </script>
 
 ## Common
@@ -16,46 +17,46 @@ Components use these in styles to follow the theme and respond to theme changes.
 These are typically used for the page, containers, and lists.
 
 <Swatch 
-backgroundColor="--Common__background-color" 
-borderColor="--Common__border-color"
-borderRadius="--Common__border-radius"
-borderStyle="--Common__border-style"
-borderWidth="--Common__border-width"
-color="--Common__color"
+backgroundColor="--stsv-Common__background-color" 
+borderColor="--stsv-Common__border-color"
+borderRadius="--stsv-Common__border-radius"
+borderStyle="--stsv-Common__border-style"
+borderWidth="--stsv-Common__border-width"
+color="--stsv-Common__color"
 />
 <br/>
 <Swatch 
-backgroundColor="--Common__background-color--hover" 
-borderColor="--Common__border-color--hover"
-borderRadius="--Common__border-radius"
-borderStyle="--Common__border-style"
-borderWidth="--Common__border-width"
-color="--Common__color--hover"
+backgroundColor="--stsv-Common__background-color--hover" 
+borderColor="--stsv-Common__border-color--hover"
+borderRadius="--stsv-Common__border-radius"
+borderStyle="--stsv-Common__border-style"
+borderWidth="--stsv-Common__border-width"
+color="--stsv-Common__color--hover"
 />
 <br/>
 <Swatch 
-backgroundColor="--Common__background-color--focus" 
-borderColor="--Common__border-color--focus"
-borderRadius="--Common__border-radius"
-borderStyle="--Common__border-style"
-borderWidth="--Common__border-width"
-color="--Common__color--focus"
+backgroundColor="--stsv-Common__background-color--focus" 
+borderColor="--stsv-Common__border-color--focus"
+borderRadius="--stsv-Common__border-radius"
+borderStyle="--stsv-Common__border-style"
+borderWidth="--stsv-Common__border-width"
+color="--stsv-Common__color--focus"
 />
 <br/>
 <Swatch 
-backgroundColor="--Common__background-color--disabled" 
-borderColor="--Common__border-color--disabled"
-borderRadius="--Common__border-radius"
-borderStyle="--Common__border-style"
-borderWidth="--Common__border-width"
-color="--Common__color--disabled"
+backgroundColor="--stsv-Common__background-color--disabled" 
+borderColor="--stsv-Common__border-color--disabled"
+borderRadius="--stsv-Common__border-radius"
+borderStyle="--stsv-Common__border-style"
+borderWidth="--stsv-Common__border-width"
+color="--stsv-Common__color--disabled"
 />
 <br/>
 <OutlineSwatch 
-outlineColor="--Common__outline-color"
-outlineOffset="--Common__outline-offset"
-outlineStyle="--Common__outline-style"
-outlineWidth="--Common__outline-width"
+outlineColor="--stsv-Common__outline-color"
+outlineOffset="--stsv-Common__outline-offset"
+outlineStyle="--stsv-Common__outline-style"
+outlineWidth="--stsv-Common__outline-width"
 />
 
 ## Button
@@ -63,48 +64,48 @@ outlineWidth="--Common__outline-width"
 These are used for clickable buttons that take action.
 
 <Swatch 
-backgroundColor="--Button__background-color" 
-borderColor="--Button__border-color"
-borderRadius="--Button__border-radius"
-borderStyle="--Button__border-style"
-borderWidth="--Button__border-width"
-color="--Button__color"
+backgroundColor="--stsv-Button__background-color" 
+borderColor="--stsv-Button__border-color"
+borderRadius="--stsv-Button__border-radius"
+borderStyle="--stsv-Button__border-style"
+borderWidth="--stsv-Button__border-width"
+color="--stsv-Button__color"
 />
 <br/>
 <Swatch 
-backgroundColor="--Button__background-color--hover" 
-borderColor="--Button__border-color--hover"
-borderRadius="--Button__border-radius"
-borderStyle="--Button__border-style"
-borderWidth="--Button__border-width"
-color="--Button__color--hover"
+backgroundColor="--stsv-Button__background-color--hover" 
+borderColor="--stsv-Button__border-color--hover"
+borderRadius="--stsv-Button__border-radius"
+borderStyle="--stsv-Button__border-style"
+borderWidth="--stsv-Button__border-width"
+color="--stsv-Button__color--hover"
 />
 <br/>
 <Swatch 
-backgroundColor="--Button__background-color--active" 
-borderColor="--Button__border-color--active"
-borderRadius="--Button__border-radius"
-borderStyle="--Button__border-style"
-borderWidth="--Button__border-width"
-color="--Button__color--active"
+backgroundColor="--stsv-Button__background-color--active" 
+borderColor="--stsv-Button__border-color--active"
+borderRadius="--stsv-Button__border-radius"
+borderStyle="--stsv-Button__border-style"
+borderWidth="--stsv-Button__border-width"
+color="--stsv-Button__color--active"
 />
 <br/>
 <Swatch 
-backgroundColor="--Button__background-color--focus" 
-borderColor="--Button__border-color--focus"
-borderRadius="--Button__border-radius"
-borderStyle="--Button__border-style"
-borderWidth="--Button__border-width"
-color="--Button__color--focus"
+backgroundColor="--stsv-Button__background-color--focus" 
+borderColor="--stsv-Button__border-color--focus"
+borderRadius="--stsv-Button__border-radius"
+borderStyle="--stsv-Button__border-style"
+borderWidth="--stsv-Button__border-width"
+color="--stsv-Button__color--focus"
 />
 <br/>
 <Swatch 
-backgroundColor="--Button__background-color--disabled" 
-borderColor="--Button__border-color--disabled"
-borderRadius="--Button__border-radius"
-borderStyle="--Button__border-style"
-borderWidth="--Button__border-width"
-color="--Button__color--disabled"
+backgroundColor="--stsv-Common__background-color--disabled" 
+borderColor="--stsv-Common__border-color--disabled"
+borderRadius="--stsv-Button__border-radius"
+borderStyle="--stsv-Button__border-style"
+borderWidth="--stsv-Button__border-width"
+color="--stsv-Common__color--disabled"
 />
 
 ## Input
@@ -112,39 +113,39 @@ color="--Button__color--disabled"
 These are used with interactive controls that take input such as checkboxes, inputs, and radio buttons.
 
 <Swatch 
-backgroundColor="--Input__background-color" 
-borderColor="--Input__border-color"
-borderRadius="--Input__border-radius"
-borderStyle="--Input__border-style"
-borderWidth="--Input__border-width"
-color="--Input__color"
+backgroundColor="--stsv-Input__background-color" 
+borderColor="--stsv-Input__border-color"
+borderRadius="--stsv-Input__border-radius"
+borderStyle="--stsv-Input__border-style"
+borderWidth="--stsv-Input__border-width"
+color="--stsv-Input__color"
 />
 <br/>
 <Swatch 
-backgroundColor="--Input__background-color--hover" 
-borderColor="--Input__border-color--hover"
-borderRadius="--Input__border-radius"
-borderStyle="--Input__border-style"
-borderWidth="--Input__border-width"
-color="--Input__color--hover"
+backgroundColor="--stsv-Input__background-color--hover" 
+borderColor="--stsv-Input__border-color--hover"
+borderRadius="--stsv-Input__border-radius"
+borderStyle="--stsv-Input__border-style"
+borderWidth="--stsv-Input__border-width"
+color="--stsv-Input__color--hover"
 />
 <br/>
 <Swatch 
-backgroundColor="--Input__background-color--focus" 
-borderColor="--Input__border-color--focus"
-borderRadius="--Input__border-radius"
-borderStyle="--Input__border-style"
-borderWidth="--Input__border-width"
-color="--Input__color--focus"
+backgroundColor="--stsv-Input__background-color--focus" 
+borderColor="--stsv-Input__border-color--focus"
+borderRadius="--stsv-Input__border-radius"
+borderStyle="--stsv-Input__border-style"
+borderWidth="--stsv-Input__border-width"
+color="--stsv-Input__color--focus"
 />
 <br/>
 <Swatch 
-backgroundColor="--Input__background-color--disabled" 
-borderColor="--Input__border-color--disabled"
-borderRadius="--Input__border-radius"
-borderStyle="--Input__border-style"
-borderWidth="--Input__border-width"
-color="--Input__color--disabled"
+backgroundColor="--stsv-Common__background-color--disabled" 
+borderColor="--stsv-Common__border-color--disabled"
+borderRadius="--stsv-Input__border-radius"
+borderStyle="--stsv-Input__border-style"
+borderWidth="--stsv-Input__border-width"
+color="--stsv-Common__color--disabled"
 />
 
 ## Display
@@ -152,41 +153,60 @@ color="--Input__color--disabled"
 These are used for non-interactive content and status such as labels and progress bars.
 
 <Swatch 
-backgroundColor="--Display__background-color" 
-borderColor="--Display__border-color"
-borderRadius="--Input__border-radius"
-borderStyle="--Input__border-style"
-borderWidth="--Input__border-width"
-color="--Display__color"
+backgroundColor="--stsv-Display__background-color" 
+borderColor="--stsv-Display__border-color"
+borderRadius="--stsv-Input__border-radius"
+borderStyle="--stsv-Input__border-style"
+borderWidth="--stsv-Input__border-width"
+color="--stsv-Display__color"
 />
 <br/>
 <DisplaySwatch 
-color="--Display__color--subtle"
+color="--stsv-Display__color--subtle"
 />
 <DisplaySwatch 
-color="--Display__color--faint"
+color="--stsv-Display__color--faint"
 />
 
 <DisplaySwatch 
-color="--Display__color--disabled"
+color="--stsv-Display__color--disabled"
 />
 
 Several colors can be used to give meaning to state.
 
 <DisplaySwatch 
-color="--Display__color--info"
+color="--stsv-Display__color--info"
 />
 <DisplaySwatch 
-color="--Display__color--progress"
+color="--stsv-Display__color--progress"
 />
 <DisplaySwatch 
-color="--Display__color--success"
+color="--stsv-Display__color--success"
 />
 <DisplaySwatch 
-color="--Display__color--warning"
+color="--stsv-Display__color--warning"
 />
 <DisplaySwatch 
-color="--Display__color--error"
+color="--stsv-Display__color--error"
+/>
+
+## Layers
+
+Layers can be used to distinguish areas of the UI.
+
+<LayerSwatch 
+backgroundColor="--stsv-Layer__background-color--1" 
+color="--stsv-Layer__color--1"
+/>
+
+<LayerSwatch 
+backgroundColor="--stsv-Layer__background-color--2" 
+color="--stsv-Layer__color--2"
+/>
+
+<LayerSwatch 
+backgroundColor="--stsv-Layer__background-color--3" 
+color="--stsv-Layer__color--3"
 />
 
 ## Neutral Colors
@@ -262,14 +282,15 @@ You can apply a theme to the root docment element with any of the theme actions.
 
 You can create a custom theme by defining a map of CSS variables to color value.
 
-> To allow components to conform to your theme, be sure to define a value for each CSS variable defined in either the `lightTheme` or `darkTheme`.
+To allow components to conform to your theme, be sure to define a value for each
+CSS variable defined in either the `lightTheme` or `darkTheme`.
 
 ```ts
 import type { CSSVarSet } from '@geoffcox/sterling-svelte';
 
 export const myTheme: Theme = {
-  '--Common__background-color': '#fff',
-  '--Common__border-color': '#222',
+  '--stsv-Common__background-color': '#fff',
+  '--stsv-Common__border-color': '#222',
   //...
 ```
 

@@ -208,13 +208,13 @@ A list of items where a single item can be selected.
 
 <style>
   .sterling-list {
-    background-color: var(--Common__background-color);
-    border-color: var(--Common__border-color);
-    border-radius: var(--Common__border-radius);
-    border-style: var(--Common__border-style);
-    border-width: var(--Common__border-width);
+    background-color: var(--stsv-Common__background-color);
+    border-color: var(--stsv-Common__border-color);
+    border-radius: var(--stsv-Common__border-radius);
+    border-style: var(--stsv-Common__border-style);
+    border-width: var(--stsv-Common__border-width);
     box-sizing: border-box;
-    color: var(--Common__color);
+    color: var(--stsv-Common__color);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
@@ -231,23 +231,23 @@ A list of items where a single item can be selected.
   }
 
   .sterling-list:hover {
-    border-color: var(--Common__border-color--hover);
-    color: var(--Common__color--hover);
+    border-color: var(--stsv-Common__border-color--hover);
+    color: var(--stsv-Common__color--hover);
   }
 
   .sterling-list:focus-within {
-    border-color: var(--Common__border-color--focus);
-    color: var(--Common__color--focus);
-    outline-color: var(--Common__outline-color);
-    outline-offset: var(--Common__outline-offset);
-    outline-style: var(--Common__outline-style);
-    outline-width: var(--Common__outline-width);
+    border-color: var(--stsv-Common__border-color--focus);
+    color: var(--stsv-Common__color--focus);
+    outline-color: var(--stsv-Common__outline-color);
+    outline-offset: var(--stsv-Common__outline-offset);
+    outline-style: var(--stsv-Common__outline-style);
+    outline-width: var(--stsv-Common__outline-width);
   }
 
   .sterling-list.disabled {
-    background-color: var(--Common__background-color--disabled);
-    border-color: var(---Common__border-color--disabled);
-    color: var(--Common__color--disabled);
+    background-color: var(--stsv-Common__background-color--disabled);
+    border-color: var(--stsv--Common__border-color--disabled);
+    color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
   }
 

@@ -4,7 +4,6 @@ Slider allows users to set a value between a minimum and maximum by moving a vis
 
 <script>
     import Example from './SliderExample.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
 ## Playground

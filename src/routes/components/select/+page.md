@@ -1,6 +1,5 @@
 <script>
     import Example from './SelectExample.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
 # Select

@@ -1,6 +1,5 @@
 <script>
     import Playground from './TreeChevronPlayground.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
 # TreeChevron

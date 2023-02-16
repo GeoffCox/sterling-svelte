@@ -242,13 +242,13 @@
   .sterling-tab {
     align-content: center;
     align-items: center;
-    background-color: var(--Common__background-color);
+    background-color: var(--stsv-Common__background-color);
     border-color: transparent;
-    border-radius: var(--Button__border-radius);
-    border-style: var(--Common__border-style);
+    border-radius: var(--stsv-Button__border-radius);
+    border-style: var(--stsv-Common__border-style);
     border-width: 0;
     box-sizing: border-box;
-    color: var(--Common__color);
+    color: var(--stsv-Common__color);
     cursor: pointer;
     display: grid;
     font: inherit;
@@ -279,24 +279,24 @@
   }
 
   .sterling-tab:hover {
-    background-color: var(--Common__background-color--hover);
-    color: var(--Common__color--hover);
+    background-color: var(--stsv-Common__background-color--hover);
+    color: var(--stsv-Common__color--hover);
   }
 
   .sterling-tab:active {
-    background-color: var(--Common__background-color--active);
-    color: var(--Common__color--active);
+    background-color: var(--stsv-Common__background-color--active);
+    color: var(--stsv-Common__color--active);
   }
 
   .sterling-tab:focus-visible {
-    outline-color: var(--Common__outline-color);
-    outline-offset: var(--Common__outline-offset);
-    outline-style: var(--Common__outline-style);
-    outline-width: var(--Common__outline-width);
+    outline-color: var(--stsv-Common__outline-color);
+    outline-offset: var(--stsv-Common__outline-offset);
+    outline-style: var(--stsv-Common__outline-style);
+    outline-width: var(--stsv-Common__outline-width);
   }
 
   .sterling-tab:disabled {
-    color: var(--Common__color--disabled);
+    color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
   }
 
@@ -325,11 +325,11 @@
   }
 
   .sterling-tab:hover .indicator {
-    background-color: var(--Display__color--faint);
+    background-color: var(--stsv-Display__color--faint);
   }
 
   .sterling-tab:active .indicator {
-    background-color: var(--Button__border-color--hover);
+    background-color: var(--stsv-Button__border-color--hover);
   }
 
   .sterling-tab:disabled .indicator,
@@ -339,10 +339,10 @@
   }
 
   .sterling-tab.selected .indicator {
-    background-color: var(--Input__color);
+    background-color: var(--stsv-Input__color);
   }
 
   .sterling-tab.selected:disabled .indicator {
-    background-color: var(--Input__color--disabled);
+    background-color: var(--stsv-Common__color--disabled);
   }
 </style>

@@ -24,7 +24,7 @@
 
 <style>
   path {
-    fill: var(--Display__color--subtle);
+    fill: var(--stsv-Display__color--subtle);
   }
 
   .checked path {
@@ -32,6 +32,6 @@
   }
 
   .disabled path {
-    fill: var(--Display__color--disabled);
+    fill: var(--stsv-Display__color--disabled);
   }
 </style>

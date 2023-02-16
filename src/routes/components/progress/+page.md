@@ -4,7 +4,6 @@ An indicator of a value between 0 and a maximum value.
 
 <script>
     import Example from './ProgressExample.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
 ## Playground

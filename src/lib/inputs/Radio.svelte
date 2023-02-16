@@ -126,10 +126,10 @@
 		and there is not a parent CSS selector.
 	*/
   .indicator {
-    background-color: var(--Input__background-color);
-    border-color: var(--Input__border-color);
-    border-style: var(--Input__border-style);
-    border-width: var(--Input__border-width);
+    background-color: var(--stsv-Input__background-color);
+    border-color: var(--stsv-Input__border-color);
+    border-style: var(--stsv-Input__border-style);
+    border-width: var(--stsv-Input__border-width);
     border-radius: 10000px;
     box-sizing: border-box;
     display: inline-block;
@@ -141,20 +141,20 @@
   }
 
   input:checked + .indicator {
-    background-color: var(--Input__background-color);
-    border-color: var(--Input__border-color);
+    background-color: var(--stsv-Input__background-color);
+    border-color: var(--stsv-Input__border-color);
   }
 
   input:focus-visible + .indicator {
-    outline-color: var(--Common__outline-color);
-    outline-offset: var(--Common__outline-offset);
-    outline-style: var(--Common__outline-style);
-    outline-width: var(--Common__outline-width);
+    outline-color: var(--stsv-Common__outline-color);
+    outline-offset: var(--stsv-Common__outline-offset);
+    outline-style: var(--stsv-Common__outline-style);
+    outline-width: var(--stsv-Common__outline-width);
   }
 
   input:disabled + .indicator {
-    background-color: var(--Input__background-color--disabled);
-    border-color: var(--Input__border-color--disabled);
+    background-color: var(--stsv-Common__background-color--disabled);
+    border-color: var(--stsv-Common__border-color--disabled);
   }
 
   .indicator::after {
@@ -171,11 +171,11 @@
   }
 
   input:checked + .indicator::after {
-    background-color: var(--Input__color);
+    background-color: var(--stsv-Input__color);
   }
 
   input:checked:disabled + .indicator::after {
-    background-color: var(--Input__color--disabled);
+    background-color: var(--stsv-Common__color--disabled);
   }
 
   .label {

@@ -50,13 +50,13 @@
   button {
     align-content: center;
     align-items: center;
-    background-color: var(--Button__background-color);
-    border-color: var(--Button__border-color);
-    border-radius: var(--Button__border-radius);
-    border-style: var(--Button__border-style);
-    border-width: var(--Button__border-width);
+    background-color: var(--stsv-Button__background-color);
+    border-color: var(--stsv-Button__border-color);
+    border-radius: var(--stsv-Button__border-radius);
+    border-style: var(--stsv-Button__border-style);
+    border-width: var(--stsv-Button__border-width);
     box-sizing: border-box;
-    color: var(--Button__color);
+    color: var(--stsv-Button__color);
     cursor: pointer;
     display: inline-flex;
     flex-direction: row;
@@ -88,29 +88,29 @@
   }
 
   button:hover {
-    background-color: var(--Button__background-color--hover);
-    border-color: var(--Button__border-color--hover);
-    color: var(--Button__color--hover);
+    background-color: var(--stsv-Button__background-color--hover);
+    border-color: var(--stsv-Button__border-color--hover);
+    color: var(--stsv-Button__color--hover);
   }
 
   button:active {
-    background-color: var(--Button__background-color--active);
-    border-color: var(--Button__border-color--active);
-    color: var(--Button__color--active);
+    background-color: var(--stsv-Button__background-color--active);
+    border-color: var(--stsv-Button__border-color--active);
+    color: var(--stsv-Button__color--active);
   }
 
   button:focus-visible {
-    border-color: var(--Button__border-color--focus);
-    outline-color: var(--Common__outline-color);
-    outline-offset: var(--Common__outline-offset);
-    outline-style: var(--Common__outline-style);
-    outline-width: var(--Common__outline-width);
+    border-color: var(--stsv-Button__border-color--focus);
+    outline-color: var(--stsv-Common__outline-color);
+    outline-offset: var(--stsv-Common__outline-offset);
+    outline-style: var(--stsv-Common__outline-style);
+    outline-width: var(--stsv-Common__outline-width);
   }
 
   button:disabled {
-    background-color: var(--Button__background-color--disabled);
-    border-color: var(--Button__border-color--disabled);
-    color: var(--Button__color--disabled);
+    background-color: var(--stsv-Common__background-color--disabled);
+    border-color: var(--stsv-Common__border-color--disabled);
+    color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
   }
 
@@ -119,11 +119,11 @@
   }
 
   button.outline:hover {
-    background-color: var(--Button__background-color--hover);
+    background-color: var(--stsv-Button__background-color--hover);
   }
 
   button.outline:active {
-    background-color: var(--Button__background-color--active);
+    background-color: var(--stsv-Button__background-color--active);
   }
 
   button.outline:disabled {
@@ -131,7 +131,7 @@
   }
 
   button.outline:disabled:hover {
-    border-color: var(--Button__border-color--disabled);
+    border-color: var(--stsv-Common__border-color--disabled);
   }
 
   button.ghost {
@@ -140,17 +140,17 @@
   }
 
   button.ghost:hover {
-    background-color: var(--Button__background-color--hover);
+    background-color: var(--stsv-Button__background-color--hover);
     border-color: transparent;
   }
 
   button.ghost:active {
-    background-color: var(--Button__background-color--active);
+    background-color: var(--stsv-Button__background-color--active);
     border-color: transparent;
   }
 
   button.ghost:focus-visible {
-    border-color: var(--Button__border-color--focus);
+    border-color: var(--stsv-Button__border-color--focus);
   }
 
   button.ghost:disabled {
@@ -158,7 +158,7 @@
   }
 
   button.ghost:disabled:hover {
-    background-color: var(--Button__background-color--disabled);
+    background-color: var(--stsv-Common__background-color--disabled);
   }
 
   @media (prefers-reduced-motion) {

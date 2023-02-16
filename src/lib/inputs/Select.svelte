@@ -306,36 +306,36 @@ A single item that can be selected from a popup list of items.
 
 <style>
   .sterling-select {
-    background-color: var(--Input__background-color);
-    border-color: var(--Input__border-color);
-    border-radius: var(--Input__border-radius);
-    border-style: var(--Input__border-style);
-    border-width: var(--Input__border-width);
-    color: var(--Input__color);
+    background-color: var(--stsv-Input__background-color);
+    border-color: var(--stsv-Input__border-color);
+    border-radius: var(--stsv-Input__border-radius);
+    border-style: var(--stsv-Input__border-style);
+    border-width: var(--stsv-Input__border-width);
+    color: var(--stsv-Input__color);
     padding: 0;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
   .sterling-select:hover {
-    background-color: var(--Input__background-color--hover);
-    border-color: var(--Input__border-color--hover);
-    color: var(--Input__color--hover);
+    background-color: var(--stsv-Input__background-color--hover);
+    border-color: var(--stsv-Input__border-color--hover);
+    color: var(--stsv-Input__color--hover);
   }
 
   .sterling-select:focus-within {
-    background-color: var(--Input__background-color--focus);
-    border-color: var(--Input__border-color--focus);
-    color: var(--Input__color--focus);
-    outline-color: var(--Common__outline-color);
-    outline-offset: var(--Common__outline-offset);
-    outline-style: var(--Common__outline-style);
-    outline-width: var(--Common__outline-width);
+    background-color: var(--stsv-Input__background-color--focus);
+    border-color: var(--stsv-Input__border-color--focus);
+    color: var(--stsv-Input__color--focus);
+    outline-color: var(--stsv-Common__outline-color);
+    outline-offset: var(--stsv-Common__outline-offset);
+    outline-style: var(--stsv-Common__outline-style);
+    outline-width: var(--stsv-Common__outline-width);
   }
 
   .sterling-select.disabled {
-    background-color: var(--Input__background-color--disabled);
-    border-color: var(---Input__border-color--disabled);
-    color: var(--Input__color--disabled);
+    background-color: var(--stsv-Common__background-color--disabled);
+    border-color: var(--stsv--Common__border-color--disabled);
+    color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
     outline: none;
   }

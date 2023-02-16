@@ -124,13 +124,13 @@
   }
 
   .switch {
-    background-color: var(--Input__background-color);
-    border-color: var(--Input__border-color);
+    background-color: var(--stsv-Input__background-color);
+    border-color: var(--stsv-Input__border-color);
     border-radius: 10000px;
-    border-style: var(--Input__border-style);
-    border-width: var(--Input__border-width);
+    border-style: var(--stsv-Input__border-style);
+    border-width: var(--stsv-Input__border-width);
     box-sizing: border-box;
-    color: var(--Input__color);
+    color: var(--stsv-Input__color);
     font: inherit;
     pointer-events: none;
     position: relative;
@@ -139,25 +139,25 @@
   }
 
   .sterling-switch:hover .switch {
-    background-color: var(--Input__background-color--hover);
-    border-color: var(--Input__border-color--hover);
-    color: var(--Input__color--hover);
+    background-color: var(--stsv-Input__background-color--hover);
+    border-color: var(--stsv-Input__border-color--hover);
+    color: var(--stsv-Input__color--hover);
   }
 
   input:focus-visible ~ .switch {
-    background-color: var(--Input__background-color--focus);
-    border-color: var(--Input__border-color--focus);
-    color: var(--Common__color--focux);
-    outline-color: var(--Common__outline-color);
-    outline-offset: var(--Common__outline-offset);
-    outline-style: var(--Common__outline-style);
-    outline-width: var(--Common__outline-width);
+    background-color: var(--stsv-Input__background-color--focus);
+    border-color: var(--stsv-Input__border-color--focus);
+    color: var(--stsv-Common__color--focux);
+    outline-color: var(--stsv-Common__outline-color);
+    outline-offset: var(--stsv-Common__outline-offset);
+    outline-style: var(--stsv-Common__outline-style);
+    outline-width: var(--stsv-Common__outline-width);
   }
 
   .sterling-switch.disabled .switch {
-    background-color: var(--Input__background-color--disabled);
-    border-color: var(--Input__border-color--disabled);
-    color: var(--Input__color--disabled);
+    background-color: var(--stsv-Common__background-color--disabled);
+    border-color: var(--stsv-Common__border-color--disabled);
+    color: var(--stsv-Common__color--disabled);
   }
 
   .sterling-switch:not(.vertical) .switch {
@@ -172,17 +172,17 @@
 
   .off-label,
   .on-label {
-    padding-top: var(--Button__border-width);
+    padding-top: var(--stsv-Button__border-width);
   }
 
   .thumb {
-    background-color: var(--Button__background-color);
-    border-color: var(--Button__border-color);
+    background-color: var(--stsv-Button__background-color);
+    border-color: var(--stsv-Button__border-color);
     border-radius: 10000px;
-    border-style: var(--Button__border-style);
-    border-width: var(--Button__border-width);
+    border-style: var(--stsv-Button__border-style);
+    border-width: var(--stsv-Button__border-width);
     box-sizing: border-box;
-    color: var(--Button__color);
+    color: var(--stsv-Button__color);
     cursor: pointer;
     display: block;
     font: inherit;
@@ -193,30 +193,30 @@
   }
 
   .sterling-switch:hover .thumb {
-    background-color: var(--Button__background-color--hover);
-    border-color: var(--Button__border-color--hover);
-    color: var(--Button__color--hover);
+    background-color: var(--stsv-Button__background-color--hover);
+    border-color: var(--stsv-Button__border-color--hover);
+    color: var(--stsv-Button__color--hover);
   }
 
   .sterling-switch:active .thumb {
-    background-color: var(--Button__background-color--active);
-    border-color: var(--Button__border-color--active);
-    color: var(--Button__color--hover);
+    background-color: var(--stsv-Button__background-color--active);
+    border-color: var(--stsv-Button__border-color--active);
+    color: var(--stsv-Button__color--hover);
   }
 
   .sterling-switch.disabled .thumb {
-    background-color: var(--Button__background-color--disabled);
-    border-color: var(--Button__border-color--disabled);
-    color: var(--Button__color--disabled);
+    background-color: var(--stsv-Common__background-color--disabled);
+    border-color: var(--stsv-Common__border-color--disabled);
+    color: var(--stsv-Common__color--disabled);
   }
 
   .sterling-switch:not(.vertical) .thumb {
-    top: calc(-1 * var(--Button__border-width));
-    transform: translateX(calc(var(--thumb-offset) - var(--Button__border-width)));
+    top: calc(-1 * var(--stsv-Button__border-width));
+    transform: translateX(calc(var(--stsv-thumb-offset) - var(--stsv-Button__border-width)));
   }
 
   .sterling-switch.vertical .thumb {
-    left: calc(-1 * var(--Button__border-width));
-    transform: translateY(calc(var(--thumb-offset) - var(--Button__border-width)));
+    left: calc(-1 * var(--stsv-Button__border-width));
+    transform: translateY(calc(var(--stsv-thumb-offset) - var(--stsv-Button__border-width)));
   }
 </style>

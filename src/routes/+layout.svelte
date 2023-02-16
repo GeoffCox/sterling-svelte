@@ -147,8 +147,8 @@
   @import '@fontsource/fira-mono';
 
   :global(:root) {
-    color: var(--Common__color);
-    background-color: var(--Common__background-color);
+    color: var(--stsv-Common__color);
+    background-color: var(--stsv-Common__background-color);
   }
 
   :global(html) {
@@ -178,8 +178,8 @@
   :global(pre),
   :global(code) {
     font-family: 'FiraMono', monospace;
-    background-color: var(--Layer__background-color--1);
-    color: var(--Layer__color--1);
+    background-color: var(--stsv-Layer__background-color--1);
+    color: var(--stsv-Layer__color--1);
   }
 
   :global(pre) {
@@ -187,14 +187,14 @@
   }
 
   :global(blockquote) {
-    background-color: var(--Layer__background-color--1);
-    color: var(--Display__color--info);
+    background-color: var(--stsv-Layer__background-color--1);
+    color: var(--stsv-Display__color--info);
     padding: 1em;
     margin: 0;
   }
 
   :global(table) {
-    border: 1px solid var(--Common__border-color);
+    border: 1px solid var(--stsv-Common__border-color);
     width: max-content;
     border-collapse: collapse;
   }
@@ -202,17 +202,17 @@
   :global(th) {
     font-weight: lighter;
     font-size: 1.1em;
-    background: var(--Display__background-color);
-    color: var(----Display__color);
+    background: var(--stsv-Display__background-color);
+    color: var(--stsv---Display__color);
     padding: 0.5em;
     text-align: start;
-    border: 1px solid var(--Common__border-color);
+    border: 1px solid var(--stsv-Common__border-color);
   }
 
   :global(td) {
     padding: 0.5em;
     text-align: start;
-    border: 1px solid var(--Common__border-color);
+    border: 1px solid var(--stsv-Common__border-color);
   }
 
   :global(li) {
@@ -261,8 +261,8 @@
   .nav {
     display: flex;
     flex-direction: column;
-    background-color: var(--Common__background-color);
-    border-right: 1px solid var(--Common__border-color);
+    background-color: var(--stsv-Common__background-color);
+    border-right: 1px solid var(--stsv-Common__border-color);
     padding: 1em;
   }
 
@@ -281,7 +281,7 @@
     text-decoration: none;
     margin: 0.5em 0;
     font-size: 1em;
-    color: var(--Common__color);
+    color: var(--stsv-Common__color);
   }
 
   .nav a:hover {

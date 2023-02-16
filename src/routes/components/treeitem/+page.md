@@ -1,6 +1,5 @@
 <script>
     import Playground from './TreeItemPlayground.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
 # TreeItem

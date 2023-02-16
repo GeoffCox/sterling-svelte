@@ -56,31 +56,31 @@
     align-items: center;
     background-color: transparent;
     box-sizing: border-box;
-    color: var(--Input__color);
+    color: var(--stsv-Input__color);
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 0.25em;
     margin: 0;
     outline: none;
     padding: 0.5em;
-    padding-left: calc(0.5em * var(--sterling-tree-node-depth));
+    padding-left: calc(0.5em * var(--stsv-sterling-tree-node-depth));
     text-overflow: ellipsis;
     transition: background-color 250ms, color 250ms, border-color 250ms;
     white-space: nowrap;
   }
 
   .sterling-tree-node-item:hover {
-    background-color: var(--Button__background-color--hover);
-    color: var(--Button__color--hover);
+    background-color: var(--stsv-Button__background-color--hover);
+    color: var(--stsv-Button__color--hover);
   }
 
   .sterling-tree-node-item.selected {
-    background-color: var(--Input__background-color--selected);
-    color: var(--Input__color--selected);
+    background-color: var(--stsv-Input__background-color--selected);
+    color: var(--stsv-Input__color--selected);
   }
 
   .sterling-tree-node-item.disabled {
-    color: var(--Input__color--disabled);
+    color: var(--stsv-Common__color--disabled);
   }
 
   .sterling-tree-node-item.leaf {

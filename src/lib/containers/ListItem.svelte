@@ -20,7 +20,7 @@
   .sterling-list-item {
     background-color: transparent;
     box-sizing: border-box;
-    color: var(--Input__color);
+    color: var(--stsv-Input__color);
     margin: 0;
     padding: 0.5em;
     outline: none;
@@ -30,17 +30,17 @@
   }
 
   .sterling-list-item:hover {
-    background-color: var(--Button__background-color--hover);
-    color: var(--Button__color--hover);
+    background-color: var(--stsv-Button__background-color--hover);
+    color: var(--stsv-Button__color--hover);
   }
 
   .sterling-list-item.selected {
-    background-color: var(--Input__background-color--selected);
-    color: var(--Input__color--selected);
+    background-color: var(--stsv-Input__background-color--selected);
+    color: var(--stsv-Input__color--selected);
   }
 
   .sterling-list-item.disabled {
-    color: var(--Input__color--disabled);
+    color: var(--stsv-Common__color--disabled);
   }
 
   @media (prefers-reduced-motion) {

@@ -4,7 +4,6 @@ A styled HTML label element.
 
 <script>
     import Example from './LabelExample.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
 ## Playground

@@ -83,8 +83,8 @@
   }
 
   .panel {
-    border: 2px double var(--Common__border-color);
-    color: var(--Layer__color--1);
+    border: 2px double var(--stsv-Common__border-color);
+    color: var(--stsv-Layer__color--1);
     padding: 1em;
     display: flex;
     flex-direction: column;
@@ -106,7 +106,7 @@
   }
 
   .event-timestamp {
-    color: var(--Display__color--info);
+    color: var(--stsv-Display__color--info);
   }
 
   h2 {

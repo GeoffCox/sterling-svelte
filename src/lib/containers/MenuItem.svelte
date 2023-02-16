@@ -352,11 +352,11 @@
   .sterling-menu-item {
     background-color: transparent;
     border-color: transparent;
-    border-radius: var(--Button__border-radius);
+    border-radius: var(--stsv-Button__border-radius);
     border-style: none;
     border-width: 0;
     box-sizing: border-box;
-    color: var(--Common__color);
+    color: var(--stsv-Common__color);
     cursor: pointer;
     font: inherit;
     margin: 0;
@@ -372,8 +372,8 @@
   }
 
   .sterling-menu-item:hover {
-    background-color: var(--Button__background-color--hover);
-    color: var(--Button__color--hover);
+    background-color: var(--stsv-Button__background-color--hover);
+    color: var(--stsv-Button__color--hover);
   }
 
   .sterling-menu-item:focus {
@@ -381,19 +381,19 @@
   }
 
   .sterling-menu-item.using-keyboard:focus {
-    border-color: var(--Button__border-color--focus);
-    outline-color: var(--Common__outline-color);
-    outline-offset: var(--Common__outline-offset);
-    outline-style: var(--Common__outline-style);
-    outline-width: var(--Common__outline-width);
+    border-color: var(--stsv-Button__border-color--focus);
+    outline-color: var(--stsv-Common__outline-color);
+    outline-offset: var(--stsv-Common__outline-offset);
+    outline-style: var(--stsv-Common__outline-style);
+    outline-width: var(--stsv-Common__outline-width);
   }
 
   .sterling-menu-item:focus {
-    background-color: var(--Input__background-color--selected);
+    background-color: var(--stsv-Input__background-color--selected);
   }
 
   .sterling-menu-item.disabled {
-    color: var(--Input__color--disabled);
+    color: var(--stsv-Common__color--disabled);
   }
 
   .sterling-menu-item.composed,

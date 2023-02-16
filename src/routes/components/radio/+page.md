@@ -4,7 +4,6 @@ A styled HTML input type=radio element.
 
 <script>
     import Example from './RadioExample.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
 ## Playground

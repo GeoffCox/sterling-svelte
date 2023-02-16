@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { lightTheme } from '$lib';
-
   export let backgroundColor: string;
   export let borderColor: string;
   export let borderRadius: string;
@@ -69,35 +67,35 @@
 
   text {
     font-size: 16px;
-    fill: var(--Common__color);
+    fill: var(--stsv-Common__color);
   }
 
   .line {
-    stroke: var(--Common__color);
+    stroke: var(--stsv-Common__color);
     stroke-width: 1px;
   }
 
   .dot {
-    fill: var(--Common__color);
+    fill: var(--stsv-Common__color);
   }
 
   .color-block-background {
     background-color: transparent;
     background-image: repeating-linear-gradient(
         45deg,
-        var(--Common__color) 25%,
+        var(--stsv-Common__color) 25%,
         transparent 25%,
         transparent 75%,
-        var(--Common__color) 75%,
-        var(--Common__color)
+        var(--stsv-Common__color) 75%,
+        var(--stsv-Common__color)
       ),
       repeating-linear-gradient(
         45deg,
-        var(--Common__color) 25%,
-        var(--Common__background-color) 25%,
-        var(--Common__background-color) 75%,
-        var(--Common__color) 75%,
-        var(--Common__color)
+        var(--stsv-Common__color) 25%,
+        var(--stsv-Common__background-color) 25%,
+        var(--stsv-Common__background-color) 75%,
+        var(--stsv-Common__color) 75%,
+        var(--stsv-Common__color)
       );
     background-position: 0 0, 4px 4px;
     background-size: 8px 8px;

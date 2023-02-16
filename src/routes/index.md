@@ -77,10 +77,13 @@ The library is in alpha - anything and everything may change at any time.
 | Tabs      | 0.0.15                |
 | Menus     | 0.0.16                |
 
-| Possible Future Components |
-| -------------------------- |
-| Tooltip                    |
-| Toggle/Choice              |
-| Accordion                  |
-| Notifications              |
-| Drawer                     |
+Future
+
+| Component      |
+| -------------- |
+| Accordion      |
+| Drawer / Panel |
+| Dropdown       |
+| Notifications  |
+| Tooltip        |
+| Toggle/Choice  |

@@ -1,6 +1,5 @@
 <script>
     import Example from './ListExample.svelte';
-    import ThemePropCard from '../ThemePropCard.svelte';
 </script>
 
 # List

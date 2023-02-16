@@ -255,24 +255,24 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
 
   .track {
     position: absolute;
-    background: var(--Display__background-color);
+    background: var(--stsv-Display__background-color);
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
   .fill {
-    background: var(--Display__color);
+    background: var(--stsv-Display__color);
     position: absolute;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
   .thumb {
-    background-color: var(--Button__background-color);
-    border-color: var(--Button__border-color);
+    background-color: var(--stsv-Button__background-color);
+    border-color: var(--stsv-Button__border-color);
     border-radius: 10000px;
-    border-style: var(--Button__border-style);
-    border-width: var(--Button__border-width);
+    border-style: var(--stsv-Button__border-style);
+    border-width: var(--stsv-Button__border-width);
     box-sizing: border-box;
-    color: var(--Button__color);
+    color: var(--stsv-Button__color);
     cursor: pointer;
     display: block;
     font: inherit;
@@ -347,40 +347,40 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   /* ----- hover ----- */
 
   .thumb:hover {
-    background-color: var(--Button__background-color--hover);
-    border-color: var(--Button__border-color--hover);
-    color: var(--Button__color--hover);
+    background-color: var(--stsv-Button__background-color--hover);
+    border-color: var(--stsv-Button__border-color--hover);
+    color: var(--stsv-Button__color--hover);
   }
 
   /* ----- active ----- */
 
   .thumb:active {
-    background-color: var(--Button__background-color--active);
-    border-color: var(--Button__border-color--active);
-    color: var(--Button__color--active);
+    background-color: var(--stsv-Button__background-color--active);
+    border-color: var(--stsv-Button__border-color--active);
+    color: var(--stsv-Button__color--active);
   }
 
   /* ----- focus ----- */
   .slider:focus-visible {
-    outline-color: var(--Common__outline-color);
-    outline-offset: var(--Common__outline-offset);
-    outline-style: var(--Common__outline-style);
-    outline-width: var(--Common__outline-width);
+    outline-color: var(--stsv-Common__outline-color);
+    outline-offset: var(--stsv-Common__outline-offset);
+    outline-style: var(--stsv-Common__outline-style);
+    outline-width: var(--stsv-Common__outline-width);
   }
   /* ----- disabled ----- */
 
   .slider.disabled .track {
-    background: var(--Common__background-color--disabled);
+    background: var(--stsv-Common__background-color--disabled);
   }
 
   .slider.disabled .fill {
-    background: var(--Common__color--disabled);
+    background: var(--stsv-Common__color--disabled);
   }
 
   .slider.disabled .thumb {
-    background-color: var(--Common__background-color--disabled);
-    border-color: var(--Common__border-color--disabled);
-    color: var(--Common__color--disabled);
+    background-color: var(--stsv-Common__background-color--disabled);
+    border-color: var(--stsv-Common__border-color--disabled);
+    color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
   }
 

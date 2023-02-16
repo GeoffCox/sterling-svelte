@@ -1,4 +1,5 @@
 <script lang="ts">
+  export let backgroundColor: string;
   export let color: string;
 
   const getCssValue = (value: string) => {
@@ -8,12 +9,14 @@
     return value;
   };
 
-  $: style = `--swatch__color: ${getCssValue(color)};`;
+  $: style =
+    `--swatch__background-color: ${getCssValue(backgroundColor)};` +
+    `--swatch__color: ${getCssValue(color)};`;
 </script>
 
 <div class="swatch" {style}>
   <div class="color-block-background" />
-  <div class="color-block" />
+  <div class="color-block"><span>T</span></div>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -22,10 +25,15 @@
     xml:space="preserve"
     class="diagram"
   >
-    <text class="text" x="110" y="50">{color}</text>
-    <line class="line" x1="100" y1="35" x2="100" y2="55" />
-    <line class="line" x1="100" y1="45" x2="45" y2="45" />
-    <circle class="dot" cx="45" cy="45" r="3" />
+    <text class="text" x="110" y="30">{backgroundColor}</text>
+    <line class="line" x1="100" y1="15" x2="100" y2="35" />
+    <line class="line" x1="100" y1="25" x2="60" y2="30" />
+    <circle class="dot" cx="60" cy="30" r="3" />
+
+    <text class="text" x="110" y="60">{color}</text>
+    <line class="line" x1="100" y1="45" x2="100" y2="65" />
+    <line class="line" x1="100" y1="55" x2="46" y2="55" />
+    <circle class="dot" cx="46" cy="55" r="3" />
   </svg>
 </div>
 
@@ -93,6 +101,7 @@
     left: 20px;
     width: 50px;
     height: 50px;
-    background-color: var(--swatch__color);
+    background-color: var(--swatch__background-color);
+    color: var(--swatch__color);
   }
 </style>
