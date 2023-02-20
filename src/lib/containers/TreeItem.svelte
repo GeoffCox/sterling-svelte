@@ -1,16 +1,12 @@
 <script lang="ts">
-  import type { TreeNodeData } from './Tree.types';
   import TreeChevron from './TreeChevron.svelte';
-
-  type T = $$Generic;
 
   export let depth = 0;
   export let disabled = false;
   export let expanded = false;
   export let hasChildren = false;
-  export let selected = false;
   export let nodeId: string;
-  export let node: TreeNodeData<T> | undefined = undefined;
+  export let selected = false;
 </script>
 
 <div
@@ -47,7 +43,7 @@
   {...$$restProps}
 >
   <TreeChevron {expanded} {hasChildren} />
-  <slot {depth} {disabled} {expanded} {hasChildren} {selected} {node} {nodeId} />
+  <slot {depth} {disabled} {expanded} {hasChildren} {selected} {nodeId} />
 </div>
 
 <style>
@@ -63,7 +59,7 @@
     margin: 0;
     outline: none;
     padding: 0.5em;
-    padding-left: calc(0.5em * var(--stsv-sterling-tree-node-depth));
+    padding-left: calc(0.5em * var(--sterling-tree-node-depth));
     text-overflow: ellipsis;
     transition: background-color 250ms, color 250ms, border-color 250ms;
     white-space: nowrap;

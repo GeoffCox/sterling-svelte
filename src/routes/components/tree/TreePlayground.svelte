@@ -1,26 +1,20 @@
 <script lang="ts">
-  import { type CoffeeNode, coffeeTree } from '../../_sampleData/coffeeTree';
-
   import Checkbox from '$lib/inputs/Checkbox.svelte';
   import Playground from '../Playground.svelte';
   import Input from '$lib/inputs/Input.svelte';
 
   import Tree from '$lib/containers/Tree.svelte';
-  import type { TreeNodeData } from '$lib/containers/Tree.types';
+  import TreeNode from '$lib/containers/TreeNode.svelte';
   import Button from '$lib/buttons/Button.svelte';
 
   let exampleRef: any;
-  let treeRef: Tree<CoffeeNode>;
+  let treeRef: Tree;
 
   let disabled = false;
   let label = 'Coffee Menu';
   let selectedNodeId: string | undefined = undefined;
   let expandedNodeIds: string[] = [];
   let expandedNodeIdsText: string;
-
-  const nodes = coffeeTree as TreeNodeData<CoffeeNode>[];
-
-  const getNodeId = (node: TreeNodeData<CoffeeNode>) => node.name;
 
   const getExpandedNodeIds = () => {
     expandedNodeIdsText = expandedNodeIds.join(',');
@@ -40,14 +34,51 @@
       bind:this={treeRef}
       bind:selectedNodeId
       {disabled}
-      {getNodeId}
-      {nodes}
       bind:expandedNodeIds
       on:select={() => exampleRef.recordEvent('select')}
       on:expandCollapse={() => exampleRef.recordEvent('expandCollapse')}
     >
       <svelte:fragment slot="label">{label}</svelte:fragment>
-      <svelte:fragment slot="nodeLabel" let:nodeId>{nodeId}</svelte:fragment>
+      <TreeNode nodeId="Coffees">
+        <TreeNode nodeId="Americano" />
+        <TreeNode nodeId="Brewed">
+          <TreeNode nodeId="Light roast" />
+          <TreeNode nodeId="Medium roast" />
+          <TreeNode nodeId="Dark roast" />
+          <TreeNode nodeId="House blend" />
+        </TreeNode>
+        <TreeNode nodeId="Cappuccino" />
+        <TreeNode nodeId="Espresso" />
+        <TreeNode nodeId="Latte" />
+        <TreeNode nodeId="Macchiato" />
+        <TreeNode nodeId="Mochas">
+          <TreeNode nodeId="Dark Chocolate Mocha" />
+          <TreeNode nodeId="White Chocolate Mocha" />
+          <TreeNode nodeId="Peppermint Chocolate Mocha" />
+        </TreeNode>
+        <TreeNode nodeId="Add-ins">
+          <TreeNode nodeId="Milks">
+            <TreeNode nodeId="Almond Milk" />
+            <TreeNode nodeId="Fat Free  Milk" />
+            <TreeNode nodeId="Non-dairy Creamer" />
+            <TreeNode nodeId="Soy Milk" />
+            <TreeNode nodeId="Two percent Milk" />
+            <TreeNode nodeId="Whole Milk" />
+          </TreeNode>
+          <TreeNode nodeId="Syrups">
+            <TreeNode nodeId="Almond syrup" />
+            <TreeNode nodeId="Hazelnut syrup" />
+            <TreeNode nodeId="Irish Creme syrup" />
+            <TreeNode nodeId="Vanilla syrup" />
+          </TreeNode>
+          <TreeNode nodeId="Toppings">
+            <TreeNode nodeId="Caramel" />
+            <TreeNode nodeId="Cinnamon" />
+            <TreeNode nodeId="Vanilla Flakes" />
+          </TreeNode>
+        </TreeNode>
+      </TreeNode>
+      <TreeNode nodeId="Teas" />
     </Tree>
   </div>
   <svelte:fragment slot="options">
@@ -75,6 +106,7 @@
 <style>
   .component {
     height: 450px;
+    min-width: 400px;
   }
 
   .edit-toggled {

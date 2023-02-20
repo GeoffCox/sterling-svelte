@@ -1,25 +1,9 @@
 import type { Writable } from 'svelte/store';
 
-export type TreeNodeData<T> = T & {
-  nodeId?: string;
-  children?: TreeNodeData<T>[];
-};
-
-/**
- * The set of event handlers forwarded from Tree
- */
-export type TreeForwardedEventHandlers = {
-  onKeydown: svelte.JSX.KeyboardEventHandler<Element>;
-};
-
 /**
  * Context for a Tree and its TreeNodes
  */
-export type TreeContext<T> = {
-  /**
-   * Gets the ID for the tree node.
-   */
-  getNodeId: (node: TreeNodeData<T>) => string;
+export type TreeContext = {
   /**
    * The IDs of the expanded ttree nodes.
    */
@@ -28,11 +12,6 @@ export type TreeContext<T> = {
    * The ID of the selected tree node.
    */
   selectedNodeId: Writable<string | undefined>;
-  /**
-   * The selected tree node's event handlers.
-   * The Tree will forward events to these handlers.
-   */
-  selectedNodeEventHandlers: Writable<TreeForwardedEventHandlers>;
 };
 
 /**

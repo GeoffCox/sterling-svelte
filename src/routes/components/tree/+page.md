@@ -1,13 +1,10 @@
 <script>
     import Playground from './TreePlayground.svelte';
-    import ItemSlotExample from './ItemSlotExample.svelte';
-    import LabelSlotExample from './LabelSlotExample.svelte';
-    import DeclarativeExample from './DeclarativeExample.svelte';
 </script>
 
 # Tree
 
-A hierarchy of items (a.k.a. nodes)
+A hierarchy of items.
 
 ## Playground
 
@@ -15,13 +12,12 @@ A hierarchy of items (a.k.a. nodes)
 
 ## Features
 
-- A single node can be selected. Focus follows selection.
-- Nodes can be expanded to show children or collapsed to hide children.
-- You can choose to have nodes expanded or collapsed by default.
-- Users can select the previous/next visible node with the up/down arrow keys.
-- Users can expand/collpase expanded/collapse nodes with the right/left arrow keys.
-- If the node is already expanded, the right arrow key selects the next node.
-- If the node is already collpased, the left arrow key selects the previous node.
+- A single tree item can be selected. Focus follows selection.
+- Tree items can be expanded/collapsed to show/hide children.
+- Users can select the previous/next visible tree item with the up/down arrow keys.
+- Users can expand/collpase expanded/collapse tree items with the right/left arrow keys.
+- If the tree item is already expanded, right arrow selects the first child.
+- If the tree item is already collpased, left arrow selects the previous tree item.
 - You can identify the tree's content with the optional label.
 
 ## Props
@@ -29,24 +25,17 @@ A hierarchy of items (a.k.a. nodes)
 | Prop            | Type                                 | Description                                             |
 | --------------- | ------------------------------------ | ------------------------------------------------------- |
 | composed        | `boolean`                            | Indicates the tree is composed within another component |
-| disabled        | `boolean`                            | Disables the tree and nodes                             |
-| expandedNodeIds | `string[]`                           | The IDs of expanded nodes                               |
-| nodes           | `TreeNode<T>[]`                      | The list of top level nodes in the hierarchy            |
-| selectedNodeId  | `string` <b>&#10072;</b> `undefined` | The ID of the selected node                             |
+| disabled        | `boolean`                            | Disables the tree and tree items                        |
+| expandedNodeIds | `string[]`                           | The IDs of expanded tree items                          |
+| tree items      | `TreeNode<T>[]`                      | The list of top level tree items in the hierarchy       |
+| selectedNodeId  | `string` <b>&#10072;</b> `undefined` | The ID of the selected tree item                        |
 
 ## Events
 
-| Event          | Detail                           | Description                                 |
-| -------------- | -------------------------------- | ------------------------------------------- |
-| select         | `{ selectedNodeId: string; }`    | Raised when a node is selected              |
-| expandCollapse | `{ expandedNodeIds: string[]; }` | Raised when a node is expanded or collapsed |
-
-## Methods
-
-| Method      | Parameters | Description                         |
-| ----------- | ---------- | ----------------------------------- |
-| expandAll   |            | Expands all the nodes in the tree   |
-| collapseAll |            | Collapses all the nodes in the tree |
+| Event          | Detail                           | Description                                      |
+| -------------- | -------------------------------- | ------------------------------------------------ |
+| select         | `{ selectedNodeId: string; }`    | Raised when a tree item is selected              |
+| expandCollapse | `{ expandedNodeIds: string[]; }` | Raised when a tree item is expanded or collapsed |
 
 ## Anatomy
 
@@ -61,61 +50,27 @@ Tree
       default slot
 ```
 
-- Tree renders a TreeNode for each of the nodes.
+- Tree renders a TreeNode for each of the tree items.
 - TreeNode renders its item slot and then its TreeNode children.
 - Tree and TreeNode work together to recursively render the hierarchy of items. They coordinate through svelte context.
 
 ## Slots
 
-| Slot      | Description                                      |
-| --------- | ------------------------------------------------ |
-| default   | Any declared TreeNode children                   |
-| item      | The template for each item, defaults to TreeItem |
-| label     | The tree label                                   |
-| nodeLabel | The template for the label within each TreeItem  |
+| Slot    | Description                    |
+| ------- | ------------------------------ |
+| default | Any declared TreeNode children |
+| label   | The tree label                 |
 
 ### let params
 
 The item and nodeLabel slots are passed the following `let` parameters.
 
-| Let Param   | Type          | Description                                 |
-| ----------- | ------------- | ------------------------------------------- |
-| depth       | `number`      | The depth of this node in the tree          |
-| disabled    | `boolean`     | True if the tree and this node are disabled |
-| expanded    | `boolean`     | True if this node is expanded               |
-| hasChildren | `boolean`     | True if this node has children              |
-| node        | `TreeNode<T>` | The node data for this node                 |
-| nodeID      | `string`      | The ID of this node                         |
-| selected    | `boolean`     | True if this node is selected               |
-
-## Examples
-
-### Custom item slot
-
-<ItemSlotExample/>
-
-### Custom label slot
-
-<LabelSlotExample/>
-
-### Declarative Tree
-
-You can create trees by declaring them in your HTML.
-This tree mimics the data-bound tree by declaring a `Tree` containing a hierarchy of `TreeNode`s.
-
-```svelte
-<Tree>
-  <TreeNode nodeId="Coffee">
-    <TreeNode nodeId="Americano" />
-    <TreeNode nodeId="Brewed">
-      <TreeNode nodeId="Light roast" />
-      <TreeNode nodeId="Medium roast" />
-      <TreeNode nodeId="Dark roast" />
-      <TreeNode nodeId="House blend" />
-    </TreeNode>
-    <TreeNode nodeId="Cappuccino" />
-    <!-- ... -->
-</Tree>
-```
-
-<DeclarativeExample/>
+| Let Param   | Type          | Description                                      |
+| ----------- | ------------- | ------------------------------------------------ |
+| depth       | `number`      | The depth of this tree item in the tree          |
+| disabled    | `boolean`     | True if the tree and this tree item are disabled |
+| expanded    | `boolean`     | True if this tree item is expanded               |
+| hasChildren | `boolean`     | True if this tree item has children              |
+| tree item   | `TreeNode<T>` | The tree item data for this tree item            |
+| nodeID      | `string`      | The ID of this tree item                         |
+| selected    | `boolean`     | True if this tree item is selected               |
