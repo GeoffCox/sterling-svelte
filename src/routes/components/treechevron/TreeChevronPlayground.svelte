@@ -2,7 +2,7 @@
   import Checkbox from '$lib/inputs/Checkbox.svelte';
   import Playground from '../Playground.svelte';
 
-  import TreeNodeChevron from '$lib/containers/TreeChevron.svelte';
+  import TreeChevron from '$lib/containers/TreeChevron.svelte';
 
   let exampleRef: any;
 
@@ -12,7 +12,7 @@
 
 <Playground bind:this={exampleRef}>
   <div slot="component">
-    <TreeNodeChevron {expanded} {hasChildren} />
+    <TreeChevron {expanded} {hasChildren} />
   </div>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={expanded}><span slot="label">expanded</span></Checkbox>

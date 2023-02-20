@@ -1,29 +1,25 @@
 import type { Writable } from 'svelte/store';
 
 /**
- * Context for a Tree and its TreeNodes
+ * Context for a Tree and its tree items.
  */
 export type TreeContext = {
   /**
-   * The IDs of the expanded ttree nodes.
+   * The IDs of the expanded ttree tree items.
    */
-  expandedNodeIds: Writable<string[]>;
+  expandedItemIds: Writable<string[]>;
   /**
-   * The ID of the selected tree node.
+   * The ID of the selected tree tree item.
    */
-  selectedNodeId: Writable<string | undefined>;
+  selectedItemId: Writable<string | undefined>;
 };
 
 /**
- * The context for a TreeNode
+ * The context for a tree item.
  */
-export type TreeNodeContext = {
+export type TreeItemContext = {
   /**
-   * The ID of the parent node.
-   */
-  parentNodeId?: string;
-  /**
-   * How many levels deep this node is in the tree hierarchy.
+   * How many levels deep this tree item is in the tree hierarchy.
    * A top level item's depth is zero.
    */
   depth: number;

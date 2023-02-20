@@ -1,20 +1,271 @@
 <script lang="ts">
-  import TreeChevron from './TreeChevron.svelte';
+  import type { TreeContext, TreeItemContext } from './Tree.types';
 
-  export let depth = 0;
+  import { getContext, setContext } from 'svelte';
+  import { slide } from 'svelte/transition';
+
+  import { treeContextKey, treeItemContextKey } from './Tree.constants';
+  import TreeItemDisplay from './TreeItemDisplay.svelte';
+
+  // ----- Props ----
   export let disabled = false;
-  export let expanded = false;
-  export let hasChildren = false;
-  export let nodeId: string;
-  export let selected = false;
+  export let treeItemId: string;
+
+  // ----- Get Context ----- //
+
+  const { expandedItemIds, selectedItemId } = getContext<TreeContext>(treeContextKey);
+  const { depth = 0 } = getContext<TreeItemContext>(treeItemContextKey) || {};
+
+  // ----- State ----- //
+
+  let treeItemRef: HTMLDivElement;
+  $: hasChildren = $$slots.default;
+  $: expanded = $expandedItemIds.includes(treeItemId);
+  $: selected = $selectedItemId === treeItemId;
+
+  // ----- Expand/Collapse ----- //
+
+  const collapseItem = (index?: number) => {
+    if (!disabled) {
+      index = index ?? $expandedItemIds.findIndex((id) => id === treeItemId);
+      if (index !== -1) {
+        expandedItemIds.set([
+          ...$expandedItemIds.slice(0, index),
+          ...$expandedItemIds.slice(index + 1)
+        ]);
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  const expandItem = (index?: number) => {
+    if (!disabled) {
+      index = index ?? $expandedItemIds.findIndex((id) => id === treeItemId);
+      if (index === -1) {
+        expandedItemIds.set([...$expandedItemIds, treeItemId]);
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  const toggleExpanded = () => {
+    if (!disabled) {
+      const index = $expandedItemIds.findIndex((id) => id === treeItemId);
+      return index !== -1 ? collapseItem(index) : expandItem(index);
+    }
+
+    return false;
+  };
+
+  // ----- Selection ----- //
+
+  const focusItem = (treeItemElement: Element) => {
+    if (!disabled) {
+      const item = treeItemElement.querySelector<HTMLElement>('.item');
+      item?.focus();
+    }
+  };
+
+  const selectItemById = (itemId: string) => {
+    if (!disabled) {
+      selectedItemId.set(itemId);
+    }
+  };
+
+  export const selectItem = () => {
+    if (!disabled) {
+      selectItemById(treeItemId);
+    }
+  };
+
+  const selectParentItem = () => {
+    let candidate = treeItemRef.parentElement?.closest<Element>('[data-tree-item-id]');
+    let parentItemId = candidate?.getAttribute('data-tree-item-id');
+
+    if (parentItemId && candidate) {
+      selectItemById(parentItemId);
+      focusItem(candidate);
+      return true;
+    }
+
+    return false;
+  };
+
+  const selectNextItem = () => {
+    if (!disabled) {
+      let nextItemId: string | null | undefined = undefined;
+
+      // look for decendants
+      let candidate = treeItemRef.querySelector('[data-tree-item-id]');
+      nextItemId = candidate?.getAttribute('data-tree-item-id');
+
+      // look for next sibling
+      if (!nextItemId) {
+        candidate = treeItemRef.nextElementSibling;
+        while (candidate && candidate.getAttribute('data-tree-item-id') === null) {
+          candidate = candidate.nextElementSibling;
+        }
+        nextItemId = candidate?.getAttribute('data-tree-item-id');
+      }
+
+      // look for next sibling of ancestor
+      if (!nextItemId) {
+        let ancestor: Element | null | undefined =
+          treeItemRef.parentElement?.closest<Element>('[data-tree-item-id]');
+        while (ancestor && !nextItemId) {
+          candidate = ancestor?.nextElementSibling;
+          nextItemId = candidate?.getAttribute('data-tree-item-id');
+          ancestor = ancestor.parentElement?.closest<Element>('[data-tree-item-id]');
+        }
+      }
+
+      if (nextItemId && candidate) {
+        selectItemById(nextItemId);
+        focusItem(candidate);
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  const selectPreviousItem = () => {
+    if (!disabled) {
+      let candidate: Element | undefined | null = undefined;
+      let prevItemId: string | null | undefined = undefined;
+
+      const previousSibling = treeItemRef?.previousElementSibling;
+      if (previousSibling) {
+        // look for the last (recursive) decendant of ths previous sibling
+        const decendants = previousSibling.querySelectorAll('[data-tree-item-id]');
+        if (decendants) {
+          candidate = decendants[decendants.length - 1];
+          prevItemId = candidate?.getAttribute('data-tree-item-id');
+        }
+
+        // look for the previous sibling
+        if (!prevItemId) {
+          candidate = previousSibling;
+          prevItemId = candidate?.getAttribute('data-tree-item-id');
+        }
+      }
+      // look for the parent
+      if (!prevItemId) {
+        candidate = treeItemRef.parentElement?.closest<Element>('[data-tree-item-id]');
+        prevItemId = candidate?.getAttribute('data-tree-item-id');
+      }
+
+      if (prevItemId && candidate) {
+        selectItemById(prevItemId);
+        focusItem(candidate);
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  // ----- Event Handlers ----- //
+
+  const onItemClick = () => {
+    toggleExpanded();
+    selectItem();
+  };
+
+  const onKeydown: svelte.JSX.KeyboardEventHandler<Element> = (event) => {
+    if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
+      switch (event.key) {
+        case 'Enter':
+        case ' ':
+          if (toggleExpanded()) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+          break;
+        case 'ArrowRight':
+          /*
+          When focus is on a closed item, opens the item; focus does not move.
+          When focus is on an open item, moves focus to the first child item.
+          When focus is on an end item (a tree item with no children), does nothing.
+          */
+          if (hasChildren) {
+            if (expanded) {
+              if (selectNextItem()) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+              }
+            } else if (expandItem()) {
+              event.preventDefault();
+              event.stopPropagation();
+              return false;
+            }
+          }
+          break;
+        case 'ArrowLeft':
+          /*
+          When focus is on an open item, closes the item.
+          When focus is on a child item that is also either an end item or a closed item, moves focus to its parent item.
+          When focus is on a closed `tree`, does nothing.
+          */
+          if (hasChildren && expanded) {
+            if (collapseItem()) {
+              event.preventDefault();
+              event.stopPropagation();
+              return false;
+            }
+          } else if (selectParentItem()) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+          break;
+        case 'ArrowUp':
+          /*
+          Moves focus to the previous item that is focusable without opening or closing a item.
+          */
+          if (selectPreviousItem()) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+          break;
+        case 'ArrowDown':
+          /*
+          Moves focus to the next item that is focusable without opening or closing a item.
+          */
+          if (selectNextItem()) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+          break;
+      }
+    }
+  };
+
+  // ----- Set Context ----- //
+
+  setContext(treeItemContextKey, { depth: depth + 1 });
 </script>
 
+<!--
+@component
+A item in a Tree displaying the item and children.
+  -->
 <div
-  class="sterling-tree-node-item"
+  aria-selected={selected ? true : undefined}
+  aria-expanded={expanded}
+  bind:this={treeItemRef}
+  class="sterling-tree-item"
   class:disabled
-  class:expanded
-  class:selected
-  style={`--sterling-tree-node-depth: ${depth}`}
+  data-tree-item-id={treeItemId}
+  role="treeitem"
   on:blur
   on:click
   on:dblclick
@@ -42,56 +293,40 @@
   on:wheel
   {...$$restProps}
 >
-  <TreeChevron {expanded} {hasChildren} />
-  <slot {depth} {disabled} {expanded} {hasChildren} {selected} {nodeId} />
+  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+  <div
+    class="item"
+    class:selected
+    tabindex={selected ? 0 : -1}
+    on:click={onItemClick}
+    on:keydown={onKeydown}
+  >
+    <slot name="item" {disabled} {expanded} {hasChildren} {depth} {treeItemId} {selected}>
+      <TreeItemDisplay {disabled} {expanded} {hasChildren} {depth} {treeItemId} {selected}>
+        <svelte:fragment
+          let:disabled
+          let:expanded
+          let:hasChildren
+          let:depth
+          let:treeItemId
+          let:selected
+        >
+          <slot name="label" {disabled} {expanded} {hasChildren} {depth} {treeItemId} {selected}
+            >{treeItemId}</slot
+          >
+        </svelte:fragment>
+      </TreeItemDisplay>
+    </slot>
+  </div>
+  {#if expanded && hasChildren}
+    <div class="children" transition:slide={{ duration: 200 }} role="group">
+      <slot />
+    </div>
+  {/if}
 </div>
 
 <style>
-  .sterling-tree-node-item {
-    align-content: center;
-    align-items: center;
-    background-color: transparent;
-    box-sizing: border-box;
-    color: var(--stsv-Input__color);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 0.25em;
-    margin: 0;
+  .item {
     outline: none;
-    padding: 0.5em;
-    padding-left: calc(0.5em * var(--sterling-tree-node-depth));
-    text-overflow: ellipsis;
-    transition: background-color 250ms, color 250ms, border-color 250ms;
-    white-space: nowrap;
-  }
-
-  .sterling-tree-node-item:hover {
-    background-color: var(--stsv-Button__background-color--hover);
-    color: var(--stsv-Button__color--hover);
-  }
-
-  .sterling-tree-node-item.selected {
-    background-color: var(--stsv-Input__background-color--selected);
-    color: var(--stsv-Input__color--selected);
-  }
-
-  .sterling-tree-node-item.disabled {
-    color: var(--stsv-Common__color--disabled);
-  }
-
-  .sterling-tree-node-item.leaf {
-    border: none;
-    background: currentColor;
-    border-radius: 50%;
-    height: 0.5em;
-    width: 0.5em;
-    margin: 0.5;
-    transform-origin: 50% 50%;
-  }
-
-  @media (prefers-reduced-motion) {
-    .sterling-tree-node-item {
-      transition: none;
-    }
   }
 </style>

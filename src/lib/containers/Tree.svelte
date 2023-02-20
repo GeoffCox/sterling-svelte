@@ -2,42 +2,40 @@
   import type { Keyborg } from 'keyborg';
 
   import { createKeyborg } from 'keyborg';
-  import { v4 as uuid } from 'uuid';
-
   import { createEventDispatcher, onMount, setContext } from 'svelte';
   import { writable } from 'svelte/store';
+  import { v4 as uuid } from 'uuid';
 
-  import { treeContextKey, treeNodeContextKey } from './Tree.constants';
-  import Label from '$lib/display/Label.svelte';
+  import Label from '../display/Label.svelte';
+  import { treeContextKey } from './Tree.constants';
 
   const inputId = uuid();
 
   export let composed = false;
   export let disabled = false;
-  export let selectedNodeId: string | undefined = undefined;
-  export let expandedNodeIds: string[] = [];
+  export let selectedItemId: string | undefined = undefined;
+  export let expandedItemIds: string[] = [];
 
   // ----- Context ----- //
 
-  const selectedNodeIdStore = writable<string | undefined>(selectedNodeId);
-  const expandedNodeIdStore = writable<string[]>(expandedNodeIds);
+  const selectedItemIdStore = writable<string | undefined>(selectedItemId);
+  const expandedItemIdStore = writable<string[]>(expandedItemIds);
 
   setContext(treeContextKey, {
-    expandedNodeIds: expandedNodeIdStore,
-    selectedNodeId: selectedNodeIdStore
+    expandedItemIds: expandedItemIdStore,
+    selectedItemId: selectedItemIdStore
   });
-  setContext(treeNodeContextKey, { parentNodeId: undefined, depth: 0 });
 
   // ----- Events ----- //
 
   const dispatch = createEventDispatcher();
 
-  const raiseExpandCollapse = (expandedNodeIds: string[]) => {
-    dispatch('expandCollapse', { expandedNodeIds });
+  const raiseExpandCollapse = (expandedItemIds: string[]) => {
+    dispatch('expandCollapse', { expandedItemIds });
   };
 
-  const raiseSelect = (selectedNodeId: string | undefined) => {
-    dispatch('select', { selectedNodeId });
+  const raiseSelect = (selectedItemId: string | undefined) => {
+    dispatch('select', { selectedItemId });
   };
 
   // ----- Keyborg ----- //
@@ -52,21 +50,21 @@
   // ----- Reactions ----- //
 
   $: {
-    selectedNodeIdStore.set(selectedNodeId);
+    selectedItemIdStore.set(selectedItemId);
   }
 
   $: {
-    selectedNodeId = $selectedNodeIdStore;
-    raiseSelect($selectedNodeIdStore);
+    selectedItemId = $selectedItemIdStore;
+    raiseSelect($selectedItemIdStore);
   }
 
   $: {
-    expandedNodeIdStore.set(expandedNodeIds);
+    expandedItemIdStore.set(expandedItemIds);
   }
 
   $: {
-    expandedNodeIds = $expandedNodeIdStore;
-    raiseExpandCollapse($expandedNodeIdStore);
+    expandedItemIds = $expandedItemIdStore;
+    raiseExpandCollapse($expandedItemIdStore);
   }
 
   // ----- Event Handlers ----- //

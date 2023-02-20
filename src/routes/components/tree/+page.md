@@ -26,16 +26,15 @@ A hierarchy of items.
 | --------------- | ------------------------------------ | ------------------------------------------------------- |
 | composed        | `boolean`                            | Indicates the tree is composed within another component |
 | disabled        | `boolean`                            | Disables the tree and tree items                        |
-| expandedNodeIds | `string[]`                           | The IDs of expanded tree items                          |
-| tree items      | `TreeNode<T>[]`                      | The list of top level tree items in the hierarchy       |
-| selectedNodeId  | `string` <b>&#10072;</b> `undefined` | The ID of the selected tree item                        |
+| expandedItemIds | `string[]`                           | The IDs of expanded tree items                          |
+| selectedItemId  | `string` <b>&#10072;</b> `undefined` | The ID of the selected tree item                        |
 
 ## Events
 
 | Event          | Detail                           | Description                                      |
 | -------------- | -------------------------------- | ------------------------------------------------ |
-| select         | `{ selectedNodeId: string; }`    | Raised when a tree item is selected              |
-| expandCollapse | `{ expandedNodeIds: string[]; }` | Raised when a tree item is expanded or collapsed |
+| select         | `{ selectedItemId: string; }`    | Raised when a tree item is selected              |
+| expandCollapse | `{ expandedItemIds: string[]; }` | Raised when a tree item is expanded or collapsed |
 
 ## Anatomy
 
@@ -43,34 +42,12 @@ A hierarchy of items.
 Tree
   label slot
   tree
-      TreeNode
-        item slot
-          TreeItem
-            nodeLabel slot
       default slot
 ```
-
-- Tree renders a TreeNode for each of the tree items.
-- TreeNode renders its item slot and then its TreeNode children.
-- Tree and TreeNode work together to recursively render the hierarchy of items. They coordinate through svelte context.
 
 ## Slots
 
 | Slot    | Description                    |
 | ------- | ------------------------------ |
-| default | Any declared TreeNode children |
+| default | Any declared TreeItem children |
 | label   | The tree label                 |
-
-### let params
-
-The item and nodeLabel slots are passed the following `let` parameters.
-
-| Let Param   | Type          | Description                                      |
-| ----------- | ------------- | ------------------------------------------------ |
-| depth       | `number`      | The depth of this tree item in the tree          |
-| disabled    | `boolean`     | True if the tree and this tree item are disabled |
-| expanded    | `boolean`     | True if this tree item is expanded               |
-| hasChildren | `boolean`     | True if this tree item has children              |
-| tree item   | `TreeNode<T>` | The tree item data for this tree item            |
-| nodeID      | `string`      | The ID of this tree item                         |
-| selected    | `boolean`     | True if this tree item is selected               |

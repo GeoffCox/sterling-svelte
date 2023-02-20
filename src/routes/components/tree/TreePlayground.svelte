@@ -4,101 +4,60 @@
   import Input from '$lib/inputs/Input.svelte';
 
   import Tree from '$lib/containers/Tree.svelte';
-  import TreeNode from '$lib/containers/TreeNode.svelte';
+  import TreeItem from '$lib/containers/TreeItem.svelte';
   import Button from '$lib/buttons/Button.svelte';
+  import CoffeeTreeItem from './CoffeeTreeItem.svelte';
+  import { coffeeTree } from '../..//_sampleData/coffeeTree';
+  import { each } from 'svelte/internal';
 
   let exampleRef: any;
-  let treeRef: Tree;
 
   let disabled = false;
   let label = 'Coffee Menu';
-  let selectedNodeId: string | undefined = undefined;
-  let expandedNodeIds: string[] = [];
-  let expandedNodeIdsText: string;
+  let selectedItemId: string | undefined = undefined;
+  let expandedItemIds: string[] = [];
+  let expandedItemIdsText: string;
 
-  const getExpandedNodeIds = () => {
-    expandedNodeIdsText = expandedNodeIds.join(',');
+  const getExpandedItemIds = () => {
+    expandedItemIdsText = expandedItemIds.join(',');
   };
 
-  const setExpandedNodeIds = () => {
-    expandedNodeIds = expandedNodeIdsText.split(',').filter(Boolean);
+  const setExpandedItemIds = () => {
+    expandedItemIds = expandedItemIdsText.split(',').filter(Boolean);
   };
-
-  const collapseAll = () => treeRef?.collapseAll();
-  const expandAll = () => treeRef?.expandAll();
 </script>
 
 <Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     <Tree
-      bind:this={treeRef}
-      bind:selectedNodeId
+      bind:selectedItemId
       {disabled}
-      bind:expandedNodeIds
+      bind:expandedItemIds
       on:select={() => exampleRef.recordEvent('select')}
       on:expandCollapse={() => exampleRef.recordEvent('expandCollapse')}
     >
       <svelte:fragment slot="label">{label}</svelte:fragment>
-      <TreeNode nodeId="Coffees">
-        <TreeNode nodeId="Americano" />
-        <TreeNode nodeId="Brewed">
-          <TreeNode nodeId="Light roast" />
-          <TreeNode nodeId="Medium roast" />
-          <TreeNode nodeId="Dark roast" />
-          <TreeNode nodeId="House blend" />
-        </TreeNode>
-        <TreeNode nodeId="Cappuccino" />
-        <TreeNode nodeId="Espresso" />
-        <TreeNode nodeId="Latte" />
-        <TreeNode nodeId="Macchiato" />
-        <TreeNode nodeId="Mochas">
-          <TreeNode nodeId="Dark Chocolate Mocha" />
-          <TreeNode nodeId="White Chocolate Mocha" />
-          <TreeNode nodeId="Peppermint Chocolate Mocha" />
-        </TreeNode>
-        <TreeNode nodeId="Add-ins">
-          <TreeNode nodeId="Milks">
-            <TreeNode nodeId="Almond Milk" />
-            <TreeNode nodeId="Fat Free  Milk" />
-            <TreeNode nodeId="Non-dairy Creamer" />
-            <TreeNode nodeId="Soy Milk" />
-            <TreeNode nodeId="Two percent Milk" />
-            <TreeNode nodeId="Whole Milk" />
-          </TreeNode>
-          <TreeNode nodeId="Syrups">
-            <TreeNode nodeId="Almond syrup" />
-            <TreeNode nodeId="Hazelnut syrup" />
-            <TreeNode nodeId="Irish Creme syrup" />
-            <TreeNode nodeId="Vanilla syrup" />
-          </TreeNode>
-          <TreeNode nodeId="Toppings">
-            <TreeNode nodeId="Caramel" />
-            <TreeNode nodeId="Cinnamon" />
-            <TreeNode nodeId="Vanilla Flakes" />
-          </TreeNode>
-        </TreeNode>
-      </TreeNode>
-      <TreeNode nodeId="Teas" />
+      {#each coffeeTree as coffeeItem}
+        <CoffeeTreeItem {coffeeItem} />
+      {/each}
     </Tree>
   </div>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
     <Input bind:value={label}><span slot="label">label slot</span></Input>
-    <Input bind:value={selectedNodeId}><span slot="label">selectedNodeId</span></Input>
+    <Input bind:value={selectedItemId}><span slot="label">selectedItemId</span></Input>
     <div class="edit-toggled">
-      <Input bind:value={expandedNodeIdsText}
-        ><span slot="label">expandedNodeIds (comma separated)</span></Input
+      <Input bind:value={expandedItemIdsText}
+        ><span slot="label">expandedItemIds (comma separated)</span></Input
       >
-      <Button on:click={getExpandedNodeIds}>Get</Button>
-      <Button on:click={setExpandedNodeIds}>Set</Button>
+      <Button on:click={getExpandedItemIds}>Get</Button>
+      <Button on:click={setExpandedItemIds}>Set</Button>
     </div>
-    <Button on:click={collapseAll}>Collapse All</Button>
-    <Button on:click={expandAll}>Expand All</Button>
   </svelte:fragment>
   <svelte:fragment slot="status">
-    <div>selectedNodeId: {selectedNodeId}</div>
+    <div>selectedItemId: {selectedItemId}</div>
     <div class="toggled-status">
-      expandedNodeIds: {expandedNodeIds.join(',')}
+      expandedItemIds: {expandedItemIds.join(',')}
     </div>
   </svelte:fragment>
 </Playground>

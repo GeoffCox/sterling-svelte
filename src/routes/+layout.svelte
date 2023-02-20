@@ -132,6 +132,7 @@
             <a href="{base}/components/tree">Tree</a>
             <a href="{base}/components/treechevron">TreeChevron</a>
             <a href="{base}/components/treeitem">TreeItem</a>
+            <a href="{base}/components/treeitemdisplay">TreeItemDisplay</a>
           </div>
         </div>
         <div class="component">

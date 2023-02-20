@@ -43,7 +43,7 @@ import TabList from './containers/TabList.svelte';
 import TextArea from './inputs/TextArea.svelte';
 import Tree from './containers/Tree.svelte';
 import TreeChevron from './containers/TreeChevron.svelte';
-import TreeItem from './containers/TreeItem.svelte';
+import TreeItemDisplay from './containers/TreeItemDisplay.svelte';
 
 export {
   Button,
@@ -67,5 +67,5 @@ export {
   TextArea,
   Tree,
   TreeChevron,
-  TreeItem
+  TreeItemDisplay
 };

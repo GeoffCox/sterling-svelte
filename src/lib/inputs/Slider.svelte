@@ -52,6 +52,8 @@
 
   const dispatch = createEventDispatcher();
 
+  //TODO: have change and input events for parity with input type=slider
+  // or use input internally within this component.
   const raiseChange = (newValue: number) => {
     dispatch('change', { value: newValue });
   };
@@ -205,11 +207,36 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     aria-valuenow={value}
     aria-valuemax={max}
     tabindex={!disabled ? 0 : undefined}
-    {...$$restProps}
+    on:blur
+    on:click
+    on:dblclick
+    on:focus
+    on:focusin
+    on:focusout
+    on:keydown
     on:keydown={onKeyDown}
+    on:keypress
+    on:keyup
+    on:mousedown
+    on:mouseenter
+    on:mouseleave
+    on:mousemove
+    on:mouseover
+    on:mouseout
+    on:mouseup
+    on:pointercancel
+    on:pointerdown
     on:pointerdown={onPointerDown}
+    on:pointerenter
+    on:pointerleave
+    on:pointermove
     on:pointermove={onPointerMove}
+    on:pointerover
+    on:pointerout
+    on:pointerup
     on:pointerup={onPointerUp}
+    on:wheel
+    {...$$restProps}
   >
     <div
       class="container"

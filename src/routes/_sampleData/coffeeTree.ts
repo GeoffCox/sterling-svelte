@@ -1,9 +1,9 @@
-export type CoffeeNode = {
+export type CoffeeItem = {
   name: string;
-  children?: CoffeeNode[];
+  children?: CoffeeItem[];
 };
 
-export const coffeeTree: CoffeeNode[] = [
+export const coffeeTree: CoffeeItem[] = [
   {
     name: 'Coffee',
     children: [
@@ -53,6 +53,20 @@ export const coffeeTree: CoffeeNode[] = [
           }
         ]
       }
+    ]
+  },
+  {
+    name: 'Tea',
+    children: [
+      { name: 'Chai' },
+      { name: 'Citrus Blend' },
+      { name: 'Earl Grey' },
+      { name: 'English Breakfast' },
+      { name: 'Lavender' },
+      { name: 'Lemon Ginger' },
+      { name: 'Orange Spice' },
+      { name: 'Matcha' },
+      { name: 'Mint' }
     ]
   },
   {
