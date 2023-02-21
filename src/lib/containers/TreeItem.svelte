@@ -6,6 +6,7 @@
 
   import { treeContextKey, treeItemContextKey } from './Tree.constants';
   import TreeItemDisplay from './TreeItemDisplay.svelte';
+  import { writable } from 'svelte/store';
 
   // ----- Props ----
   export let disabled = false;
@@ -13,15 +14,28 @@
 
   // ----- Get Context ----- //
 
-  const { expandedItemIds, selectedItemId } = getContext<TreeContext>(treeContextKey);
-  const { depth = 0 } = getContext<TreeItemContext>(treeItemContextKey) || {};
+  const {
+    expandedItemIds,
+    selectedItemId,
+    disabled: treeDisabled
+  } = getContext<TreeContext>(treeContextKey);
+  const { depth = 0, disabled: parentDisabled } =
+    getContext<TreeItemContext>(treeItemContextKey) || {};
 
   // ----- State ----- //
 
   let treeItemRef: HTMLDivElement;
+
   $: hasChildren = $$slots.default;
   $: expanded = $expandedItemIds.includes(treeItemId);
   $: selected = $selectedItemId === treeItemId;
+  $: itemDisabled = disabled || $parentDisabled || $treeDisabled;
+
+  const disabledStore = writable<boolean>(itemDisabled);
+
+  $: {
+    disabledStore.set(itemDisabled);
+  }
 
   // ----- Expand/Collapse ----- //
 
@@ -64,39 +78,41 @@
   // ----- Selection ----- //
 
   const focusItem = (treeItemElement: Element) => {
-    if (!disabled) {
+    if (!itemDisabled) {
       const item = treeItemElement.querySelector<HTMLElement>('.item');
       item?.focus();
     }
   };
 
   const selectItemById = (itemId: string) => {
-    if (!disabled) {
+    if (!itemDisabled) {
       selectedItemId.set(itemId);
     }
   };
 
   export const selectItem = () => {
-    if (!disabled) {
+    if (!itemDisabled) {
       selectItemById(treeItemId);
     }
   };
 
   const selectParentItem = () => {
-    let candidate = treeItemRef.parentElement?.closest<Element>('[data-tree-item-id]');
-    let parentItemId = candidate?.getAttribute('data-tree-item-id');
+    if (!itemDisabled) {
+      let candidate = treeItemRef.parentElement?.closest<Element>('[data-tree-item-id]');
+      let parentItemId = candidate?.getAttribute('data-tree-item-id');
 
-    if (parentItemId && candidate) {
-      selectItemById(parentItemId);
-      focusItem(candidate);
-      return true;
+      if (parentItemId && candidate) {
+        selectItemById(parentItemId);
+        focusItem(candidate);
+        return true;
+      }
     }
 
     return false;
   };
 
   const selectNextItem = () => {
-    if (!disabled) {
+    if (!itemDisabled) {
       let nextItemId: string | null | undefined = undefined;
 
       // look for decendants
@@ -134,7 +150,7 @@
   };
 
   const selectPreviousItem = () => {
-    if (!disabled) {
+    if (!itemDisabled) {
       let candidate: Element | undefined | null = undefined;
       let prevItemId: string | null | undefined = undefined;
 
@@ -171,9 +187,11 @@
 
   // ----- Event Handlers ----- //
 
-  const onItemClick = () => {
-    toggleExpanded();
-    selectItem();
+  const onClick = () => {
+    if (!itemDisabled) {
+      toggleExpanded();
+      selectItem();
+    }
   };
 
   const onKeydown: svelte.JSX.KeyboardEventHandler<Element> = (event) => {
@@ -251,7 +269,7 @@
 
   // ----- Set Context ----- //
 
-  setContext(treeItemContextKey, { depth: depth + 1 });
+  setContext(treeItemContextKey, { depth: depth + 1, disabled: disabledStore });
 </script>
 
 <!--
@@ -263,7 +281,7 @@ A item in a Tree displaying the item and children.
   aria-expanded={expanded}
   bind:this={treeItemRef}
   class="sterling-tree-item"
-  class:disabled
+  class:disabled={itemDisabled}
   data-tree-item-id={treeItemId}
   role="treeitem"
   on:blur
@@ -298,11 +316,26 @@ A item in a Tree displaying the item and children.
     class="item"
     class:selected
     tabindex={selected ? 0 : -1}
-    on:click={onItemClick}
+    on:click={onClick}
     on:keydown={onKeydown}
   >
-    <slot name="item" {disabled} {expanded} {hasChildren} {depth} {treeItemId} {selected}>
-      <TreeItemDisplay {disabled} {expanded} {hasChildren} {depth} {treeItemId} {selected}>
+    <slot
+      name="item"
+      disabled={itemDisabled}
+      {expanded}
+      {hasChildren}
+      {depth}
+      {treeItemId}
+      {selected}
+    >
+      <TreeItemDisplay
+        disabled={itemDisabled}
+        {expanded}
+        {hasChildren}
+        {depth}
+        {treeItemId}
+        {selected}
+      >
         <svelte:fragment
           let:disabled
           let:expanded

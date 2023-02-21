@@ -22,7 +22,7 @@
 
 <Playground bind:this={exampleRef}>
   <div class="component" slot="component">
-    <TreeItem treeItemId="Coffee Bean Types">
+    <TreeItem treeItemId="Coffee Bean Types" {disabled}>
       <TreeItem treeItemId="Arabica" />
       <TreeItem treeItemId="Robusta" />
       <TreeItem treeItemId="Liberica" />

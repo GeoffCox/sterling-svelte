@@ -1,4 +1,4 @@
-import type { Writable } from 'svelte/store';
+import type { Readable, Writable } from 'svelte/store';
 
 /**
  * Context for a Tree and its tree items.
@@ -12,6 +12,9 @@ export type TreeContext = {
    * The ID of the selected tree tree item.
    */
   selectedItemId: Writable<string | undefined>;
+
+  /** If the tree is disabled */
+  disabled: Readable<boolean>;
 };
 
 /**
@@ -23,4 +26,7 @@ export type TreeItemContext = {
    * A top level item's depth is zero.
    */
   depth: number;
+
+  /** If the tree item is disabled */
+  disabled: Readable<boolean>;
 };

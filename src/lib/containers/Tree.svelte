@@ -20,10 +20,12 @@
 
   const selectedItemIdStore = writable<string | undefined>(selectedItemId);
   const expandedItemIdStore = writable<string[]>(expandedItemIds);
+  const disabledStore = writable<boolean>(disabled);
 
   setContext(treeContextKey, {
     expandedItemIds: expandedItemIdStore,
-    selectedItemId: selectedItemIdStore
+    selectedItemId: selectedItemIdStore,
+    disabled: disabledStore
   });
 
   // ----- Events ----- //
@@ -65,6 +67,10 @@
   $: {
     expandedItemIds = $expandedItemIdStore;
     raiseExpandCollapse($expandedItemIdStore);
+  }
+
+  $: {
+    disabledStore.set(disabled);
   }
 
   // ----- Event Handlers ----- //

@@ -12,12 +12,8 @@ A hierarchy of items.
 
 ## Features
 
-- A single tree item can be selected. Focus follows selection.
-- Tree items can be expanded/collapsed to show/hide children.
-- Users can select the previous/next visible tree item with the up/down arrow keys.
-- Users can expand/collpase expanded/collapse tree items with the right/left arrow keys.
-- If the tree item is already expanded, right arrow selects the first child.
-- If the tree item is already collpased, left arrow selects the previous tree item.
+- Provides expanded items tracking for TreeItem children.
+- Provides selected item tracking for TreeItem children.
 - You can identify the tree's content with the optional label.
 
 ## Props

@@ -77,6 +77,7 @@
 
   .sterling-tree-item.disabled {
     color: var(--stsv-Common__color--disabled);
+    cursor: not-allowed;
   }
 
   .sterling-tree-item.leaf {

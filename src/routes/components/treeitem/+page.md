@@ -22,12 +22,10 @@ An item within a Tree.
 
 ## Props
 
-| Prop            | Type                                 | Description                                             |
-| --------------- | ------------------------------------ | ------------------------------------------------------- |
-| composed        | `boolean`                            | Indicates the tree is composed within another component |
-| disabled        | `boolean`                            | Disables the tree and tree items                        |
-| expandedItemIds | `string[]`                           | The IDs of expanded tree items                          |
-| selectedItemId  | `string` <b>&#10072;</b> `undefined` | The ID of the selected tree item                        |
+| Prop       | Type      | Description             |
+| ---------- | --------- | ----------------------- |
+| treeItemId | `string`  | The ID of the tree item |
+| disabled   | `boolean` | Disables the tree item  |
 
 ## Events
 
