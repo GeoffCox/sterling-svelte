@@ -9,12 +9,12 @@
 
   let exampleRef: any;
 
-  let label = 'COUNTRIES';
+  let composed = false;
   let disabled = false;
   let horizontal = false;
-  let composed = false;
-  let selectedItemIdText = '';
+  let label = 'COUNTRIES';
   let selectedItemId = '';
+  let selectedItemIdText = '';
 
   const updateSelectedItemId = debounce((itemId: string) => {
     selectedItemId = itemId;
@@ -38,7 +38,7 @@
       {horizontal}
       selectionKeys="tab"
       on:select={(event) => {
-        exampleRef.recordEvent(`itemSelected:[${event.detail.itemId}]`);
+        exampleRef.recordEvent(`select:${event.detail.itemId}`);
       }}
     >
       <svelte:fragment slot="label">{label}</svelte:fragment>
@@ -48,9 +48,9 @@
     </List>
   </div>
   <svelte:fragment slot="options">
+    <Checkbox bind:checked={composed}><span slot="label">composed</span></Checkbox>
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
     <Checkbox bind:checked={horizontal}><span slot="label">horizontal</span></Checkbox>
-    <Checkbox bind:checked={composed}><span slot="label">composed</span></Checkbox>
     <Input bind:value={label}><span slot="label">label</span></Input>
     <Input bind:value={selectedItemIdText}><span slot="label">selectedItemId</span></Input>
   </svelte:fragment>

@@ -64,6 +64,7 @@
     background-color: transparent;
     box-sizing: border-box;
     color: var(--stsv-Input__color);
+    cursor: pointer;
     margin: 0;
     padding: 0.5em;
     outline: none;
@@ -84,6 +85,7 @@
 
   .sterling-list-item.disabled {
     color: var(--stsv-Common__color--disabled);
+    cursor: not-allowed;
   }
 
   @media (prefers-reduced-motion) {
