@@ -1,5 +1,5 @@
 <script>
-    import Example from './ListExample.svelte';
+    import Playground from './ListPlayground.svelte';
 </script>
 
 # List
@@ -8,57 +8,90 @@ A list of items where a single item can be selected.
 
 ## Playground
 
-<Example />
+<Playground />
 
 ## Features
 
 - Choose between a vertical or horizontal list.
-- Arrow keys selected the next or previous item.
 - Identify the list of items with an associated label.
+- Compose the list into another control that manages border and focus visuals.
+- Imperatively select first, previous, next, or last item.
+- Users can select previous/next items with up/down or left/right arrow keys.
+- Users can select the first/last item with home/end keys.
+
+## Usage
+
+Declare a List with ListItems inside.
+
+```svelte
+<script lang="ts">
+  let selectedItemId = 'banana';
+</script>
+
+<List bind:selectedItemId>
+  <span slot="label">Fruits</span>
+  <ListItem itemId="apple">Apple</ListItem>
+  <ListItem itemId="banana">Banana</ListItem>
+  <ListItem itemId="pear">Pear</ListItem>
+  <ListItem itemId="grape">Grape</ListItem>
+</List>
+```
 
 ## Props
 
-| Name                    | Type    | Description                                              |
-| ----------------------- | ------- | -------------------------------------------------------- |
-| composed                | boolean | Indicates the list is composed within another component. |
-|                         |         | Removes background, border, and outline styles.          |
-| disabled                | boolean | Disables the list and items                              |
-| items                   | any[]   | The items in the list                                    |
-| horizontal              | boolean | If the list layout should be horizontal                  |
-| selectedIndex           | number  | The index of the currently selected item                 |
-| selectedItem (readonly) | any     | The currently selected item                              |
+| Name           | Type    | Description                                         |
+| -------------- | ------- | --------------------------------------------------- |
+| composed       | boolean | Styles the list to appear within another component. |
+| disabled       | boolean | Disables the list and items                         |
+| horizontal     | boolean | If the list layout should be horizontal             |
+| selectedItemId | string  | The ID of the currently selected item               |
 
 ## Events
 
-| Name         | Event.detail      | Description                      |
-| ------------ | ----------------- | -------------------------------- |
-| itemSelected | `{ index, item }` | Raised when an item is selected. |
+| Name   | Event.detail | Description                      |
+| ------ | ------------ | -------------------------------- |
+| select | `{ itemId }` | Raised when an item is selected. |
 
 ## Methods
 
-| Name               | Description                                        |
-| ------------------ | -------------------------------------------------- |
-| focusSelectedItem  | Focuses the selected item and scrolls it into view |
-| selectPreviousItem | Selected the previous item                         |
-| selectNextItem     | Selected the next item                             |
+| Name               | Description                    |
+| ------------------ | ------------------------------ |
+| selectFirstItem    | Selects the first list item    |
+| selectPreviousItem | Selects the previous list item |
+| selectNextItem     | Selects the next list item     |
+| selectLastItem     | Selects the last list item     |
+
+- A list item is identified by having the `data-list-item-id` property
+- List items should also have `role=option` in this listbox.
+
+## List Context
+
+| Name           | Type                | Description                     |
+| -------------- | ------------------- | ------------------------------- |
+| disabled       | `Readable<boolean>` | If the list is disabled         |
+| selectedItemId | `Writable<boolean>` | The itemId of the selected item |
+| horizontal     | `Readable<boolean>` | If the list is horizontal       |
 
 ## Anatomy
 
 ```
 List
   label slot
-  list of items
-    item slot
-      ListItem
-        _default_ slot
+    default slot
 ```
 
 ## Slots
 
-| Name      | `let` params | Description                             |
-| --------- | ------------ | --------------------------------------- |
-| _default_ | (multiple)\* | Each item wrapped in a ListItem         |
-| item      | (multiple)\* | Each item without the ListItem wrapper. |
-| label     |              | The label associated with the input     |
+| Name    | `let` params | Description                         |
+| ------- | ------------ | ----------------------------------- |
+| default | (multiple)\* | The list items within this list     |
+| label   |              | The label associated with the input |
 
-\* `disabled`, `index`, `item` and `selected`
+## Let Params
+
+| Name           | Type      | Passed to slots |
+| -------------- | --------- | --------------- |
+| composed       | `boolean` | default, label  |
+| disabled       | `boolean` | default, label  |
+| horizontal     | `boolean` | default, label  |
+| selectedItemId | `string`  | default, label  |

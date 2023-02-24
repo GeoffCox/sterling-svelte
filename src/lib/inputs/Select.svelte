@@ -4,8 +4,8 @@
   import { computePosition, flip, offset, shift, autoUpdate } from '@floating-ui/dom';
   import { clickOutside } from '../clickOutside';
   import Label from '../display/Label.svelte';
-  import List from '$lib/containers/List.svelte';
-  import Input from './Input.svelte';
+  import List from '../containers/List.svelte';
+  import ListItem from '../containers/ListItem.svelte';
 
   /*--------------------
 		Properties
@@ -58,7 +58,7 @@
 
   let selectRef: HTMLDivElement;
   let popupRef: HTMLDivElement;
-  let listRef: List<T>;
+  let listRef: List;
 
   const popupId = uuid();
   let popupPosition: { x?: number; y?: number } = {
@@ -194,8 +194,10 @@
     }
   };
 
-  const onPendingItemSelected = (event: CustomEvent<{ index: number; item: any }>) => {
-    pendingSelectedIndex = event.detail.index;
+  const onPendingItemSelected = (event: CustomEvent<{ itemId: string }>) => {
+    console.log('onPendingItemSelected', event);
+    const itemId = event.detail.itemId;
+    pendingSelectedIndex = Number.parseInt(itemId);
     if (!open) {
       selectedIndex = pendingSelectedIndex;
     }
@@ -274,31 +276,24 @@ A single item that can be selected from a popup list of items.
   >
     <div class="popup-content">
       <slot name="list">
-        {#if $$slots.default}
-          <List
-            bind:this={listRef}
-            selectedIndex={pendingSelectedIndex}
-            {items}
-            {disabled}
-            on:click={onListClick}
-            on:keydown={onListKeydown}
-            on:itemSelected={onPendingItemSelected}
-          >
-            <svelte:fragment let:disabled let:index let:item let:selected>
-              <slot {disabled} {index} {item} {selected} />
-            </svelte:fragment>
-          </List>
-        {:else}
-          <List
-            bind:this={listRef}
-            selectedIndex={pendingSelectedIndex}
-            {items}
-            {disabled}
-            on:click={onListClick}
-            on:keydown={onListKeydown}
-            on:itemSelected={onPendingItemSelected}
-          />
-        {/if}
+        <List
+          bind:this={listRef}
+          selectedItemId={`${pendingSelectedIndex}`}
+          {disabled}
+          on:click={onListClick}
+          on:keydown={onListKeydown}
+          on:select={onPendingItemSelected}
+        >
+          {#each items as item, index}
+            <ListItem {disabled} itemId={`${index}`}>
+              <svelte:fragment let:disabled let:itemId let:selected>
+                <slot {disabled} {index} {item} {selected}>
+                  {item}
+                </slot>
+              </svelte:fragment>
+            </ListItem>
+          {/each}
+        </List>
       </slot>
     </div>
   </div>

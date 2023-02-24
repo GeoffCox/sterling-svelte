@@ -5,7 +5,6 @@
   import Slider from '$lib/inputs/Slider.svelte';
 
   import TreeItemDisplay from '$lib/containers/TreeItemDisplay.svelte';
-  import { debounce } from 'lodash-es';
 
   let exampleRef: any;
 

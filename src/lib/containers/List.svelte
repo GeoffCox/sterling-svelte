@@ -1,36 +1,16 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import type { Keyborg } from 'keyborg';
+
+  import { createKeyborg } from 'keyborg';
+  import { createEventDispatcher, onMount, setContext } from 'svelte';
+  import { writable } from 'svelte/store';
   import { v4 as uuid } from 'uuid';
 
   import Label from '../display/Label.svelte';
-  import ListItem from './ListItem.svelte';
+  import { listContextKey } from './List.constants';
+  import type { ListContext } from './List.types';
 
-  type T = $$Generic;
-
-  /**
-   * Disables the list and all items
-   */
-  export let disabled: boolean = false;
-
-  /**
-   * The items to put in the list.
-   */
-  export let items: T[] = [];
-
-  /**
-   * Controls if the list is laid out horizontally.
-   */
-  export let horizontal = false;
-
-  /**
-   * The index of the selected item.
-   */
-  export let selectedIndex = -1;
-
-  /**
-   * The selected item (readonly).
-   */
-  export let selectedItem: T | undefined = undefined;
+  // ----- Props ----- //
 
   /**
    * If the list is composed within another container
@@ -38,100 +18,231 @@
    */
   export let composed = false;
 
-  $: {
-    selectedItem = items[selectedIndex];
-  }
+  /**
+   * Disables the list and all items
+   */
+  export let disabled: boolean = false;
 
-  const inputId = uuid();
+  /**
+   * Controls if the list is laid out horizontally.
+   */
+  export let horizontal = false;
+
+  /**
+   * The selected item (readonly).
+   */
+  export let selectedItemId: string | undefined = undefined;
+
+  // ----- State ----- //
+
+  const listId = `list-${uuid()}`;
 
   let listRef: HTMLDivElement;
-  let itemRefs: Record<number, HTMLDivElement> = {};
+  let lastSelectedItemRef: HTMLElement;
+
+  const selectedItemIdStore = writable<string | undefined>(selectedItemId);
+  const horizontalStore = writable<boolean>(horizontal);
+  const disabledStore = writable<boolean>(disabled);
+
+  $: {
+    disabledStore.set(disabled);
+  }
+
+  $: {
+    horizontalStore.set(horizontal);
+  }
+
+  $: {
+    selectedItemIdStore.set(selectedItemId);
+  }
+
+  $: {
+    selectedItemId = $selectedItemIdStore;
+  }
+
+  // ----- Events ----- //
 
   const dispatch = createEventDispatcher();
 
-  const raiseItemSelected = (index: number) => {
-    dispatch('itemSelected', { index, item: items[index] });
+  const raiseSelect = (itemId?: string) => {
+    dispatch('select', { itemId });
   };
 
-  export const focusSelectedItem = () => {
-    listRef.focus();
-    const selectedRef = itemRefs[selectedIndex] as HTMLDivElement;
-    selectedRef?.focus();
-    selectedRef?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+  $: {
+    raiseSelect(selectedItemId);
+  }
+
+  // ----- Keyborg ----- //
+
+  let keyborg: Keyborg = createKeyborg(window);
+
+  let usingKeyboard = keyborg.isNavigatingWithKeyboard();
+  const keyborgHandler = (value: boolean) => {
+    usingKeyboard = value;
   };
 
-  $: canSelectPreviousItem = items.length > 0 && selectedIndex !== 0;
-  $: canSelectNextItem = items.length > 0 && selectedIndex !== items.length - 1;
+  // ----- Selection ----- //
+
+  const getSelectedItemElement = () => {
+    if (
+      lastSelectedItemRef &&
+      lastSelectedItemRef.getAttribute('data-list-item-id') === selectedItemId &&
+      lastSelectedItemRef.closest('[role="listbox]') === listRef
+    ) {
+      return lastSelectedItemRef;
+    } else {
+      return listRef.querySelector('[data-list-item-id][aria-selected=true]');
+    }
+  };
+
+  const selectItem = (itemId: string, element: HTMLElement) => {
+    selectedItemIdStore.set(itemId);
+    lastSelectedItemRef = element;
+    element.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  };
+
+  export const selectFirstItem = () => {
+    let candidate: Element | undefined | null = listRef?.firstElementChild;
+    while (candidate && candidate.getAttribute('data-list-item-id') === null) {
+      candidate = candidate.nextElementSibling;
+    }
+    let candidateItemId = candidate?.getAttribute('data-list-item-id');
+
+    if (candidateItemId && candidate) {
+      selectItem(candidateItemId, candidate as HTMLElement);
+      return true;
+    }
+
+    return false;
+  };
 
   export const selectPreviousItem = () => {
-    if (canSelectPreviousItem) {
-      selectedIndex = Math.max(0, selectedIndex - 1);
+    let selectedItem = getSelectedItemElement();
+    let candidate = selectedItem?.previousElementSibling;
+    while (candidate && candidate.getAttribute('data-list-item-id') === null) {
+      candidate = candidate.previousElementSibling;
     }
+    let candidateItemId = candidate?.getAttribute('data-list-item-id');
+
+    if (candidateItemId && candidate) {
+      selectItem(candidateItemId, candidate as HTMLElement);
+      return true;
+    }
+
+    return false;
   };
 
   export const selectNextItem = () => {
-    if (canSelectNextItem) {
-      selectedIndex = Math.min(items.length - 1, selectedIndex + 1);
+    let selectedItem = getSelectedItemElement();
+    let candidate = selectedItem?.nextElementSibling;
+    while (candidate && candidate.getAttribute('data-list-item-id') === null) {
+      candidate = candidate.nextElementSibling;
     }
+    let candidateItemId = candidate?.getAttribute('data-list-item-id');
+
+    if (candidateItemId && candidate) {
+      selectItem(candidateItemId, candidate as HTMLElement);
+      return true;
+    }
+
+    return false;
   };
 
-  export const selectItem = (item: T) => {
-    const index = items.indexOf(item);
-    if (index !== -1) {
-      selectedIndex = index;
+  export const selectLastItem = () => {
+    let candidate: Element | undefined | null = listRef?.lastElementChild;
+    while (
+      candidate &&
+      (candidate.getAttribute('data-list-item-id') === null ||
+        candidate.classList.contains('disabled'))
+    ) {
+      candidate = candidate.previousElementSibling;
     }
+    let candidateItemId = candidate?.getAttribute('data-list-item-id');
+
+    if (candidateItemId && candidate) {
+      selectItem(candidateItemId, candidate as HTMLElement);
+      return true;
+    }
+
+    return false;
   };
 
-  $: {
-    raiseItemSelected(selectedIndex);
-  }
+  // ----- Event Handlers ----- //
 
-  // When the selectedIndex changes, scroll it into view
-  $: {
-    const selectedRef = itemRefs[selectedIndex] as HTMLDivElement;
-    selectedRef?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-  }
+  onMount(() => {
+    keyborg.subscribe(keyborgHandler);
 
-  const onItemClick = (index: number) => {
+    return () => {
+      keyborg.unsubscribe(keyborgHandler);
+    };
+  });
+
+  const onClick: svelte.JSX.MouseEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
-      selectedIndex = index;
+      let candidate: HTMLElement | null | undefined = event.target as HTMLElement;
+      let candidateItemId: string | null | undefined = candidate?.getAttribute('data-list-item-id');
+
+      if (candidateItemId === undefined || candidateItemId === null) {
+        candidate = candidate?.closest<HTMLElement>('[data-list-item-id]');
+        candidateItemId = candidate?.getAttribute('data-list-item-id');
+      }
+      if (candidateItemId && candidate) {
+        selectItem(candidateItemId, candidate);
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+      }
     }
-  };
-
-  const onArrowSelectPrevious: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    selectPreviousItem();
-  };
-
-  const onArrowSelectNext: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    selectNextItem();
   };
 
   const onKeydown: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
     // if using arrows, only move when there are no modifier keys
     if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
       switch (event.key) {
+        case 'Home':
+          if (selectFirstItem()) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+          break;
+        case 'End':
+          if (selectLastItem()) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+          break;
         case 'ArrowLeft':
           if (horizontal) {
-            onArrowSelectPrevious(event);
+            selectPreviousItem();
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
           }
           break;
         case 'ArrowRight':
           if (horizontal) {
-            onArrowSelectNext(event);
+            selectNextItem();
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
           }
           break;
         case 'ArrowUp':
           if (!horizontal) {
-            onArrowSelectPrevious(event);
+            selectPreviousItem();
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
           }
           break;
         case 'ArrowDown':
           if (!horizontal) {
-            onArrowSelectNext(event);
+            selectNextItem();
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
           }
           break;
         default:
@@ -139,6 +250,14 @@
       }
     }
   };
+
+  // ----- Set Context ----- //
+
+  setContext<ListContext>(listContextKey, {
+    disabled: disabledStore,
+    selectedItemId: selectedItemIdStore,
+    horizontal: horizontalStore
+  });
 </script>
 
 <!--
@@ -146,21 +265,31 @@
 A list of items where a single item can be selected.
   -->
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<div class="sterling-list" class:horizontal class:disabled class:composed tabindex={0}>
+<div
+  class="sterling-list"
+  class:horizontal
+  class:disabled
+  class:composed
+  class:using-keyboard={usingKeyboard}
+>
   {#if $$slots.label}
-    <Label {disabled} for={inputId}>
-      <slot name="label" />
+    <Label {disabled} for={listId}>
+      <slot name="label" {composed} {disabled} {horizontal} {selectedItemId} />
     </Label>
   {/if}
   <div
+    aria-activedescendant={selectedItemId}
+    aria-orientation={horizontal ? 'horizontal' : 'vertical'}
     bind:this={listRef}
     class="list"
     class:disabled
     class:horizontal
+    id={listId}
     role="listbox"
     tabindex={!disabled ? 0 : undefined}
     on:blur
     on:click
+    on:click={onClick}
     on:copy
     on:cut
     on:dblclick
@@ -168,6 +297,7 @@ A list of items where a single item can be selected.
     on:focusin
     on:focusout
     on:keydown
+    on:keydown={onKeydown}
     on:keypress
     on:keyup
     on:mousedown
@@ -180,29 +310,9 @@ A list of items where a single item can be selected.
     on:scroll
     on:wheel
     on:paste
-    on:keydown={onKeydown}
     {...$$restProps}
   >
-    {#each items as item, index (item)}
-      {@const selected = selectedIndex === index}
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <div
-        bind:this={itemRefs[index]}
-        aria-selected={disabled ? undefined : selected}
-        class="list-item"
-        data-index={index + 1}
-        role="option"
-        on:click={() => onItemClick(index)}
-      >
-        <slot name="item" {disabled} {index} {item} {selected}>
-          <ListItem {disabled} {selected} {index} {item}>
-            <slot {disabled} {index} {item} {selected}>
-              {item}
-            </slot>
-          </ListItem>
-        </slot>
-      </div>
-    {/each}
+    <slot {composed} {disabled} {horizontal} {selectedItemId} />
   </div>
 </div>
 
@@ -235,7 +345,7 @@ A list of items where a single item can be selected.
     color: var(--stsv-Common__color--hover);
   }
 
-  .sterling-list:focus-within {
+  .sterling-list.using-keyboard:focus-within {
     border-color: var(--stsv-Common__border-color--focus);
     color: var(--stsv-Common__color--focus);
     outline-color: var(--stsv-Common__outline-color);

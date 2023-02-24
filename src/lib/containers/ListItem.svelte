@@ -1,19 +1,62 @@
 <script lang="ts">
-  type T = $$Generic;
+  import { getContext } from 'svelte';
+  import { listContextKey } from './List.constants';
+  import type { ListContext } from './List.types';
 
   export let disabled = false;
-  export let selected = false;
-  export let index = -1;
-  export let item: T | undefined = undefined;
+  export let itemId: string;
+
+  // ----- GetContext ----- //
+
+  const {
+    disabled: listDisabled,
+    selectedItemId,
+    horizontal
+  } = getContext<ListContext>(listContextKey);
+
+  // ----- State ----- //
+  let itemRef: HTMLDivElement;
+
+  $: _disabled = disabled || $listDisabled;
+  $: selected = $selectedItemId === itemId;
 </script>
 
 <div
-  aria-selected={disabled ? undefined : selected}
+  aria-selected={selected}
+  bind:this={itemRef}
   class="sterling-list-item"
-  class:disabled
+  class:disabled={_disabled}
   class:selected
+  data-list-item-id={itemId}
+  role="option"
+  on:blur
+  on:click
+  on:dblclick
+  on:focus
+  on:focusin
+  on:focusout
+  on:keydown
+  on:keypress
+  on:keyup
+  on:mousedown
+  on:mouseenter
+  on:mouseleave
+  on:mousemove
+  on:mouseover
+  on:mouseout
+  on:mouseup
+  on:pointercancel
+  on:pointerdown
+  on:pointerenter
+  on:pointerleave
+  on:pointermove
+  on:pointerover
+  on:pointerout
+  on:pointerup
+  on:wheel
+  {...$$restProps}
 >
-  <slot {disabled} {selected} {index} {item} />
+  <slot {disabled} {horizontal} {itemId} {selected}>{itemId}</slot>
 </div>
 
 <style>
@@ -29,7 +72,7 @@
     white-space: nowrap;
   }
 
-  .sterling-list-item:hover {
+  .sterling-list-item:not(.disabled):hover {
     background-color: var(--stsv-Button__background-color--hover);
     color: var(--stsv-Button__color--hover);
   }

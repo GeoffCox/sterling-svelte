@@ -11,16 +11,22 @@ export { toggleDarkTheme } from './theme/toggleDarkTheme';
 export { clickOutside } from './clickOutside';
 export { menuBarContextKey, menuItemContextKey } from './containers/Menus.constants';
 
+// ----- Component types ----- //
 export type { ButtonVariant, ButtonShape } from './buttons/Button.types';
 export type {
   MenuItemRegistration,
   MenuBarContext,
   MenuItemContext
 } from './containers/Menus.types';
+export type { ListContext } from './containers/List.types';
 export type { ProgressColorful } from './display/Progress.types';
 export type { TextAreaResize } from './inputs/TextArea.types';
 export type { TabData } from './containers/Tabs.types';
-export type { TreeNodeData } from './containers/Tree.types';
+
+// ----- Component constants ----- //
+export { listContextKey } from './containers/List.constants';
+
+// ----- Components ----- //
 
 import Button from './buttons/Button.svelte';
 import Checkbox from './inputs/Checkbox.svelte';
@@ -28,6 +34,7 @@ import Dialog from './surfaces/Dialog.svelte';
 import Input from './inputs/Input.svelte';
 import Label from './display/Label.svelte';
 import List from './containers/List.svelte';
+import ListItem from './containers/ListItem.svelte';
 import Menu from './containers/Menu.svelte';
 import MenuBar from './containers/MenuBar.svelte';
 import MenuButton from './buttons/MenuButton.svelte';
@@ -52,6 +59,7 @@ export {
   Input,
   Label,
   List,
+  ListItem,
   Menu,
   MenuBar,
   MenuButton,
