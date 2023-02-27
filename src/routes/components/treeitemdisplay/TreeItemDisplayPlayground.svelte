@@ -29,7 +29,7 @@
 <Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     <TreeItemDisplay
-      treeItemId="treeItemId"
+      value="sterling"
       depth={itemDepth}
       {disabled}
       {expanded}

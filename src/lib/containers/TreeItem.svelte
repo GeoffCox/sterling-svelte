@@ -10,13 +10,13 @@
 
   // ----- Props ----
   export let disabled = false;
-  export let treeItemId: string;
+  export let value: string;
 
   // ----- Get Context ----- //
 
   const {
-    expandedItemIds,
-    selectedItemId,
+    expandedValues,
+    selectedValue,
     disabled: treeDisabled
   } = getContext<TreeContext>(treeContextKey);
   const { depth = 0, disabled: parentDisabled } =
@@ -27,25 +27,25 @@
   let treeItemRef: HTMLDivElement;
 
   $: hasChildren = $$slots.default;
-  $: expanded = $expandedItemIds.includes(treeItemId);
-  $: selected = $selectedItemId === treeItemId;
-  $: itemDisabled = disabled || $parentDisabled || $treeDisabled;
+  $: expanded = $expandedValues.includes(value);
+  $: selected = $selectedValue === value;
+  $: _disabled = disabled || $parentDisabled || $treeDisabled;
 
-  const disabledStore = writable<boolean>(itemDisabled);
+  const disabledStore = writable<boolean>(_disabled);
 
   $: {
-    disabledStore.set(itemDisabled);
+    disabledStore.set(_disabled);
   }
 
   // ----- Expand/Collapse ----- //
 
   const collapseItem = (index?: number) => {
     if (!disabled) {
-      index = index ?? $expandedItemIds.findIndex((id) => id === treeItemId);
+      index = index ?? $expandedValues.findIndex((id) => id === value);
       if (index !== -1) {
-        expandedItemIds.set([
-          ...$expandedItemIds.slice(0, index),
-          ...$expandedItemIds.slice(index + 1)
+        expandedValues.set([
+          ...$expandedValues.slice(0, index),
+          ...$expandedValues.slice(index + 1)
         ]);
         return true;
       }
@@ -56,9 +56,9 @@
 
   const expandItem = (index?: number) => {
     if (!disabled) {
-      index = index ?? $expandedItemIds.findIndex((id) => id === treeItemId);
+      index = index ?? $expandedValues.findIndex((id) => id === value);
       if (index === -1) {
-        expandedItemIds.set([...$expandedItemIds, treeItemId]);
+        expandedValues.set([...$expandedValues, value]);
         return true;
       }
     }
@@ -68,7 +68,7 @@
 
   const toggleExpanded = () => {
     if (!disabled) {
-      const index = $expandedItemIds.findIndex((id) => id === treeItemId);
+      const index = $expandedValues.findIndex((id) => id === value);
       return index !== -1 ? collapseItem(index) : expandItem(index);
     }
 
@@ -78,31 +78,31 @@
   // ----- Selection ----- //
 
   const focusItem = (treeItemElement: Element) => {
-    if (!itemDisabled) {
+    if (!_disabled) {
       const item = treeItemElement.querySelector<HTMLElement>('.item');
       item?.focus();
     }
   };
 
-  const selectItemById = (itemId: string) => {
-    if (!itemDisabled) {
-      selectedItemId.set(itemId);
+  const selectItemById = (value: string) => {
+    if (!_disabled) {
+      selectedValue.set(value);
     }
   };
 
   export const selectItem = () => {
-    if (!itemDisabled) {
-      selectItemById(treeItemId);
+    if (!_disabled) {
+      selectItemById(value);
     }
   };
 
   const selectParentItem = () => {
-    if (!itemDisabled) {
-      let candidate = treeItemRef.parentElement?.closest<Element>('[data-tree-item-id]');
-      let parentItemId = candidate?.getAttribute('data-tree-item-id');
+    if (!_disabled) {
+      let candidate = treeItemRef.parentElement?.closest<Element>('[role="treeitem"][data-value]');
+      let candidateValue = candidate?.getAttribute('data-value');
 
-      if (parentItemId && candidate) {
-        selectItemById(parentItemId);
+      if (candidateValue && candidate) {
+        selectItemById(candidateValue);
         focusItem(candidate);
         return true;
       }
@@ -112,35 +112,36 @@
   };
 
   const selectNextItem = () => {
-    if (!itemDisabled) {
-      let nextItemId: string | null | undefined = undefined;
+    if (!_disabled) {
+      let candidateValue: string | null | undefined = undefined;
 
       // look for decendants
-      let candidate = treeItemRef.querySelector('[data-tree-item-id]');
-      nextItemId = candidate?.getAttribute('data-tree-item-id');
+      let candidate = treeItemRef.querySelector('[role="treeitem"][data-value]');
+      candidateValue = candidate?.getAttribute('data-value');
 
       // look for next sibling
-      if (!nextItemId) {
+      if (!candidateValue) {
         candidate = treeItemRef.nextElementSibling;
-        while (candidate && candidate.getAttribute('data-tree-item-id') === null) {
+        while (candidate && candidate.getAttribute('data-value') === null) {
           candidate = candidate.nextElementSibling;
         }
-        nextItemId = candidate?.getAttribute('data-tree-item-id');
+        candidateValue = candidate?.getAttribute('data-value');
       }
 
       // look for next sibling of ancestor
-      if (!nextItemId) {
-        let ancestor: Element | null | undefined =
-          treeItemRef.parentElement?.closest<Element>('[data-tree-item-id]');
-        while (ancestor && !nextItemId) {
+      if (!candidateValue) {
+        let ancestor: Element | null | undefined = treeItemRef.parentElement?.closest<Element>(
+          '[role="treeitem"][data-value]'
+        );
+        while (ancestor && !candidateValue) {
           candidate = ancestor?.nextElementSibling;
-          nextItemId = candidate?.getAttribute('data-tree-item-id');
-          ancestor = ancestor.parentElement?.closest<Element>('[data-tree-item-id]');
+          candidateValue = candidate?.getAttribute('data-value');
+          ancestor = ancestor.parentElement?.closest<Element>('[role="treeitem"][data-value]');
         }
       }
 
-      if (nextItemId && candidate) {
-        selectItemById(nextItemId);
+      if (candidateValue && candidate) {
+        selectItemById(candidateValue);
         focusItem(candidate);
         return true;
       }
@@ -150,33 +151,33 @@
   };
 
   const selectPreviousItem = () => {
-    if (!itemDisabled) {
+    if (!_disabled) {
       let candidate: Element | undefined | null = undefined;
-      let prevItemId: string | null | undefined = undefined;
+      let candidateValue: string | null | undefined = undefined;
 
       const previousSibling = treeItemRef?.previousElementSibling;
       if (previousSibling) {
         // look for the last (recursive) decendant of ths previous sibling
-        const decendants = previousSibling.querySelectorAll('[data-tree-item-id]');
+        const decendants = previousSibling.querySelectorAll('[role="treeitem"][data-value]');
         if (decendants) {
           candidate = decendants[decendants.length - 1];
-          prevItemId = candidate?.getAttribute('data-tree-item-id');
+          candidateValue = candidate?.getAttribute('data-value');
         }
 
         // look for the previous sibling
-        if (!prevItemId) {
+        if (!candidateValue) {
           candidate = previousSibling;
-          prevItemId = candidate?.getAttribute('data-tree-item-id');
+          candidateValue = candidate?.getAttribute('data-value');
         }
       }
       // look for the parent
-      if (!prevItemId) {
-        candidate = treeItemRef.parentElement?.closest<Element>('[data-tree-item-id]');
-        prevItemId = candidate?.getAttribute('data-tree-item-id');
+      if (!candidateValue) {
+        candidate = treeItemRef.parentElement?.closest<Element>('[role="treeitem"][data-value]');
+        candidateValue = candidate?.getAttribute('data-value');
       }
 
-      if (prevItemId && candidate) {
-        selectItemById(prevItemId);
+      if (candidateValue && candidate) {
+        selectItemById(candidateValue);
         focusItem(candidate);
         return true;
       }
@@ -188,7 +189,7 @@
   // ----- Event Handlers ----- //
 
   const onClick = () => {
-    if (!itemDisabled) {
+    if (!_disabled) {
       toggleExpanded();
       selectItem();
     }
@@ -281,8 +282,8 @@ A item in a Tree displaying the item and children.
   aria-expanded={expanded}
   bind:this={treeItemRef}
   class="sterling-tree-item"
-  class:disabled={itemDisabled}
-  data-tree-item-id={treeItemId}
+  class:disabled={_disabled}
+  data-value={value}
   role="treeitem"
   on:blur
   on:click
@@ -319,33 +320,11 @@ A item in a Tree displaying the item and children.
     on:click={onClick}
     on:keydown={onKeydown}
   >
-    <slot
-      name="item"
-      disabled={itemDisabled}
-      {expanded}
-      {hasChildren}
-      {depth}
-      {treeItemId}
-      {selected}
-    >
-      <TreeItemDisplay
-        disabled={itemDisabled}
-        {expanded}
-        {hasChildren}
-        {depth}
-        {treeItemId}
-        {selected}
-      >
-        <svelte:fragment
-          let:disabled
-          let:expanded
-          let:hasChildren
-          let:depth
-          let:treeItemId
-          let:selected
-        >
-          <slot name="label" {disabled} {expanded} {hasChildren} {depth} {treeItemId} {selected}
-            >{treeItemId}</slot
+    <slot name="item" {depth} disabled={_disabled} {expanded} {hasChildren} {selected} {value}>
+      <TreeItemDisplay {depth} disabled={_disabled} {expanded} {hasChildren} {selected} {value}>
+        <svelte:fragment let:depth let:disabled let:expanded let:hasChildren let:selected let:value>
+          <slot name="label" {depth} {disabled} {expanded} {hasChildren} {selected} {value}
+            >{value}</slot
           >
         </svelte:fragment>
       </TreeItemDisplay>

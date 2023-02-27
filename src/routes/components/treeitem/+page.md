@@ -12,27 +12,33 @@ An item within a Tree.
 
 ## Features
 
-- A single tree item can be selected. Focus follows selection.
-- Tree items can be expanded/collapsed to show/hide children.
-- Users can select the previous/next visible tree item with the up/down arrow keys.
-- Users can expand/collpase expanded/collapse tree items with the right/left arrow keys.
+- A single tree item can be selected.
+- Focus follows selection.
+
+## Interactions
+
+- Clicking a tree item selects it.
+- Clicking a tree item with children will toggle expand/collapse.
+- Up/Down arrow keys will select the previous/next tree item in the hierarchy.
+- Right/Left arrow keys will expand/collapse tree items with children.
 - If the tree item is already expanded, right arrow selects the first child.
 - If the tree item is already collpased, left arrow selects the previous tree item.
-- You can identify the tree's content with the optional label.
+
+- Note: A tree item is identified by having `data-value` and `role="treeitem"` properties
 
 ## Props
 
-| Prop       | Type      | Description             |
-| ---------- | --------- | ----------------------- |
-| treeItemId | `string`  | The ID of the tree item |
-| disabled   | `boolean` | Disables the tree item  |
+| Prop     | Type      | Description                       |
+| -------- | --------- | --------------------------------- |
+| value    | `string`  | The unique value of the tree item |
+| disabled | `boolean` | Disables the tree item            |
 
 ## Events
 
-| Event          | Detail                           | Description                                      |
-| -------------- | -------------------------------- | ------------------------------------------------ |
-| select         | `{ selectedItemId: string; }`    | Raised when a tree item is selected              |
-| expandCollapse | `{ expandedItemIds: string[]; }` | Raised when a tree item is expanded or collapsed |
+| Event          | Detail                          | Description                                      |
+| -------------- | ------------------------------- | ------------------------------------------------ |
+| select         | `{ selectedValue: string; }`    | Raised when a tree item is selected              |
+| expandCollapse | `{ expandedValues: string[]; }` | Raised when a tree item is expanded or collapsed |
 
 ## Anatomy
 
@@ -45,21 +51,18 @@ Tree
 
 ## Slots
 
-| Slot    | Description                    |
-| ------- | ------------------------------ |
-| default | Any declared TreeItem children |
-| label   | The tree label                 |
+| Slot    | Description        |
+| ------- | ------------------ |
+| default | Tree item children |
+| label   | The tree label     |
 
 ### let params
 
-The item and nodeLabel slots are passed the following `let` parameters.
-
-| Let Param   | Type          | Description                                      |
-| ----------- | ------------- | ------------------------------------------------ |
-| depth       | `number`      | The depth of this tree item in the tree          |
-| disabled    | `boolean`     | True if the tree and this tree item are disabled |
-| expanded    | `boolean`     | True if this tree item is expanded               |
-| hasChildren | `boolean`     | True if this tree item has children              |
-| tree item   | `TreeItem<T>` | The tree item data for this tree item            |
-| nodeID      | `string`      | The ID of this tree item                         |
-| selected    | `boolean`     | True if this tree item is selected               |
+| Let Param   | Type      | Passed to slots |
+| ----------- | --------- | --------------- |
+| depth       | `number`  | item, label     |
+| disabled    | `boolean` | item, label     |
+| expanded    | `boolean` | item, label     |
+| hasChildren | `boolean` | item, label     |
+| selected    | `boolean` | item, label     |
+| value       | `string`  | item, label     |

@@ -5,7 +5,7 @@
   export let disabled = false;
   export let expanded = false;
   export let hasChildren = false;
-  export let treeItemId: string;
+  export let value: string;
   export let selected = false;
 </script>
 
@@ -43,7 +43,7 @@
   {...$$restProps}
 >
   <TreeChevron {expanded} {hasChildren} />
-  <slot {depth} {disabled} {expanded} {hasChildren} {selected} {treeItemId} />
+  <slot {depth} {disabled} {expanded} {hasChildren} {selected} {value} />
 </div>
 
 <style>
@@ -59,7 +59,7 @@
     margin: 0;
     outline: none;
     padding: 0.5em;
-    padding-left: calc(0.5em * var(--sterling-tree-item-depth));
+    padding-left: calc(0.2em + (0.5em * var(--sterling-tree-item-depth)));
     text-overflow: ellipsis;
     transition: background-color 250ms, color 250ms, border-color 250ms;
     white-space: nowrap;

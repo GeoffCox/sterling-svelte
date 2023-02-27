@@ -21,6 +21,8 @@ A list of items where a single item can be selected.
 - Up/Down or left/right arrow keys select the previous/next item.
 - Home/End keys select first/last item.
 
+- Note: A list item is identified by having `data-value` and `role="listitem"` properties
+
 ## Usage
 
 ```svelte
@@ -62,8 +64,6 @@ A list of items where a single item can be selected.
 | selectPreviousItem   | (autological) |
 | selectNextItem       | (autological) |
 | selectLastItem       | (autological) |
-
-- A list item is identified by having `data-value` and `role="listitem"` properties
 
 ## List Context
 

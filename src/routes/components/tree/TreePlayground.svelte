@@ -14,25 +14,25 @@
 
   let disabled = false;
   let label = 'Coffee Menu';
-  let selectedItemId: string | undefined = undefined;
-  let expandedItemIds: string[] = [];
-  let expandedItemIdsText: string;
+  let selectedValue: string | undefined = undefined;
+  let expandedValues: string[] = [];
+  let expandedValuesText: string;
 
-  const getExpandedItemIds = () => {
-    expandedItemIdsText = expandedItemIds.join(',');
+  const getExpandedValues = () => {
+    expandedValuesText = expandedValues.join(',');
   };
 
-  const setExpandedItemIds = () => {
-    expandedItemIds = expandedItemIdsText.split(',').filter(Boolean);
+  const setExpandedValues = () => {
+    expandedValues = expandedValuesText.split(',').filter(Boolean);
   };
 </script>
 
 <Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     <Tree
-      bind:selectedItemId
+      bind:selectedValue
       {disabled}
-      bind:expandedItemIds
+      bind:expandedValues
       on:select={() => exampleRef.recordEvent('select')}
       on:expandCollapse={() => exampleRef.recordEvent('expandCollapse')}
     >
@@ -45,19 +45,19 @@
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
     <Input bind:value={label}><span slot="label">label slot</span></Input>
-    <Input bind:value={selectedItemId}><span slot="label">selectedItemId</span></Input>
+    <Input bind:value={selectedValue}><span slot="label">selectedValue</span></Input>
     <div class="edit-toggled">
-      <Input bind:value={expandedItemIdsText}
-        ><span slot="label">expandedItemIds (comma separated)</span></Input
+      <Input bind:value={expandedValuesText}
+        ><span slot="label">expandedValues (comma separated)</span></Input
       >
-      <Button on:click={getExpandedItemIds}>Get</Button>
-      <Button on:click={setExpandedItemIds}>Set</Button>
+      <Button on:click={getExpandedValues}>Get</Button>
+      <Button on:click={setExpandedValues}>Set</Button>
     </div>
   </svelte:fragment>
   <svelte:fragment slot="status">
-    <div>selectedItemId: {selectedItemId}</div>
+    <div>selectedValue: {selectedValue}</div>
     <div class="toggled-status">
-      expandedItemIds: {expandedItemIds.join(',')}
+      expandedValues: {expandedValues.join(',')}
     </div>
   </svelte:fragment>
 </Playground>

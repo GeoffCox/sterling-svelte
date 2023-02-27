@@ -12,25 +12,25 @@ A hierarchy of items.
 
 ## Features
 
-- Provides expanded items tracking for TreeItem children.
-- Provides selected item tracking for TreeItem children.
-- You can identify the tree's content with the optional label.
+- Control which tree items are expanded or collapsed.
+- Get or set the selected tree item.
+- Identify the tree's content with the optional label.
 
 ## Props
 
-| Prop            | Type                                 | Description                                             |
-| --------------- | ------------------------------------ | ------------------------------------------------------- |
-| composed        | `boolean`                            | Indicates the tree is composed within another component |
-| disabled        | `boolean`                            | Disables the tree and tree items                        |
-| expandedItemIds | `string[]`                           | The IDs of expanded tree items                          |
-| selectedItemId  | `string` <b>&#10072;</b> `undefined` | The ID of the selected tree item                        |
+| Prop           | Type                                 | Description                                             |
+| -------------- | ------------------------------------ | ------------------------------------------------------- |
+| composed       | `boolean`                            | Indicates the tree is composed within another component |
+| disabled       | `boolean`                            | Disables the tree and tree items                        |
+| expandedValues | `string[]`                           | The values of expanded tree items                       |
+| selectedValue  | `string` <b>&#10072;</b> `undefined` | The value of the selected tree item                     |
 
 ## Events
 
-| Event          | Detail                           | Description                                      |
-| -------------- | -------------------------------- | ------------------------------------------------ |
-| select         | `{ selectedItemId: string; }`    | Raised when a tree item is selected              |
-| expandCollapse | `{ expandedItemIds: string[]; }` | Raised when a tree item is expanded or collapsed |
+| Event          | Detail                          | Description                                      |
+| -------------- | ------------------------------- | ------------------------------------------------ |
+| expandCollapse | `{ expandedValues: string[]; }` | Raised when a tree item is expanded or collapsed |
+| select         | `{ selectedValue: string; }`    | Raised when a tree item is selected              |
 
 ## Anatomy
 

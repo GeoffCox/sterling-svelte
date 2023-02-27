@@ -7,11 +7,11 @@ export type TreeContext = {
   /**
    * The IDs of the expanded ttree tree items.
    */
-  expandedItemIds: Writable<string[]>;
+  expandedValues: Writable<string[]>;
   /**
    * The ID of the selected tree tree item.
    */
-  selectedItemId: Writable<string | undefined>;
+  selectedValue: Writable<string | undefined>;
 
   /** If the tree is disabled */
   disabled: Readable<boolean>;

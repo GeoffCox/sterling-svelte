@@ -4,7 +4,7 @@
 
 # TreeChevron
 
-A chevron indicating expanded/collapsed state for nodes in a Tree.
+A chevron indicating expanded/collapsed state for items in a Tree.
 
 ## Playground
 
@@ -12,16 +12,17 @@ A chevron indicating expanded/collapsed state for nodes in a Tree.
 
 ## Features
 
-- Displays a chevron for nodes with children and a bullet for nodes without.
-- Chevron points right when node collapsed, points down when expanded.
-- Chevron changes are animated as rotation. No animation when prefers-reduced motion.
+- Displays a chevron for items with children and a bullet for items without.
+- Chevron points right when collapsed, points down when expanded.
+- Chevron changes are animated as rotation.
+- No animation occurs for prefers-reduced-motion.
 
 ## Props
 
 | Name        | Type      | Description                          |
 | ----------- | --------- | ------------------------------------ |
-| expanded    | `boolean` | If the associated node is expanded.  |
-| hasChildren | `boolean` | If the associated node has children. |
+| expanded    | `boolean` | If the associated item is expanded.  |
+| hasChildren | `boolean` | If the associated item has children. |
 
 ## Anatomy
 

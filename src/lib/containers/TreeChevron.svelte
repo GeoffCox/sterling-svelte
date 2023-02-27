@@ -4,7 +4,7 @@
   export let expanded = false;
   export let hasChildren = false;
 
-  let lastValue = expanded;
+  let previousExpanded = expanded;
 
   let mounted = false;
 
@@ -16,10 +16,10 @@
 
   let animate = false;
   $: {
-    if (expanded !== lastValue && mounted) {
+    if (expanded !== previousExpanded && mounted) {
       animate = true;
     }
-    lastValue = expanded;
+    previousExpanded = expanded;
   }
 </script>
 

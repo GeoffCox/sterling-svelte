@@ -6,11 +6,11 @@
 </script>
 
 {#if coffeeItem.children}
-  <TreeItem treeItemId={coffeeItem.name}>
+  <TreeItem value={coffeeItem.name}>
     {#each coffeeItem.children as child}
       <svelte:self coffeeItem={child} />
     {/each}
   </TreeItem>
 {:else}
-  <TreeItem treeItemId={coffeeItem.name} />
+  <TreeItem value={coffeeItem.name} />
 {/if}

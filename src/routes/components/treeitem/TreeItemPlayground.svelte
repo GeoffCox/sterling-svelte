@@ -11,22 +11,22 @@
 
   let disabled = false;
 
-  const selectedItemIdStore = writable<string | undefined>();
-  const expandedItemIdStore = writable<string[]>([]);
+  const expandedValuesStore = writable<string[]>([]);
+  const selectedValueStore = writable<string | undefined>();
 
   setContext(treeContextKey, {
-    expandedItemIds: expandedItemIdStore,
-    selectedItemId: selectedItemIdStore
+    expandedValues: expandedValuesStore,
+    selectedValue: selectedValueStore
   });
 </script>
 
 <Playground bind:this={exampleRef}>
   <div class="component" slot="component">
-    <TreeItem treeItemId="Coffee Bean Types" {disabled}>
-      <TreeItem treeItemId="Arabica" />
-      <TreeItem treeItemId="Robusta" />
-      <TreeItem treeItemId="Liberica" />
-      <TreeItem treeItemId="Excelsa" />
+    <TreeItem value="Coffee Bean Types" {disabled}>
+      <TreeItem value="Arabica" />
+      <TreeItem value="Robusta" />
+      <TreeItem value="Liberica" />
+      <TreeItem value="Excelsa" />
     </TreeItem>
   </div>
   <svelte:fragment slot="options">

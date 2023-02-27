@@ -24,18 +24,18 @@ A single item that can be selected from a dropdown list of items.
 
 ## Props
 
-| Name                      | Type    | Description                           |
-| ------------------------- | ------- | ------------------------------------- |
-| disabled                  | boolean | Disables the select                   |
-| open                      | boolean | If the menu is open                   |
-| selectedItemId (readonly) | string  | The ID of the currently selected item |
+| Name          | Type    | Description                    |
+| ------------- | ------- | ------------------------------ |
+| disabled      | boolean | Disables the select            |
+| open          | boolean | If the menu is open            |
+| selectedValue | string  | The value of the selected item |
 
 ## Events
 
-| Name    | Event.detail | Description                                          |
-| ------- | ------------ | ---------------------------------------------------- |
-| pending | `{ itemId }` | Raised as items are selected while the menu is open. |
-| select  | `{ itemId }` | Raised when an item is selected.                     |
+| Name    | Event.detail        | Description                                          |
+| ------- | ------------------- | ---------------------------------------------------- |
+| pending | `{ value: string }` | Raised as items are selected while the menu is open. |
+| select  | `{ value: string }` | Raised when an item is selected.                     |
 
 ## Anatomy
 

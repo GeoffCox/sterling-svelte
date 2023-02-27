@@ -16,12 +16,12 @@
   let selectedValue: string | undefined = undefined;
   let selectedValueText: string | undefined = '';
 
-  const updateSelectedItemId = debounce((itemId?: string) => {
-    selectedValue = itemId;
+  const updateSelectedValue = debounce((value?: string) => {
+    selectedValue = value;
   }, 500);
 
   $: {
-    updateSelectedItemId(selectedValueText);
+    updateSelectedValue(selectedValueText);
   }
 
   $: {
@@ -38,7 +38,7 @@
       {horizontal}
       selectionKeys="tab"
       on:select={(event) => {
-        exampleRef.recordEvent(`select:${event.detail.itemId}`);
+        exampleRef.recordEvent(`select:${event.detail.value}`);
       }}
     >
       <svelte:fragment slot="label">{label}</svelte:fragment>
@@ -55,7 +55,7 @@
     <Input bind:value={selectedValueText}><span slot="label">selectedValue</span></Input>
   </svelte:fragment>
   <svelte:fragment slot="status">
-    <div>selectedItemId: {selectedValue}</div>
+    <div>selectedValue: {selectedValue}</div>
   </svelte:fragment>
 </Playground>
 

@@ -13,18 +13,18 @@
 
   export let composed = false;
   export let disabled = false;
-  export let selectedItemId: string | undefined = undefined;
-  export let expandedItemIds: string[] = [];
+  export let selectedValue: string | undefined = undefined;
+  export let expandedValues: string[] = [];
 
   // ----- Context ----- //
 
-  const selectedItemIdStore = writable<string | undefined>(selectedItemId);
-  const expandedItemIdStore = writable<string[]>(expandedItemIds);
+  const selectedValueStore = writable<string | undefined>(selectedValue);
+  const expandedValuesStore = writable<string[]>(expandedValues);
   const disabledStore = writable<boolean>(disabled);
 
   setContext(treeContextKey, {
-    expandedItemIds: expandedItemIdStore,
-    selectedItemId: selectedItemIdStore,
+    expandedValues: expandedValuesStore,
+    selectedValue: selectedValueStore,
     disabled: disabledStore
   });
 
@@ -32,12 +32,12 @@
 
   const dispatch = createEventDispatcher();
 
-  const raiseExpandCollapse = (expandedItemIds: string[]) => {
-    dispatch('expandCollapse', { expandedItemIds });
+  const raiseExpandCollapse = (expandedValues: string[]) => {
+    dispatch('expandCollapse', { expandedValues });
   };
 
-  const raiseSelect = (selectedItemId: string | undefined) => {
-    dispatch('select', { selectedItemId });
+  const raiseSelect = (selectedValue: string | undefined) => {
+    dispatch('select', { selectedValue });
   };
 
   // ----- Keyborg ----- //
@@ -52,21 +52,21 @@
   // ----- Reactions ----- //
 
   $: {
-    selectedItemIdStore.set(selectedItemId);
+    selectedValueStore.set(selectedValue);
   }
 
   $: {
-    selectedItemId = $selectedItemIdStore;
-    raiseSelect($selectedItemIdStore);
+    selectedValue = $selectedValueStore;
+    raiseSelect($selectedValueStore);
   }
 
   $: {
-    expandedItemIdStore.set(expandedItemIds);
+    expandedValuesStore.set(expandedValues);
   }
 
   $: {
-    expandedItemIds = $expandedItemIdStore;
-    raiseExpandCollapse($expandedItemIdStore);
+    expandedValues = $expandedValuesStore;
+    raiseExpandCollapse($expandedValuesStore);
   }
 
   $: {
@@ -117,7 +117,6 @@
     height: 100%;
     margin: 0;
     overflow: hidden;
-    padding: 0;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 

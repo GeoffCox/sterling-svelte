@@ -3,37 +3,44 @@
   import { onMount } from 'svelte';
   import { base } from '$app/paths';
   import { oceanTheme } from './oceanTheme';
+  import ListItem from '$lib/containers/ListItem.svelte';
 
-  const themeNames: string[] = ['automatic (light/dark)', 'light', 'dark', 'ocean (dark)'];
-  let themeIndex = 0;
+  const themes: Record<string, string> = {
+    auto: 'automatic light/dark',
+    light: 'light',
+    dark: 'dark',
+    ocean: 'ocean (dark)'
+  };
+
+  let currentTheme = 'auto';
 
   let mounted = false;
 
-  const setTheme = (node: HTMLElement, index: number) => {
+  const setTheme = (node: HTMLElement, themeKey: string) => {
     const themeParams = { atDocumentRoot: true };
-    switch (index) {
-      case 1:
+    switch (themeKey) {
+      case 'light':
         applyLightTheme(node, themeParams);
         break;
-      case 2:
+      case 'dark':
         applyDarkTheme(node, themeParams);
         break;
-      case 3:
+      case 'ocean':
         applyTheme(node, { ...themeParams, theme: oceanTheme });
         break;
-      case 0:
+      case 'auto':
       default:
         toggleDarkTheme(node, themeParams);
         break;
     }
   };
 
-  const applyCurrentTheme = (node: HTMLElement, params: { index: number }) => {
-    setTheme(node, params.index);
+  const applyCurrentTheme = (node: HTMLElement, params: { themeKey: string }) => {
+    setTheme(node, params.themeKey);
     return {
       destroy() {},
-      update(params: { index: number }) {
-        setTheme(node, params.index);
+      update(params: { themeKey: string }) {
+        setTheme(node, params.themeKey);
       }
     };
   };
@@ -75,13 +82,10 @@
   };
 
   const loadThemeFromCookie = () => {
-    const index = themeNames.indexOf(getThemeCookie());
-    if (index !== -1) {
-      themeIndex = index;
-    }
+    currentTheme = getThemeCookie() || currentTheme;
   };
 
-  $: mounted && setThemeCookie(themeNames[themeIndex]);
+  $: mounted && setThemeCookie(currentTheme);
 
   onMount(() => {
     mounted = true;
@@ -91,15 +95,18 @@
 
 <div>
   {#if mounted}
-    <div class="layout" use:applyCurrentTheme={{ index: themeIndex }}>
+    <div class="layout" use:applyCurrentTheme={{ themeKey: currentTheme }}>
       <div class="header">
         <div class="title">sterling-svelte (in progress)</div>
         <div class="subtitle">
           A modern, accessible, and lightweight UI component library for Svelte.
         </div>
         <div class="select-theme">
-          <Select items={themeNames} bind:selectedIndex={themeIndex}>
+          <Select bind:selectedValue={currentTheme}>
             <svelte:fragment slot="label">Theme</svelte:fragment>
+            {#each Object.keys(themes) as themeKey}
+              <ListItem value={themeKey}>{themes[themeKey]}</ListItem>
+            {/each}
           </Select>
         </div>
       </div>
