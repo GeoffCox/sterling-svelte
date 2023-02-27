@@ -36,6 +36,7 @@ import Menu from './Menu.svelte';
 import MenuBar from './MenuBar.svelte';
 import MenuButton from './MenuButton.svelte';
 import MenuItem from './MenuItem.svelte';
+import MenuItemDisplay from './MenuItemDisplay.svelte';
 import MenuSeparator from './MenuSeparator.svelte';
 import Progress from './Progress.svelte';
 import Radio from './Radio.svelte';
@@ -47,6 +48,7 @@ import TabList from './TabList.svelte';
 import TextArea from './TextArea.svelte';
 import Tree from './Tree.svelte';
 import TreeChevron from './TreeChevron.svelte';
+import TreeItem from './TreeItem.svelte';
 import TreeItemDisplay from './TreeItemDisplay.svelte';
 
 export {
@@ -61,6 +63,7 @@ export {
   MenuBar,
   MenuButton,
   MenuItem,
+  MenuItemDisplay,
   MenuSeparator,
   Progress,
   Radio,
@@ -72,5 +75,6 @@ export {
   TextArea,
   Tree,
   TreeChevron,
+  TreeItem,
   TreeItemDisplay
 };
