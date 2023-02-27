@@ -13,8 +13,8 @@
   let disabled = false;
   let horizontal = false;
   let label = 'COUNTRIES';
-  let selectedItemId = '';
-  let selectedItemIdText = '';
+  let selectedItemId: string | undefined = undefined;
+  let selectedItemIdText: string | undefined = '';
 
   const updateSelectedItemId = debounce((itemId: string) => {
     selectedItemId = itemId;

@@ -11,12 +11,10 @@ export const forwardEvents = (
     customEvents?: string[]
   ) => {
     let forward = (event: any) => {
-      console.log('forward', node, target, event);
       target.dispatchEvent(event);
     };
 
     let forwardCustom = (event: any) => {
-      console.log('custom forward', node, target, event);
       const customEvent = event as CustomEvent;
       target.dispatchEvent(
         custom_event(customEvent.type, customEvent.detail, {

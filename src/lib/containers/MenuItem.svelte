@@ -48,19 +48,6 @@
     onSelect = undefined
   } = getContext<MenuItemContext>(menuItemContextKey) || {};
 
-  console.log({
-    rootMenuItemId,
-    depth,
-    register,
-    unregister,
-    closeMenu,
-    focusPrevious,
-    focusNext,
-    onOpen,
-    onClose,
-    onSelect
-  });
-
   const { openPreviousMenu = undefined, openNextMenu = undefined } =
     getContext<MenuBarContext>(menuBarContextKey) || {};
 

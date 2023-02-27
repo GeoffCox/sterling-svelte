@@ -25,29 +25,23 @@
       <slot name="component" />
     </div>
     <div class="configuration">
-      {#if $$slots.status}
-        <div class="status panel">
-          <h2>Status</h2>
-          <slot name="status">(none)</slot>
+      <div class="options panel">
+        <h2>Options</h2>
+        <slot name="options">(none)</slot>
+      </div>
+      <div class="status panel">
+        <h2>Status</h2>
+        <slot name="status">(none)</slot>
+      </div>
+      <div class="events panel">
+        <h2>Events <small>(newest to oldest)</small></h2>
+        <div class="event-list">
+          {#each events as event}
+            <div class="event-message">{event.message}</div>
+            <div class="event-timestamp">&nbsp;@{event.timestamp.getMilliseconds()}</div>
+          {/each}
         </div>
-      {/if}
-      {#if $$slots.options}
-        <div class="options panel">
-          <h2>Options</h2>
-          <slot name="options">(none)</slot>
-        </div>
-      {/if}
-      {#if events.length > 0}
-        <div class="events panel">
-          <h2>Events <small>(newest to oldest)</small></h2>
-          <div class="event-list">
-            {#each events as event}
-              <div class="event-message">{event.message}</div>
-              <div class="event-timestamp">&nbsp;@{event.timestamp.getMilliseconds()}</div>
-            {/each}
-          </div>
-        </div>
-      {/if}
+      </div>
     </div>
   {/if}
 </div>
@@ -55,17 +49,15 @@
 <style>
   .example {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: auto;
     align-items: flex-start;
     justify-items: stretch;
-    column-gap: 2em;
+    row-gap: 2em;
     padding: 2em;
   }
 
   .component {
-    grid-row: 1 / span 3;
-    grid-column: 1 / span 1;
     border: 1px dashed lightgray;
     border-radius: 10px;
     padding: 15px;
@@ -77,9 +69,10 @@
 
   .configuration {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
     justify-items: stretch;
+    column-gap: 1em;
   }
 
   .panel {

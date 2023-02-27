@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Keyborg } from 'keyborg';
+  import type { ListContext } from './List.types';
 
   import { createKeyborg } from 'keyborg';
   import { createEventDispatcher, onMount, setContext } from 'svelte';
@@ -8,28 +9,29 @@
 
   import Label from '../display/Label.svelte';
   import { listContextKey } from './List.constants';
-  import type { ListContext } from './List.types';
 
   // ----- Props ----- //
 
   /**
    * If the list is composed within another container
-   * and should not show borders or background.
+   * @default false
    */
   export let composed = false;
 
   /**
    * Disables the list and all items
+   * @default false
    */
   export let disabled: boolean = false;
 
   /**
-   * Controls if the list is laid out horizontally.
+   * If the list item layout is horizontal.
+   * @default false
    */
   export let horizontal = false;
 
   /**
-   * The selected item (readonly).
+   * The ID of the selected item.
    */
   export let selectedItemId: string | undefined = undefined;
 
@@ -40,9 +42,9 @@
   let listRef: HTMLDivElement;
   let lastSelectedItemRef: HTMLElement;
 
-  const selectedItemIdStore = writable<string | undefined>(selectedItemId);
-  const horizontalStore = writable<boolean>(horizontal);
   const disabledStore = writable<boolean>(disabled);
+  const horizontalStore = writable<boolean>(horizontal);
+  const selectedItemIdStore = writable<string | undefined>(selectedItemId);
 
   $: {
     disabledStore.set(disabled);
@@ -81,6 +83,17 @@
     usingKeyboard = value;
   };
 
+  // ----- Focus ----- //
+
+  export const focus = () => {
+    listRef?.focus();
+  };
+
+  export const scrollToSelectedItem = () => {
+    const element = getSelectedItemElement();
+    element?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  };
+
   // ----- Selection ----- //
 
   const getSelectedItemElement = () => {
@@ -91,7 +104,7 @@
     ) {
       return lastSelectedItemRef;
     } else {
-      return listRef.querySelector('[data-list-item-id][aria-selected=true]');
+      return listRef?.querySelector('[data-list-item-id][aria-selected=true]');
     }
   };
 
@@ -188,34 +201,26 @@
       }
       if (candidateItemId && candidate) {
         selectItem(candidateItemId, candidate);
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
       }
     }
   };
 
   const onKeydown: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
-    // if using arrows, only move when there are no modifier keys
     if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
       switch (event.key) {
         case 'Home':
-          if (selectFirstItem()) {
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
-          }
-          break;
+          selectFirstItem();
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
         case 'End':
-          if (selectLastItem()) {
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
-          }
-          break;
+          selectLastItem();
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
         case 'ArrowLeft':
           if (horizontal) {
-            selectPreviousItem();
+            selectedItemId !== undefined ? selectPreviousItem() : selectLastItem();
             event.preventDefault();
             event.stopPropagation();
             return false;
@@ -223,7 +228,7 @@
           break;
         case 'ArrowRight':
           if (horizontal) {
-            selectNextItem();
+            selectedItemId !== undefined ? selectNextItem() : selectFirstItem();
             event.preventDefault();
             event.stopPropagation();
             return false;
@@ -231,7 +236,7 @@
           break;
         case 'ArrowUp':
           if (!horizontal) {
-            selectPreviousItem();
+            selectedItemId !== undefined ? selectPreviousItem() : selectLastItem();
             event.preventDefault();
             event.stopPropagation();
             return false;
@@ -239,13 +244,11 @@
           break;
         case 'ArrowDown':
           if (!horizontal) {
-            selectNextItem();
+            selectedItemId !== undefined ? selectNextItem() : selectFirstItem();
             event.preventDefault();
             event.stopPropagation();
             return false;
           }
-          break;
-        default:
           break;
       }
     }
@@ -285,8 +288,8 @@ A list of items where a single item can be selected.
     class:disabled
     class:horizontal
     id={listId}
-    role="listbox"
-    tabindex={!disabled ? 0 : undefined}
+    role="list"
+    tabindex={0}
     on:blur
     on:click
     on:click={onClick}

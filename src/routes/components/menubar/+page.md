@@ -23,12 +23,6 @@ A horizontal container of MenuItems typically at the top-level of an application
 
 Declare a MenuBar containing a hierarchy of MenuItems.
 
-```ts
-const onSelect = (event) => {
-  console.log('select', event.detail.menuItemId);
-};
-```
-
 ```svelte
 <MenuBar on:select={onSelect}>
   <MenuItem menuItemId="file" text="File">

@@ -1,10 +1,12 @@
 <script lang="ts">
   import { getContext } from 'svelte';
+  import { v4 as uuid } from 'uuid';
+
   import { listContextKey } from './List.constants';
   import type { ListContext } from './List.types';
 
   export let disabled = false;
-  export let itemId: string;
+  export let itemId: string | undefined;
 
   // ----- GetContext ----- //
 
@@ -19,6 +21,8 @@
 
   $: _disabled = disabled || $listDisabled;
   $: selected = $selectedItemId === itemId;
+
+  $: _itemId = itemId ?? `list-item-${uuid()}`;
 </script>
 
 <div
@@ -28,7 +32,7 @@
   class:disabled={_disabled}
   class:selected
   data-list-item-id={itemId}
-  role="option"
+  role="listitem"
   on:blur
   on:click
   on:dblclick
