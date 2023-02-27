@@ -2,7 +2,7 @@
   import { createEventDispatcher, onMount, tick } from 'svelte';
 
   import Button from './Button.svelte';
-  import CloseX from './CloseX.svelte';
+  import CloseX from './CloseX2.svelte';
 
   const dialogFadeDuration = 250;
 
@@ -155,9 +155,7 @@ A styled &lt;dialog&gt; element
             </div>
             <div class="close">
               <Button variant="ghost" shape="circular" on:click={() => closeDialog()}>
-                <div class="close-x">
-                  <CloseX />
-                </div>
+                <div class="close-x" />
               </Button>
             </div>
           </slot>
@@ -250,13 +248,29 @@ A styled &lt;dialog&gt; element
   }
 
   .close-x {
-    width: 1.5em;
-    height: 1.5em;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    place-content: center;
-    align-content: center;
+    width: 1em;
+    height: 1em;
+    position: relative;
+  }
+
+  .close-x:before,
+  .close-x:after {
+    content: '';
+    position: absolute;
+    width: 0.75em;
+    height: 0.125em;
+    background-color: currentColor;
+    top: 0.45em;
+  }
+
+  .close-x:before {
+    transform: rotate(45deg);
+    left: 0.125em;
+  }
+
+  .close-x:after {
+    transform: rotate(-45deg);
+    right: 0.125em;
   }
 
   .body {
