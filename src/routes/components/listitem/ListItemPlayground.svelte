@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
-  import Input from '$lib/inputs/Input.svelte';
-  import ListItem from '$lib/containers/ListItem.svelte';
+  import Input from '$lib/Input.svelte';
+  import ListItem from '$lib/ListItem.svelte';
   import { setContext } from 'svelte';
   import { writable } from 'svelte/store';
-  import type { ListContext } from '$lib/containers/List.types';
-  import { listContextKey } from '$lib/containers/List.constants';
+  import type { ListContext } from '$lib';
+  import { listContextKey } from '$lib/List.constants';
 
   let exampleRef: any;
 

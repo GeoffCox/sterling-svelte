@@ -1,7 +1,7 @@
 <script lang="ts">
   import { v4 as uuid } from 'uuid';
 
-  import Label from '$lib/display/Label.svelte';
+  import Label from '$lib/Label.svelte';
 
   export let checked: boolean = false;
   export let disabled: boolean = false;

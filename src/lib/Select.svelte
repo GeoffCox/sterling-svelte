@@ -3,9 +3,9 @@
   import { createEventDispatcher, onMount, tick } from 'svelte';
   import { v4 as uuid } from 'uuid';
 
-  import { clickOutside } from '../clickOutside';
-  import Label from '../display/Label.svelte';
-  import List from '../containers/List.svelte';
+  import { clickOutside } from './actions/clickOutside';
+  import Label from './Label.svelte';
+  import List from './List.svelte';
 
   const inputId = uuid();
   const popupId = uuid();

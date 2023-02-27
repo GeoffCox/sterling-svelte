@@ -5,7 +5,7 @@
   import { getContext, onMount } from 'svelte';
   import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 
-  import { portal } from '../portal';
+  import { portal } from './actions/portal';
   import { menuItemContextKey } from './Menus.constants';
 
   export let reference: HTMLElement;

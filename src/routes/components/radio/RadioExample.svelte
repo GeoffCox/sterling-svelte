@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Radio from '$lib/inputs/Radio.svelte';
+  import Radio from '$lib/Radio.svelte';
   import Playground from '../Playground.svelte';
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import Input from '$lib/inputs/Input.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
+  import Input from '$lib/Input.svelte';
 
   let exampleRef: any;
 

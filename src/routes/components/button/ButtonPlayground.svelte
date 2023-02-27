@@ -3,9 +3,9 @@
   import Playground from '../Playground.svelte';
 
   import type { ButtonShape, ButtonVariant } from '$lib';
-  import Button from '$lib/buttons/Button.svelte';
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import Select from '$lib/inputs/Select.svelte';
+  import Button from '$lib/Button.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
+  import Select from '$lib/Select.svelte';
 
   let exampleRef: any;
 

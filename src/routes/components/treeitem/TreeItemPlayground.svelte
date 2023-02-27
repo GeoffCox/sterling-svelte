@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
 
-  import TreeItem from '$lib/containers/TreeItem.svelte';
+  import TreeItem from '$lib/TreeItem.svelte';
   import { writable } from 'svelte/store';
-  import { treeContextKey } from '$lib/containers/Tree.constants';
+  import { treeContextKey } from '$lib/Tree.constants';
   import { setContext } from 'svelte';
 
   let exampleRef: any;

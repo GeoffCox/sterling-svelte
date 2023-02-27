@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import Progress from '$lib/display/Progress.svelte';
-  import Slider from '$lib/inputs/Slider.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
+  import Progress from '$lib/Progress.svelte';
+  import Slider from '$lib/Slider.svelte';
 
   import Playground from '../Playground.svelte';
-  import Input from '$lib/inputs/Input.svelte';
-  import Select from '$lib/inputs/Select.svelte';
-  import type { ProgressColorful } from '$lib/display/Progress.types';
+  import Input from '$lib/Input.svelte';
+  import Select from '$lib/Select.svelte';
+  import type { ProgressColorful } from '$lib/Progress.types';
 
   const colorfulStates = ['none', 'auto', 'progress', 'success', 'warning', 'error'];
 

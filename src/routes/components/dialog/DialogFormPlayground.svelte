@@ -3,8 +3,8 @@
 
   import Playground from '../Playground.svelte';
 
-  import Button from '$lib/buttons/Button.svelte';
-  import Dialog from '$lib/surfaces/Dialog.svelte';
+  import Button from '$lib/Button.svelte';
+  import Dialog from '$lib/Dialog.svelte';
 
   let exampleRef: any;
   let formRef: HTMLFormElement;

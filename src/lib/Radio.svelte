@@ -1,24 +1,53 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { v4 as uuid } from 'uuid';
-  import Label from '../display/Label.svelte';
 
+  import Label from './Label.svelte';
+
+  /*
+   * bind:group doesn't seem to work properly (yet) in a nested radio.
+   * The workaround is to export `checked` and `group` properties
+   * and implement the same behavior.
+   */
   export let checked: boolean = false;
+  export let group: any | undefined | null = undefined;
   export let disabled: boolean = false;
 
   const inputId = uuid();
+
+  const onChange: svelte.JSX.ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (e.currentTarget.checked) {
+      group = $$restProps.value;
+    }
+  };
+
+  let mounted = false;
+  onMount(() => {
+    if (checked) {
+      group = $$restProps.value;
+    }
+    mounted = true;
+  });
+
+  $: {
+    if (mounted) {
+      checked = group === $$restProps.value;
+    }
+  }
 </script>
 
 <!--
 	@component
-	A styled HTML input type=checkbox element.
+	A styled HTML input type=radio element with optional label.
 -->
-<div class="sterling-checkbox">
+<div class="sterling-radio">
   <div class="container">
     <input
-      type="checkbox"
+      type="radio"
       on:blur
       on:click
       on:change
+      on:change={onChange}
       on:dblclick
       on:focus
       on:focusin
@@ -36,24 +65,24 @@
       on:mouseup
       on:toggle
       on:wheel
-      bind:checked
+      checked={group === $$restProps.value}
       {...$$restProps}
-      id={inputId}
       {disabled}
+      id={inputId}
     />
     <div class="indicator" />
   </div>
   {#if $$slots.label}
     <div class="label">
       <Label {disabled} for={inputId}>
-        <slot name="label" {checked} {disabled} />
+        <slot name="label" />
       </Label>
     </div>
   {/if}
 </div>
 
 <style>
-  .sterling-checkbox {
+  .sterling-radio {
     display: inline-flex;
     align-content: stretch;
     align-items: stretch;
@@ -64,7 +93,6 @@
     padding: 0;
     margin: 0;
   }
-
   /* 
 		The container 
 		- allows the input to be hidden
@@ -72,14 +100,15 @@
 		- prevents collisions with surrounding slots
 	 */
   .container {
-    font: inherit;
+    box-sizing: border-box;
     position: relative;
-    display: grid;
+    font: inherit;
+    display: flex;
     align-items: center;
   }
 
   /*
-		The input is hidden since the built-in browser checkbox cannot be customized
+		The input is hidden since the built-in browser radio cannot be customized
 	*/
   input {
     font: inherit;
@@ -87,12 +116,12 @@
     padding: 0;
     position: absolute;
     opacity: 0;
-    height: 20px;
-    width: 20px;
+    height: 21px;
+    width: 21px;
   }
 
   /*
-	 	The indicator handles both the box and the checkmark.
+	 	The indicator handles both the radio box and circle mark.
 	 	The box cannot be on the container since the adjacent sibling selector is needed
 		and there is not a parent CSS selector.
 	*/
@@ -101,13 +130,14 @@
     border-color: var(--stsv-Input__border-color);
     border-style: var(--stsv-Input__border-style);
     border-width: var(--stsv-Input__border-width);
+    border-radius: 10000px;
     box-sizing: border-box;
     display: inline-block;
-    height: 20px;
+    height: 21px;
     position: relative;
-    transition: background-color 250ms, color 250ms, border-color 250ms;
-    width: 20px;
     pointer-events: none;
+    transition: background-color 250ms, color 250ms, border-color 250ms;
+    width: 21px;
   }
 
   input:checked + .indicator {
@@ -127,28 +157,25 @@
     border-color: var(--stsv-Common__border-color--disabled);
   }
 
-  /*
-		The checkmark is a rotated L centered in the box.
-	*/
-  input:checked + .indicator::after {
-    border-color: var(--stsv-Input__color);
-    border-style: solid;
-    border-width: 0 3px 3px 0;
-    box-sizing: border-box;
+  .indicator::after {
+    background-color: transparent;
+    border-radius: 10000px;
     content: '';
-    height: 14px;
+    height: 9px;
     left: 50%;
     position: absolute;
-    top: 45%;
-    transform: translate(-50%, -50%) rotate(45deg);
-    transform-origin: center;
-    transition: border-color 250ms;
-    width: 7px;
-    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: background-color 250ms;
+    width: 9px;
+  }
+
+  input:checked + .indicator::after {
+    background-color: var(--stsv-Input__color);
   }
 
   input:checked:disabled + .indicator::after {
-    border-color: var(--stsv-Common__color--disabled);
+    background-color: var(--stsv-Common__color--disabled);
   }
 
   .label {
@@ -158,7 +185,7 @@
 
   @media (prefers-reduced-motion) {
     .indicator,
-    input:checked + .indicator::after {
+    .indicator::after {
       transition: none;
     }
   }

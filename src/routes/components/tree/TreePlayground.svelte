@@ -1,14 +1,12 @@
 <script lang="ts">
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
-  import Input from '$lib/inputs/Input.svelte';
+  import Input from '$lib/Input.svelte';
 
-  import Tree from '$lib/containers/Tree.svelte';
-  import TreeItem from '$lib/containers/TreeItem.svelte';
-  import Button from '$lib/buttons/Button.svelte';
+  import Tree from '$lib/Tree.svelte';
+  import Button from '$lib/Button.svelte';
   import CoffeeTreeItem from './CoffeeTreeItem.svelte';
   import { coffeeTree } from '../..//_sampleData/coffeeTree';
-  import { each } from 'svelte/internal';
 
   let exampleRef: any;
 

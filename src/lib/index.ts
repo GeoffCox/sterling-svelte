@@ -8,50 +8,46 @@ export { lightTheme } from './theme/lightTheme';
 export { neutrals } from './theme/colors';
 export { toggleDarkTheme } from './theme/toggleDarkTheme';
 
-export { clickOutside } from './clickOutside';
-export { menuBarContextKey, menuItemContextKey } from './containers/Menus.constants';
+export { clickOutside } from './actions/clickOutside';
+export { menuBarContextKey, menuItemContextKey } from './Menus.constants';
 
 // ----- Component types ----- //
-export type { ButtonVariant, ButtonShape } from './buttons/Button.types';
-export type {
-  MenuItemRegistration,
-  MenuBarContext,
-  MenuItemContext
-} from './containers/Menus.types';
-export type { ListContext } from './containers/List.types';
-export type { ProgressColorful } from './display/Progress.types';
-export type { TextAreaResize } from './inputs/TextArea.types';
-export type { TabData } from './containers/Tabs.types';
+export type { ButtonVariant, ButtonShape } from './Button.types';
+export type { MenuItemRegistration, MenuBarContext, MenuItemContext } from './Menus.types';
+export type { ListContext } from './List.types';
+export type { ProgressColorful } from './Progress.types';
+export type { TextAreaResize } from './TextArea.types';
+export type { TabData } from './Tabs.types';
 
 // ----- Component constants ----- //
-export { listContextKey } from './containers/List.constants';
-export { treeContextKey, treeItemContextKey } from './containers/Tree.constants';
+export { listContextKey } from './List.constants';
+export { treeContextKey, treeItemContextKey } from './Tree.constants';
 
 // ----- Components ----- //
 
-import Button from './buttons/Button.svelte';
-import Checkbox from './inputs/Checkbox.svelte';
-import Dialog from './surfaces/Dialog.svelte';
-import Input from './inputs/Input.svelte';
-import Label from './display/Label.svelte';
-import List from './containers/List.svelte';
-import ListItem from './containers/ListItem.svelte';
-import Menu from './containers/Menu.svelte';
-import MenuBar from './containers/MenuBar.svelte';
-import MenuButton from './buttons/MenuButton.svelte';
-import MenuItem from './containers/MenuItem.svelte';
-import MenuSeparator from './containers/MenuSeparator.svelte';
-import Progress from './display/Progress.svelte';
-import Radio from './inputs/Radio.svelte';
-import Select from './inputs/Select.svelte';
-import Slider from './inputs/Slider.svelte';
-import Switch from './inputs/Switch.svelte';
-import Tab from './containers/Tab.svelte';
-import TabList from './containers/TabList.svelte';
-import TextArea from './inputs/TextArea.svelte';
-import Tree from './containers/Tree.svelte';
-import TreeChevron from './containers/TreeChevron.svelte';
-import TreeItemDisplay from './containers/TreeItemDisplay.svelte';
+import Button from './Button.svelte';
+import Checkbox from './Checkbox.svelte';
+import Dialog from './Dialog.svelte';
+import Input from './Input.svelte';
+import Label from './Label.svelte';
+import List from './List.svelte';
+import ListItem from './ListItem.svelte';
+import Menu from './Menu.svelte';
+import MenuBar from './MenuBar.svelte';
+import MenuButton from './MenuButton.svelte';
+import MenuItem from './MenuItem.svelte';
+import MenuSeparator from './MenuSeparator.svelte';
+import Progress from './Progress.svelte';
+import Radio from './Radio.svelte';
+import Select from './Select.svelte';
+import Slider from './Slider.svelte';
+import Switch from './Switch.svelte';
+import Tab from './Tab.svelte';
+import TabList from './TabList.svelte';
+import TextArea from './TextArea.svelte';
+import Tree from './Tree.svelte';
+import TreeChevron from './TreeChevron.svelte';
+import TreeItemDisplay from './TreeItemDisplay.svelte';
 
 export {
   Button,

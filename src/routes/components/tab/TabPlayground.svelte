@@ -2,12 +2,12 @@
   import { setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
-  import Input from '$lib/inputs/Input.svelte';
+  import Input from '$lib/Input.svelte';
 
-  import { tabListContextKey } from '$lib/containers/Tabs.constants';
-  import Tab from '$lib/containers/Tab.svelte';
+  import { tabListContextKey } from '$lib/Tabs.constants';
+  import Tab from '$lib/Tab.svelte';
 
   // ----- Context ----- //
 

@@ -14,7 +14,7 @@ Each CSS variable that is a part of the sterling-svelte design is prefixed with 
 
 ## Common
 
-These are typically used for the page, containers, and lists.
+These are typically used for the page and containers like lists and trees.
 
 <Swatch 
 backgroundColor="--stsv-Common__background-color" 

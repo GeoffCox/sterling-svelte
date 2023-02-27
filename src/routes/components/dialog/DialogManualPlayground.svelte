@@ -1,9 +1,9 @@
 <script lang="ts">
   import Playground from '../Playground.svelte';
 
-  import Button from '$lib/buttons/Button.svelte';
-  import Dialog from '$lib/surfaces/Dialog.svelte';
-  import Radio from '$lib/inputs/Radio.svelte';
+  import Button from '$lib/Button.svelte';
+  import Dialog from '$lib/Dialog.svelte';
+  import Radio from '$lib/Radio.svelte';
 
   let exampleRef: any;
 

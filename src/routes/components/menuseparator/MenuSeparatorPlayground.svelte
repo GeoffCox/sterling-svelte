@@ -1,7 +1,7 @@
 <script lang="ts">
   import Playground from '../Playground.svelte';
 
-  import MenuSeparator from '$lib/containers/MenuSeparator.svelte';
+  import MenuSeparator from '$lib/MenuSeparator.svelte';
 </script>
 
 <Playground>

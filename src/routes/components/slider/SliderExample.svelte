@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Slider from '$lib/inputs/Slider.svelte';
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import Input from '$lib/inputs/Input.svelte';
+  import Slider from '$lib/Slider.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
+  import Input from '$lib/Input.svelte';
   import Playground from '../Playground.svelte';
 
   let exampleRef: any;

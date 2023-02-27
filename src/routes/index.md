@@ -76,14 +76,15 @@ The library is in alpha - anything and everything may change at any time.
 | Tree      | 0.0.14                |
 | Tabs      | 0.0.15                |
 | Menus     | 0.0.16                |
+| Tooltip   | 0.0.17                |
 
 Future
 
-| Component      |
-| -------------- |
-| Accordion      |
-| Drawer / Panel |
-| Dropdown       |
-| Notifications  |
-| Tooltip        |
-| Toggle/Choice  |
+| Component                |
+| ------------------------ |
+| Accordion                |
+| Drawer / Panel           |
+| Dropdown                 |
+| Notifications            |
+| Tooltip                  |
+| ChoiceGroup/RadioButtons |

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { v4 as uuid } from 'uuid';
-  import Label from '../display/Label.svelte';
+  import Label from './Label.svelte';
 
   export let value: string = '';
   export let disabled: boolean = false;

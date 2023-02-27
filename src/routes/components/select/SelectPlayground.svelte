@@ -1,14 +1,14 @@
 <script lang="ts">
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import Select from '$lib/inputs/Select.svelte';
-  import Input from '$lib/inputs/Input.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
+  import Select from '$lib/Select.svelte';
+  import Input from '$lib/Input.svelte';
 
   import Playground from '../Playground.svelte';
 
   import { countries } from '../../_sampleData/countries';
   import { random } from 'lodash-es';
-  import Button from '$lib/buttons/Button.svelte';
-  import ListItem from '$lib/containers/ListItem.svelte';
+  import Button from '$lib/Button.svelte';
+  import ListItem from '$lib/ListItem.svelte';
 
   let exampleRef: any;
 

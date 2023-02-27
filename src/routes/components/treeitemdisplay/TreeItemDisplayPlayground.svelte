@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
-  import Input from '$lib/inputs/Input.svelte';
-  import Slider from '$lib/inputs/Slider.svelte';
+  import Input from '$lib/Input.svelte';
+  import Slider from '$lib/Slider.svelte';
 
-  import TreeItemDisplay from '$lib/containers/TreeItemDisplay.svelte';
+  import TreeItemDisplay from '$lib/TreeItemDisplay.svelte';
 
   let exampleRef: any;
 

@@ -1,15 +1,15 @@
 <script lang="ts">
   import type { ButtonShape, ButtonVariant } from './Button.types';
-  import type { MenuItemRegistration, MenuItemContext } from '../containers/Menus.types';
+  import type { MenuItemRegistration, MenuItemContext } from './Menus.types';
 
   import { v4 as uuid } from 'uuid';
   import { createEventDispatcher, getContext, setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
   import Button from './Button.svelte';
-  import Menu from '../containers/Menu.svelte';
-  import { menuItemContextKey } from '../containers/Menus.constants';
-  import { focusFirstChild, focusNextChild, focusPreviousChild } from '../containers/Menus.utils';
+  import Menu from './Menu.svelte';
+  import { menuItemContextKey } from './Menus.constants';
+  import { focusFirstChild, focusNextChild, focusPreviousChild } from './Menus.utils';
 
   // ----- Props ----- //
 
@@ -65,8 +65,8 @@
     closeMenu: (recursive?: boolean) => {
       open = false;
     },
-    focusPrevious: (currentValue) => focusPreviousChild($children, currentValue),
-    focusNext: (currentValue) => focusNextChild($children, currentValue),
+    focusPrevious: (currentValue: string) => focusPreviousChild($children, currentValue),
+    focusNext: (currentValue: string) => focusNextChild($children, currentValue),
     onOpen: raiseOpen,
     onClose: raiseClose,
     onSelect: raiseSelect

@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
 
-  import MenuItem from '$lib/containers/MenuItem.svelte';
-  import MenuSeparator from '$lib/containers/MenuSeparator.svelte';
-  import MenuButton from '$lib/buttons/MenuButton.svelte';
+  import MenuItem from '$lib/MenuItem.svelte';
+  import MenuSeparator from '$lib/MenuSeparator.svelte';
+  import MenuButton from '$lib/MenuButton.svelte';
 
   let exampleRef: any;
   let disabled = false;

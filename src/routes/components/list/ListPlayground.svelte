@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
-  import List from '$lib/containers/List.svelte';
-  import Input from '$lib/inputs/Input.svelte';
+  import List from '$lib/List.svelte';
+  import Input from '$lib/Input.svelte';
   import { countries } from '../../_sampleData/countries';
-  import ListItem from '$lib/containers/ListItem.svelte';
+  import ListItem from '$lib/ListItem.svelte';
   import { debounce } from 'lodash-es';
 
   let exampleRef: any;

@@ -7,7 +7,7 @@
   import { writable } from 'svelte/store';
   import { v4 as uuid } from 'uuid';
 
-  import Label from '../display/Label.svelte';
+  import Label from './Label.svelte';
   import { listContextKey } from './List.constants';
 
   // ----- Props ----- //

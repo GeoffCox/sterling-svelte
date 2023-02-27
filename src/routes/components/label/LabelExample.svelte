@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
-  import Label from '$lib/display/Label.svelte';
-  import Input from '$lib/inputs/Input.svelte';
+  import Label from '$lib/Label.svelte';
+  import Input from '$lib/Input.svelte';
 
   let disabled = false;
   let labelText = 'This is a label';

@@ -3,7 +3,8 @@
   import { onMount } from 'svelte';
   import { base } from '$app/paths';
   import { oceanTheme } from './oceanTheme';
-  import ListItem from '$lib/containers/ListItem.svelte';
+  import Input from '$lib/Input.svelte';
+  import ListItem from '$lib/ListItem.svelte';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -12,9 +13,41 @@
     ocean: 'ocean (dark)'
   };
 
-  let currentTheme = 'auto';
+  const components = [
+    'Button',
+    'Checkbox',
+    'Dialog',
+    'Input',
+    'Label',
+    'List',
+    'ListItem',
+    'Menu',
+    'MenuBar',
+    'MenuButton',
+    'MenuItem',
+    'MenuSeparator',
+    'Progress',
+    'Radio',
+    'Select',
+    'Slider',
+    'Switch',
+    'Tab',
+    'TabList',
+    'TextArea',
+    'Tree',
+    'TreeChevron',
+    'TreeItem',
+    'TreeItemDisplay'
+  ];
 
   let mounted = false;
+  let currentTheme = 'auto';
+  let filterText = '';
+
+  $: filteredComponents =
+    filterText && filterText.trim().length > 0
+      ? components.filter((x) => x.toLowerCase().includes(filterText.trim().toLowerCase()))
+      : components;
 
   const setTheme = (node: HTMLElement, themeKey: string) => {
     const themeParams = { atDocumentRoot: true };
@@ -115,32 +148,16 @@
         <div class="nav">
           <a href="{base}/">Overview</a>
           <a href="{base}/theme">Theme</a>
+          <div class="filter">
+            <Input bind:value={filterText} type="search">
+              <span slot="label">Filter Components</span>
+            </Input>
+          </div>
           <div class="nav-header">Components</div>
           <div class="nav-section">
-            <a href="{base}/components/button">Button</a>
-            <a href="{base}/components/checkbox">Checkbox</a>
-            <a href="{base}/components/dialog">Dialog</a>
-            <a href="{base}/components/input">Input</a>
-            <a href="{base}/components/label">Label</a>
-            <a href="{base}/components/list">List</a>
-            <a href="{base}/components/listitem">ListItem</a>
-            <a href="{base}/components/menu">Menu</a>
-            <a href="{base}/components/menubar">MenuBar</a>
-            <a href="{base}/components/menubutton">MenuButton</a>
-            <a href="{base}/components/menuitem">MenuItem</a>
-            <a href="{base}/components/menuseparator">MenuSeparator</a>
-            <a href="{base}/components/progress">Progress</a>
-            <a href="{base}/components/radio">Radio</a>
-            <a href="{base}/components/select">Select</a>
-            <a href="{base}/components/slider">Slider</a>
-            <a href="{base}/components/switch">Switch</a>
-            <a href="{base}/components/tab">Tab</a>
-            <a href="{base}/components/tablist">TabList</a>
-            <a href="{base}/components/textarea">TextArea</a>
-            <a href="{base}/components/tree">Tree</a>
-            <a href="{base}/components/treechevron">TreeChevron</a>
-            <a href="{base}/components/treeitem">TreeItem</a>
-            <a href="{base}/components/treeitemdisplay">TreeItemDisplay</a>
+            {#each filteredComponents as component}
+              <a href="{base}/components/{component.toLowerCase()}">{component}</a>
+            {/each}
           </div>
         </div>
         <div class="component">
@@ -295,6 +312,10 @@
 
   .nav a:hover {
     text-decoration: underline;
+  }
+
+  .filter {
+    margin-top: 3em;
   }
 
   .component {

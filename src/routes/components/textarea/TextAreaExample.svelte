@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Input from '$lib/inputs/Input.svelte';
-  import TextArea from '$lib/inputs/TextArea.svelte';
+  import Input from '$lib/Input.svelte';
+  import TextArea from '$lib/TextArea.svelte';
   import Playground from '../Playground.svelte';
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
-  import type { TextAreaResize } from '$lib/inputs/TextArea.types';
-  import Select from '$lib/inputs/Select.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
+  import type { TextAreaResize } from '$lib/TextArea.types';
+  import Select from '$lib/Select.svelte';
 
   let exampleRef: any;
 

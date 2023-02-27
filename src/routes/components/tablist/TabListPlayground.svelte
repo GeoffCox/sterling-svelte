@@ -1,8 +1,7 @@
 <script lang="ts">
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
-  import TabList from '$lib/containers/TabList.svelte';
-  import Tab from '$lib/containers/Tab.svelte';
+  import TabList from '$lib/TabList.svelte';
 
   let exampleRef: any;
 

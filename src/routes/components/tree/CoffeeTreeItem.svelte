@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TreeItem from '$lib/containers/TreeItem.svelte';
+  import TreeItem from '$lib/TreeItem.svelte';
   import type { CoffeeItem } from '../../_sampleData/coffeeTree';
 
   export let coffeeItem: CoffeeItem;

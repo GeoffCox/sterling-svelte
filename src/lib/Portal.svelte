@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { portal } from '../portal';
+  import { portal } from './actions/portal';
 
   export let target: HTMLElement = document.body;
 </script>

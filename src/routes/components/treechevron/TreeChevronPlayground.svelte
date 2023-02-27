@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Checkbox from '$lib/inputs/Checkbox.svelte';
+  import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
 
-  import TreeChevron from '$lib/containers/TreeChevron.svelte';
+  import TreeChevron from '$lib/TreeChevron.svelte';
 
   let exampleRef: any;
 

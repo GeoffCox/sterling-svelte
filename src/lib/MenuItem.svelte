@@ -11,7 +11,7 @@
   import { writable } from 'svelte/store';
 
   // import { portal } from '../portal';
-  import { clickOutside } from '../clickOutside';
+  import { clickOutside } from './actions/clickOutside';
   import { afterUpdate, createEventDispatcher } from 'svelte/internal';
   import MenuItemDisplay from './MenuItemDisplay.svelte';
   import { menuBarContextKey, menuItemContextKey } from './Menus.constants';

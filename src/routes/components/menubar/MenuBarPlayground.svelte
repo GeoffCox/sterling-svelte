@@ -1,9 +1,9 @@
 <script lang="ts">
   import Playground from '../Playground.svelte';
 
-  import MenuItem from '$lib/containers/MenuItem.svelte';
-  import MenuBar from '$lib/containers/MenuBar.svelte';
-  import MenuSeparator from '$lib/containers/MenuSeparator.svelte';
+  import MenuItem from '$lib/MenuItem.svelte';
+  import MenuBar from '$lib/MenuBar.svelte';
+  import MenuSeparator from '$lib/MenuSeparator.svelte';
 
   let exampleRef: any;
 </script>

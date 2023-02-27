@@ -1,6 +1,6 @@
 <script lang="ts">
   import { v4 as uuid } from 'uuid';
-  import Label from '../display/Label.svelte';
+  import Label from './Label.svelte';
   import type { TextAreaResize } from './TextArea.types';
 
   export let value: string;
