@@ -8,22 +8,22 @@
 
   const dispatch = createEventDispatcher();
 
-  const raiseClose = (menuItemId: string) => {
-    dispatch('close', { menuItemId });
+  const raiseClose = (value: string) => {
+    dispatch('close', { value });
   };
 
-  const raiseOpen = (menuItemId: string) => {
-    dispatch('open', { menuItemId });
+  const raiseOpen = (value: string) => {
+    dispatch('open', { value });
   };
 
-  const raiseSelect = (menuItemId: string) => {
-    dispatch('select', { menuItemId });
+  const raiseSelect = (value: string) => {
+    dispatch('select', { value });
   };
 
   const children = writable<MenuItemRegistration[]>([]);
 
-  const openPreviousChild = (fromMenuItemId: string) => {
-    const index = $children?.findIndex((menuItem) => menuItem.id === fromMenuItemId);
+  const openPreviousChild = (currentValue: string) => {
+    const index = $children?.findIndex((menuItem) => menuItem.value === currentValue);
     if (index !== -1) {
       const focusIndex = index === 0 ? $children.length - 1 : index - 1;
       $children[focusIndex].focus();
@@ -31,8 +31,8 @@
     }
   };
 
-  const openNextChild = (fromMenuItemId: string) => {
-    const index = $children?.findIndex((menuItem) => menuItem.id === fromMenuItemId);
+  const openNextChild = (currentValue: string) => {
+    const index = $children?.findIndex((menuItem) => menuItem.value === currentValue);
     if (index !== -1) {
       const focusIndex = (index + 1) % $children.length;
       $children[focusIndex].focus();
@@ -40,8 +40,8 @@
     }
   };
 
-  const focusChild = (menuItemId: string) => {
-    const focusIndex = $children?.findIndex((menuItem) => menuItem.id === menuItemId);
+  const focusChild = (value: string) => {
+    const focusIndex = $children?.findIndex((menuItem) => menuItem.value === value);
     if (focusIndex !== -1) {
       $children[focusIndex].focus();
     }
@@ -52,7 +52,7 @@
       children.set([...$children, menuItem]);
     },
     unregister: (menuItem: MenuItemRegistration) => {
-      children.set($children.filter((x) => x.id !== menuItem.id));
+      children.set($children.filter((x) => x.value !== menuItem.value));
     },
     closeMenu: (recursive?: boolean) => {},
     focusPrevious: openPreviousChild,

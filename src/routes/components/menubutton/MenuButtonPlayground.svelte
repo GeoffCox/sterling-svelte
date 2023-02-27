@@ -15,16 +15,16 @@
 
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
-    <MenuButton menuItemId="file">
+    <MenuButton value="file">
       File
       <svelte:fragment slot="items">
-        <MenuItem menuItemId="file-new" text="New" />
-        <MenuItem menuItemId="file-open" text="Open..." />
-        <MenuItem menuItemId="file-save" text="Save" />
-        <MenuItem menuItemId="file-save-as" text="Save As..." disabled />
+        <MenuItem value="file-new" text="New" />
+        <MenuItem value="file-open" text="Open..." />
+        <MenuItem value="file-save" text="Save" />
+        <MenuItem value="file-save-as" text="Save As..." disabled />
         <MenuSeparator />
         <MenuItem
-          menuItemId="auto-save"
+          value="auto-save"
           role="menuitemcheckbox"
           text="Auto Save"
           checked={autoSave}
@@ -32,28 +32,28 @@
         />
         <MenuSeparator />
         <MenuItem
-          menuItemId="prefer-performance"
+          value="prefer-performance"
           role="menuitemradio"
           text="Performance Mode"
           checked={renderChoice === 'performance'}
           on:select={() => (renderChoice = 'performance')}
         />
         <MenuItem
-          menuItemId="prefer-quality"
+          value="prefer-quality"
           role="menuitemradio"
           text="Quality Mode"
           checked={renderChoice === 'quality'}
           on:select={() => (renderChoice = 'quality')}
         />
         <MenuSeparator />
-        <MenuItem menuItemId="file-share" text="Share">
-          <MenuItem menuItemId="file-share-email" text="E-mail" />
-          <MenuItem menuItemId="file-share-text" text="Text Messaging" />
-          <MenuItem menuItemId="file-share-internet" text="Entire Internet" />
+        <MenuItem value="file-share" text="Share">
+          <MenuItem value="file-share-email" text="E-mail" />
+          <MenuItem value="file-share-text" text="Text Messaging" />
+          <MenuItem value="file-share-internet" text="Entire Internet" />
         </MenuItem>
 
         <MenuSeparator />
-        <MenuItem menuItemId="file-quit" text="Quit" />
+        <MenuItem value="file-quit" text="Quit" />
       </svelte:fragment>
     </MenuButton>
   </svelte:fragment>>

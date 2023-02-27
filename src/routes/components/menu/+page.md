@@ -21,10 +21,10 @@ Use the open property to show or hide the menu.
 
 ```svelte
 <Menu {open} reference={buttonRef}>
-  <MenuItem menuItemId="new" text="New" />
-  <MenuItem menuItemId="open" text="Open" />
-  <MenuItem menuItemId="save" text="Save" />
-  <MenuItem menuItemId="close" text="Close" />
+  <MenuItem value="new" text="New" />
+  <MenuItem value="open" text="Open" />
+  <MenuItem value="save" text="Save" />
+  <MenuItem value="close" text="Close" />
 </Menu>
 ```
 

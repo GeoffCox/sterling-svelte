@@ -26,44 +26,44 @@ A clickable item within a menu.
 
 ## Usage
 
-Declare a hierarchy of MenuItems each with a unique ID and text to display.
+Declare a hierarchy of MenuItems each with a unique value and text to display.
 Children of a MenuItem will be in its submenu.
 
 ```ts
 const onSelect = (event) => {
-  alert('select', event.detail.menuItemId);
+  alert('select', event.detail.value);
 };
 ```
 
 ```svelte
-<MenuItem menuItemId="file" text="File" on:select={onSelect}>
-  <MenuItem menuItemId="new" text="New" />
-  <MenuItem menuItemId="open" text="Open" />
-  <MenuItem menuItemId="save" text="Save" />
-  <MenuItem menuItemId="close" text="Close" />
+<MenuItem value="file" text="File" on:select={onSelect}>
+  <MenuItem value="new" text="New" />
+  <MenuItem value="open" text="Open" />
+  <MenuItem value="save" text="Save" />
+  <MenuItem value="close" text="Close" />
 </MenuItem>
 ```
 
 ## Props
 
-| Name       | Type     | Default    | Description                            |
-| ---------- | -------- | ---------- | -------------------------------------- |
-| checked    | boolean  | false      | If the menu item is checked            |
-| disabled   | boolean  | false      | Disables the menu item                 |
-| open       | boolean  | false      | If the submenu is visible              |
-| menuItemId | string   |            | The unqiue ID of the menu item.        |
-| role       | string\* | 'menuitem' | The aria role of the menu item.        |
-| text       | string   |            | The text to display for the menu item. |
+| Name     | Type     | Default    | Description                            |
+| -------- | -------- | ---------- | -------------------------------------- |
+| checked  | boolean  | false      | If the menu item is checked            |
+| disabled | boolean  | false      | Disables the menu item                 |
+| open     | boolean  | false      | If the submenu is visible              |
+| value    | string   |            | The unqiue value of the menu item.     |
+| role     | string\* | 'menuitem' | The aria role of the menu item.        |
+| text     | string   |            | The text to display for the menu item. |
 
 - \* 'menuitem' | 'menuitemcheckbox' | 'menuitemradio'
 
 ## Events
 
-| Name     | Event.detail     | Description                                  |
-| -------- | ---------------- | -------------------------------------------- |
-| close\*  | `{ menuItemId }` | Raised when a menu item's submenu is closed. |
-| open\*   | `{ menuItemId }` | Raised when a menu item's submenu is opened. |
-| select\* | `{ menuItemId }` | Raised when a menu item is clicked/selected. |
+| Name     | Event.detail | Description                                  |
+| -------- | ------------ | -------------------------------------------- |
+| close\*  | `{ value }`  | Raised when a menu item's submenu is closed. |
+| open\*   | `{ value }`  | Raised when a menu item's submenu is opened. |
+| select\* | `{ value }`  | Raised when a menu item is clicked/selected. |
 
 - \* raised for a menu item or any of its submenu children.
 
@@ -94,13 +94,13 @@ portal
 
 The item slot is passed the following `let` parameters.
 
-| Let Param   | Type      | Description                                     |
-| ----------- | --------- | ----------------------------------------------- |
-| checked     | `boolean` | True if the item is checked.                    |
-| depth       | `number`  | Menu depth of the item starting at 0            |
-| disabled    | `boolean` | True if the item is disabled                    |
-| hasChildren | `boolean` | True if the item has children                   |
-| open        | `boolean` | True if the submenu is open                     |
-| menuItemId  | `string`  | Unique ID of the item within the menu hierarchy |
-| role        | `string`  | Aria role of the menu item                      |
-| text        | `string`  | Text to display                                 |
+| Let Param   | Type      | Description                                        |
+| ----------- | --------- | -------------------------------------------------- |
+| checked     | `boolean` | True if the item is checked.                       |
+| depth       | `number`  | Menu depth of the item starting at 0               |
+| disabled    | `boolean` | True if the item is disabled                       |
+| hasChildren | `boolean` | True if the item has children                      |
+| open        | `boolean` | True if the submenu is open                        |
+| value       | `string`  | Unique value of the item within the menu hierarchy |
+| role        | `string`  | Aria role of the menu item                         |
+| text        | `string`  | Text to display                                    |

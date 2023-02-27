@@ -29,14 +29,14 @@
   export let composed = false;
   export let disabled = false;
   export let open = false;
-  export let menuItemId: string;
+  export let value: string;
   export let role: 'menuitem' | 'menuitemcheckbox' | 'menuitemradio' = 'menuitem';
   export let text: string | undefined = undefined;
 
   // ----- Get Context ----- //
 
   const {
-    rootMenuItemId = menuItemId,
+    rootValue = value,
     depth = 0,
     register = undefined,
     unregister = undefined,
@@ -55,8 +55,8 @@
 
   const instanceId = uuid();
 
-  $: displayId = `${menuItemId}-display-${instanceId}`;
-  $: menuId = `${menuItemId}-menu-${instanceId}`;
+  $: displayId = `${value}-display-${instanceId}`;
+  $: menuId = `${value}-menu-${instanceId}`;
 
   let menuItemRef: HTMLButtonElement;
 
@@ -71,19 +71,19 @@
 
   const dispatch = createEventDispatcher();
 
-  const raiseClose = (menuItemId: string) => {
-    dispatch('close', { menuItemId });
-    onClose?.(menuItemId);
+  const raiseClose = (value: string) => {
+    dispatch('close', { value });
+    onClose?.(value);
   };
 
-  const raiseOpen = (menuItemId: string) => {
-    dispatch('open', { menuItemId });
-    onOpen?.(menuItemId);
+  const raiseOpen = (value: string) => {
+    dispatch('open', { value });
+    onOpen?.(value);
   };
 
   $: {
     if (hasChildren && open !== prevOpen) {
-      open ? raiseOpen(menuItemId) : raiseClose(menuItemId);
+      open ? raiseOpen(value) : raiseClose(value);
     }
     prevOpen = open;
   }
@@ -91,9 +91,9 @@
   // dispatches the event and bubbles it up the context
   // so that container components can subscribe to select
   // events for children.
-  const raiseSelect = (menuItemId: string) => {
-    dispatch('select', { menuItemId });
-    onSelect?.(menuItemId);
+  const raiseSelect = (value: string) => {
+    dispatch('select', { value });
+    onSelect?.(value);
   };
 
   // ----- Keyborg ----- //
@@ -122,7 +122,7 @@
     keyborg.subscribe(keyborgHandler);
 
     const menuItemSelf = {
-      id: menuItemId,
+      value,
       open: () => {
         open = true;
       },
@@ -157,7 +157,7 @@
             return false;
           } else if (depth > 0) {
             // When inside a menu, focus next sibling menu item.
-            focusNext?.(menuItemId);
+            focusNext?.(value);
             event.preventDefault();
             return false;
           }
@@ -167,7 +167,7 @@
             // When a top menu item, open the previous top-level menu
             open = false;
             closeMenu?.(true);
-            openPreviousMenu?.(rootMenuItemId);
+            openPreviousMenu?.(rootValue);
           } else {
             // When inside a menu, close the containing menu
             closeMenu?.();
@@ -183,7 +183,7 @@
             // Otherwise open the next top-level menu
             open = false;
             closeMenu?.(true);
-            openNextMenu?.(rootMenuItemId);
+            openNextMenu?.(rootValue);
           }
           event.preventDefault();
           return false;
@@ -196,7 +196,7 @@
             return false;
           } else if (depth > 0) {
             // When inside a menu ,focus the previous item
-            focusPrevious?.(menuItemId);
+            focusPrevious?.(value);
             event.preventDefault();
             return false;
           }
@@ -223,7 +223,7 @@
         event.stopPropagation();
         return false;
       } else {
-        raiseSelect(menuItemId);
+        raiseSelect(value);
         closeMenu?.(true);
       }
     }
@@ -236,7 +236,7 @@
 
     let element: HTMLElement | null = mouseEvent.target as HTMLElement;
     while (element) {
-      if (element.getAttribute('data-root-menu-item-id') === rootMenuItemId) {
+      if (element.getAttribute('data-root-value') === rootValue) {
         return;
       }
       element = element.parentElement;
@@ -247,13 +247,13 @@
   // ----- Set Context ----- //
 
   setContext<MenuItemContext>(menuItemContextKey, {
-    rootMenuItemId: rootMenuItemId,
+    rootValue: rootValue,
     depth: depth + 1,
     register: (menuItem: MenuItemRegistration) => {
       children.set([...$children, menuItem]);
     },
     unregister: (menuItem: MenuItemRegistration) => {
-      children.set($children.filter((x) => x.id !== menuItem.id));
+      children.set($children.filter((x) => x.value !== menuItem.value));
     },
     closeMenu: (recursive?: boolean) => {
       open = false;
@@ -265,8 +265,8 @@
         menuItemRef?.focus();
       }
     },
-    focusPrevious: (fromMenuItemId) => focusPreviousChild($children, fromMenuItemId),
-    focusNext: (fromMenuItemId) => focusNextChild($children, fromMenuItemId),
+    focusPrevious: (currentValue) => focusPreviousChild($children, currentValue),
+    focusNext: (currentValue) => focusNextChild($children, currentValue),
     onOpen: raiseOpen,
     onClose: raiseClose,
     onSelect: raiseSelect
@@ -284,8 +284,8 @@
   class:composed
   class:disabled
   class:using-keyboard={usingKeyboard}
-  data-menu-item-id={menuItemId}
-  data-root-menu-item-id={rootMenuItemId}
+  data-value={value}
+  data-root-value={rootValue}
   {role}
   tabindex={0}
   type="button"
@@ -322,7 +322,7 @@
   {...$$restProps}
 >
   <div class="item" id={displayId}>
-    <slot name="item" {checked} {disabled} {hasChildren} {depth} {menuItemId} {open} {role} {text}>
+    <slot name="item" {checked} {disabled} {hasChildren} {depth} {value} {open} {role} {text}>
       <MenuItemDisplay {checked} hasChildren={depth > 0 && hasChildren} menuItemRole={role}
         >{text}</MenuItemDisplay
       >

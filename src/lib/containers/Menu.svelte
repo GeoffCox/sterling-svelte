@@ -2,7 +2,7 @@
   import type { MenuItemContext } from './Menus.types';
   import type { Placement } from '@floating-ui/dom';
 
-  import { getContext } from 'svelte';
+  import { getContext, onMount } from 'svelte';
   import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 
   import { portal } from '../portal';
@@ -16,7 +16,7 @@
 
   // ----- Get Context ----- //
 
-  const { rootMenuItemId, depth = 0 } = getContext<MenuItemContext>(menuItemContextKey) || {};
+  const { rootValue, depth = 0 } = getContext<MenuItemContext>(menuItemContextKey) || {};
 
   // ----- Portal Host ----- //
 
@@ -33,10 +33,24 @@
 
   const portalTarget = ensurePortalHost();
 
+  // ----- Body Height Change ----- //
+
+  let bodyHeight = 0;
+
+  // create an Observer instance
+  const resizeObserver = new ResizeObserver((entries) => {
+    console.log('Body height changed:', entries[0].target.clientHeight);
+    bodyHeight = entries[0].target.clientHeight;
+  });
+
   // ----- Position ----- //
 
   const menuPlacement = (depth > 1 ? 'right-start' : 'bottom-start') as Placement;
-  const middleware = [offset({ mainAxis: -2 }), flip(), shift({ padding: 0 })];
+  const middleware = [
+    offset({ mainAxis: -2 }),
+    flip(),
+    shift({ padding: 0, mainAxis: true, crossAxis: true })
+  ];
 
   const computeMenuPosition = async () => {
     if (reference && menuRef) {
@@ -58,35 +72,46 @@
     }
   };
 
-  $: open, reference, menuRef, autoUpdateMenuPosition();
+  $: menuRef, reference, autoUpdateMenuPosition();
+  $: open, bodyHeight, computeMenuPosition();
+
+  onMount(() => {
+    // start observing a DOM node
+    resizeObserver.observe(document.body);
+
+    return () => {
+      resizeObserver.unobserve(document.body);
+    };
+  });
 </script>
 
 {#if open}
-  <div class="portal" data-root-menu-id={rootMenuItemId} use:portal={{ target: portalTarget }}>
+  <div
+    class="sterling-menu-portal"
+    data-root-value={rootValue}
+    use:portal={{ target: portalTarget }}
+  >
     <div
       bind:this={menuRef}
-      class="menu"
+      class="sterling-menu"
+      role="menu"
       class:open
       {...$$restProps}
       style="left:{menuPosition.x}px; top:{menuPosition.y}px"
     >
-      {#if $$slots.default}
-        <!-- TODO: Remove this extra children div.  Probably not needed -->
-        <div class="children" role="menu">
-          <slot />
-        </div>
-      {/if}
+      <slot />
     </div>
   </div>
 {/if}
 
 <style>
-  .portal {
+  .sterling-menu-portal {
     position: relative;
     overflow: visible;
+    background: rgba(255, 0, 0, 0.1);
   }
 
-  .menu {
+  .sterling-menu {
     background-color: var(--stsv-Common__background-color);
     border-color: var(--stsv-Common__border-color);
     border-radius: var(--stsv-Common__border-radius);
@@ -101,19 +126,17 @@
     z-index: 1;
     top: 0;
     left: 0;
-  }
 
-  .menu.open {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-  }
-
-  .children {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     row-gap: calc(2 * var(--stsv-Common__outline-width));
     padding: 0.25em;
+  }
+
+  .sterling-menu.open {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
   }
 </style>

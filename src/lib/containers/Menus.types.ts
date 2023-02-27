@@ -1,28 +1,28 @@
 export type MenuItemRegistration = {
-  id: string;
+  value: string;
   open: () => void;
   close: () => void;
   focus: () => void;
 };
 
 export type MenuBarContext = {
-  openPreviousMenu?: (fromMenuItemId: string) => void;
-  openNextMenu?: (fromMenuItemId: string) => void;
+  openPreviousMenu?: (currentValue: string) => void;
+  openNextMenu?: (currentValue: string) => void;
 };
 
 export type MenuItemContext = {
-  rootMenuItemId?: string;
+  rootValue?: string;
   depth?: number;
 
   register?: (menuItem: MenuItemRegistration) => void;
   unregister?: (menuItem: MenuItemRegistration) => void;
 
-  focusPrevious?: (fromMenuItemId: string) => void;
-  focusNext?: (fromMenuItemId: string) => void;
+  focusPrevious?: (currentValue: string) => void;
+  focusNext?: (currentValue: string) => void;
 
   closeMenu?: (recursive?: boolean) => void;
 
-  onOpen?: (menuItemId: string) => void;
-  onClose?: (menuItemId: string) => void;
-  onSelect?: (menuItemId: string) => void;
+  onOpen?: (value: string) => void;
+  onClose?: (value: string) => void;
+  onSelect?: (value: string) => void;
 };

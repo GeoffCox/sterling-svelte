@@ -25,16 +25,16 @@ Declare a MenuBar containing a hierarchy of MenuItems.
 
 ```svelte
 <MenuBar on:select={onSelect}>
-  <MenuItem menuItemId="file" text="File">
+  <MenuItem value="file" text="File">
     <!-- ... child MenuItems -->
   </MenuItem>
-  <MenuItem menuItemId="edit" text="Edit">
+  <MenuItem value="edit" text="Edit">
     <!-- ... child MenuItems -->
   </MenuItem>
-  <MenuItem menuItemId="view" text="View">
+  <MenuItem value="view" text="View">
     <!-- ... child MenuItems -->
   </MenuItem>
-  <MenuItem menuItemId="help" text="Help">
+  <MenuItem value="help" text="Help">
     <!-- ... child MenuItems -->
   </MenuItem>
 </MenuBar>
@@ -48,12 +48,12 @@ Declare a MenuBar containing a hierarchy of MenuItems.
 
 ## Events
 
-| Name     | Event.detail     | Description                                  |
-| -------- | ---------------- | -------------------------------------------- |
-| (div)    |                  | HTML div events                              |
-| close\*  | `{ menuItemId }` | Raised when a menu item's submenu is closed. |
-| open\*   | `{ menuItemId }` | Raised when a menu item's submenu is opened. |
-| select\* | `{ menuItemId }` | Raised when a menu item is clicked/selected. |
+| Name     | Event.detail | Description                                  |
+| -------- | ------------ | -------------------------------------------- |
+| (div)    |              | HTML div events                              |
+| close\*  | `{ value }`  | Raised when a menu item's submenu is closed. |
+| open\*   | `{ value }`  | Raised when a menu item's submenu is opened. |
+| select\* | `{ value }`  | Raised when a menu item is clicked/selected. |
 
 - \* raised for any contained menu item.
 
@@ -78,13 +78,13 @@ MenuItemBar
 
 The item slot is passed the following `let` parameters.
 
-| Let Param   | Type      | Description                                         |
-| ----------- | --------- | --------------------------------------------------- | --- |
-| checked     | `boolean` | True if the item is checked.                        |
-| depth       | `number`  | The menu depth of the item starting at 0.           |
-| disabled    | `boolean` | True if the item is disabled                        |
-| hasChildren | `boolean` | True if the item has children                       |
-| open        | `boolean` | True if the submenu is open                         |
-| menuItemId  | `string`  | The unique ID of the item within the menu hierarchy |     |
-| role        | `string`  | The aria role of the menu item                      |
-| text        | `string`  | The text to display                                 |
+| Let Param   | Type      | Description                                            |
+| ----------- | --------- | ------------------------------------------------------ | --- |
+| checked     | `boolean` | True if the item is checked.                           |
+| depth       | `number`  | The menu depth of the item starting at 0.              |
+| disabled    | `boolean` | True if the item is disabled                           |
+| hasChildren | `boolean` | True if the item has children                          |
+| open        | `boolean` | True if the submenu is open                            |
+| value       | `string`  | The unique value of the item within the menu hierarchy |     |
+| role        | `string`  | The aria role of the menu item                         |
+| text        | `string`  | The text to display                                    |

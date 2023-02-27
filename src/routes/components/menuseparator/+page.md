@@ -19,10 +19,10 @@ A styled line for separating menu items.
 Declare a menu separator within a menu item.
 
 ```svelte
-<MenuItem menuItemId="file" text="File">
-  <MenuItem menuItemId="new-file" text="New..." />
+<MenuItem value="file" text="File">
+  <MenuItem value="new-file" text="New..." />
   <MenuSeparator />
-  <MenuItem menuItemId="open-file" text="Open..." />
+  <MenuItem value="open-file" text="Open..." />
 </MenuItem>
 ```
 

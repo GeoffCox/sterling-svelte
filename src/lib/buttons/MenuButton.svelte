@@ -13,9 +13,9 @@
 
   // ----- Props ----- //
 
-  export let menuItemId: string;
   export let open = false;
   export let shape: ButtonShape = 'rounded';
+  export let value: string;
   export let variant: ButtonVariant = 'regular';
 
   // ----- State ----- //
@@ -23,7 +23,7 @@
   const instanceId = uuid();
 
   let reference: HTMLDivElement;
-  $: menuId = `${menuItemId}-menu-${instanceId}`;
+  $: menuId = `${value}-menu-${instanceId}`;
   $: hasChildren = $$slots.items;
 
   const children = writable<MenuItemRegistration[]>([]);
@@ -32,16 +32,16 @@
 
   const dispatch = createEventDispatcher();
 
-  const raiseClose = (menuItemId: string) => {
-    dispatch('close', { menuItemId });
+  const raiseClose = (value: string) => {
+    dispatch('close', { value });
   };
 
-  const raiseOpen = (menuItemId: string) => {
-    dispatch('open', { menuItemId });
+  const raiseOpen = (value: string) => {
+    dispatch('open', { value });
   };
 
-  const raiseSelect = (menuItemId: string) => {
-    dispatch('select', { menuItemId });
+  const raiseSelect = (value: string) => {
+    dispatch('select', { value });
   };
 
   const onClick = () => {
@@ -54,19 +54,19 @@
   // ----- Set Context ----- //
 
   setContext<MenuItemContext>(menuItemContextKey, {
-    rootMenuItemId: menuItemId,
+    rootValue: value,
     depth: 1,
     register: (menuItem: MenuItemRegistration) => {
       children.set([...$children, menuItem]);
     },
     unregister: (menuItem: MenuItemRegistration) => {
-      children.set($children.filter((x) => x.id !== menuItem.id));
+      children.set($children.filter((x) => x.value !== menuItem.value));
     },
     closeMenu: (recursive?: boolean) => {
       open = false;
     },
-    focusPrevious: (fromMenuItemId) => focusPreviousChild($children, fromMenuItemId),
-    focusNext: (fromMenuItemId) => focusNextChild($children, fromMenuItemId),
+    focusPrevious: (currentValue) => focusPreviousChild($children, currentValue),
+    focusNext: (currentValue) => focusNextChild($children, currentValue),
     onOpen: raiseOpen,
     onClose: raiseClose,
     onSelect: raiseSelect
@@ -82,8 +82,8 @@
   aria-expanded={open}
   aria-haspopup={hasChildren}
   aria-owns={menuId}
-  data-menu-item-id={menuItemId}
-  data-root-menu-item-id={menuItemId}
+  data-value={value}
+  data-root-value={value}
   {variant}
   {shape}
   on:blur
