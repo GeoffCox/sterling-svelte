@@ -1,17 +1,18 @@
 <script lang="ts">
+  import { computePosition, flip, offset, shift, autoUpdate } from '@floating-ui/dom';
   import { createEventDispatcher, onMount, tick } from 'svelte';
   import { v4 as uuid } from 'uuid';
-  import { computePosition, flip, offset, shift, autoUpdate } from '@floating-ui/dom';
+
   import { clickOutside } from '../clickOutside';
   import Label from '../display/Label.svelte';
   import List from '../containers/List.svelte';
-  import ListItem from '../containers/ListItem.svelte';
+
+  const inputId = uuid();
+  const popupId = uuid();
 
   /*--------------------
 		Properties
 	  --------------------*/
-
-  type T = $$Generic;
 
   /**
    * Disables the list and all items
@@ -19,32 +20,14 @@
   export let disabled: boolean = false;
 
   /**
-   * The items to list.
-   */
-  export let items: T[] = [];
-
-  /**
    * Opens the popup to select from the items
    */
   export let open = false;
 
   /**
-   * The index of the selected item
+   * The selected value
    */
-  export let selectedIndex = 0;
-
-  /**
-   * The selected item (read only)
-   */
-  export let selectedItem: T | undefined = undefined;
-
-  $: {
-    selectedItem = items[selectedIndex];
-  }
-
-  const inputId = uuid();
-
-  //TODO: Allow callers to control the popup width and height
+  export let selectedValue: string | undefined = undefined;
 
   /*--------------------
 		State
@@ -54,13 +37,12 @@
   let prevOpen = false;
 
   // Tracks the pending selected index
-  let pendingSelectedIndex = selectedIndex;
+  let pendingSelectedValue = selectedValue;
 
   let selectRef: HTMLDivElement;
   let popupRef: HTMLDivElement;
   let listRef: List;
 
-  const popupId = uuid();
   let popupPosition: { x?: number; y?: number } = {
     x: undefined,
     y: undefined
@@ -71,35 +53,39 @@
 	  --------------------*/
   const dispatch = createEventDispatcher();
 
-  const raiseItemSelected = (index: number) => {
-    dispatch('itemSelected', { index, item: items[index] });
+  const raiseSelect = (value?: string) => {
+    dispatch('select', { value });
   };
 
-  const raiseItemSelectPending = (index: number) => {
-    dispatch('itemSelectPending', { index, item: items[index] });
+  const raisePending = (value?: string) => {
+    dispatch('pending', { value });
   };
 
   /*--------------------
 		Reactions
 	  --------------------*/
 
-  $: selectedIndex,
-    () => {
-      pendingSelectedIndex = selectedIndex;
-    };
-
   $: {
-    raiseItemSelected(selectedIndex);
+    pendingSelectedValue = selectedValue;
   }
 
   $: {
-    raiseItemSelectPending(pendingSelectedIndex);
+    raiseSelect(selectedValue);
+  }
+
+  $: {
+    if (open) {
+      raisePending(pendingSelectedValue);
+    }
   }
 
   $: {
     if (open && !prevOpen) {
       prevOpen = true;
-      tick().then(() => listRef?.focusSelectedItem());
+      tick().then(() => {
+        listRef?.focus();
+        listRef?.scrollToSelectedItem();
+      });
     } else if (prevOpen) {
       prevOpen = false;
       tick().then(() => selectRef?.focus());
@@ -139,23 +125,36 @@
       switch (event.key) {
         case ' ':
           {
-            open = !open;
+            if (!open) {
+              open = true;
+            }
             event.preventDefault();
             event.stopPropagation();
+            return false;
           }
           break;
         case 'ArrowUp':
           {
-            listRef.selectPreviousItem();
+            if (selectedValue) {
+              listRef.selectPreviousItem();
+            } else {
+              listRef.selectLastItem();
+            }
             event.preventDefault();
             event.stopPropagation();
+            return false;
           }
           break;
         case 'ArrowDown':
           {
-            listRef.selectNextItem();
+            if (selectedValue) {
+              listRef.selectNextItem();
+            } else {
+              listRef.selectFirstItem();
+            }
             event.preventDefault();
             event.stopPropagation();
+            return false;
           }
           break;
       }
@@ -167,18 +166,20 @@
       switch (event.key) {
         case 'Enter':
           {
-            selectedIndex = pendingSelectedIndex;
+            selectedValue = pendingSelectedValue;
             open = !open;
             event.preventDefault();
             event.stopPropagation();
+            return false;
           }
           break;
         case 'Escape':
           {
-            pendingSelectedIndex = selectedIndex;
+            pendingSelectedValue = selectedValue;
             open = !open;
             event.preventDefault();
             event.stopPropagation();
+            return false;
           }
           break;
       }
@@ -186,20 +187,16 @@
   };
 
   const onListClick: svelte.JSX.MouseEventHandler<any> = (event) => {
-    if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
-      selectedIndex = pendingSelectedIndex;
-      open = false;
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    open = false;
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
   };
 
-  const onPendingItemSelected = (event: CustomEvent<{ itemId: string }>) => {
-    console.log('onPendingItemSelected', event);
-    const itemId = event.detail.itemId;
-    pendingSelectedIndex = Number.parseInt(itemId);
+  const onListSelect = (event: CustomEvent<{ value: string }>) => {
+    pendingSelectedValue = event.detail.value;
     if (!open) {
-      selectedIndex = pendingSelectedIndex;
+      selectedValue = pendingSelectedValue;
     }
   };
 </script>
@@ -245,20 +242,17 @@ A single item that can be selected from a popup list of items.
 >
   {#if $$slots.label}
     <Label {disabled} for={inputId}>
-      <!-- BUGBUG: Problem with slot let params conflict
-        It seems that when a default slot is used multiple times in a module,
-        the first time sets the possible let params.
-        If we don't define the same let params on this label slot that 
-        is the default slot for label, then using the default slot for list
-        will error saying the property is not defined.
-      -->
-      <slot name="label" index={0} item={undefined} selected={false} />
+      <slot name="label" {disabled} {selectedValue} />
     </Label>
   {/if}
   <div class="input" id={inputId}>
     <div class="value">
       <slot name="value">
-        {items[selectedIndex]}
+        {#if selectedValue}
+          {selectedValue}
+        {:else}
+          <span>&nbsp;</span>
+        {/if}
       </slot>
     </div>
     <div class="button">
@@ -275,26 +269,17 @@ A single item that can be selected from a popup list of items.
     style="left:{popupPosition.x}px; top:{popupPosition.y}px"
   >
     <div class="popup-content">
-      <slot name="list">
-        <List
-          bind:this={listRef}
-          selectedItemId={`${pendingSelectedIndex}`}
-          {disabled}
-          on:click={onListClick}
-          on:keydown={onListKeydown}
-          on:select={onPendingItemSelected}
-        >
-          {#each items as item, index}
-            <ListItem {disabled} itemId={`${index}`}>
-              <svelte:fragment let:disabled let:itemId let:selected>
-                <slot {disabled} {index} {item} {selected}>
-                  {item}
-                </slot>
-              </svelte:fragment>
-            </ListItem>
-          {/each}
-        </List>
-      </slot>
+      <List
+        bind:this={listRef}
+        {disabled}
+        selectedValue={pendingSelectedValue}
+        on:click={onListClick}
+        on:keydown={onListKeydown}
+        on:select={onListSelect}
+        tabIndex={open ? 0 : -1}
+      >
+        <slot />
+      </List>
     </div>
   </div>
 </div>
@@ -307,6 +292,7 @@ A single item that can be selected from a popup list of items.
     border-style: var(--stsv-Input__border-style);
     border-width: var(--stsv-Input__border-width);
     color: var(--stsv-Input__color);
+    cursor: pointer;
     padding: 0;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
@@ -317,7 +303,7 @@ A single item that can be selected from a popup list of items.
     color: var(--stsv-Input__color--hover);
   }
 
-  .sterling-select:focus-within {
+  .sterling-select:focus-visible {
     background-color: var(--stsv-Input__background-color--focus);
     border-color: var(--stsv-Input__border-color--focus);
     color: var(--stsv-Input__color--focus);
@@ -393,9 +379,10 @@ A single item that can be selected from a popup list of items.
   }
 
   .popup {
+    background-color: var(--stsv-Common__background-color);
     box-sizing: border-box;
     display: none;
-    overflow: hidden;
+    overflow: visible;
     position: absolute;
     box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 4px -1px;
     width: fit-content;

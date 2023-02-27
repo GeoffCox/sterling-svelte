@@ -22,7 +22,7 @@ Children of a MenuItem will be in its submenu.
 
 ```ts
 const onSelect = (event) => {
-  console.log('select', event.detail.menuItemId);
+  alert('select', event.detail.menuItemId);
 };
 ```
 

@@ -25,6 +25,7 @@ export type { TabData } from './containers/Tabs.types';
 
 // ----- Component constants ----- //
 export { listContextKey } from './containers/List.constants';
+export { treeContextKey, treeItemContextKey } from './containers/Tree.constants';
 
 // ----- Components ----- //
 

@@ -13,26 +13,26 @@
   let disabled = false;
   let horizontal = false;
   let label = 'COUNTRIES';
-  let selectedItemId: string | undefined = undefined;
-  let selectedItemIdText: string | undefined = '';
+  let selectedValue: string | undefined = undefined;
+  let selectedValueText: string | undefined = '';
 
-  const updateSelectedItemId = debounce((itemId: string) => {
-    selectedItemId = itemId;
+  const updateSelectedItemId = debounce((itemId?: string) => {
+    selectedValue = itemId;
   }, 500);
 
   $: {
-    updateSelectedItemId(selectedItemIdText);
+    updateSelectedItemId(selectedValueText);
   }
 
   $: {
-    selectedItemIdText = selectedItemId;
+    selectedValueText = selectedValue;
   }
 </script>
 
 <Playground bind:this={exampleRef}>
   <div class="component" class:horizontal slot="component">
     <List
-      bind:selectedItemId
+      bind:selectedValue
       {composed}
       {disabled}
       {horizontal}
@@ -43,7 +43,7 @@
     >
       <svelte:fragment slot="label">{label}</svelte:fragment>
       {#each countries as country}
-        <ListItem itemId={country}>{country}</ListItem>
+        <ListItem value={country}>{country}</ListItem>
       {/each}
     </List>
   </div>
@@ -52,10 +52,10 @@
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
     <Checkbox bind:checked={horizontal}><span slot="label">horizontal</span></Checkbox>
     <Input bind:value={label}><span slot="label">label</span></Input>
-    <Input bind:value={selectedItemIdText}><span slot="label">selectedItemId</span></Input>
+    <Input bind:value={selectedValueText}><span slot="label">selectedValue</span></Input>
   </svelte:fragment>
   <svelte:fragment slot="status">
-    <div>selectedItemId: {selectedItemId}</div>
+    <div>selectedItemId: {selectedValue}</div>
   </svelte:fragment>
 </Playground>
 

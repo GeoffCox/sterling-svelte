@@ -12,16 +12,27 @@ An item appearing within a List.
 
 ## Features
 
-- Displays selected on the parent List's selectedItemId.
-- Displays disabled based on the parent List's disabled.
+- Displays `selected` on List `selectedValue`.
+- Displays `disabled` based on List `disabled`.
+- Applies `role="listitem"` and `data-value={value}` to support selection by List.
+
+## Usage
+
+```svelte
+<List>
+  <ListItem value="example">An example item</ListItem>
+</List>
+```
 
 ## Props
 
-| Name     | Type                 | Description              |
-| -------- | -------------------- | ------------------------ |
-| (div)    | HTMLDivElement props | Built in HTML properties |
-| disabled | boolean              | Disables the list item   |
-| itemId   | string               | The ID of the item       |
+| Name     | Type                 | Description                  |
+| -------- | -------------------- | ---------------------------- |
+| (div)    | HTMLDivElement props | Built in HTML properties     |
+| disabled | `boolean`            | Disables the list item       |
+| value    | `string`             | The value of the list item\* |
+
+- \* Should be unique within the list
 
 ## Anatomy
 
@@ -42,5 +53,5 @@ ListItem
 | ---------- | --------- | --------------- |
 | disabled   | `boolean` | default         |
 | horizontal | `boolean` | default         |
-| itemId     | `string`  | default         |
 | selected   | `boolean` | default         |
+| value      | `string`  | default         |

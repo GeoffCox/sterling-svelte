@@ -15,13 +15,13 @@
   let selected = false;
   let text = 'Sterling';
 
-  const selectedItemIdStore = writable<string | undefined>('');
+  const selectedValueStore = writable<string | undefined>('');
   const horizontalStore = writable<boolean>(horizontal);
   const disabledStore = writable<boolean>(disabled);
 
   setContext<ListContext>(listContextKey, {
     disabled: disabledStore,
-    selectedItemId: selectedItemIdStore,
+    selectedValue: selectedValueStore,
     horizontal: horizontalStore
   });
 
@@ -30,13 +30,13 @@
   }
 
   $: {
-    selected ? selectedItemIdStore.set('itemId') : selectedItemIdStore.set('');
+    selected ? selectedValueStore.set('sterling') : selectedValueStore.set('');
   }
 </script>
 
 <Playground bind:this={exampleRef}>
   <div class="component" class:horizontal slot="component">
-    <ListItem itemId="itemId">{text}</ListItem>
+    <ListItem value="sterling">{text}</ListItem>
   </div>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>

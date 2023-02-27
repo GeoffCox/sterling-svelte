@@ -6,13 +6,13 @@
   import type { ListContext } from './List.types';
 
   export let disabled = false;
-  export let itemId: string | undefined;
+  export let value: string;
 
   // ----- GetContext ----- //
 
   const {
     disabled: listDisabled,
-    selectedItemId,
+    selectedValue,
     horizontal
   } = getContext<ListContext>(listContextKey);
 
@@ -20,9 +20,7 @@
   let itemRef: HTMLDivElement;
 
   $: _disabled = disabled || $listDisabled;
-  $: selected = $selectedItemId === itemId;
-
-  $: _itemId = itemId ?? `list-item-${uuid()}`;
+  $: selected = $selectedValue === value;
 </script>
 
 <div
@@ -31,7 +29,7 @@
   class="sterling-list-item"
   class:disabled={_disabled}
   class:selected
-  data-list-item-id={itemId}
+  data-value={value}
   role="listitem"
   on:blur
   on:click
@@ -60,7 +58,7 @@
   on:wheel
   {...$$restProps}
 >
-  <slot {disabled} {horizontal} {itemId} {selected}>{itemId}</slot>
+  <slot {disabled} {horizontal} {selected} {value}>{value}</slot>
 </div>
 
 <style>

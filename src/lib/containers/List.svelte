@@ -31,9 +31,9 @@
   export let horizontal = false;
 
   /**
-   * The ID of the selected item.
+   * The value of the selected item.
    */
-  export let selectedItemId: string | undefined = undefined;
+  export let selectedValue: string | undefined = undefined;
 
   // ----- State ----- //
 
@@ -44,7 +44,7 @@
 
   const disabledStore = writable<boolean>(disabled);
   const horizontalStore = writable<boolean>(horizontal);
-  const selectedItemIdStore = writable<string | undefined>(selectedItemId);
+  const selectedValueStore = writable<string | undefined>(selectedValue);
 
   $: {
     disabledStore.set(disabled);
@@ -55,23 +55,23 @@
   }
 
   $: {
-    selectedItemIdStore.set(selectedItemId);
+    selectedValueStore.set(selectedValue);
   }
 
   $: {
-    selectedItemId = $selectedItemIdStore;
+    selectedValue = $selectedValueStore;
   }
 
   // ----- Events ----- //
 
   const dispatch = createEventDispatcher();
 
-  const raiseSelect = (itemId?: string) => {
-    dispatch('select', { itemId });
+  const raiseSelect = (value?: string) => {
+    dispatch('select', { value });
   };
 
   $: {
-    raiseSelect(selectedItemId);
+    raiseSelect(selectedValue);
   }
 
   // ----- Keyborg ----- //
@@ -96,33 +96,41 @@
 
   // ----- Selection ----- //
 
+  const isElementListItem = (candidate: Element) => {
+    return (
+      candidate &&
+      candidate.getAttribute('data-value') !== null &&
+      candidate.getAttribute('data-value') !== undefined &&
+      candidate.getAttribute('role') === 'listitem'
+    );
+  };
   const getSelectedItemElement = () => {
     if (
-      lastSelectedItemRef &&
-      lastSelectedItemRef.getAttribute('data-list-item-id') === selectedItemId &&
-      lastSelectedItemRef.closest('[role="listbox]') === listRef
+      isElementListItem(lastSelectedItemRef) &&
+      lastSelectedItemRef?.getAttribute('data-value') === selectedValue &&
+      lastSelectedItemRef?.closest('[role="list"]') === listRef
     ) {
       return lastSelectedItemRef;
     } else {
-      return listRef?.querySelector('[data-list-item-id][aria-selected=true]');
+      return listRef?.querySelector('[data-value][aria-selected=true]');
     }
   };
 
-  const selectItem = (itemId: string, element: HTMLElement) => {
-    selectedItemIdStore.set(itemId);
+  const selectItem = (value: string, element: HTMLElement) => {
+    selectedValueStore.set(value);
     lastSelectedItemRef = element;
     element.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   };
 
   export const selectFirstItem = () => {
     let candidate: Element | undefined | null = listRef?.firstElementChild;
-    while (candidate && candidate.getAttribute('data-list-item-id') === null) {
+    while (candidate && !isElementListItem(candidate)) {
       candidate = candidate.nextElementSibling;
     }
-    let candidateItemId = candidate?.getAttribute('data-list-item-id');
+    let candidateValue = candidate?.getAttribute('data-value');
 
-    if (candidateItemId && candidate) {
-      selectItem(candidateItemId, candidate as HTMLElement);
+    if (candidateValue && candidate) {
+      selectItem(candidateValue, candidate as HTMLElement);
       return true;
     }
 
@@ -132,13 +140,13 @@
   export const selectPreviousItem = () => {
     let selectedItem = getSelectedItemElement();
     let candidate = selectedItem?.previousElementSibling;
-    while (candidate && candidate.getAttribute('data-list-item-id') === null) {
+    while (candidate && !isElementListItem(candidate)) {
       candidate = candidate.previousElementSibling;
     }
-    let candidateItemId = candidate?.getAttribute('data-list-item-id');
+    let candidateValue = candidate?.getAttribute('data-value');
 
-    if (candidateItemId && candidate) {
-      selectItem(candidateItemId, candidate as HTMLElement);
+    if (candidateValue && candidate) {
+      selectItem(candidateValue, candidate as HTMLElement);
       return true;
     }
 
@@ -148,13 +156,13 @@
   export const selectNextItem = () => {
     let selectedItem = getSelectedItemElement();
     let candidate = selectedItem?.nextElementSibling;
-    while (candidate && candidate.getAttribute('data-list-item-id') === null) {
+    while (candidate && !isElementListItem(candidate)) {
       candidate = candidate.nextElementSibling;
     }
-    let candidateItemId = candidate?.getAttribute('data-list-item-id');
+    let candidateValue = candidate?.getAttribute('data-value');
 
-    if (candidateItemId && candidate) {
-      selectItem(candidateItemId, candidate as HTMLElement);
+    if (candidateValue && candidate) {
+      selectItem(candidateValue, candidate as HTMLElement);
       return true;
     }
 
@@ -163,17 +171,13 @@
 
   export const selectLastItem = () => {
     let candidate: Element | undefined | null = listRef?.lastElementChild;
-    while (
-      candidate &&
-      (candidate.getAttribute('data-list-item-id') === null ||
-        candidate.classList.contains('disabled'))
-    ) {
+    while (candidate && !isElementListItem(candidate)) {
       candidate = candidate.previousElementSibling;
     }
-    let candidateItemId = candidate?.getAttribute('data-list-item-id');
+    let candidateValue = candidate?.getAttribute('data-value');
 
-    if (candidateItemId && candidate) {
-      selectItem(candidateItemId, candidate as HTMLElement);
+    if (candidateValue && candidate) {
+      selectItem(candidateValue, candidate as HTMLElement);
       return true;
     }
 
@@ -193,14 +197,14 @@
   const onClick: svelte.JSX.MouseEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
       let candidate: HTMLElement | null | undefined = event.target as HTMLElement;
-      let candidateItemId: string | null | undefined = candidate?.getAttribute('data-list-item-id');
+      let candidateValue: string | null | undefined = candidate?.getAttribute('data-value');
 
-      if (candidateItemId === undefined || candidateItemId === null) {
-        candidate = candidate?.closest<HTMLElement>('[data-list-item-id]');
-        candidateItemId = candidate?.getAttribute('data-list-item-id');
+      if (candidateValue === undefined || candidateValue === null) {
+        candidate = candidate?.closest<HTMLElement>('[data-value]');
+        candidateValue = candidate?.getAttribute('data-value');
       }
-      if (candidateItemId && candidate) {
-        selectItem(candidateItemId, candidate);
+      if (candidateValue && candidate) {
+        selectItem(candidateValue, candidate);
       }
     }
   };
@@ -220,36 +224,32 @@
           return false;
         case 'ArrowLeft':
           if (horizontal) {
-            selectedItemId !== undefined ? selectPreviousItem() : selectLastItem();
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
+            selectedValue !== undefined ? selectPreviousItem() : selectLastItem();
           }
-          break;
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
         case 'ArrowRight':
           if (horizontal) {
-            selectedItemId !== undefined ? selectNextItem() : selectFirstItem();
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
+            selectedValue !== undefined ? selectNextItem() : selectFirstItem();
           }
-          break;
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
         case 'ArrowUp':
           if (!horizontal) {
-            selectedItemId !== undefined ? selectPreviousItem() : selectLastItem();
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
+            selectedValue !== undefined ? selectPreviousItem() : selectLastItem();
           }
-          break;
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
         case 'ArrowDown':
           if (!horizontal) {
-            selectedItemId !== undefined ? selectNextItem() : selectFirstItem();
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
+            selectedValue !== undefined ? selectNextItem() : selectFirstItem();
           }
-          break;
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
       }
     }
   };
@@ -258,7 +258,7 @@
 
   setContext<ListContext>(listContextKey, {
     disabled: disabledStore,
-    selectedItemId: selectedItemIdStore,
+    selectedValue: selectedValueStore,
     horizontal: horizontalStore
   });
 </script>
@@ -277,11 +277,11 @@ A list of items where a single item can be selected.
 >
   {#if $$slots.label}
     <Label {disabled} for={listId}>
-      <slot name="label" {composed} {disabled} {horizontal} {selectedItemId} />
+      <slot name="label" {composed} {disabled} {horizontal} {selectedValue} />
     </Label>
   {/if}
   <div
-    aria-activedescendant={selectedItemId}
+    aria-activedescendant={selectedValue}
     aria-orientation={horizontal ? 'horizontal' : 'vertical'}
     bind:this={listRef}
     class="list"
@@ -315,7 +315,7 @@ A list of items where a single item can be selected.
     on:paste
     {...$$restProps}
   >
-    <slot {composed} {disabled} {horizontal} {selectedItemId} />
+    <slot {composed} {disabled} {horizontal} {selectedValue} />
   </div>
 </div>
 
