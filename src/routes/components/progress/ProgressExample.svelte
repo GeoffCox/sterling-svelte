@@ -7,17 +7,17 @@
   import Input from '$lib/Input.svelte';
   import Select from '$lib/Select.svelte';
   import type { ProgressColorful } from '$lib/Progress.types';
+  import ListItem from '$lib/ListItem.svelte';
 
   const colorfulStates = ['none', 'auto', 'progress', 'success', 'warning', 'error'];
 
-  let colorfulStateIndex = 0;
-  $: colorful = colorfulStates[colorfulStateIndex] as ProgressColorful;
-  let value = 35;
+  let colorful: ProgressColorful = 'none';
+  let disabled = false;
+  let label = 'PROGRESS';
   let max = 100;
   let percent: number;
-  let disabled = false;
+  let value = 35;
   let vertical = false;
-  let label = 'PROGRESS';
 
   // This helps fix the lost typing of forwarded events on Input
   type FormEvent<E extends Event = Event, T extends EventTarget = HTMLElement> = E & {
@@ -49,8 +49,14 @@
       <svelte:fragment slot="label">max</svelte:fragment>
     </Input>
     <Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
-    <Select items={colorfulStates} bind:selectedIndex={colorfulStateIndex}>
+    <Select bind:selectedValue={colorful}>
       <svelte:fragment slot="label">colorful</svelte:fragment>
+      <ListItem value="none">none</ListItem>
+      <ListItem value="auto">auto</ListItem>
+      <ListItem value="progress">progress</ListItem>
+      <ListItem value="success">success</ListItem>
+      <ListItem value="warning">warning</ListItem>
+      <ListItem value="error">error</ListItem>
     </Select>
     <Checkbox bind:checked={disabled}>
       <svelte:fragment slot="label">disabled</svelte:fragment>

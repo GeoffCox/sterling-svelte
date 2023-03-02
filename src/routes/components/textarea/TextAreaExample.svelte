@@ -5,6 +5,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import type { TextAreaResize } from '$lib/TextArea.types';
   import Select from '$lib/Select.svelte';
+  import ListItem from '$lib/ListItem.svelte';
 
   let exampleRef: any;
 
@@ -14,9 +15,7 @@
   let autoHeight = false;
   let value = '';
 
-  const resizeValues: TextAreaResize[] = ['none', 'both', 'horizontal', 'vertical'];
-  let resizeIndex = 1;
-  $: resize = resizeValues[resizeIndex];
+  let resize: TextAreaResize = 'none';
 </script>
 
 <Playground bind:this={exampleRef}>
@@ -37,8 +36,12 @@
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
     <Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
     <Input bind:value={placeholder}><span slot="label">PLACEHOLDER</span></Input>
-    <Select items={resizeValues} bind:selectedIndex={resizeIndex}>
+    <Select bind:selectedValue={resize}>
       <span slot="label">resize</span>
+      <ListItem value="none">none</ListItem>
+      <ListItem value="both">both</ListItem>
+      <ListItem value="horizontal">horizontal</ListItem>
+      <ListItem value="vertical">vertical</ListItem>
     </Select>
     <Checkbox bind:checked={autoHeight}><span slot="label">Auto height</span></Checkbox>
   </svelte:fragment>

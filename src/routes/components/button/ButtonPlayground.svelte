@@ -6,20 +6,14 @@
   import Button from '$lib/Button.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
   import Select from '$lib/Select.svelte';
+  import ListItem from '$lib/ListItem.svelte';
 
   let exampleRef: any;
-
-  const buttonVariants: ButtonVariant[] = ['regular', 'outline', 'ghost'];
-  let buttonVariantIndex = 0;
-  $: buttonVariant = buttonVariants[buttonVariantIndex];
-
-  const buttonShapes: ButtonShape[] = ['circular', 'rounded', 'square'];
-  let buttonShapeIndex = 1;
-  $: buttonShape = buttonShapes[buttonShapeIndex];
-
   let buttonDisabled = false;
-  let buttonWithText = true;
+  let buttonShape: ButtonShape = 'rounded';
+  let buttonVariant: ButtonVariant = 'regular';
   let buttonWithIcon = true;
+  let buttonWithText = true;
 </script>
 
 <Playground bind:this={exampleRef}>
@@ -42,11 +36,17 @@
     <Checkbox bind:checked={buttonDisabled}><span slot="label">disabled</span></Checkbox>
     <Checkbox bind:checked={buttonWithText}><span slot="label">with text</span></Checkbox>
     <Checkbox bind:checked={buttonWithIcon}><span slot="label">with icon</span></Checkbox>
-    <Select items={buttonShapes} bind:selectedIndex={buttonShapeIndex}>
+    <Select bind:selectedValue={buttonShape}>
       <span slot="label">shape</span>
+      <ListItem value="circular">circular</ListItem>
+      <ListItem value="rounded">rounded</ListItem>
+      <ListItem value="square">square</ListItem>
     </Select>
-    <Select items={buttonVariants} bind:selectedIndex={buttonVariantIndex}>
+    <Select bind:selectedValue={buttonVariant}>
       <span slot="label">variant</span>
+      <ListItem value="ghost">ghost</ListItem>
+      <ListItem value="outline">outline</ListItem>
+      <ListItem value="regular">regular</ListItem>
     </Select>
   </div>
 </Playground>

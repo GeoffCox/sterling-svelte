@@ -123,7 +123,7 @@
     padding: 0 0.5em 0.5em 0.5em;
     min-height: 3em;
     margin: 0.5em 0 0 0;
-    resize: var(--stsv-TextArea__resize, none);
+    resize: var(--TextArea__resize, none);
     width: 100%;
   }
 
