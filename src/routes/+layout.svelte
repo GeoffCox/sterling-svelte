@@ -34,6 +34,7 @@
     'Tab',
     'TabList',
     'TextArea',
+    'Tooltip',
     'Tree',
     'TreeChevron',
     'TreeItem',
