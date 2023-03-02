@@ -1,3 +1,9 @@
+// ----- actions ----- //
+export { clickOutside } from './actions/clickOutside';
+export { forwardEvents } from './actions/forwardEvents';
+export { portal } from './actions/portal';
+
+// ----- theme ----- //
 export { type Theme, type ThemeActionParams } from './theme/types';
 
 export { applyDarkTheme } from './theme/applyDarkTheme';
@@ -8,23 +14,25 @@ export { lightTheme } from './theme/lightTheme';
 export { neutrals } from './theme/colors';
 export { toggleDarkTheme } from './theme/toggleDarkTheme';
 
-export { clickOutside } from './actions/clickOutside';
+// ----- Button ----- //
+
 export { menuBarContextKey, menuItemContextKey } from './Menus.constants';
 
 // ----- Component types ----- //
 export type { ButtonVariant, ButtonShape } from './Button.types';
-export type { MenuItemRegistration, MenuBarContext, MenuItemContext } from './Menus.types';
 export type { ListContext } from './List.types';
+export type { MenuBarContext, MenuItemContext, MenuItemRegistration } from './Menus.types';
 export type { ProgressColorful } from './Progress.types';
+export type { TabData, TabListContext } from './Tabs.types';
 export type { TextAreaResize } from './TextArea.types';
-export type { TabData } from './Tabs.types';
+export type { TooltipAutoShow, TooltipPlacement } from './Tooltip.types';
+export type { TreeContext, TreeItemContext } from './Tree.types';
 
 // ----- Component constants ----- //
 export { listContextKey } from './List.constants';
 export { treeContextKey, treeItemContextKey } from './Tree.constants';
 
 // ----- Components ----- //
-
 import Button from './Button.svelte';
 import Checkbox from './Checkbox.svelte';
 import Dialog from './Dialog.svelte';
