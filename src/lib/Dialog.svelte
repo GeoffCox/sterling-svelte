@@ -2,7 +2,6 @@
   import { createEventDispatcher, onMount, tick } from 'svelte';
 
   import Button from './Button.svelte';
-  import CloseX from './CloseX2.svelte';
 
   const dialogFadeDuration = 250;
 
