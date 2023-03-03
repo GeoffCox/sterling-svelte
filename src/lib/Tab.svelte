@@ -1,8 +1,8 @@
 <script lang="ts">
   import { getContext } from 'svelte';
 
-  import type { TabListContext } from './Tabs.types';
-  import { tabListContextKey } from './Tabs.constants';
+  import type { TabListContext } from './TabList.types';
+  import { tabListContextKey } from './TabList.constants';
 
   // ----- Props ----- //
   export let disabled = false;

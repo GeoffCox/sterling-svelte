@@ -23,13 +23,14 @@ export type { ButtonVariant, ButtonShape } from './Button.types';
 export type { ListContext } from './List.types';
 export type { MenuBarContext, MenuItemContext, MenuItemRegistration } from './Menus.types';
 export type { ProgressColorful } from './Progress.types';
-export type { TabListContext } from './Tabs.types';
+export type { TabListContext } from './TabList.types';
 export type { TextAreaResize } from './TextArea.types';
 export type { TooltipAutoShow, TooltipPlacement } from './Tooltip.types';
 export type { TreeContext, TreeItemContext } from './Tree.types';
 
 // ----- Component constants ----- //
 export { listContextKey } from './List.constants';
+export { tabListContextKey } from './TabList.constants';
 export { treeContextKey, treeItemContextKey } from './Tree.constants';
 
 // ----- Components ----- //

@@ -247,7 +247,7 @@ A single item that can be selected from a popup list of items.
   {/if}
   <div class="input" id={inputId}>
     <div class="value">
-      <slot name="value">
+      <slot name="value" {disabled} {open} {selectedValue}>
         {#if selectedValue}
           {selectedValue}
         {:else}

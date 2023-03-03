@@ -1,47 +1,35 @@
-# Overview
+# sterling-svelte Overview
 
-## Why yet another component library?
+- lightweight (`< 200K`)
+- minimal and classic design
+- fast rendering performance thanks to Svelte
+- ideomatic Svelte
+- for modern, evergreen browsers
+- follows aria accessibility standards
 
-Many component libraries for Svelte are ports of libraries from React or Angular.
-Others are CSS ported from design systems like Material UI or Bootstrap.
+## Sterling Design System
 
-Svelte builds components that encapsulate behavior, layout, and style.
-This can make it difficult to provide component style customization.
-Most existing libraries are either strictly opinionated and offer little customization,
-or have an overwhelming number of specialty customization knobs.
+- The sterling theme is a set of CSS variables set by the `applyTheme` action.
+- CSS variables allow theme switching without re-rendering components.
+- The theme balances general purpose and component-specific variables.
+  This provides practical customization with minimal cost.
+- Each theme variable is prefixed with `--stsv-` to indicate it belongs to sterling-svelte.
+- Each theme variable also follows the Block Element Module (BEM) naming convention.
 
-I needed a component library built to take full advantage of Svelte.
-I wanted a consistent minimalist style with a practical style customization.
+### Built in themes
 
-**_sterling-svelte_**:
+- A neutral color palette keeps the focus on the content of your application.
+- High contrast ratios meet or exceed accessibility standards.
+- Medium weight (size, spacing, and borders) create clear visual separation with a clean style.
+- Components use font `em`s for non-theme layout to remain responsive and avoid hard-coded pixel values.
 
-- is thin and lightweight
-- is minimal and classically styled
-- is ideomatic Svelte
-- targets modern, evergreen browsers
-- meets latest accessibility standards
+## Architecture Tenets
 
-## Design
-
-### Theme and Styles
-
-- Built in themes have a neutral color palette with high contrast ratios.
-  This keeps the focus on the content of your application.
-- Size, spacing, and borders are medium weight to make visual separation easy to see while maintaining a clean look.
-- Each component scales its padding and layout based on font EMs to remain responsive and avoid hard-coded pixel values.
-- The theme is applied as CSS variables to allow theme switching without re-rendering.
-- The theme balances general purpose and component-specific variables to provide customization with the minimal performance cost.
-
-### Slots
-
-- Components use slots for customization and replacement of parts.
-  For example, input components have a label slot for changing the label component rather than only providing a string value.
-- The default slot is reserved for transclusion where the slot represents the content typically between the open and close tags.
-  Named slots provide better semantic meaning and extensibility without breaking changes.
-
-### Native HTML Element Components
-
-- Components that render or wrap an HTML element will forward props and bubble events.
+- Components that semanticaly wrap a specific HTML element will forward props and bubble events.
+  For example, `Button` and `<button>`.
+- Svelte slots are used for customization and replacement of parts.
+- The default slot is reserved for setting the children of a component (e.g. items for a list).
+- Svelte context is used to pass information across the component hierarchy.
 
 ## Dependencies
 
@@ -52,6 +40,7 @@ I wanted a consistent minimalist style with a practical style customization.
 | ----------- | ------------------------------- |
 | uuid        | to create element identifiers   |
 | floating-ui | to position popups and overlays |
+| keyborg     | for typing detection            |
 | lodash-es   | for data utility functions      |
 
 ## Roadmap
@@ -78,13 +67,17 @@ The library is in alpha - anything and everything may change at any time.
 | Menus     | 0.0.16                |
 | Tooltip   | 0.0.17                |
 
-Future
+Under consideration
 
 | Component                |
 | ------------------------ |
 | Accordion                |
+| Avatar / Persona         |
+| Badge                    |
+| ChoiceGroup/RadioButtons |
 | Drawer / Panel           |
 | Dropdown                 |
+| Grid / DataGrid          |
+| Link, LinkButton         |
 | Notifications            |
-| Tooltip                  |
-| ChoiceGroup/RadioButtons |
+| Toolbar                  |

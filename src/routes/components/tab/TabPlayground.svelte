@@ -6,7 +6,7 @@
   import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
 
-  import { tabListContextKey } from '$lib/Tabs.constants';
+  import { tabListContextKey } from '$lib/TabList.constants';
   import Tab from '$lib/Tab.svelte';
 
   // ----- Context ----- //

@@ -133,11 +133,14 @@
       <div class="header">
         <div class="title">sterling-svelte (in progress)</div>
         <div class="subtitle">
-          A modern, accessible, and lightweight UI component library for Svelte.
+          A modern, accessible, lightweight UI component library for Svelte.
         </div>
         <div class="select-theme">
           <Select bind:selectedValue={currentTheme}>
             <svelte:fragment slot="label">Theme</svelte:fragment>
+            <svelte:fragment slot="value" let:selectedValue
+              ><span> {selectedValue && themes[selectedValue]}</span></svelte:fragment
+            >
             {#each Object.keys(themes) as themeKey}
               <ListItem value={themeKey}>{themes[themeKey]}</ListItem>
             {/each}

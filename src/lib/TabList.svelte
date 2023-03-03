@@ -1,12 +1,12 @@
 <script lang="ts">
   import type { Keyborg } from 'keyborg';
-  import type { TabListContext } from './Tabs.types';
+  import type { TabListContext } from './TabList.types';
 
   import { createKeyborg } from 'keyborg';
   import { createEventDispatcher, onMount, setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
-  import { tabListContextKey } from './Tabs.constants';
+  import { tabListContextKey } from './TabList.constants';
 
   // ----- Props ----- //
 
