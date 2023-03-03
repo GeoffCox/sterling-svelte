@@ -1,55 +1,56 @@
 <script>
-    import Example from './TabListPlayground.svelte';
+    import Playground from './TabListPlayground.svelte';
 </script>
 
 # TabList
 
-A list where selecting an item switches to its associated view.
+A list of tabs where on tab can be selected.
 
 ## Playground
 
-<Example />
+<Playground />
 
 ## Features
 
-- Choose between vertical or horizontal layout.
-- Choose if selection follows focus.
-- Users can focus the previous/next tab with arrow keys.
-- Users can focus the first/last tab with the home/end keys.
-- Provide tabs as an array of data or declare tabs in HTML.
+- Horizontal or vertical layout.
+
+## Interactions
+
+- Clicking a tab selects it
+- Arrow keys select the previous or next tab.
+- Home/End keys select the first/last tab.
 
 ## Props
 
-| Name                  | Type           | Description                                   |
-| --------------------- | -------------- | --------------------------------------------- |
-| disabled              | `boolean`      | Disables the tab list and tabs                |
-| tabs                  | `TabData<T>[]` | The items in the list                         |
-| vertical              | `boolean`      | If tabs are displayed vertically              |
-| selectedTab           | `TabData<T>`   | The data of the selected tab when databinding |
-| selectedTabId         | `string`       | The ID of the selected tab                    |
-| selectionFollowsFocus | `boolean`      | If a tab is selected whenever it is focused   |
+| Name          | Type      | Description                      |
+| ------------- | --------- | -------------------------------- | ----------------------------- |
+| disabled      | `boolean` | Disables the tab list and tabs   |
+| vertical      | `boolean` | If tabs are displayed vertically |
+| selectedValue | `string   | undefined`                       | The value of the selected tab |
 
 ## Events
 
-| Name   | Event.detail     | Description                    |
-| ------ | ---------------- | ------------------------------ |
-| select | `{ tabId, tab }` | Raised when a tab is selected. |
+| Name   | Event.detail | Description                    |
+| ------ | ------------ | ------------------------------ |
+| select | `{ value }`  | Raised when a tab is selected. |
 
 ## Anatomy
 
 ```
 TabList
-  list of tabs
-    Tab
-  _default_ slot
+  default slot
 ```
 
 ## Slots
 
-| Name       | Description                              |
-| ---------- | ---------------------------------------- |
-| default    | Any declared children                    |
-| tabContent | A template for the content of each `Tab` |
+| Name    | Description                                |
+| ------- | ------------------------------------------ |
+| default | Declared children, typically Tab controls. |
 
-- default slot `let` params: (none)
-- tabContent slot `let` params: data, disabled, selected, tabId, text
+## Let Params
+
+| Name          | Type      | Passed to slots |
+| ------------- | --------- | --------------- |
+| disabled      | `boolean` | default         |
+| selectedValue | `string`  | default         |
+| vertical      | `boolean` | default         |

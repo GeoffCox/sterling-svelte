@@ -4,7 +4,7 @@
 
 # Tab
 
-A selectable item within a tab list.
+An item within a TabList.
 
 ## Playground
 
@@ -18,13 +18,15 @@ A selectable item within a tab list.
 
 ## Props
 
-| Name     | Type         | Default | Description                         |
-| -------- | ------------ | ------- | ----------------------------------- |
-| data     | `TabData<T>` |         | A data object for databinding.      |
-| disabled | `boolean`    | `false` | If the tab item is disabled         |
-| selected | `boolean`    | `false` | If the tab item is selected         |
-| tabId    | `string`     |         | The ID of the tab item              |
-| text     | `string`     |         | Text to display in the default slot |
+| Name     | Type      | Default | Description                         |
+| -------- | --------- | ------- | ----------------------------------- |
+| disabled | `boolean` | `false` | If the tab item is disabled\*       |
+| selected | `boolean` | `false` | If the tab item is selected\*\*     |
+| text     | `string`  |         | Text to display in the default slot |
+| value    | `string`  |         | The value of the tab item           |
+
+- \* Tab will use disabled from TabList to also disable the tab when the TabList is disabled.
+- \*\* Tab will use the selectedValue from TabList to automatically update selected.
 
 ## Anatomy
 
@@ -40,4 +42,11 @@ Tab
 | ------- | ---------------------- |
 | default | The content to display |
 
-- default slot `let` params: data, disabled, selected, tabId, and text.
+## Let Params
+
+| Name     | Type      | Passed to slots |
+| -------- | --------- | --------------- |
+| disabled | `boolean` | default         |
+| selected | `boolean` | default         |
+| text     | `string`  | default         |
+| value    | `string`  | default         |

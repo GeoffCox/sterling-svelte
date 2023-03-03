@@ -2,55 +2,38 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
   import TabList from '$lib/TabList.svelte';
+  import Tab from '$lib/Tab.svelte';
+  import Input from '$lib/Input.svelte';
 
   let exampleRef: any;
 
-  const tabs = [
-    {
-      tabId: 'first',
-      text: 'First'
-    },
-    {
-      tabId: 'second',
-      text: 'Second',
-      disabled: true
-    },
-    {
-      tabId: 'third',
-      text: 'Third'
-    },
-    {
-      tabId: 'fourth',
-      text: 'Fourth'
-    }
-  ];
   let disabled = false;
-  let selectedTabId: string | undefined = 'third';
-  let selectionFollowsFocus = false;
+  let selectedValue: string | undefined;
   let vertical = false;
 </script>
 
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
     <TabList
-      bind:selectedTabId
+      bind:selectedValue
       {disabled}
-      {tabs}
-      {selectionFollowsFocus}
       {vertical}
       on:select={(event) => {
-        exampleRef.recordEvent(`selected: ${event.detail.selectedTabId}`);
+        exampleRef.recordEvent(`select: ${event.detail.selectedValue}`);
       }}
-    />
+    >
+      <Tab value="first">First</Tab>
+      <Tab value="second">Second</Tab>
+      <Tab value="third">Third</Tab>
+      <Tab value="fourth">Fourth</Tab>
+    </TabList>
   </svelte:fragment>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
-    <Checkbox bind:checked={selectionFollowsFocus}
-      ><span slot="label">selectionFollowsFocus</span></Checkbox
-    >
     <Checkbox bind:checked={vertical}><span slot="label">vertical</span></Checkbox>
+    <Input bind:value={selectedValue}><span slot="label">selectedValue</span></Input>
   </svelte:fragment>
   <svelte:fragment slot="status">
-    <div>selectedTabId: {selectedTabId}</div>
+    <div>selectedValue: {selectedValue}</div>
   </svelte:fragment>
 </Playground>

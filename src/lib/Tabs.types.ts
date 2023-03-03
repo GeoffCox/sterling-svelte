@@ -1,14 +1,8 @@
 import type { Readable, Writable } from 'svelte/store';
 
-export type TabData<T> = T & {
-  tabId: string;
-  text?: string;
-  disabled?: boolean;
-};
-
-export type TabListContext<T> = {
+export type TabListContext = {
   disabled: Readable<boolean>;
-  selectedTabId: Writable<string | undefined>;
-  selectionFollowsFocus: Readable<boolean>;
+  selectedValue: Writable<string | undefined>;
+  usingKeyboard: Readable<boolean>;
   vertical: Readable<boolean>;
 };

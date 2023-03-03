@@ -23,7 +23,7 @@ export type { ButtonVariant, ButtonShape } from './Button.types';
 export type { ListContext } from './List.types';
 export type { MenuBarContext, MenuItemContext, MenuItemRegistration } from './Menus.types';
 export type { ProgressColorful } from './Progress.types';
-export type { TabData, TabListContext } from './Tabs.types';
+export type { TabListContext } from './Tabs.types';
 export type { TextAreaResize } from './TextArea.types';
 export type { TooltipAutoShow, TooltipPlacement } from './Tooltip.types';
 export type { TreeContext, TreeItemContext } from './Tree.types';
@@ -54,6 +54,7 @@ import Switch from './Switch.svelte';
 import Tab from './Tab.svelte';
 import TabList from './TabList.svelte';
 import TextArea from './TextArea.svelte';
+import Tooltip from './Tooltip.svelte';
 import Tree from './Tree.svelte';
 import TreeChevron from './TreeChevron.svelte';
 import TreeItem from './TreeItem.svelte';
@@ -81,6 +82,7 @@ export {
   Tab,
   TabList,
   TextArea,
+  Tooltip,
   Tree,
   TreeChevron,
   TreeItem,

@@ -104,6 +104,7 @@
       candidate.getAttribute('role') === 'listitem'
     );
   };
+
   const getSelectedItemElement = () => {
     if (
       isElementListItem(lastSelectedItemRef) &&

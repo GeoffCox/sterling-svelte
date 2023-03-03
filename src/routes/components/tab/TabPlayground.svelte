@@ -11,21 +11,19 @@
 
   // ----- Context ----- //
 
-  const selectedTabIdStore = writable<string | undefined>();
-  const selectionFollowsFocusStore = writable<boolean>(false);
+  const selectedValueStore = writable<string | undefined>();
   const verticalStore = writable<boolean>(false);
   const disabledStore = writable<boolean>(false);
 
   setContext(tabListContextKey, {
     disabled: disabledStore,
-    selectedTabId: selectedTabIdStore,
-    selectionFollowsFocus: selectionFollowsFocusStore,
+    selectedValue: selectedValueStore,
     vertical: verticalStore
   });
 
   let exampleRef: any;
 
-  const tabId = 'tabId';
+  const value = 'example-tab';
   let text = 'sterling-svelte';
   let disabled = false;
   let selected = false;
@@ -36,17 +34,17 @@
   }
 
   $: {
-    selectedTabIdStore.set(selected ? tabId : undefined);
+    selectedValueStore.set(selected ? value : undefined);
   }
 
   $: {
-    selected = $selectedTabIdStore === tabId;
+    selected = $selectedValueStore === value;
   }
 </script>
 
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
-    <Tab {tabId} {disabled} {text} />
+    <Tab {value} {disabled} {text} />
   </svelte:fragment>>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>

@@ -1,204 +1,50 @@
 <script lang="ts">
   import { getContext } from 'svelte';
 
-  import type { TabListContext, TabData } from './Tabs.types';
+  import type { TabListContext } from './Tabs.types';
   import { tabListContextKey } from './Tabs.constants';
 
-  type T = $$Generic;
-
-  export let data: TabData<T> | undefined = undefined;
+  // ----- Props ----- //
   export let disabled = false;
-  export let tabId: string | undefined = undefined;
-  export let text: string | undefined = undefined;
   export let selected = false;
+  export let text: string | undefined = undefined;
+  export let value: string;
 
+  // ----- State ----- //
   let tabRef: HTMLButtonElement;
 
   const {
     disabled: tabListDisabled,
-    selectedTabId,
-    selectionFollowsFocus,
+    selectedValue,
+    usingKeyboard,
     vertical
-  } = getContext<TabListContext<T>>(tabListContextKey);
+  } = getContext<TabListContext>(tabListContextKey);
 
-  $: _tabId = tabId || data?.tabId;
-  $: _text = text || data?.text || _tabId;
-  $: _disabled = $tabListDisabled || disabled || data?.disabled === true;
+  $: _disabled = $tabListDisabled || disabled;
 
   $: {
-    if (!_tabId) {
-      throw new Error('Both tabId and data.tabId are missing');
-    }
-  }
-
-  $: {
-    selected = $selectedTabId === _tabId;
+    selected = $selectedValue === value;
   }
 
   $: {
     if (selected) {
-      selectedTabId.set(_tabId);
-      tabRef?.focus();
+      selectedValue.set(value);
     }
   }
-
-  const getFirstActiveTab = () => {
-    let foundTab = tabRef.parentElement?.firstElementChild as HTMLButtonElement;
-    while (foundTab) {
-      if (!foundTab.disabled && foundTab.getAttribute('data-tab-id')) {
-        break;
-      }
-      foundTab = foundTab.nextElementSibling as HTMLButtonElement;
-    }
-    return foundTab;
-  };
-
-  const getLastActiveTab = () => {
-    let foundTab = tabRef.parentElement?.lastElementChild as HTMLButtonElement;
-    while (foundTab) {
-      if (!foundTab.disabled && foundTab.getAttribute('data-tab-id')) {
-        break;
-      }
-      foundTab = foundTab.previousElementSibling as HTMLButtonElement;
-    }
-    return foundTab;
-  };
-
-  const getPreviousActiveTab = () => {
-    let foundTab = tabRef?.previousElementSibling as HTMLButtonElement;
-    while (foundTab) {
-      if (!foundTab.disabled && foundTab.getAttribute('data-tab-id')) {
-        break;
-      }
-      foundTab = foundTab.previousElementSibling as HTMLButtonElement;
-    }
-    return foundTab;
-  };
-
-  const getNextActiveTab = () => {
-    let foundTab = tabRef?.nextElementSibling as HTMLButtonElement;
-    while (foundTab) {
-      if (!foundTab.disabled && foundTab.getAttribute('data-tab-id')) {
-        break;
-      }
-      foundTab = foundTab.nextElementSibling as HTMLButtonElement;
-    }
-    return foundTab;
-  };
-
-  const focusFirstTab = (): boolean => {
-    if (!_disabled) {
-      let foundTab = getFirstActiveTab();
-      if (foundTab) {
-        foundTab.focus();
-        return true;
-      }
-    }
-    return false;
-  };
-
-  const focusLastTab = () => {
-    if (!_disabled) {
-      let foundTab = getLastActiveTab();
-      if (foundTab) {
-        foundTab.focus();
-        return true;
-      }
-    }
-    return false;
-  };
-
-  const focusPreviousTab = () => {
-    if (!_disabled) {
-      let foundTab = getPreviousActiveTab();
-      if (foundTab) {
-        foundTab.focus();
-        return true;
-      }
-    }
-    return false;
-  };
-
-  const focusNextTab = () => {
-    if (!_disabled) {
-      let foundTab = getNextActiveTab();
-      if (foundTab) {
-        foundTab.focus();
-        return true;
-      }
-    }
-    return false;
-  };
-
-  const onClick: svelte.JSX.MouseEventHandler<HTMLButtonElement> = (event) => {
-    if (!_disabled) {
-      selectedTabId.set(_tabId);
-    }
-  };
-
-  const onFocus: svelte.JSX.FocusEventHandler<HTMLButtonElement> = (event) => {
-    if (!_disabled && $selectionFollowsFocus) {
-      selectedTabId.set(_tabId);
-    }
-  };
-
-  const onKeydown: svelte.JSX.KeyboardEventHandler<HTMLButtonElement> = (event) => {
-    // if using arrows, only move when there are no modifier keys
-    if (!_disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
-      switch (event.key) {
-        case 'Home':
-          if (focusFirstTab()) {
-            event.preventDefault();
-            return false;
-          }
-          break;
-        case 'End':
-          if (focusLastTab()) {
-            event.preventDefault();
-            return false;
-          }
-          break;
-        case 'ArrowLeft':
-          if (!$vertical && focusPreviousTab()) {
-            event.preventDefault();
-            return false;
-          }
-          break;
-        case 'ArrowRight':
-          if (!$vertical && focusNextTab()) {
-            event.preventDefault();
-            return false;
-          }
-          break;
-        case 'ArrowUp':
-          if ($vertical && focusPreviousTab()) {
-            event.preventDefault();
-            return false;
-          }
-          break;
-        case 'ArrowDown':
-          if ($vertical && focusNextTab()) {
-            event.preventDefault();
-            return false;
-          }
-          break;
-        default:
-          break;
-      }
-    }
-  };
 </script>
 
 <button
   bind:this={tabRef}
+  aria-selected={selected}
   class="sterling-tab"
   disabled={_disabled}
   class:selected
+  class:using-keyboard={$usingKeyboard}
   class:vertical={$vertical}
-  data-tab-id={_tabId}
+  data-value={value}
   role="tab"
-  tabindex={selected ? 0 : -1}
   type="button"
+  tabIndex={selected ? 0 : -1}
   on:blur
   on:click
   on:dblclick
@@ -224,14 +70,11 @@
   on:pointerout
   on:pointerup
   on:wheel
-  on:click={onClick}
-  on:focus={onFocus}
-  on:keydown={onKeydown}
 >
   <div class="content">
-    <slot {data} disabled={_disabled} {selected} tabId={_tabId} text={_text}>
+    <slot disabled={_disabled} {selected} {value} {text}>
       <div class="text">
-        {_text || _tabId}
+        {text || value}
       </div>
     </slot>
   </div>
@@ -288,7 +131,7 @@
     color: var(--stsv-Common__color--active);
   }
 
-  .sterling-tab:focus-visible {
+  .sterling-tab.using-keyboard:focus-visible {
     outline-color: var(--stsv-Common__outline-color);
     outline-offset: var(--stsv-Common__outline-offset);
     outline-style: var(--stsv-Common__outline-style);

@@ -1,72 +1,249 @@
 <script lang="ts">
-  import { createEventDispatcher, setContext } from 'svelte';
+  import type { Keyborg } from 'keyborg';
+  import type { TabListContext } from './Tabs.types';
 
-  import type { TabData } from './Tabs.types';
-  import Tab from './Tab.svelte';
+  import { createKeyborg } from 'keyborg';
+  import { createEventDispatcher, onMount, setContext } from 'svelte';
   import { writable } from 'svelte/store';
+
   import { tabListContextKey } from './Tabs.constants';
 
   // ----- Props ----- //
 
-  type T = $$Generic;
-
   export let disabled: boolean = false;
-  export let tabs: TabData<T>[] = [];
   export let vertical = false;
-  export let selectedTabId: string | undefined = undefined;
-  export let selectionFollowsFocus: boolean = false;
+  export let selectedValue: string | undefined = undefined;
 
-  export let selectedTab: TabData<T> | undefined = undefined;
+  // ----- Keyborg ----- //
 
-  // ----- Context ----- //
+  let keyborg: Keyborg = createKeyborg(window);
 
-  const selectedTabIdStore = writable<string | undefined>(selectedTabId);
-  const selectionFollowsFocusStore = writable<boolean>(selectionFollowsFocus);
-  const verticalStore = writable<boolean>(vertical);
+  let usingKeyboard = keyborg.isNavigatingWithKeyboard();
+  const keyborgHandler = (value: boolean) => {
+    usingKeyboard = value;
+  };
+
+  // ----- State ----- //
+
+  let tabListRef: HTMLDivElement;
+  let lastSelectedTabRef: HTMLElement;
+
   const disabledStore = writable<boolean>(disabled);
+  const selectedValueStore = writable<string | undefined>(selectedValue);
+  const usingKeyboardStore = writable<boolean>(usingKeyboard);
+  const verticalStore = writable<boolean>(vertical);
 
-  setContext(tabListContextKey, {
-    disabled: disabledStore,
-    selectedTabId: selectedTabIdStore,
-    selectionFollowsFocus: selectionFollowsFocusStore,
-    vertical: verticalStore
-  });
+  $: disabledStore.set(disabled);
+
+  $: selectedValueStore.set(selectedValue);
+
+  $: {
+    selectedValue = $selectedValueStore;
+  }
+
+  $: usingKeyboardStore.set(usingKeyboard);
+
+  $: verticalStore.set(vertical);
 
   // ----- Events ----- //
 
   const dispatch = createEventDispatcher();
 
-  const raiseSelected = (tabId?: string, tab?: TabData<T>) => {
-    dispatch('select', { tabId, tab });
+  const raiseSelect = (value?: string) => {
+    dispatch('select', { value });
   };
 
-  // ----- Reactions ----- //
-  $: disabledStore.set(disabled);
-
-  $: selectedTabIdStore.set(selectedTabId);
-
   $: {
-    selectedTabId = $selectedTabIdStore;
-    selectedTab = tabs.find((tab) => tab.tabId === selectedTabId);
-    raiseSelected(selectedTabId, selectedTab);
+    raiseSelect(selectedValue);
   }
 
-  $: selectionFollowsFocusStore.set(selectionFollowsFocus);
-  $: verticalStore.set(vertical);
+  // ----- Selection ----- //
+
+  const isElementTab = (candidate: Element) => {
+    return (
+      candidate &&
+      candidate.getAttribute('data-value') !== null &&
+      candidate.getAttribute('data-value') !== undefined &&
+      candidate.getAttribute('role') === 'tab'
+    );
+  };
+
+  const getSelectedTabElement = () => {
+    if (
+      isElementTab(lastSelectedTabRef) &&
+      lastSelectedTabRef?.getAttribute('data-value') === selectedValue &&
+      lastSelectedTabRef?.closest('[role="tablist"]') === tabListRef
+    ) {
+      return lastSelectedTabRef;
+    } else {
+      return tabListRef?.querySelector('[data-value][aria-selected=true]');
+    }
+  };
+
+  const selectTab = (value: string, element: HTMLElement) => {
+    selectedValueStore.set(value);
+    lastSelectedTabRef = element;
+    element.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    element.focus();
+  };
+
+  export const selectFirstTab = () => {
+    let candidate: Element | undefined | null = tabListRef?.firstElementChild;
+    while (candidate && !isElementTab(candidate)) {
+      candidate = candidate.nextElementSibling;
+    }
+    let candidateValue = candidate?.getAttribute('data-value');
+
+    if (candidateValue && candidate) {
+      selectTab(candidateValue, candidate as HTMLElement);
+      return true;
+    }
+
+    return false;
+  };
+
+  export const selectPreviousTab = () => {
+    let selectedItem = getSelectedTabElement();
+    let candidate = selectedItem?.previousElementSibling;
+    while (candidate && !isElementTab(candidate)) {
+      candidate = candidate.previousElementSibling;
+    }
+    let candidateValue = candidate?.getAttribute('data-value');
+
+    if (candidateValue && candidate) {
+      selectTab(candidateValue, candidate as HTMLElement);
+      return true;
+    }
+
+    return false;
+  };
+
+  export const selectNextTab = () => {
+    let selectedItem = getSelectedTabElement();
+    let candidate = selectedItem?.nextElementSibling;
+    while (candidate && !isElementTab(candidate)) {
+      candidate = candidate.nextElementSibling;
+    }
+    let candidateValue = candidate?.getAttribute('data-value');
+
+    if (candidateValue && candidate) {
+      selectTab(candidateValue, candidate as HTMLElement);
+      return true;
+    }
+
+    return false;
+  };
+
+  export const selectLastTab = () => {
+    let candidate: Element | undefined | null = tabListRef?.lastElementChild;
+    while (candidate && !isElementTab(candidate)) {
+      candidate = candidate.previousElementSibling;
+    }
+    let candidateValue = candidate?.getAttribute('data-value');
+
+    if (candidateValue && candidate) {
+      selectTab(candidateValue, candidate as HTMLElement);
+      return true;
+    }
+
+    return false;
+  };
+
+  // ----- EventHandlers ----- //
+
+  onMount(() => {
+    keyborg.subscribe(keyborgHandler);
+
+    return () => {
+      keyborg.unsubscribe(keyborgHandler);
+    };
+  });
+
+  const onClick: svelte.JSX.MouseEventHandler<HTMLDivElement> = (event) => {
+    if (!disabled) {
+      let candidate: HTMLElement | null | undefined = event.target as HTMLElement;
+      let candidateValue: string | null | undefined = candidate?.getAttribute('data-value');
+
+      if (candidateValue === undefined || candidateValue === null) {
+        candidate = candidate?.closest<HTMLElement>('[role=tab]');
+        candidateValue = candidate?.getAttribute('data-value');
+      }
+
+      if (candidateValue && candidate) {
+        selectTab(candidateValue, candidate);
+      }
+    }
+  };
+
+  const onKeydown: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
+    console.log('tabList onKeydown', event);
+    // if using arrows, only move when there are no modifier keys
+    if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
+      switch (event.key) {
+        case 'Home':
+          selectFirstTab();
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        case 'End':
+          selectLastTab();
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        case 'ArrowLeft':
+          if (!vertical) {
+            selectPreviousTab();
+          }
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        case 'ArrowRight':
+          if (!vertical) {
+            selectNextTab();
+          }
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        case 'ArrowUp':
+          if (vertical) {
+            selectPreviousTab();
+          }
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        case 'ArrowDown':
+          if (vertical) {
+            selectNextTab();
+          }
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        default:
+          break;
+      }
+    }
+  };
+
+  // ----- Set Context ----- //
+
+  setContext<TabListContext>(tabListContextKey, {
+    disabled: disabledStore,
+    selectedValue: selectedValueStore,
+    usingKeyboard: usingKeyboardStore,
+    vertical: verticalStore
+  });
 </script>
 
-<!--
-  @component
-  A list of items where a single item can be selected.
-    -->
-<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div
+  aria-orientation={vertical ? 'vertical' : 'horizontal'}
+  bind:this={tabListRef}
   class="sterling-tab-list"
   role="tablist"
   class:vertical
   class:disabled
   on:blur
   on:click
+  on:click={onClick}
   on:copy
   on:cut
   on:dblclick
@@ -74,6 +251,7 @@
   on:focusin
   on:focusout
   on:keydown
+  on:keydown={onKeydown}
   on:keypress
   on:keyup
   on:mousedown
@@ -88,18 +266,7 @@
   on:paste
   {...$$restProps}
 >
-  {#each tabs as tab (tab.tabId)}
-    <Tab data={tab}>
-      <svelte:fragment let:data let:disabled let:selected let:tabId let:text>
-        <slot name="tabContent" {data} {disabled} {selected} {tabId} {text}>
-          <div class="text">
-            {text}
-          </div>
-        </slot>
-      </svelte:fragment>
-    </Tab>
-  {/each}
-  <slot />
+  <slot {disabled} {selectedValue} {vertical} />
 </div>
 
 <style>
@@ -130,10 +297,6 @@
 
   .sterling-tab-list:hover {
     color: var(--stsv-Common__color--hover);
-  }
-
-  .sterling-tab-list.vertical .text {
-    padding-top: 0.25em;
   }
 
   @media (prefers-reduced-motion) {
