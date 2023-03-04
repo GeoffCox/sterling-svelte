@@ -31,7 +31,7 @@
   <svelte:fragment slot="options">
     <div />
     <div>
-      <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
+      <Checkbox bind:checked={disabled}>disabled</Checkbox>
     </div>
     <div />
     <div>

@@ -47,9 +47,9 @@
     <Tab {value} {disabled} {text} />
   </svelte:fragment>>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
-    <Checkbox bind:checked={selected}><span slot="label">selected</span></Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Checkbox bind:checked={selected}>selected</Checkbox>
     <Input bind:value={text}><span slot="label">text</span></Input>
-    <Checkbox bind:checked={vertical}><span slot="label">vertical</span></Checkbox>
+    <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
 </Playground>

@@ -33,9 +33,9 @@
     </Button>
   </div>
   <div class="options" slot="options">
-    <Checkbox bind:checked={buttonDisabled}><span slot="label">disabled</span></Checkbox>
-    <Checkbox bind:checked={buttonWithText}><span slot="label">with text</span></Checkbox>
-    <Checkbox bind:checked={buttonWithIcon}><span slot="label">with icon</span></Checkbox>
+    <Checkbox bind:checked={buttonDisabled}>disabled</Checkbox>
+    <Checkbox bind:checked={buttonWithText}>with text</Checkbox>
+    <Checkbox bind:checked={buttonWithIcon}>with icon</Checkbox>
     <Select bind:selectedValue={buttonShape}>
       <span slot="label">shape</span>
       <ListItem value="circular">circular</ListItem>

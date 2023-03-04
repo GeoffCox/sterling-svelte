@@ -58,12 +58,8 @@
       <ListItem value="warning">warning</ListItem>
       <ListItem value="error">error</ListItem>
     </Select>
-    <Checkbox bind:checked={disabled}>
-      <svelte:fragment slot="label">disabled</svelte:fragment>
-    </Checkbox>
-    <Checkbox bind:checked={vertical}>
-      <svelte:fragment slot="label">vertical</svelte:fragment>
-    </Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>value: {value}</div>

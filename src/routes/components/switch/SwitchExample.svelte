@@ -39,11 +39,11 @@
     <div>checked: {checked}</div>
   </svelte:fragment>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
-    <Checkbox bind:checked={vertical}><span slot="label">vertical</span></Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Checkbox bind:checked={vertical}>vertical</Checkbox>
     <Input bind:value={offText}><span slot="label">offText</span></Input>
     <Input bind:value={onText}><span slot="label">onText</span></Input>
-    <Checkbox bind:checked={customLabels}><span slot="label">custom labels</span></Checkbox>
+    <Checkbox bind:checked={customLabels}>custom labels</Checkbox>
   </svelte:fragment>
 </Playground>
 

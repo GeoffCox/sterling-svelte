@@ -13,12 +13,12 @@
 <Playground bind:this={exampleRef}>
   <div slot="component" class="component">
     <Checkbox {disabled} bind:checked on:change={() => exampleRef.recordEvent('change')}
-      ><svelte:fragment slot="label">{label}</svelte:fragment></Checkbox
+      >{label}</Checkbox
     >
   </div>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
-    <Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Input bind:value={label}>LABEL (slot)</Input>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>checked: {checked}</div>

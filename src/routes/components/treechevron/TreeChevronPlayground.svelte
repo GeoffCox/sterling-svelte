@@ -15,7 +15,7 @@
     <TreeChevron {expanded} {hasChildren} />
   </div>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={expanded}><span slot="label">expanded</span></Checkbox>
-    <Checkbox bind:checked={hasChildren}><span slot="label">hasChildren</span></Checkbox>
+    <Checkbox bind:checked={expanded}>expanded</Checkbox>
+    <Checkbox bind:checked={hasChildren}>hasChildren</Checkbox>
   </svelte:fragment>
 </Playground>

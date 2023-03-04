@@ -110,10 +110,10 @@
       >
     </div>
     <div>
-      <Checkbox bind:checked={vertical}><span slot="label">vertical</span></Checkbox>
+      <Checkbox bind:checked={vertical}>vertical</Checkbox>
     </div>
     <div>
-      <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
+      <Checkbox bind:checked={disabled}>disabled</Checkbox>
     </div>
     <Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
   </svelte:fragment>

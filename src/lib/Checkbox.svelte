@@ -43,10 +43,10 @@
     />
     <div class="indicator" />
   </div>
-  {#if $$slots.label}
+  {#if $$slots.default}
     <div class="label">
       <Label {disabled} for={inputId}>
-        <slot name="label" {checked} {disabled} />
+        <slot {checked} {disabled} />
       </Label>
     </div>
   {/if}

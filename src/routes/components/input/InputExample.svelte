@@ -24,7 +24,7 @@
     </Input>
   </div>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
     <Input bind:value={placeholder}><span slot="label">PLACEHOLDER</span></Input>
   </svelte:fragment>

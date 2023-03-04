@@ -33,7 +33,7 @@
     </TextArea>
   </div>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
     <Input bind:value={placeholder}><span slot="label">PLACEHOLDER</span></Input>
     <Select bind:selectedValue={resize}>
@@ -43,7 +43,7 @@
       <ListItem value="horizontal">horizontal</ListItem>
       <ListItem value="vertical">vertical</ListItem>
     </Select>
-    <Checkbox bind:checked={autoHeight}><span slot="label">Auto height</span></Checkbox>
+    <Checkbox bind:checked={autoHeight}>Auto height</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div class="value">value: {value}</div>

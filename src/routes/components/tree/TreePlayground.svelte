@@ -41,7 +41,7 @@
     </Tree>
   </div>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Input bind:value={label}><span slot="label">label slot</span></Input>
     <Input bind:value={selectedValue}><span slot="label">selectedValue</span></Input>
     <div class="edit-toggled">

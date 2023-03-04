@@ -24,13 +24,13 @@ A styled HTML input (type=checkbox).
 Checkbox
   input type=checkbox
   checkmark
-  label slot
+  default slot
 ```
 
 ## Slots
 
-| Name  | Description                          |
-| ----- | ------------------------------------ |
-| label | Content appearing after the checkbox |
+| Name    | Description                          |
+| ------- | ------------------------------------ |
+| default | Content appearing after the checkbox |
 
 - label slot `let` params: disabled, checked

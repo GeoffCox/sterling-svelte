@@ -13,9 +13,7 @@
     <Label {disabled}>{labelText}</Label>
   </div>
   <div slot="options">
-    <Checkbox bind:checked={disabled}>
-      <svelte:fragment slot="label">disabled</svelte:fragment>
-    </Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Input bind:value={labelText}><span slot="label">LABEL TEXT</span></Input>
   </div>
 </Playground>

@@ -30,12 +30,8 @@
     </Tooltip>
   </div>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={autoShow}>
-      <svelte:fragment slot="label">autoShow</svelte:fragment>
-    </Checkbox>
-    <Checkbox bind:checked={open}>
-      <svelte:fragment slot="label">open</svelte:fragment>
-    </Checkbox>
+    <Checkbox bind:checked={autoShow}>autoShow</Checkbox>
+    <Checkbox bind:checked={open}>open</Checkbox>
     <Select bind:selectedValue={autoShowOption}>
       <ListItem value="click">click</ListItem>
       <ListItem value="hover">hover</ListItem>

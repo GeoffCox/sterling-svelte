@@ -29,8 +29,8 @@
     </TabList>
   </svelte:fragment>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
-    <Checkbox bind:checked={vertical}><span slot="label">vertical</span></Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Checkbox bind:checked={vertical}>vertical</Checkbox>
     <Input bind:value={selectedValue}><span slot="label">selectedValue</span></Input>
   </svelte:fragment>
   <svelte:fragment slot="status">

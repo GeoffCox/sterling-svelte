@@ -39,8 +39,8 @@
     <ListItem value="sterling">{text}</ListItem>
   </div>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Input bind:value={text}><span slot="label">(text content)</span></Input>
-    <Checkbox bind:checked={selected}><span slot="label">selected</span></Checkbox>
+    <Checkbox bind:checked={selected}>selected</Checkbox>
   </svelte:fragment>
 </Playground>

@@ -61,6 +61,6 @@
     </MenuItem>
   </svelte:fragment>>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={disabled}><span slot="label">disabled</span></Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
   </svelte:fragment>
 </Playground>
