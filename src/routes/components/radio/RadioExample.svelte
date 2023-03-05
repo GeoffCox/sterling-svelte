@@ -24,7 +24,7 @@
         name="choices"
         value={possibleValue}
         on:change={() => exampleRef.recordEvent(`change value:${possibleValue}`)}
-        ><span slot="label">{possibleValue}</span></Radio
+        >{possibleValue}</Radio
       >
     {/each}
   </div>
@@ -35,7 +35,7 @@
     </div>
     <div />
     <div>
-      <Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
+      <Input bind:value={label}>LABEL (slot)</Input>
     </div>
   </svelte:fragment>
   <svelte:fragment slot="status">

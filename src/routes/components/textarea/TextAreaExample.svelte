@@ -34,8 +34,8 @@
   </div>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
-    <Input bind:value={placeholder}><span slot="label">PLACEHOLDER</span></Input>
+    <Input bind:value={label}>LABEL (slot)</Input>
+    <Input bind:value={placeholder}>PLACEHOLDER</Input>
     <Select bind:selectedValue={resize}>
       <span slot="label">resize</span>
       <ListItem value="none">none</ListItem>

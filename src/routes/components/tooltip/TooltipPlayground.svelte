@@ -50,7 +50,7 @@
       <ListItem value="bottom-end">bottom-end</ListItem>
       <ListItem value="left-end">left-end</ListItem>
     </Select>
-    <Input bind:value={tipText}><span slot="label">tip (text)</span></Input>
+    <Input bind:value={tipText}>tip (text)</Input>
     <div class="delay-slider">
       <Slider bind:value={hoverDelayMilliseconds} min={0} max={3000}
         ><span slot="label">hoverDelayMilliseconds {hoverDelayMilliseconds}ms</span></Slider

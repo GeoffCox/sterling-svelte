@@ -45,10 +45,8 @@
     <div class="slider">
       <Slider bind:value min={0} {max} />
     </div>
-    <Input value={max.toString()} on:change={onMaxChange}>
-      <svelte:fragment slot="label">max</svelte:fragment>
-    </Input>
-    <Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
+    <Input value={max.toString()} on:change={onMaxChange}>max</Input>
+    <Input bind:value={label}>LABEL (slot)</Input>
     <Select bind:selectedValue={colorful}>
       <svelte:fragment slot="label">colorful</svelte:fragment>
       <ListItem value="none">none</ListItem>

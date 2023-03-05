@@ -1,11 +1,21 @@
 <script lang="ts">
   import { v4 as uuid } from 'uuid';
+  import type { U } from 'vitest/dist/types-71ccd11d';
   import Label from './Label.svelte';
+
+  // ----- Props ----- //
 
   export let checked: boolean = false;
   export let disabled: boolean = false;
+  export let id: string | undefined = undefined;
 
-  const inputId = uuid();
+  // ----- State ----- //
+
+  $: {
+    if ($$slots.default && id === undefined) {
+      id = uuid();
+    }
+  }
 </script>
 
 <!--
@@ -15,6 +25,8 @@
 <div class="sterling-checkbox">
   <div class="container">
     <input
+      {disabled}
+      {id}
       type="checkbox"
       on:blur
       on:click
@@ -38,14 +50,12 @@
       on:wheel
       bind:checked
       {...$$restProps}
-      id={inputId}
-      {disabled}
     />
     <div class="indicator" />
   </div>
   {#if $$slots.default}
     <div class="label">
-      <Label {disabled} for={inputId}>
+      <Label {disabled} for={id}>
         <slot {checked} {disabled} />
       </Label>
     </div>

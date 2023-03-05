@@ -12,11 +12,15 @@ A styled HTML input (type=checkbox).
 
 ## Props
 
-## Props
+| Name    | Type       | Default | Description                          |
+| ------- | ---------- | ------- | ------------------------------------ |
+| (input) | (multiple) |         | Built in HTMLInputElement properties |
 
-| Name    | Type             | Default | Description              |
-| ------- | ---------------- | ------- | ------------------------ |
-| (input) | HTMLInputElement |         | Built in HTML properties |
+## Events
+
+| Name    | Type       | Description                      |
+| ------- | ---------- | -------------------------------- |
+| (input) | (multiple) | Built in HTMLInputElement events |
 
 ## Anatomy
 
@@ -29,8 +33,15 @@ Checkbox
 
 ## Slots
 
-| Name    | Description                          |
-| ------- | ------------------------------------ |
-| default | Content appearing after the checkbox |
+| Name    | Description                   |
+| ------- | ----------------------------- |
+| default | Content of the checkbox label |
 
 - label slot `let` params: disabled, checked
+
+## Let Params
+
+| Name     | Type      | Passed to slots |
+| -------- | --------- | --------------- |
+| checked  | `boolean` | default         |
+| disabled | `boolean` | default         |

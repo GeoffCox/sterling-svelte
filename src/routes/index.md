@@ -28,7 +28,7 @@
 - Components that semanticaly wrap a specific HTML element will forward props and bubble events.
   For example, `Button` and `<button>`.
 - Svelte slots are used for customization and replacement of parts.
-- The default slot is reserved for setting the children of a component (e.g. items for a list).
+- The default slot is used for the logical children of a component (e.g. items for a list, content for button, label for a checkbox).
 - Svelte context is used to pass information across the component hierarchy.
 
 ## Dependencies

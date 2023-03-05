@@ -95,19 +95,16 @@
   </div>
   <svelte:fragment slot="options">
     <div>
-      <Input value={min.toString()} on:change={onMinChange}><span slot="label">min</span></Input>
+      <Input value={min.toString()} on:change={onMinChange}>min</Input>
     </div>
     <div>
-      <Input value={max.toString()} on:change={onMaxChange}><span slot="label">max</span></Input>
+      <Input value={max.toString()} on:change={onMaxChange}>max</Input>
     </div>
     <div>
-      <Input value={step?.toString()} on:change={onStepChange}><span slot="label">step</span></Input
-      >
+      <Input value={step?.toString()} on:change={onStepChange}>step</Input>
     </div>
     <div>
-      <Input value={precision.toString()} on:change={onPrecisionChange}
-        ><span slot="label">precision</span></Input
-      >
+      <Input value={precision.toString()} on:change={onPrecisionChange}>precision</Input>
     </div>
     <div>
       <Checkbox bind:checked={vertical}>vertical</Checkbox>
@@ -115,7 +112,7 @@
     <div>
       <Checkbox bind:checked={disabled}>disabled</Checkbox>
     </div>
-    <Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
+    <Input bind:value={label}>LABEL (slot)</Input>
   </svelte:fragment>
   <div slot="status">
     <div>value: {value}</div>

@@ -2,10 +2,19 @@
   import { v4 as uuid } from 'uuid';
   import Label from './Label.svelte';
 
-  export let value: string = '';
-  export let disabled: boolean = false;
+  // ----- Props ----- //
 
-  const inputId = uuid();
+  export let disabled: boolean = false;
+  export let id: string | undefined = undefined;
+  export let value: string = '';
+
+  // ----- State ----- //
+
+  $: {
+    if ($$slots.default && id === undefined) {
+      id = uuid();
+    }
+  }
 </script>
 
 <!--
@@ -13,13 +22,15 @@
 	A styled HTML input element with optional label.
 -->
 <div class="sterling-input">
-  {#if $$slots.label}
-    <Label {disabled} for={inputId}>
-      <slot name="label" />
+  {#if $$slots.default}
+    <Label {disabled} for={id}>
+      <slot {disabled} {value} />
     </Label>
   {/if}
   <input
     bind:value
+    {disabled}
+    {id}
     on:blur
     on:click
     on:change
@@ -47,8 +58,6 @@
     on:reset
     on:wheel
     {...$$restProps}
-    {disabled}
-    id={inputId}
   />
 </div>
 

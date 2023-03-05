@@ -153,9 +153,7 @@
           <a href="{base}/">Overview</a>
           <a href="{base}/theme">Theme</a>
           <div class="filter">
-            <Input bind:value={filterText} type="search">
-              <span slot="label">Filter Components</span>
-            </Input>
+            <Input bind:value={filterText} type="search">Filter Components</Input>
           </div>
           <div class="nav-header">Components</div>
           <div class="nav-section">

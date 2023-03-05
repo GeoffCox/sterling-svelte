@@ -40,7 +40,7 @@
   </div>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Input bind:value={text}><span slot="label">(text content)</span></Input>
+    <Input bind:value={text}>(text content)</Input>
     <Checkbox bind:checked={selected}>selected</Checkbox>
   </svelte:fragment>
 </Playground>

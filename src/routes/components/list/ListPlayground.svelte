@@ -51,8 +51,8 @@
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={horizontal}>horizontal</Checkbox>
-    <Input bind:value={label}><span slot="label">label</span></Input>
-    <Input bind:value={selectedValueText}><span slot="label">selectedValue</span></Input>
+    <Input bind:value={label}>label</Input>
+    <Input bind:value={selectedValueText}>selectedValue</Input>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>

@@ -14,6 +14,6 @@
   </div>
   <div slot="options">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Input bind:value={labelText}><span slot="label">LABEL TEXT</span></Input>
+    <Input bind:value={labelText}>LABEL TEXT</Input>
   </div>
 </Playground>

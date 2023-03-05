@@ -46,13 +46,9 @@
       <div slot="title">How would you like your product delivered?</div>
       <div slot="body">
         <div class="mail-options">
-          <Radio value="standard" bind:group={delivery}
-            ><span slot="label">Standard Mail</span></Radio
-          >
-          <Radio value="commercial" bind:group={delivery}
-            ><span slot="label">Commercial Carrier</span></Radio
-          >
-          <Radio value="drone" bind:group={delivery}><span slot="label">Drone</span></Radio>
+          <Radio value="standard" bind:group={delivery}>Standard Mail</Radio>
+          <Radio value="commercial" bind:group={delivery}>Commercial Carrier</Radio>
+          <Radio value="drone" bind:group={delivery}>Drone</Radio>
         </div>
         {#if message}
           <div class="message">{message}</div>

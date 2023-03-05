@@ -1,6 +1,6 @@
 # Radio
 
-A styled HTML input type=radio element.
+A styled HTML input (type=radio).
 
 <script>
     import Example from './RadioExample.svelte';
@@ -12,19 +12,35 @@ A styled HTML input type=radio element.
 
 ## Props
 
-| Name  | Type | Description                                          |
-| ----- | ---- | ---------------------------------------------------- |
-| group | any  | Use with bind to set the value as a radio is checked |
+| Name    | Type                           | Default     | Description                                          |
+| ------- | ------------------------------ | ----------- | ---------------------------------------------------- |
+| (input) | (multiple)                     |             | Built in HTMLInputElement properties                 |
+| group   | `any` \| `null` \| `undefined` | `undefined` | Use with bind to set the value as a radio is checked |
+
+## Events
+
+| Name    | Type       | Description                      |
+| ------- | ---------- | -------------------------------- |
+| (input) | (multiple) | Built in HTMLInputElement events |
 
 ## Anatomy
 
-`radio
+```
+Radio
   HTML input (hidden)
-  dot
-label slot`
+  radio dot
+  default slot
+```
 
 ## Slots
 
-| Name  | Description                       |
-| ----- | --------------------------------- |
-| label | Content appearing after the radio |
+| Name    | Description                |
+| ------- | -------------------------- |
+| default | Content of the radio label |
+
+## Let Params
+
+| Name     | Type                           | Passed to slots |
+| -------- | ------------------------------ | --------------- |
+| disabled | `boolean`                      | default         |
+| value    | `any` \| `null` \| `undefined` | default         |

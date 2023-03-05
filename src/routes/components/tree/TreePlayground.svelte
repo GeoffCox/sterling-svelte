@@ -42,12 +42,10 @@
   </div>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Input bind:value={label}><span slot="label">label slot</span></Input>
-    <Input bind:value={selectedValue}><span slot="label">selectedValue</span></Input>
+    <Input bind:value={label}>label slot</Input>
+    <Input bind:value={selectedValue}>selectedValue</Input>
     <div class="edit-toggled">
-      <Input bind:value={expandedValuesText}
-        ><span slot="label">expandedValues (comma separated)</span></Input
-      >
+      <Input bind:value={expandedValuesText}>expandedValues (comma separated)</Input>
       <Button on:click={getExpandedValues}>Get</Button>
       <Button on:click={setExpandedValues}>Set</Button>
     </div>

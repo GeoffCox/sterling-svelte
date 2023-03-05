@@ -42,7 +42,7 @@
   </div>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Input bind:value={label}><span slot="label">LABEL</span></Input>
+    <Input bind:value={label}>LABEL</Input>
     <Button on:click={() => (selectedValue = undefined)}>selectedValue = undefined</Button>
     <Button on:click={() => (selectedValue = items[random(0, items.length - 1)])}
       >selectedValue = random()</Button

@@ -4,16 +4,34 @@
 
   import Label from './Label.svelte';
 
+  // ----- Props ----- //
+
   /*
    * bind:group doesn't seem to work properly (yet) in a nested radio.
    * The workaround is to export `checked` and `group` properties
    * and implement the same behavior.
    */
   export let checked: boolean = false;
-  export let group: any | undefined | null = undefined;
   export let disabled: boolean = false;
+  export let group: any | undefined | null = undefined;
+  export let id: string | undefined = undefined;
 
-  const inputId = uuid();
+  // ----- State ----- //
+  let mounted = false;
+
+  $: {
+    if ($$slots.default && id === undefined) {
+      id = uuid();
+    }
+  }
+
+  $: {
+    if (mounted) {
+      checked = group === $$restProps.value;
+    }
+  }
+
+  // ----- Events ----- //
 
   const onChange: svelte.JSX.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.currentTarget.checked) {
@@ -21,19 +39,14 @@
     }
   };
 
-  let mounted = false;
+  // ----- Event Handlers ----- //
+
   onMount(() => {
     if (checked) {
       group = $$restProps.value;
     }
     mounted = true;
   });
-
-  $: {
-    if (mounted) {
-      checked = group === $$restProps.value;
-    }
-  }
 </script>
 
 <!--
@@ -43,6 +56,9 @@
 <div class="sterling-radio">
   <div class="container">
     <input
+      checked={group === $$restProps.value}
+      {disabled}
+      {id}
       type="radio"
       on:blur
       on:click
@@ -65,17 +81,14 @@
       on:mouseup
       on:toggle
       on:wheel
-      checked={group === $$restProps.value}
       {...$$restProps}
-      {disabled}
-      id={inputId}
     />
     <div class="indicator" />
   </div>
-  {#if $$slots.label}
+  {#if $$slots.default}
     <div class="label">
-      <Label {disabled} for={inputId}>
-        <slot name="label" />
+      <Label {disabled} for={id}>
+        <slot {checked} {disabled} {group} />
       </Label>
     </div>
   {/if}

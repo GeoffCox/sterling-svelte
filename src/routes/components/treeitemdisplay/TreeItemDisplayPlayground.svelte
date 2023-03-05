@@ -49,7 +49,7 @@
         ><span slot="label">depth</span></Slider
       >
     </div>
-    <Input bind:value={label}><span slot="label">label slot</span></Input>
+    <Input bind:value={label}>label slot</Input>
   </svelte:fragment>
 </Playground>
 

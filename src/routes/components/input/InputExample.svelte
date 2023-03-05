@@ -20,13 +20,13 @@
       on:input={() => exampleRef.recordEvent('input')}
       on:change={() => exampleRef.recordEvent('change')}
     >
-      <svelte:fragment slot="label">{label}</svelte:fragment>
+      {label}
     </Input>
   </div>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Input bind:value={label}><span slot="label">LABEL (slot)</span></Input>
-    <Input bind:value={placeholder}><span slot="label">PLACEHOLDER</span></Input>
+    <Input bind:value={label}>LABEL (slot)</Input>
+    <Input bind:value={placeholder}>PLACEHOLDER</Input>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>value: {value}</div>

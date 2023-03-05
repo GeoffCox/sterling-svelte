@@ -16,17 +16,33 @@ A styled HTML input element.
 
 ## Props
 
-No additional properties beyond those for the native element.
+| Name    | Type       | Default | Description                          |
+| ------- | ---------- | ------- | ------------------------------------ |
+| (input) | (multiple) |         | Built in HTMLInputElement properties |
+
+## Events
+
+| Name    | Type       | Description                      |
+| ------- | ---------- | -------------------------------- |
+| (input) | (multiple) | Built in HTMLInputElement events |
 
 ## Anatomy
 
 ```
-  label slot
+Input
+  default slot
   HTML input
 ```
 
 ## Slots
 
-| Name  | Description                         |
-| ----- | ----------------------------------- |
-| label | The label associated with the input |
+| Name    | Description                |
+| ------- | -------------------------- |
+| default | Content of the input label |
+
+## Let Params
+
+| Name     | Type      | Passed to slots |
+| -------- | --------- | --------------- |
+| disabled | `boolean` | default         |
+| value    | `string`  | default         |
