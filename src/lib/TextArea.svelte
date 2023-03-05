@@ -3,12 +3,21 @@
   import Label from './Label.svelte';
   import type { TextAreaResize } from './TextArea.types';
 
-  export let value: string;
-  export let resize: TextAreaResize = 'none';
-  export let disabled = false;
-  export let autoHeight = false;
+  // ----- Props ----- //
 
-  const inputId = uuid();
+  export let autoHeight = false;
+  export let disabled = false;
+  export let id: string | undefined = undefined;
+  export let resize: TextAreaResize = 'none';
+  export let value: string;
+
+  // ----- State ----- //
+
+  $: {
+    if ($$slots.default && id === undefined) {
+      id = uuid();
+    }
+  }
 
   let textAreaRef: HTMLTextAreaElement;
 
@@ -28,15 +37,16 @@
   $: autoHeight, autoSetHeight();
 </script>
 
-<div class="sterling-text-area" style={`--TextArea__resize: ${resize};`}>
-  {#if $$slots.label}
-    <Label {disabled} for={inputId}>
-      <slot name="label" />
+<div class="sterling-text-area" class:disabled style={`--TextArea__resize: ${resize};`}>
+  {#if $$slots.default}
+    <Label {disabled} for={id}>
+      <slot {autoHeight} {disabled} {resize} {value} />
     </Label>
   {/if}
   <textarea
-    {...$$restProps}
     bind:this={textAreaRef}
+    {disabled}
+    rows="1"
     bind:value
     on:blur
     on:click
@@ -65,8 +75,6 @@
     on:reset
     on:wheel
     on:input={onInput}
-    {disabled}
-    rows="1"
     {...$$restProps}
   />
 </div>
@@ -107,7 +115,7 @@
     outline-width: var(--stsv-Common__outline-width);
   }
 
-  .sterling-text-area:disabled {
+  .sterling-text-area.disabled {
     background-color: var(--stsv-Common__background-color--disabled);
     border-color: var(--stsv--Common__border-color--disabled);
     color: var(--stsv-Common__color--disabled);
@@ -117,7 +125,7 @@
   textarea {
     background: none;
     box-sizing: border-box;
-    color: inherit;
+    color: var(--stsv-Input__color);
     font: inherit;
     line-height: inherit;
     padding: 0 0.5em 0.5em 0.5em;
@@ -134,6 +142,14 @@
     background-color: transparent;
     border: none;
     outline: none;
+  }
+
+  .sterling-text-area:hover textarea {
+    color: var(--stsv-Input__color--hover);
+  }
+
+  .sterling-text-area.disabled textarea {
+    color: var(--stsv-Common__color--disabled);
   }
 
   textarea::placeholder {

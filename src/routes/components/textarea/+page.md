@@ -20,19 +20,35 @@ A styled HTML textarea element.
 
 | Name       | Type       | Default | Description                                |
 | ---------- | ---------- | ------- | ------------------------------------------ |
+| (textarea) | (multiple) |         | Built in HTMLTextAreaElement properties    |
 | autoHeight | boolean    | false   | Automatically adjust height to fit content |
 | resize     | CSS resize | 'none'  | Sets the textarea resize CSS property      |
+
+## Events
+
+| Name       | Type       | Description                         |
+| ---------- | ---------- | ----------------------------------- |
+| (textarea) | (multiple) | Built in HTMLTextAreaElement events |
 
 ## Anatomy
 
 ```
 TextArea
-  label slot
+  default slot
   HTML textarea
 ```
 
 ## Slots
 
-| Name  | Description                         |
-| ----- | ----------------------------------- |
-| label | The label associated with the input |
+| Name    | Description                   |
+| ------- | ----------------------------- |
+| default | Content of the textarea label |
+
+## Let Params
+
+| Name       | Type       | Passed to slots |
+| ---------- | ---------- | --------------- |
+| autoHeight | `boolean`  | default         |
+| disabled   | `boolean`  | default         |
+| resize     | CSS resize | default         |
+| value      | `string`   | default         |
