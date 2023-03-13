@@ -161,32 +161,44 @@ color="--stsv-Display__color"
 <Swatch 
 color="--stsv-Display__color--subtle"
 />
+<br/>
 <Swatch 
 color="--stsv-Display__color--faint"
 />
-
+<br/>
 <Swatch 
 color="--stsv-Display__color--disabled"
 />
+<br/>
+
+## Info, Success, Warning, and Error
 
 Several colors can be used to give meaning to state.
 
 <Swatch
 backgroundColor="--stsv-Info__background-color"
+borderColor="--stsv-Info__border-color"
 color="--stsv-Info__color"
 />
+<br/>
 <Swatch
 backgroundColor="--stsv-Success__background-color"
+borderColor="--stsv-Success__border-color"
 color="--stsv-Success__color"
 />
+<br/>
 <Swatch
 backgroundColor="--stsv-Warning__background-color"
+borderColor="--stsv-Warning__border-color"
 color="--stsv-Warning__color"
 />
+<br/>
 <Swatch
 backgroundColor="--stsv-Error__background-color"
+borderColor="--stsv-Error__border-color"
 color="--stsv-Error__color"
 />
+<br/>
 
 ## Layers
 

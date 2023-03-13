@@ -184,10 +184,18 @@
     {/if}
     {#if isPropSet.borders}
       <div bind:this={bordersTextRef}>
-        <div>{borderColor}</div>
-        <div>{borderRadius}</div>
-        <div>{borderStyle}</div>
-        <div>{borderWidth}</div>
+        {#if isPropSet.borderColor}
+          <div>{borderColor}</div>
+        {/if}
+        {#if isPropSet.borderRadius}
+          <div>{borderRadius}</div>
+        {/if}
+        {#if isPropSet.borderStyle}
+          <div>{borderStyle}</div>
+        {/if}
+        {#if isPropSet.borderWidth}
+          <div>{borderWidth}</div>
+        {/if}
       </div>
     {/if}
     {#if isPropSet.color}
@@ -314,10 +322,10 @@
   .color-block {
     align-items: center;
     background-color: var(--swatch__background-color);
-    border-color: var(--swatch__border-color);
-    border-radius: var(--swatch__border-radius);
-    border-style: var(--swatch__border-style);
-    border-width: var(--swatch__border-width);
+    border-color: var(--swatch__border-color, transparent);
+    border-radius: var(--swatch__border-radius, 0);
+    border-style: var(--swatch__border-style, solid);
+    border-width: var(--swatch__border-width, var(--stsv-Common__border-width));
     outline-color: var(--swatch__outline-color);
     outline-offset: var(--swatch__outline-offset);
     outline-style: var(--swatch__outline-style);
