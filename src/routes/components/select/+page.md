@@ -24,11 +24,12 @@ A single item that can be selected from a dropdown list of items.
 
 ## Props
 
-| Name          | Type    | Description                    |
-| ------------- | ------- | ------------------------------ |
-| disabled      | boolean | Disables the select            |
-| open          | boolean | If the menu is open            |
-| selectedValue | string  | The value of the selected item |
+| Name          | Type                    | Default     | Description                                          |
+| ------------- | ----------------------- | ----------- | ---------------------------------------------------- |
+| composed      | `boolean`               | `false`     | Styles the select to appear within another component |
+| disabled      | `boolean`               | `false`     | Disables the select                                  |
+| open          | `boolean`               | `false`     | If the menu is open                                  |
+| selectedValue | `string` \| `undefined` | `undefined` | The value of the selected item                       |
 
 ## Events
 

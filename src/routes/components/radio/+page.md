@@ -3,12 +3,12 @@
 A styled HTML input (type=radio).
 
 <script>
-    import Example from './RadioExample.svelte';
+    import Playground from './RadioPlayground.svelte';
 </script>
 
 ## Playground
 
-<Example />
+<Playground />
 
 ## Props
 

@@ -1,10 +1,12 @@
 <script lang="ts">
   import { v4 as uuid } from 'uuid';
+
   import Label from './Label.svelte';
 
   // ----- Props ----- //
 
-  export let disabled: boolean = false;
+  export let composed = false;
+  export let disabled = false;
   export let id: string | undefined = undefined;
   export let value: string = '';
 
@@ -17,54 +19,48 @@
   }
 </script>
 
-<!--
-	@component
-	A styled HTML input element with optional label.
--->
-<div class="sterling-input">
-  {#if $$slots.default}
-    <Label {disabled} for={id}>
-      <slot {disabled} {value} />
-    </Label>
-  {/if}
-  <input
-    bind:value
-    {disabled}
-    {id}
-    on:blur
-    on:click
-    on:change
-    on:copy
-    on:cut
-    on:paste
-    on:dblclick
-    on:focus
-    on:focusin
-    on:focusout
-    on:input
-    on:invalid
-    on:keydown
-    on:keypress
-    on:keyup
-    on:mousedown
-    on:mouseenter
-    on:mouseleave
-    on:mousemove
-    on:mouseover
-    on:mouseout
-    on:mouseup
-    on:select
-    on:submit
-    on:reset
-    on:wheel
-    {...$$restProps}
-  />
-</div>
+{#if $$slots.default}
+  <Label {disabled} for={id}>
+    <slot {composed} {disabled} {value} />
+  </Label>
+{/if}
+<input
+  bind:value
+  class="sterling-input"
+  class:composed
+  {disabled}
+  {id}
+  on:blur
+  on:click
+  on:change
+  on:copy
+  on:cut
+  on:paste
+  on:dblclick
+  on:focus
+  on:focusin
+  on:focusout
+  on:input
+  on:invalid
+  on:keydown
+  on:keypress
+  on:keyup
+  on:mousedown
+  on:mouseenter
+  on:mouseleave
+  on:mousemove
+  on:mouseover
+  on:mouseout
+  on:mouseup
+  on:select
+  on:submit
+  on:reset
+  on:wheel
+  {...$$restProps}
+/>
 
 <style>
   .sterling-input {
-    display: flex;
-    flex-direction: column;
     background-color: var(--stsv-Input__background-color);
     border-color: var(--stsv-Input__border-color);
     border-radius: var(--stsv-Input__border-radius);
@@ -73,6 +69,8 @@
     color: var(--stsv-Input__color);
     font: inherit;
     margin: 0;
+    outline: none;
+    padding: 0.5em;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
@@ -82,7 +80,7 @@
     color: var(--stsv-Input__color--hover);
   }
 
-  .sterling-input:focus-within {
+  .sterling-input:focus {
     background-color: var(--stsv-Input__background-color--focus);
     border-color: var(--stsv-Input__border-color--focus);
     color: var(--stsv-Input__color--focus);
@@ -99,42 +97,26 @@
     cursor: not-allowed;
   }
 
-  .sterling-input input {
-    font: inherit;
-    color: inherit;
-    padding: 0.5em;
-  }
-
-  .sterling-input input,
-  .sterling-input input:hover,
-  .sterling-input input:focus-within,
-  .sterling-input input:disabled {
-    background-color: transparent;
+  .sterling-input.composed,
+  .sterling-input.composed:hover,
+  .sterling-input.composed:focus,
+  .sterling-input.composed.disabled {
+    background: transparent;
     border: none;
     outline: none;
   }
 
-  .sterling-input input::placeholder {
+  .sterling-input::placeholder {
     color: var(--stsv-Display__color--faint);
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
-  .sterling-input input:disabled::placeholder {
+  .sterling-input:disabled::placeholder {
     color: var(--stsv-Display__color--disabled);
   }
 
-  .sterling-input > :global(label) {
-    font-size: 0.7em;
-    margin: 0.5em 0 0 0.7em;
-  }
-
-  .sterling-input > :global(label):empty {
-    margin: 0;
-  }
-
   @media (prefers-reduced-motion) {
-    .sterling-input,
-    .sterling-input input::placeholder {
+    .sterling-input {
       transition: none;
     }
   }

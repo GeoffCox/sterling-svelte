@@ -3,6 +3,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Playground from '../Playground.svelte';
+  import Field from '$lib/Field.svelte';
 
   let exampleRef: any;
 
@@ -77,9 +78,7 @@
         bind:vertical
         {disabled}
         on:change={(e) => exampleRef.recordEvent(`change value:${e.detail.value}`)}
-      >
-        <span slot="label">{label}</span>
-      </Slider>
+      />
     {:else}
       <Slider
         bind:value
@@ -94,29 +93,24 @@
     {/if}
   </div>
   <svelte:fragment slot="options">
-    <div>
-      <Input value={min.toString()} on:change={onMinChange}>min</Input>
-    </div>
-    <div>
-      <Input value={max.toString()} on:change={onMaxChange}>max</Input>
-    </div>
-    <div>
-      <Input value={step?.toString()} on:change={onStepChange}>step</Input>
-    </div>
-    <div>
-      <Input value={precision.toString()} on:change={onPrecisionChange}>precision</Input>
-    </div>
-    <div>
-      <Checkbox bind:checked={vertical}>vertical</Checkbox>
-    </div>
-    <div>
-      <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    </div>
-    <Input bind:value={label}>LABEL (slot)</Input>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Field label="min">
+      <Input value={min.toString()} on:change={onMinChange} composed />
+    </Field>
+    <Field label="max">
+      <Input value={max.toString()} on:change={onMaxChange} composed />
+    </Field>
+    <Field label="precision">
+      <Input value={precision.toString()} on:change={onPrecisionChange} composed />
+    </Field>
+    <Field label="step">
+      <Input value={step?.toString()} on:change={onStepChange} composed />
+    </Field>
+    <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
-  <div slot="status">
+  <svelte:fragment slot="status">
     <div>value: {value}</div>
-  </div>
+  </svelte:fragment>
 </Playground>
 
 <style>

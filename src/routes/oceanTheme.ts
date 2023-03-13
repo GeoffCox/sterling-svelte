@@ -104,7 +104,7 @@ export const oceanTheme: Theme = {
   '--stsv-Input__color--selected': neutrals.neutral100,
 
   // ----- Display ----- //
-  '--stsv-Display__background-color': neutrals.neutral30,
+  '--stsv-Display__background-color': neutrals.neutral20,
   '--stsv-Display__border-color': neutrals.neutral92,
   '--stsv-Display__color': neutrals.neutral100,
 
@@ -112,9 +112,19 @@ export const oceanTheme: Theme = {
   '--stsv-Display__color--faint': neutrals.neutral45,
   '--stsv-Display__color--disabled': neutrals.neutral45,
 
-  '--stsv-Display__color--info': '#025E73',
-  '--stsv-Display__color--progress': '#0099DD',
-  '--stsv-Display__color--success': '#03A64A',
-  '--stsv-Display__color--warning': '#F2A71B',
-  '--stsv-Display__color--error': '#A62B1F'
+  '--stsv-Info__background-color': 'hsl(198, 100%, 10%)',
+  '--stsv-Info__border-color': 'hsl(198, 100%, 40%)',
+  '--stsv-Info__color': 'hsl(198, 80%, 50%)',
+
+  '--stsv-Success__background-color': 'hsl(146, 100%, 10%)',
+  '--stsv-Success__border-color': 'hsl(146, 100%, 30%)',
+  '--stsv-Success__color': 'hsl(146, 100%, 40%)',
+
+  '--stsv-Warning__background-color': 'hsl(39, 100%, 10%)',
+  '--stsv-Warning__border-color': 'hsl(39, 100%, 45%)',
+  '--stsv-Warning__color': 'hsl(39, 100%, 50%)',
+
+  '--stsv-Error__background-color': 'hsl(5, 100%, 10%)',
+  '--stsv-Error__border-color': 'hsl(5, 100%, 40%)',
+  '--stsv-Error__color': 'hsl(5, 100%, 50%)'
 };

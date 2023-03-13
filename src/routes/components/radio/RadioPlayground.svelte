@@ -3,6 +3,7 @@
   import Playground from '../Playground.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
+  import Field from '$lib/Field.svelte';
 
   let exampleRef: any;
 
@@ -29,14 +30,10 @@
     {/each}
   </div>
   <svelte:fragment slot="options">
-    <div />
-    <div>
-      <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    </div>
-    <div />
-    <div>
-      <Input bind:value={label}>LABEL (slot)</Input>
-    </div>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Field label="label (prefix)">
+      <Input bind:value={label} composed />
+    </Field>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>

@@ -1,8 +1,10 @@
 <script lang="ts">
   export let disabled = false;
+  HTMLLabelElement;
 </script>
 
 <label
+  aria-disabled={disabled}
   class="sterling-label"
   class:disabled
   on:blur
@@ -31,18 +33,15 @@
   <slot />
 </label>
 
-<!-- 
-    @component 
-    A styled HTML label element
--->
 <style>
   label {
-    transition: opacity 250ms;
+    color: var(--stsv-Display__color);
+    transition: color 250ms;
     font: inherit;
   }
 
   label.disabled {
-    opacity: 0.5;
+    color: var(--stsv-Common__color--disabled);
   }
 
   @media (prefers-reduced-motion) {

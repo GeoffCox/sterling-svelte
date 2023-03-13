@@ -6,6 +6,7 @@
   import Playground from '../Playground.svelte';
   import ChillIcon from './ChillIcon.svelte';
   import HeatIcon from './HeatIcon.svelte';
+  import Field from '$lib/Field.svelte';
 
   let exampleRef: any;
   let checked = false;
@@ -39,11 +40,15 @@
     <div>checked: {checked}</div>
   </svelte:fragment>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Checkbox bind:checked={vertical}>vertical</Checkbox>
-    <Input bind:value={offText}>offText</Input>
-    <Input bind:value={onText}>onText</Input>
     <Checkbox bind:checked={customLabels}>custom labels</Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Field label="offText">
+      <Input bind:value={offText} composed />
+    </Field>
+    <Field label="onText">
+      <Input bind:value={onText} composed />
+    </Field>
+    <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
 </Playground>
 

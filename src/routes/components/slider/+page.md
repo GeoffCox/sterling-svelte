@@ -3,12 +3,12 @@
 Slider allows users to set a value between a minimum and maximum by moving a visual 'thumb' along a line.
 
 <script>
-    import Example from './SliderExample.svelte';
+    import Playground from './SliderPlayground.svelte';
 </script>
 
 ## Playground
 
-<Example />
+<Playground />
 
 ## Features
 

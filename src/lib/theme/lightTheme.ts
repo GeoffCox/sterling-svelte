@@ -2,7 +2,7 @@ import type { Theme } from './types';
 import { neutrals } from './colors';
 
 export const lightTheme: Theme = {
-  // ----- Common ---- //
+  // ----- Common (18) ---- //
   '--stsv-Common__background-color': neutrals.neutral100,
   '--stsv-Common__border-color': neutrals.neutral60,
   '--stsv-Common__border-radius': '0',
@@ -41,7 +41,7 @@ export const lightTheme: Theme = {
   '--stsv-Layer__background-color--3': neutrals.neutral92,
   '--stsv-Layer__color--3': neutrals.neutral15,
 
-  // ----- Button ----- //
+  // ----- Button (15) ----- //
 
   '--stsv-Button__background-color': neutrals.neutral96,
   '--stsv-Button__border-color': neutrals.neutral60,
@@ -65,7 +65,7 @@ export const lightTheme: Theme = {
   '--stsv-Button__border-color--focus': neutrals.neutral0,
   '--stsv-Button__color--focus': neutrals.neutral15,
 
-  // ----- Input ----- //
+  // ----- Input (15) ----- //
   '--stsv-Input__background-color': neutrals.neutral98,
   '--stsv-Input__border-color': neutrals.neutral60,
   '--stsv-Input__border-radius': '3px',
@@ -90,16 +90,26 @@ export const lightTheme: Theme = {
 
   // ----- Display ----- //
   '--stsv-Display__background-color': neutrals.neutral92,
-  '--stsv-Display__border-color': neutrals.neutral60,
+  '--stsv-Display__border-color': neutrals.neutral30,
   '--stsv-Display__color': neutrals.neutral15,
 
-  '--stsv-Display__color--subtle': neutrals.neutral30,
+  '--stsv-Display__color--subtle': neutrals.neutral45,
   '--stsv-Display__color--faint': neutrals.neutral85,
   '--stsv-Display__color--disabled': neutrals.neutral85,
 
-  '--stsv-Display__color--info': '#025E73',
-  '--stsv-Display__color--progress': '#0099DD',
-  '--stsv-Display__color--success': '#03A64A',
-  '--stsv-Display__color--warning': '#F2A71B',
-  '--stsv-Display__color--error': '#A62B1F'
+  '--stsv-Info__background-color': 'hsl(198, 100%, 90%)',
+  '--stsv-Info__border-color': 'hsl(198, 100%, 40%)',
+  '--stsv-Info__color': 'hsl(198, 80%, 33%)',
+
+  '--stsv-Success__background-color': 'hsl(146, 100%, 90%)',
+  '--stsv-Success__border-color': 'hsl(146, 100%, 30%)',
+  '--stsv-Success__color': 'hsl(146, 80%, 25%)',
+
+  '--stsv-Warning__background-color': 'hsl(39, 100%, 80%)',
+  '--stsv-Warning__border-color': 'hsl(39, 100%, 45%)',
+  '--stsv-Warning__color': 'hsl(39, 100%, 25%)',
+
+  '--stsv-Error__background-color': 'hsl(5, 100%, 90%)',
+  '--stsv-Error__border-color': 'hsl(5, 100%, 40%)',
+  '--stsv-Error__color': 'hsl(5, 80%, 40%)'
 };

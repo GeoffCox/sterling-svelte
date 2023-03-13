@@ -5,6 +5,7 @@
   import { oceanTheme } from './oceanTheme';
   import Input from '$lib/Input.svelte';
   import ListItem from '$lib/ListItem.svelte';
+  import Field from '$lib/Field.svelte';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -17,6 +18,7 @@
     'Button',
     'Checkbox',
     'Dialog',
+    'Field',
     'Input',
     'Label',
     'List',
@@ -131,20 +133,21 @@
   {#if mounted}
     <div class="layout" use:applyCurrentTheme={{ themeKey: currentTheme }}>
       <div class="header">
-        <div class="title">sterling-svelte (in progress)</div>
+        <div class="title">sterling-svelte (alpha)</div>
         <div class="subtitle">
           A modern, accessible, lightweight UI component library for Svelte.
         </div>
         <div class="select-theme">
-          <Select bind:selectedValue={currentTheme}>
-            <svelte:fragment slot="label">Theme</svelte:fragment>
-            <svelte:fragment slot="value" let:selectedValue
-              ><span> {selectedValue && themes[selectedValue]}</span></svelte:fragment
-            >
-            {#each Object.keys(themes) as themeKey}
-              <ListItem value={themeKey}>{themes[themeKey]}</ListItem>
-            {/each}
-          </Select>
+          <Field label="Theme" forwardClick>
+            <Select bind:selectedValue={currentTheme} composed>
+              <svelte:fragment slot="value" let:selectedValue
+                ><span> {selectedValue && themes[selectedValue]}</span></svelte:fragment
+              >
+              {#each Object.keys(themes) as themeKey}
+                <ListItem value={themeKey}>{themes[themeKey]}</ListItem>
+              {/each}
+            </Select>
+          </Field>
         </div>
       </div>
 
@@ -153,7 +156,9 @@
           <a href="{base}/">Overview</a>
           <a href="{base}/theme">Theme</a>
           <div class="filter">
-            <Input bind:value={filterText} type="search">Filter Components</Input>
+            <Field label="Filter Components" for="filter-components">
+              <Input id="filter-components" bind:value={filterText} type="search" composed />
+            </Field>
           </div>
           <div class="nav-header">Components</div>
           <div class="nav-section">
@@ -216,7 +221,7 @@
 
   :global(blockquote) {
     background-color: var(--stsv-Layer__background-color--1);
-    color: var(--stsv-Display__color--info);
+    color: var(--stsv-Info__color);
     padding: 1em;
     margin: 0;
   }

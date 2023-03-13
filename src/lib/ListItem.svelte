@@ -1,6 +1,5 @@
 <script lang="ts">
   import { getContext } from 'svelte';
-  import { v4 as uuid } from 'uuid';
 
   import { listContextKey } from './List.constants';
   import type { ListContext } from './List.types';

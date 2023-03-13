@@ -49,10 +49,10 @@
 <style>
   .example {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: auto;
     grid-template-rows: auto;
     align-items: flex-start;
-    justify-items: stretch;
+    justify-items: flex-start;
     row-gap: 2em;
     padding: 2em;
   }
@@ -60,11 +60,10 @@
   .component {
     border: 1px dashed lightgray;
     border-radius: 10px;
+    box-sizing: border-box;
+    display: block;
     padding: 15px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 5px;
-    align-items: start;
+    width: max-content;
   }
 
   .configuration {
@@ -79,11 +78,12 @@
     border: 2px double var(--stsv-Common__border-color);
     color: var(--stsv-Layer__color--1);
     padding: 1em;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
     row-gap: 1em;
-    align-items: flex-start;
-    margin-bottom: 1em;
+    place-items: flex-start;
+    place-content: flex-start;
     min-width: 350px;
   }
 
@@ -99,7 +99,7 @@
   }
 
   .event-timestamp {
-    color: var(--stsv-Display__color--info);
+    color: var(--stsv-Info__color);
   }
 
   h2 {

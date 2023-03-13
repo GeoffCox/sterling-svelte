@@ -1,5 +1,5 @@
 <script>
-    import Example from './SwitchExample.svelte';
+    import Playground from './SwitchPlayground.svelte';
 </script>
 
 # Switch
@@ -8,7 +8,7 @@ A styled HTML input type=checkbox element.
 
 ## Playground
 
-<Example />
+<Playground />
 
 ## Features
 

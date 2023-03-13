@@ -3,6 +3,7 @@
   import Playground from '../Playground.svelte';
   import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
+  import Field from '$lib/Field.svelte';
 
   let disabled = false;
   let labelText = 'This is a label';
@@ -12,8 +13,10 @@
   <div slot="component">
     <Label {disabled}>{labelText}</Label>
   </div>
-  <div slot="options">
+  <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Input bind:value={labelText}>LABEL TEXT</Input>
-  </div>
+    <Field label="text (default slot)">
+      <Input bind:value={labelText} composed />
+    </Field>
+  </svelte:fragment>
 </Playground>

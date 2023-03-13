@@ -1,7 +1,6 @@
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Select from '$lib/Select.svelte';
-  import Input from '$lib/Input.svelte';
 
   import Playground from '../Playground.svelte';
 
@@ -12,21 +11,22 @@
 
   let exampleRef: any;
 
+  let composed = false;
   let open = false;
   let items = countries;
 
   let selectedValue: string | undefined = items[random(0, items.length - 1)];
   let disabled = false;
-  let label = 'COUNTRIES';
 </script>
 
 <Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     <Select
+      {composed}
+      {disabled}
+      {items}
       bind:open
       bind:selectedValue
-      {items}
-      {disabled}
       on:select={(event) => {
         exampleRef.recordEvent(`select:${event.detail.value}`);
       }}
@@ -34,15 +34,14 @@
         exampleRef.recordEvent(`pending:${event.detail.value}`);
       }}
     >
-      <svelte:fragment slot="label">{label}</svelte:fragment>
       {#each items as item}
         <ListItem value={item} />
       {/each}
     </Select>
   </div>
   <svelte:fragment slot="options">
+    <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Input bind:value={label}>LABEL</Input>
     <Button on:click={() => (selectedValue = undefined)}>selectedValue = undefined</Button>
     <Button on:click={() => (selectedValue = items[random(0, items.length - 1)])}
       >selectedValue = random()</Button

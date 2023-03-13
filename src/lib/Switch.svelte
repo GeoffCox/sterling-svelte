@@ -21,6 +21,8 @@
   $: thumbSize = vertical ? thumbHeight : thumbWidth;
   $: ratio = vertical ? (checked ? 0 : 1) : checked ? 1 : 0;
   $: valueOffset = (switchSize - thumbSize) * ratio;
+
+  $: console.log({ ratio, valueOffset });
 </script>
 
 <!--
@@ -29,6 +31,9 @@
 -->
 <div class="sterling-switch" class:vertical class:disabled>
   <input
+    bind:checked
+    {disabled}
+    id={inputId}
     type="checkbox"
     on:blur
     on:click
@@ -50,9 +55,6 @@
     on:mouseup
     on:toggle
     on:wheel
-    bind:checked
-    id={inputId}
-    {disabled}
     {...$$restProps}
   />
   <div class="off-label">
@@ -212,11 +214,11 @@
 
   .sterling-switch:not(.vertical) .thumb {
     top: calc(-1 * var(--stsv-Button__border-width));
-    transform: translateX(calc(var(--stsv-thumb-offset) - var(--stsv-Button__border-width)));
+    transform: translateX(calc(var(--thumb-offset) - var(--stsv-Button__border-width)));
   }
 
   .sterling-switch.vertical .thumb {
     left: calc(-1 * var(--stsv-Button__border-width));
-    transform: translateY(calc(var(--stsv-thumb-offset) - var(--stsv-Button__border-width)));
+    transform: translateY(calc(var(--thumb-offset) - var(--stsv-Button__border-width)));
   }
 </style>

@@ -4,34 +4,18 @@
   import { v4 as uuid } from 'uuid';
 
   import { clickOutside } from './actions/clickOutside';
-  import Label from './Label.svelte';
   import List from './List.svelte';
 
-  const inputId = uuid();
   const popupId = uuid();
 
-  /*--------------------
-		Properties
-	  --------------------*/
+  // ----- Props ----- //
 
-  /**
-   * Disables the list and all items
-   */
+  export let composed: boolean = false;
   export let disabled: boolean = false;
-
-  /**
-   * Opens the popup to select from the items
-   */
   export let open = false;
-
-  /**
-   * The selected value
-   */
   export let selectedValue: string | undefined = undefined;
 
-  /*--------------------
-		State
-	  --------------------*/
+  // ----- State ----- //
 
   // Tracks the previous open state
   let prevOpen = false;
@@ -48,9 +32,8 @@
     y: undefined
   };
 
-  /*--------------------
-		Events
-	  --------------------*/
+  // ----- Events ----- //
+
   const dispatch = createEventDispatcher();
 
   const raiseSelect = (value?: string) => {
@@ -61,9 +44,7 @@
     dispatch('pending', { value });
   };
 
-  /*--------------------
-		Reactions
-	  --------------------*/
+  // ----- Reactions ----- //
 
   $: {
     pendingSelectedValue = selectedValue;
@@ -92,9 +73,7 @@
     }
   }
 
-  /*--------------------
-		Event Handlers
-	  --------------------*/
+  // ----- Event Handlers ----- //
 
   let mounted = false;
   onMount(() => {
@@ -201,16 +180,13 @@
   };
 </script>
 
-<!--
-@component
-A single item that can be selected from a popup list of items.
-  -->
 <div
   bind:this={selectRef}
   aria-controls={popupId}
   aria-haspopup="listbox"
   aria-expanded={open}
   class="sterling-select"
+  class:composed
   class:disabled
   role="combobox"
   tabindex="0"
@@ -240,26 +216,19 @@ A single item that can be selected from a popup list of items.
   on:keydown={onSelectKeydown}
   {...$$restProps}
 >
-  {#if $$slots.label}
-    <Label {disabled} for={inputId}>
-      <slot name="label" {disabled} {selectedValue} />
-    </Label>
-  {/if}
-  <div class="input" id={inputId}>
-    <div class="value">
-      <slot name="value" {disabled} {open} {selectedValue}>
-        {#if selectedValue}
-          {selectedValue}
-        {:else}
-          <span>&nbsp;</span>
-        {/if}
-      </slot>
-    </div>
-    <div class="button">
-      <slot name="button" {open}>
-        <div class="chevron" />
-      </slot>
-    </div>
+  <div class="value">
+    <slot name="value" {disabled} {open} {selectedValue}>
+      {#if selectedValue}
+        {selectedValue}
+      {:else}
+        <span>&nbsp;</span>
+      {/if}
+    </slot>
+  </div>
+  <div class="button">
+    <slot name="button" {open}>
+      <div class="chevron" />
+    </slot>
   </div>
   <div
     bind:this={popupRef}
@@ -286,6 +255,8 @@ A single item that can be selected from a popup list of items.
 
 <style>
   .sterling-select {
+    align-content: center;
+    align-items: center;
     background-color: var(--stsv-Input__background-color);
     border-color: var(--stsv-Input__border-color);
     border-radius: var(--stsv-Input__border-radius);
@@ -293,6 +264,10 @@ A single item that can be selected from a popup list of items.
     border-width: var(--stsv-Input__border-width);
     color: var(--stsv-Input__color);
     cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto;
+    outline: none;
     padding: 0;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
@@ -303,7 +278,7 @@ A single item that can be selected from a popup list of items.
     color: var(--stsv-Input__color--hover);
   }
 
-  .sterling-select:focus-visible {
+  .sterling-select:focus {
     background-color: var(--stsv-Input__background-color--focus);
     border-color: var(--stsv-Input__border-color--focus);
     color: var(--stsv-Input__color--focus);
@@ -321,21 +296,13 @@ A single item that can be selected from a popup list of items.
     outline: none;
   }
 
-  .sterling-select > :global(label) {
-    font-size: 0.7em;
-    margin: 0.5em 0 0 0.7em;
-  }
-
-  .sterling-select > :global(label):empty {
-    margin: 0;
-  }
-
-  .input {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto;
-    align-content: center;
-    align-items: center;
+  .sterling-select.composed,
+  .sterling-select.composed:hover,
+  .sterling-select.composed.focus,
+  .sterling-select.composed.disabled {
+    background: none;
+    border: none;
+    outline: none;
   }
 
   .value {
@@ -383,6 +350,7 @@ A single item that can be selected from a popup list of items.
     box-sizing: border-box;
     display: none;
     overflow: visible;
+    outline: none;
     position: absolute;
     box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 4px -1px;
     width: fit-content;

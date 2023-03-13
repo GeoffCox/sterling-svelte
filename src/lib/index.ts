@@ -20,6 +20,7 @@ export { menuBarContextKey, menuItemContextKey } from './Menus.constants';
 
 // ----- Component types ----- //
 export type { ButtonVariant, ButtonShape } from './Button.types';
+export type { FieldStatus } from './Field.types';
 export type { ListContext } from './List.types';
 export type { MenuBarContext, MenuItemContext, MenuItemRegistration } from './Menus.types';
 export type { ProgressColorful } from './Progress.types';
@@ -37,6 +38,7 @@ export { treeContextKey, treeItemContextKey } from './Tree.constants';
 import Button from './Button.svelte';
 import Checkbox from './Checkbox.svelte';
 import Dialog from './Dialog.svelte';
+import Field from './Field.svelte';
 import Input from './Input.svelte';
 import Label from './Label.svelte';
 import List from './List.svelte';
@@ -65,6 +67,7 @@ export {
   Button,
   Checkbox,
   Dialog,
+  Field,
   Input,
   Label,
   List,

@@ -31,7 +31,6 @@ A list of items where a single item can be selected.
 </script>
 
 <List bind:selectedValue>
-  <span slot="label">Fruits</span>
   <ListItem value="apple">Apple</ListItem>
   <ListItem value="banana">Banana</ListItem>
   <ListItem value="pear">Pear</ListItem>
@@ -41,12 +40,12 @@ A list of items where a single item can be selected.
 
 ## Props
 
-| Name          | Type    | Description                                        |
-| ------------- | ------- | -------------------------------------------------- |
-| composed      | boolean | Styles the list to appear within another component |
-| disabled      | boolean | Disables the list and items                        |
-| horizontal    | boolean | If the list layout should be horizontal            |
-| selectedValue | string  | The value of the currently selected item           |
+| Name          | Type                    | Default     | Description                                        |
+| ------------- | ----------------------- | ----------- | -------------------------------------------------- |
+| composed      | `boolean`               | `false`     | Styles the list to appear within another component |
+| disabled      | `boolean`               | `false`     | Disables the list and items                        |
+| horizontal    | `boolean`               | `false`     | If the list layout should be horizontal            |
+| selectedValue | `string` \| `undefined` | `undefined` | The value of the currently selected item           |
 
 ## Events
 

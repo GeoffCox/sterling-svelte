@@ -1,13 +1,13 @@
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
-  import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
   import Tooltip from '$lib/Tooltip.svelte';
   import type { TooltipAutoShow, TooltipPlacement } from '$lib/Tooltip.types';
   import ListItem from '$lib/ListItem.svelte';
   import Select from '$lib/Select.svelte';
   import Slider from '$lib/Slider.svelte';
+  import Field from '$lib/Field.svelte';
 
   let autoShow = true;
   let autoShowOption: TooltipAutoShow = 'hover';
@@ -32,29 +32,35 @@
   <svelte:fragment slot="options">
     <Checkbox bind:checked={autoShow}>autoShow</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
-    <Select bind:selectedValue={autoShowOption}>
-      <ListItem value="click">click</ListItem>
-      <ListItem value="hover">hover</ListItem>
-    </Select>
-    <Select bind:selectedValue={placement}>
-      <ListItem value="top">top</ListItem>
-      <ListItem value="right">right</ListItem>
-      <ListItem value="bottom">bottom</ListItem>
-      <ListItem value="left">left</ListItem>
-      <ListItem value="top-start">top-start</ListItem>
-      <ListItem value="right-start">right-start</ListItem>
-      <ListItem value="bottom-start">bottom-start</ListItem>
-      <ListItem value="left-start">left-start</ListItem>
-      <ListItem value="top-end">top-end</ListItem>
-      <ListItem value="right-end">right-end</ListItem>
-      <ListItem value="bottom-end">bottom-end</ListItem>
-      <ListItem value="left-end">left-end</ListItem>
-    </Select>
-    <Input bind:value={tipText}>tip (text)</Input>
+    <Field label="autoShow">
+      <Select bind:selectedValue={autoShowOption} composed>
+        <ListItem value="click">click</ListItem>
+        <ListItem value="hover">hover</ListItem>
+      </Select>
+    </Field>
+    <Field label="placement">
+      <Select bind:selectedValue={placement} composed>
+        <ListItem value="top">top</ListItem>
+        <ListItem value="right">right</ListItem>
+        <ListItem value="bottom">bottom</ListItem>
+        <ListItem value="left">left</ListItem>
+        <ListItem value="top-start">top-start</ListItem>
+        <ListItem value="right-start">right-start</ListItem>
+        <ListItem value="bottom-start">bottom-start</ListItem>
+        <ListItem value="left-start">left-start</ListItem>
+        <ListItem value="top-end">top-end</ListItem>
+        <ListItem value="right-end">right-end</ListItem>
+        <ListItem value="bottom-end">bottom-end</ListItem>
+        <ListItem value="left-end">left-end</ListItem>
+      </Select>
+    </Field>
+    <Field label="tip (text)">
+      <Input bind:value={tipText} composed />
+    </Field>
     <div class="delay-slider">
-      <Slider bind:value={hoverDelayMilliseconds} min={0} max={3000}
-        ><span slot="label">hoverDelayMilliseconds {hoverDelayMilliseconds}ms</span></Slider
-      >
+      <Field label={`hoverDelayMilliseconds: ${hoverDelayMilliseconds}ms`}>
+        <Slider bind:value={hoverDelayMilliseconds} min={0} max={3000} />
+      </Field>
     </div>
   </svelte:fragment>
 </Playground>

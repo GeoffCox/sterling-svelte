@@ -7,6 +7,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Select from '$lib/Select.svelte';
   import ListItem from '$lib/ListItem.svelte';
+  import Field from '$lib/Field.svelte';
 
   let exampleRef: any;
   let buttonDisabled = false;
@@ -32,33 +33,28 @@
       {/if}
     </Button>
   </div>
-  <div class="options" slot="options">
+  <svelte:fragment slot="options">
     <Checkbox bind:checked={buttonDisabled}>disabled</Checkbox>
     <Checkbox bind:checked={buttonWithText}>with text</Checkbox>
     <Checkbox bind:checked={buttonWithIcon}>with icon</Checkbox>
-    <Select bind:selectedValue={buttonShape}>
-      <span slot="label">shape</span>
-      <ListItem value="circular">circular</ListItem>
-      <ListItem value="rounded">rounded</ListItem>
-      <ListItem value="square">square</ListItem>
-    </Select>
-    <Select bind:selectedValue={buttonVariant}>
-      <span slot="label">variant</span>
-      <ListItem value="ghost">ghost</ListItem>
-      <ListItem value="outline">outline</ListItem>
-      <ListItem value="regular">regular</ListItem>
-    </Select>
-  </div>
+    <Field label="shape" forwardClick>
+      <Select bind:selectedValue={buttonShape} composed>
+        <ListItem value="circular">circular</ListItem>
+        <ListItem value="rounded">rounded</ListItem>
+        <ListItem value="square">square</ListItem>
+      </Select>
+    </Field>
+    <Field label="variant" forwardClick>
+      <Select bind:selectedValue={buttonVariant} composed>
+        <ListItem value="ghost">ghost</ListItem>
+        <ListItem value="outline">outline</ListItem>
+        <ListItem value="regular">regular</ListItem>
+      </Select>
+    </Field>
+  </svelte:fragment>
 </Playground>
 
 <style>
-  .options {
-    align-items: start;
-    display: flex;
-    flex-direction: column;
-    row-gap: 15px;
-  }
-
   .component {
     box-sizing: border-box;
     display: grid;

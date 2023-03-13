@@ -1,7 +1,4 @@
 <script lang="ts">
-  import { v4 as uuid } from 'uuid';
-
-  import Label from './Label.svelte';
   import type { ProgressColorful } from './Progress.types';
 
   export let value = 0;
@@ -14,8 +11,6 @@
   export let colorful: ProgressColorful = 'none';
 
   export let disabled = false;
-
-  const inputId = uuid();
 
   let clientHeight: number;
   let clientWidth: number;
@@ -31,7 +26,7 @@
   $: percentWidth = clientWidth * ratio;
 
   $: indicatorStyle = vertical ? `height: ${percentHeight}px` : `width: ${percentWidth}px`;
-  $: indicatorColor = colorful === 'auto' ? (percent === 100 ? 'success' : 'progress') : colorful;
+  $: indicatorColor = colorful === 'auto' ? (percent === 100 ? 'success' : 'info') : colorful;
 </script>
 
 <!--
@@ -45,6 +40,7 @@
   class="sterling-progress"
   class:disabled
   class:vertical
+  role="progressbar"
   on:click
   on:dblclick
   on:focus
@@ -59,22 +55,15 @@
   on:wheel
   {...$$restProps}
 >
-  {#if $$slots.label}
-    <Label {disabled} for={inputId}>
-      <slot name="label" />
-    </Label>
-  {/if}
-  <div class="progress-bar" id={inputId}>
-    <div class="container" bind:clientWidth bind:clientHeight>
-      <div
-        class="indicator"
-        class:progress={indicatorColor === 'progress'}
-        class:success={indicatorColor === 'success'}
-        class:warning={indicatorColor === 'warning'}
-        class:error={indicatorColor === 'error'}
-        style={indicatorStyle}
-      />
-    </div>
+  <div class="container" bind:clientWidth bind:clientHeight>
+    <div
+      class="indicator"
+      class:info={indicatorColor === 'info'}
+      class:success={indicatorColor === 'success'}
+      class:warning={indicatorColor === 'warning'}
+      class:error={indicatorColor === 'error'}
+      style={indicatorStyle}
+    />
   </div>
 </div>
 
@@ -84,18 +73,6 @@
     flex-direction: column;
     align-content: flex-start;
     align-items: flex-start;
-  }
-
-  .sterling-progress > :global(label) {
-    font-size: 0.7em;
-    margin: 0.5em 0.7em;
-  }
-
-  .sterling-progress > :global(label):empty {
-    margin: 0;
-  }
-
-  .progress-bar {
     display: block;
     background: var(--stsv-Common__background-color);
     box-sizing: border-box;
@@ -117,7 +94,7 @@
   }
 
   .indicator {
-    background-color: var(--stsv-Display__color);
+    background-color: var(--stsv-Display__border-color);
     box-sizing: border-box;
     height: 100%;
     min-height: 1px;
@@ -129,9 +106,6 @@
   .sterling-progress.vertical {
     align-items: center;
     align-content: center;
-  }
-
-  .sterling-progress.vertical .progress-bar {
     height: unset;
     width: 1em;
   }
@@ -152,25 +126,25 @@
 
   /* ----- Colorful ----- */
 
-  .indicator.progress {
-    background-color: var(--stsv-Display__color--progress);
+  .indicator.info {
+    background-color: var(--stsv-Info__border-color);
   }
 
   .indicator.success {
-    background-color: var(--stsv-Display__color--success);
+    background-color: var(--stsv-Success__border-color);
   }
 
   .indicator.warning {
-    background-color: var(--stsv-Display__color--warning);
+    background-color: var(--stsv-Warning__border-color);
   }
 
   .indicator.error {
-    background-color: var(--stsv-Display__color--error);
+    background-color: var(--stsv-Error__border-color);
   }
 
   /* ----- Disabled ----- */
 
-  .sterling-progress.disabled .progress-bar {
+  .sterling-progress.disabled {
     background: var(--stsv-Common__background-color--disabled);
     border-color: var(--stsv-Common__border-color--disabled);
   }
@@ -180,7 +154,7 @@
   }
 
   @media (prefers-reduced-motion) {
-    .progress-bar,
+    .sterling-progress,
     .indicator {
       transition: none;
     }

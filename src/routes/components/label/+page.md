@@ -3,12 +3,12 @@
 A styled HTML label element.
 
 <script>
-    import Example from './LabelExample.svelte';
+    import Playground from './LabelPlayground.svelte';
 </script>
 
 ## Playground
 
-<Example />
+<Playground />
 
 ## Features
 

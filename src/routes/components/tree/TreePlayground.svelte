@@ -7,14 +7,15 @@
   import Button from '$lib/Button.svelte';
   import CoffeeTreeItem from './CoffeeTreeItem.svelte';
   import { coffeeTree } from '../..//_sampleData/coffeeTree';
+  import Field from '$lib/Field.svelte';
 
   let exampleRef: any;
 
+  let composed = false;
   let disabled = false;
-  let label = 'Coffee Menu';
-  let selectedValue: string | undefined = undefined;
   let expandedValues: string[] = [];
   let expandedValuesText: string;
+  let selectedValue: string | undefined = undefined;
 
   const getExpandedValues = () => {
     expandedValuesText = expandedValues.join(',');
@@ -29,26 +30,30 @@
   <div class="component" slot="component">
     <Tree
       bind:selectedValue
+      {composed}
       {disabled}
       bind:expandedValues
       on:select={() => exampleRef.recordEvent('select')}
       on:expandCollapse={() => exampleRef.recordEvent('expandCollapse')}
     >
-      <svelte:fragment slot="label">{label}</svelte:fragment>
       {#each coffeeTree as coffeeItem}
         <CoffeeTreeItem {coffeeItem} />
       {/each}
     </Tree>
   </div>
   <svelte:fragment slot="options">
+    <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Input bind:value={label}>label slot</Input>
-    <Input bind:value={selectedValue}>selectedValue</Input>
     <div class="edit-toggled">
-      <Input bind:value={expandedValuesText}>expandedValues (comma separated)</Input>
+      <Field label="expandedValues (comma separated)">
+        <Input bind:value={expandedValuesText} composed />
+      </Field>
       <Button on:click={getExpandedValues}>Get</Button>
       <Button on:click={setExpandedValues}>Set</Button>
     </div>
+    <Field label="selectedValue">
+      <Input bind:value={selectedValue} composed />
+    </Field>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>

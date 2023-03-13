@@ -8,6 +8,7 @@
 
   import { tabListContextKey } from '$lib/TabList.constants';
   import Tab from '$lib/Tab.svelte';
+  import Field from '$lib/Field.svelte';
 
   // ----- Context ----- //
 
@@ -49,7 +50,9 @@
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={selected}>selected</Checkbox>
-    <Input bind:value={text}>text</Input>
+    <Field label="text">
+      <Input bind:value={text} composed />
+    </Field>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
 </Playground>

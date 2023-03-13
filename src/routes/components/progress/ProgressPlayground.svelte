@@ -8,12 +8,10 @@
   import Select from '$lib/Select.svelte';
   import type { ProgressColorful } from '$lib/Progress.types';
   import ListItem from '$lib/ListItem.svelte';
-
-  const colorfulStates = ['none', 'auto', 'progress', 'success', 'warning', 'error'];
+  import Field from '$lib/Field.svelte';
 
   let colorful: ProgressColorful = 'none';
   let disabled = false;
-  let label = 'PROGRESS';
   let max = 100;
   let percent: number;
   let value = 35;
@@ -37,25 +35,25 @@
 
 <Playground>
   <div class="component" class:vertical slot="component">
-    <Progress {colorful} {disabled} {value} {max} bind:percent {vertical}>
-      <svelte:fragment slot="label">{label}</svelte:fragment>
-    </Progress>
+    <Progress {colorful} {disabled} {value} {max} bind:percent {vertical} />
   </div>
   <svelte:fragment slot="options">
     <div class="slider">
       <Slider bind:value min={0} {max} />
     </div>
-    <Input value={max.toString()} on:change={onMaxChange}>max</Input>
-    <Input bind:value={label}>LABEL (slot)</Input>
-    <Select bind:selectedValue={colorful}>
-      <svelte:fragment slot="label">colorful</svelte:fragment>
-      <ListItem value="none">none</ListItem>
-      <ListItem value="auto">auto</ListItem>
-      <ListItem value="progress">progress</ListItem>
-      <ListItem value="success">success</ListItem>
-      <ListItem value="warning">warning</ListItem>
-      <ListItem value="error">error</ListItem>
-    </Select>
+    <Field label="max">
+      <Input value={max.toString()} on:change={onMaxChange} composed />
+    </Field>
+    <Field label="colorful" forwardClick>
+      <Select bind:selectedValue={colorful} composed>
+        <ListItem value="none">none</ListItem>
+        <ListItem value="auto">auto</ListItem>
+        <ListItem value="info">info</ListItem>
+        <ListItem value="success">success</ListItem>
+        <ListItem value="warning">warning</ListItem>
+        <ListItem value="error">error</ListItem>
+      </Select>
+    </Field>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>

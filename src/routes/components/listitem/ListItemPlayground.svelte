@@ -7,6 +7,7 @@
   import { writable } from 'svelte/store';
   import type { ListContext } from '$lib';
   import { listContextKey } from '$lib/List.constants';
+  import Field from '$lib/Field.svelte';
 
   let exampleRef: any;
 
@@ -40,7 +41,9 @@
   </div>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Input bind:value={text}>(text content)</Input>
+    <Field label="text">
+      <Input bind:value={text} composed />
+    </Field>
     <Checkbox bind:checked={selected}>selected</Checkbox>
   </svelte:fragment>
 </Playground>

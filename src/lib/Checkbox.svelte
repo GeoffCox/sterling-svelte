@@ -1,6 +1,5 @@
 <script lang="ts">
   import { v4 as uuid } from 'uuid';
-  import type { U } from 'vitest/dist/types-71ccd11d';
   import Label from './Label.svelte';
 
   // ----- Props ----- //

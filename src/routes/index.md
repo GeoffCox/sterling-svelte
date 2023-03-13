@@ -66,6 +66,7 @@ The library is in alpha - anything and everything may change at any time.
 | Tabs      | 0.0.15                |
 | Menus     | 0.0.16                |
 | Tooltip   | 0.0.17                |
+| Field     | 0.0.18                |
 
 Under consideration
 

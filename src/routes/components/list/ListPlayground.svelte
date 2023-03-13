@@ -6,13 +6,13 @@
   import { countries } from '../../_sampleData/countries';
   import ListItem from '$lib/ListItem.svelte';
   import { debounce } from 'lodash-es';
+  import Field from '$lib/Field.svelte';
 
   let exampleRef: any;
 
   let composed = false;
   let disabled = false;
   let horizontal = false;
-  let label = 'COUNTRIES';
   let selectedValue: string | undefined = undefined;
   let selectedValueText: string | undefined = '';
 
@@ -41,7 +41,6 @@
         exampleRef.recordEvent(`select:${event.detail.value}`);
       }}
     >
-      <svelte:fragment slot="label">{label}</svelte:fragment>
       {#each countries as country}
         <ListItem value={country}>{country}</ListItem>
       {/each}
@@ -51,8 +50,9 @@
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={horizontal}>horizontal</Checkbox>
-    <Input bind:value={label}>label</Input>
-    <Input bind:value={selectedValueText}>selectedValue</Input>
+    <Field label="selectedValue">
+      <Input bind:value={selectedValueText} composed />
+    </Field>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>

@@ -4,12 +4,8 @@
   import { createKeyborg } from 'keyborg';
   import { createEventDispatcher, onMount, setContext } from 'svelte';
   import { writable } from 'svelte/store';
-  import { v4 as uuid } from 'uuid';
 
-  import Label from './Label.svelte';
   import { treeContextKey } from './Tree.constants';
-
-  const inputId = uuid();
 
   export let composed = false;
   export let disabled = false;
@@ -88,18 +84,12 @@
 <div
   aria-disabled={disabled}
   class="sterling-tree"
-  class:disabled
   class:composed
+  class:disabled
   class:using-keyboard={usingKeyboard}
+  role="tree"
 >
-  {#if $$slots.label}
-    <Label {disabled} for={inputId}>
-      <slot name="label" />
-    </Label>
-  {/if}
-  <div class="tree" role="tree">
-    <slot />
-  </div>
+  <slot />
 </div>
 
 <style>
@@ -111,12 +101,14 @@
     border-width: var(--stsv-Common__border-width);
     box-sizing: border-box;
     color: var(--stsv-Common__color);
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
     height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
     margin: 0;
-    overflow: hidden;
+    position: relative;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
@@ -142,31 +134,10 @@
   }
 
   .sterling-tree.composed,
-  .sterling-tree:hover.composed,
-  .sterling-tree:focus-visible.composed,
-  .sterling-tree.disabled.composed {
-    background: none;
+  .sterling-tree.composed:hover,
+  .sterling-tree.composed.using-keyboard:focus-visible,
+  .sterling-tree.composed.disabled {
     border: none;
     outline: none;
-  }
-
-  .sterling-tree > :global(label) {
-    font-size: 0.7em;
-    margin: 0.5em 0.7em;
-  }
-
-  .sterling-tree > :global(label):empty {
-    margin: 0;
-  }
-
-  .tree {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    grid-row: 2 / span 1;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    outline: none;
-    position: relative;
   }
 </style>

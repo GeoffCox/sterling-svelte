@@ -1,5 +1,5 @@
 <script>
-    import Example from './InputExample.svelte';
+    import Playground from './InputPlayground.svelte';
 </script>
 
 # Input
@@ -8,7 +8,7 @@ A styled HTML input element.
 
 ## Playground
 
-<Example />
+<Playground />
 
 ## Features
 
@@ -16,9 +16,10 @@ A styled HTML input element.
 
 ## Props
 
-| Name    | Type       | Default | Description                          |
-| ------- | ---------- | ------- | ------------------------------------ |
-| (input) | (multiple) |         | Built in HTMLInputElement properties |
+| Name     | Type       | Default | Description                                         |
+| -------- | ---------- | ------- | --------------------------------------------------- |
+| (input)  | (multiple) |         | Built in HTMLInputElement properties                |
+| composed | `boolean`  | `false` | Styles the input to appear within another component |
 
 ## Events
 
@@ -36,13 +37,14 @@ Input
 
 ## Slots
 
-| Name    | Description                |
-| ------- | -------------------------- |
-| default | Content of the input label |
+| Name    | Description               |
+| ------- | ------------------------- |
+| default | Content of an input label |
 
 ## Let Params
 
 | Name     | Type      | Passed to slots |
 | -------- | --------- | --------------- |
+| composed | `boolean` | default         |
 | disabled | `boolean` | default         |
 | value    | `string`  | default         |

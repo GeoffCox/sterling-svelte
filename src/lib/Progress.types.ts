@@ -1,1 +1,1 @@
-export type ProgressColorful = 'none' | 'auto' | 'progress' | 'success' | 'warning' | 'error';
+export type ProgressColorful = 'none' | 'auto' | 'info' | 'success' | 'warning' | 'error';

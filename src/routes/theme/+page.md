@@ -7,9 +7,6 @@ Each CSS variable that is a part of the sterling-svelte design is prefixed with 
 <script>
     import PaletteExample from './NeutralColorsExample.svelte';
     import Swatch from './Swatch.svelte';
-    import OutlineSwatch from './OutlineSwatch.svelte';
-    import DisplaySwatch from './DisplaySwatch.svelte';
-    import LayerSwatch from './LayerSwatch.svelte';
 </script>
 
 ## Common
@@ -52,7 +49,7 @@ borderWidth="--stsv-Common__border-width"
 color="--stsv-Common__color--disabled"
 />
 <br/>
-<OutlineSwatch 
+<Swatch 
 outlineColor="--stsv-Common__outline-color"
 outlineOffset="--stsv-Common__outline-offset"
 outlineStyle="--stsv-Common__outline-style"
@@ -161,50 +158,51 @@ borderWidth="--stsv-Input__border-width"
 color="--stsv-Display__color"
 />
 <br/>
-<DisplaySwatch 
+<Swatch 
 color="--stsv-Display__color--subtle"
 />
-<DisplaySwatch 
+<Swatch 
 color="--stsv-Display__color--faint"
 />
 
-<DisplaySwatch 
+<Swatch 
 color="--stsv-Display__color--disabled"
 />
 
 Several colors can be used to give meaning to state.
 
-<DisplaySwatch 
-color="--stsv-Display__color--info"
+<Swatch
+backgroundColor="--stsv-Info__background-color"
+color="--stsv-Info__color"
 />
-<DisplaySwatch 
-color="--stsv-Display__color--progress"
+<Swatch
+backgroundColor="--stsv-Success__background-color"
+color="--stsv-Success__color"
 />
-<DisplaySwatch 
-color="--stsv-Display__color--success"
+<Swatch
+backgroundColor="--stsv-Warning__background-color"
+color="--stsv-Warning__color"
 />
-<DisplaySwatch 
-color="--stsv-Display__color--warning"
-/>
-<DisplaySwatch 
-color="--stsv-Display__color--error"
+<Swatch
+backgroundColor="--stsv-Error__background-color"
+color="--stsv-Error__color"
 />
 
 ## Layers
 
 Layers can be used to distinguish areas of the UI.
 
-<LayerSwatch 
+<Swatch 
 backgroundColor="--stsv-Layer__background-color--1" 
 color="--stsv-Layer__color--1"
 />
 
-<LayerSwatch 
+<Swatch 
 backgroundColor="--stsv-Layer__background-color--2" 
 color="--stsv-Layer__color--2"
 />
 
-<LayerSwatch 
+<Swatch 
 backgroundColor="--stsv-Layer__background-color--3" 
 color="--stsv-Layer__color--3"
 />

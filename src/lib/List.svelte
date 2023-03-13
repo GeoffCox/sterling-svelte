@@ -7,32 +7,13 @@
   import { writable } from 'svelte/store';
   import { v4 as uuid } from 'uuid';
 
-  import Label from './Label.svelte';
   import { listContextKey } from './List.constants';
 
   // ----- Props ----- //
 
-  /**
-   * If the list is composed within another container
-   * @default false
-   */
   export let composed = false;
-
-  /**
-   * Disables the list and all items
-   * @default false
-   */
   export let disabled: boolean = false;
-
-  /**
-   * If the list item layout is horizontal.
-   * @default false
-   */
   export let horizontal = false;
-
-  /**
-   * The value of the selected item.
-   */
   export let selectedValue: string | undefined = undefined;
 
   // ----- State ----- //
@@ -270,54 +251,44 @@ A list of items where a single item can be selected.
   -->
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div
+  aria-activedescendant={selectedValue}
+  aria-disabled={disabled}
+  aria-orientation={horizontal ? 'horizontal' : 'vertical'}
+  bind:this={listRef}
   class="sterling-list"
-  class:horizontal
-  class:disabled
   class:composed
+  class:disabled
+  class:horizontal
   class:using-keyboard={usingKeyboard}
+  id={listId}
+  role="list"
+  tabindex={0}
+  on:blur
+  on:click
+  on:click={onClick}
+  on:copy
+  on:cut
+  on:dblclick
+  on:focus
+  on:focusin
+  on:focusout
+  on:keydown
+  on:keydown={onKeydown}
+  on:keypress
+  on:keyup
+  on:mousedown
+  on:mouseenter
+  on:mouseleave
+  on:mousemove
+  on:mouseover
+  on:mouseout
+  on:mouseup
+  on:scroll
+  on:wheel
+  on:paste
+  {...$$restProps}
 >
-  {#if $$slots.label}
-    <Label {disabled} for={listId}>
-      <slot name="label" {composed} {disabled} {horizontal} {selectedValue} />
-    </Label>
-  {/if}
-  <div
-    aria-activedescendant={selectedValue}
-    aria-orientation={horizontal ? 'horizontal' : 'vertical'}
-    bind:this={listRef}
-    class="list"
-    class:disabled
-    class:horizontal
-    id={listId}
-    role="list"
-    tabindex={0}
-    on:blur
-    on:click
-    on:click={onClick}
-    on:copy
-    on:cut
-    on:dblclick
-    on:focus
-    on:focusin
-    on:focusout
-    on:keydown
-    on:keydown={onKeydown}
-    on:keypress
-    on:keyup
-    on:mousedown
-    on:mouseenter
-    on:mouseleave
-    on:mousemove
-    on:mouseover
-    on:mouseout
-    on:mouseup
-    on:scroll
-    on:wheel
-    on:paste
-    {...$$restProps}
-  >
-    <slot {composed} {disabled} {horizontal} {selectedValue} />
-  </div>
+  <slot {composed} {disabled} {horizontal} {selectedValue} />
 </div>
 
 <style>
@@ -329,18 +300,24 @@ A list of items where a single item can be selected.
     border-width: var(--stsv-Common__border-width);
     box-sizing: border-box;
     color: var(--stsv-Common__color);
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
     height: 100%;
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    outline: none;
     padding: 0;
+    position: relative;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
   .sterling-list.horizontal {
+    flex-direction: row;
     height: unset;
+    overflow-x: scroll;
+    overflow-y: hidden;
     width: 100%;
   }
 
@@ -366,38 +343,12 @@ A list of items where a single item can be selected.
   }
 
   .sterling-list.composed,
-  .sterling-list:hover.composed,
-  .sterling-list:focus-visible.composed,
-  .sterling-list.disabled.composed {
+  .sterling-list.composed:hover,
+  .sterling-list.composed.using-keyboard:focus-within,
+  .sterling-list.composed.disabled {
     background: none;
     border: none;
     outline: none;
-  }
-
-  .list {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    grid-row: 2 / span 1;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    outline: none;
-    position: relative;
-  }
-
-  .list.horizontal {
-    flex-direction: row;
-    overflow-x: scroll;
-    overflow-y: hidden;
-  }
-
-  .sterling-list > :global(label) {
-    font-size: 0.7em;
-    margin: 0.5em 0.7em;
-  }
-
-  .sterling-list > :global(label):empty {
-    margin: 0;
   }
 
   @media (prefers-reduced-motion) {

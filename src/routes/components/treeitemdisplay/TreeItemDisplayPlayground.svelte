@@ -5,6 +5,7 @@
   import Slider from '$lib/Slider.svelte';
 
   import TreeItemDisplay from '$lib/TreeItemDisplay.svelte';
+  import Field from '$lib/Field.svelte';
 
   let exampleRef: any;
 
@@ -44,17 +45,20 @@
     <Checkbox bind:checked={expanded}>expanded</Checkbox>
     <Checkbox bind:checked={hasChildren}>hasChildren</Checkbox>
     <Checkbox bind:checked={selected}>selected</Checkbox>
-    <div class="slider">
-      <Slider maxValue="20" bind:value={depth} on:mouseup={() => (allowDepthChange = true)}
-        ><span slot="label">depth</span></Slider
-      >
-    </div>
-    <Input bind:value={label}>label slot</Input>
+    <Field label="depth: {depth}">
+      <div class="slider">
+        <Slider maxValue="20" bind:value={depth} on:mouseup={() => (allowDepthChange = true)} />
+      </div>
+    </Field>
+    <Field label="label (text)">
+      <Input bind:value={label} composed />
+    </Field>
   </svelte:fragment>
 </Playground>
 
 <style>
   .slider {
     width: 350px;
+    padding: 0.5em;
   }
 </style>

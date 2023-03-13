@@ -4,6 +4,7 @@
   import TabList from '$lib/TabList.svelte';
   import Tab from '$lib/Tab.svelte';
   import Input from '$lib/Input.svelte';
+  import Field from '$lib/Field.svelte';
 
   let exampleRef: any;
 
@@ -22,16 +23,18 @@
         exampleRef.recordEvent(`select: ${event.detail.selectedValue}`);
       }}
     >
-      <Tab value="first">First</Tab>
-      <Tab value="second">Second</Tab>
-      <Tab value="third">Third</Tab>
-      <Tab value="fourth">Fourth</Tab>
+      <Tab value="First">First</Tab>
+      <Tab value="Second">Second</Tab>
+      <Tab value="Third">Third</Tab>
+      <Tab value="Fourth">Fourth</Tab>
     </TabList>
   </svelte:fragment>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
-    <Input bind:value={selectedValue}>selectedValue</Input>
+    <Field label="selectedValue">
+      <Input bind:value={selectedValue} composed />
+    </Field>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>

@@ -1,5 +1,5 @@
 <script>
-    import Example from './TextAreaExample.svelte';
+    import Playground from './TextAreaPlayground.svelte';
 </script>
 
 # TextArea
@@ -8,7 +8,7 @@ A styled HTML textarea element.
 
 ## Playground
 
-<Example />
+<Playground />
 
 ## Features
 
