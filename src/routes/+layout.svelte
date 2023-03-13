@@ -154,6 +154,8 @@
       <div class="content">
         <div class="nav">
           <a href="{base}/">Overview</a>
+          <a href="{base}/topics/gettingStarted">Getting Started</a>
+          <a href="{base}/topics/roadmap">Roadmap</a>
           <a href="{base}/theme">Theme</a>
           <div class="filter">
             <Field label="Filter Components" for="filter-components">
