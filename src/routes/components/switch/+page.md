@@ -14,7 +14,7 @@ A styled HTML input type=checkbox element.
 
 - Choose between a horizontal or vertical switch
 - Identify the switch positions with the offText or onText
-- Customize labels by filling the off-label and on-label slot
+- Customize labels by filling the offLabel and on-label slot
 
 ## Props
 
@@ -26,28 +26,28 @@ A styled HTML input type=checkbox element.
 | offText  | string  | undefined | The text to display nearest the OFF side of the switch\*  |
 | onText   | string  | undefined | The text to display nearest the ON side of the switch\*\* |
 
-- \* When the off-label slot is not filled, the OFF position is labeled with offText
-- \*\* When the on-label slot is not filled, the ON position is labeled with onText
+- \* When the offLabel slot is not filled, the OFF position is labeled with offText
+- \*\* When the onLabel slot is not filled, the ON position is labeled with onText
 
 ## Anatomy
 
 ```
 Switch
   HTML input (hidden)
-  off-label slot
+  offLabel slot
     Label with offText (default)
   switch
     thumb
-  on-label slot
+  onLabel slot
     Label with onText (default)
 ```
 
 ## Slots
 
-| Name      | let params                                    | Description                                          |
-| --------- | --------------------------------------------- | ---------------------------------------------------- |
-| off-label | checked, disabled, inputId, offText, vertical | Content appearing nearest the OFF side of the switch |
-| on-label  | checked, disabled, inputId, offText, vertical | Content appearing nearest the ON side of the switch  |
+| Name     | let params                                    | Description                                          |
+| -------- | --------------------------------------------- | ---------------------------------------------------- |
+| offLabel | checked, disabled, inputId, offText, vertical | Content appearing nearest the OFF side of the switch |
+| onLabel  | checked, disabled, inputId, onText, vertical  | Content appearing nearest the ON side of the switch  |
 
-- off-label `let` params: checked, disabled, inputId, off-label, vertical
-- on-label slot `let` params: checked, disabled, inputId, on-label, vertical
+- offLabel `let` params: checked, disabled, inputId, offText, vertical
+- onLabel slot `let` params: checked, disabled, inputId, onText, vertical

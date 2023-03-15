@@ -21,12 +21,12 @@
   <div slot="component">
     {#if customLabels}
       <Switch bind:checked {disabled} {vertical}>
-        <div class="chill" slot="off-label" let:checked let:disabled let:inputId>
+        <div class="chill" slot="offLabel" let:checked let:disabled let:inputId>
           <Label for={inputId}>
             <ChillIcon checked={!checked} {disabled} />
           </Label>
         </div>
-        <div class="heat" slot="on-label" let:checked let:disabled let:inputId>
+        <div class="heat" slot="onLabel" let:checked let:disabled let:inputId>
           <Label for={inputId}>
             <HeatIcon {checked} {disabled} />
           </Label>

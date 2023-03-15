@@ -11,7 +11,7 @@ export { applyLightTheme } from './theme/applyLightTheme';
 export { applyTheme } from './theme/applyTheme';
 export { darkTheme } from './theme/darkTheme';
 export { lightTheme } from './theme/lightTheme';
-export { neutrals } from './theme/colors';
+export { neutralColors, lightStatusColors, darkStatusColors } from './theme/colors';
 export { toggleDarkTheme } from './theme/toggleDarkTheme';
 
 // ----- Button ----- //
@@ -38,6 +38,7 @@ export { treeContextKey, treeItemContextKey } from './Tree.constants';
 import Button from './Button.svelte';
 import Checkbox from './Checkbox.svelte';
 import Dialog from './Dialog.svelte';
+import Dropdown from './Dropdown.svelte';
 import Field from './Field.svelte';
 import Input from './Input.svelte';
 import Label from './Label.svelte';
@@ -67,6 +68,7 @@ export {
   Button,
   Checkbox,
   Dialog,
+  Dropdown,
   Field,
   Input,
   Label,

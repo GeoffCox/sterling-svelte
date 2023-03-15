@@ -7,8 +7,8 @@
   export let disabled: boolean = false;
   export let vertical: boolean = false;
 
-  export let onText: string = '';
-  export let offText: string = '';
+  export let onText: string | undefined = undefined;
+  export let offText: string | undefined = undefined;
 
   const inputId = uuid();
 
@@ -22,7 +22,8 @@
   $: ratio = vertical ? (checked ? 0 : 1) : checked ? 1 : 0;
   $: valueOffset = (switchSize - thumbSize) * ratio;
 
-  $: console.log({ ratio, valueOffset });
+  $: hasOffLabel = $$slots.offLabel || (offText !== undefined && offText.length > 0);
+  $: hasOnLabel = $$slots.onLabel || (onText !== undefined && onText.length > 0);
 </script>
 
 <!--
@@ -57,13 +58,15 @@
     on:wheel
     {...$$restProps}
   />
-  <div class="off-label">
-    <slot name="off-label" {checked} {disabled} {inputId} {offText} {vertical}>
-      {#if offText}
-        <Label for={inputId} {disabled}>{offText}</Label>
-      {/if}
-    </slot>
-  </div>
+  {#if hasOffLabel}
+    <div class="off-label">
+      <slot name="offLabel" {checked} {disabled} {inputId} {offText} {vertical}>
+        {#if offText}
+          <Label for={inputId} {disabled}>{offText}</Label>
+        {/if}
+      </slot>
+    </div>
+  {/if}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="switch" bind:offsetWidth={switchWidth} bind:offsetHeight={switchHeight}>
     <div
@@ -73,13 +76,15 @@
       style={`--thumb-offset: ${valueOffset}px`}
     />
   </div>
-  <div class="on-label">
-    <slot name="on-label" {checked} {disabled} {inputId} {onText} {vertical}>
-      {#if onText}
-        <Label for={inputId} {disabled}>{onText}</Label>
-      {/if}
-    </slot>
-  </div>
+  {#if hasOnLabel}
+    <div class="on-label">
+      <slot name="onLabel" {checked} {disabled} {inputId} {onText} {vertical}>
+        {#if onText}
+          <Label for={inputId} {disabled}>{onText}</Label>
+        {/if}
+      </slot>
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -92,7 +97,7 @@
   .sterling-switch:not(.vertical) {
     align-items: center;
     column-gap: 0.5em;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto 1fr auto;
     grid-template-rows: auto;
     justify-items: stretch;
   }

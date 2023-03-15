@@ -171,9 +171,9 @@ color="--stsv-Display__color--disabled"
 />
 <br/>
 
-## Info, Success, Warning, and Error
+## Status colors
 
-Several colors can be used to give meaning to state.
+Several colors can be used to give meaning to status.
 
 <Swatch
 backgroundColor="--stsv-Info__background-color"

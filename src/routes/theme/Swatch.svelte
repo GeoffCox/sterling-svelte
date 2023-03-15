@@ -8,10 +8,10 @@
   export let borderStyle: string | undefined = undefined;
   export let borderWidth: string | undefined = undefined;
   export let color: string | undefined = undefined;
-  export let outlineColor: string;
-  export let outlineOffset: string;
-  export let outlineStyle: string;
-  export let outlineWidth: string;
+  export let outlineColor: string | undefined = undefined;
+  export let outlineOffset: string | undefined = undefined;
+  export let outlineStyle: string | undefined = undefined;
+  export let outlineWidth: string | undefined = undefined;
 
   // isPropSet avoids repeatedly comparing against undefined
   const isPropSet = {

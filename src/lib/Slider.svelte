@@ -5,13 +5,14 @@
 
   // ----- Props ----- //
 
-  export let value: number = 0;
+  export let composed = false;
+  export let disabled: boolean = false;
   export let min: number = 0;
   export let max: number = 100;
-  export let step: number | undefined = undefined;
   export let precision: number = 0;
+  export let step: number | undefined = undefined;
+  export let value: number = 0;
   export let vertical: boolean = false;
-  export let disabled: boolean = false;
 
   // ----- State ----- //
   let sliderRef: HTMLDivElement;
@@ -164,6 +165,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   aria-valuenow={value}
   aria-valuemax={max}
   class="sterling-slider"
+  class:composed
   class:disabled
   class:horizontal={!vertical}
   class:vertical
@@ -344,6 +346,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     outline-style: var(--stsv-Common__outline-style);
     outline-width: var(--stsv-Common__outline-width);
   }
+
   /* ----- disabled ----- */
 
   .sterling-slider.disabled .track {
@@ -359,6 +362,15 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     border-color: var(--stsv-Common__border-color--disabled);
     color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
+  }
+
+  .sterling-slider.composed,
+  .sterling-slider.composed:hover,
+  .sterling-slider.composed.focus,
+  .sterling-slider.composed.disabled {
+    background: none;
+    border: none;
+    outline: none;
   }
 
   @media (prefers-reduced-motion) {

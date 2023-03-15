@@ -1,11 +1,15 @@
 <script lang="ts">
-  import { neutrals } from '$lib';
+  import { neutralColors } from '$lib';
 </script>
 
 <div class="colors">
-  {#each Object.keys(neutrals) as key}
+  {#each Object.keys(neutralColors) as key}
     <div class="color">
-      <div class="swatch" style="background-color: {neutrals[key]}" title={`${neutrals[key]}`} />
+      <div
+        class="swatch"
+        style="background-color: {neutralColors[key]}"
+        title={`${neutralColors[key]}`}
+      />
       <div class="name">{key}</div>
     </div>
   {/each}

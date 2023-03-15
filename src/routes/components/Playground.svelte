@@ -84,7 +84,6 @@
     row-gap: 1em;
     place-items: flex-start;
     place-content: flex-start;
-    min-width: 350px;
   }
 
   .event-list {

@@ -18,6 +18,7 @@
     'Button',
     'Checkbox',
     'Dialog',
+    'Dropdown',
     'Field',
     'Input',
     'Label',

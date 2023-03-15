@@ -9,26 +9,37 @@ This will include components that have standards for behavior and accessibility.
 
 ## Components
 
-| Component | Categories         | Introduced in Version |
-| --------- | ------------------ | --------------------- |
-| (theme)   | infrastructure     | 0.0.1                 |
-| Button    | native, command    | 0.0.3                 |
-| Input     | native, form       | 0.0.4                 |
-| Checkbox  | native, form       | 0.0.5                 |
-| Radio     | native, form       | 0.0.6                 |
-| List      | container          | 0.0.7                 |
-| Select    | form               | 0.0.7                 |
-| Progress  | display            | 0.0.8                 |
-| Slider    | form               | 0.0.8                 |
-| Dialog    | surface            | 0.0.9                 |
-| Label     | display, form      | 0.0.10                |
-| Switch    | form               | 0.0.11                |
-| TextArea  | form               | 0.0.13                |
-| Tree      | container          | 0.0.14                |
-| Tabs      | container, surface | 0.0.15                |
-| Menus     | container, command | 0.0.16                |
-| Tooltip   | display            | 0.0.17                |
-| Field     | display, form      | 0.0.18                |
+| Component         | Categories     | HTML Element        | Introduced in Version |
+| ----------------- | -------------- | ------------------- | --------------------- |
+| (theme)           | infrastructure |                     | 0.0.1                 |
+| Button            | command        | button              | 0.0.3                 |
+| Input             | form           | input type=text     | 0.0.4                 |
+| Checkbox          | form           | input type=checkbox | 0.0.5                 |
+| Radio             | form           | input type=radio    | 0.0.6                 |
+| List              | container      |                     | 0.0.7                 |
+| ListItem          | container      |                     | 0.0.7                 |
+| Select            | form           |                     | 0.0.7                 |
+| Progress          | display        |                     | 0.0.8                 |
+| Slider            | form           | input               | 0.0.8                 |
+| Dialog            | surface        | dialog              | 0.0.9                 |
+| Label             | form           | label               | 0.0.10                |
+| Switch            | form           | input type=checkbox | 0.0.11                |
+| TextArea          | form           | textarea            | 0.0.13                |
+| Tree              | container      |                     | 0.0.14                |
+| TreeChevron       | container      |                     | 0.0.14                |
+| TreeItem          | container      |                     | 0.0.14                |
+| TreeItemDisplay   | container      |                     | 0.0.14                |
+| TabList           | container      |                     | 0.0.15                |
+| Tab               | command        | button              | 0.0.15                |
+| Menu              | command        |                     | 0.0.16                |
+| MenuBar           | command        |                     | 0.0.16                |
+| MenuButton        | command        | button              | 0.0.16                |
+| MenuItem          | command        | button              | 0.0.16                |
+| MenuItemDisplay   | command        |                     | 0.0.16                |
+| MenuItemSeparator | command        |                     | 0.0.16                |
+| Tooltip           | display        |                     | 0.0.17                |
+| Field             | form           | label               | 0.0.18                |
+| Dropdown          | form           |                     | 0.0.19                |
 
 <br/>
 
@@ -39,7 +50,6 @@ This will include components that have standards for behavior and accessibility.
 - display: displays read-only information
 - form: typically used with form field input
 - infrastructure: non-component code helpful to components
-- native: renders a native HTML element
 - surface: used to display sets of components on demand
 
 ## Under consideration
@@ -86,7 +96,6 @@ There are many reasons a component may never be added to sterling-svelte even th
 - ColorPicker
 - DatePicker
 - Drawer / Panel
-- Dropdown
 - Rating
 - Tags
 - TimePicker
