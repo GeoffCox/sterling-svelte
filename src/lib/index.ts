@@ -21,6 +21,7 @@ export { menuBarContextKey, menuItemContextKey } from './Menus.constants';
 // ----- Component types ----- //
 export type { ButtonVariant, ButtonShape } from './Button.types';
 export type { FieldStatus } from './Field.types';
+export type { LinkVariant } from './Link.types';
 export type { ListContext } from './List.types';
 export type { MenuBarContext, MenuItemContext, MenuItemRegistration } from './Menus.types';
 export type { ProgressColorful } from './Progress.types';
@@ -42,6 +43,7 @@ import Dropdown from './Dropdown.svelte';
 import Field from './Field.svelte';
 import Input from './Input.svelte';
 import Label from './Label.svelte';
+import Link from './Link.svelte';
 import List from './List.svelte';
 import ListItem from './ListItem.svelte';
 import Menu from './Menu.svelte';
@@ -72,6 +74,7 @@ export {
   Field,
   Input,
   Label,
+  Link,
   List,
   ListItem,
   Menu,

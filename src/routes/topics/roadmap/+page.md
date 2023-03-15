@@ -40,17 +40,9 @@ This will include components that have standards for behavior and accessibility.
 | Tooltip           | display        |                     | 0.0.17                |
 | Field             | form           | label               | 0.0.18                |
 | Dropdown          | form           |                     | 0.0.19                |
+| Link              | navigation     | a                   | 0.0.20                |
 
 <br/>
-
-### Categories
-
-- command: clicking executes a command or action
-- container: displays a set or hierarchy of other components
-- display: displays read-only information
-- form: typically used with form field input
-- infrastructure: non-component code helpful to components
-- surface: used to display sets of components on demand
 
 ## Under consideration
 
@@ -104,7 +96,6 @@ There are many reasons a component may never be added to sterling-svelte even th
 ### Navigation
 
 - Breadcrumb
-- Link, LinkButton
 - Nav
 - Pagination
 

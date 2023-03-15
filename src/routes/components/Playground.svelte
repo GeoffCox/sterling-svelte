@@ -68,10 +68,12 @@
 
   .configuration {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: auto;
     justify-items: stretch;
     column-gap: 1em;
+    width: 100%;
   }
 
   .panel {

@@ -29,7 +29,7 @@
         <SvelteIcon />
       {/if}
       {#if buttonWithText}
-        Sterling
+        sterling-svelte
       {/if}
     </Button>
   </div>

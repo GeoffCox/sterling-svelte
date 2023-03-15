@@ -20,7 +20,7 @@
 </script>
 
 <Playground bind:this={exampleRef}>
-  <div class="component" slot="component">
+  <svelte:fragment slot="component">
     <Select
       {composed}
       {disabled}
@@ -38,7 +38,7 @@
         <ListItem value={item} />
       {/each}
     </Select>
-  </div>
+  </svelte:fragment>
   <svelte:fragment slot="options">
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
@@ -52,14 +52,3 @@
     <div>selectedValue: {selectedValue}</div>
   </svelte:fragment>
 </Playground>
-
-<style>
-  .component {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    justify-items: stretch;
-    min-width: 25ch;
-  }
-</style>

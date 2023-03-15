@@ -6,6 +6,7 @@
   import Input from '$lib/Input.svelte';
   import ListItem from '$lib/ListItem.svelte';
   import Field from '$lib/Field.svelte';
+  import Link from '$lib/Link.svelte';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -22,6 +23,7 @@
     'Field',
     'Input',
     'Label',
+    'Link',
     'List',
     'ListItem',
     'Menu',
@@ -154,10 +156,10 @@
 
       <div class="content">
         <div class="nav">
-          <a href="{base}/">Overview</a>
-          <a href="{base}/topics/gettingStarted">Getting Started</a>
-          <a href="{base}/topics/roadmap">Roadmap</a>
-          <a href="{base}/theme">Theme</a>
+          <Link href="{base}/" variant="ghost">Overview</Link>
+          <Link href="{base}/topics/gettingStarted" variant="ghost">Getting Started</Link>
+          <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
+          <Link href="{base}/theme" variant="ghost">Theme</Link>
           <div class="filter">
             <Field label="Filter Components" for="filter-components">
               <Input id="filter-components" bind:value={filterText} type="search" composed />
@@ -166,7 +168,9 @@
           <div class="nav-header">Components</div>
           <div class="nav-section">
             {#each filteredComponents as component}
-              <a href="{base}/components/{component.toLowerCase()}">{component}</a>
+              <Link href="{base}/components/{component.toLowerCase()}" variant="ghost"
+                >{component}</Link
+              >
             {/each}
           </div>
         </div>
@@ -304,6 +308,10 @@
 
   .nav-section {
     padding-left: 0.25em;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
   }
 
   .nav-header {
