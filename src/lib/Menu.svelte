@@ -98,7 +98,9 @@
       {...$$restProps}
       style="left:{menuPosition.x}px; top:{menuPosition.y}px"
     >
-      <slot />
+      <div class="sterling-menu-content">
+        <slot />
+      </div>
     </div>
   </div>
 {/if}
@@ -116,26 +118,31 @@
     border-radius: var(--stsv-Common__border-radius);
     border-style: var(--stsv-Common__border-style);
     border-width: var(--stsv-Common__border-width);
-    box-sizing: border-box;
-    position: absolute;
     box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 4px -1px;
-    overflow: hidden;
-    width: max-content;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     height: fit-content;
-    z-index: 1;
-    top: 0;
     left: 0;
+    max-height: calc(50vh);
+    overflow: scroll;
+    overscroll-behavior: contain;
+    padding: 0.25em;
+    position: absolute;
+    top: 0;
+    width: max-content;
+    z-index: 1;
+  }
 
+  .sterling-menu-content {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     row-gap: calc(2 * var(--stsv-Common__outline-width));
-    padding: 0.25em;
   }
 
   .sterling-menu.open {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
   }
 </style>

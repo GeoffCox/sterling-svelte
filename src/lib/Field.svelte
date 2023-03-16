@@ -162,12 +162,18 @@
   on:paste
   {...$$restProps}
 >
-  <slot name="label" disabled={targetDisabled} for={htmlFor} {label} {required}>
-    <div class="label-text">
-      {label}
+  {#if label || $$slots.label}
+    <slot name="label" disabled={targetDisabled} for={htmlFor} {label} {required}>
+      <div class="label-text">
+        {label}
+      </div>
+    </slot>
+  {/if}
+  {#if $$slots.default}
+    <div class="content">
+      <slot />
     </div>
-  </slot>
-  <slot />
+  {/if}
   {#if message}
     <slot name="message" disabled={targetDisabled} {message} {required} {status}>
       <div
@@ -243,6 +249,12 @@
 
   .sterling-field.disabled .label-text {
     color: var(--stsv-Common__color--disabled);
+  }
+
+  .content {
+    display: flex;
+    align-content: stretch;
+    align-items: center;
   }
 
   .message {

@@ -51,6 +51,12 @@
     }
   };
 
+  $: {
+    if (!open) {
+      reference?.closest('button')?.focus();
+    }
+  }
+
   // ----- Set Context ----- //
 
   setContext<MenuItemContext>(menuItemContextKey, {
@@ -114,10 +120,26 @@
   on:wheel
   {...$$restProps}
 >
-  <div bind:this={reference}>
+  <div class="reference" bind:this={reference}>
     <slot />
-    <Menu id={menuId} {reference} {open}>
-      <slot name="items" />
-    </Menu>
   </div>
+  <Menu id={menuId} {reference} {open}>
+    <slot name="items" />
+  </Menu>
 </Button>
+
+<style>
+  .reference {
+    align-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    column-gap: 0.25em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
