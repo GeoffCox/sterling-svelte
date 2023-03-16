@@ -3,15 +3,15 @@
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
   viewBox="0 0 98.1 118"
-  width="1em"
-  height="1em"
+  width="1.5em"
+  height="1.5em"
   xml:space="preserve"
   {...$$restProps}
 >
   <title>Svelte</title>
   <style type="text/css">
     .st0 {
-      fill: currentColor;
+      fill: #222;
     }
     .st1 {
       fill: #ffffff;

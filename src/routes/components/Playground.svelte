@@ -78,7 +78,6 @@
 
   .panel {
     border: 2px double var(--stsv-Common__border-color);
-    color: var(--stsv-Layer__color--1);
     padding: 1em;
     display: grid;
     grid-template-columns: 1fr;

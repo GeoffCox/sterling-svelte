@@ -7,6 +7,14 @@
   import ListItem from '$lib/ListItem.svelte';
   import Field from '$lib/Field.svelte';
   import Link from '$lib/Link.svelte';
+  import MenuBar from '$lib/MenuBar.svelte';
+  import Menu from '$lib/Menu.svelte';
+  import MenuItem from '$lib/MenuItem.svelte';
+  import MenuButton from '$lib/MenuButton.svelte';
+  import HamburgerIcon from './HamburgerIcon.svelte';
+  import MenuSeparator from '$lib/MenuSeparator.svelte';
+  import FilterIcon from './FilterIcon.svelte';
+  import ThemeIcon from './ThemeIcon.svelte';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -130,17 +138,58 @@
     mounted = true;
     loadThemeFromCookie();
   });
+
+  const onNavMenuSelect = (event: CustomEvent<any>) => {
+    const url = event.detail.value;
+    window.location.href = url;
+  };
+
+  const onThemeSelect = (event: CustomEvent<any>) => {
+    currentTheme = event.detail.value;
+  };
 </script>
 
 <div>
   {#if mounted}
     <div class="layout" use:applyCurrentTheme={{ themeKey: currentTheme }}>
       <div class="header">
-        <div class="title">sterling-svelte (alpha)</div>
+        <div class="hamburger-menu">
+          <MenuButton
+            value="components"
+            shape="circular"
+            variant="ghost"
+            on:select={onNavMenuSelect}
+          >
+            <HamburgerIcon />
+            <svelte:fragment slot="items">
+              <MenuItem value="{base}/" text="Overview" />
+              <MenuItem value="{base}/topics/gettingStarted" text="Getting Started" />
+              <MenuItem value="{base}/topics/roadmap" text="Roadmap" />
+              <MenuItem value="{base}/theme" text="Theme" />
+              <MenuSeparator />
+              {#each filteredComponents as component}
+                <MenuItem value="{base}/components/{component.toLowerCase()}" text={component} />
+              {/each}
+            </svelte:fragment>
+          </MenuButton>
+        </div>
+        <div class="title">
+          <span>sterling-svelte (alpha)</span>
+        </div>
         <div class="subtitle">
           A modern, accessible, lightweight UI component library for Svelte.
         </div>
         <div class="select-theme">
+          <MenuButton value="theme" on:select={onThemeSelect} shape="circular">
+            <ThemeIcon />
+            <svelte:fragment slot="items">
+              {#each Object.keys(themes) as themeKey}
+                <MenuItem value={themeKey} text={themes[themeKey]} />
+              {/each}
+            </svelte:fragment>
+          </MenuButton>
+        </div>
+        <!-- <div class="select-theme">
           <Field label="Theme" forwardClick>
             <Select bind:selectedValue={currentTheme} composed>
               <svelte:fragment slot="value" let:selectedValue
@@ -151,21 +200,24 @@
               {/each}
             </Select>
           </Field>
-        </div>
+        </div> -->
       </div>
 
       <div class="content">
         <div class="nav">
-          <Link href="{base}/" variant="ghost">Overview</Link>
-          <Link href="{base}/topics/gettingStarted" variant="ghost">Getting Started</Link>
-          <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
-          <Link href="{base}/theme" variant="ghost">Theme</Link>
-          <div class="filter">
-            <Field label="Filter Components" for="filter-components">
-              <Input id="filter-components" bind:value={filterText} type="search" composed />
-            </Field>
+          <div class="nav-section">
+            <Link href="{base}/" variant="ghost">Overview</Link>
+            <Link href="{base}/topics/gettingStarted" variant="ghost">Getting Started</Link>
+            <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
+            <Link href="{base}/theme" variant="ghost">Theme</Link>
           </div>
           <div class="nav-header">Components</div>
+          <div class="filter">
+            <Field for="filter-components">
+              <Input id="filter-components" bind:value={filterText} composed />
+              <FilterIcon />
+            </Field>
+          </div>
           <div class="nav-section">
             {#each filteredComponents as component}
               <Link href="{base}/components/{component.toLowerCase()}" variant="ghost"
@@ -183,6 +235,7 @@
 </div>
 
 <style>
+  /* ----- Global ----- */
   @import '@fontsource/overpass';
   @import '@fontsource/fira-mono';
 
@@ -260,42 +313,60 @@
     margin-block-start: 0.5em;
   }
 
+  /* ----- Layout ----- */
+
   .layout {
     padding: 0 3em;
   }
 
   .header {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto;
     grid-template-rows: auto auto;
-    column-gap: 3em;
-    padding: 2em 0;
-    width: fit-content;
+    padding: 2em 0 1em 0;
+    border-bottom: 1px solid var(--stsv-Common__border-color);
   }
 
-  .header .title {
-    font-size: 1.6em;
+  .header .hamburger-menu {
+    align-self: flex-start;
+    justify-self: flex-end;
+    font-size: 0.8em;
     grid-row: 1 / span 1;
     grid-column: 1 / span 1;
   }
 
+  .header .title {
+    font-size: 1.6em;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    align-items: center;
+    grid-row: 1 / span 1;
+    grid-column: 2 / span 1;
+    min-width: 250px;
+  }
+
   .header .subtitle {
-    font-size: 1.2em;
+    font-size: 0.9em;
     grid-row: 2 / span 1;
-    grid-column: 1 / span 1;
+    grid-column: 2 / span 1;
   }
 
   .header .select-theme {
     min-width: 250px;
+    display: grid;
+    justify-items: flex-end;
     justify-self: flex-end;
+    align-items: center;
     grid-row: 1 / span 2;
-    grid-column: 2 / span 1;
+    grid-column: 3 / span 1;
+    margin-left: 1em;
   }
 
   .content {
     display: grid;
     grid-template-columns: auto 1fr;
-    margin-top: 1em;
+    margin-top: 0.25em;
   }
 
   .nav {
@@ -308,32 +379,22 @@
 
   .nav-section {
     padding-left: 0.25em;
-    display: flex;
-    flex-direction: column;
-    align-content: flex-start;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: 0.25em;
+    justify-content: flex-start;
+    justify-items: flex-start;
   }
 
   .nav-header {
     font-size: 0.8em;
     font-variant: small-caps;
-    margin-top: 2em;
-  }
-
-  .nav a {
-    display: block;
-    text-decoration: none;
-    margin: 0.5em 0;
-    font-size: 1em;
-    color: var(--stsv-Common__color);
-  }
-
-  .nav a:hover {
-    text-decoration: underline;
+    margin: 1em 0 0.5em 0;
   }
 
   .filter {
-    margin-top: 3em;
+    margin: 0 0 0.5em 0;
   }
 
   .component {
@@ -341,6 +402,12 @@
     flex-direction: column;
     place-content: start;
     place-items: start;
-    padding: 0 20px 150px 20px;
+    padding: 0 1em 10em 1em;
+  }
+
+  @media (max-width: 1000px) {
+    .nav {
+      display: none;
+    }
   }
 </style>
