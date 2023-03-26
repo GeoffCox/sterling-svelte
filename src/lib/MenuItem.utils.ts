@@ -1,4 +1,4 @@
-import type { MenuItemRegistration } from './Menus.types';
+import type { MenuItemRegistration } from './MenuItem.types';
 
 export const focusPreviousChild = (children: MenuItemRegistration[], currentValue: string) => {
   const index = children?.findIndex((menuItem) => menuItem.value === currentValue);

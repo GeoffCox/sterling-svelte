@@ -1,7 +1,7 @@
 <script lang="ts">
   // import type { Placement } from '@floating-ui/dom';
   import type { Keyborg } from 'keyborg';
-  import type { MenuBarContext, MenuItemRegistration, MenuItemContext } from './Menus.types';
+  import type { MenuItemRegistration, MenuItemContext } from './MenuItem.types';
 
   // import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
   import { createKeyborg } from 'keyborg';
@@ -14,14 +14,16 @@
   import { clickOutside } from './actions/clickOutside';
   import { afterUpdate, createEventDispatcher } from 'svelte/internal';
   import MenuItemDisplay from './MenuItemDisplay.svelte';
-  import { menuBarContextKey, menuItemContextKey } from './Menus.constants';
+  import { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
+  import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
   import Menu from './Menu.svelte';
   import {
     focusFirstChild,
     focusLastChild,
     focusNextChild,
     focusPreviousChild
-  } from './Menus.utils';
+  } from './MenuItem.utils';
+  import type { MenuBarContext } from './MenuBar.types';
 
   // ----- Props ----- //
 
@@ -46,10 +48,10 @@
     onOpen = undefined,
     onClose = undefined,
     onSelect = undefined
-  } = getContext<MenuItemContext>(menuItemContextKey) || {};
+  } = getContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY) || {};
 
   const { openPreviousMenu = undefined, openNextMenu = undefined } =
-    getContext<MenuBarContext>(menuBarContextKey) || {};
+    getContext<MenuBarContext>(MENU_BAR_CONTEXT_KEY) || {};
 
   // ----- State ----- //
 
@@ -260,7 +262,7 @@
 
   // ----- Set Context ----- //
 
-  setContext<MenuItemContext>(menuItemContextKey, {
+  setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
     rootValue: rootValue,
     depth: depth + 1,
     register: (menuItem: MenuItemRegistration) => {

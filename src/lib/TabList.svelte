@@ -6,7 +6,7 @@
   import { createEventDispatcher, onMount, setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
-  import { tabListContextKey } from './TabList.constants';
+  import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
 
   // ----- Props ----- //
 
@@ -236,7 +236,7 @@
 
   // ----- Set Context ----- //
 
-  setContext<TabListContext>(tabListContextKey, {
+  setContext<TabListContext>(TAB_LIST_CONTEXT_KEY, {
     disabled: disabledStore,
     selectedValue: selectedValueStore,
     usingKeyboard: usingKeyboardStore,

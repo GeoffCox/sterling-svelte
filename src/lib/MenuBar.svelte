@@ -1,10 +1,12 @@
 <script lang="ts">
-  import type { MenuItemContext, MenuItemRegistration, MenuBarContext } from './Menus.types';
+  import type { MenuItemContext, MenuItemRegistration } from './MenuItem.types';
 
   import { createEventDispatcher, setContext } from 'svelte';
 
-  import { menuBarContextKey, menuItemContextKey } from './Menus.constants';
+  import { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
+  import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
   import { writable } from 'svelte/store';
+  import type { MenuBarContext } from './MenuBar.types';
 
   // ----- State ----- //
   let menuBarRef: HTMLDivElement;
@@ -62,7 +64,7 @@
     }
   };
 
-  setContext<MenuItemContext>(menuItemContextKey, {
+  setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
     register: (menuItem: MenuItemRegistration) => {
       children.set([...$children, menuItem]);
     },
@@ -77,7 +79,7 @@
     onSelect: raiseSelect
   });
 
-  setContext<MenuBarContext>(menuBarContextKey, {
+  setContext<MenuBarContext>(MENU_BAR_CONTEXT_KEY, {
     openPreviousMenu: openPreviousChild,
     openNextMenu: openNextChild
   });

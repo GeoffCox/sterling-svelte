@@ -4,7 +4,7 @@
 
   import TreeItem from '$lib/TreeItem.svelte';
   import { writable } from 'svelte/store';
-  import { treeContextKey } from '$lib/Tree.constants';
+  import { TREE_CONTEXT_KEY } from '$lib/Tree.constants';
   import { setContext } from 'svelte';
 
   let exampleRef: any;
@@ -14,7 +14,7 @@
   const expandedValuesStore = writable<string[]>([]);
   const selectedValueStore = writable<string | undefined>();
 
-  setContext(treeContextKey, {
+  setContext(TREE_CONTEXT_KEY, {
     expandedValues: expandedValuesStore,
     selectedValue: selectedValueStore
   });

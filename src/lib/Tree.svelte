@@ -6,7 +6,7 @@
   import { createEventDispatcher, onMount, setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
-  import { treeContextKey } from './Tree.constants';
+  import { TREE_CONTEXT_KEY } from './Tree.constants';
 
   // ----- Props ----- //
 
@@ -90,7 +90,7 @@
   });
 
   // ----- Set Context ----- //
-  setContext<TreeContext>(treeContextKey, {
+  setContext<TreeContext>(TREE_CONTEXT_KEY, {
     expandedValues: expandedValuesStore,
     selectedValue: selectedValueStore,
     disabled: disabledStore

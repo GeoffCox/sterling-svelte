@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getContext } from 'svelte';
 
-  import { listContextKey } from './List.constants';
+  import { LIST_CONTEXT_KEY } from './List.constants';
   import type { ListContext } from './List.types';
 
   export let disabled = false;
@@ -13,7 +13,7 @@
     disabled: listDisabled,
     selectedValue,
     horizontal
-  } = getContext<ListContext>(listContextKey);
+  } = getContext<ListContext>(LIST_CONTEXT_KEY);
 
   // ----- State ----- //
   let itemRef: HTMLDivElement;

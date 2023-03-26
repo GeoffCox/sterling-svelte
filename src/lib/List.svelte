@@ -7,7 +7,7 @@
   import { writable } from 'svelte/store';
   import { v4 as uuid } from 'uuid';
 
-  import { listContextKey } from './List.constants';
+  import { LIST_CONTEXT_KEY } from './List.constants';
 
   // ----- Props ----- //
 
@@ -248,7 +248,7 @@
 
   // ----- Set Context ----- //
 
-  setContext<ListContext>(listContextKey, {
+  setContext<ListContext>(LIST_CONTEXT_KEY, {
     disabled: disabledStore,
     selectedValue: selectedValueStore,
     horizontal: horizontalStore

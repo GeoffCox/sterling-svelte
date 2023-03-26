@@ -2,7 +2,7 @@
   import SvelteIcon from '../../SvelteIcon.svelte';
   import Playground from '../Playground.svelte';
 
-  import type { ButtonShape, ButtonVariant } from '$lib';
+  import { LINK_VARIANTS, type ButtonShape, type ButtonVariant } from '$lib';
   import Button from '$lib/Button.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
   import Select from '$lib/Select.svelte';
@@ -33,9 +33,9 @@
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="variant" forwardClick>
       <Select bind:selectedValue={variant} composed>
-        <ListItem value="ghost">ghost</ListItem>
-        <ListItem value="undecorated">undecorated</ListItem>
-        <ListItem value="regular">regular</ListItem>
+        {#each LINK_VARIANTS as linkVariant}
+          <ListItem value={linkVariant}>{linkVariant}</ListItem>
+        {/each}
       </Select>
     </Field>
     <Checkbox bind:checked={withText}>with text</Checkbox>

@@ -6,7 +6,7 @@
   import { setContext } from 'svelte';
   import { writable } from 'svelte/store';
   import type { ListContext } from '$lib';
-  import { listContextKey } from '$lib/List.constants';
+  import { LIST_CONTEXT_KEY } from '$lib/List.constants';
   import Field from '$lib/Field.svelte';
 
   let exampleRef: any;
@@ -20,7 +20,7 @@
   const horizontalStore = writable<boolean>(horizontal);
   const disabledStore = writable<boolean>(disabled);
 
-  setContext<ListContext>(listContextKey, {
+  setContext<ListContext>(LIST_CONTEXT_KEY, {
     disabled: disabledStore,
     selectedValue: selectedValueStore,
     horizontal: horizontalStore

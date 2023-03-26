@@ -6,7 +6,7 @@
   import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
 
-  import { tabListContextKey } from '$lib/TabList.constants';
+  import { TAB_LIST_CONTEXT_KEY } from '$lib/TabList.constants';
   import Tab from '$lib/Tab.svelte';
   import Field from '$lib/Field.svelte';
 
@@ -16,7 +16,7 @@
   const verticalStore = writable<boolean>(false);
   const disabledStore = writable<boolean>(false);
 
-  setContext(tabListContextKey, {
+  setContext(TAB_LIST_CONTEXT_KEY, {
     disabled: disabledStore,
     selectedValue: selectedValueStore,
     vertical: verticalStore

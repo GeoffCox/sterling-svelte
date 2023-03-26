@@ -2,7 +2,7 @@
   import { getContext } from 'svelte';
 
   import type { TabListContext } from './TabList.types';
-  import { tabListContextKey } from './TabList.constants';
+  import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
 
   // ----- Props ----- //
   export let disabled = false;
@@ -18,7 +18,7 @@
     selectedValue,
     usingKeyboard,
     vertical
-  } = getContext<TabListContext>(tabListContextKey);
+  } = getContext<TabListContext>(TAB_LIST_CONTEXT_KEY);
 
   $: _disabled = $tabListDisabled || disabled;
 

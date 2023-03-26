@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type { MenuItemContext } from './Menus.types';
+  import type { MenuItemContext } from './MenuItem.types';
   import type { Placement } from '@floating-ui/dom';
 
   import { getContext, onMount } from 'svelte';
   import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 
   import { portal } from './actions/portal';
-  import { menuItemContextKey } from './Menus.constants';
+  import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
 
   export let reference: HTMLElement;
   export let open: boolean = false;
@@ -16,7 +16,7 @@
 
   // ----- Get Context ----- //
 
-  const { rootValue, depth = 0 } = getContext<MenuItemContext>(menuItemContextKey) || {};
+  const { rootValue, depth = 0 } = getContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY) || {};
 
   // ----- Methods ----- //
 

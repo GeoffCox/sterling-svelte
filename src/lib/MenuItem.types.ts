@@ -5,11 +5,6 @@ export type MenuItemRegistration = {
   focus: () => void;
 };
 
-export type MenuBarContext = {
-  openPreviousMenu?: (currentValue: string) => void;
-  openNextMenu?: (currentValue: string) => void;
-};
-
 export type MenuItemContext = {
   rootValue?: string;
   depth?: number;

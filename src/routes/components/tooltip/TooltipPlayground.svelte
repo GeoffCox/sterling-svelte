@@ -3,16 +3,17 @@
   import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
   import Tooltip from '$lib/Tooltip.svelte';
-  import type { TooltipShowOn, TooltipPlacement } from '$lib/Tooltip.types';
+  import type { TooltipShowOn } from '$lib/Tooltip.types';
   import ListItem from '$lib/ListItem.svelte';
   import Select from '$lib/Select.svelte';
   import Slider from '$lib/Slider.svelte';
   import Field from '$lib/Field.svelte';
+  import { FLOATING_PLACEMENTS, TOOLTIP_SHOW_ONS, type FloatingPlacement } from '$lib';
 
   let disabled = false;
   let showOn: TooltipShowOn = 'hover';
   let hoverDelayMilliseconds = 1000;
-  let placement: TooltipPlacement = 'top';
+  let placement: FloatingPlacement = 'top';
   let open = false;
   let tipText = 'Tooltip';
 </script>
@@ -29,24 +30,16 @@
     <Checkbox bind:checked={open}>open</Checkbox>
     <Field label="autoShow">
       <Select bind:selectedValue={showOn} composed>
-        <ListItem value="click">click</ListItem>
-        <ListItem value="hover">hover</ListItem>
+        {#each TOOLTIP_SHOW_ONS as tooltipShowOn}
+          <ListItem value={tooltipShowOn}>{tooltipShowOn}</ListItem>
+        {/each}
       </Select>
     </Field>
     <Field label="placement">
       <Select bind:selectedValue={placement} composed>
-        <ListItem value="top">top</ListItem>
-        <ListItem value="right">right</ListItem>
-        <ListItem value="bottom">bottom</ListItem>
-        <ListItem value="left">left</ListItem>
-        <ListItem value="top-start">top-start</ListItem>
-        <ListItem value="right-start">right-start</ListItem>
-        <ListItem value="bottom-start">bottom-start</ListItem>
-        <ListItem value="left-start">left-start</ListItem>
-        <ListItem value="top-end">top-end</ListItem>
-        <ListItem value="right-end">right-end</ListItem>
-        <ListItem value="bottom-end">bottom-end</ListItem>
-        <ListItem value="left-end">left-end</ListItem>
+        {#each FLOATING_PLACEMENTS as floatingPlacement}
+          <ListItem value={floatingPlacement}>{floatingPlacement}</ListItem>
+        {/each}
       </Select>
     </Field>
     <Field label="tip (text)">

@@ -4,7 +4,7 @@
   import { getContext, setContext } from 'svelte';
   import { slide } from 'svelte/transition';
 
-  import { treeContextKey, treeItemContextKey } from './Tree.constants';
+  import { TREE_CONTEXT_KEY, TREE_ITEM_CONTEXT_KEY } from './Tree.constants';
   import TreeItemDisplay from './TreeItemDisplay.svelte';
   import { writable } from 'svelte/store';
 
@@ -18,9 +18,9 @@
     expandedValues,
     selectedValue,
     disabled: treeDisabled
-  } = getContext<TreeContext>(treeContextKey);
+  } = getContext<TreeContext>(TREE_CONTEXT_KEY);
   const { depth = 0, disabled: parentDisabled } =
-    getContext<TreeItemContext>(treeItemContextKey) || {};
+    getContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY) || {};
 
   // ----- State ----- //
 
@@ -305,7 +305,7 @@
 
   // ----- Set Context ----- //
 
-  setContext(treeItemContextKey, { depth: depth + 1, disabled: disabledStore });
+  setContext(TREE_ITEM_CONTEXT_KEY, { depth: depth + 1, disabled: disabledStore });
 </script>
 
 <!--

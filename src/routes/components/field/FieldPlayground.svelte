@@ -7,6 +7,7 @@
   import ListItem from '$lib/ListItem.svelte';
   import Select from '$lib/Select.svelte';
   import type { FieldStatus } from '$lib/Field.types';
+  import { FIELD_STATUSES } from '$lib';
 
   let disabled = false;
   let forwardClick = false;
@@ -42,11 +43,9 @@
     <Checkbox bind:checked={required}>required</Checkbox>
     <Field label="status" for="status-select" forwardClick>
       <Select id="status-select" bind:selectedValue={status} composed>
-        <ListItem value="none">none</ListItem>
-        <ListItem value="info">info</ListItem>
-        <ListItem value="success">success</ListItem>
-        <ListItem value="warning">warning</ListItem>
-        <ListItem value="error">error</ListItem>
+        {#each FIELD_STATUSES as fieldStatus}
+          <ListItem value={fieldStatus}>{fieldStatus}</ListItem>
+        {/each}
       </Select>
     </Field>
     <Checkbox bind:checked={useFor}>use <i>for</i> and <i>id</i> association</Checkbox>

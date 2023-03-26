@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { ButtonShape, ButtonVariant } from './Button.types';
-  import type { MenuItemRegistration, MenuItemContext } from './Menus.types';
+  import type { MenuItemRegistration, MenuItemContext } from './MenuItem.types';
 
   import { v4 as uuid } from 'uuid';
   import { createEventDispatcher, getContext, setContext } from 'svelte';
@@ -8,8 +8,8 @@
 
   import Button from './Button.svelte';
   import Menu from './Menu.svelte';
-  import { menuItemContextKey } from './Menus.constants';
-  import { focusFirstChild, focusNextChild, focusPreviousChild } from './Menus.utils';
+  import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
+  import { focusFirstChild, focusNextChild, focusPreviousChild } from './MenuItem.utils';
 
   // ----- Props ----- //
 
@@ -77,7 +77,7 @@
 
   // ----- Set Context ----- //
 
-  setContext<MenuItemContext>(menuItemContextKey, {
+  setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
     rootValue: value,
     depth: 1,
     register: (menuItem: MenuItemRegistration) => {

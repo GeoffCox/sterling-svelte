@@ -1,1 +1,4 @@
-export type FieldStatus = 'none' | 'info' | 'success' | 'warning' | 'error';
+import type { FIELD_STATUSES } from './Field.constants';
+
+type FieldStatusTuple = typeof FIELD_STATUSES;
+export type FieldStatus = FieldStatusTuple[number];

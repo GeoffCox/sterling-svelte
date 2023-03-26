@@ -1,4 +1,4 @@
-import type { Placement } from '@floating-ui/dom';
+import type { TOOLTIP_SHOW_ONS } from './Tooltip.constants';
 
-export type TooltipShowOn = 'hover' | 'click';
-export type TooltipPlacement = Placement;
+type TooltipShowOnTuple = typeof TOOLTIP_SHOW_ONS;
+export type TooltipShowOn = TooltipShowOnTuple[number];

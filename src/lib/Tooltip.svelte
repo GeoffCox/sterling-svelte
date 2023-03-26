@@ -3,14 +3,15 @@
   import type { ComputePositionReturn } from '@floating-ui/core';
   import { arrow, autoUpdate, computePosition, flip, offset } from '@floating-ui/dom';
   import { onMount } from 'svelte';
-  import type { TooltipShowOn, TooltipPlacement } from './Tooltip.types';
+  import type { TooltipShowOn } from './Tooltip.types';
   import { fade } from 'svelte/transition';
+  import type { FloatingPlacement } from './floating-ui.types';
 
   export let disabled = false;
   export let showOn: TooltipShowOn | undefined = undefined;
   export let hoverDelayMilliseconds: number = 1000;
   export let open = false;
-  export let placement: TooltipPlacement = 'top';
+  export let placement: FloatingPlacement = 'top';
   export let portalTarget: HTMLElement | undefined = undefined;
 
   let originRef: HTMLDivElement;

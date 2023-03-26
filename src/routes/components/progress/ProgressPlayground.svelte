@@ -9,6 +9,7 @@
   import type { ProgressColorful } from '$lib/Progress.types';
   import ListItem from '$lib/ListItem.svelte';
   import Field from '$lib/Field.svelte';
+  import { PROGRESS_COLORFULS } from '$lib';
 
   let colorful: ProgressColorful = 'none';
   let disabled = false;
@@ -46,12 +47,9 @@
     </Field>
     <Field label="colorful" forwardClick>
       <Select bind:selectedValue={colorful} composed>
-        <ListItem value="none">none</ListItem>
-        <ListItem value="auto">auto</ListItem>
-        <ListItem value="info">info</ListItem>
-        <ListItem value="success">success</ListItem>
-        <ListItem value="warning">warning</ListItem>
-        <ListItem value="error">error</ListItem>
+        {#each PROGRESS_COLORFULS as progressColorful}
+          <ListItem value={progressColorful}>{progressColorful}</ListItem>
+        {/each}
       </Select>
     </Field>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
