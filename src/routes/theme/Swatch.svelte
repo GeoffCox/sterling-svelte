@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { update } from 'lodash-es';
   import { onMount } from 'svelte';
 
   export let backgroundColor: string | undefined = undefined;
