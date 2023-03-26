@@ -1,8 +1,28 @@
 <script lang="ts">
   import type { ButtonShape, ButtonVariant } from './Button.types';
 
+  // ----- Props ----- //
+
   export let variant: ButtonVariant = 'regular';
   export let shape: ButtonShape = 'rounded';
+
+  // ----- State ----- //
+
+  let buttonRef: HTMLButtonElement;
+
+  // ----- Methods ----- //
+
+  export const click = () => {
+    buttonRef?.click();
+  };
+
+  export const blur = () => {
+    buttonRef?.blur();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    buttonRef?.focus(options);
+  };
 </script>
 
 <!--
@@ -10,6 +30,7 @@
 	A styled HTML button element.
 -->
 <button
+  bind:this={buttonRef}
   class="sterling-button"
   class:square={shape === 'square'}
   class:circular={shape === 'circular'}

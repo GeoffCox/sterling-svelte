@@ -3,6 +3,8 @@
 
   import Label from '$lib/Label.svelte';
 
+  // ----- Props ----- //
+
   export let checked: boolean = false;
   export let disabled: boolean = false;
   export let vertical: boolean = false;
@@ -10,7 +12,10 @@
   export let onText: string | undefined = undefined;
   export let offText: string | undefined = undefined;
 
+  // ----- State ----- //
+
   const inputId = uuid();
+  let inputRef: HTMLInputElement;
 
   let switchWidth: number = 0;
   let switchHeight: number = 0;
@@ -24,6 +29,20 @@
 
   $: hasOffLabel = $$slots.offLabel || (offText !== undefined && offText.length > 0);
   $: hasOnLabel = $$slots.onLabel || (onText !== undefined && onText.length > 0);
+
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    inputRef?.blur();
+  };
+
+  export const click = () => {
+    inputRef?.click();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    inputRef?.focus(options);
+  };
 </script>
 
 <!--
@@ -32,6 +51,7 @@
 -->
 <div class="sterling-switch" class:vertical class:disabled>
   <input
+    bind:this={inputRef}
     bind:checked
     {disabled}
     id={inputId}

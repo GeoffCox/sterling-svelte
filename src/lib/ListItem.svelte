@@ -20,6 +20,20 @@
 
   $: _disabled = disabled || $listDisabled;
   $: selected = $selectedValue === value;
+
+  // ----- Methods ----- //
+
+  export const click = () => {
+    itemRef?.click();
+  };
+
+  export const blur = () => {
+    itemRef?.blur();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    itemRef?.focus(options);
+  };
 </script>
 
 <div

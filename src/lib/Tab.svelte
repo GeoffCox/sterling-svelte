@@ -31,6 +31,20 @@
       selectedValue.set(value);
     }
   }
+
+  // ----- Methods ----- //
+
+  export const click = () => {
+    tabRef?.click();
+  };
+
+  export const blur = () => {
+    tabRef?.blur();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    tabRef?.focus(options);
+  };
 </script>
 
 <button

@@ -57,6 +57,16 @@
     raiseSelect(selectedValue);
   }
 
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    tabListRef?.blur();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    tabListRef?.focus(options);
+  };
+
   // ----- Selection ----- //
 
   const isElementTab = (candidate: Element) => {

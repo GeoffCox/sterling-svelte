@@ -3,14 +3,14 @@
   import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
   import Tooltip from '$lib/Tooltip.svelte';
-  import type { TooltipAutoShow, TooltipPlacement } from '$lib/Tooltip.types';
+  import type { TooltipShowOn, TooltipPlacement } from '$lib/Tooltip.types';
   import ListItem from '$lib/ListItem.svelte';
   import Select from '$lib/Select.svelte';
   import Slider from '$lib/Slider.svelte';
   import Field from '$lib/Field.svelte';
 
-  let autoShow = true;
-  let autoShowOption: TooltipAutoShow = 'hover';
+  let disabled = false;
+  let showOn: TooltipShowOn = 'hover';
   let hoverDelayMilliseconds = 1000;
   let placement: TooltipPlacement = 'top';
   let open = false;
@@ -19,21 +19,16 @@
 
 <Playground>
   <div slot="component">
-    <Tooltip
-      bind:open
-      autoShow={autoShow ? autoShowOption : undefined}
-      {hoverDelayMilliseconds}
-      {placement}
-    >
+    <Tooltip bind:open {disabled} {showOn} {hoverDelayMilliseconds} {placement}>
       <div>Sterling</div>
       <div class="tip" slot="tip">{tipText}</div>
     </Tooltip>
   </div>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={autoShow}>autoShow</Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Field label="autoShow">
-      <Select bind:selectedValue={autoShowOption} composed>
+      <Select bind:selectedValue={showOn} composed>
         <ListItem value="click">click</ListItem>
         <ListItem value="hover">hover</ListItem>
       </Select>

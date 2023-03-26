@@ -12,30 +12,29 @@ A clickable item within a menu.
 
 ## Features
 
-- Menu items can act as checkboxes or radio buttons to toggle checked state.
-- Menu items can contain other menu items to display a submenu when clicked.
-- Submenus are shown in popovers above other content.
-- The select event is raised when a menu item or any of its children are clicked.
-- A submenu can contain MenuItem and non-MenuItem components.
-- Users can navigate menus using the keyboard:
+- Display a checkbox or radio dot based on checked state
+- Show child menu items in a submenu
+- The submenu floats above other element via portaling
+- Compose the menu item into another control that manages border and focus
 
-  - Click/select a menu with enter or spacebar keys.
-  - Cycle focus through menu items with the up/down arrow keys.
-  - Expand/collapse submenus with the left/right arrow keys.
-  - Close the entire hierarchy of open menus with the escape key.
+## Interactions
+
+- Enter/space key invokes a menu item
+- Up/down arrow key selects the previous/next menu item
+- Left/right arrow key collapses/expands a menu item's submenu
+- Escape key closes the hierarchy of open menus
 
 ## Usage
 
-Declare a hierarchy of MenuItems each with a unique value and text to display.
-Children of a MenuItem will be in its submenu.
-
-```ts
-const onSelect = (event) => {
-  alert('select', event.detail.value);
-};
-```
-
 ```svelte
+<script lang="ts">
+  import MenuItem from '@geoffcox/sterling-svelte/MenuItem.svelte';
+
+  const onSelect = (event) => {
+    alert('select', event.detail.value);
+  };
+</script>
+
 <MenuItem value="file" text="File" on:select={onSelect}>
   <MenuItem value="new" text="New" />
   <MenuItem value="open" text="Open" />
@@ -46,61 +45,64 @@ const onSelect = (event) => {
 
 ## Props
 
-| Name     | Type     | Default    | Description                            |
-| -------- | -------- | ---------- | -------------------------------------- |
-| checked  | boolean  | false      | If the menu item is checked            |
-| disabled | boolean  | false      | Disables the menu item                 |
-| open     | boolean  | false      | If the submenu is visible              |
-| value    | string   |            | The unqiue value of the menu item.     |
-| role     | string\* | 'menuitem' | The aria role of the menu item.        |
-| text     | string   |            | The text to display for the menu item. |
+| Name     | Type                    | Default     | Description                             |
+| -------- | ----------------------- | ----------- | --------------------------------------- |
+| (button) |                         |             | HTMLButtonElement properties            |
+| checked  | `boolean`               | `false`     | If the menu item is checked             |
+| disabled | `boolean`               | `false`     | If the menu item is disabled            |
+| open     | `boolean`               | `false`     | If the submenu is open                  |
+| value    | `string`                |             | The unqiue value of the menu item       |
+| text     | `string` \| `undefined` | `undefined` | The text to display for the menu item\* |
 
-- \* 'menuitem' | 'menuitemcheckbox' | 'menuitemradio'
+- \* If the item slot is filled, text is not displayed as part of MenuItemDisplay.
 
 ## Events
 
-| Name     | Event.detail | Description                                  |
-| -------- | ------------ | -------------------------------------------- |
-| close\*  | `{ value }`  | Raised when a menu item's submenu is closed. |
-| open\*   | `{ value }`  | Raised when a menu item's submenu is opened. |
-| select\* | `{ value }`  | Raised when a menu item is clicked/selected. |
+| Name     | Event.detail | Description                                 |
+| -------- | ------------ | ------------------------------------------- |
+| (button) |              | HTMLButtonElement events                    |
+| close\*  | `{ value }`  | Raised when a menu item's submenu is closed |
+| open\*   | `{ value }`  | Raised when a menu item's submenu is opened |
+| select\* | `{ value }`  | Raised when a menu item is clicked/selected |
 
-- \* raised for a menu item or any of its submenu children.
+- \* raised for a menu item or any of its descendants.
+
+## Methods
+
+| Name  | Parameters  | Description             |
+| ----- | ----------- | ----------------------- |
+| blur  |             | HTMLButtonElement.blur  |
+| click |             | HTMLButtonElement.click |
+| focus | `(options)` | HTMLButtonElement.focus |
 
 ## Anatomy
 
 ```
-MenuItem
+MenuItem (button)
   item slot
     MenuItemDisplay
 
 portal
-  menu
-    children
-        default slot
+  Menu
+    default slot
 ```
-
-- MenuItemDisplay is the default for the item slot
-- The portal and menu display submenus floating above other page content
 
 ## Slots
 
-| Slot    | Description                                                 |
-| ------- | ----------------------------------------------------------- |
-| default | Any declared MenuItem children                              |
-| item    | The template for the menu item, defaults to MenuItemDisplay |
+| Slot    | Description       |
+| ------- | ----------------- |
+| default | MenuItem children |
+| item    | MenuItem content  |
 
-### let params
+## Let Params
 
-The item slot is passed the following `let` parameters.
-
-| Let Param   | Type      | Description                                        |
-| ----------- | --------- | -------------------------------------------------- |
-| checked     | `boolean` | True if the item is checked.                       |
-| depth       | `number`  | Menu depth of the item starting at 0               |
-| disabled    | `boolean` | True if the item is disabled                       |
-| hasChildren | `boolean` | True if the item has children                      |
-| open        | `boolean` | True if the submenu is open                        |
-| value       | `string`  | Unique value of the item within the menu hierarchy |
-| role        | `string`  | Aria role of the menu item                         |
-| text        | `string`  | Text to display                                    |
+| Name        | Passed to slots |
+| ----------- | --------------- |
+| checked     | item            |
+| depth       | default, item   |
+| disabled    | default, item   |
+| hasChildren | item            |
+| open        | item            |
+| role        | item            |
+| text        | item            |
+| value       | item            |

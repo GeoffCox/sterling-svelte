@@ -4,9 +4,26 @@
   export let href: string;
   export let disabled: boolean = false;
   export let variant: LinkVariant = 'regular';
+
+  let linkRef: HTMLAnchorElement;
+
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    linkRef?.blur();
+  };
+
+  export const click = () => {
+    linkRef?.click();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    linkRef?.focus();
+  };
 </script>
 
 <a
+  bind:this={linkRef}
   class="sterling-link"
   class:disabled
   class:ghost={variant === 'ghost'}

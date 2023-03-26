@@ -37,7 +37,7 @@
       {hasChildren}
       {selected}
     >
-      <svelte:fragment>{label}</svelte:fragment>
+      {label}
     </TreeItemDisplay>
   </div>
   <svelte:fragment slot="options">

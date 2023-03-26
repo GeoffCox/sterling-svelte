@@ -1,15 +1,13 @@
 <script>
-    import ManualPlayground from './DialogManualPlayground.svelte';
-    import FormPlayground from './DialogFormPlayground.svelte';
+    import ManualExample from './DialogManualExample.svelte';
+    import FormExample from './DialogFormExample.svelte';
 </script>
 
 # Dialog
 
-A styled HTML `<dialog>` element for modal dialogs.
+A styled HTML `<dialog />`.
 
-## Playground
-
-### Form Submit
+## Example: Form Submit
 
 The native HTML `dialog` supports submitting a `form` within it.
 When the form is submitted, the dialog closes.
@@ -23,16 +21,15 @@ The `Dialog` component has a `form` wrapping the content, so you don't need to a
 IMPORTANT!
 
 - HTML button has a default `type="submit"`. Clicking it submits the form.
-- This library's `Button` has a default `type="button"`. You will need to set `type="submit"` if you to submit the form.
+- This library's `Button` has a default `type="button"`. You will need to set `type="submit"` to submit a form.
 
-<FormPlayground />
+<FormExample />
 
-### Manual Action Buttons
+## Example: Buttons
 
-This example demonstrates buttons that do not submit the form.
-Instead, `on:click` handlers take action.
+In this approach, buttons do not submit the form. Instead, `on:click` handlers take action.
 
-<ManualPlayground />
+<ManualExample />
 
 ## Features
 
@@ -52,6 +49,12 @@ IMPORTANT!
   Other components should be used for modeless windows.
 - Because the `open` prop causes the dialog to be modeless, it is not forwarded to the `dialog` element.
 - The `cancel` event is bubbled, but it is only raised when the escape key is pressed. It is not raised when the close button or any button with `value=''` is pressed.
+
+## Interactions
+
+- The escape key closes the dialog.
+- Clicking the close button closes the dialog.
+- Clicking a button in the dialog with `type="submit"` closes the dialog and sets the result.
 
 ## Usage
 
@@ -86,29 +89,38 @@ const deleteProduct = () => {
 
 ## Props
 
-| Name           | Type    | Default | Description                                      |
-| -------------- | ------- | ------- | ------------------------------------------------ |
-| open           | boolean | false   | If the dialog is open (i.e. visible)             |
-| backdropCloses | boolean | false   | If clicking outside the dialog should cancel it. |
+| Name           | Type    | Default | Description                                       |
+| -------------- | ------- | ------- | ------------------------------------------------- |
+| (dialog)       |         |         | HTMLDialogElement properties                      |
+| backdropCloses | boolean | false   | If clicking outside the dialog should cancel it.  |
+| open           | boolean | false   | If the dialog is open (i.e. visible)              |
+| returnValue    | string  | ''      | The return value from submitting the dialog form. |
+
+## Events
+
+| Name     | Event.detail | Description           |
+| -------- | ------------ | --------------------- |
+| (dialog) |              | HTMLDivElement events |
 
 ## Anatomy
 
 ```
-HTML dialog
-  content slot
-    header slot
-      title slot
-      close button
-    body slot
-    footer slot
+Dialog (dialog)
+  form
+    content slot
+      header slot
+        title slot
+        close button
+      body slot
+      footer slot
 ```
 
 ## Slots
 
-| Name     | Default                    | Description                   |
-| -------- | -------------------------- | ----------------------------- |
-| contents | header, body, footer slots | All content within the dialog |
-| header   | title slot, close button   | The dialog header             |
-| title    |                            | The dialog title              |
-| body     |                            | The dialog body               |
-| footer   |                            | The dialog footer             |
+| Name    | Default content            | Description                   |
+| ------- | -------------------------- | ----------------------------- |
+| body    |                            | The dialog body               |
+| content | header, body, footer slots | All content within the dialog |
+| footer  |                            | The dialog footer             |
+| header  | title slot, close button   | The dialog header             |
+| title   |                            | The dialog title              |

@@ -12,11 +12,52 @@
 
   // ----- State ----- //
 
+  let inputRef: HTMLInputElement;
+
   $: {
     if ($$slots.default && id === undefined) {
       id = uuid();
     }
   }
+
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    inputRef?.blur();
+  };
+
+  export const click = () => {
+    inputRef?.click();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    inputRef?.focus();
+  };
+
+  export const select = () => {
+    inputRef?.select();
+  };
+
+  export const setSelectionRange = (
+    start: number | null,
+    end: number | null,
+    direction?: 'forward' | 'backward' | 'none'
+  ) => {
+    inputRef?.setSelectionRange(start, end, direction);
+  };
+
+  export const setRangeText = (
+    replacement: string,
+    start?: number,
+    end?: number,
+    selectionMode?: SelectionMode
+  ) => {
+    if (start && end) {
+      inputRef?.setRangeText(replacement, start, end, selectionMode);
+    } else {
+      inputRef?.setRangeText(replacement);
+    }
+  };
 </script>
 
 {#if $$slots.default}
@@ -25,11 +66,12 @@
   </Label>
 {/if}
 <input
-  bind:value
+  bind:this={inputRef}
   class="sterling-input"
   class:composed
   {disabled}
   {id}
+  bind:value
   on:blur
   on:click
   on:change

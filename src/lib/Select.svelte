@@ -73,6 +73,26 @@
     }
   }
 
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    selectRef?.blur();
+  };
+
+  export const click = () => {
+    selectRef?.click();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    selectRef?.focus();
+  };
+
+  export const scrollToSelectedItem = () => {
+    if (open) {
+      listRef?.scrollToSelectedItem();
+    }
+  };
+
   // ----- Event Handlers ----- //
 
   let mounted = false;
@@ -226,7 +246,7 @@
     </slot>
   </div>
   <div class="button">
-    <slot name="button" {open}>
+    <slot name="button" {disabled} {open} {selectedValue}>
       <div class="chevron" />
     </slot>
   </div>

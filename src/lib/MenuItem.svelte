@@ -115,6 +115,20 @@
 
   $: autoFocusFirstChild(open, depth > 0);
 
+  // ----- Methods ----- //
+
+  export const click = () => {
+    menuItemRef?.click();
+  };
+
+  export const blur = () => {
+    menuItemRef?.blur();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    menuItemRef?.focus(options);
+  };
+
   // ----- Event Handlers ----- //
 
   onMount(() => {
@@ -322,15 +336,15 @@
   {...$$restProps}
 >
   <div class="item" id={displayId}>
-    <slot name="item" {checked} {disabled} {hasChildren} {depth} {value} {open} {role} {text}>
+    <slot name="item" {checked} {depth} {disabled} {hasChildren} {open} {role} {text} {value}>
       <MenuItemDisplay {checked} hasChildren={depth > 0 && hasChildren} menuItemRole={role}
         >{text}</MenuItemDisplay
       >
     </slot>
   </div>
-  {#if menuItemRef && open && $$slots.default}
+  {#if menuItemRef && open && hasChildren}
     <Menu id={menuId} {open} reference={menuItemRef}>
-      <slot />
+      <slot {depth} {disabled} />
     </Menu>
   {/if}
 </button>

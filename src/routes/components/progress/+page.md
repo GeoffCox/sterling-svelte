@@ -1,6 +1,6 @@
 # Progress
 
-An indicator of a value between 0 and a maximum value.
+An displayed value in a range.
 
 <script>
     import Playground from './ProgressPlayground.svelte';
@@ -12,34 +12,48 @@ An indicator of a value between 0 and a maximum value.
 
 ## Features
 
-- Choose between a horizontal or vertical progress bar.
-- Identify the value with an associated label.
-- Give meaning to the value with semantic colors.
+- Horizontal or vertical layout.
+- Set semantic colors for the progress state.
 - Bind to the calculated percentage.
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import Progress from '@geoffcox/sterling-svelte/Progress.svelte';
+  let value = 50;
+  let percent = 0;
+</script>
+
+<Progress {value} bind:percent />
+<span>{percent}%</span>
+```
 
 ## Props
 
-| Name                | Type             | Description                                    |
-| ------------------- | ---------------- | ---------------------------------------------- |
-| colorful            | ProgressColorful | Changes the indicator color. Defaults to none. |
-| disabled            | boolean          | Disables the progress making it look inactive  |
-| max                 | number           | The maximum value to display. Defaults to 100  |
-| percent (read only) | number           | The percentage of value / max                  |
-| value               | number           | The current value to display                   |
-| vertical            | boolean          | Displays the progress vertically               |
+| Name                | Type               | Default  | Description                  |
+| ------------------- | ------------------ | -------- | ---------------------------- |
+| (div)               |                    |          | HTMLDivElement properties    |
+| colorful            | `ProgressColorful` | `'none'` | The indicator color          |
+| disabled            | `boolean`          | `false`  | If the progress is disabled  |
+| max                 | `number`           | `100`    | The maximum value to display |
+| percent (read only) | `number`           |          | The value/max                |
+| value               | `number`           | `0`      | The current value            |
+| vertical            | `boolean`          | `false`  | If the progress is vertical  |
 
 - ProgressColorful: 'none' | 'auto' | 'progress' | 'success' | 'warning' | 'error'
-  - auto: Set to 'progress' when value less than max and 'success' when value equals max.
+  - auto: Set to 'progress' when value is less than max and 'success' when value equals max.
+
+## Events
+
+| Name  | Event.detail | Description           |
+| ----- | ------------ | --------------------- |
+| (div) |              | HTMLDivElement events |
 
 ## Anatomy
 
 ```
-  label slot
-  indicator
+Progress (div)
+  container (div)
+    indicator (div)
 ```
-
-## Slots
-
-| Name  | Description                            |
-| ----- | -------------------------------------- |
-| label | The label associated with the progress |

@@ -10,11 +10,27 @@
 
   // ----- State ----- //
 
+  let inputRef: HTMLInputElement;
+
   $: {
     if ($$slots.default && id === undefined) {
       id = uuid();
     }
   }
+
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    inputRef?.blur();
+  };
+
+  export const click = () => {
+    inputRef?.click();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    inputRef?.focus(options);
+  };
 </script>
 
 <!--
@@ -24,6 +40,7 @@
 <div class="sterling-checkbox">
   <div class="container">
     <input
+      bind:this={inputRef}
       {disabled}
       {id}
       type="checkbox"
@@ -55,7 +72,9 @@
   {#if $$slots.default}
     <div class="label">
       <Label {disabled} for={id}>
-        <slot {checked} {disabled} />
+        <slot {checked} {disabled} inputId={id} value={$$restProps.value}>
+          {$$restProps.value}
+        </slot>
       </Label>
     </div>
   {/if}

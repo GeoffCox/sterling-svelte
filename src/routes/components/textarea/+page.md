@@ -4,7 +4,7 @@
 
 # TextArea
 
-A styled HTML textarea element.
+A styled `<textarea/>`.
 
 ## Playground
 
@@ -12,43 +12,48 @@ A styled HTML textarea element.
 
 ## Features
 
-- Identify the value with an associated label.
-- Choose to automatically adjust the height to fit content.
+- Automatically adjust the height to fit content.
 - Add a resize handle to the corner of the text area.
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import TextArea from '@geoffcox/sterling-svelte/TextArea.svelte';
+
+  let value = 'Welcome to sterling-svelte';
+</script>
+
+<TextArea bind={value} autoHeight />
+```
 
 ## Props
 
 | Name       | Type       | Default | Description                                |
 | ---------- | ---------- | ------- | ------------------------------------------ |
-| (textarea) | (multiple) |         | Built in HTMLTextAreaElement properties    |
+| (textarea) |            |         | HTMLTextAreaElement properties             |
 | autoHeight | boolean    | false   | Automatically adjust height to fit content |
 | resize     | CSS resize | 'none'  | Sets the textarea resize CSS property      |
 
 ## Events
 
-| Name       | Type       | Description                         |
-| ---------- | ---------- | ----------------------------------- |
-| (textarea) | (multiple) | Built in HTMLTextAreaElement events |
+| Name       | Type | Description                |
+| ---------- | ---- | -------------------------- |
+| (textarea) |      | HTMLTextAreaElement events |
+
+## Methods
+
+| Name              | Parameters                                | Description                        |
+| ----------------- | ----------------------------------------- | ---------------------------------- |
+| blur              |                                           | HTMLInputElement.blur              |
+| click             |                                           | HTMLInputElement.click             |
+| focus             | `(options)`                               | HTMLInputElement.focus             |
+| select            |                                           | HTMLInputElement.select            |
+| setSelectionRange | `(start, end, direction)`                 | HTMLInputElement.setSelectionRange |
+| setTextRange      | `(replacment, start, end, selectionMode)` | HTMLInputElement.setTextRange      |
 
 ## Anatomy
 
 ```
-TextArea
-  default slot
-  HTML textarea
+TextArea (textarea)
 ```
-
-## Slots
-
-| Name    | Description                   |
-| ------- | ----------------------------- |
-| default | Content of the textarea label |
-
-## Let Params
-
-| Name       | Type       | Passed to slots |
-| ---------- | ---------- | --------------- |
-| autoHeight | `boolean`  | default         |
-| disabled   | `boolean`  | default         |
-| resize     | CSS resize | default         |
-| value      | `string`   | default         |

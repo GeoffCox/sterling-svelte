@@ -4,7 +4,7 @@
 
 # Link
 
-A styled HTML anchor.
+A styled `<a />`.
 
 ## Playground
 
@@ -15,26 +15,42 @@ A styled HTML anchor.
 - The link can be disabled.
 - You can choose different variants of the link style.
 
+## Usage
+
+```svelte
+<Link href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a">
+  &lt;a&gt;: The Anchor element
+</Link>
+```
+
 ## Props
 
-| Name     | Type        | Default   | Description                           |
-| -------- | ----------- | --------- | ------------------------------------- |
-| (a)      |             |           | Built in HTMLAnchorElement properties |
-| disabled | boolean     | false     | Disables the component                |
-| variant  | LinkVariant | 'regular' | Changes the style of the component    |
+| Name     | Type        | Default   | Description                        |
+| -------- | ----------- | --------- | ---------------------------------- |
+| (a)      |             |           | HTMLAnchorElement properties       |
+| disabled | boolean     | false     | Disables the component             |
+| variant  | LinkVariant | 'regular' | Changes the style of the component |
 
 - LinkVariant: 'regular' | 'ghost' | 'undecorated'
 
 ## Events
 
-| Name | Event.detail | Description                       |
-| ---- | ------------ | --------------------------------- |
-| (a)  |              | Built in HTMLAnchorElement events |
+| Name | Event.detail | Description              |
+| ---- | ------------ | ------------------------ |
+| (a)  |              | HTMLAnchorElement events |
+
+## Methods
+
+| Name  | Parameters  | Description             |
+| ----- | ----------- | ----------------------- |
+| blur  |             | HTMLAnchorElement.blur  |
+| click |             | HTMLAnchorElement.click |
+| focus | `(options)` | HTMLAnchorElement.focus |
 
 ## Anatomy
 
 ```
-Link (HTML a)
+Link (<a />)
   default slot
 ```
 

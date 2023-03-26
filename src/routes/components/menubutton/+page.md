@@ -4,7 +4,7 @@
 
 # MenuButton
 
-A Button that shows a context menu when clicked.
+A Button that shows a menu when clicked.
 
 ## Playground
 
@@ -12,40 +12,42 @@ A Button that shows a context menu when clicked.
 
 ## Features
 
-- Same features as the Button component
-- Same features as the menu of the MenuItem component.
+- A composite component of Button and Menu
+- Bubbles events for MenuItem descendants
+
+## Interactions
+
+- Clicking the button opens/closes the menu
 
 ## Usage
 
-Declare a hierarchy of MenuItems each with a unique value and text to display.
-Children of a MenuItem will be in its submenu.
-
-```ts
-const onSelect = (event) => {
-  alert('select', event.detail.value);
-};
-```
-
 ```svelte
-<MenuItem value="file" text="File" on:select={onSelect}>
+<script lang="ts">
+  import MenuItem from '@geoffcox/sterling-svelte/MenuItem.svelte';
+
+  const onSelect = (event) => {
+    alert('select', event.detail.value);
+  };
+</script>
+
+<MenuButton value="file" on:select={onSelect}>
+  File
+  <svelte:fragment slot="items">
   <MenuItem value="new" text="New" />
   <MenuItem value="open" text="Open" />
   <MenuItem value="save" text="Save" />
   <MenuItem value="close" text="Close" />
+  </svelte:fragment>
 </MenuItem>
 ```
 
 ## Props
 
-| Name     | Type     | Default    | Description                            |
-| -------- | -------- | ---------- | -------------------------------------- |
-| (Button) |          |            | Button props                           |
-| open     | boolean  | false      | If the submenu is visible              |
-| value    | string   |            | The unqiue value of the menu item.     |
-| role     | string\* | 'menuitem' | The aria role of the menu item.        |
-| text     | string   |            | The text to display for the menu item. |
-
-- \* 'menuitem' | 'menuitemcheckbox' | 'menuitemradio'
+| Name     | Type       | Default | Description                          |
+| -------- | ---------- | ------- | ------------------------------------ |
+| (Button) |            |         | Button properties                    |
+| open     | `boolean ` | `false` | If the menu is visible               |
+| value    | `string  ` |         | The unqiue value of the menu button. |
 
 ## Events
 
@@ -69,7 +71,14 @@ Button
 
 ## Slots
 
-| Slot    | Description                    |
-| ------- | ------------------------------ |
-| default | Button content                 |
-| items   | Menu items in the context menu |
+| Slot    | Description             |
+| ------- | ----------------------- |
+| default | Button content          |
+| items   | Menu items for the menu |
+
+## Let Params
+
+| Name    | Passed to slots |
+| ------- | --------------- |
+| shape   | default         |
+| variant | default         |

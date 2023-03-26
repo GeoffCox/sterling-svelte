@@ -1,6 +1,6 @@
 # Slider
 
-Slider allows users to set a value between a minimum and maximum by moving a visual 'thumb' along a line.
+A draggable 'thumb' on a line to set a value in a range.
 
 <script>
     import Playground from './SliderPlayground.svelte';
@@ -12,48 +12,65 @@ Slider allows users to set a value between a minimum and maximum by moving a vis
 
 ## Features
 
-- Choose between a horizontal or vertical slider.
-- User can change value by dragging the thumb.
-- Arrow keys increment value up or down.
-- Identify the value with an associated label.
-- Bind to the calculated percentage.
+- Horizontal or vertical layout.
+- Compose the slider into another control that manages border and focus.
+
+## Interactions
+
+- Drag the thumb to change the value.
+- Left/Right arrow keys decrement/increment the value.
+- Up/Down arrow keys decrement/increment the value.
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import Slider from '@geoffcox/sterling-svelte/Slider.svelte';
+  let value = 70;
+</script>
+
+<Slider bind:value min={32} max={211} />
+```
 
 ## Props
 
-| Name      | Type    | Default   | Description                                          |
-| --------- | ------- | --------- | ---------------------------------------------------- |
-| disabled  | boolean | false     | Disables the progress making it look inactive        |
-| max       | number  | 100       | The maximum value.                                   |
-| min       | number  | 0         | The minimal value. .                                 |
-| precision | number  | 0         | The number of decimal places allowed for the value.  |
-| step      | number  | undefined | The optional allowed increments between min and max. |
-| value     | number  | 0         | The current value                                    |
-| vertical  | boolean | false     | If the slider should be vertical.                    |
-
-## Anatomy
-
-```
-  label slot
-  slider
-    track
-    fill
-    thumb
-```
-
-- label (optional): describes the slider value
-- slider: contains the track, fill, and thumb
-- track: displays the range between min and max
-- fill: displays filling betweenmin and value
-- thumb: a draggable button for changing the value
-
-## Slots
-
-| Name  | Description                            |
-| ----- | -------------------------------------- |
-| label | The label associated with the progress |
+| Name      | Type      | Default     | Description                                 |
+| --------- | --------- | ----------- | ------------------------------------------- |
+| (div)     |           |             | HTMLDivElement properties                   |
+| disabled  | `boolean` | `false`     | If the slider is disabled                   |
+| max       | `number`  | `100`       | The maximum value                           |
+| min       | `number`  | `0`         | The minimal value                           |
+| precision | `number`  | `0`         | The number of decimal places for the value  |
+| step      | `number`  | `undefined` | The optional increments between min and max |
+| value     | `number`  | `0`         | The current value                           |
+| vertical  | `boolean` | `false`     | If the layout is vertical                   |
 
 ## Events
 
 | Name   | Event.detail | Description                           |
 | ------ | ------------ | ------------------------------------- |
+| (div)  |              | HTMLDivElement events                 |
 | change | `{ value }`  | Raised when the slider value changes. |
+
+## Methods
+
+| Name  | Parameters  | Description          |
+| ----- | ----------- | -------------------- |
+| blur  |             | HTMLDivElement.blur  |
+| click |             | HTMLDivElement.click |
+| focus | `(options)` | HTMLDivElement.focus |
+
+## Anatomy
+
+```
+Slider (div)
+  container
+    track
+    fill
+    thumb
+```
+
+- container: holds the track, fill, and thumb
+- track: displays the range between min and max
+- fill: displays a filled in track between min and value
+- thumb: a draggable button for changing the value

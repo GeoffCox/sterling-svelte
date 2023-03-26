@@ -27,12 +27,14 @@ export type { MenuBarContext, MenuItemContext, MenuItemRegistration } from './Me
 export type { ProgressColorful } from './Progress.types';
 export type { TabListContext } from './TabList.types';
 export type { TextAreaResize } from './TextArea.types';
-export type { TooltipAutoShow, TooltipPlacement } from './Tooltip.types';
+export type { TooltipShowOn as TooltipAutoShow, TooltipPlacement } from './Tooltip.types';
 export type { TreeContext, TreeItemContext } from './Tree.types';
 
 // ----- Component constants ----- //
+export { BUTTON_SHAPES, BUTTON_VARIANTS } from './Button.constants';
 export { listContextKey } from './List.constants';
 export { tabListContextKey } from './TabList.constants';
+export { TEXT_AREA_RESIZES } from './TextArea.constants';
 export { treeContextKey, treeItemContextKey } from './Tree.constants';
 
 // ----- Components ----- //

@@ -9,21 +9,21 @@ const pathsBase = dev ? '' : '/demos/sterling-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
-	// for more information about preprocessors
-	preprocess: [
-		vitePreprocess(),
-		mdsvex({
-			extensions: ['.md']
-		})
-	],
-	extensions: ['.svelte', '.md'],
-	kit: {
-		adapter: dev ? autoAdapter() : staticAdapter(),
-		paths: {
-			base: pathsBase
-		}
-	}
+  // Consult https://kit.svelte.dev/docs/integrations#preprocessors
+  // for more information about preprocessors
+  preprocess: [
+    vitePreprocess(),
+    mdsvex({
+      extensions: ['.md']
+    })
+  ],
+  extensions: ['.svelte', '.md'],
+  kit: {
+    adapter: dev ? autoAdapter() : staticAdapter(),
+    paths: {
+      base: pathsBase
+    }
+  }
 };
 
 export default config;

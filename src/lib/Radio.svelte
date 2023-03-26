@@ -18,6 +18,7 @@
 
   // ----- State ----- //
   let mounted = false;
+  let radioRef: HTMLInputElement;
 
   $: {
     if ($$slots.default && id === undefined) {
@@ -39,6 +40,20 @@
     }
   };
 
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    radioRef?.blur();
+  };
+
+  export const click = () => {
+    radioRef?.click();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    radioRef?.focus(options);
+  };
+
   // ----- Event Handlers ----- //
 
   onMount(() => {
@@ -56,6 +71,7 @@
 <div class="sterling-radio">
   <div class="container">
     <input
+      bind:this={radioRef}
       checked={group === $$restProps.value}
       {disabled}
       {id}
@@ -88,7 +104,9 @@
   {#if $$slots.default}
     <div class="label">
       <Label {disabled} for={id}>
-        <slot {checked} {disabled} {group} />
+        <slot {checked} {disabled} {group} inputId={id} value={$$restProps.value}>
+          {$$restProps.value}
+        </slot>
       </Label>
     </div>
   {/if}

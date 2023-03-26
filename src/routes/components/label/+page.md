@@ -1,6 +1,6 @@
 # Label
 
-A styled HTML label element.
+A styled `<label/>`.
 
 <script>
     import Playground from './LabelPlayground.svelte';
@@ -12,24 +12,49 @@ A styled HTML label element.
 
 ## Features
 
-- The label inherits color, when disabled opacity is set to 0.5.
-- HTML label props are forwarded and events are bubbled.
+- Supports disabled state
+
+## Usage
+
+```svelte
+<script lang="ts">
+  let greeting: string = 'Hello';
+</script>
+
+<Label for="greeting">Greeting</Label>
+<Input id="greeting" bind:value={greeting} />
+```
 
 ## Props
 
-| Name     | Type    | Description                                |
-| -------- | ------- | ------------------------------------------ |
-| disabled | boolean | Disables the label making it look inactive |
+| Name     | Type    | Default | Description                                |
+| -------- | ------- | ------- | ------------------------------------------ |
+| (label)  |         |         | HTMLLabelElement properties                |
+| disabled | boolean | false   | Disables the label making it look inactive |
+
+## Events
+
+| Name    | Event.detail | Description             |
+| ------- | ------------ | ----------------------- |
+| (label) |              | HTMLLabelElement events |
+
+## Methods
+
+| Name  | Parameters  | Description            |
+| ----- | ----------- | ---------------------- |
+| blur  |             | HTMLLabelElement.blur  |
+| click |             | HTMLLabelElement.click |
+| focus | `(options)` | HTMLLabelElement.focus |
 
 ## Anatomy
 
 ```
-HTML label
-   _default_ slot
+HTML (label)
+   default slot
 ```
 
 ## Slots
 
-| Name      | Description                             |
-| --------- | --------------------------------------- |
-| _default_ | The content to display within the label |
+| Name    | Description                             |
+| ------- | --------------------------------------- |
+| default | The content to display within the label |

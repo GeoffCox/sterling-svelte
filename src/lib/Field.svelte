@@ -20,6 +20,7 @@
   export let status: FieldStatus = 'none';
 
   // ----- State ----- //
+
   let fieldRef: HTMLLabelElement;
   let targetDisabled = false;
   let targetRef: HTMLElement | null = null;
@@ -114,6 +115,20 @@
     usingKeyboard = value;
   };
 
+  // ----- Methods ----- //
+
+  export const click = () => {
+    fieldRef?.click();
+  };
+
+  export const blur = () => {
+    fieldRef?.blur();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    fieldRef?.focus(options);
+  };
+
   // ----- Event Handlers ----- //
 
   onMount(() => {
@@ -132,8 +147,8 @@
 </script>
 
 <label
-  aria-disabled={targetDisabled}
   bind:this={fieldRef}
+  aria-disabled={targetDisabled}
   class="sterling-field"
   class:disabled={targetDisabled}
   class:using-keyboard={usingKeyboard}
@@ -163,7 +178,7 @@
   {...$$restProps}
 >
   {#if label || $$slots.label}
-    <slot name="label" disabled={targetDisabled} for={htmlFor} {label} {required}>
+    <slot name="label" disabled={targetDisabled} for={htmlFor} {forwardClick} {label} {required}>
       <div class="label-text">
         {label}
       </div>
@@ -189,7 +204,7 @@
   {/if}
   {#if required}
     <slot name="required" {requiredTip}>
-      <Tooltip autoShow="hover">
+      <Tooltip showOn="hover">
         <span class="required-tip" slot="tip">{requiredTip}</span>
         <div class="required">*</div>
       </Tooltip>
@@ -249,12 +264,6 @@
 
   .sterling-field.disabled .label-text {
     color: var(--stsv-Common__color--disabled);
-  }
-
-  .content {
-    display: flex;
-    align-content: stretch;
-    align-items: center;
   }
 
   .message {

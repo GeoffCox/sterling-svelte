@@ -3,6 +3,9 @@
   import Playground from '../Playground.svelte';
 
   import type { ButtonShape, ButtonVariant } from '$lib';
+
+  import { BUTTON_SHAPES, BUTTON_VARIANTS } from '$lib';
+
   import Button from '$lib/Button.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
   import Select from '$lib/Select.svelte';
@@ -10,45 +13,40 @@
   import Field from '$lib/Field.svelte';
 
   let exampleRef: any;
-  let buttonDisabled = false;
-  let buttonShape: ButtonShape = 'rounded';
-  let buttonVariant: ButtonVariant = 'regular';
-  let buttonWithIcon = true;
-  let buttonWithText = true;
+  let disabled = false;
+  let shape: ButtonShape = 'rounded';
+  let variant: ButtonVariant = 'regular';
+  let withIcon = true;
+  let withText = true;
 </script>
 
 <Playground bind:this={exampleRef}>
   <div class="component" slot="component">
-    <Button
-      disabled={buttonDisabled}
-      shape={buttonShape}
-      variant={buttonVariant}
-      on:click={() => exampleRef.recordEvent('click')}
-    >
-      {#if buttonWithIcon}
+    <Button {disabled} {shape} {variant} on:click={() => exampleRef.recordEvent('click')}>
+      {#if withIcon}
         <SvelteIcon />
       {/if}
-      {#if buttonWithText}
+      {#if withText}
         sterling-svelte
       {/if}
     </Button>
   </div>
   <svelte:fragment slot="options">
-    <Checkbox bind:checked={buttonDisabled}>disabled</Checkbox>
-    <Checkbox bind:checked={buttonWithText}>with text</Checkbox>
-    <Checkbox bind:checked={buttonWithIcon}>with icon</Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Checkbox bind:checked={withText}>with text</Checkbox>
+    <Checkbox bind:checked={withIcon}>with icon</Checkbox>
     <Field label="shape" forwardClick>
-      <Select bind:selectedValue={buttonShape} composed>
-        <ListItem value="circular">circular</ListItem>
-        <ListItem value="rounded">rounded</ListItem>
-        <ListItem value="square">square</ListItem>
+      <Select bind:selectedValue={shape} composed>
+        {#each BUTTON_SHAPES as variantItem}
+          <ListItem value={variantItem}>{variantItem}</ListItem>
+        {/each}
       </Select>
     </Field>
     <Field label="variant" forwardClick>
-      <Select bind:selectedValue={buttonVariant} composed>
-        <ListItem value="ghost">ghost</ListItem>
-        <ListItem value="outline">outline</ListItem>
-        <ListItem value="regular">regular</ListItem>
+      <Select bind:selectedValue={variant} composed>
+        {#each BUTTON_VARIANTS as variantItem}
+          <ListItem value={variantItem}>{variantItem}</ListItem>
+        {/each}
       </Select>
     </Field>
   </svelte:fragment>

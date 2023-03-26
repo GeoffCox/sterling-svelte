@@ -3,21 +3,22 @@
   import type { ComputePositionReturn } from '@floating-ui/core';
   import { arrow, autoUpdate, computePosition, flip, offset } from '@floating-ui/dom';
   import { onMount } from 'svelte';
-  import type { TooltipAutoShow, TooltipPlacement } from './Tooltip.types';
+  import type { TooltipShowOn, TooltipPlacement } from './Tooltip.types';
   import { fade } from 'svelte/transition';
 
-  export let autoShow: TooltipAutoShow | undefined = undefined;
+  export let disabled = false;
+  export let showOn: TooltipShowOn | undefined = undefined;
   export let hoverDelayMilliseconds: number = 1000;
   export let open = false;
   export let placement: TooltipPlacement = 'top';
   export let portalTarget: HTMLElement | undefined = undefined;
 
-  let anchorRef: HTMLDivElement;
+  let originRef: HTMLDivElement;
   let tooltipRef: HTMLDivElement;
   let arrowRef: HTMLDivElement;
   let position: ComputePositionReturn | undefined = undefined;
 
-  $: reference = $$slots.default ? (anchorRef?.previousElementSibling as HTMLElement) : undefined;
+  $: reference = $$slots.default ? (originRef?.previousElementSibling as HTMLElement) : undefined;
 
   // ----- Position ----- //
 
@@ -105,9 +106,21 @@
 
   // ----- Show/Hide ----- //
 
-  const show = () => (open = true);
+  const show = () => {
+    if (!disabled) {
+      open = true;
+    }
+  };
+
   const hide = () => (open = false);
-  const toggle = () => (open = !open);
+
+  const toggle = () => {
+    if (!disabled) {
+      open = !open;
+    } else {
+      open = false;
+    }
+  };
 
   const delayShow = () => {
     hoverDelayMilliseconds === 0
@@ -116,6 +129,12 @@
           show();
         }, hoverDelayMilliseconds);
   };
+
+  $: {
+    if (disabled) {
+      hide();
+    }
+  }
 
   let cleanupAutoShowUpdate = () => {};
 
@@ -126,7 +145,7 @@
     const element = reference;
 
     if (element) {
-      switch (autoShow) {
+      switch (showOn) {
         case 'click':
           element.addEventListener('click', toggle);
           cleanupAutoShowUpdate = () => element.removeEventListener('click', toggle);
@@ -142,7 +161,7 @@
     }
   };
 
-  $: reference, autoShow, autoShowUpdate();
+  $: reference, showOn, autoShowUpdate();
 
   // ----- EventHandlers ----- //
 
@@ -156,8 +175,8 @@
   });
 </script>
 
-<slot />
-<div class="sterling-tooltip-anchor" bind:this={anchorRef} />
+<slot {disabled} {open} />
+<div class="sterling-tooltip-origin" bind:this={originRef} />
 
 {#if open}
   <div
@@ -173,7 +192,7 @@
 {/if}
 
 <style>
-  .sterling-tooltip-anchor {
+  .sterling-tooltip-origin {
     display: none;
     width: 0;
     height: 0;

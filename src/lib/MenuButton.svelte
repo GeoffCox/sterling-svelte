@@ -22,7 +22,10 @@
 
   const instanceId = uuid();
 
+  let buttonRef: Button;
   let reference: HTMLDivElement;
+  let prevOpen = open;
+
   $: menuId = `${value}-menu-${instanceId}`;
   $: hasChildren = $$slots.items;
 
@@ -52,10 +55,25 @@
   };
 
   $: {
-    if (!open) {
-      reference?.closest('button')?.focus();
+    if (!open && open !== prevOpen) {
+      focus();
     }
+    prevOpen = open;
   }
+
+  // ----- Methods ----- //
+
+  export const click = () => {
+    buttonRef?.click();
+  };
+
+  export const blur = () => {
+    buttonRef?.blur();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    buttonRef?.focus(options);
+  };
 
   // ----- Set Context ----- //
 
@@ -84,6 +102,7 @@
       A Button that displays a context menu when clicked.
   -->
 <Button
+  bind:this={buttonRef}
   aria-controls={menuId}
   aria-expanded={open}
   aria-haspopup={hasChildren}
@@ -121,7 +140,7 @@
   {...$$restProps}
 >
   <div class="reference" bind:this={reference}>
-    <slot />
+    <slot {shape} {variant} />
   </div>
   <Menu id={menuId} {reference} {open}>
     <slot name="items" />

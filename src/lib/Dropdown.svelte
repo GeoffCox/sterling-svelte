@@ -38,6 +38,20 @@
     raiseOpen(open);
   }
 
+  // ----- Methods ----- //
+
+  export const click = () => {
+    dropdownRef?.click();
+  };
+
+  export const blur = () => {
+    dropdownRef?.blur();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    dropdownRef?.focus(options);
+  };
+
   // ----- Event Handlers ----- //
 
   let mounted = false;

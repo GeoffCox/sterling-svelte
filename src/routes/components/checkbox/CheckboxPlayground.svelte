@@ -1,11 +1,11 @@
 <script lang="ts">
+  import Button from '$lib/Button.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
-  import Playground from '../Playground.svelte';
-  import Input from '$lib/Input.svelte';
   import Field from '$lib/Field.svelte';
+  import Input from '$lib/Input.svelte';
+  import Playground from '../Playground.svelte';
 
   let exampleRef: any;
-
   let disabled = false;
   let checked = false;
   let label = 'Sterling';

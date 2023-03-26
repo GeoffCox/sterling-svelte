@@ -4,7 +4,7 @@
 
 # Dropdown
 
-An displayed value and button where a dropdown appears when open.
+A value and button where a dropdown can be opened for changing the value.
 
 ## Playground
 
@@ -13,13 +13,34 @@ An displayed value and button where a dropdown appears when open.
 ## Features
 
 - Define any content for the value and popup.
-- The panel is dynamically positioned based on avaiable screen space.
+- The dropown is dynamically positioned based on avaiable screen space.
+
+## Interactions
+
 - Clicking the button opens/closes the dropdown.
 - Clicking the value opens/closes the dropdown.
 - Clicking outside the dropdown closes the dropdown.
-- The escape key closes the dropdown.
+- Pressing the escape key closes the dropdown.
 
 ## Usage
+
+```svelte
+<script lang="ts">
+  let open = false;
+  let low = 5;
+  let high = 500;
+</script>
+
+<Dropdown bind:open>
+  <div slot="value">
+    Delta {high - low}
+  </div>
+  <div>
+    <Slider bind:value={low} max={0} />
+    <Slider bind:value={high} min={101} max={200} />
+  </div>
+</Dropdown>
+```
 
 ## Props
 
@@ -36,11 +57,20 @@ An displayed value and button where a dropdown appears when open.
 | Name  | Event.detail | Description           |
 | ----- | ------------ | --------------------- |
 | (div) |              | HTMLDivElement events |
+| open  | `{open}`     |                       |
+
+## Methods
+
+| Name  | Parameters  | Description          |
+| ----- | ----------- | -------------------- |
+| blur  |             | HTMLDivElement.blur  |
+| click |             | HTMLDivElement.click |
+| focus | `(options)` | HTMLDivElement.focus |
 
 ## Anatomy
 
 ```
-Dropdown
+Dropdown (div)
   value slot
   button slot
   dropdown

@@ -4,11 +4,8 @@
   import { base } from '$app/paths';
   import { oceanTheme } from './oceanTheme';
   import Input from '$lib/Input.svelte';
-  import ListItem from '$lib/ListItem.svelte';
   import Field from '$lib/Field.svelte';
   import Link from '$lib/Link.svelte';
-  import MenuBar from '$lib/MenuBar.svelte';
-  import Menu from '$lib/Menu.svelte';
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuButton from '$lib/MenuButton.svelte';
   import HamburgerIcon from './HamburgerIcon.svelte';
@@ -189,18 +186,6 @@
             </svelte:fragment>
           </MenuButton>
         </div>
-        <!-- <div class="select-theme">
-          <Field label="Theme" forwardClick>
-            <Select bind:selectedValue={currentTheme} composed>
-              <svelte:fragment slot="value" let:selectedValue
-                ><span> {selectedValue && themes[selectedValue]}</span></svelte:fragment
-              >
-              {#each Object.keys(themes) as themeKey}
-                <ListItem value={themeKey}>{themes[themeKey]}</ListItem>
-              {/each}
-            </Select>
-          </Field>
-        </div> -->
       </div>
 
       <div class="content">
@@ -333,6 +318,7 @@
     font-size: 0.8em;
     grid-row: 1 / span 1;
     grid-column: 1 / span 1;
+    margin-right: 0.5em;
   }
 
   .header .title {

@@ -6,6 +6,11 @@
   import { menuBarContextKey, menuItemContextKey } from './Menus.constants';
   import { writable } from 'svelte/store';
 
+  // ----- State ----- //
+  let menuBarRef: HTMLDivElement;
+
+  // ----- Events ----- //
+
   const dispatch = createEventDispatcher();
 
   const raiseClose = (value: string) => {
@@ -18,6 +23,16 @@
 
   const raiseSelect = (value: string) => {
     dispatch('select', { value });
+  };
+
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    menuBarRef?.blur();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    menuBarRef?.focus(options);
   };
 
   const children = writable<MenuItemRegistration[]>([]);
@@ -69,6 +84,7 @@
 </script>
 
 <div
+  bind:this={menuBarRef}
   class="sterling-menu-bar"
   role="menubar"
   on:blur

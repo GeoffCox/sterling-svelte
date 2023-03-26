@@ -1,3 +1,7 @@
-export type ButtonVariant = 'regular' | 'outline' | 'ghost';
+import type { BUTTON_SHAPES, BUTTON_VARIANTS } from './Button.constants';
 
-export type ButtonShape = 'circular' | 'rounded' | 'square';
+type ButtonShapeTuple = typeof BUTTON_SHAPES;
+export type ButtonShape = ButtonShapeTuple[number];
+
+type ButtonVariantTuple = typeof BUTTON_VARIANTS;
+export type ButtonVariant = ButtonVariantTuple[number];

@@ -4,7 +4,7 @@
 
 # MenuSeparator
 
-A styled line for separating menu items.
+A line between groups of menu items.
 
 ## Playground
 
@@ -28,18 +28,18 @@ Declare a menu separator within a menu item.
 
 ## Props
 
-| Name  | Type           | Description         |
-| ----- | -------------- | ------------------- |
-| (div) | HTMLDivElement | HTML div properties |
+| Name  | Type | Description               |
+| ----- | ---- | ------------------------- |
+| (div) |      | HTMLDivElement properties |
 
 ## Events
 
-| Name  | Description     |
-| ----- | --------------- |
-| (div) | HTML div events |
+| Name  | Event detail | Description           |
+| ----- | ------------ | --------------------- |
+| (div) |              | HTMLDivElement events |
 
 ## Anatomy
 
 ```
-MenuSeparator
+MenuSeparator (div)
 ```

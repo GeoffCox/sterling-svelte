@@ -15,12 +15,17 @@
   let offText = 'off';
   let onText = 'on';
   let customLabels = false;
+
+  const onSwitchChange = (e: Event) => {
+    const switchEvent = e as any;
+    exampleRef.recordEvent(`change: ${switchEvent.currentTarget?.checked}`);
+  };
 </script>
 
 <Playground bind:this={exampleRef}>
   <div slot="component">
     {#if customLabels}
-      <Switch bind:checked {disabled} {vertical}>
+      <Switch bind:checked {disabled} {vertical} on:change={onSwitchChange}>
         <div class="chill" slot="offLabel" let:checked let:disabled let:inputId>
           <Label for={inputId}>
             <ChillIcon checked={!checked} {disabled} />
@@ -33,7 +38,7 @@
         </div>
       </Switch>
     {:else}
-      <Switch bind:checked {disabled} {vertical} {onText} {offText} />
+      <Switch bind:checked {disabled} {vertical} {onText} {offText} on:change={onSwitchChange} />
     {/if}
   </div>
   <svelte:fragment slot="status">

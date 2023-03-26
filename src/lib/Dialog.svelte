@@ -1,9 +1,11 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount, tick } from 'svelte';
+  import { onMount, tick } from 'svelte';
 
   import Button from './Button.svelte';
 
   const dialogFadeDuration = 250;
+
+  // ----- Props ----- //
 
   /**
    * If the dialog is open
@@ -23,12 +25,14 @@
    */
   export let backdropCloses = false;
 
+  // ----- State ----- //
+
   let dialogRef: HTMLDialogElement;
   let contentRef: HTMLDivElement;
   let formRef: HTMLFormElement;
   let closing = false;
 
-  const dispatch = createEventDispatcher();
+  // ----- Event Handlers ----- //
 
   const onDocumentClick = (event: MouseEvent) => {
     // as tracking clicks outside the dialog is only active while the dialog is open
@@ -136,10 +140,10 @@ A styled &lt;dialog&gt; element
 - Props and events to make using &lt;dialog&gt; easier
 -->
 <dialog
+  bind:this={dialogRef}
   class="dialog"
   class:open
   class:closing
-  bind:this={dialogRef}
   on:close
   on:cancel
   {...$$restProps}

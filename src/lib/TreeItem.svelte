@@ -41,7 +41,7 @@
 
   const collapseItem = (index?: number) => {
     if (!disabled) {
-      index = index ?? $expandedValues.findIndex((id) => id === value);
+      index = index ?? $expandedValues.findIndex((expandedValue) => expandedValue === value);
       if (index !== -1) {
         expandedValues.set([
           ...$expandedValues.slice(0, index),
@@ -54,9 +54,11 @@
     return false;
   };
 
+  export const collapse = () => collapseItem();
+
   const expandItem = (index?: number) => {
     if (!disabled) {
-      index = index ?? $expandedValues.findIndex((id) => id === value);
+      index = index ?? $expandedValues.findIndex((expandedValue) => expandedValue === value);
       if (index === -1) {
         expandedValues.set([...$expandedValues, value]);
         return true;
@@ -66,43 +68,76 @@
     return false;
   };
 
-  const toggleExpanded = () => {
+  export const expand = () => expandItem();
+
+  export const toggleExpanded = () => {
     if (!disabled) {
-      const index = $expandedValues.findIndex((id) => id === value);
+      const index = $expandedValues.findIndex((expandedValue) => expandedValue === value);
       return index !== -1 ? collapseItem(index) : expandItem(index);
     }
 
     return false;
   };
 
-  // ----- Selection ----- //
+  // ----- Focus ----- //
 
-  const focusItem = (treeItemElement: Element) => {
+  const blurItem = (treeItemElement: Element) => {
     if (!_disabled) {
-      const item = treeItemElement.querySelector<HTMLElement>('.item');
-      item?.focus();
+      const item = treeItemElement?.querySelector<HTMLElement>('.item');
+      item?.blur();
     }
   };
 
-  const selectItemById = (value: string) => {
+  export const blur = () => {
+    blurItem(treeItemRef);
+  };
+
+  const focusItem = (treeItemElement: Element, options?: FocusOptions) => {
+    if (!_disabled) {
+      const item = treeItemElement?.querySelector<HTMLElement>('.item');
+      item?.focus(options);
+    }
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    focusItem(treeItemRef);
+    treeItemRef?.focus(options);
+  };
+
+  // ----- Click ----- //
+
+  const clickItem = (treeItemElement: Element) => {
+    if (!_disabled) {
+      const item = treeItemElement?.querySelector<HTMLElement>('.item');
+      item?.click();
+    }
+  };
+
+  export const click = () => {
+    clickItem(treeItemRef);
+  };
+
+  // ----- Selection ----- //
+
+  const selectItemByValue = (value: string) => {
     if (!_disabled) {
       selectedValue.set(value);
     }
   };
 
-  export const selectItem = () => {
+  export const select = () => {
     if (!_disabled) {
-      selectItemById(value);
+      selectItemByValue(value);
     }
   };
 
-  const selectParentItem = () => {
+  export const selectParent = () => {
     if (!_disabled) {
       let candidate = treeItemRef.parentElement?.closest<Element>('[role="treeitem"][data-value]');
       let candidateValue = candidate?.getAttribute('data-value');
 
       if (candidateValue && candidate) {
-        selectItemById(candidateValue);
+        selectItemByValue(candidateValue);
         focusItem(candidate);
         return true;
       }
@@ -111,7 +146,43 @@
     return false;
   };
 
-  const selectNextItem = () => {
+  export const selectPrevious = () => {
+    if (!_disabled) {
+      let candidate: Element | undefined | null = undefined;
+      let candidateValue: string | null | undefined = undefined;
+
+      const previousSibling = treeItemRef?.previousElementSibling;
+      if (previousSibling) {
+        // look for the last (recursive) decendant of ths previous sibling
+        const decendants = previousSibling.querySelectorAll('[role="treeitem"][data-value]');
+        if (decendants) {
+          candidate = decendants[decendants.length - 1];
+          candidateValue = candidate?.getAttribute('data-value');
+        }
+
+        // look for the previous sibling
+        if (!candidateValue) {
+          candidate = previousSibling;
+          candidateValue = candidate?.getAttribute('data-value');
+        }
+      }
+      // look for the parent
+      if (!candidateValue) {
+        candidate = treeItemRef.parentElement?.closest<Element>('[role="treeitem"][data-value]');
+        candidateValue = candidate?.getAttribute('data-value');
+      }
+
+      if (candidateValue && candidate) {
+        selectItemByValue(candidateValue);
+        focusItem(candidate);
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  export const selectNext = () => {
     if (!_disabled) {
       let candidateValue: string | null | undefined = undefined;
 
@@ -141,43 +212,7 @@
       }
 
       if (candidateValue && candidate) {
-        selectItemById(candidateValue);
-        focusItem(candidate);
-        return true;
-      }
-    }
-
-    return false;
-  };
-
-  const selectPreviousItem = () => {
-    if (!_disabled) {
-      let candidate: Element | undefined | null = undefined;
-      let candidateValue: string | null | undefined = undefined;
-
-      const previousSibling = treeItemRef?.previousElementSibling;
-      if (previousSibling) {
-        // look for the last (recursive) decendant of ths previous sibling
-        const decendants = previousSibling.querySelectorAll('[role="treeitem"][data-value]');
-        if (decendants) {
-          candidate = decendants[decendants.length - 1];
-          candidateValue = candidate?.getAttribute('data-value');
-        }
-
-        // look for the previous sibling
-        if (!candidateValue) {
-          candidate = previousSibling;
-          candidateValue = candidate?.getAttribute('data-value');
-        }
-      }
-      // look for the parent
-      if (!candidateValue) {
-        candidate = treeItemRef.parentElement?.closest<Element>('[role="treeitem"][data-value]');
-        candidateValue = candidate?.getAttribute('data-value');
-      }
-
-      if (candidateValue && candidate) {
-        selectItemById(candidateValue);
+        selectItemByValue(candidateValue);
         focusItem(candidate);
         return true;
       }
@@ -191,7 +226,7 @@
   const onClick = () => {
     if (!_disabled) {
       toggleExpanded();
-      selectItem();
+      select();
     }
   };
 
@@ -214,7 +249,7 @@
           */
           if (hasChildren) {
             if (expanded) {
-              if (selectNextItem()) {
+              if (selectNext()) {
                 event.preventDefault();
                 event.stopPropagation();
                 return false;
@@ -238,7 +273,7 @@
               event.stopPropagation();
               return false;
             }
-          } else if (selectParentItem()) {
+          } else if (selectParent()) {
             event.preventDefault();
             event.stopPropagation();
             return false;
@@ -248,7 +283,7 @@
           /*
           Moves focus to the previous item that is focusable without opening or closing a item.
           */
-          if (selectPreviousItem()) {
+          if (selectPrevious()) {
             event.preventDefault();
             event.stopPropagation();
             return false;
@@ -258,7 +293,7 @@
           /*
           Moves focus to the next item that is focusable without opening or closing a item.
           */
-          if (selectNextItem()) {
+          if (selectNext()) {
             event.preventDefault();
             event.stopPropagation();
             return false;
@@ -332,7 +367,7 @@ A item in a Tree displaying the item and children.
   </div>
   {#if expanded && hasChildren}
     <div class="children" transition:slide={{ duration: 200 }} role="group">
-      <slot />
+      <slot {depth} {disabled} {selected} {value} />
     </div>
   {/if}
 </div>

@@ -1,15 +1,36 @@
 <script lang="ts">
   import TreeChevron from './TreeChevron.svelte';
 
+  // ----- Props ----- //
+
   export let depth = 0;
   export let disabled = false;
   export let expanded = false;
   export let hasChildren = false;
   export let value: string;
   export let selected = false;
+
+  // ----- State ----- //
+
+  let divRef: HTMLDivElement;
+
+  // ----- Methods ----- //
+
+  export const click = () => {
+    divRef?.click();
+  };
+
+  export const blur = () => {
+    divRef?.blur();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    divRef?.focus(options);
+  };
 </script>
 
 <div
+  bind:this={divRef}
   class="sterling-tree-item"
   class:disabled
   class:expanded

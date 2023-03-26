@@ -41,10 +41,15 @@
   class:disabled
   class:vertical
   role="progressbar"
+  on:blur
   on:click
   on:dblclick
   on:focus
-  on:blur
+  on:focusin
+  on:focusout
+  on:keydown
+  on:keypress
+  on:keyup
   on:mousedown
   on:mouseenter
   on:mouseleave
@@ -52,6 +57,14 @@
   on:mouseover
   on:mouseout
   on:mouseup
+  on:pointercancel
+  on:pointerdown
+  on:pointerenter
+  on:pointerleave
+  on:pointermove
+  on:pointerover
+  on:pointerout
+  on:pointerup
   on:wheel
   {...$$restProps}
 >
@@ -69,7 +82,7 @@
 
 <style>
   .sterling-progress {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-content: flex-start;
     align-items: flex-start;
@@ -77,7 +90,7 @@
     background: var(--stsv-Common__background-color);
     box-sizing: border-box;
     height: 1em;
-    padding: 0.2em;
+    padding: 0.25em;
     border-width: var(--stsv-Common__border-width);
     border-style: var(--stsv-Common__border-style);
     border-color: var(--stsv-Common__border-color);

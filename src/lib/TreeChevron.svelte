@@ -5,13 +5,12 @@
   export let hasChildren = false;
 
   let previousExpanded = expanded;
-
   let mounted = false;
 
   onMount(() => {
     setTimeout(() => {
       mounted = true;
-    }, 10);
+    }, 0);
   });
 
   let animate = false;

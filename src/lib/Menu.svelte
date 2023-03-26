@@ -18,6 +18,16 @@
 
   const { rootValue, depth = 0 } = getContext<MenuItemContext>(menuItemContextKey) || {};
 
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    menuRef?.blur();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    menuRef?.focus(options);
+  };
+
   // ----- Portal Host ----- //
 
   const ensurePortalHost = () => {
@@ -86,15 +96,36 @@
 
 {#if open}
   <div
+    use:portal={{ target: portalTarget }}
     class="sterling-menu-portal"
     data-root-value={rootValue}
-    use:portal={{ target: portalTarget }}
   >
     <div
       bind:this={menuRef}
       class="sterling-menu"
       role="menu"
       class:open
+      on:blur
+      on:click
+      on:copy
+      on:cut
+      on:dblclick
+      on:focus
+      on:focusin
+      on:focusout
+      on:keydown
+      on:keypress
+      on:keyup
+      on:mousedown
+      on:mouseenter
+      on:mouseleave
+      on:mousemove
+      on:mouseover
+      on:mouseout
+      on:mouseup
+      on:scroll
+      on:wheel
+      on:paste
       {...$$restProps}
       style="left:{menuPosition.x}px; top:{menuPosition.y}px"
     >

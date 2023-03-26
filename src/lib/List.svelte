@@ -55,6 +55,25 @@
     raiseSelect(selectedValue);
   }
 
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    listRef?.blur();
+  };
+
+  export const click = () => {
+    listRef?.click();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    listRef?.focus();
+  };
+
+  export const scrollToSelectedItem = () => {
+    const element = getSelectedItemElement();
+    element?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  };
+
   // ----- Keyborg ----- //
 
   let keyborg: Keyborg = createKeyborg(window);
@@ -65,15 +84,6 @@
   };
 
   // ----- Focus ----- //
-
-  export const focus = () => {
-    listRef?.focus();
-  };
-
-  export const scrollToSelectedItem = () => {
-    const element = getSelectedItemElement();
-    element?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-  };
 
   // ----- Selection ----- //
 

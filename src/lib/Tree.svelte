@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Keyborg } from 'keyborg';
+  import type { TreeContext } from './Tree.types';
 
   import { createKeyborg } from 'keyborg';
   import { createEventDispatcher, onMount, setContext } from 'svelte';
@@ -7,22 +8,30 @@
 
   import { treeContextKey } from './Tree.constants';
 
+  // ----- Props ----- //
+
   export let composed = false;
   export let disabled = false;
   export let selectedValue: string | undefined = undefined;
   export let expandedValues: string[] = [];
 
-  // ----- Context ----- //
+  // ----- State ----- //
+
+  let treeRef: HTMLDivElement;
 
   const selectedValueStore = writable<string | undefined>(selectedValue);
   const expandedValuesStore = writable<string[]>(expandedValues);
   const disabledStore = writable<boolean>(disabled);
 
-  setContext(treeContextKey, {
-    expandedValues: expandedValuesStore,
-    selectedValue: selectedValueStore,
-    disabled: disabledStore
-  });
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    treeRef?.blur();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    treeRef?.focus(options);
+  };
 
   // ----- Events ----- //
 
@@ -41,6 +50,7 @@
   let keyborg: Keyborg = createKeyborg(window);
 
   let usingKeyboard = keyborg.isNavigatingWithKeyboard();
+
   const keyborgHandler = (value: boolean) => {
     usingKeyboard = value;
   };
@@ -78,18 +88,52 @@
       keyborg.unsubscribe(keyborgHandler);
     };
   });
+
+  // ----- Set Context ----- //
+  setContext<TreeContext>(treeContextKey, {
+    expandedValues: expandedValuesStore,
+    selectedValue: selectedValueStore,
+    disabled: disabledStore
+  });
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div
+  bind:this={treeRef}
   aria-disabled={disabled}
   class="sterling-tree"
   class:composed
   class:disabled
   class:using-keyboard={usingKeyboard}
   role="tree"
+  on:blur
+  on:click
+  on:dblclick
+  on:focus
+  on:focusin
+  on:focusout
+  on:keydown
+  on:keypress
+  on:keyup
+  on:mousedown
+  on:mouseenter
+  on:mouseleave
+  on:mousemove
+  on:mouseover
+  on:mouseout
+  on:mouseup
+  on:pointercancel
+  on:pointerdown
+  on:pointerenter
+  on:pointerleave
+  on:pointermove
+  on:pointerover
+  on:pointerout
+  on:pointerup
+  on:wheel
+  {...$$restProps}
 >
-  <slot />
+  <slot {composed} {disabled} />
 </div>
 
 <style>

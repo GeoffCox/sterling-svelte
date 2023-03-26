@@ -17,6 +17,20 @@
   // ----- State ----- //
   let sliderRef: HTMLDivElement;
 
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    sliderRef?.blur();
+  };
+
+  export const click = () => {
+    sliderRef?.click();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    sliderRef?.focus();
+  };
+
   // -----Events----- //
 
   const dispatch = createEventDispatcher();

@@ -4,7 +4,8 @@
 
 # TreeItemDisplay
 
-Displays a chevron and a label for an item in a tree.
+A chevron and a label for an item in a tree.
+TreeItem uses this as the default content in the item slot.
 
 ## Playground
 
@@ -16,6 +17,21 @@ Displays a chevron and a label for an item in a tree.
 - Visually indicates when the item is selected.
 - The content can be customized with the default slot.
 
+## Usage
+
+```svelte
+<script lang="ts">
+  let expanded = false;
+  let hasChildren = true;
+  let depth = 1;
+  let selected = false;
+</script>
+
+<TreeItemDisplay value="sterling-svelte" {depth} {expanded} {hasChildren} {selected}>
+  sterling-svelte
+</TreeItemDisplay>
+```
+
 ## Props
 
 | Name        | Type      | Description                                           |
@@ -26,10 +42,24 @@ Displays a chevron and a label for an item in a tree.
 | hasChildren | `boolean` | If the associated tree item has children.             |
 | selected    | `boolean` | If the associated tree item has is selected.          |
 
+## Events
+
+| Name  | Event.detail | Description           |
+| ----- | ------------ | --------------------- |
+| (div) |              | HTMLDivElement events |
+
+## Methods
+
+| Name  | Parameters  | Description          |
+| ----- | ----------- | -------------------- |
+| blur  |             | HTMDivElement.blur   |
+| click |             | HTMLDivElement.click |
+| focus | `(options)` | HTMLDivElement.focus |
+
 ## Anatomy
 
 ```
-TreeItem
+TreeItemDisplay (div)
   TreeChevron
   default slot
 ```
@@ -40,15 +70,16 @@ TreeItem
 | ------- | ----------------------------- |
 | default | The content after the chevron |
 
-### let params
+### Let Params
 
 The default slot is passed the following `let` parameters.
 
-| Let Param   | Type      | Description                                      |
-| ----------- | --------- | ------------------------------------------------ |
-| depth       | `number`  | The depth of this tree item in the tree          |
-| disabled    | `boolean` | True if the tree and this tree item are disabled |
-| expanded    | `boolean` | True if this tree item is expanded               |
-| hasChildren | `boolean` | True if this tree item has children              |
-| nodeID      | `string`  | The ID of this tree item                         |
-| selected    | `boolean` | True if this tree item is selected               |
+| Let Param   | Passed to slots |
+| ----------- | --------------- |
+| depth       | default         |
+| disabled    | default         |
+| expanded    | default         |
+| hasChildren | default         |
+| nodeID      | default         |
+| selected    | default         |
+| value       | default         |

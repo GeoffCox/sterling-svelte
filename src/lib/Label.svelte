@@ -1,9 +1,27 @@
 <script lang="ts">
   export let disabled = false;
-  HTMLLabelElement;
+
+  // ----- State ----- //
+
+  let labelRef: HTMLLabelElement;
+
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    labelRef?.blur();
+  };
+
+  export const click = () => {
+    labelRef?.click();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    labelRef?.focus();
+  };
 </script>
 
 <label
+  bind:this={labelRef}
   aria-disabled={disabled}
   class="sterling-label"
   class:disabled
@@ -30,7 +48,7 @@
   on:paste
   {...$$restProps}
 >
-  <slot />
+  <slot {disabled} />
 </label>
 
 <style>

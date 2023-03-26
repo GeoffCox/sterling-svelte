@@ -4,7 +4,7 @@
 
 # List
 
-A list of items where a single item can be selected.
+A list of items where an item can be selected.
 
 ## Playground
 
@@ -14,10 +14,11 @@ A list of items where a single item can be selected.
 
 - Choose between a vertical or horizontal list.
 - Identify the list of items with an associated label.
-- Compose the list into another control that manages border and focus display.
+- Compose the list into another control that manages border and focus.
 
 ## Interactions
 
+- Clicking an item selects it.
 - Up/Down or left/right arrow keys select the previous/next item.
 - Home/End keys select first/last item.
 
@@ -42,6 +43,7 @@ A list of items where a single item can be selected.
 
 | Name          | Type                    | Default     | Description                                        |
 | ------------- | ----------------------- | ----------- | -------------------------------------------------- |
+| (div)         |                         |             | HTMLDivElement events                              |
 | composed      | `boolean`               | `false`     | Styles the list to appear within another component |
 | disabled      | `boolean`               | `false`     | Disables the list and items                        |
 | horizontal    | `boolean`               | `false`     | If the list layout should be horizontal            |
@@ -51,20 +53,23 @@ A list of items where a single item can be selected.
 
 | Name   | Event.detail        | Description                      |
 | ------ | ------------------- | -------------------------------- |
+| (div)  |                     | HTMLDivElement events            |
 | select | `{ value: string }` | Raised when an item is selected. |
 
 ## Methods
 
-| Name                 | Description   |
-| -------------------- | ------------- |
-| focus                | (autological) |
-| scrollToSelectedItem | (autological) |
-| selectFirstItem      | (autological) |
-| selectPreviousItem   | (autological) |
-| selectNextItem       | (autological) |
-| selectLastItem       | (autological) |
+| Name                 | Parameters  | Description                           |
+| -------------------- | ----------- | ------------------------------------- |
+| blur                 |             | HTMLDivElement.blur                   |
+| click                |             | HTMLDivElement.click                  |
+| focus                | `(options)` | HTMLDivElement.focus                  |
+| scrollToSelectedItem |             | Scrolls to the selected item          |
+| selectFirstItem      |             | Selects the first item in the list    |
+| selectPreviousItem   |             | Selects the previous item in the list |
+| selectNextItem       |             | Selects the next item in the list     |
+| selectLastItem       |             | Selects the last item in the list     |
 
-## List Context
+## Context
 
 | Name          | Type                |
 | ------------- | ------------------- |

@@ -4,7 +4,7 @@
 
 # Button
 
-A styled HTML button.
+A styled `<button />`.
 
 ## Playground
 
@@ -12,31 +12,64 @@ A styled HTML button.
 
 ## Features
 
-- You can choose the shape of the button.
-- You can choose the appearance of the button.
+- Change the shape of the button.
+- Vary the style of the button
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import Button from '@geoffcox/sterling-svelte/Button.svelte';
+
+  const onClick = () => {
+    //do something on button click
+  };
+</script>
+
+<Button on:click={onClick}>sterling-svelte</Button>
+```
 
 ## Props
 
-| Name     | Type              | Default   | Description                     |
-| -------- | ----------------- | --------- | ------------------------------- |
-| (button) | HTMLButtonElement |           | Built in HTML properties        |
-| shape    | ButtonShape       | 'rounded' | Changes the shape of the button |
-| variant  | ButtonVariant     | 'regular' | Changes the style of the button |
+| Name     | Type            | Default     | Description                  |
+| -------- | --------------- | ----------- | ---------------------------- |
+| (button) |                 |             | HTMLButtonElement properties |
+| shape    | `ButtonShape`   | `'rounded'` | The shape of the button      |
+| variant  | `ButtonVariant` | `'regular'` | The style of the button      |
 
 - ButtonVariant: 'regular' | 'outline' | 'ghost'
 - ButtonShape: 'circular' | 'rounded' | 'square'
 
+## Events
+
+| Name     | Event.detail | Description              |
+| -------- | ------------ | ------------------------ |
+| (button) |              | HTMLButtonElement events |
+
+## Methods
+
+| Name  | Parameters  | Description             |
+| ----- | ----------- | ----------------------- |
+| blur  |             | HTMLButtonElement.blur  |
+| click |             | HTMLButtonElement.click |
+| focus | `(options)` | HTMLButtonElement.focus |
+
 ## Anatomy
 
 ```
-Button (HTML button)
+Button (button)
   default slot
 ```
 
 ## Slots
 
-| Name      | Description               |
-| --------- | ------------------------- |
-| _default_ | Content within the button |
+| Name    | Description    |
+| ------- | -------------- |
+| default | Button content |
 
-- default slot `let` params: shape, variant
+## Let Params
+
+| Name    | Passed to slots |
+| ------- | --------------- |
+| shape   | default         |
+| variant | default         |

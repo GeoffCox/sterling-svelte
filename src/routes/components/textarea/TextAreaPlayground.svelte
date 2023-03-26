@@ -7,6 +7,7 @@
   import Select from '$lib/Select.svelte';
   import ListItem from '$lib/ListItem.svelte';
   import Field from '$lib/Field.svelte';
+  import { TEXT_AREA_RESIZES } from '$lib';
 
   let exampleRef: any;
 
@@ -37,10 +38,9 @@
     </Field>
     <Field label="resize" forwardClick>
       <Select bind:selectedValue={resize} composed>
-        <ListItem value="none">none</ListItem>
-        <ListItem value="both">both</ListItem>
-        <ListItem value="horizontal">horizontal</ListItem>
-        <ListItem value="vertical">vertical</ListItem>
+        {#each TEXT_AREA_RESIZES as resizeValue}
+          <ListItem value={resizeValue}>{resizeValue}</ListItem>
+        {/each}
       </Select>
     </Field>
     <Checkbox bind:checked={autoHeight}>Auto height</Checkbox>

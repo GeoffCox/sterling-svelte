@@ -18,8 +18,10 @@ A label container for an interactive element such as an input, select, list, or 
 - Accepts the label `for` attribute to associate with the `id` of the interactive element.
 - An optional message can be displayed within the field border.
 - The optional message can be associated with a status.
-- Clicks on the label click the interactive element.
-- HTML label props are forwarded and events are bubbled.
+
+## Interactions
+
+- Clicking on the label focuses the interactive element.
 
 ## Usage
 
@@ -47,6 +49,7 @@ around the interactive element.
 
 | Name         | Type          | Default                    | Description                                          |
 | ------------ | ------------- | -------------------------- | ---------------------------------------------------- |
+| (label)      |               |                            | HTMLLabelElement properties                          |
 | forwardClick | `boolean`     | `false`                    | If clicks on the label click the interactive element |
 | label        | `string`      |                            | Text content of the label                            |
 | message      | `string`      |                            | Text content of the field message                    |
@@ -56,30 +59,47 @@ around the interactive element.
 
 - FieldStatus = 'none' | 'info' | 'success' | 'warning' | 'error'
 
+## Events
+
+| Name    | Event.detail | Description             |
+| ------- | ------------ | ----------------------- |
+| (label) |              | HTMLLabelElement events |
+
+## Methods
+
+| Name  | Parameters  | Description            |
+| ----- | ----------- | ---------------------- |
+| blur  |             | HTMLLabelElement.blur  |
+| click |             | HTMLLabelElement.click |
+| focus | `(options)` | HTMLLabelElement.focus |
+
 ## Anatomy
 
 ```
-HTML label
-   _default_ slot
+Field (label)
+  label slot
+  default slot
+  message slot
 ```
 
 ## Slots
 
-| Name     | Description                                        |
-| -------- | -------------------------------------------------- |
-| default  | The interactive control for the field              |
-| label    | The label content. Defaults to the label prop.     |
-| message  | The message content. Defaults to the message prop. |
-| required | The required indicator. Defaults to '\*'.          |
+| Name     | Default content          | Description                                        |
+| -------- | ------------------------ | -------------------------------------------------- |
+| default  |                          | The interactive control for the field              |
+| label    | label text               | The label content. Defaults to the label prop.     |
+| message  | message text with status | The message content. Defaults to the message prop. |
+| required | required \* with tooltip | The required indicator. Defaults to '\*'.          |
 
 ## Let Params
 
-| Name        | Passed to slots          |
-| ----------- | ------------------------ |
-| disabled    | label, message, required |
-| for         | label                    |
-| label       | label                    |
-| message     | message                  |
-| status      | message                  |
-| required    | label, message           |
-| requiredTip | required                 |
+| Name         | Passed to slots          |
+| ------------ | ------------------------ |
+| disabled     | label, message, required |
+| for          | label                    |
+| forwardClick | label                    |
+| label        | label                    |
+| message      | message                  |
+| status       | message                  |
+| required     | label, message           |
+| requiredTip  | required                 |

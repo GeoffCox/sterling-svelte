@@ -4,7 +4,7 @@
 
 # ListItem
 
-An item appearing within a List.
+An item within a `List`.
 
 ## Playground
 
@@ -12,13 +12,18 @@ An item appearing within a List.
 
 ## Features
 
-- Displays `selected` on List `selectedValue`.
-- Displays `disabled` based on List `disabled`.
-- Applies `role="listitem"` and `data-value={value}` to support selection by List.
+- Set the item content.
+- Provides selection and interaction within a List.
+- Compose the list item into another control that manages border and focus.
 
 ## Usage
 
 ```svelte
+<script lang="ts">
+  import List from '@geoffcox/sterling-svelte/List.svelte';
+  import ListItem from '@geoffcox/sterling-svelte/ListItem.svelte';
+</script>
+
 <List>
   <ListItem value="example">An example item</ListItem>
 </List>
@@ -26,32 +31,47 @@ An item appearing within a List.
 
 ## Props
 
-| Name     | Type                 | Description                  |
-| -------- | -------------------- | ---------------------------- |
-| (div)    | HTMLDivElement props | Built in HTML properties     |
-| disabled | `boolean`            | Disables the list item       |
-| value    | `string`             | The value of the list item\* |
+| Name     | Type      | Default | Description                  |
+| -------- | --------- | ------- | ---------------------------- |
+| (div)    |           |         | HtmlDivElement properties    |
+| disabled | `boolean` | `false` | Disables the list item       |
+| value    | `string`  |         | The value of the list item\* |
 
 - \* Should be unique within the list
+
+## Events
+
+| Name  | Event.detail | Description           |
+| ----- | ------------ | --------------------- |
+| (div) |              | HtmlDivElement events |
+
+## Methods
+
+| Name  | Parameters  | Description       |
+| ----- | ----------- | ----------------- |
+| blur  |             | HTMLElement.blur  |
+| click |             | HTMLElement.click |
+| focus | `(options)` | HTMLElement.focus |
 
 ## Anatomy
 
 ```
 ListItem
   default slot
+    {value}
 ```
 
 ## Slots
 
-| Name    | Description           |
-| ------- | --------------------- |
-| default | The list item content |
+| Name    | Description      |
+| ------- | ---------------- |
+| default | ListItem content |
 
 ## Let Params
 
-| Name       | Type      | Passed to slots |
-| ---------- | --------- | --------------- |
-| disabled   | `boolean` | default         |
-| horizontal | `boolean` | default         |
-| selected   | `boolean` | default         |
-| value      | `string`  | default         |
+| Name       | Passed to slots |
+| ---------- | --------------- |
+| disabled   | default         |
+| horizontal | default         |
+| selected   | default         |
+| value      | default         |

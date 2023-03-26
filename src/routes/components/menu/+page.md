@@ -1,26 +1,35 @@
+<script>
+    import Link from '$lib/Link.svelte';
+</script>
+
 # Menu
 
 A panel that floats above other content containing a list of menu items.
 
-Menu is a building block of the menu system:
+Menu is a building block of menus:
 
-- [MenuBar](menubar)
-- [MenuButton](menubutton)
-- [MenuItem](menuitem)
-- [MenuSeparator](menuseparator)
+- <Link href="menubar">MenuBar</Link>
+- <Link href="menubutton">MenuButton</Link>
+- <Link href="menuitem">MenuItem</Link>
+- <Link href="menuseparator">MenuSeparator</Link>
 
 ## Features
 
-- Manages position based on the reference element.
-- Appears above other content in the page.
+- Manages position based on the reference element
+- The menu floats above other element via portaling
 
 ## Usage
 
-To display a menu, reference the component triggering the menu to position the menu.
-Use the open property to show or hide the menu.
-
 ```svelte
-<Menu {open} reference={buttonRef}>
+<script lang="ts">
+  import Menu from '@geoffcox/sterling-svelte/Component.svelte';
+
+  let originRef: HTMLDivElement;
+  let open = false;
+</script>
+
+<div bind:this={originRef} on:click={() => (open = !open)}>Hello Menu</div>
+<Menu {open} reference={originRef}>
   <MenuItem value="new" text="New" />
   <MenuItem value="open" text="Open" />
   <MenuItem value="save" text="Save" />
@@ -30,11 +39,11 @@ Use the open property to show or hide the menu.
 
 ## Props
 
-| Name      | Type        | Default | Description                                       |
-| --------- | ----------- | ------- | ------------------------------------------------- |
-| (div)     |             |         | HTMLDivElement props                              |
-| open      | boolean     | false   | If the submenu is visible                         |
-| reference | HTMLElement |         | The element to reference for positioning the menu |
+| Name      | Type          | Default | Description                                       |
+| --------- | ------------- | ------- | ------------------------------------------------- |
+| (div)     |               |         | HTMLDivElement props                              |
+| open      | `boolean`     | `false` | If the menu is visible                            |
+| reference | `HTMLElement` |         | The element to reference for positioning the menu |
 
 ## Events
 
@@ -42,11 +51,18 @@ Use the open property to show or hide the menu.
 | ----- | ------ | --------------------- |
 | (div) |        | HTMLDivElement events |
 
+## Methods
+
+| Name  | Parameters  | Description          |
+| ----- | ----------- | -------------------- |
+| blur  |             | HTMLDivElement.blur  |
+| focus | `(options)` | HTMLDivElement.focus |
+
 ## Anatomy
 
 ```
-(portal)
-  Menu
+portal (div)
+  Menu (div)
     default slot
 ```
 

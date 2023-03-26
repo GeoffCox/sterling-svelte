@@ -4,7 +4,7 @@
 
 # Switch
 
-A styled HTML input type=checkbox element.
+A styled `<input type=checkbox/>`.
 
 ## Playground
 
@@ -12,28 +12,53 @@ A styled HTML input type=checkbox element.
 
 ## Features
 
-- Choose between a horizontal or vertical switch
-- Identify the switch positions with the offText or onText
-- Customize labels by filling the offLabel and on-label slot
+- Horizontal or vertical layout
+- On/Off labels for switch positions
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import Switch from '@geoffcox/sterling-svelte/Switch.svelte';
+
+  let checked = false;
+</script>
+
+<Switch bind:checked onText="ON" offText="OFF" />
+```
 
 ## Props
 
-| Name     | Type    | Default   | Description                                               |
-| -------- | ------- | --------- | --------------------------------------------------------- |
-| disabled | boolean | false     | Disables the switch                                       |
-| checked  | boolean | false     | If the switch is ON                                       |
-| vertical | boolean | false     | If the switch should be vertical                          |
-| offText  | string  | undefined | The text to display nearest the OFF side of the switch\*  |
-| onText   | string  | undefined | The text to display nearest the ON side of the switch\*\* |
+| Name     | Type      | Default     | Description                                              |
+| -------- | --------- | ----------- | -------------------------------------------------------- |
+| (input)  |           |             | HTMLInputElement properties                              |
+| disabled | `boolean` | `false`     | If the switch is disabled                                |
+| checked  | `boolean` | `false`     | If the switch is ON                                      |
+| vertical | `boolean` | `false`     | If the switch layout should be vertical                  |
+| offText  | `string`  | `undefined` | The text to display nearest the OFF side of the switch\* |
+| onText   | `string`  | `undefined` | The text to display nearest the ON side of the switch\*  |
 
-- \* When the offLabel slot is not filled, the OFF position is labeled with offText
-- \*\* When the onLabel slot is not filled, the ON position is labeled with onText
+- \* When the offLabel/onLabel slot is filled, offText/onText are not rendered.
+
+## Events
+
+| Name    | Type | Description             |
+| ------- | ---- | ----------------------- |
+| (input) |      | HTMLInputElement events |
+
+## Methods
+
+| Name  | Parameters  | Description            |
+| ----- | ----------- | ---------------------- |
+| blur  |             | HTMLInputElement.blur  |
+| click |             | HTMLInputElement.click |
+| focus | `(options)` | HTMLInputElement.focus |
 
 ## Anatomy
 
 ```
-Switch
-  HTML input (hidden)
+Switch (div)
+  input (hidden)
   offLabel slot
     Label with offText (default)
   switch

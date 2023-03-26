@@ -25,6 +25,45 @@
   };
 
   $: autoHeight, autoSetHeight();
+
+  // ----- Methods ----- //
+
+  export const blur = () => {
+    textAreaRef?.blur();
+  };
+
+  export const click = () => {
+    textAreaRef?.click();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    textAreaRef?.focus();
+  };
+
+  export const select = () => {
+    textAreaRef?.select();
+  };
+
+  export const setSelectionRange = (
+    start: number | null,
+    end: number | null,
+    direction?: 'forward' | 'backward' | 'none'
+  ) => {
+    textAreaRef?.setSelectionRange(start, end, direction);
+  };
+
+  export const setRangeText = (
+    replacement: string,
+    start?: number,
+    end?: number,
+    selectionMode?: SelectionMode
+  ) => {
+    if (start && end) {
+      textAreaRef?.setRangeText(replacement, start, end, selectionMode);
+    } else {
+      textAreaRef?.setRangeText(replacement);
+    }
+  };
 </script>
 
 <textarea

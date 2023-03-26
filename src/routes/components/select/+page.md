@@ -12,20 +12,33 @@ A single item that can be selected from a dropdown list of items.
 
 ## Features
 
-- Identify the value and list of items with an associated label.
-- Imperatively open and close the dropdown.
-- The dropwon is dynamically positioned based on avaiable screen space.
-- Users can open and close the dropdown by clicking the input or chevron.
-- Users can close the dropdown by clicking on outside the input or dropdown.
-- Users can select the next or previous item without opening the dropdown by using the up/down arrow keys.
-- Users can open the dropdown with the spacebar key.
-- Users can choose the selected value in the dropdown with the either enter or spacebar keys.
-- Users can close the dropdown and cancel changing the current value with the escape key.
+- The dropdown is dynamically positioned based on avaiable screen space.
+- Compose the select into another control that manages border and focus.
+
+## Interactions
+
+- Clicking the input or chevron opens/closes the dropdown.
+- Clicking outside an open dropdown closes it.
+- Up/Down arrow keys select the previous/next item in the list of items.
+- The space key opens/closes the dropdown.
+- The enter key chooses the selected value in the dropdown and closes it.
+- The escape key closes the dropdown without changing the value.
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import Select from '@geoffcox/sterling-svelte/Select.svelte';
+</script>
+
+<Component />
+```
 
 ## Props
 
 | Name          | Type                    | Default     | Description                                          |
 | ------------- | ----------------------- | ----------- | ---------------------------------------------------- |
+| (div)         |                         |             | HTMLDivElement events                                |
 | composed      | `boolean`               | `false`     | Styles the select to appear within another component |
 | disabled      | `boolean`               | `false`     | Disables the select                                  |
 | open          | `boolean`               | `false`     | If the menu is open                                  |
@@ -35,16 +48,25 @@ A single item that can be selected from a dropdown list of items.
 
 | Name    | Event.detail        | Description                                          |
 | ------- | ------------------- | ---------------------------------------------------- |
+| (div)   |                     | HTMLDivElement events                                |
 | pending | `{ value: string }` | Raised as items are selected while the menu is open. |
 | select  | `{ value: string }` | Raised when an item is selected.                     |
+
+## Methods
+
+| Name                 | Parameters  | Description                         |
+| -------------------- | ----------- | ----------------------------------- |
+| blur                 |             | HTMLDivElement.blur                 |
+| click                |             | HTMLDivElement.click                |
+| focus                | `(options)` | HTMLDivElement.focus                |
+| scrollToSelectedItem |             | HTMLDivElement.scrolltoSelectedItem |
 
 ## Anatomy
 
 ```
-Select
-  Label
-    label slot
+Select (div)
   value slot
+    {selectedValue}
   button slot
   dropdown
     list slot
@@ -53,10 +75,16 @@ Select
 
 ## Slots
 
-| Name    | Description                                                     |
-| ------- | --------------------------------------------------------------- |
-| button  | The button that opens and closes the menu. `Button` by default. |
-| default | The items to display within the list                            |
-| label   | The label content associated with the input.                    |
-| list    | The list containing items within the menu. `List` by default.   |
-| value   | The value display of of the current selected item.              |
+| Name    | Description                                       |
+| ------- | ------------------------------------------------- |
+| button  | The button that opens and closes the menu.        |
+| default | The items to display within the list              |
+| value   | The value display of of the current selected item |
+
+## Let Params
+
+| Name          | Passed to slots |
+| ------------- | --------------- |
+| disabled      | button, value   |
+| open          | button, value   |
+| selectedValue | button, value   |
