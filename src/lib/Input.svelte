@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { v4 as uuid } from 'uuid';
+  import { idGenerator } from './idGenerator';
 
   import Label from './Label.svelte';
 
@@ -16,7 +16,7 @@
 
   $: {
     if ($$slots.default && id === undefined) {
-      id = uuid();
+      id = idGenerator.nextId('Input');
     }
   }
 

@@ -5,7 +5,6 @@
 
   // import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
   import { createKeyborg } from 'keyborg';
-  import { v4 as uuid } from 'uuid';
 
   import { getContext, onMount, setContext } from 'svelte';
   import { writable } from 'svelte/store';
@@ -24,6 +23,7 @@
     focusPreviousChild
   } from './MenuItem.utils';
   import type { MenuBarContext } from './MenuBar.types';
+  import { idGenerator } from './idGenerator';
 
   // ----- Props ----- //
 
@@ -55,7 +55,7 @@
 
   // ----- State ----- //
 
-  const instanceId = uuid();
+  const instanceId = idGenerator.nextId('MenuItem');
 
   $: displayId = `${value}-display-${instanceId}`;
   $: menuId = `${value}-menu-${instanceId}`;

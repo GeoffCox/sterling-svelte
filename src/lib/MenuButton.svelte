@@ -2,7 +2,6 @@
   import type { ButtonShape, ButtonVariant } from './Button.types';
   import type { MenuItemRegistration, MenuItemContext } from './MenuItem.types';
 
-  import { v4 as uuid } from 'uuid';
   import { createEventDispatcher, getContext, setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
@@ -10,6 +9,7 @@
   import Menu from './Menu.svelte';
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
   import { focusFirstChild, focusNextChild, focusPreviousChild } from './MenuItem.utils';
+  import { idGenerator } from './idGenerator';
 
   // ----- Props ----- //
 
@@ -20,7 +20,7 @@
 
   // ----- State ----- //
 
-  const instanceId = uuid();
+  const instanceId = idGenerator.nextId('MenuButton');
 
   let buttonRef: Button;
   let reference: HTMLDivElement;

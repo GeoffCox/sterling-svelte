@@ -38,7 +38,6 @@
 
 | Library     | Usage                           |
 | ----------- | ------------------------------- |
-| uuid        | to create element identifiers   |
 | floating-ui | to position popups and overlays |
 | keyborg     | for typing detection            |
 | lodash-es   | for data utility functions      |

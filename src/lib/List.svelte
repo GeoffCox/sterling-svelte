@@ -5,7 +5,6 @@
   import { createKeyborg } from 'keyborg';
   import { createEventDispatcher, onMount, setContext } from 'svelte';
   import { writable } from 'svelte/store';
-  import { v4 as uuid } from 'uuid';
 
   import { LIST_CONTEXT_KEY } from './List.constants';
 
@@ -17,8 +16,6 @@
   export let selectedValue: string | undefined = undefined;
 
   // ----- State ----- //
-
-  const listId = `list-${uuid()}`;
 
   let listRef: HTMLDivElement;
   let lastSelectedItemRef: HTMLElement;
@@ -270,7 +267,6 @@ A list of items where a single item can be selected.
   class:disabled
   class:horizontal
   class:using-keyboard={usingKeyboard}
-  id={listId}
   role="list"
   tabindex={0}
   on:blur

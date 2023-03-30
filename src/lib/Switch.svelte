@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { v4 as uuid } from 'uuid';
-
   import Label from '$lib/Label.svelte';
+  import { idGenerator } from './idGenerator';
 
   // ----- Props ----- //
 
@@ -14,7 +13,7 @@
 
   // ----- State ----- //
 
-  const inputId = uuid();
+  const inputId = idGenerator.nextId('Switch');
   let inputRef: HTMLInputElement;
 
   let switchWidth: number = 0;

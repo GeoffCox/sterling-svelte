@@ -1,11 +1,11 @@
 <script lang="ts">
   import { computePosition, flip, offset, shift, autoUpdate } from '@floating-ui/dom';
   import { createEventDispatcher, onMount, tick } from 'svelte';
-  import { v4 as uuid } from 'uuid';
 
   import { clickOutside } from './actions/clickOutside';
+  import { idGenerator } from './idGenerator';
 
-  const popupId = uuid();
+  const popupId = idGenerator.nextId('Dropdown-popup');
 
   // ----- Props ----- //
 
