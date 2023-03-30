@@ -6,7 +6,7 @@
   import Tree from '$lib/Tree.svelte';
   import Button from '$lib/Button.svelte';
   import CoffeeTreeItem from './CoffeeTreeItem.svelte';
-  import { coffeeTree } from '../..//_sampleData/coffeeTree';
+  import { coffeeTree } from '../../_sampleData/coffeeTree';
   import Field from '$lib/Field.svelte';
 
   let exampleRef: any;

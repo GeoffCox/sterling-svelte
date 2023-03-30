@@ -4,8 +4,10 @@ import { vitePreprocess } from '@sveltejs/kit/vite';
 import { mdsvex } from 'mdsvex';
 
 const dev = process.env.NODE_ENV === 'development';
+const publishing = process.env.STERLING_SVELTE_PUBLISH === 'true';
 
-const pathsBase = dev ? '' : '/demos/sterling-svelte';
+const pathsBase = publishing ? '/demos/sterling-svelte' : '';
+const routes = publishing ? 'src/routes/(app)' : 'src/routes';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -19,9 +21,13 @@ const config = {
   ],
   extensions: ['.svelte', '.md'],
   kit: {
-    adapter: dev ? autoAdapter() : staticAdapter(),
+    adapter: publishing ? staticAdapter() : autoAdapter(),
     paths: {
-      base: pathsBase
+      base: pathsBase,
+      relative: !publishing
+    },
+    files: {
+      routes
     }
   }
 };
