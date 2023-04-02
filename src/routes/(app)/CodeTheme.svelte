@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { onMount, tick } from 'svelte';
+  import { assets } from '$app/paths';
+  import { onMount } from 'svelte';
 
   export let theme: string;
   let autoIsDark = false;
@@ -25,27 +26,17 @@
   const updateTheme = async (theme: string, autoIsDark: boolean) => {
     const themeFile = getThemeFile(theme, autoIsDark);
     if (themeFile) {
-      const stylesToRemove: Element[] = [];
-      let styleToKeep: Element | undefined = undefined;
+      let themeLink = document.head.querySelector('link[sterling-code-theme]');
 
-      document.head.querySelectorAll('style[data-vite-dev-id]').forEach((value) => {
-        const stylePath = value.getAttribute('data-vite-dev-id');
-        if (stylePath?.includes(`/${themeFile}`)) {
-          styleToKeep = value as Element;
-        } else if (stylePath?.includes('/prism-')) {
-          stylesToRemove.push(value as Element);
-        }
-      });
-
-      stylesToRemove.forEach((style) => {
-        (style as HTMLStyleElement).disabled = true;
-      });
-
-      if (styleToKeep !== undefined) {
-        (styleToKeep as HTMLStyleElement).disabled = false;
-      } else {
-        await import(`./${themeFile}`);
+      if (themeLink) {
+        themeLink.remove();
       }
+
+      themeLink = document.createElement('link');
+      themeLink.setAttribute('sterling-code-theme', 'true');
+      themeLink.setAttribute('href', `${assets}/` + themeFile);
+      themeLink.setAttribute('rel', 'stylesheet');
+      document.head.appendChild(themeLink);
     }
   };
 
