@@ -13,6 +13,7 @@
   import FilterIcon from './FilterIcon.svelte';
   import ThemeIcon from './ThemeIcon.svelte';
   import CodeTheme from './CodeTheme.svelte';
+  import GitHubIcon from './GitHubIcon.svelte';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -55,8 +56,6 @@
   let mounted = false;
   let currentTheme = 'auto';
   let filterText = '';
-
-  $: isDarkTheme = currentTheme === 'dark' || currentTheme === 'ocean';
 
   $: filteredComponents =
     filterText && filterText.trim().length > 0
@@ -175,7 +174,8 @@
           </MenuButton>
         </div>
         <div class="title">
-          <span>sterling-svelte (alpha)</span>
+          <span>sterling-svelte</span>
+          <span style="font-size: 0.7em">&nbsp;{import.meta.env.PACKAGE_VERSION}</span>
         </div>
         <div class="subtitle">
           A modern, accessible, lightweight UI component library for Svelte.
@@ -189,6 +189,11 @@
               {/each}
             </svelte:fragment>
           </MenuButton>
+        </div>
+        <div class="github">
+          <Link href="http://github.com/GeoffCox/sterling-svelte" variant="ghost">
+            <div class="github-icon"><GitHubIcon /></div>
+          </Link>
         </div>
       </div>
 
@@ -310,7 +315,7 @@
 
   .header {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr auto auto;
     grid-template-rows: auto auto;
     padding: 2em 0 1em 0;
     border-bottom: 1px solid var(--stsv-Common__border-color);
@@ -343,7 +348,6 @@
   }
 
   .header .select-theme {
-    min-width: 250px;
     display: grid;
     justify-items: flex-end;
     justify-self: flex-end;
@@ -351,6 +355,21 @@
     grid-row: 1 / span 2;
     grid-column: 3 / span 1;
     margin-left: 1em;
+  }
+
+  .header .github {
+    display: grid;
+    justify-items: flex-end;
+    justify-self: flex-end;
+    align-items: center;
+    grid-row: 1 / span 2;
+    grid-column: 4 / span 1;
+    margin-left: 1em;
+  }
+
+  .header .github .github-icon {
+    width: 50px;
+    height: 50px;
   }
 
   .content {

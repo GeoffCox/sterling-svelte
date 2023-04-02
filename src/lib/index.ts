@@ -3,6 +3,9 @@ export { clickOutside } from './actions/clickOutside';
 export { forwardEvents } from './actions/forwardEvents';
 export { portal } from './actions/portal';
 
+// ----- functions ----- //
+export { idGenerator } from './idGenerator';
+
 // ----- theme ----- //
 export { type Theme, type ThemeActionParams } from './theme/types';
 
