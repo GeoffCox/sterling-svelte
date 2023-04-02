@@ -4,7 +4,10 @@
   import { LIST_CONTEXT_KEY } from './List.constants';
   import type { ListContext } from './List.types';
 
+  /** Item is disabled when this is true or the containing list is disabled. **/
   export let disabled = false;
+
+  /** Should be unique within the list **/
   export let value: string;
 
   // ----- GetContext ----- //

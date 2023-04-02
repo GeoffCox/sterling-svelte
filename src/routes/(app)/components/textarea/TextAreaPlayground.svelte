@@ -31,7 +31,7 @@
       on:change={() => exampleRef.recordEvent('change')}
     />
   </svelte:fragment>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="placeholder">
       <Input bind:value={placeholder} composed />

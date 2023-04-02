@@ -29,7 +29,7 @@
       <TreeItem value="Excelsa" />
     </TreeItem>
   </div>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
   </svelte:fragment>
 </Playground>

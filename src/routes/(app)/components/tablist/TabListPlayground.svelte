@@ -29,7 +29,7 @@
       <Tab value="Fourth">Fourth</Tab>
     </TabList>
   </svelte:fragment>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
     <Field label="selectedValue">

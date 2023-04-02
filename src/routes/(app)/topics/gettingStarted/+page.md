@@ -34,12 +34,12 @@ You can choose from the built in themes or create your own:
 
 ## 3. Add components
 
-You can import components from svelte files under `lib/*.svelte` (recommended) or from the root of the library.
+You can import components from svelte files under `*.svelte` (recommended) or from the library root.
 
 ```svelte
 <script>
   import { toggleDarkTheme } from '@geoffcox/sterling-svelte';
-  import Button from '@geoffcox/sterling-svelte/lib/Button.svelte';
+  import Button from '@geoffcox/sterling-svelte/Button.svelte';
   import { Checkbox } from '@geoffcox/sterling-svelte';
 </script>
 

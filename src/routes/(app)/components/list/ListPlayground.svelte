@@ -46,7 +46,7 @@
       {/each}
     </List>
   </div>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={horizontal}>horizontal</Checkbox>

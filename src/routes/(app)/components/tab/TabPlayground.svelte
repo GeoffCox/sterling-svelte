@@ -47,7 +47,7 @@
   <svelte:fragment slot="component">
     <Tab {value} {disabled} {text} />
   </svelte:fragment>>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={selected}>selected</Checkbox>
     <Field label="text">

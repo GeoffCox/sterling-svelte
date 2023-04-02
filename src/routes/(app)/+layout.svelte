@@ -12,6 +12,7 @@
   import MenuSeparator from '$lib/MenuSeparator.svelte';
   import FilterIcon from './FilterIcon.svelte';
   import ThemeIcon from './ThemeIcon.svelte';
+  import CodeTheme from './CodeTheme.svelte';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -54,6 +55,8 @@
   let mounted = false;
   let currentTheme = 'auto';
   let filterText = '';
+
+  $: isDarkTheme = currentTheme === 'dark' || currentTheme === 'ocean';
 
   $: filteredComponents =
     filterText && filterText.trim().length > 0
@@ -163,6 +166,7 @@
               <MenuItem value="{base}/topics/gettingStarted" text="Getting Started" />
               <MenuItem value="{base}/topics/roadmap" text="Roadmap" />
               <MenuItem value="{base}/theme" text="Theme" />
+              <MenuItem value="{base}/topics/actions" text="Actions" />
               <MenuSeparator />
               {#each filteredComponents as component}
                 <MenuItem value="{base}/components/{component.toLowerCase()}" text={component} />
@@ -195,12 +199,15 @@
             <Link href="{base}/topics/gettingStarted" variant="ghost">Getting Started</Link>
             <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
             <Link href="{base}/theme" variant="ghost">Theme</Link>
+            <Link href="{base}/topics/actions" variant="ghost">Actions</Link>
           </div>
           <div class="nav-header">Components</div>
           <div class="filter">
             <Field for="filter-components">
-              <Input id="filter-components" bind:value={filterText} composed />
-              <FilterIcon />
+              <div class="filter-flex">
+                <Input id="filter-components" bind:value={filterText} composed />
+                <FilterIcon />
+              </div>
             </Field>
           </div>
           <div class="nav-section">
@@ -212,7 +219,9 @@
           </div>
         </div>
         <div class="component">
-          <slot />
+          <CodeTheme theme={currentTheme}>
+            <slot />
+          </CodeTheme>
         </div>
       </div>
     </div>
@@ -255,13 +264,8 @@
 
   :global(pre),
   :global(code) {
-    font-family: 'FiraMono', monospace;
-    background-color: var(--stsv-Layer__background-color--1);
-    color: var(--stsv-Layer__color--1);
-  }
-
-  :global(pre) {
-    padding: 1em;
+    font-size: 0.9em;
+    font-family: Menlo, Monaco, Consolas, 'Andale Mono', 'Ubuntu Mono', 'Courier New', monospace;
   }
 
   :global(blockquote) {
@@ -381,6 +385,12 @@
 
   .filter {
     margin: 0 0 0.5em 0;
+  }
+
+  .filter-flex {
+    display: flex;
+    align-items: center;
+    padding-right: 0.25em;
   }
 
   .component {

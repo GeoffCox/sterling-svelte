@@ -29,7 +29,7 @@
       {/if}
     </Link>
   </svelte:fragment>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="variant" forwardClick>
       <Select bind:selectedValue={variant} composed>
@@ -38,6 +38,8 @@
         {/each}
       </Select>
     </Field>
+  </svelte:fragment>
+  <svelte:fragment slot="options">
     <Checkbox bind:checked={withText}>with text</Checkbox>
     <Checkbox bind:checked={withIcon}>with icon</Checkbox>
   </svelte:fragment>

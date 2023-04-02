@@ -44,8 +44,7 @@
   <svelte:fragment slot="status">
     <div>checked: {checked}</div>
   </svelte:fragment>
-  <svelte:fragment slot="options">
-    <Checkbox bind:checked={customLabels}>custom labels</Checkbox>
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="offText">
       <Input bind:value={offText} composed />
@@ -54,6 +53,9 @@
       <Input bind:value={onText} composed />
     </Field>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
+  </svelte:fragment>
+  <svelte:fragment slot="options">
+    <Checkbox bind:checked={customLabels}>custom labels</Checkbox>
   </svelte:fragment>
 </Playground>
 

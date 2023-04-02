@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
 
+  export let noEvents = false;
+
   let events: { message: string; timestamp: Date }[] = [];
 
   export const recordEvent = (message: string) => {
@@ -25,23 +27,35 @@
       <slot name="component" />
     </div>
     <div class="configuration">
-      <div class="options panel">
-        <h2>Options</h2>
-        <slot name="options">(none)</slot>
-      </div>
-      <div class="status panel">
-        <h2>Status</h2>
-        <slot name="status">(none)</slot>
-      </div>
-      <div class="events panel">
-        <h2>Events <small>(newest to oldest)</small></h2>
-        <div class="event-list">
-          {#each events as event}
-            <div class="event-message">{event.message}</div>
-            <div class="event-timestamp">&nbsp;@{event.timestamp.getMilliseconds()}</div>
-          {/each}
+      {#if $$slots.props}
+        <div class="props panel">
+          <h2>Props</h2>
+          <slot name="props">(none)</slot>
         </div>
-      </div>
+      {/if}
+      {#if $$slots.options}
+        <div class="options panel">
+          <h2>Options</h2>
+          <slot name="options">(none)</slot>
+        </div>
+      {/if}
+      {#if $$slots.status}
+        <div class="status panel">
+          <h2>Status</h2>
+          <slot name="status">(none)</slot>
+        </div>
+      {/if}
+      {#if !noEvents}
+        <div class="events panel">
+          <h2>Events <small>(newest to oldest)</small></h2>
+          <div class="event-list">
+            {#each events as event}
+              <div class="event-message">{event.message}</div>
+              <div class="event-timestamp">&nbsp;@{event.timestamp.getMilliseconds()}</div>
+            {/each}
+          </div>
+        </div>
+      {/if}
     </div>
   {/if}
 </div>

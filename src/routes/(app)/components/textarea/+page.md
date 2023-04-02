@@ -6,54 +6,47 @@
 
 A styled `<textarea/>`.
 
-## Playground
-
-<Playground />
-
-## Features
-
 - Automatically adjust the height to fit content.
 - Add a resize handle to the corner of the text area.
 
-## Usage
+<Playground />
 
 ```svelte
 <script lang="ts">
-  import TextArea from '@geoffcox/sterling-svelte/TextArea.svelte';
+  // ----- Props ----- //
 
-  let value = 'Welcome to sterling-svelte';
+  // HTMLDivElement props are forwarded
+
+  let autoHeight: boolean = false;
+  let resize: TextAreaResize = 'none';
+  let value: string;
+
+  // ----- Events ----- //
+
+  // HTMLDivElement events are bubbled
+
+  dispatch('select', { value });
+
+  // ----- Methods ----- //
+
+  function blur();
+  function focus(options: FocusOptions);
+  function click();
+  function select();
+  function setSelectionRange(
+    start: number | null,
+    end: number | null,
+    direction?: 'forward' | 'backward' | 'none'
+  );
+  function setRangeText(
+    replacement: string,
+    start?: number,
+    end?: number,
+    selectionMode?: SelectionMode
+  );
 </script>
 
-<TextArea bind={value} autoHeight />
-```
+<!-- Anatomy -->
 
-## Props
-
-| Name       | Type       | Default | Description                                |
-| ---------- | ---------- | ------- | ------------------------------------------ |
-| (textarea) |            |         | HTMLTextAreaElement properties             |
-| autoHeight | boolean    | false   | Automatically adjust height to fit content |
-| resize     | CSS resize | 'none'  | Sets the textarea resize CSS property      |
-
-## Events
-
-| Name       | Type | Description                |
-| ---------- | ---- | -------------------------- |
-| (textarea) |      | HTMLTextAreaElement events |
-
-## Methods
-
-| Name              | Parameters                                | Description                        |
-| ----------------- | ----------------------------------------- | ---------------------------------- |
-| blur              |                                           | HTMLInputElement.blur              |
-| click             |                                           | HTMLInputElement.click             |
-| focus             | `(options)`                               | HTMLInputElement.focus             |
-| select            |                                           | HTMLInputElement.select            |
-| setSelectionRange | `(start, end, direction)`                 | HTMLInputElement.setSelectionRange |
-| setTextRange      | `(replacment, start, end, selectionMode)` | HTMLInputElement.setTextRange      |
-
-## Anatomy
-
-```
-TextArea (textarea)
+<textarea />
 ```

@@ -97,6 +97,7 @@
   }
 
   .sterling-tree-item.disabled {
+    background-color: var(--stsv-Input__background-color--disabled);
     color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
   }

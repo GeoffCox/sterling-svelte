@@ -6,67 +6,35 @@
 
 An item within a `TabList`.
 
-## Playground
-
 <Playground />
 
-## Features
+```svelte
+<script lang="ts">
+  // ----- Props ----- //
 
-- Set the tab content.
-- Visually indicates selection.
+  // HTMLDivElement props are forwarded
 
-## Interactions
+  let disabled = false;
+  let selected = false;
+  let text: string | undefined = undefined;
+  let value: string;
 
-- Clicking the tab selects it.
-- Space key selects the tab.
+  // ----- Events ----- //
 
-## Props
+  // HTMLDivElement events are bubbled
 
-| Name     | Type      | Default | Description                         |
-| -------- | --------- | ------- | ----------------------------------- |
-| (button) |           |         | HTMLButtonElement properties        |
-| disabled | `boolean` | `false` | If the tab item is disabled\*       |
-| selected | `boolean` | `false` | If the tab item is selected\*\*     |
-| text     | `string`  |         | Text to display in the default slot |
-| value    | `string`  |         | The value of the tab item           |
+  // ----- Methods ----- //
 
-- \* Tab will use disabled from TabListContext to also disable the tab when the TabList is disabled.
-- \*\* Tab will use the selectedValue from TabListContext to automatically update the selected value.
+  function blur();
+  function click();
+  function focus(options: FocusOptions);
+</script>
 
-## Events
+<!-- Anatomy -->
 
-| Name     | Event.detail | Description              |
-| -------- | ------------ | ------------------------ |
-| (button) |              | HTMLButtonElement events |
-
-## Methods
-
-| Name  | Parameters  | Description          |
-| ----- | ----------- | -------------------- |
-| blur  |             | HTMLDivElement.blur  |
-| click |             | HTMLDivElement.click |
-| focus | `(options)` | HTMLDivElement.focus |
-
-## Anatomy
-
+<button>
+  <slot disabled={_disabled} {selected} {value} {text}/ >
+  <!-- indicator -->
+  <div >
+</button>
 ```
-Tab (button)
-  default slot
-    {text} | {value}
-  indicator
-```
-
-## Slots
-
-| Slot    | Description      |
-| ------- | ---------------- |
-| default | The tab contents |
-
-## Let Params
-
-| Name     | Type      | Passed to slots |
-| -------- | --------- | --------------- |
-| disabled | `boolean` | default         |
-| selected | `boolean` | default         |
-| text     | `string`  | default         |
-| value    | `string`  | default         |

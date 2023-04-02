@@ -29,7 +29,7 @@
       >
     {/each}
   </div>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="label (prefix)">
       <Input bind:value={label} composed />

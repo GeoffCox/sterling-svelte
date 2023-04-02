@@ -15,7 +15,7 @@
 
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
-    <MenuButton value="file">
+    <MenuButton {disabled} value="file">
       File
       <svelte:fragment slot="items">
         <MenuItem value="file-new" text="New" />
@@ -57,7 +57,7 @@
       </svelte:fragment>
     </MenuButton>
   </svelte:fragment>>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
   </svelte:fragment>
 </Playground>

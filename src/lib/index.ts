@@ -26,7 +26,8 @@ export type { ProgressColorful } from './Progress.types';
 export type { TabListContext } from './TabList.types';
 export type { TextAreaResize } from './TextArea.types';
 export type { TooltipShowOn } from './Tooltip.types';
-export type { TreeContext, TreeItemContext } from './Tree.types';
+export type { TreeContext } from './Tree.types';
+export type { TreeItemContext } from './TreeItem.types';
 
 // ----- Component constants ----- //
 export { BUTTON_SHAPES, BUTTON_VARIANTS } from './Button.constants';

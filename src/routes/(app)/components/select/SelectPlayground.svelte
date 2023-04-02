@@ -39,7 +39,7 @@
       {/each}
     </Select>
   </svelte:fragment>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Button on:click={() => (selectedValue = undefined)}>selectedValue = undefined</Button>

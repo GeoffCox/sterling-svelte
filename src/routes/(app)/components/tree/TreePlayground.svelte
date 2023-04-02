@@ -41,7 +41,7 @@
       {/each}
     </Tree>
   </div>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <div class="edit-toggled">
@@ -65,7 +65,6 @@
 
 <style>
   .component {
-    height: 450px;
     min-width: 400px;
   }
 

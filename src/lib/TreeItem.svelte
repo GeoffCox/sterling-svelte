@@ -1,5 +1,6 @@
 <script lang="ts">
-  import type { TreeContext, TreeItemContext } from './Tree.types';
+  import type { TreeContext } from './Tree.types';
+  import type { TreeItemContext } from './TreeItem.types';
 
   import { getContext, setContext } from 'svelte';
   import { slide } from 'svelte/transition';
@@ -305,7 +306,7 @@
 
   // ----- Set Context ----- //
 
-  setContext(TREE_ITEM_CONTEXT_KEY, { depth: depth + 1, disabled: disabledStore });
+  setContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY, { depth: depth + 1, disabled: disabledStore });
 </script>
 
 <!--

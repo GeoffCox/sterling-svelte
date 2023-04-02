@@ -38,7 +38,7 @@
   <div class="component" class:vertical slot="component">
     <Progress {colorful} {disabled} {value} {max} bind:percent {vertical} />
   </div>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <div class="slider">
       <Slider bind:value min={0} {max} />
     </div>

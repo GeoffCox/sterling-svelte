@@ -39,11 +39,13 @@
   <div class="component" class:horizontal slot="component">
     <ListItem value="sterling">{text}</ListItem>
   </div>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="text">
       <Input bind:value={text} composed />
     </Field>
+  </svelte:fragment>
+  <svelte:fragment slot="options">
     <Checkbox bind:checked={selected}>selected</Checkbox>
   </svelte:fragment>
 </Playground>

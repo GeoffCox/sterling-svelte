@@ -40,7 +40,7 @@
       {label}
     </TreeItemDisplay>
   </div>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={expanded}>expanded</Checkbox>
     <Checkbox bind:checked={hasChildren}>hasChildren</Checkbox>
@@ -50,7 +50,7 @@
         <Slider maxValue="20" bind:value={depth} on:mouseup={() => (allowDepthChange = true)} />
       </div>
     </Field>
-    <Field label="label (text)">
+    <Field label="default slot">
       <Input bind:value={label} composed />
     </Field>
   </svelte:fragment>

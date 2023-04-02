@@ -60,7 +60,7 @@
       <MenuItem value="file-quit" text="Quit" />
     </MenuItem>
   </svelte:fragment>>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
   </svelte:fragment>
 </Playground>

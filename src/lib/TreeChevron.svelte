@@ -22,7 +22,38 @@
   }
 </script>
 
-<div class="tree-chevron" class:leaf={!hasChildren} class:animate class:expanded />
+<div
+  class="tree-chevron"
+  class:leaf={!hasChildren}
+  class:animate
+  class:expanded
+  on:blur
+  on:click
+  on:dblclick
+  on:focus
+  on:focusin
+  on:focusout
+  on:keydown
+  on:keypress
+  on:keyup
+  on:mousedown
+  on:mouseenter
+  on:mouseleave
+  on:mousemove
+  on:mouseover
+  on:mouseout
+  on:mouseup
+  on:pointercancel
+  on:pointerdown
+  on:pointerenter
+  on:pointerleave
+  on:pointermove
+  on:pointerover
+  on:pointerout
+  on:pointerup
+  on:wheel
+  {...$$restProps}
+/>
 
 <style>
   .tree-chevron {

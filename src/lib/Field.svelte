@@ -16,7 +16,7 @@
   export let label: string | undefined = undefined;
   export let message: string | undefined = undefined;
   export let required: boolean = false;
-  export let requiredTip = 'This field is required';
+  export let requiredReason = 'This field is required';
   export let status: FieldStatus = 'none';
 
   // ----- State ----- //
@@ -203,9 +203,9 @@
     </slot>
   {/if}
   {#if required}
-    <slot name="required" {requiredTip}>
+    <slot name="required" requiredTip={requiredReason}>
       <Tooltip showOn="hover">
-        <span class="required-tip" slot="tip">{requiredTip}</span>
+        <span class="required-tip" slot="tip">{requiredReason}</span>
         <div class="required">*</div>
       </Tooltip>
     </slot>

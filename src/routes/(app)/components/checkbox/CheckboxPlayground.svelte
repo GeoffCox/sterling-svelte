@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Button from '$lib/Button.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
   import Field from '$lib/Field.svelte';
   import Input from '$lib/Input.svelte';
@@ -17,7 +16,7 @@
       >{label}</Checkbox
     >
   </div>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="default slot (text)">
       <Input bind:value={label} composed />

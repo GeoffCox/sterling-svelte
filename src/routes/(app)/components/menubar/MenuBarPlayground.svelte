@@ -62,5 +62,5 @@
         <MenuItem value="extensions" role="menuitemradio" text="Extensions" />
       </MenuItem>
     </MenuBar>
-  </svelte:fragment>>
+  </svelte:fragment>
 </Playground>

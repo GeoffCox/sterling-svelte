@@ -6,55 +6,30 @@ A styled `<label/>`.
     import Playground from './LabelPlayground.svelte';
 </script>
 
-## Playground
-
 <Playground />
-
-## Features
-
-- Supports disabled state
-
-## Usage
 
 ```svelte
 <script lang="ts">
-  let greeting: string = 'Hello';
+  // ----- Props ----- //
+
+  // HTMLLabelElement props are forwarded
+
+  let disabled = false;
+
+  // ----- Events ----- //
+
+  // HTMLLabelElement events are bubbled
+
+  // ----- Methods ----- //
+
+  function click();
+  function blur();
+  function focus(options: FocusOptions);
 </script>
 
-<Label for="greeting">Greeting</Label>
-<Input id="greeting" bind:value={greeting} />
+<!-- Anatomy -->
+
+<label>
+  <slot {disabled} />
+</label>
 ```
-
-## Props
-
-| Name     | Type    | Default | Description                                |
-| -------- | ------- | ------- | ------------------------------------------ |
-| (label)  |         |         | HTMLLabelElement properties                |
-| disabled | boolean | false   | Disables the label making it look inactive |
-
-## Events
-
-| Name    | Event.detail | Description             |
-| ------- | ------------ | ----------------------- |
-| (label) |              | HTMLLabelElement events |
-
-## Methods
-
-| Name  | Parameters  | Description            |
-| ----- | ----------- | ---------------------- |
-| blur  |             | HTMLLabelElement.blur  |
-| click |             | HTMLLabelElement.click |
-| focus | `(options)` | HTMLLabelElement.focus |
-
-## Anatomy
-
-```
-HTML (label)
-   default slot
-```
-
-## Slots
-
-| Name    | Description                             |
-| ------- | --------------------------------------- |
-| default | The content to display within the label |

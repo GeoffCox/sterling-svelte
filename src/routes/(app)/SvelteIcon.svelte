@@ -11,7 +11,7 @@
   <title>Svelte</title>
   <style type="text/css">
     .st0 {
-      fill: #222;
+      fill: #ff3e00;
     }
     .st1 {
       fill: #ffffff;

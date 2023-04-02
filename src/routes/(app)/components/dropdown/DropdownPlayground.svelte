@@ -39,7 +39,7 @@
       </div></Dropdown
     >
   </svelte:fragment>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>

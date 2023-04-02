@@ -14,7 +14,7 @@
   <div slot="component">
     <TreeChevron {expanded} {hasChildren} />
   </div>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={expanded}>expanded</Checkbox>
     <Checkbox bind:checked={hasChildren}>hasChildren</Checkbox>
   </svelte:fragment>

@@ -25,7 +25,7 @@
 
 <Example bind:this={exampleRef}>
   <div class="component" slot="component">
-    <Button on:click={() => showDialog()}>Open dialog</Button>
+    <Button on:click={() => showDialog()}>Open form submit dialog</Button>
     <Dialog
       bind:open
       bind:returnValue

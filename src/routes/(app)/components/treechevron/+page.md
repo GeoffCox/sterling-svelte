@@ -6,26 +6,28 @@
 
 A chevron indicating expanded/collapsed of an item in a tree hierarchy.
 
-## Playground
-
-<Playground />
-
-## Features
-
 - Displays a chevron for items with children and a bullet for items without.
 - Chevron points right when collapsed, points down when expanded.
 - Chevron changes are animated as rotation.
 - No animation occurs when prefers-reduced-motion set.
 
-## Props
+<Playground />
 
-| Name        | Type      | Deafault | Description                          |
-| ----------- | --------- | -------- | ------------------------------------ |
-| expanded    | `boolean` | `false`  | If the associated item is expanded.  |
-| hasChildren | `boolean` | `false`  | If the associated item has children. |
+```svelte
+<script lang="ts">
+  // ----- Props ----- //
 
-## Anatomy
+  // HTMLDivElement props are forwarded
 
-```
-TreeChevron (div)
+  let expanded = false;
+  let hasChildren = false;
+
+  // ----- Events ----- //
+
+  // HTMLDivElement events are bubbled
+</script>
+
+<!-- Anatomy -->
+
+<div />
 ```

@@ -31,10 +31,8 @@
       {/if}
     </Button>
   </div>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Checkbox bind:checked={withText}>with text</Checkbox>
-    <Checkbox bind:checked={withIcon}>with icon</Checkbox>
     <Field label="shape" forwardClick>
       <Select bind:selectedValue={shape} composed>
         {#each BUTTON_SHAPES as variantItem}
@@ -49,6 +47,10 @@
         {/each}
       </Select>
     </Field>
+  </svelte:fragment>
+  <svelte:fragment slot="options">
+    <Checkbox bind:checked={withText}>with text</Checkbox>
+    <Checkbox bind:checked={withIcon}>with icon</Checkbox>
   </svelte:fragment>
 </Playground>
 

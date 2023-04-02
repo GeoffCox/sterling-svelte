@@ -6,72 +6,37 @@
 
 A styled `<input type=checkbox />`.
 
-## Playground
-
 <Playground />
-
-## Features
-
-- Add label content to describe the checkbox.
-
-## Usage
 
 ```svelte
 <script lang="ts">
-  import Checkbox from '@geoffcox/sterling-svelte/Checkbox.svelte';
+  // ----- Props ----- //
 
-  let checked = false;
+  // HTMLInputElement props are forwarded
 
-  const onChange = () => {
-    //do something on the change
-  };
+  let shape: ButtonShape = 'rounded';
+  let variant: ButtonVariant = 'regular';
+
+  // ----- Events ----- //
+
+  // HTMLInputElement events are bubbled
+
+  // ----- Methods ----- //
+
+  function click();
+  function blur();
+  function focus(options: FocusOptions);
 </script>
 
-<Checkbox bind:checked on:change={onChange}>sterling-svelte</Checkbox>
+<!-- Anatomy -->
+
+<div>
+  <!-- hidden -->
+  <input />
+  <!-- checkmark -->
+  <div />
+  <Label>
+    <slot {checked} {disabled} inputId={id} {value} />
+  </Label>
+</div>
 ```
-
-## Props
-
-| Name    | Type | Default | Description                 |
-| ------- | ---- | ------- | --------------------------- |
-| (input) |      |         | HTMLInputElement properties |
-
-## Events
-
-| Name    | Type | Description             |
-| ------- | ---- | ----------------------- |
-| (input) |      | HTMLInputElement events |
-
-## Methods
-
-| Name  | Parameters  | Description            |
-| ----- | ----------- | ---------------------- |
-| blur  |             | HTMLInputElement.blur  |
-| click |             | HTMLInputElement.click |
-| focus | `(options)` | HTMLInputElement.focus |
-
-## Anatomy
-
-```
-Checkbox (div)
-  input type=checkbox //hidden
-  checkmark (div)
-  Label
-    default slot
-      {value}
-```
-
-## Slots
-
-| Name    | Description            |
-| ------- | ---------------------- |
-| default | Checkbox label content |
-
-## Let Params
-
-| Name     | Passed to slots |
-| -------- | --------------- |
-| checked  | default         |
-| disabled | default         |
-| inputId  | default         |
-| value    | default         |

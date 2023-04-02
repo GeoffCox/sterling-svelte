@@ -25,7 +25,7 @@
       <div class="tip" slot="tip">{tipText}</div>
     </Tooltip>
   </div>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Field label="autoShow">

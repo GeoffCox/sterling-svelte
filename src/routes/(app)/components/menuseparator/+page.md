@@ -6,40 +6,20 @@
 
 A line between groups of menu items.
 
-## Playground
-
 <Playground />
 
-## Features
-
-- Provides `role='separator'` to support ARIA
-
-## Usage
-
-Declare a menu separator within a menu item.
-
 ```svelte
-<MenuItem value="file" text="File">
-  <MenuItem value="new-file" text="New..." />
-  <MenuSeparator />
-  <MenuItem value="open-file" text="Open..." />
-</MenuItem>
-```
+<script lang="ts">
+  // ----- Props ----- //
 
-## Props
+  // HTMLDivElement props are forwarded
 
-| Name  | Type | Description               |
-| ----- | ---- | ------------------------- |
-| (div) |      | HTMLDivElement properties |
+  // ----- Events ----- //
 
-## Events
+  // HTMLDivElement events are bubbled
+</script>
 
-| Name  | Event detail | Description           |
-| ----- | ------------ | --------------------- |
-| (div) |              | HTMLDivElement events |
+<!-- Anatomy -->
 
-## Anatomy
-
-```
-MenuSeparator (div)
+<div />
 ```

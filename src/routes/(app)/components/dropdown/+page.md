@@ -6,89 +6,46 @@
 
 A value and button where a dropdown can be opened for changing the value.
 
-## Playground
+- Set arbitrary content for the value and popup.
+- The dropown is dynamically positioned based on avaiable screen space.
 
 <Playground />
 
-## Features
-
-- Define any content for the value and popup.
-- The dropown is dynamically positioned based on avaiable screen space.
-
-## Interactions
-
-- Clicking the button opens/closes the dropdown.
-- Clicking the value opens/closes the dropdown.
-- Clicking outside the dropdown closes the dropdown.
-- Pressing the escape key closes the dropdown.
-
-## Usage
-
 ```svelte
 <script lang="ts">
+  // ----- Props ----- //
+
+  // HTMLDivElement props are forwarded
+
+  /** when true, the component should be styled to be hosted within a container component. */
+  let composed: boolean = false;
+  let disabled: boolean = false;
   let open = false;
-  let low = 5;
-  let high = 500;
+
+  /** when true, then clicking outside the dropdown won't close it. */
+  let stayOpenOnClickAway = false;
+
+  // ----- Events ----- //
+
+  // HTMLDivElement events are bubbled
+
+  dispatch('open', { open });
+
+  // ----- Methods ----- //
+
+  function click();
+  function blur();
+  function focus(options: FocusOptions);
 </script>
 
-<Dropdown bind:open>
-  <div slot="value">
-    Delta {high - low}
-  </div>
+<!-- Anatomy -->
+
+<div>
+  <slot name="value" {composed} {disabled} {open} />
+  <slot name="button" {composed} {disabled} {open} />
+  <!-- popup -->
   <div>
-    <Slider bind:value={low} max={0} />
-    <Slider bind:value={high} min={101} max={200} />
+    <slot {composed} {disabled} {open} />
   </div>
-</Dropdown>
+</div>
 ```
-
-## Props
-
-| Name                | Type      | Default | Description                                                                          |
-| ------------------- | --------- | ------- | ------------------------------------------------------------------------------------ |
-| (div)               |           |         | HTMLDivElement properties                                                            |
-| composed            | `boolean` | `false` | When true, the component should be styled to be hosted within a container component. |
-| disabled            | `boolean` | `false` | When true, the component is disabled.                                                |
-| open                | `boolean` | `false` | When true, the dropdown is opened.                                                   |
-| stayOpenOnClickAway | `boolean` | `false` | When true and clicking outside the dropdown, it remains open.                        |
-
-## Events
-
-| Name  | Event.detail | Description           |
-| ----- | ------------ | --------------------- |
-| (div) |              | HTMLDivElement events |
-| open  | `{open}`     |                       |
-
-## Methods
-
-| Name  | Parameters  | Description          |
-| ----- | ----------- | -------------------- |
-| blur  |             | HTMLDivElement.blur  |
-| click |             | HTMLDivElement.click |
-| focus | `(options)` | HTMLDivElement.focus |
-
-## Anatomy
-
-```
-Dropdown (div)
-  value slot
-  button slot
-  dropdown
-    default slot
-```
-
-## Slots
-
-| Name    | Description                                    |
-| ------- | ---------------------------------------------- |
-| button  | The button that opens and closes the dropdown. |
-| default | The items to display within the dropdown.      |
-| value   | The content to display with the button.        |
-
-## Let Parameters
-
-| Name     | Passed to slots        |
-| -------- | ---------------------- |
-| composed | button, default, value |
-| disabled | button, default, value |
-| open     | button, default, value |

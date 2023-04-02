@@ -13,7 +13,7 @@
   <div slot="component">
     <Label {disabled}>{labelText}</Label>
   </div>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="text (default slot)">
       <Input bind:value={labelText} composed />

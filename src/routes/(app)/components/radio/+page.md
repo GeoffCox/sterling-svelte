@@ -6,75 +6,39 @@ A styled `<input type="radio" />`
     import Playground from './RadioPlayground.svelte';
 </script>
 
-## Playground
-
 <Playground />
-
-## Features
-
-- Add label content to describe the checkbox.
-
-## Usage
 
 ```svelte
 <script lang="ts">
-  import Radio from '@geoffcox/sterling-svelte/Radio.svelte';
+  // ----- Props ----- //
 
-  const values = ['apple', 'banana', 'grapes', 'orange'];
-  let selectedValue = 'apple';
+  // HTMLDivElement props are forwarded
+
+  let checked: boolean = false;
+  let disabled: boolean = false;
+  let group: any | undefined | null = undefined;
+  let id: string | undefined = undefined;
+
+  // ----- Events ----- //
+
+  // HTMLDivElement events are bubbled
+
+  // ----- Methods ----- //
+
+  function blur();
+  function click();
+  function focus(options: FocusOptions);
 </script>
 
-<div class="component" slot="component">
-  {#each values as value}
-    <Radio bind:group={selectedValue} name="fruits" {value}>{value}</Radio>
-  {/each}
+<!-- Anatomy -->
+
+<div>
+  <!-- hidden -->
+  <input />
+  <!-- radio dot -->
+  <div />
+  <Label>
+    <slot {checked} {disabled} inputId={id} {value} />
+  </Label>
 </div>
 ```
-
-## Props
-
-| Name    | Type                           | Default     | Description                                          |
-| ------- | ------------------------------ | ----------- | ---------------------------------------------------- |
-| (input) |                                |             | HTMLInputElement properties                          |
-| group   | `any` \| `null` \| `undefined` | `undefined` | Use with bind to set the value as a radio is checked |
-
-## Events
-
-| Name    | Type | Description             |
-| ------- | ---- | ----------------------- |
-| (input) |      | HTMLInputElement events |
-
-## Methods
-
-| Name  | Parameters  | Description            |
-| ----- | ----------- | ---------------------- |
-| blur  |             | HTMLInputElement.blur  |
-| click |             | HTMLInputElement.click |
-| focus | `(options)` | HTMLInputElement.focus |
-
-## Anatomy
-
-```
-Radio (div)
-  input //hidden
-  radio dot (div)
-  Label
-    default slot
-      {value}
-```
-
-## Slots
-
-| Name    | Description         |
-| ------- | ------------------- |
-| default | Radio label content |
-
-## Let Params
-
-| Name     | Passed to slots |
-| -------- | --------------- |
-| checked  | default         |
-| disabled | default         |
-| group    | default         |
-| inputId  | default         |
-| value    | default         |

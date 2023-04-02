@@ -31,7 +31,7 @@
       <Input id="field-target" {disabled} composed />
     </Field>
   </svelte:fragment>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>input disabled</Checkbox>
     <Checkbox bind:checked={forwardClick}>forwardClick</Checkbox>
     <Field label="label">
@@ -48,6 +48,8 @@
         {/each}
       </Select>
     </Field>
+  </svelte:fragment>
+  <svelte:fragment slot="options">
     <Checkbox bind:checked={useFor}>use <i>for</i> and <i>id</i> association</Checkbox>
   </svelte:fragment>
 </Playground>
