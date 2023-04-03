@@ -1,6 +1,6 @@
 # sterling-svelte Overview
 
-- lightweight (`< 200K`)
+- lightweight (`< 300K`)
 - minimal and classic design
 - fast rendering performance thanks to Svelte
 - ideomatic Svelte
