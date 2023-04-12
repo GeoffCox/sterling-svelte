@@ -32,8 +32,8 @@
     "format": "prettier --plugin-search-dir . --write ."
   },
   "devDependencies": {
-    "@fontsource/fira-mono": "^4.5.10",
-    "@fontsource/overpass": "^4.5.10",
+    "@fontsource/open-sans": "^4.5.14",
+    "@fontsource/source-code-pro": "^4.5.14",
     "@playwright/test": "^1.28.1",
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/adapter-static": "^1.0.0",

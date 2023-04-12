@@ -35,7 +35,6 @@
           element: arrowRef
         })
       ];
-      console.log(placement);
       position = await computePosition(reference, tooltipRef, {
         placement,
         middleware

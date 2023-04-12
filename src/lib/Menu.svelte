@@ -110,6 +110,12 @@
       on:copy
       on:cut
       on:dblclick
+      on:dragend
+      on:dragenter
+      on:dragleave
+      on:dragover
+      on:dragstart
+      on:drop
       on:focus
       on:focusin
       on:focusout
@@ -157,7 +163,7 @@
     height: fit-content;
     left: 0;
     max-height: calc(50vh);
-    overflow: scroll;
+    overflow: auto;
     overscroll-behavior: contain;
     padding: 0.25em;
     position: absolute;

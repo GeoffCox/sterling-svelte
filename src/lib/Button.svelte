@@ -39,6 +39,13 @@
   type="button"
   on:blur
   on:click
+  on:drag
+  on:dragend
+  on:dragenter
+  on:dragleave
+  on:dragover
+  on:dragstart
+  on:drop
   on:dblclick
   on:focus
   on:focusin

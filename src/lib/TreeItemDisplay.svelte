@@ -39,6 +39,12 @@
   on:blur
   on:click
   on:dblclick
+  on:dragend
+  on:dragenter
+  on:dragleave
+  on:dragover
+  on:dragstart
+  on:drop
   on:focus
   on:focusin
   on:focusout

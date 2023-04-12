@@ -72,6 +72,7 @@
   rows="1"
   style={`--TextArea__resize: ${resize};`}
   bind:value
+  on:beforeinput
   on:blur
   on:click
   on:change
@@ -79,6 +80,12 @@
   on:cut
   on:paste
   on:dblclick
+  on:dragend
+  on:dragenter
+  on:dragleave
+  on:dragover
+  on:dragstart
+  on:drop
   on:focus
   on:focusin
   on:focusout

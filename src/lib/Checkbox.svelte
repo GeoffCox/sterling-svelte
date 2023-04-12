@@ -48,6 +48,12 @@
       on:click
       on:change
       on:dblclick
+      on:dragend
+      on:dragenter
+      on:dragleave
+      on:dragover
+      on:dragstart
+      on:drop
       on:focus
       on:focusin
       on:focusout
@@ -62,7 +68,6 @@
       on:mouseover
       on:mouseout
       on:mouseup
-      on:toggle
       on:wheel
       bind:checked
       {...$$restProps}
@@ -70,27 +75,24 @@
     <div class="indicator" />
   </div>
   {#if $$slots.default}
-    <div class="label">
-      <Label {disabled} for={id}>
-        <slot {checked} {disabled} inputId={id} value={$$restProps.value}>
-          {$$restProps.value}
-        </slot>
-      </Label>
-    </div>
+    <Label {disabled} for={id}>
+      <slot {checked} {disabled} inputId={id} value={$$restProps.value}>
+        {$$restProps.value}
+      </slot>
+    </Label>
   {/if}
 </div>
 
 <style>
   .sterling-checkbox {
-    display: inline-flex;
-    align-content: stretch;
-    align-items: stretch;
+    align-content: center;
+    align-items: center;
     box-sizing: border-box;
+    display: inline-flex;
     font: inherit;
-    gap: 0.4em;
+    margin: 0;
     outline: none;
     padding: 0;
-    margin: 0;
   }
 
   /* 
@@ -104,6 +106,7 @@
     position: relative;
     display: grid;
     align-items: center;
+    margin-right: 0.25em;
   }
 
   /*
@@ -177,11 +180,6 @@
 
   input:checked:disabled + .indicator::after {
     border-color: var(--stsv-Common__color--disabled);
-  }
-
-  .label {
-    user-select: none;
-    margin-top: 0.25em;
   }
 
   @media (prefers-reduced-motion) {

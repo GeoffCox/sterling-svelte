@@ -115,6 +115,12 @@
   on:click
   on:click={onClick}
   on:dblclick
+  on:dragend
+  on:dragenter
+  on:dragleave
+  on:dragover
+  on:dragstart
+  on:drop
   on:focus
   on:focusin
   on:focusout
