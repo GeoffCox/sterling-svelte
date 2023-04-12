@@ -54,7 +54,7 @@
     </Field>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="tweaks">
     <Checkbox bind:checked={customLabels}>custom labels</Checkbox>
   </svelte:fragment>
 </Playground>

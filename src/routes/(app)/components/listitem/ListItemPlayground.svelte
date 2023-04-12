@@ -45,7 +45,7 @@
       <Input bind:value={text} composed />
     </Field>
   </svelte:fragment>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="tweaks">
     <Checkbox bind:checked={selected}>selected</Checkbox>
   </svelte:fragment>
 </Playground>

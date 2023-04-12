@@ -9,14 +9,11 @@
  code[class*="language-"],
  pre[class*="language-"] {
      color: #d6deeb;
-     font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
      text-align: left;
      white-space: pre;
      word-spacing: normal;
      word-break: normal;
      word-wrap: normal;
-     line-height: 1.5;
-     font-size: 1em;
  
      -moz-tab-size: 4;
      -o-tab-size: 4;
@@ -74,7 +71,6 @@
  .token.prolog,
  .token.cdata {
      color: rgb(99, 119, 119);
-     font-style: italic;
  }
  
  .token.punctuation {
@@ -87,7 +83,6 @@
  
  .token.deleted {
      color: rgba(239, 83, 80, 0.56);
-     font-style: italic;
  }
  
  .token.symbol,
@@ -119,13 +114,11 @@
  .token.selector,
  .token.doctype {
      color: rgb(199, 146, 234);
-     font-style: italic;
  }
  
  .token.attr-name,
  .token.inserted {
      color: rgb(173, 219, 103);
-     font-style: italic;
  }
  
  .token.string,

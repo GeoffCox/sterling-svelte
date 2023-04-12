@@ -6,14 +6,11 @@
  code[class*="language-"],
  pre[class*="language-"] {
      color: #393A34;
-	font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
      direction: ltr;
      text-align: left;
      white-space: pre;
      word-spacing: normal;
      word-break: normal;
-     font-size: 1em;
-     line-height: 1.5;
  
      -moz-tab-size: 4;
      -o-tab-size: 4;
@@ -23,10 +20,6 @@
      -moz-hyphens: none;
      -ms-hyphens: none;
      hyphens: none;
- }
- 
- pre > code[class*="language-"] {
-     font-size: 1em;
  }
  
  pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
@@ -62,7 +55,6 @@
  .token.doctype,
  .token.cdata {
      color: #008000;
-     font-style: italic;
  }
  
  .token.namespace {

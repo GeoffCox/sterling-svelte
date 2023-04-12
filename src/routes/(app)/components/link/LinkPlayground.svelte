@@ -39,7 +39,7 @@
       </Select>
     </Field>
   </svelte:fragment>
-  <svelte:fragment slot="options">
+  <svelte:fragment slot="tweaks">
     <Checkbox bind:checked={withText}>with text</Checkbox>
     <Checkbox bind:checked={withIcon}>with icon</Checkbox>
   </svelte:fragment>

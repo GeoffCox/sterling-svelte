@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Tooltip from '$lib/Tooltip.svelte';
   import { onDestroy, onMount } from 'svelte';
 
   export let noEvents = false;
@@ -33,10 +34,17 @@
           <slot name="props">(none)</slot>
         </div>
       {/if}
-      {#if $$slots.options}
-        <div class="options panel">
-          <h2>Options</h2>
-          <slot name="options">(none)</slot>
+      {#if $$slots.tweaks}
+        <div class="tweaks panel">
+          <Tooltip showOn="hover">
+            <h2>Tweaks</h2>
+            <svelte:fragment slot="tip"
+              ><div class="tweaks-tip">
+                Things you can change in this playground that aren't props of the component.
+              </div></svelte:fragment
+            >
+          </Tooltip>
+          <slot name="tweaks">(none)</slot>
         </div>
       {/if}
       {#if $$slots.status}
@@ -125,5 +133,10 @@
     padding: 0;
     font-size: 1.2em;
     font-weight: normal;
+  }
+
+  .tweaks-tip {
+    max-width: 300px;
+    padding: 1em;
   }
 </style>

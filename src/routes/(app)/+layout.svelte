@@ -162,8 +162,9 @@
             <HamburgerIcon />
             <svelte:fragment slot="items">
               <MenuItem value="{base}/" text="Overview" />
-              <MenuItem value="{base}/topics/gettingStarted" text="Getting Started" />
+              <MenuItem value="{base}/topics/start" text="Getting Started" />
               <MenuItem value="{base}/topics/roadmap" text="Roadmap" />
+              <MenuItem value="{base}/topics/architecture" text="Architecture" />
               <MenuItem value="{base}/theme" text="Theme" />
               <MenuItem value="{base}/topics/actions" text="Actions" />
               <MenuSeparator />
@@ -201,8 +202,9 @@
         <div class="nav">
           <div class="nav-section">
             <Link href="{base}/" variant="ghost">Overview</Link>
-            <Link href="{base}/topics/gettingStarted" variant="ghost">Getting Started</Link>
+            <Link href="{base}/topics/start" variant="ghost">Getting Started</Link>
             <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
+            <Link href="{base}/topics/architecture" variant="ghost">Architecture</Link>
             <Link href="{base}/theme" variant="ghost">Theme</Link>
             <Link href="{base}/topics/actions" variant="ghost">Actions</Link>
           </div>
@@ -235,8 +237,8 @@
 
 <style>
   /* ----- Global ----- */
-  @import '@fontsource/overpass';
-  @import '@fontsource/fira-mono';
+  @import '@fontsource/open-sans';
+  @import '@fontsource/source-code-pro';
 
   :global(:root) {
     color: var(--stsv-Common__color);
@@ -249,8 +251,7 @@
   }
 
   :global(body) {
-    font-family: 'Overpass', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-      Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
   }
 
@@ -267,10 +268,17 @@
     line-height: 1.6em;
   }
 
-  :global(pre),
   :global(code) {
-    font-size: 0.9em;
-    font-family: Menlo, Monaco, Consolas, 'Andale Mono', 'Ubuntu Mono', 'Courier New', monospace;
+    font-size: 1em;
+    font-family: 'Source Code Pro', monospace;
+    color: var(--stsv-Info__color);
+  }
+
+  :global(pre),
+  :global(pre) :global(code) {
+    font-size: 14px;
+    font-family: 'Source Code Pro', monospace;
+    color: var(--stsv-Common__color);
   }
 
   :global(blockquote) {
