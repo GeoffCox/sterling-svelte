@@ -3,6 +3,7 @@
 
   // ----- Props ----- //
 
+  export let disabled: boolean = false;
   export let variant: ButtonVariant = 'regular';
   export let shape: ButtonShape = 'rounded';
 
@@ -36,6 +37,7 @@
   class:circular={shape === 'circular'}
   class:outline={variant === 'outline'}
   class:ghost={variant === 'ghost'}
+  {disabled}
   type="button"
   on:blur
   on:click
@@ -135,13 +137,6 @@
     outline-width: var(--stsv-Common__outline-width);
   }
 
-  button:disabled {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv-Common__border-color--disabled);
-    color: var(--stsv-Common__color--disabled);
-    cursor: not-allowed;
-  }
-
   button.outline {
     background-color: transparent;
   }
@@ -152,14 +147,6 @@
 
   button.outline:active {
     background-color: var(--stsv-Button__background-color--active);
-  }
-
-  button.outline:disabled {
-    background-color: transparent;
-  }
-
-  button.outline:disabled:hover {
-    border-color: var(--stsv-Common__border-color--disabled);
   }
 
   button.ghost {
@@ -181,12 +168,20 @@
     border-color: var(--stsv-Button__border-color--focus);
   }
 
-  button.ghost:disabled {
-    border-color: transparent;
+  button:disabled {
+    cursor: not-allowed;
+    position: relative;
   }
 
-  button.ghost:disabled:hover {
-    background-color: var(--stsv-Common__background-color--disabled);
+  button:disabled::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: var(--stsv-Disabled__background);
+    pointer-events: none;
   }
 
   @media (prefers-reduced-motion) {

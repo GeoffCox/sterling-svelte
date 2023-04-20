@@ -295,6 +295,7 @@
     grid-template-rows: auto;
     outline: none;
     padding: 0;
+    position: relative;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
@@ -315,11 +316,25 @@
   }
 
   .sterling-select.disabled {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv--Common__border-color--disabled);
-    color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
     outline: none;
+  }
+
+  .sterling-select::after {
+    background: var(--stsv-Disabled__background);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    transition: opacity 250ms;
+  }
+
+  .sterling-select.disabled::after {
+    opacity: 1;
   }
 
   .sterling-select.composed,
@@ -329,6 +344,10 @@
     background: none;
     border: none;
     outline: none;
+  }
+
+  .sterling-select.composed.disabled::after {
+    opacity: 0;
   }
 
   .value {
@@ -395,7 +414,8 @@
   }
 
   @media (prefers-reduced-motion) {
-    .sterling-select {
+    .sterling-select,
+    .sterling-select::after {
       transition: none;
     }
   }

@@ -153,7 +153,7 @@
   <div
     bind:this={popupRef}
     class="popup"
-    class:open
+    class:open={open && !disabled}
     id={popupId}
     style="left:{popupPosition.x}px; top:{popupPosition.y}px"
   >
@@ -176,6 +176,7 @@
     grid-template-rows: auto;
     outline: none;
     padding: 0;
+    position: relative;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
@@ -196,20 +197,37 @@
   }
 
   .sterling-dropdown.disabled {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv--Common__border-color--disabled);
-    color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
     outline: none;
   }
 
+  .sterling-dropdown::after {
+    background: var(--stsv-Disabled__background);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    transition: opacity 250ms;
+  }
+
+  .sterling-dropdown.disabled::after {
+    opacity: 1;
+  }
+
   .sterling-dropdown.composed,
   .sterling-dropdown.composed:hover,
-  .sterling-dropdown.composed.focus,
-  .sterling-dropdown.composed.disabled {
+  .sterling-dropdown.composed.focus {
     background: none;
     border: none;
     outline: none;
+  }
+
+  .sterling-dropdown.composed.disabled::after {
+    opacity: 0;
   }
 
   .button {
@@ -279,7 +297,8 @@
   }
 
   @media (prefers-reduced-motion) {
-    .sterling-dropdown {
+    .sterling-dropdown,
+    .sterling-dropdown::after {
       transition: none;
     }
   }

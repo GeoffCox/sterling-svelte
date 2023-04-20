@@ -300,7 +300,9 @@ A list of items where a single item can be selected.
   on:paste
   {...$$restProps}
 >
-  <slot {composed} {disabled} {horizontal} {selectedValue} />
+  <div class="container">
+    <slot {composed} {disabled} {horizontal} {selectedValue} />
+  </div>
 </div>
 
 <style>
@@ -312,13 +314,10 @@ A list of items where a single item can be selected.
     border-width: var(--stsv-Common__border-width);
     box-sizing: border-box;
     color: var(--stsv-Common__color);
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
     height: 100%;
-    margin: 0;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
+    margin: 0;
     outline: none;
     padding: 0;
     position: relative;
@@ -326,9 +325,8 @@ A list of items where a single item can be selected.
   }
 
   .sterling-list.horizontal {
-    flex-direction: row;
     height: unset;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     width: 100%;
   }
@@ -347,13 +345,6 @@ A list of items where a single item can be selected.
     outline-width: var(--stsv-Common__outline-width);
   }
 
-  .sterling-list.disabled {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv--Common__border-color--disabled);
-    color: var(--stsv-Common__color--disabled);
-    cursor: not-allowed;
-  }
-
   .sterling-list.composed,
   .sterling-list.composed:hover,
   .sterling-list.composed.using-keyboard:focus-within,
@@ -363,8 +354,47 @@ A list of items where a single item can be selected.
     outline: none;
   }
 
+  .sterling-list.disabled * {
+    cursor: not-allowed;
+  }
+
+  /* ----- container - a layout panel that grows with the items ----- */
+
+  .container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: fit-content;
+  }
+
+  .sterling-list.horizontal .container {
+    flex-direction: row;
+  }
+
+  .container::after {
+    background: var(--stsv-Disabled__background);
+    content: '';
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    pointer-events: none;
+    transition: opacity 250ms;
+  }
+
+  .sterling-list.disabled .container::after {
+    opacity: 1;
+  }
+
+  /* ----- media queries ----- */
+
   @media (prefers-reduced-motion) {
-    .sterling-list {
+    .sterling-list,
+    .container::after {
       transition: none;
     }
   }

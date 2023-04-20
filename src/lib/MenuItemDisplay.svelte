@@ -1,10 +1,11 @@
 <script lang="ts">
   export let checked = false;
+  export let disabled = false;
   export let hasChildren = false;
   export let menuItemRole: 'menuitem' | 'menuitemcheckbox' | 'menuitemradio' = 'menuitem';
 </script>
 
-<div class="menu-item-display">
+<div class="sterling-menu-item-display" class:disabled>
   <div
     class="check"
     class:checkmark={menuItemRole === 'menuitemcheckbox'}
@@ -24,7 +25,7 @@
 </div>
 
 <style>
-  .menu-item-display {
+  .sterling-menu-item-display {
     align-items: center;
     justify-items: flex-start;
     display: grid;
@@ -94,5 +95,35 @@
     border-right: 3px solid currentColor;
     border-top: 3px solid currentColor;
     transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .sterling-menu-item-display.disabled {
+    cursor: not-allowed;
+    outline: none;
+  }
+
+  .sterling-menu-item-display::after {
+    background: var(--stsv-Disabled__background);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    transition: opacity 250ms;
+  }
+
+  .sterling-menu-item-display.disabled::after {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion) {
+    .sterling-menu-item-display::after,
+    .check,
+    .check::after {
+      transition: none;
+    }
   }
 </style>

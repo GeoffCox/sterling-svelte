@@ -27,6 +27,16 @@ export const darkTheme: Theme = {
   '--stsv-Common__outline-width': '2px',
 
   // disabled
+  '--stsv-Common__background-color1--disabled': 'hsla(0, 0%, 0%, 20%)',
+  '--stsv-Common__background-color2--disabled': `hsla(0, 0%, 100%, 20%)`,
+  '--stsv-Disabled__background':
+    'repeating-linear-gradient(' +
+    '45deg,' +
+    'var(--stsv-Common__background-color1--disabled),' +
+    'var(--stsv-Common__background-color1--disabled) 3px,' +
+    'var(--stsv-Common__background-color2--disabled) 3px,' +
+    'var(--stsv-Common__background-color2--disabled) 6px' +
+    ')',
   '--stsv-Common__background-color--disabled': neutralColors.neutral45,
   '--stsv-Common__border-color--disabled': neutralColors.neutral92,
   '--stsv-Common__color--disabled': neutralColors.neutral60,

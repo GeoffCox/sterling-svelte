@@ -139,7 +139,9 @@
   on:wheel
   {...$$restProps}
 >
-  <slot {composed} {disabled} />
+  <div class="container">
+    <slot {composed} {disabled} />
+  </div>
 </div>
 
 <style>
@@ -151,14 +153,10 @@
     border-width: var(--stsv-Common__border-width);
     box-sizing: border-box;
     color: var(--stsv-Common__color);
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
     height: 100%;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin: 0;
-    position: relative;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
@@ -176,18 +174,51 @@
     outline-width: var(--stsv-Common__outline-width);
   }
 
-  .sterling-tree.disabled {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv--Common__border-color--disabled);
-    color: var(--stsv-Common__color--disabled);
-    cursor: not-allowed;
-  }
-
   .sterling-tree.composed,
   .sterling-tree.composed:hover,
   .sterling-tree.composed.using-keyboard:focus-visible,
   .sterling-tree.composed.disabled {
+    background: none;
     border: none;
     outline: none;
+  }
+
+  .sterling-tree.disabled * {
+    cursor: not-allowed;
+  }
+
+  /* ----- container - a layout panel that grows with the items ----- */
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    position: relative;
+  }
+
+  .container::after {
+    background: var(--stsv-Disabled__background);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+    right: 0;
+    top: 0;
+    transition: opacity 250ms;
+  }
+
+  .sterling-tree.disabled .container::after {
+    opacity: 1;
+  }
+
+  /* ----- media queries ----- */
+
+  @media (prefers-reduced-motion) {
+    .sterling-tree,
+    .container::after {
+      transition: none;
+    }
   }
 </style>

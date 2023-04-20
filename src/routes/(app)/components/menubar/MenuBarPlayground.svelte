@@ -38,6 +38,12 @@
         <MenuItem value="save-as" text="Save As..." />
         <MenuItem value="save-all" text="Save All" />
         <MenuSeparator />
+        <MenuItem value="share" text="Share">
+          <MenuItem value="share-email" text="Email" />
+          <MenuItem value="share-text" text="Text Message" />
+          <MenuItem value="share-other" text="Other..." />
+        </MenuItem>
+        <MenuSeparator />
         <MenuItem value="close-file" text="Close File" />
         <MenuItem value="close-folder" text="Close Folder" />
       </MenuItem>

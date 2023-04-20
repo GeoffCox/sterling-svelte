@@ -10,8 +10,6 @@
 
   export let colorful: ProgressColorful = 'none';
 
-  export let disabled = false;
-
   let clientHeight: number;
   let clientWidth: number;
 
@@ -38,7 +36,6 @@
 
 <div
   class="sterling-progress"
-  class:disabled
   class:vertical
   role="progressbar"
   on:blur
@@ -159,17 +156,6 @@
 
   .indicator.error {
     background-color: var(--stsv-Error__border-color);
-  }
-
-  /* ----- Disabled ----- */
-
-  .sterling-progress.disabled {
-    background: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv-Common__border-color--disabled);
-  }
-
-  .sterling-progress.disabled .indicator {
-    background-color: var(--stsv-Display__color--disabled);
   }
 
   @media (prefers-reduced-motion) {

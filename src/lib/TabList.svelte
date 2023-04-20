@@ -298,7 +298,7 @@
     grid-auto-flow: column;
     grid-template-columns: repeat(auto-fill, auto);
     grid-template-rows: 1fr;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
   }
 
@@ -307,7 +307,7 @@
     grid-template-rows: auto;
     grid-template-columns: 1fr;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     row-gap: 0.5em;
   }
 

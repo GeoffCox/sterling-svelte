@@ -18,7 +18,7 @@
 
   const selectedValueStore = writable<string | undefined>('');
   const horizontalStore = writable<boolean>(horizontal);
-  const disabledStore = writable<boolean>(disabled);
+  const disabledStore = writable<boolean>(false);
 
   setContext<ListContext>(LIST_CONTEXT_KEY, {
     disabled: disabledStore,
@@ -27,17 +27,13 @@
   });
 
   $: {
-    disabledStore.set(disabled);
-  }
-
-  $: {
     selected ? selectedValueStore.set('sterling') : selectedValueStore.set('');
   }
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground bind:this={exampleRef} noEvents>
   <div class="component" class:horizontal slot="component">
-    <ListItem value="sterling">{text}</ListItem>
+    <ListItem {disabled} value="sterling">{text}</ListItem>
   </div>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>

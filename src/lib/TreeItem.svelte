@@ -20,8 +20,7 @@
     selectedValue,
     disabled: treeDisabled
   } = getContext<TreeContext>(TREE_CONTEXT_KEY);
-  const { depth = 0, disabled: parentDisabled } =
-    getContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY) || {};
+  const { depth = 0 } = getContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY) || {};
 
   // ----- State ----- //
 
@@ -30,18 +29,18 @@
   $: hasChildren = $$slots.default;
   $: expanded = $expandedValues.includes(value);
   $: selected = $selectedValue === value;
-  $: _disabled = disabled || $parentDisabled || $treeDisabled;
+  $: _disabled = disabled || $treeDisabled;
 
-  const disabledStore = writable<boolean>(_disabled);
+  const disabledStore = writable<boolean>(disabled);
 
   $: {
-    disabledStore.set(_disabled);
+    disabledStore.set(disabled);
   }
 
   // ----- Expand/Collapse ----- //
 
   const collapseItem = (index?: number) => {
-    if (!disabled) {
+    if (!_disabled) {
       index = index ?? $expandedValues.findIndex((expandedValue) => expandedValue === value);
       if (index !== -1) {
         expandedValues.set([
@@ -58,7 +57,7 @@
   export const collapse = () => collapseItem();
 
   const expandItem = (index?: number) => {
-    if (!disabled) {
+    if (!_disabled) {
       index = index ?? $expandedValues.findIndex((expandedValue) => expandedValue === value);
       if (index === -1) {
         expandedValues.set([...$expandedValues, value]);
@@ -72,7 +71,7 @@
   export const expand = () => expandItem();
 
   export const toggleExpanded = () => {
-    if (!disabled) {
+    if (!_disabled) {
       const index = $expandedValues.findIndex((expandedValue) => expandedValue === value);
       return index !== -1 ? collapseItem(index) : expandItem(index);
     }
@@ -374,7 +373,7 @@ A item in a Tree displaying the item and children.
   </div>
   {#if expanded && hasChildren}
     <div class="children" transition:slide={{ duration: 200 }} role="group">
-      <slot {depth} {disabled} {selected} {value} />
+      <slot {depth} {selected} {value} />
     </div>
   {/if}
 </div>

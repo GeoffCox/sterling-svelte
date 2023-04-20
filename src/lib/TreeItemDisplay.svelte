@@ -1,5 +1,9 @@
 <script lang="ts">
+  import { getContext } from 'svelte';
+  import { TREE_CONTEXT_KEY } from './Tree.constants';
+  import type { TreeContext } from './Tree.types';
   import TreeChevron from './TreeChevron.svelte';
+  import { readable } from 'svelte/store';
 
   // ----- Props ----- //
 
@@ -9,6 +13,12 @@
   export let hasChildren = false;
   export let value: string;
   export let selected = false;
+
+  // ----- Get Context ----- //
+
+  const { disabled: treeDisabled } = getContext<TreeContext>(TREE_CONTEXT_KEY) || {
+    disabled: readable<boolean>(false)
+  };
 
   // ----- State ----- //
 
@@ -31,8 +41,9 @@
 
 <div
   bind:this={divRef}
-  class="sterling-tree-item"
-  class:disabled
+  class="sterling-tree-item-display"
+  class:disabled={disabled && !$treeDisabled}
+  class:item-disabled={disabled}
   class:expanded
   class:selected
   style={`--sterling-tree-item-depth: ${depth}`}
@@ -74,7 +85,7 @@
 </div>
 
 <style>
-  .sterling-tree-item {
+  .sterling-tree-item-display {
     align-content: center;
     align-items: center;
     background-color: transparent;
@@ -86,29 +97,46 @@
     margin: 0;
     outline: none;
     padding: 0.5em;
+    position: relative;
     padding-left: calc(0.2em + (0.5em * var(--sterling-tree-item-depth)));
     text-overflow: ellipsis;
     transition: background-color 250ms, color 250ms, border-color 250ms;
     white-space: nowrap;
   }
 
-  .sterling-tree-item:hover {
+  .sterling-tree-item-display:not(.item-disabled):not(.selected):hover {
     background-color: var(--stsv-Button__background-color--hover);
     color: var(--stsv-Button__color--hover);
   }
 
-  .sterling-tree-item.selected {
+  .sterling-tree-item-display.selected {
     background-color: var(--stsv-Input__background-color--selected);
     color: var(--stsv-Input__color--selected);
   }
 
-  .sterling-tree-item.disabled {
-    background-color: var(--stsv-Input__background-color--disabled);
-    color: var(--stsv-Common__color--disabled);
+  .sterling-tree-item-display.disabled {
     cursor: not-allowed;
+    outline: none;
   }
 
-  .sterling-tree-item.leaf {
+  .sterling-tree-item-display::after {
+    background: var(--stsv-Disabled__background);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity 250ms;
+  }
+
+  .sterling-tree-item-display.disabled::after {
+    opacity: 1;
+  }
+
+  .sterling-tree-item-display.leaf {
     border: none;
     background: currentColor;
     border-radius: 50%;
@@ -119,7 +147,8 @@
   }
 
   @media (prefers-reduced-motion) {
-    .sterling-tree-item {
+    .sterling-tree-item-display,
+    .sterling-tree-item-display::after {
       transition: none;
     }
   }

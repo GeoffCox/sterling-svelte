@@ -65,51 +65,59 @@
     <slot {composed} {disabled} {value} />
   </Label>
 {/if}
-<input
-  bind:this={inputRef}
-  class="sterling-input"
-  class:composed
-  {disabled}
-  {id}
-  bind:value
-  on:beforeinput
-  on:blur
-  on:click
-  on:change
-  on:copy
-  on:cut
-  on:paste
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:input
-  on:invalid
-  on:keydown
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:select
-  on:submit
-  on:reset
-  on:wheel
-  {...$$restProps}
-/>
+<div class="sterling-input" class:composed class:disabled>
+  <input
+    bind:this={inputRef}
+    {disabled}
+    {id}
+    bind:value
+    on:beforeinput
+    on:blur
+    on:click
+    on:change
+    on:copy
+    on:cut
+    on:paste
+    on:dblclick
+    on:dragend
+    on:dragenter
+    on:dragleave
+    on:dragover
+    on:dragstart
+    on:drop
+    on:focus
+    on:focusin
+    on:focusout
+    on:input
+    on:invalid
+    on:keydown
+    on:keypress
+    on:keyup
+    on:mousedown
+    on:mouseenter
+    on:mouseleave
+    on:mousemove
+    on:mouseover
+    on:mouseout
+    on:mouseup
+    on:select
+    on:submit
+    on:reset
+    on:wheel
+    {...$$restProps}
+  />
+</div>
 
 <style>
   .sterling-input {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  input {
     background-color: var(--stsv-Input__background-color);
     border-color: var(--stsv-Input__border-color);
     border-radius: var(--stsv-Input__border-radius);
@@ -123,13 +131,13 @@
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
-  .sterling-input:hover {
+  .sterling-input:hover input {
     background-color: var(--stsv-Input__background-color--hover);
     border-color: var(--stsv-Input__border-color--hover);
     color: var(--stsv-Input__color--hover);
   }
 
-  .sterling-input:focus {
+  input:focus {
     background-color: var(--stsv-Input__background-color--focus);
     border-color: var(--stsv-Input__border-color--focus);
     color: var(--stsv-Input__color--focus);
@@ -139,33 +147,43 @@
     outline-width: var(--stsv-Common__outline-width);
   }
 
-  .sterling-input:disabled {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv--Common__border-color--disabled);
-    color: var(--stsv-Common__color--disabled);
-    cursor: not-allowed;
-  }
-
-  .sterling-input.composed,
-  .sterling-input.composed:hover,
-  .sterling-input.composed:focus,
-  .sterling-input.composed.disabled {
+  .sterling-input.composed input,
+  .sterling-input.composed:hover input,
+  .sterling-input.composed:focus input {
     background: transparent;
     border: none;
     outline: none;
   }
 
-  .sterling-input::placeholder {
+  input::placeholder {
     color: var(--stsv-Display__color--faint);
-    transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
-  .sterling-input:disabled::placeholder {
-    color: var(--stsv-Display__color--disabled);
+  .sterling-input.disabled * {
+    cursor: not-allowed;
+    outline: none;
+  }
+
+  .sterling-input::after {
+    background: var(--stsv-Disabled__background);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    transition: opacity 250ms;
+  }
+
+  .sterling-input.disabled::after {
+    opacity: 1;
   }
 
   @media (prefers-reduced-motion) {
-    .sterling-input {
+    .sterling-input::after,
+    input {
       transition: none;
     }
   }

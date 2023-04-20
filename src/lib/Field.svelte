@@ -237,7 +237,7 @@
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
-  .sterling-field:hover {
+  .sterling-field:not(.disabled):hover {
     background-color: var(--stsv-Input__background-color--hover);
     border-color: var(--stsv-Input__border-color--hover);
     color: var(--stsv-Input__color--hover);
@@ -253,9 +253,11 @@
   }
 
   .sterling-field.disabled {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv--Common__border-color--disabled);
-    color: var(--stsv-Common__color--disabled);
+    cursor: not-allowed;
+  }
+
+  .sterling-field.disabled * {
+    cursor: not-allowed;
   }
 
   .label-text {
@@ -268,15 +270,17 @@
     margin: 0;
   }
 
-  .sterling-field.disabled .label-text {
-    color: var(--stsv-Common__color--disabled);
+  .content {
+    display: grid;
   }
 
   .message {
+    box-sizing: border-box;
     font-size: 0.8em;
     background-color: var(--stsv-Display__background-color);
     color: var(--stsv-Display__color);
     padding: 0.5em;
+    width: 100%;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
@@ -304,12 +308,6 @@
     color: var(--stsv-Error__color);
   }
 
-  .sterling-field.disabled .message {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv--Common__border-color--disabled);
-    color: var(--stsv-Common__color--disabled);
-  }
-
   .required {
     text-align: center;
     font-weight: bold;
@@ -328,6 +326,7 @@
 
   @media (prefers-reduced-motion) {
     .sterling-field,
+    .sterling-field::after,
     .message {
       transition: none;
     }

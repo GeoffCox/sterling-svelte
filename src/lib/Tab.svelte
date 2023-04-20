@@ -117,6 +117,7 @@
     font: inherit;
     overflow: hidden;
     padding: 0.5em 1em 0.25em 1em;
+    position: relative;
     text-decoration: none;
     text-overflow: ellipsis;
     transition: background-color 250ms, color 250ms, border-color 250ms;
@@ -159,8 +160,25 @@
   }
 
   .sterling-tab:disabled {
-    color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
+    outline: none;
+  }
+
+  .sterling-tab::after {
+    background: var(--stsv-Disabled__background);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    transition: opacity 250ms;
+  }
+
+  .sterling-tab:disabled::after {
+    opacity: 1;
   }
 
   .content {
@@ -205,7 +223,11 @@
     background-color: var(--stsv-Input__color);
   }
 
-  .sterling-tab.selected:disabled .indicator {
-    background-color: var(--stsv-Common__color--disabled);
+  @media (prefers-reduced-motion) {
+    .sterling-tab,
+    .sterling-tab::after,
+    .indicator {
+      transition: none;
+    }
   }
 </style>

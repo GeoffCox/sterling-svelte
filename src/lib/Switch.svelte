@@ -118,6 +118,14 @@
     position: relative;
   }
 
+  .sterling-switch input {
+    cursor: pointer;
+  }
+
+  .sterling-switch.disabled input {
+    cursor: not-allowed;
+  }
+
   .sterling-switch:not(.vertical) {
     align-items: center;
     column-gap: 0.5em;
@@ -185,12 +193,6 @@
     outline-width: var(--stsv-Common__outline-width);
   }
 
-  .sterling-switch.disabled .switch {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv-Common__border-color--disabled);
-    color: var(--stsv-Common__color--disabled);
-  }
-
   .sterling-switch:not(.vertical) .switch {
     width: 2em;
     height: 1.25em;
@@ -214,7 +216,6 @@
     border-width: var(--stsv-Button__border-width);
     box-sizing: border-box;
     color: var(--stsv-Button__color);
-    cursor: pointer;
     display: block;
     font: inherit;
     height: 1.25em;
@@ -235,10 +236,21 @@
     color: var(--stsv-Button__color--hover);
   }
 
-  .sterling-switch.disabled .thumb {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv-Common__border-color--disabled);
-    color: var(--stsv-Common__color--disabled);
+  .sterling-switch .thumb::after {
+    background: var(--stsv-Disabled__background);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    transition: opacity 250ms;
+  }
+
+  .sterling-switch.disabled .thumb::after {
+    opacity: 1;
   }
 
   .sterling-switch:not(.vertical) .thumb {
@@ -249,5 +261,13 @@
   .sterling-switch.vertical .thumb {
     left: calc(-1 * var(--stsv-Button__border-width));
     transform: translateY(calc(var(--thumb-offset) - var(--stsv-Button__border-width)));
+  }
+
+  @media (prefers-reduced-motion) {
+    .switch,
+    .thumb,
+    .thumb::after {
+      transition: none;
+    }
   }
 </style>

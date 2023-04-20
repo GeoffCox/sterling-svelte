@@ -162,7 +162,7 @@
   });
 
   const onKeyDown: svelte.JSX.KeyboardEventHandler<Element> = (event) => {
-    if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
+    if (!disabled && !event.altKey && !event.ctrlKey && !event.shiftKey) {
       switch (event.key) {
         case 'ArrowDown':
           if (depth === 0 && hasChildren) {
@@ -345,8 +345,11 @@
 >
   <div class="item" id={displayId}>
     <slot name="item" {checked} {depth} {disabled} {hasChildren} {open} {role} {text} {value}>
-      <MenuItemDisplay {checked} hasChildren={depth > 0 && hasChildren} menuItemRole={role}
-        >{text}</MenuItemDisplay
+      <MenuItemDisplay
+        {checked}
+        {disabled}
+        hasChildren={depth > 0 && hasChildren}
+        menuItemRole={role}>{text}</MenuItemDisplay
       >
     </slot>
   </div>
@@ -399,10 +402,6 @@
 
   .sterling-menu-item:focus {
     background-color: var(--stsv-Input__background-color--selected);
-  }
-
-  .sterling-menu-item.disabled {
-    color: var(--stsv-Common__color--disabled);
   }
 
   .sterling-menu-item.composed,

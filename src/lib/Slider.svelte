@@ -278,6 +278,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     height: 1.5em;
     overflow: hidden;
     padding: 0;
+    position: relative;
     text-decoration: none;
     transition: background-color 250ms, color 250ms, border-color 250ms;
     white-space: nowrap;
@@ -369,19 +370,26 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
 
   /* ----- disabled ----- */
 
-  .sterling-slider.disabled .track {
-    background: var(--stsv-Common__background-color--disabled);
-  }
-
-  .sterling-slider.disabled .fill {
-    background: var(--stsv-Common__color--disabled);
-  }
-
   .sterling-slider.disabled .thumb {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv-Common__border-color--disabled);
-    color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
+    outline: none;
+  }
+
+  .sterling-slider .thumb::after {
+    background: var(--stsv-Disabled__background);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    transition: opacity 250ms;
+  }
+
+  .sterling-slider.disabled .thumb::after {
+    opacity: 1;
   }
 
   .sterling-slider.composed,
@@ -397,7 +405,8 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     .sterling-slider,
     .track,
     .fill,
-    .thumb {
+    .thumb,
+    .thumb::after {
       transition: none;
     }
   }

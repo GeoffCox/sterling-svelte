@@ -20,7 +20,7 @@
       {disabled}
       {vertical}
       on:select={(event) => {
-        exampleRef.recordEvent(`select: ${event.detail.selectedValue}`);
+        exampleRef.recordEvent(`select: ${event.detail.value}`);
       }}
     >
       <Tab value="First">First</Tab>

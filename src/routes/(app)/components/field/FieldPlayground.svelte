@@ -18,7 +18,7 @@
   let useFor = true;
 </script>
 
-<Playground>
+<Playground noEvents>
   <svelte:fragment slot="component">
     <Field
       for={useFor ? 'field-target' : undefined}

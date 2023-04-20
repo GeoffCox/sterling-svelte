@@ -24,7 +24,13 @@
 
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
-    <Dropdown bind:open {composed} {disabled} {stayOpenOnClickAway}>
+    <Dropdown
+      bind:open
+      {composed}
+      {disabled}
+      {stayOpenOnClickAway}
+      on:open={(ev) => exampleRef.recordEvent(`open: ${ev.detail.open}`)}
+    >
       <div class="value" slot="value">
         <AnimatedProgress value={progress} {animate} {reverse} {speed} />
       </div>

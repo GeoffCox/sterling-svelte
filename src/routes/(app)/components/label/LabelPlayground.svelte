@@ -9,7 +9,7 @@
   let labelText = 'This is a label';
 </script>
 
-<Playground>
+<Playground noEvents>
   <div slot="component">
     <Label {disabled}>{labelText}</Label>
   </div>

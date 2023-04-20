@@ -37,10 +37,11 @@
 	@component
 	A styled HTML input type=checkbox element.
 -->
-<div class="sterling-checkbox">
+<div class="sterling-checkbox" class:disabled>
   <div class="container">
     <input
       bind:this={inputRef}
+      bind:checked
       {disabled}
       {id}
       type="checkbox"
@@ -69,13 +70,12 @@
       on:mouseout
       on:mouseup
       on:wheel
-      bind:checked
       {...$$restProps}
     />
     <div class="indicator" />
   </div>
   {#if $$slots.default}
-    <Label {disabled} for={id}>
+    <Label for={id}>
       <slot {checked} {disabled} inputId={id} value={$$restProps.value}>
         {$$restProps.value}
       </slot>
@@ -146,6 +146,11 @@
     border-color: var(--stsv-Input__border-color);
   }
 
+  .sterling-checkbox:hover .indicator {
+    background-color: var(--stsv-Input__background-color--hover);
+    border-color: var(--stsv-Input__border-color--hover);
+  }
+
   input:focus-visible + .indicator {
     outline-color: var(--stsv-Common__outline-color);
     outline-offset: var(--stsv-Common__outline-offset);
@@ -153,15 +158,10 @@
     outline-width: var(--stsv-Common__outline-width);
   }
 
-  input:disabled + .indicator {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv-Common__border-color--disabled);
-  }
-
   /*
 		The checkmark is a rotated L centered in the box.
 	*/
-  input:checked + .indicator::after {
+  .indicator::after {
     border-color: var(--stsv-Input__color);
     border-style: solid;
     border-width: 0 3px 3px 0;
@@ -173,18 +173,45 @@
     top: 45%;
     transform: translate(-50%, -50%) rotate(45deg);
     transform-origin: center;
-    transition: border-color 250ms;
+    transition: border-color 250ms, opacity 150ms;
     width: 7px;
-    visibility: visible;
+    opacity: 0;
   }
 
-  input:checked:disabled + .indicator::after {
-    border-color: var(--stsv-Common__color--disabled);
+  input:checked + .indicator::after {
+    opacity: 1;
+  }
+
+  .sterling-checkbox:hover input:checked + .indicator::after {
+    border-color: var(--stsv-Input__color--hover);
+  }
+
+  .sterling-checkbox.disabled,
+  .sterling-checkbox.disabled input {
+    cursor: not-allowed;
+  }
+
+  .container::after {
+    background: var(--stsv-Disabled__background);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    transition: opacity 250ms;
+  }
+
+  .sterling-checkbox.disabled .container::after {
+    opacity: 1;
   }
 
   @media (prefers-reduced-motion) {
     .indicator,
-    input:checked + .indicator::after {
+    .indicator::after,
+    .container::after {
       transition: none;
     }
   }

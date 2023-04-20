@@ -68,7 +68,7 @@
 	@component
 	A styled HTML input type=radio element with optional label.
 -->
-<div class="sterling-radio">
+<div class="sterling-radio" class:disabled>
   <div class="container">
     <input
       bind:this={radioRef}
@@ -179,16 +179,16 @@
     border-color: var(--stsv-Input__border-color);
   }
 
+  .sterling-radio:not(.disabled):hover .indicator {
+    background-color: var(--stsv-Input__background-color--hover);
+    border-color: var(--stsv-Input__border-color--hover);
+  }
+
   input:focus-visible + .indicator {
     outline-color: var(--stsv-Common__outline-color);
     outline-offset: var(--stsv-Common__outline-offset);
     outline-style: var(--stsv-Common__outline-style);
     outline-width: var(--stsv-Common__outline-width);
-  }
-
-  input:disabled + .indicator {
-    background-color: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv-Common__border-color--disabled);
   }
 
   .indicator::after {
@@ -208,13 +208,32 @@
     background-color: var(--stsv-Input__color);
   }
 
-  input:checked:disabled + .indicator::after {
-    background-color: var(--stsv-Common__color--disabled);
+  .sterling-radio.disabled * {
+    cursor: not-allowed;
+  }
+
+  .container::after {
+    background: var(--stsv-Disabled__background);
+    border-radius: 10000px;
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    transition: opacity 250ms;
+  }
+
+  .sterling-radio.disabled .container::after {
+    opacity: 1;
   }
 
   @media (prefers-reduced-motion) {
     .indicator,
-    .indicator::after {
+    .indicator::after,
+    .container::after {
       transition: none;
     }
   }

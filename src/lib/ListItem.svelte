@@ -3,6 +3,7 @@
 
   import { LIST_CONTEXT_KEY } from './List.constants';
   import type { ListContext } from './List.types';
+  import { readable } from 'svelte/store';
 
   /** Item is disabled when this is true or the containing list is disabled. **/
   export let disabled = false;
@@ -16,12 +17,14 @@
     disabled: listDisabled,
     selectedValue,
     horizontal
-  } = getContext<ListContext>(LIST_CONTEXT_KEY);
+  } = getContext<ListContext>(LIST_CONTEXT_KEY) || {
+    disabled: readable(false),
+    selectedValue: undefined,
+    horizontal: false
+  };
 
   // ----- State ----- //
   let itemRef: HTMLDivElement;
-
-  $: _disabled = disabled || $listDisabled;
   $: selected = $selectedValue === value;
 
   // ----- Methods ----- //
@@ -43,7 +46,8 @@
   aria-selected={selected}
   bind:this={itemRef}
   class="sterling-list-item"
-  class:disabled={_disabled}
+  class:disabled={disabled || $listDisabled}
+  class:item-disabled={disabled && !$listDisabled}
   class:selected
   data-value={value}
   role="listitem"
@@ -91,13 +95,14 @@
     cursor: pointer;
     margin: 0;
     padding: 0.5em;
+    position: relative;
     outline: none;
     text-overflow: ellipsis;
     transition: background-color 250ms, color 250ms, border-color 250ms;
     white-space: nowrap;
   }
 
-  .sterling-list-item:not(.disabled):hover {
+  .sterling-list-item:not(.disabled):not(.selected):hover {
     background-color: var(--stsv-Button__background-color--hover);
     color: var(--stsv-Button__color--hover);
   }
@@ -108,12 +113,30 @@
   }
 
   .sterling-list-item.disabled {
-    color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
+    outline: none;
+  }
+
+  .sterling-list-item::after {
+    background: var(--stsv-Disabled__background);
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    transition: opacity 250ms;
+  }
+
+  .sterling-list-item.item-disabled::after {
+    opacity: 1;
   }
 
   @media (prefers-reduced-motion) {
-    .sterling-list-item {
+    .sterling-list-item,
+    .sterling-list-item::after {
       transition: none;
     }
   }

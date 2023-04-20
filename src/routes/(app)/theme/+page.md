@@ -6,6 +6,7 @@ Each CSS variable that is a part of the sterling-svelte design is prefixed with 
 
 <script>
     import PaletteExample from './NeutralColorsExample.svelte';
+    import DisabledSwatch from './DisabledSwatch.svelte';
     import Swatch from './Swatch.svelte';
 </script>
 
@@ -38,15 +39,6 @@ borderRadius="--stsv-Common__border-radius"
 borderStyle="--stsv-Common__border-style"
 borderWidth="--stsv-Common__border-width"
 color="--stsv-Common__color--focus"
-/>
-<br/>
-<Swatch 
-backgroundColor="--stsv-Common__background-color--disabled" 
-borderColor="--stsv-Common__border-color--disabled"
-borderRadius="--stsv-Common__border-radius"
-borderStyle="--stsv-Common__border-style"
-borderWidth="--stsv-Common__border-width"
-color="--stsv-Common__color--disabled"
 />
 <br/>
 <Swatch 
@@ -199,6 +191,21 @@ borderColor="--stsv-Error__border-color"
 color="--stsv-Error__color"
 />
 <br/>
+
+## Disabled
+
+Components indicate disabled state as an overlay with a diagonal striped pattern.
+The pattern is taken from the diagonal "NO STEP" pattern on aircraft.
+
+<DisabledSwatch />
+--stsv-Disabled__background
+<br/>
+<br/>
+The stripes are white and black with low opacity and work well across light and dark themes.
+
+Traditionally, disabled state is indicated using dimmed colors of the component often
+centering aroound a midline gray. This tends to damange contrast when the background,
+border, and foreground colors are near the disabled colors.
 
 ## Layers
 
