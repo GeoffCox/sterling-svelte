@@ -10,6 +10,8 @@
 
   export let colorful: ProgressColorful = 'none';
 
+  export let disabled = false;
+
   let clientHeight: number;
   let clientWidth: number;
 
@@ -36,6 +38,7 @@
 
 <div
   class="sterling-progress"
+  class:disabled
   class:vertical
   role="progressbar"
   on:blur
@@ -106,7 +109,6 @@
     justify-content: flex-start;
     width: 100%;
     height: 100%;
-    min-width: 100px;
   }
 
   .indicator {
@@ -130,7 +132,6 @@
     flex-direction: column;
     justify-content: flex-end;
     min-width: unset;
-    min-height: 100px;
   }
 
   .sterling-progress.vertical .indicator {
@@ -156,6 +157,17 @@
 
   .indicator.error {
     background-color: var(--stsv-Error__border-color);
+  }
+
+  /* ----- Disabled ----- */
+
+  .sterling-progress.disabled {
+    background: var(--stsv-Common__background-color--disabled);
+    border-color: var(--stsv-Common__border-color--disabled);
+  }
+
+  .sterling-progress.disabled .indicator {
+    background-color: var(--stsv-Display__color--disabled);
   }
 
   @media (prefers-reduced-motion) {

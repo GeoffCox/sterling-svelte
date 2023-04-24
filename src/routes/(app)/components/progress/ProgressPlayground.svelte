@@ -34,8 +34,10 @@
 </script>
 
 <Playground>
-  <div class="component" class:vertical slot="component">
-    <Progress {colorful} {value} {max} bind:percent {vertical} />
+  <div class="component" slot="component">
+    <div class="progress" class:vertical>
+      <Progress {colorful} {value} {max} bind:percent {vertical} />
+    </div>
   </div>
   <svelte:fragment slot="props">
     <div class="slider">
@@ -68,6 +70,16 @@
     place-content: center;
     place-items: center;
     padding: 0;
+  }
+
+  .progress {
+    display: grid;
+    width: 100px;
+  }
+
+  .progress.vertical {
+    width: unset;
+    height: 100px;
   }
 
   .slider {

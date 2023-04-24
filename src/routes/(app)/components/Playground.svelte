@@ -80,7 +80,7 @@
   }
 
   .component {
-    border: 1px dashed lightgray;
+    border: 1px dashed var(--stsv-Common__border-color);
     border-radius: 10px;
     box-sizing: border-box;
     display: block;
