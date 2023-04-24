@@ -127,17 +127,21 @@
   }
 
   .sterling-switch:not(.vertical) {
+    align-content: center;
     align-items: center;
     column-gap: 0.5em;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto auto auto;
     grid-template-rows: auto;
-    justify-items: stretch;
+    justify-content: flex-start;
+    justify-items: flex-start;
   }
 
   .sterling-switch.vertical {
-    align-items: stretch;
+    align-content: flex-start;
+    align-items: flex-start;
     grid-template-columns: auto;
     grid-template-rows: auto auto auto;
+    justify-content: center;
     justify-items: center;
     row-gap: 0.5em;
   }
