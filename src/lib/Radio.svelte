@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { idGenerator } from './idGenerator';
 
   import Label from './Label.svelte';
@@ -11,14 +10,52 @@
    * The workaround is to export `checked` and `group` properties
    * and implement the same behavior.
    */
+
   export let checked: boolean = false;
   export let disabled: boolean = false;
   export let group: any | undefined | null = undefined;
   export let id: string | undefined = undefined;
 
+  // ensure initial state is consistent
+  if (checked && $$restProps.value !== group) {
+    group = $$restProps.value;
+  } else if (!checked && $$restProps.value === group) {
+    checked = true;
+  }
+
   // ----- State ----- //
-  let mounted = false;
-  let radioRef: HTMLInputElement;
+
+  let inputRef: HTMLInputElement;
+  let previousChecked = checked;
+  let previousGroup = group;
+
+  const reconcile = () => {
+    if (checked !== previousChecked) {
+      // when checked, set group to value
+      if (checked && $$restProps.value) {
+        group = $$restProps.value;
+        previousGroup = $$restProps.value;
+      }
+      previousChecked = checked;
+    } else if (group !== previousGroup) {
+      // when group changes, update checked
+      if ($$restProps.value) {
+        checked = $$restProps.value === group;
+        previousChecked = checked;
+      }
+      previousGroup = group;
+    }
+  };
+
+  $: checked, group, $$restProps.value, reconcile();
+
+  $: {
+    if (inputRef && checked && !inputRef.checked) {
+      // setting checked doesn't cause raise on:change,
+      // so we click the radio to cause it to be checked.
+      inputRef.click();
+    }
+  }
 
   $: {
     if ($$slots.default && id === undefined) {
@@ -26,42 +63,27 @@
     }
   }
 
-  $: {
-    if (mounted) {
-      checked = group === $$restProps.value;
-    }
-  }
+  // ----- Methods ----- //
 
-  // ----- Events ----- //
+  export const blur = () => {
+    inputRef?.blur();
+  };
+
+  export const click = () => {
+    inputRef?.click();
+  };
+
+  export const focus = (options?: FocusOptions) => {
+    inputRef?.focus(options);
+  };
+
+  // ----- Event Handlers ----- //
 
   const onChange: svelte.JSX.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.currentTarget.checked) {
       group = $$restProps.value;
     }
   };
-
-  // ----- Methods ----- //
-
-  export const blur = () => {
-    radioRef?.blur();
-  };
-
-  export const click = () => {
-    radioRef?.click();
-  };
-
-  export const focus = (options?: FocusOptions) => {
-    radioRef?.focus(options);
-  };
-
-  // ----- Event Handlers ----- //
-
-  onMount(() => {
-    if (checked) {
-      group = $$restProps.value;
-    }
-    mounted = true;
-  });
 </script>
 
 <!--
@@ -71,9 +93,10 @@
 <div class="sterling-radio" class:disabled>
   <div class="container">
     <input
-      bind:this={radioRef}
-      checked={group === $$restProps.value}
+      bind:this={inputRef}
+      {checked}
       {disabled}
+      {group}
       {id}
       type="radio"
       on:blur
