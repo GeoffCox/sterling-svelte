@@ -365,7 +365,6 @@ A list of items where a single item can be selected.
     position: relative;
     flex-direction: column;
     flex-wrap: nowrap;
-    width: fit-content;
   }
 
   .sterling-list.horizontal .container {
