@@ -7,7 +7,7 @@
   export let autoHeight = false;
   export let disabled = false;
   export let resize: TextAreaResize = 'none';
-  export let value: string;
+  export let value: string = '';
 
   // ----- State ----- //
 
@@ -74,7 +74,7 @@
   };
 </script>
 
-<div class="sterling-text-area2" class:disabled>
+<div class="sterling-text-area" class:disabled>
   <textarea
     bind:this={textAreaRef}
     bind:value
@@ -120,8 +120,10 @@
 </div>
 
 <style>
-  .sterling-text-area2 {
+  .sterling-text-area {
     position: relative;
+    height: 100%;
+    width: 100%;
   }
 
   textarea {
@@ -162,12 +164,12 @@
     outline-width: var(--stsv-Common__outline-width);
   }
 
-  .sterling-text-area2:disabled {
+  .sterling-text-area:disabled {
     cursor: not-allowed;
     outline: none;
   }
 
-  .sterling-text-area2::after {
+  .sterling-text-area::after {
     background: var(--stsv-Disabled__background);
     bottom: 0;
     content: '';
@@ -180,7 +182,7 @@
     transition: opacity 250ms;
   }
 
-  .sterling-text-area2.disabled::after {
+  .sterling-text-area.disabled::after {
     opacity: 1;
   }
 
@@ -191,8 +193,8 @@
 
   @media (prefers-reduced-motion) {
     textarea,
-    .sterling-text-area2,
-    .sterling-text-area2::after {
+    .sterling-text-area,
+    .sterling-text-area::after {
       transition: none;
     }
   }
