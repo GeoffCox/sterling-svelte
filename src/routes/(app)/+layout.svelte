@@ -165,6 +165,7 @@
               <MenuItem value="{base}/topics/start" text="Getting Started" />
               <MenuItem value="{base}/topics/roadmap" text="Roadmap" />
               <MenuItem value="{base}/topics/architecture" text="Architecture" />
+              <MenuItem value="{base}/topics/gallery" text="Gallery" />
               <MenuItem value="{base}/theme" text="Theme" />
               <MenuItem value="{base}/topics/actions" text="Actions" />
               <MenuSeparator />
@@ -205,6 +206,7 @@
             <Link href="{base}/topics/start" variant="ghost">Getting Started</Link>
             <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
             <Link href="{base}/topics/architecture" variant="ghost">Architecture</Link>
+            <Link href="{base}/topics/gallery" variant="ghost">Gallery</Link>
             <Link href="{base}/theme" variant="ghost">Theme</Link>
             <Link href="{base}/topics/actions" variant="ghost">Actions</Link>
           </div>
