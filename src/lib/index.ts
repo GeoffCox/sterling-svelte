@@ -66,6 +66,7 @@ import MenuButton from './MenuButton.svelte';
 import MenuItem from './MenuItem.svelte';
 import MenuItemDisplay from './MenuItemDisplay.svelte';
 import MenuSeparator from './MenuSeparator.svelte';
+import Popover from './Popover.svelte';
 import Progress from './Progress.svelte';
 import Radio from './Radio.svelte';
 import Select from './Select.svelte';
@@ -97,6 +98,7 @@ export {
   MenuItem,
   MenuItemDisplay,
   MenuSeparator,
+  Popover,
   Progress,
   Radio,
   Select,

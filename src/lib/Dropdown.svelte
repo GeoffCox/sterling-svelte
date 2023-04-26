@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { computePosition, flip, offset, shift, autoUpdate } from '@floating-ui/dom';
-  import { createEventDispatcher, onMount, tick } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
+
+  import Popup from './Popover.svelte';
 
   import { clickOutside } from './actions/clickOutside';
   import { idGenerator } from './idGenerator';
@@ -17,12 +18,7 @@
   // ----- State ----- //
 
   let dropdownRef: HTMLDivElement;
-  let popupRef: HTMLDivElement;
-
-  let popupPosition: { x?: number; y?: number } = {
-    x: undefined,
-    y: undefined
-  };
+  let popupContentRef: HTMLDivElement;
 
   // ----- Events ----- //
 
@@ -54,32 +50,11 @@
 
   // ----- Event Handlers ----- //
 
-  let mounted = false;
-  onMount(() => {
-    mounted = true;
-    const cleanup = autoUpdate(dropdownRef, popupRef, async () => {
-      const { x, y } = await computePosition(dropdownRef, popupRef, {
-        placement: 'bottom-end',
-        middleware: [offset({ mainAxis: 2 }), flip(), shift({ padding: 0 })]
-      });
-
-      if (open) {
-        popupPosition = { x, y };
-      }
-    });
-    return cleanup;
-  });
-
   const onClick = (event: MouseEvent) => {
-    if (!disabled && mounted) {
-      const targetNode = event.target as Node;
-      const withinPopup = popupRef?.contains(targetNode);
-
-      if (!withinPopup) {
-        open = !open;
-        event.preventDefault();
-        event.stopPropagation();
-      }
+    if (!disabled) {
+      open = !open;
+      event.preventDefault();
+      event.stopPropagation();
     }
   };
 
@@ -111,7 +86,7 @@
   class:disabled
   role="combobox"
   tabindex="0"
-  use:clickOutside
+  use:clickOutside={{ ignoreOthers: [popupContentRef] }}
   on:blur
   on:click
   on:click={onClick}
@@ -150,15 +125,11 @@
     </div>
   </slot>
 
-  <div
-    bind:this={popupRef}
-    class="popup"
-    class:open={open && !disabled}
-    id={popupId}
-    style="left:{popupPosition.x}px; top:{popupPosition.y}px"
-  >
-    <slot {composed} {disabled} {open} />
-  </div>
+  <Popup reference={dropdownRef} open={!disabled && open}>
+    <div class="popup-content" bind:this={popupContentRef}>
+      <slot {composed} {disabled} {open} />
+    </div>
+  </Popup>
 </div>
 
 <style>
@@ -294,6 +265,10 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
+  }
+
+  .popup-content {
+    padding: 0.25em;
   }
 
   @media (prefers-reduced-motion) {

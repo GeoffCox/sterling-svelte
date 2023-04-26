@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { computePosition, flip, offset, shift, autoUpdate } from '@floating-ui/dom';
-  import { createEventDispatcher, onMount, tick } from 'svelte';
+  import { createEventDispatcher, tick } from 'svelte';
 
   import { clickOutside } from './actions/clickOutside';
   import { idGenerator } from './idGenerator';
   import List from './List.svelte';
+  import Popup from './Popover.svelte';
 
   const popupId = idGenerator.nextId('Select-popup');
 
@@ -24,13 +24,7 @@
   let pendingSelectedValue = selectedValue;
 
   let selectRef: HTMLDivElement;
-  let popupRef: HTMLDivElement;
   let listRef: List;
-
-  let popupPosition: { x?: number; y?: number } = {
-    x: undefined,
-    y: undefined
-  };
 
   // ----- Events ----- //
 
@@ -64,8 +58,10 @@
     if (open && !prevOpen) {
       prevOpen = true;
       tick().then(() => {
-        listRef?.focus();
-        listRef?.scrollToSelectedItem();
+        setTimeout(() => {
+          listRef?.focus();
+          listRef?.scrollToSelectedItem();
+        }, 10);
       });
     } else if (prevOpen) {
       prevOpen = false;
@@ -94,22 +90,6 @@
   };
 
   // ----- Event Handlers ----- //
-
-  let mounted = false;
-  onMount(() => {
-    mounted = true;
-    const cleanup = autoUpdate(selectRef, popupRef, async () => {
-      const { x, y } = await computePosition(selectRef, popupRef, {
-        placement: 'bottom-end',
-        middleware: [offset({ mainAxis: 2 }), flip(), shift({ padding: 0 })]
-      });
-
-      if (open) {
-        popupPosition = { x, y };
-      }
-    });
-    return cleanup;
-  });
 
   const onSelectClick: svelte.JSX.MouseEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
@@ -256,27 +236,20 @@
       <div class="chevron" />
     </slot>
   </div>
-  <div
-    bind:this={popupRef}
-    class="popup"
-    class:open
-    id={popupId}
-    style="left:{popupPosition.x}px; top:{popupPosition.y}px"
-  >
-    <div class="popup-content">
-      <List
-        bind:this={listRef}
-        {disabled}
-        selectedValue={pendingSelectedValue}
-        on:click={onListClick}
-        on:keydown={onListKeydown}
-        on:select={onListSelect}
-        tabIndex={open ? 0 : -1}
-      >
-        <slot />
-      </List>
-    </div>
-  </div>
+  <Popup reference={selectRef} bind:open id={popupId}>
+    <List
+      bind:this={listRef}
+      composed
+      {disabled}
+      selectedValue={pendingSelectedValue}
+      on:click={onListClick}
+      on:keydown={onListKeydown}
+      on:select={onListSelect}
+      tabIndex={open ? 0 : -1}
+    >
+      <slot />
+    </List>
+  </Popup>
 </div>
 
 <style>
@@ -388,25 +361,6 @@
 		*/
     transform: translate(-50%, calc(-50% / 0.707)) rotate(135deg);
     transform-origin: 50% 50%;
-  }
-
-  .popup {
-    background-color: var(--stsv-Common__background-color);
-    box-sizing: border-box;
-    display: none;
-    overflow: visible;
-    outline: none;
-    position: absolute;
-    box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 4px -1px;
-    width: fit-content;
-    height: fit-content;
-    z-index: 1;
-  }
-
-  .popup.open {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
   }
 
   .popup-content {

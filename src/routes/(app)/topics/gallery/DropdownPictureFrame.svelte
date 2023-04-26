@@ -14,7 +14,7 @@
 
 <PictureFrame name="Dropdown">
   <div class="layout">
-    <Dropdown stayOpenOnClickAway>
+    <Dropdown>
       <div class="value" slot="value">{value}</div>
       <div class="popup">
         <div class="color-block" style={`background-color:${value};`} />
