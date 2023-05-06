@@ -1,12 +1,11 @@
 <script lang="ts">
-  import type { Keyborg } from 'keyborg';
   import type { ListContext } from './List.types';
 
-  import { createKeyborg } from 'keyborg';
-  import { createEventDispatcher, onMount, setContext } from 'svelte';
+  import { createEventDispatcher, setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
   import { LIST_CONTEXT_KEY } from './List.constants';
+  import { usingKeyboard } from './stores/usingKeyboard';
 
   // ----- Props ----- //
 
@@ -69,15 +68,6 @@
   export const scrollToSelectedItem = () => {
     const element = getSelectedItemElement();
     element?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-  };
-
-  // ----- Keyborg ----- //
-
-  let keyborg: Keyborg = createKeyborg(window);
-
-  let usingKeyboard = keyborg.isNavigatingWithKeyboard();
-  const keyborgHandler = (value: boolean) => {
-    usingKeyboard = value;
   };
 
   // ----- Focus ----- //
@@ -175,14 +165,6 @@
 
   // ----- Event Handlers ----- //
 
-  onMount(() => {
-    keyborg.subscribe(keyborgHandler);
-
-    return () => {
-      keyborg.unsubscribe(keyborgHandler);
-    };
-  });
-
   const onClick: svelte.JSX.MouseEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
       let candidate: HTMLElement | null | undefined = event.target as HTMLElement;
@@ -266,7 +248,7 @@ A list of items where a single item can be selected.
   class:composed
   class:disabled
   class:horizontal
-  class:using-keyboard={usingKeyboard}
+  class:using-keyboard={$usingKeyboard}
   role="list"
   tabindex={0}
   on:blur

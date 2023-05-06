@@ -1,10 +1,8 @@
 <script lang="ts">
-  import type { Keyborg } from 'keyborg';
   import type { ButtonShape, ButtonVariant } from './Button.types';
   import type { MenuItemContext } from './MenuItem.types';
 
-  import { createKeyborg } from 'keyborg';
-  import { createEventDispatcher, getContext, onMount, setContext, tick } from 'svelte';
+  import { createEventDispatcher, setContext, tick } from 'svelte';
   import { writable } from 'svelte/store';
 
   import Button from './Button.svelte';
@@ -13,6 +11,7 @@
   import { idGenerator } from './idGenerator';
   import Popover from './Popover.svelte';
   import { clickOutside } from './actions/clickOutside';
+  import { usingKeyboard } from './stores/usingKeyboard';
 
   // ----- Props ----- //
 
@@ -69,29 +68,12 @@
     buttonRef?.focus(options);
   };
 
-  // ----- Keyborg ----- //
-
-  let keyborg: Keyborg = createKeyborg(window);
-
-  let usingKeyboard = keyborg.isNavigatingWithKeyboard();
-  const keyborgHandler = (value: boolean) => {
-    usingKeyboard = value;
-  };
-
   // ----- Event Handlers ----- //
-
-  onMount(() => {
-    keyborg.subscribe(keyborgHandler);
-
-    return () => {
-      keyborg.unsubscribe(keyborgHandler);
-    };
-  });
 
   const onClick = async () => {
     if (!open) {
       openValues.set(['menu-button']);
-      if (usingKeyboard) {
+      if ($usingKeyboard) {
         await tick();
         menuRef?.focusFirstMenuItem();
       }

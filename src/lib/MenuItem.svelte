@@ -1,8 +1,5 @@
 <script lang="ts">
-  import type { Keyborg } from 'keyborg';
   import type { MenuItemRegistration, MenuItemContext, MenuItemRole } from './MenuItem.types';
-
-  import { createKeyborg } from 'keyborg';
 
   import {
     getContext,
@@ -22,6 +19,7 @@
   import { isElementEnabledMenuItem } from './MenuItem.utils';
   import MenuItemDisplay from './MenuItemDisplay.svelte';
   import Popover from './Popover.svelte';
+  import { usingKeyboard } from './stores/usingKeyboard';
 
   // ----- Props ----- //
 
@@ -109,15 +107,6 @@
     onSelect?.(value);
   };
 
-  // ----- Keyborg ----- //
-
-  let keyborg: Keyborg = createKeyborg(window);
-
-  let usingKeyboard = keyborg.isNavigatingWithKeyboard();
-  const keyborgHandler = (value: boolean) => {
-    usingKeyboard = value;
-  };
-
   // ----- Focus ----- //
 
   const focusPreviousMenuItem = () => {
@@ -176,11 +165,6 @@
 
   onMount(() => {
     mounted = true;
-    keyborg.subscribe(keyborgHandler);
-
-    return () => {
-      keyborg.unsubscribe(keyborgHandler);
-    };
   });
 
   afterUpdate(() => {
@@ -331,7 +315,7 @@
       if (hasChildren) {
         if (!$openValues.includes(value)) {
           openMenu();
-          if (usingKeyboard) {
+          if ($usingKeyboard) {
             setTimeout(async () => {
               await tick();
               menuRef?.focusFirstMenuItem();

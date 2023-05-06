@@ -1,27 +1,17 @@
 <script lang="ts">
-  import type { Keyborg } from 'keyborg';
   import type { TabListContext } from './TabList.types';
 
-  import { createKeyborg } from 'keyborg';
-  import { createEventDispatcher, onMount, setContext } from 'svelte';
+  import { createEventDispatcher, setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
   import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
+  import { usingKeyboard } from './stores/usingKeyboard';
 
   // ----- Props ----- //
 
   export let disabled: boolean = false;
   export let vertical = false;
   export let selectedValue: string | undefined = undefined;
-
-  // ----- Keyborg ----- //
-
-  let keyborg: Keyborg = createKeyborg(window);
-
-  let usingKeyboard = keyborg.isNavigatingWithKeyboard();
-  const keyborgHandler = (value: boolean) => {
-    usingKeyboard = value;
-  };
 
   // ----- State ----- //
 
@@ -30,7 +20,6 @@
 
   const disabledStore = writable<boolean>(disabled);
   const selectedValueStore = writable<string | undefined>(selectedValue);
-  const usingKeyboardStore = writable<boolean>(usingKeyboard);
   const verticalStore = writable<boolean>(vertical);
 
   $: disabledStore.set(disabled);
@@ -40,8 +29,6 @@
   $: {
     selectedValue = $selectedValueStore;
   }
-
-  $: usingKeyboardStore.set(usingKeyboard);
 
   $: verticalStore.set(vertical);
 
@@ -161,14 +148,6 @@
 
   // ----- EventHandlers ----- //
 
-  onMount(() => {
-    keyborg.subscribe(keyborgHandler);
-
-    return () => {
-      keyborg.unsubscribe(keyborgHandler);
-    };
-  });
-
   const onClick: svelte.JSX.MouseEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
       let candidate: HTMLElement | null | undefined = event.target as HTMLElement;
@@ -238,7 +217,6 @@
   setContext<TabListContext>(TAB_LIST_CONTEXT_KEY, {
     disabled: disabledStore,
     selectedValue: selectedValueStore,
-    usingKeyboard: usingKeyboardStore,
     vertical: verticalStore
   });
 </script>

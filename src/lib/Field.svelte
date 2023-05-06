@@ -1,10 +1,7 @@
 <script lang="ts">
-  import type { Keyborg } from 'keyborg';
-
-  import { createKeyborg } from 'keyborg';
-  import { onMount } from 'svelte';
   import type { FieldStatus } from './Field.types';
   import Tooltip from './Tooltip.svelte';
+  import { usingKeyboard } from './stores/usingKeyboard';
 
   // ----- Props ----- //
 
@@ -106,15 +103,6 @@
     }
   }
 
-  // ----- Keyborg ----- //
-
-  let keyborg: Keyborg = createKeyborg(window);
-
-  let usingKeyboard = keyborg.isNavigatingWithKeyboard();
-  const keyborgHandler = (value: boolean) => {
-    usingKeyboard = value;
-  };
-
   // ----- Methods ----- //
 
   export const click = () => {
@@ -131,14 +119,6 @@
 
   // ----- Event Handlers ----- //
 
-  onMount(() => {
-    keyborg.subscribe(keyborgHandler);
-
-    return () => {
-      keyborg.unsubscribe(keyborgHandler);
-    };
-  });
-
   const onClick = () => {
     if (forwardClick) {
       targetRef?.click();
@@ -151,7 +131,7 @@
   aria-disabled={targetDisabled}
   class="sterling-field"
   class:disabled={targetDisabled}
-  class:using-keyboard={usingKeyboard}
+  class:using-keyboard={$usingKeyboard}
   for={htmlFor}
   on:blur
   on:click

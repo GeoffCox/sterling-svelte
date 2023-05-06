@@ -3,6 +3,7 @@
 
   import type { TabListContext } from './TabList.types';
   import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
+  import { usingKeyboard } from './stores/usingKeyboard';
 
   // ----- Props ----- //
   export let disabled = false;
@@ -16,7 +17,6 @@
   const {
     disabled: tabListDisabled,
     selectedValue,
-    usingKeyboard,
     vertical
   } = getContext<TabListContext>(TAB_LIST_CONTEXT_KEY);
 

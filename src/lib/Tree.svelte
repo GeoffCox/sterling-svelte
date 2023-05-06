@@ -1,12 +1,11 @@
 <script lang="ts">
-  import type { Keyborg } from 'keyborg';
   import type { TreeContext } from './Tree.types';
 
-  import { createKeyborg } from 'keyborg';
-  import { createEventDispatcher, onMount, setContext } from 'svelte';
+  import { createEventDispatcher, setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
   import { TREE_CONTEXT_KEY } from './Tree.constants';
+  import { usingKeyboard } from './stores/usingKeyboard';
 
   // ----- Props ----- //
 
@@ -45,16 +44,6 @@
     dispatch('select', { selectedValue });
   };
 
-  // ----- Keyborg ----- //
-
-  let keyborg: Keyborg = createKeyborg(window);
-
-  let usingKeyboard = keyborg.isNavigatingWithKeyboard();
-
-  const keyborgHandler = (value: boolean) => {
-    usingKeyboard = value;
-  };
-
   // ----- Reactions ----- //
 
   $: {
@@ -79,16 +68,6 @@
     disabledStore.set(disabled);
   }
 
-  // ----- Event Handlers ----- //
-
-  onMount(() => {
-    keyborg.subscribe(keyborgHandler);
-
-    return () => {
-      keyborg.unsubscribe(keyborgHandler);
-    };
-  });
-
   // ----- Set Context ----- //
   setContext<TreeContext>(TREE_CONTEXT_KEY, {
     expandedValues: expandedValuesStore,
@@ -104,7 +83,7 @@
   class="sterling-tree"
   class:composed
   class:disabled
-  class:using-keyboard={usingKeyboard}
+  class:using-keyboard={$usingKeyboard}
   role="tree"
   on:blur
   on:click

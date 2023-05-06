@@ -3,15 +3,24 @@
   import type { TreeItemContext } from './TreeItem.types';
 
   import { getContext, setContext } from 'svelte';
-  import { slide } from 'svelte/transition';
+  import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
 
   import { TREE_CONTEXT_KEY, TREE_ITEM_CONTEXT_KEY } from './Tree.constants';
   import TreeItemDisplay from './TreeItemDisplay.svelte';
   import { writable } from 'svelte/store';
+  import { prefersReducedMotion } from './stores/prefersReducedMotion';
 
   // ----- Props ----
   export let disabled = false;
   export let value: string;
+
+  // ----- Media Queries ----- //
+
+  const slidNoOp = (node: Element, params?: SlideParams): TransitionConfig => {
+    return { delay: 0, duration: 0 };
+  };
+
+  $: slideMotion = !$prefersReducedMotion ? slide : slidNoOp;
 
   // ----- Get Context ----- //
 
@@ -372,7 +381,7 @@ A item in a Tree displaying the item and children.
     </slot>
   </div>
   {#if expanded && hasChildren}
-    <div class="children" transition:slide={{ duration: 200 }} role="group">
+    <div class="children" transition:slideMotion={{ duration: 200 }} role="group">
       <slot {depth} {selected} {value} />
     </div>
   {/if}

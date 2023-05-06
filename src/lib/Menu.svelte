@@ -2,13 +2,22 @@
   import type { MenuItemContext } from './MenuItem.types';
 
   import { getContext } from 'svelte';
-  import { slide } from 'svelte/transition';
+  import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
 
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
   import { isElementEnabledMenuItem, isElementMenuItem } from './MenuItem.utils';
+  import { prefersReducedMotion } from './stores/prefersReducedMotion';
 
   let menuRef: HTMLDivElement;
   let menuItemsRef: HTMLDivElement;
+
+  // ----- Media Queries ----- //
+
+  const slidNoOp = (node: Element, params?: SlideParams): TransitionConfig => {
+    return { delay: 0, duration: 0 };
+  };
+
+  $: slideMotion = !$prefersReducedMotion ? slide : slidNoOp;
 
   // ----- Get Context ----- //
 
@@ -81,8 +90,8 @@
   role="menu"
   class:open
   data-root-value={rootValue}
-  in:slide={{ duration: 300 }}
-  out:slide={{ duration: 100 }}
+  in:slideMotion={{ duration: 300 }}
+  out:slideMotion={{ duration: 100 }}
   on:blur
   on:click
   on:copy
