@@ -4,7 +4,7 @@
 
 # Menu
 
-A panel that floats above other content containing a list of menu items.
+A list of menu items.
 
 - Menu is a building block of menus:
   - <Link href="menubar">MenuBar</Link>
@@ -19,9 +19,6 @@ A panel that floats above other content containing a list of menu items.
   // ----- Props ----- //
 
   // HTMLDivElement props are forwarded
-
-  let reference: HTMLElement;
-  let open: boolean = false;
 
   // ----- Events ----- //
 

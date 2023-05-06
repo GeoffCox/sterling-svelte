@@ -23,3 +23,24 @@ export const focusFirstChild = (children: MenuItemRegistration[]) => {
 export const focusLastChild = (children: MenuItemRegistration[]) => {
   children?.[children.length - 1]?.focus();
 };
+
+export const isElementMenuItem = (candidate: Element | null | undefined) => {
+  if (!candidate) return false;
+
+  const dataValue = candidate?.getAttribute('data-value');
+  const role = candidate?.getAttribute('role');
+
+  return (
+    (role === 'menuitem' || role === 'menuitemcheckbox' || role === 'menuitemradio') &&
+    dataValue !== null &&
+    dataValue !== undefined
+  );
+};
+
+export const isElementEnabledMenuItem = (candidate: Element | null | undefined) => {
+  if (!isElementMenuItem(candidate)) {
+    return false;
+  }
+  const disabled = candidate?.getAttribute('disabled');
+  return disabled === null || disabled === 'false';
+};

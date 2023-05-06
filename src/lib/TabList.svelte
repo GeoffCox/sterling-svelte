@@ -186,7 +186,6 @@
   };
 
   const onKeydown: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
-    console.log('tabList onKeydown', event);
     // if using arrows, only move when there are no modifier keys
     if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
       switch (event.key) {

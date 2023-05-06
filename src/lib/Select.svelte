@@ -237,18 +237,20 @@
     </slot>
   </div>
   <Popup reference={selectRef} bind:open id={popupId}>
-    <List
-      bind:this={listRef}
-      composed
-      {disabled}
-      selectedValue={pendingSelectedValue}
-      on:click={onListClick}
-      on:keydown={onListKeydown}
-      on:select={onListSelect}
-      tabIndex={open ? 0 : -1}
-    >
-      <slot />
-    </List>
+    <div class="popup-content">
+      <List
+        bind:this={listRef}
+        composed
+        {disabled}
+        selectedValue={pendingSelectedValue}
+        on:click={onListClick}
+        on:keydown={onListKeydown}
+        on:select={onListSelect}
+        tabIndex={open ? 0 : -1}
+      >
+        <slot />
+      </List>
+    </div>
   </Popup>
 </div>
 
@@ -364,7 +366,17 @@
   }
 
   .popup-content {
-    max-height: 15em;
+    background-color: var(--stsv-Common__background-color);
+    border-color: var(--stsv-Common__border-color);
+    border-radius: var(--stsv-Common__border-radius);
+    border-style: var(--stsv-Common__border-style);
+    border-width: var(--stsv-Common__border-width);
+    padding: 0.25em;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+    max-height: 20em;
   }
 
   @media (prefers-reduced-motion) {

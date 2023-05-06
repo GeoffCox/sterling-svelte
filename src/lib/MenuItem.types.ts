@@ -1,3 +1,9 @@
+import type { Writable } from 'svelte/store';
+import type { MENU_ITEM_ROLES } from './MenuItem.constants';
+
+type MenuItemRoleTuple = typeof MENU_ITEM_ROLES;
+export type MenuItemRole = MenuItemRoleTuple[number];
+
 export type MenuItemRegistration = {
   value: string;
   open: () => void;
@@ -6,16 +12,18 @@ export type MenuItemRegistration = {
 };
 
 export type MenuItemContext = {
+  /**
+   * If the menu item is a top-elvel item in a menu bar
+   */
+  isMenuBarItem?: boolean;
+  /**
+   * The menu item values for the chain of open menus.
+   */
+  openValues: Writable<string[]>;
   rootValue?: string;
   depth?: number;
 
-  register?: (menuItem: MenuItemRegistration) => void;
-  unregister?: (menuItem: MenuItemRegistration) => void;
-
-  focusPrevious?: (currentValue: string) => void;
-  focusNext?: (currentValue: string) => void;
-
-  closeMenu?: (recursive?: boolean) => void;
+  closeContainingMenu?: () => void;
 
   onOpen?: (value: string) => void;
   onClose?: (value: string) => void;

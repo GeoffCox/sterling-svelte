@@ -64,6 +64,7 @@
           </div>
         </div>
       {/if}
+      <slot />
     </div>
   {/if}
 </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { MenuItemContext, MenuItemRegistration } from './MenuItem.types';
+  import type { MenuItemContext } from './MenuItem.types';
 
   import { createEventDispatcher, setContext } from 'svelte';
 
@@ -7,9 +7,32 @@
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
   import { writable } from 'svelte/store';
   import type { MenuBarContext } from './MenuBar.types';
+  import { isElementEnabledMenuItem } from './MenuItem.utils';
+  import { idGenerator } from './idGenerator';
+  import { clickOutside } from './actions/clickOutside';
 
   // ----- State ----- //
+  const openValues = writable<string[]>([]);
+  const rootValue = idGenerator.nextId('MenuBar');
+
   let menuBarRef: HTMLDivElement;
+  let prevOpenValue: string | undefined = undefined;
+
+  // Remember the last open value
+  $: {
+    if ($openValues.length > 0) {
+      prevOpenValue = $openValues[0];
+    }
+  }
+
+  // Restore focus to the last open menu bar item when it closes
+  $: {
+    if ($openValues.length === 0 && prevOpenValue !== undefined) {
+      const candidate = menuBarRef.querySelector(`[data-value="${prevOpenValue}"]`);
+      (candidate as HTMLElement)?.focus();
+      prevOpenValue = undefined;
+    }
+  }
 
   // ----- Events ----- //
 
@@ -37,51 +60,90 @@
     menuBarRef?.focus(options);
   };
 
-  const children = writable<MenuItemRegistration[]>([]);
+  // ----- Open/Close ----- //
 
-  const openPreviousChild = (currentValue: string) => {
-    const index = $children?.findIndex((menuItem) => menuItem.value === currentValue);
-    if (index !== -1) {
-      const focusIndex = index === 0 ? $children.length - 1 : index - 1;
-      $children[focusIndex].focus();
-      $children[focusIndex].open();
+  const getOpenMenuBarItem = () => {
+    const value = $openValues[0];
+    if (value) {
+      return menuBarRef.querySelector(`[data-value="${value}"]`);
     }
+    return null;
   };
 
-  const openNextChild = (currentValue: string) => {
-    const index = $children?.findIndex((menuItem) => menuItem.value === currentValue);
-    if (index !== -1) {
-      const focusIndex = (index + 1) % $children.length;
-      $children[focusIndex].focus();
-      $children[focusIndex].open();
+  const openPreviousMenuBarItem = () => {
+    const openItem = getOpenMenuBarItem() || menuBarRef.firstElementChild;
+    let candidate = openItem?.previousElementSibling || menuBarRef.lastElementChild;
+
+    while (candidate && !isElementEnabledMenuItem(candidate)) {
+      candidate = candidate.previousElementSibling || menuBarRef.lastElementChild;
+      if (candidate === openItem) {
+        return false;
+      }
     }
+
+    if (!candidate) {
+      candidate = menuBarRef.lastElementChild;
+      candidate = candidate && isElementEnabledMenuItem(candidate) ? candidate : null;
+    }
+
+    (candidate as HTMLElement)?.click();
+    return !!candidate;
   };
 
-  const focusChild = (value: string) => {
-    const focusIndex = $children?.findIndex((menuItem) => menuItem.value === value);
-    if (focusIndex !== -1) {
-      $children[focusIndex].focus();
+  const openNextMenuBarItem = () => {
+    const openItem = getOpenMenuBarItem() || menuBarRef.lastElementChild;
+    let candidate = openItem?.nextElementSibling || menuBarRef.firstElementChild;
+
+    while (candidate && !isElementEnabledMenuItem(candidate)) {
+      candidate = candidate.nextElementSibling || menuBarRef.firstElementChild;
+      if (candidate === openItem) {
+        return false;
+      }
     }
+
+    if (!candidate) {
+      candidate = menuBarRef.firstElementChild;
+      candidate = candidate && isElementEnabledMenuItem(candidate) ? candidate : null;
+    }
+
+    (candidate as HTMLElement)?.click();
+    return !!candidate;
   };
+
+  const closeAllMenus = () => {
+    openValues.set([]);
+  };
+
+  // ----- Event Handlers ----- //
+
+  const onClickOutside = (event: svelte.JSX.ClickOutsideEvent) => {
+    const {
+      detail: { mouseEvent }
+    } = event;
+    let element: HTMLElement | null = mouseEvent.target as HTMLElement;
+    while (element) {
+      if (element.getAttribute('data-root-value') === rootValue) {
+        return;
+      }
+      element = element.parentElement;
+    }
+    closeAllMenus?.();
+  };
+
+  // ----- Set Context ----- //
+
+  setContext<MenuBarContext>(MENU_BAR_CONTEXT_KEY, {
+    openPreviousMenuBarItem,
+    openNextMenuBarItem
+  });
 
   setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
-    register: (menuItem: MenuItemRegistration) => {
-      children.set([...$children, menuItem]);
-    },
-    unregister: (menuItem: MenuItemRegistration) => {
-      children.set($children.filter((x) => x.value !== menuItem.value));
-    },
-    closeMenu: (recursive?: boolean) => {},
-    focusPrevious: openPreviousChild,
-    focusNext: openNextChild,
+    isMenuBarItem: true,
+    openValues,
+    rootValue,
     onClose: raiseClose,
     onOpen: raiseOpen,
     onSelect: raiseSelect
-  });
-
-  setContext<MenuBarContext>(MENU_BAR_CONTEXT_KEY, {
-    openPreviousMenu: openPreviousChild,
-    openNextMenu: openNextChild
   });
 </script>
 
@@ -117,6 +179,8 @@
   on:wheel
   on:paste
   {...$$restProps}
+  use:clickOutside
+  on:click_outside={onClickOutside}
 >
   <slot />
 </div>

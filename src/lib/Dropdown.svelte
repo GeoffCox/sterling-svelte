@@ -268,7 +268,16 @@
   }
 
   .popup-content {
+    background-color: var(--stsv-Common__background-color);
+    border-color: var(--stsv-Common__border-color);
+    border-radius: var(--stsv-Common__border-radius);
+    border-style: var(--stsv-Common__border-style);
+    border-width: var(--stsv-Common__border-width);
     padding: 0.25em;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    overflow: hidden;
   }
 
   @media (prefers-reduced-motion) {

@@ -2,7 +2,7 @@
   import type { Placement } from '@floating-ui/dom';
 
   import { onMount } from 'svelte';
-  import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+  import { autoUpdate, computePosition, flip, offset } from '@floating-ui/dom';
   import { portal } from './actions/portal';
 
   // ----- Props ----- //
@@ -47,11 +47,7 @@
 
   // ----- Position ----- //
 
-  const middleware = [
-    offset({ mainAxis: -2 }),
-    flip(),
-    shift({ padding: 0, mainAxis: true, crossAxis: true })
-  ];
+  const middleware = [offset({ mainAxis: -2 }), flip()];
 
   const computePopupPosition = async () => {
     if (reference && popupRef) {
@@ -136,11 +132,6 @@
   }
 
   .sterling-popover {
-    background-color: var(--stsv-Common__background-color);
-    border-color: var(--stsv-Common__border-color);
-    border-radius: var(--stsv-Common__border-radius);
-    border-style: var(--stsv-Common__border-style);
-    border-width: var(--stsv-Common__border-width);
     box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 4px -1px;
     box-sizing: border-box;
     display: none;
@@ -148,9 +139,7 @@
     grid-template-rows: 1fr;
     height: fit-content;
     left: 0;
-    max-height: calc(50vh);
-    overflow: auto;
-    overscroll-behavior: contain;
+    overflow: hidden;
     position: absolute;
     top: 0;
     width: max-content;

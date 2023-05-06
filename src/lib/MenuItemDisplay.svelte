@@ -1,8 +1,11 @@
 <script lang="ts">
+  import type { MenuItemRole } from './MenuItem.types';
+
   export let checked = false;
   export let disabled = false;
   export let hasChildren = false;
-  export let menuItemRole: 'menuitem' | 'menuitemcheckbox' | 'menuitemradio' = 'menuitem';
+  export let isMenuBarItem = false;
+  export let menuItemRole: MenuItemRole = 'menuitem';
 </script>
 
 <div class="sterling-menu-item-display" class:disabled>
@@ -20,7 +23,7 @@
       <slot name="shortcut" />
     </div>
   {:else}
-    <div class="chevron" class:has-children={hasChildren} />
+    <div class="chevron" class:has-children={!isMenuBarItem && hasChildren} />
   {/if}
 </div>
 

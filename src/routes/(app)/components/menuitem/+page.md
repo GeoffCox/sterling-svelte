@@ -7,11 +7,16 @@
 A clickable item within a menu.
 
 - Support item, checkbox, or radio roles.
+- By default, renders a MenuItemDisplay supporting checkbox and radio indicators, text, and submenu chevron.
 
 <Playground />
 
 ```svelte
 <script lang="ts">
+  // ----- Types ----- //
+
+  type MenuItemRole = 'menuitem' | 'menuitemcheckbox' | 'menuitemradio';
+
   // ----- Props ----- //
 
   // HTMLDivElement props are forwarded
@@ -19,9 +24,8 @@ A clickable item within a menu.
   let checked = false;
   let composed = false;
   let disabled = false;
-  let open = false;
   let value: string;
-  let role: 'menuitem' | 'menuitemcheckbox' | 'menuitemradio' = 'menuitem';
+  let role: MenuItemRole = 'menuitem';
   let text: string | undefined = undefined;
 
   // ----- Events ----- //
@@ -47,17 +51,11 @@ A clickable item within a menu.
   };
 
   type MenuItemContext = {
+    isMenuBarItem?: boolean;
+    openValues: Writable<string[]>;
     rootValue?: string;
     depth?: number;
-
-    register?: (menuItem: MenuItemRegistration) => void;
-    unregister?: (menuItem: MenuItemRegistration) => void;
-
-    focusPrevious?: (currentValue: string) => void;
-    focusNext?: (currentValue: string) => void;
-
-    closeMenu?: (recursive?: boolean) => void;
-
+    closeContainingMenu?: () => void;
     onOpen?: (value: string) => void;
     onClose?: (value: string) => void;
     onSelect?: (value: string) => void;
@@ -67,7 +65,22 @@ A clickable item within a menu.
 <!-- Anatomy -->
 
 <button>
-  <slot name="item" {checked} {depth} {disabled} {hasChildren} {open} {role} {text} {value} />
+  <slot
+    name="item"
+    {checked}
+    {depth}
+    {disabled}
+    {hasChildren}
+    {isMenuBarItem}
+    {open}
+    {role}
+    {text}
+    {value}
+  >
+    <MenuItemDisplay {checked} {disabled} {hasChildren} {isMenuBarItem} menuItemRole={role}
+      >{text}</MenuItemDisplay
+    >
+  </slot>
   <Menu>
     <slot {depth} {disabled} />
   </Menu>

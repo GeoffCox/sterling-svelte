@@ -33,8 +33,8 @@ A horizontal list of menu items typically at the top of a window.
   // ----- Context ----- //
 
   type MenuBarContext = {
-    openPreviousMenu?: (currentValue: string) => void;
-    openNextMenu?: (currentValue: string) => void;
+    openPreviousMenuBarItem?: () => void;
+    openNextMenuBarItem?: () => void;
   };
 </script>
 

@@ -4,12 +4,27 @@
 
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
+  import { setContext } from 'svelte';
+  import { MENU_ITEM_CONTEXT_KEY, type MenuItemContext } from '$lib';
+  import { writable } from 'svelte/store';
 
   let exampleRef: any;
   let disabled = false;
 
   let renderChoice: 'performance' | 'quality' = 'performance';
   let autoSave: boolean = false;
+
+  const openValues = writable<string[]>([]);
+
+  setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
+    openValues,
+    isMenuBarItem: true,
+    rootValue: 'root',
+    closeContainingMenu: () => {},
+    onOpen: () => {},
+    onClose: () => {},
+    onSelect: () => {}
+  });
 </script>
 
 <Playground bind:this={exampleRef}>
@@ -23,7 +38,21 @@
       on:select={(event) => exampleRef.recordEvent(`select '${event.detail.value}'`)}
     >
       <MenuItem value="file-new" text="New" />
-      <MenuItem value="file-open" text="Open..." />
+      <MenuItem value="open-file" text="Open..." />
+      <MenuItem value="open-folder" text="Open Folder..." />
+      <MenuItem value="open-recent" text="Open Recent">
+        <MenuItem value="recent-1" text="Recent File 1" />
+        <MenuItem value="recent-2" text="Recent File 2" />
+        <MenuItem value="recent-3" text="Recent File 3" />
+        <MenuItem value="recent-4" text="Recent File 4" />
+        <MenuItem value="recent-5" text="Recent File 5" />
+        <MenuItem value="recent-6" text="Recent File 6" />
+        <MenuItem value="open-recent-older" text="Older">
+          <MenuItem value="recent-7" text="Recent File 7" />
+          <MenuItem value="recent-8" text="Recent File 8" />
+          <MenuItem value="recent-9" text="Recent File 9" />
+        </MenuItem>
+      </MenuItem>
       <MenuItem value="file-save" text="Save" />
       <MenuItem value="file-save-as" text="Save As..." disabled />
       <MenuSeparator />
@@ -55,11 +84,10 @@
         <MenuItem value="file-share-text" text="Text Messaging" />
         <MenuItem value="file-share-internet" text="Entire Internet" />
       </MenuItem>
-
       <MenuSeparator />
       <MenuItem value="file-quit" text="Quit" />
     </MenuItem>
-  </svelte:fragment>>
+  </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
   </svelte:fragment>

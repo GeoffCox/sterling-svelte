@@ -1,15 +1,18 @@
 <script lang="ts">
+  import type { Keyborg } from 'keyborg';
   import type { ButtonShape, ButtonVariant } from './Button.types';
-  import type { MenuItemRegistration, MenuItemContext } from './MenuItem.types';
+  import type { MenuItemContext } from './MenuItem.types';
 
-  import { createEventDispatcher, getContext, setContext } from 'svelte';
+  import { createKeyborg } from 'keyborg';
+  import { createEventDispatcher, getContext, onMount, setContext, tick } from 'svelte';
   import { writable } from 'svelte/store';
 
   import Button from './Button.svelte';
   import Menu from './Menu.svelte';
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
-  import { focusFirstChild, focusNextChild, focusPreviousChild } from './MenuItem.utils';
   import { idGenerator } from './idGenerator';
+  import Popover from './Popover.svelte';
+  import { clickOutside } from './actions/clickOutside';
 
   // ----- Props ----- //
 
@@ -24,12 +27,17 @@
 
   let buttonRef: Button;
   let reference: HTMLDivElement;
+  let menuRef: Menu;
   let prevOpen = open;
 
   $: menuId = `${value}-menu-${instanceId}`;
   $: hasChildren = $$slots.items;
 
-  const children = writable<MenuItemRegistration[]>([]);
+  const openValues = writable<string[]>([]);
+
+  $: {
+    open = $openValues.length > 0;
+  }
 
   // ----- Events ----- //
 
@@ -47,20 +55,6 @@
     dispatch('select', { value });
   };
 
-  const onClick = () => {
-    open = !open;
-    if (open) {
-      setTimeout(() => focusFirstChild($children), 10);
-    }
-  };
-
-  $: {
-    if (!open && open !== prevOpen) {
-      focus();
-    }
-    prevOpen = open;
-  }
-
   // ----- Methods ----- //
 
   export const click = () => {
@@ -75,22 +69,73 @@
     buttonRef?.focus(options);
   };
 
+  // ----- Keyborg ----- //
+
+  let keyborg: Keyborg = createKeyborg(window);
+
+  let usingKeyboard = keyborg.isNavigatingWithKeyboard();
+  const keyborgHandler = (value: boolean) => {
+    usingKeyboard = value;
+  };
+
+  // ----- Event Handlers ----- //
+
+  onMount(() => {
+    keyborg.subscribe(keyborgHandler);
+
+    return () => {
+      keyborg.unsubscribe(keyborgHandler);
+    };
+  });
+
+  const onClick = async () => {
+    if (!open) {
+      openValues.set(['menu-button']);
+      if (usingKeyboard) {
+        await tick();
+        menuRef?.focusFirstMenuItem();
+      }
+    } else {
+      open = false;
+      openValues.set([]);
+    }
+  };
+
+  $: {
+    if (!open && open !== prevOpen) {
+      focus();
+    }
+    prevOpen = open;
+  }
+
+  // ----- Event Handlers ----- //
+
+  const closeAllMenus = () => {
+    openValues.set([]);
+  };
+
+  const onClickOutside = (event: svelte.JSX.ClickOutsideEvent) => {
+    const {
+      detail: { mouseEvent }
+    } = event;
+    let element: HTMLElement | null = mouseEvent.target as HTMLElement;
+    while (element) {
+      if (element.getAttribute('data-root-value') === value) {
+        return;
+      }
+      element = element.parentElement;
+    }
+    closeAllMenus?.();
+  };
+
   // ----- Set Context ----- //
 
   setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
+    openValues,
     rootValue: value,
-    depth: 1,
-    register: (menuItem: MenuItemRegistration) => {
-      children.set([...$children, menuItem]);
-    },
-    unregister: (menuItem: MenuItemRegistration) => {
-      children.set($children.filter((x) => x.value !== menuItem.value));
-    },
-    closeMenu: (recursive?: boolean) => {
+    closeContainingMenu: () => {
       open = false;
     },
-    focusPrevious: (currentValue: string) => focusPreviousChild($children, currentValue),
-    focusNext: (currentValue: string) => focusNextChild($children, currentValue),
     onOpen: raiseOpen,
     onClose: raiseClose,
     onSelect: raiseSelect
@@ -145,12 +190,14 @@
   on:wheel
   {...$$restProps}
 >
-  <div class="reference" bind:this={reference}>
+  <div class="reference" bind:this={reference} use:clickOutside on:click_outside={onClickOutside}>
     <slot {shape} {variant} />
   </div>
-  <Menu id={menuId} {reference} {open}>
-    <slot name="items" />
-  </Menu>
+  <Popover {reference} placement="bottom-start" {open}>
+    <Menu bind:this={menuRef} id={menuId} {reference} {open}>
+      <slot name="items" />
+    </Menu>
+  </Popover>
 </Button>
 
 <style>
