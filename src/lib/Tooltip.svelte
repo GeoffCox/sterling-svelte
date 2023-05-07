@@ -143,6 +143,7 @@
     cleanupAutoShowUpdate = () => {};
 
     const element = reference;
+    open = false;
 
     if (element) {
       switch (showOn) {

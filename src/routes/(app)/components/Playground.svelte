@@ -36,14 +36,7 @@
       {/if}
       {#if $$slots.tweaks}
         <div class="tweaks panel">
-          <Tooltip showOn="hover">
-            <h2>Tweaks</h2>
-            <svelte:fragment slot="tip"
-              ><div class="tweaks-tip">
-                Things you can change in this playground that aren't props of the component.
-              </div></svelte:fragment
-            >
-          </Tooltip>
+          <h2>Tweaks</h2>
           <slot name="tweaks">(none)</slot>
         </div>
       {/if}

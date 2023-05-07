@@ -11,7 +11,6 @@
   import { idGenerator } from './idGenerator';
   import Popover from './Popover.svelte';
   import { clickOutside } from './actions/clickOutside';
-  import { usingKeyboard } from './stores/usingKeyboard';
 
   // ----- Props ----- //
 
@@ -73,10 +72,8 @@
   const onClick = async () => {
     if (!open) {
       openValues.set(['menu-button']);
-      if ($usingKeyboard) {
-        await tick();
-        menuRef?.focusFirstMenuItem();
-      }
+      await tick();
+      menuRef?.focusFirstMenuItem();
     } else {
       open = false;
       openValues.set([]);
@@ -113,6 +110,7 @@
   // ----- Set Context ----- //
 
   setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
+    depth: 1,
     openValues,
     rootValue: value,
     closeContainingMenu: () => {
