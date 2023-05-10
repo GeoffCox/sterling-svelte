@@ -204,30 +204,30 @@
   }
 
   .sterling-tab:not(.selected):not(:active):hover .indicator {
-    background-color: var(--stsv-Common__border-color--hover);
+    background-color: var(--stsv-Input__border-color--hover);
     opacity: 0.3;
   }
 
   .sterling-tab:active .indicator {
-    background-color: var(--stsv-Common__border-color--active);
+    background-color: var(--stsv-Input__border-color--active);
   }
 
   .sterling-tab.selected .indicator {
-    background-color: var(--stsv-Common__border-color--selected);
+    background-color: var(--stsv-Input__border-color--selected);
   }
 
   /* ----- indicator colorful -----*/
 
   .sterling-tab.colorful:not(.selected):not(:active):hover .indicator {
-    background-color: var(--stsv-Common--colorful__border-color--hover);
+    background-color: var(--stsv-Input--colorful__border-color--hover);
   }
 
   .sterling-tab.colorful:active .indicator {
-    background-color: var(--stsv-Common--colorful__border-color--active);
+    background-color: var(--stsv-Input--colorful__border-color--active);
   }
 
   .sterling-tab.colorful.selected .indicator {
-    background-color: var(--stsv-Common--colorful__border-color--active);
+    background-color: var(--stsv-Input--colorful__border-color--active);
   }
 
   /* ----- indicator disabled -----*/

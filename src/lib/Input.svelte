@@ -175,7 +175,7 @@
   }
 
   input::placeholder {
-    color: var(--stsv-Display__color--faint);
+    color: var(--stsv-Common__color--subtle);
   }
 
   .sterling-input.disabled * {

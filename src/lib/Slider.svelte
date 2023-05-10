@@ -282,7 +282,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
 
   .track {
     position: absolute;
-    background: var(--stsv-Display__background-color);
+    background: var(--stsv-Common__background-color--secondary);
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
@@ -312,7 +312,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   /* ----- fill ----- */
 
   .fill {
-    background: var(--stsv-Display__color);
+    background: var(--stsv-Common__color);
     position: absolute;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
@@ -331,7 +331,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   }
 
   .sterling-slider.colorful .fill {
-    background: var(--stsv-Common--colorful__border-color--selected);
+    background: var(--stsv-Input--colorful__border-color--selected);
     position: absolute;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }

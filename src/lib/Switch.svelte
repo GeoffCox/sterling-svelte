@@ -238,7 +238,7 @@
   .sterling-switch.colorful input:focus-visible ~ .switch {
     background-color: var(--stsv-Input--colorful__background-color--focus);
     border-color: var(--stsv-Input--colorful__border-color--focus);
-    color: var(--stsv-Common--colorful__color--focux);
+    color: var(--stsv-Input--colorful__color--focus);
   }
 
   /* ----- thumb ----- */

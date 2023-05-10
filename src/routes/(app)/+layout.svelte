@@ -284,8 +284,8 @@
   }
 
   :global(blockquote) {
-    background-color: var(--stsv-Layer__background-color--1);
-    color: var(--stsv-Info__color);
+    background-color: var(--stsv-Common__background-color--faint);
+    color: var(--stsv-Common__color--secondary);
     padding: 1em;
     margin: 0;
   }
@@ -299,8 +299,8 @@
   :global(th) {
     font-weight: lighter;
     font-size: 1.1em;
-    background: var(--stsv-Display__background-color);
-    color: var(--stsv---Display__color);
+    background: var(--stsv-Common__background-color--secondary);
+    color: var(--stsv---Common__color--secondary);
     padding: 0.5em;
     text-align: start;
     border: 1px solid var(--stsv-Common__border-color);

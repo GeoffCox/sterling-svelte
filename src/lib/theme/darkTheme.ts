@@ -10,15 +10,14 @@ export const darkTheme: Theme = {
   '--stsv-Common__border-width': '2px',
   '--stsv-Common__color': neutralColors.color12,
 
-  // hover
-  '--stsv-Common__background-color--hover': neutralColors.color2,
-  '--stsv-Common__border-color--hover': neutralColors.color10,
-  '--stsv-Common__color--hover': neutralColors.color12,
+  '--stsv-Common__background-color--secondary': neutralColors.color3,
+  '--stsv-Common__color--secondary': neutralColors.color6,
 
-  // focus
-  '--stsv-Common__background-color--focus': neutralColors.color5,
-  '--stsv-Common__border-color--focus': neutralColors.color12,
-  '--stsv-Common__color--focus': neutralColors.color12,
+  '--stsv-Common__background-color--subtle': neutralColors.color2,
+  '--stsv-Common__color--subtle': neutralColors.color5,
+
+  '--stsv-Common__background-color--faint': neutralColors.color1,
+  '--stsv-Common__color--faint': neutralColors.color4,
 
   // outline
   '--stsv-Common__outline-color': neutralColors.color12,
@@ -27,6 +26,10 @@ export const darkTheme: Theme = {
   '--stsv-Common__outline-width': '2px',
 
   // disabled
+  '--stsv-Common__background-color--disabled': neutralColors.color5,
+  '--stsv-Common__border-color--disabled': neutralColors.color9,
+  '--stsv-Common__color--disabled': neutralColors.color6,
+
   '--stsv-Common__background-color1--disabled': 'hsla(0, 0%, 0%, 20%)',
   '--stsv-Common__background-color2--disabled': `hsla(0, 0%, 100%, 20%)`,
   '--stsv-Disabled__background':
@@ -37,44 +40,20 @@ export const darkTheme: Theme = {
     'var(--stsv-Common__background-color2--disabled) 3px,' +
     'var(--stsv-Common__background-color2--disabled) 6px' +
     ')',
-  '--stsv-Common__background-color--disabled': neutralColors.color5,
-  '--stsv-Common__border-color--disabled': neutralColors.color9,
-  '--stsv-Common__color--disabled': neutralColors.color6,
 
   // ----- Common--colorful (15) ---- //
-  '--stsv-Common--colorful__background-color': blueColors.color12,
-  '--stsv-Common--colorful__border-color': blueColors.color4,
-  '--stsv-Common--colorful__color': blueColors.color3,
+  '--stsv-Common--colorful__background-color': blueColors.color1,
+  '--stsv-Common--colorful__border-color': blueColors.color8,
+  '--stsv-Common--colorful__color': blueColors.color9,
 
-  // hover
-  '--stsv-Common--colorful__background-color--hover': blueColors.color12,
-  '--stsv-Common--colorful__border-color--hover': blueColors.color5,
-  '--stsv-Common--colorful__color--hover': blueColors.color4,
+  '--stsv-Common--colorful__background-color--secondary': blueColors.color3,
+  '--stsv-Common--colorful__color--secondary': blueColors.color7,
 
-  // focus
-  '--stsv-Common--colorful__background-color--focus': blueColors.color12,
-  '--stsv-Common--colorful__border-color--focus': blueColors.color5,
-  '--stsv-Common--colorful__color--focus': blueColors.color4,
+  '--stsv-Common--colorful__background-color--subtle': blueColors.color2,
+  '--stsv-Common--colorful__color--subtle': blueColors.color5,
 
-  // active
-  '--stsv-Common--colorful__background-color--active': blueColors.color12,
-  '--stsv-Common--colorful__border-color--active': blueColors.color3,
-  '--stsv-Common--colorful__color--active': blueColors.color1,
-
-  // selected
-  '--stsv-Common--colorful__background-color--selected': blueColors.color12,
-  '--stsv-Common--colorful__border-color--selected': blueColors.color3,
-  '--stsv-Common--colorful__color--selected': blueColors.color1,
-
-  // ----- Layer ---- //
-  '--stsv-Layer__background-color--1': neutralColors.color3,
-  '--stsv-Layer__color--1': neutralColors.color12,
-
-  '--stsv-Layer__background-color--2': neutralColors.color1,
-  '--stsv-Layer__color--2': neutralColors.color12,
-
-  '--stsv-Layer__background-color--3': neutralColors.color5,
-  '--stsv-Layer__color--3': neutralColors.color12,
+  '--stsv-Common--colorful__background-color--faint': blueColors.color1,
+  '--stsv-Common--colorful__color--faint': blueColors.color3,
 
   // ----- Button ----- //
 
@@ -102,23 +81,23 @@ export const darkTheme: Theme = {
 
   // ----- Button--colorful (12) ---- //
 
-  '--stsv-Button--colorful__background-color': blueColors.color6,
-  '--stsv-Button--colorful__border-color': blueColors.color4,
+  '--stsv-Button--colorful__background-color': blueColors.color5,
+  '--stsv-Button--colorful__border-color': blueColors.color3,
   '--stsv-Button--colorful__color': blueColors.color11,
 
   // hover
-  '--stsv-Button--colorful__background-color--hover': blueColors.color7,
-  '--stsv-Button--colorful__border-color--hover': blueColors.color5,
+  '--stsv-Button--colorful__background-color--hover': blueColors.color6,
+  '--stsv-Button--colorful__border-color--hover': blueColors.color4,
   '--stsv-Button--colorful__color--hover': blueColors.color11,
 
   // focus
-  '--stsv-Button--colorful__background-color--focus': blueColors.color7,
-  '--stsv-Button--colorful__border-color--focus': blueColors.color5,
+  '--stsv-Button--colorful__background-color--focus': blueColors.color6,
+  '--stsv-Button--colorful__border-color--focus': blueColors.color4,
   '--stsv-Button--colorful__color--focus': blueColors.color11,
 
   // active
-  '--stsv-Button--colorful__background-color--active': blueColors.color5,
-  '--stsv-Button--colorful__border-color--active': blueColors.color3,
+  '--stsv-Button--colorful__background-color--active': blueColors.color7,
+  '--stsv-Button--colorful__border-color--active': blueColors.color5,
   '--stsv-Button--colorful__color--active': blueColors.color12,
 
   // ----- Input ----- //
@@ -146,34 +125,26 @@ export const darkTheme: Theme = {
 
   // ----- Input--colorful (12) ---- //
 
-  '--stsv-Input--colorful__background-color': blueColors.color11,
-  '--stsv-Input--colorful__border-color': blueColors.color4,
-  '--stsv-Input--colorful__color': blueColors.color2,
+  '--stsv-Input--colorful__background-color': blueColors.color4,
+  '--stsv-Input--colorful__border-color': blueColors.color9,
+  '--stsv-Input--colorful__color': blueColors.color12,
 
   // hover
-  '--stsv-Input--colorful__background-color--hover': blueColors.color12,
-  '--stsv-Input--colorful__border-color--hover': blueColors.color5,
-  '--stsv-Input--colorful__color--hover': blueColors.color2,
+  '--stsv-Input--colorful__background-color--hover': blueColors.color2,
+  '--stsv-Input--colorful__border-color--hover': blueColors.color10,
+  '--stsv-Input--colorful__color--hover': blueColors.color12,
 
   // focus
-  '--stsv-Input--colorful__background-color--focus': blueColors.color12,
-  '--stsv-Input--colorful__border-color--focus': blueColors.color5,
-  '--stsv-Input--colorful__color--focus': blueColors.color2,
+  '--stsv-Input--colorful__background-color--focus': blueColors.color2,
+  '--stsv-Input--colorful__border-color--focus': blueColors.color10,
+  '--stsv-Input--colorful__color--focus': blueColors.color12,
 
   // selected
-  '--stsv-Input--colorful__background-color--selected': blueColors.color9,
-  '--stsv-Input--colorful__border-color--selected': blueColors.color3,
-  '--stsv-Input--colorful__color--selected': blueColors.color2,
+  '--stsv-Input--colorful__background-color--selected': blueColors.color6,
+  '--stsv-Input--colorful__border-color--selected': blueColors.color11,
+  '--stsv-Input--colorful__color--selected': blueColors.color12,
 
-  // ----- Display ----- //
-  '--stsv-Display__background-color': neutralColors.color3,
-  '--stsv-Display__border-color': neutralColors.color9,
-  '--stsv-Display__color': neutralColors.neutral80,
-
-  '--stsv-Display__color--subtle': neutralColors.color10,
-  '--stsv-Display__color--faint': neutralColors.color5,
-  '--stsv-Display__color--disabled': neutralColors.color5,
-
+  // ----- Status ----- //
   '--stsv-Info__background-color': darkStatusColors.info.backgroundColor,
   '--stsv-Info__border-color': darkStatusColors.info.borderColor,
   '--stsv-Info__color': darkStatusColors.info.color,

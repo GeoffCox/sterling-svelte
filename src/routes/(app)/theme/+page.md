@@ -1,8 +1,8 @@
 # Theme
 
-Each theme consists of a set of CSS variables.
-Components use these in styles to follow the theme and respond to theme changes.
-Each CSS variable that is a part of the sterling-svelte design is prefixed with stsv.
+- Each theme consists of a set of CSS variables.
+- Components use these in styles to follow the theme and respond to theme changes.
+- Each CSS variable that is a part of the sterling-svelte design is prefixed with stsv.
 
 <script>
     import BlueColorsExample from './BlueColorsExample.svelte';
@@ -11,11 +11,9 @@ Each CSS variable that is a part of the sterling-svelte design is prefixed with 
     import Swatch from './Swatch.svelte';
 </script>
 
-## Default
+## Common
 
-### Common
-
-These are typically used for the page and containers like lists and trees.
+The common variables are used for body text and containers (e.g. lists, trees).
 
 <Swatch 
 backgroundColor="--stsv-Common__background-color" 
@@ -26,41 +24,29 @@ borderWidth="--stsv-Common__border-width"
 color="--stsv-Common__color"
 />
 <br/>
+Secondary, subtle, and faint colors are used for less important text, placeholders, visually separate regions, and decorations.
+
+> The background-color and color pairs do not guarantee sufficient accessibility contrast.
+
+<br/>
+<br/>
 <Swatch 
-backgroundColor="--stsv-Common__background-color--hover" 
-borderColor="--stsv-Common__border-color--hover"
-borderRadius="--stsv-Common__border-radius"
-borderStyle="--stsv-Common__border-style"
-borderWidth="--stsv-Common__border-width"
-color="--stsv-Common__color--hover"
+backgroundColor="--stsv-Common__background-color--secondary" 
+color="--stsv-Common__color--secondary"
 />
 <br/>
 <Swatch 
-backgroundColor="--stsv-Common__background-color--focus" 
-borderColor="--stsv-Common__border-color--focus"
-borderRadius="--stsv-Common__border-radius"
-borderStyle="--stsv-Common__border-style"
-borderWidth="--stsv-Common__border-width"
-color="--stsv-Common__color--focus"
+backgroundColor="--stsv-Common__background-color--subtle" 
+color="--stsv-Common__color--subtle"
 />
 <br/>
 <Swatch 
-backgroundColor="--stsv-Common__background-color--active" 
-borderColor="--stsv-Common__border-color--active"
-borderRadius="--stsv-Common__border-radius"
-borderStyle="--stsv-Common__border-style"
-borderWidth="--stsv-Common__border-width"
-color="--stsv-Common__color--active"
+backgroundColor="--stsv-Common__background-color--faint" 
+color="--stsv-Common__color--faint"
 />
 <br/>
-<Swatch 
-backgroundColor="--stsv-Common__background-color--selected" 
-borderColor="--stsv-Common__border-color--selected"
-borderRadius="--stsv-Common__border-radius"
-borderStyle="--stsv-Common__border-style"
-borderWidth="--stsv-Common__border-width"
-color="--stsv-Common__color--selected"
-/>
+Outline colors are used across components to indicate keyboard focus.
+<br/>
 <br/>
 <Swatch 
 outlineColor="--stsv-Common__outline-color"
@@ -68,6 +54,22 @@ outlineOffset="--stsv-Common__outline-offset"
 outlineStyle="--stsv-Common__outline-style"
 outlineWidth="--stsv-Common__outline-width"
 />
+<br/>
+Components indicate disabled state as an overlay with a diagonal striped pattern.
+
+- The pattern is taken from the diagonal "NO STEP" pattern on aircraft.
+- The stripes are white and black with low opacity and work well across light and dark themes.
+
+> Traditionally, disabled state is indicated using dimmed colors of the component often
+> centering aroound a midline gray. This tends to damange contrast when the background,
+> border, and foreground colors are near the disabled colors.
+
+<br/>
+<br/>
+<DisabledSwatch />
+--stsv-Disabled__background
+<br/>
+<br/>
 
 ### Button
 
@@ -108,18 +110,10 @@ borderWidth="--stsv-Button__border-width"
 color="--stsv-Button__color--active"
 />
 <br/>
-<Swatch 
-backgroundColor="--stsv-Common__background-color--disabled" 
-borderColor="--stsv-Common__border-color--disabled"
-borderRadius="--stsv-Button__border-radius"
-borderStyle="--stsv-Button__border-style"
-borderWidth="--stsv-Button__border-width"
-color="--stsv-Common__color--disabled"
-/>
 
 ### Input
 
-These are used with interactive controls that take input such as checkboxes, inputs, and radio buttons.
+These are used with interactive input controls (e.g. checkbox, text input, radio)
 
 <Swatch 
 backgroundColor="--stsv-Input__background-color" 
@@ -176,40 +170,20 @@ borderWidth="--stsv-Common__border-width"
 color="--stsv-Common--colorful__color"
 />
 <br/>
+<br/>
 <Swatch 
-backgroundColor="--stsv-Common--colorful__background-color--hover" 
-borderColor="--stsv-Common--colorful__border-color--hover"
-borderRadius="--stsv-Common__border-radius"
-borderStyle="--stsv-Common__border-style"
-borderWidth="--stsv-Common__border-width"
-color="--stsv-Common--colorful__color--hover"
+backgroundColor="--stsv-Common--colorful__background-color--secondary" 
+color="--stsv-Common--colorful__color--secondary"
 />
 <br/>
 <Swatch 
-backgroundColor="--stsv-Common--colorful__background-color--focus" 
-borderColor="--stsv-Common--colorful__border-color--focus"
-borderRadius="--stsv-Common__border-radius"
-borderStyle="--stsv-Common__border-style"
-borderWidth="--stsv-Common__border-width"
-color="--stsv-Common--colorful__color--focus"
+backgroundColor="--stsv-Common--colorful__background-color--subtle" 
+color="--stsv-Common--colorful__color--subtle"
 />
 <br/>
 <Swatch 
-backgroundColor="--stsv-Common--colorful__background-color--active" 
-borderColor="--stsv-Common--colorful__border-color--active"
-borderRadius="--stsv-Common__border-radius"
-borderStyle="--stsv-Common__border-style"
-borderWidth="--stsv-Common__border-width"
-color="--stsv-Common--colorful__color--active"
-/>
-<br/>
-<Swatch 
-backgroundColor="--stsv-Common--colorful__background-color--selected" 
-borderColor="--stsv-Common--colorful__border-color--selected"
-borderRadius="--stsv-Common__border-radius"
-borderStyle="--stsv-Common__border-style"
-borderWidth="--stsv-Common__border-width"
-color="--stsv-Common--colorful__color--selected"
+backgroundColor="--stsv-Common--colorful__background-color--faint" 
+color="--stsv-Common--colorful__color--faint"
 />
 
 ### Button
@@ -279,32 +253,6 @@ borderWidth="--stsv-Input__border-width"
 color="--stsv-Input--colorful__color--focus"
 />
 
-## Display
-
-These are used for non-interactive content and status such as labels, placeholders, and progress.
-
-<Swatch 
-backgroundColor="--stsv-Display__background-color" 
-borderColor="--stsv-Display__border-color"
-borderRadius="--stsv-Input__border-radius"
-borderStyle="--stsv-Input__border-style"
-borderWidth="--stsv-Input__border-width"
-color="--stsv-Display__color"
-/>
-<br/>
-<Swatch 
-color="--stsv-Display__color--subtle"
-/>
-<br/>
-<Swatch 
-color="--stsv-Display__color--faint"
-/>
-<br/>
-<Swatch 
-color="--stsv-Display__color--disabled"
-/>
-<br/>
-
 ## Status colors
 
 Several colors can be used to give meaning to status.
@@ -333,40 +281,6 @@ borderColor="--stsv-Error__border-color"
 color="--stsv-Error__color"
 />
 <br/>
-
-## Disabled
-
-Components indicate disabled state as an overlay with a diagonal striped pattern.
-The pattern is taken from the diagonal "NO STEP" pattern on aircraft.
-
-<DisabledSwatch />
---stsv-Disabled__background
-<br/>
-<br/>
-The stripes are white and black with low opacity and work well across light and dark themes.
-
-Traditionally, disabled state is indicated using dimmed colors of the component often
-centering aroound a midline gray. This tends to damange contrast when the background,
-border, and foreground colors are near the disabled colors.
-
-## Layers
-
-Layers can visually separate areas or groups of components.
-
-<Swatch 
-backgroundColor="--stsv-Layer__background-color--1" 
-color="--stsv-Layer__color--1"
-/>
-
-<Swatch 
-backgroundColor="--stsv-Layer__background-color--2" 
-color="--stsv-Layer__color--2"
-/>
-
-<Swatch 
-backgroundColor="--stsv-Layer__background-color--3" 
-color="--stsv-Layer__color--3"
-/>
 
 ## Neutrals
 

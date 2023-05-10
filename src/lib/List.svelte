@@ -297,12 +297,12 @@ A list of items where a single item can be selected.
 <style>
   .sterling-list {
     background-color: var(--stsv-Common__background-color);
-    border-color: var(--stsv-Common__border-color);
-    border-radius: var(--stsv-Common__border-radius);
-    border-style: var(--stsv-Common__border-style);
-    border-width: var(--stsv-Common__border-width);
+    border-color: var(--stsv-Input__border-color);
+    border-radius: var(--stsv-Input__border-radius);
+    border-style: var(--stsv-Input__border-style);
+    border-width: var(--stsv-Input__border-width);
     box-sizing: border-box;
-    color: var(--stsv-Common__color);
+    color: var(--stsv-Input__color);
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
@@ -321,13 +321,13 @@ A list of items where a single item can be selected.
   }
 
   .sterling-list:hover {
-    border-color: var(--stsv-Common__border-color--hover);
-    color: var(--stsv-Common__color--hover);
+    border-color: var(--stsv-Input__border-color--hover);
+    color: var(--stsv-Input__color--hover);
   }
 
   .sterling-list.using-keyboard:focus-within {
-    border-color: var(--stsv-Common__border-color--focus);
-    color: var(--stsv-Common__color--focus);
+    border-color: var(--stsv-Input__border-color--focus);
+    color: var(--stsv-Input__color--focus);
     outline-color: var(--stsv-Common__outline-color);
     outline-offset: var(--stsv-Common__outline-offset);
     outline-style: var(--stsv-Common__outline-style);

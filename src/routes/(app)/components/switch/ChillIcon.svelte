@@ -26,7 +26,7 @@
 <style>
   .left,
   .right {
-    fill: var(--stsv-Display__color--subtle);
+    fill: var(--stsv-Common__color--subtle);
   }
 
   .checked .left {
@@ -39,6 +39,6 @@
 
   .disabled .left,
   .disabled .right {
-    fill: var(--stsv-Display__color--disabled);
+    fill: var(--stsv-Common__color--disabled);
   }
 </style>

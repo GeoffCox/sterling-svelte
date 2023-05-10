@@ -26,16 +26,6 @@ export const oceanTheme: Theme = {
   '--stsv-Common__border-width': '2px',
   '--stsv-Common__color': oceanBlues.color12,
 
-  // hover
-  '--stsv-Common__background-color--hover': oceanBlues.color2,
-  '--stsv-Common__border-color--hover': oceanBlues.color10,
-  '--stsv-Common__color--hover': oceanBlues.color12,
-
-  // focus
-  '--stsv-Common__background-color--focus': oceanBlues.color5,
-  '--stsv-Common__border-color--focus': oceanBlues.color12,
-  '--stsv-Common__color--focus': oceanBlues.color12,
-
   // outline
   '--stsv-Common__outline-color': oceanBlues.color12,
   '--stsv-Common__outline-offset': '0',
@@ -43,6 +33,10 @@ export const oceanTheme: Theme = {
   '--stsv-Common__outline-width': '2px',
 
   // disabled
+  '--stsv-Common__background-color--disabled': oceanBlues.color5,
+  '--stsv-Common__border-color--disabled': oceanBlues.color9,
+  '--stsv-Common__color--disabled': oceanBlues.color9,
+
   '--stsv-Common__background-color1--disabled': 'hsla(0, 0%, 0%, 20%)',
   '--stsv-Common__background-color2--disabled': `hsla(0, 0%, 100%, 20%)`,
   '--stsv-Disabled__background':
@@ -53,19 +47,6 @@ export const oceanTheme: Theme = {
     'var(--stsv-Common__background-color2--disabled) 3px,' +
     'var(--stsv-Common__background-color2--disabled) 6px' +
     ')',
-  '--stsv-Common__background-color--disabled': oceanBlues.color5,
-  '--stsv-Common__border-color--disabled': oceanBlues.color9,
-  '--stsv-Common__color--disabled': oceanBlues.color9,
-
-  // ----- Layer ---- //
-  '--stsv-Layer__background-color--1': oceanBlues.color3,
-  '--stsv-Layer__color--1': oceanBlues.color12,
-
-  '--stsv-Layer__background-color--2': oceanBlues.color1,
-  '--stsv-Layer__color--2': oceanBlues.color12,
-
-  '--stsv-Layer__background-color--3': oceanBlues.color5,
-  '--stsv-Layer__color--3': oceanBlues.color12,
 
   // ----- Button ----- //
 
@@ -114,15 +95,7 @@ export const oceanTheme: Theme = {
   '--stsv-Input__border-color--selected': oceanBlues.color11,
   '--stsv-Input__color--selected': oceanBlues.color12,
 
-  // ----- Display ----- //
-  '--stsv-Display__background-color': oceanBlues.color3,
-  '--stsv-Display__border-color': oceanBlues.color9,
-  '--stsv-Display__color': oceanBlues.color12,
-
-  '--stsv-Display__color--subtle': oceanBlues.color10,
-  '--stsv-Display__color--faint': oceanBlues.color5,
-  '--stsv-Display__color--disabled': oceanBlues.color5,
-
+  // ----- Status ----- //
   '--stsv-Info__background-color': darkStatusColors.info.backgroundColor,
   '--stsv-Info__border-color': darkStatusColors.info.borderColor,
   '--stsv-Info__color': darkStatusColors.info.color,

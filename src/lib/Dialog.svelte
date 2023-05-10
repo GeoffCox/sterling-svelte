@@ -198,7 +198,7 @@ A styled &lt;dialog&gt; element
   }
 
   .header {
-    background-color: var(--stsv-Display__background-color);
+    background-color: var(--stsv-Common__background-color--secondary);
   }
 
   .content {
@@ -281,7 +281,7 @@ A styled &lt;dialog&gt; element
   }
 
   .separator {
-    background-color: var(--stsv-Display__background-color);
+    background-color: var(--stsv-Common__background-color--secondary);
     height: var(--stsv-Common__border-width);
     margin: 0 0.25em;
   }

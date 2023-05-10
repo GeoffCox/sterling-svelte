@@ -59,7 +59,7 @@
 
 <style>
   label {
-    color: var(--stsv-Display__color);
+    color: var(--stsv-Common__color);
     transition: color 250ms;
     font: inherit;
   }

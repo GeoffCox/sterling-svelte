@@ -148,13 +148,13 @@
   }
 
   .sterling-tree:hover {
-    border-color: var(--stsv-Common__border-color--hover);
-    color: var(--stsv-Common__color--hover);
+    border-color: var(--stsv-Input__border-color--hover);
+    color: var(--stsv-Input__color--hover);
   }
 
   .sterling-tree.using-keyboard:focus-within {
     border-color: var(--stsv-Button__border-color--focus);
-    color: var(--stsv-Common__color--focus);
+    color: var(--stsv-Input__color--focus);
     outline-color: var(--stsv-Common__outline-color);
     outline-offset: var(--stsv-Common__outline-offset);
     outline-style: var(--stsv-Common__outline-style);

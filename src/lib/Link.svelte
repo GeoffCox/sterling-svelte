@@ -86,35 +86,35 @@
   }
 
   a:visited {
-    border-bottom-color: var(--stsv-Common__border-color);
+    border-bottom-color: var(--stsv-Input__border-color);
   }
 
   a:hover {
-    border-bottom-color: var(--stsv-Common__border-color--hover);
-    color: var(--stsv-Common__color--hover);
+    border-bottom-color: var(--stsv-Input__border-color--hover);
+    color: var(--stsv-Input__color--hover);
   }
 
   a:active {
-    border-bottom-color: var(--stsv-Common__border-color--active);
-    color: var(--stsv-Common__color--active);
+    border-bottom-color: var(--stsv-Input__border-color--active);
+    color: var(--stsv-Input__color--active);
   }
 
   /* ----- colorful ----- */
 
   a.colorful,
   a.colorful:visited {
-    border-bottom-color: var(--stsv-Common--colorful__border-color);
-    color: var(--stsv-Common--colorful__color);
+    border-bottom-color: var(--stsv-Input--colorful__border-color);
+    color: var(--stsv-Input--colorful__color);
   }
 
   a.colorful:hover {
-    border-bottom-color: var(--stsv-Common--colorful__border-color--hover);
-    color: var(--stsv-Common--colorful__color--hover);
+    border-bottom-color: var(--stsv-Input--colorful__border-color--hover);
+    color: var(--stsv-Input--colorful__color--hover);
   }
 
   a.colorful:active {
-    border-bottom-color: var(--stsv-Common--colorful__border-color--active);
-    color: var(--stsv-Common--colorful__color--active);
+    border-bottom-color: var(--stsv-Input--colorful__border-color--active);
+    color: var(--stsv-Input--colorful__color--active);
   }
 
   /* ----- ghost ----- */
@@ -124,21 +124,21 @@
   }
 
   a.ghost:hover {
-    border-bottom-color: var(--stsv-Common__border-color--hover);
+    border-bottom-color: var(--stsv-Input__border-color--hover);
   }
 
   a.ghost:active {
-    border-bottom-color: var(--stsv-Common__border-color--active);
+    border-bottom-color: var(--stsv-Input__border-color--active);
   }
 
   /* ----- ghost colorful ----- */
 
   a.ghost.colorful:hover {
-    border-bottom-color: var(--stsv-Common--colorful__border-color--hover);
+    border-bottom-color: var(--stsv-Input--colorful__border-color--hover);
   }
 
   a.ghost.colorful:active {
-    border-bottom-color: var(--stsv-Common--colorful__border-color--active);
+    border-bottom-color: var(--stsv-Input--colorful__border-color--active);
   }
 
   /* ----- disabled ----- */

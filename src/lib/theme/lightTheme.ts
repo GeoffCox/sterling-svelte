@@ -2,10 +2,6 @@ import type { Theme } from './types';
 import { blueColors, lightStatusColors, neutralColors } from './colors';
 
 export const lightTheme: Theme = {
-  // ----- Default ---- //
-
-  // ----- Disabled ---- //
-
   // ----- Common (18) ---- //
   '--stsv-Common__background-color': neutralColors.color12,
   '--stsv-Common__border-color': neutralColors.color5,
@@ -14,28 +10,14 @@ export const lightTheme: Theme = {
   '--stsv-Common__border-width': '2px',
   '--stsv-Common__color': neutralColors.color2,
 
-  '--stsv-Common__color--secondary': neutralColors.color6,
-  '--stsv-Common__color--tertiary': neutralColors.color8,
+  '--stsv-Common__background-color--secondary': neutralColors.color9,
+  '--stsv-Common__color--secondary': neutralColors.color5,
 
-  // hover
-  '--stsv-Common__background-color--hover': neutralColors.color12,
-  '--stsv-Common__border-color--hover': neutralColors.color4,
-  '--stsv-Common__color--hover': neutralColors.color2,
+  '--stsv-Common__background-color--subtle': neutralColors.color10,
+  '--stsv-Common__color--subtle': neutralColors.color7,
 
-  // focus
-  '--stsv-Common__background-color--focus': neutralColors.color10,
-  '--stsv-Common__border-color--focus': neutralColors.color4,
-  '--stsv-Common__color--focus': neutralColors.color2,
-
-  // active
-  '--stsv-Common__background-color--active': neutralColors.color12,
-  '--stsv-Common__border-color--active': neutralColors.color3,
-  '--stsv-Common__color--active': neutralColors.color2,
-
-  // selected
-  '--stsv-Common__background-color--selected': neutralColors.color12,
-  '--stsv-Common__border-color--selected': neutralColors.color3,
-  '--stsv-Common__color--selected': neutralColors.color2,
+  '--stsv-Common__background-color--faint': neutralColors.color11,
+  '--stsv-Common__color--faint': neutralColors.color9,
 
   // outline
   '--stsv-Common__outline-color': neutralColors.color2,
@@ -44,6 +26,10 @@ export const lightTheme: Theme = {
   '--stsv-Common__outline-width': '2px',
 
   // disabled
+  '--stsv-Common__background-color--disabled': neutralColors.color10,
+  '--stsv-Common__border-color--disabled': neutralColors.color7,
+  '--stsv-Common__color--disabled': neutralColors.color7,
+
   '--stsv-Common__background-color1--disabled': 'hsla(0, 0%, 0%, 20%)',
   '--stsv-Common__background-color2--disabled': `hsla(0, 0%, 100%, 20%)`,
   '--stsv-Disabled__background':
@@ -54,44 +40,20 @@ export const lightTheme: Theme = {
     'var(--stsv-Common__background-color2--disabled) 3px,' +
     'var(--stsv-Common__background-color2--disabled) 6px' +
     ')',
-  '--stsv-Common__background-color--disabled': neutralColors.color10,
-  '--stsv-Common__border-color--disabled': neutralColors.color7,
-  '--stsv-Common__color--disabled': neutralColors.color7,
 
   // ----- Common--colorful (15) ---- //
   '--stsv-Common--colorful__background-color': blueColors.color12,
   '--stsv-Common--colorful__border-color': blueColors.color4,
   '--stsv-Common--colorful__color': blueColors.color3,
 
-  // hover
-  '--stsv-Common--colorful__background-color--hover': blueColors.color12,
-  '--stsv-Common--colorful__border-color--hover': blueColors.color5,
-  '--stsv-Common--colorful__color--hover': blueColors.color4,
+  '--stsv-Common--colorful__background-color--secondary': blueColors.color9,
+  '--stsv-Common--colorful__color--secondary': blueColors.color5,
 
-  // focus
-  '--stsv-Common--colorful__background-color--focus': blueColors.color12,
-  '--stsv-Common--colorful__border-color--focus': blueColors.color5,
-  '--stsv-Common--colorful__color--focus': blueColors.color4,
+  '--stsv-Common--colorful__background-color--subtle': blueColors.color10,
+  '--stsv-Common--colorful__color--subtle': blueColors.color7,
 
-  // active
-  '--stsv-Common--colorful__background-color--active': blueColors.color12,
-  '--stsv-Common--colorful__border-color--active': blueColors.color3,
-  '--stsv-Common--colorful__color--active': blueColors.color2,
-
-  // selected
-  '--stsv-Common--colorful__background-color--selected': blueColors.color12,
-  '--stsv-Common--colorful__border-color--selected': blueColors.color3,
-  '--stsv-Common--colorful__color--selected': blueColors.color2,
-
-  // ----- Layer ---- //
-  '--stsv-Layer__background-color--1': neutralColors.color11,
-  '--stsv-Layer__color--1': neutralColors.color2,
-
-  '--stsv-Layer__background-color--2': neutralColors.color10,
-  '--stsv-Layer__color--2': neutralColors.color2,
-
-  '--stsv-Layer__background-color--3': neutralColors.color9,
-  '--stsv-Layer__color--3': neutralColors.color2,
+  '--stsv-Common--colorful__background-color--faint': blueColors.color11,
+  '--stsv-Common--colorful__color--faint': blueColors.color9,
 
   // ----- Button (15) ----- //
 
@@ -181,15 +143,6 @@ export const lightTheme: Theme = {
   '--stsv-Input--colorful__background-color--selected': blueColors.color9,
   '--stsv-Input--colorful__border-color--selected': blueColors.color3,
   '--stsv-Input--colorful__color--selected': blueColors.color2,
-
-  // ----- Display (6) ----- //
-  '--stsv-Display__background-color': neutralColors.color9,
-  '--stsv-Display__border-color': neutralColors.color4,
-  '--stsv-Display__color': neutralColors.color2,
-
-  '--stsv-Display__color--subtle': neutralColors.color5,
-  '--stsv-Display__color--faint': neutralColors.color8,
-  '--stsv-Display__color--disabled': neutralColors.color8,
 
   // ----- Semantic (12) ----- //
   '--stsv-Info__background-color': lightStatusColors.info.backgroundColor,

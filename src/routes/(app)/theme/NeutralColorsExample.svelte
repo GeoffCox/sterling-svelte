@@ -10,7 +10,7 @@
         style="background-color: {neutralColors[key]}"
         title={`${neutralColors[key]}`}
       />
-      <div class="name">{key}</div>
+      <div class="name" style="color: {neutralColors[key]}">{key}</div>
     </div>
   {/each}
 </div>

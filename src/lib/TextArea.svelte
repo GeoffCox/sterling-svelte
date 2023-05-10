@@ -206,7 +206,7 @@
   }
 
   textarea::placeholder {
-    color: var(--stsv-Display__color--faint);
+    color: var(--stsv-Common__color--subtle);
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 

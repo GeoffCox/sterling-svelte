@@ -112,7 +112,7 @@
   }
 
   .indicator {
-    background-color: var(--stsv-Display__border-color);
+    background-color: var(--stsv-Common__border-color);
     box-sizing: border-box;
     height: 100%;
     min-height: 1px;
@@ -167,7 +167,7 @@
   }
 
   .sterling-progress.disabled .indicator {
-    background-color: var(--stsv-Display__color--disabled);
+    background-color: var(--stsv-Common__color--disabled);
   }
 
   @media (prefers-reduced-motion) {

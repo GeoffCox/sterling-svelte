@@ -224,8 +224,8 @@
   }
 
   .sterling-field.using-keyboard:focus-within {
-    border-color: var(--stsv-Common__border-color--focus);
-    color: var(--stsv-Common__color--focus);
+    border-color: var(--stsv-Input__border-color--focus);
+    color: var(--stsv-Input__color--focus);
     outline-color: var(--stsv-Common__outline-color);
     outline-offset: var(--stsv-Common__outline-offset);
     outline-style: var(--stsv-Common__outline-style);
@@ -241,7 +241,7 @@
   }
 
   .label-text {
-    color: var(--stsv-Display__color);
+    color: var(--stsv-Common__color--secondary);
     font-size: 0.8em;
     margin: 0.5em 0.7em 0.2em 0.2em;
   }
@@ -257,8 +257,8 @@
   .message {
     box-sizing: border-box;
     font-size: 0.8em;
-    background-color: var(--stsv-Display__background-color);
-    color: var(--stsv-Display__color);
+    background-color: var(--stsv-Common__background-color--secondary);
+    color: var(--stsv-Common__color--secondary);
     padding: 0.5em;
     width: 100%;
     transition: background-color 250ms, color 250ms, border-color 250ms;
