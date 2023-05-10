@@ -15,6 +15,7 @@ A styled `<input type="radio" />`
   // HTMLDivElement props are forwarded
 
   let checked: boolean = false;
+  let colorful: boolean = false;
   let disabled: boolean = false;
   let group: any | undefined | null = undefined;
   let id: string | undefined = undefined;

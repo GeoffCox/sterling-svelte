@@ -13,6 +13,7 @@
 
   let exampleRef: any;
   let disabled = false;
+  let colorful = false;
   let variant: LinkVariant = 'regular';
   let withIcon = true;
   let withText = true;
@@ -20,7 +21,7 @@
 
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
-    <Link {disabled} href="#" {variant} on:click={() => exampleRef.recordEvent('click')}>
+    <Link {colorful} {disabled} href="#" {variant} on:click={() => exampleRef.recordEvent('click')}>
       {#if withIcon}
         <SvelteIcon />
       {/if}
@@ -30,6 +31,7 @@
     </Link>
   </svelte:fragment>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="variant" forwardClick>
       <Select bind:selectedValue={variant} composed>

@@ -19,6 +19,7 @@ A styled `<button />`.
 
   // HTMLButtonElement props are forwarded
 
+  let colorful: boolean = false;
   let shape: ButtonShape = 'rounded';
   let variant: ButtonVariant = 'regular';
 

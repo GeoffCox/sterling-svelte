@@ -8,6 +8,7 @@
 
   let exampleRef: any;
 
+  let colorful = false;
   let disabled = false;
   let selectedValue: string | undefined;
   let vertical = false;
@@ -17,6 +18,7 @@
   <svelte:fragment slot="component">
     <TabList
       bind:selectedValue
+      {colorful}
       {disabled}
       {vertical}
       on:select={(event) => {
@@ -30,6 +32,7 @@
     </TabList>
   </svelte:fragment>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
     <Field label="selectedValue">

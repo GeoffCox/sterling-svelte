@@ -9,6 +9,7 @@
 
   // ----- Props ----- //
 
+  export let colorful = false;
   export let composed = false;
   export let disabled: boolean = false;
   export let horizontal = false;
@@ -19,9 +20,14 @@
   let listRef: HTMLDivElement;
   let lastSelectedItemRef: HTMLElement;
 
+  const colorfulStore = writable<boolean>(colorful);
   const disabledStore = writable<boolean>(disabled);
   const horizontalStore = writable<boolean>(horizontal);
   const selectedValueStore = writable<string | undefined>(selectedValue);
+
+  $: {
+    colorfulStore.set(colorful);
+  }
 
   $: {
     disabledStore.set(disabled);
@@ -228,6 +234,7 @@
   // ----- Set Context ----- //
 
   setContext<ListContext>(LIST_CONTEXT_KEY, {
+    colorful: colorfulStore,
     disabled: disabledStore,
     selectedValue: selectedValueStore,
     horizontal: horizontalStore

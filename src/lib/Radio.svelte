@@ -11,6 +11,7 @@
    * and implement the same behavior.
    */
 
+  export let colorful = false;
   export let checked: boolean = false;
   export let disabled: boolean = false;
   export let group: any | undefined | null = undefined;
@@ -90,7 +91,7 @@
 	@component
 	A styled HTML input type=radio element with optional label.
 -->
-<div class="sterling-radio" class:disabled>
+<div class="sterling-radio" class:colorful class:disabled>
   <div class="container">
     <input
       bind:this={inputRef}
@@ -229,6 +230,25 @@
 
   input:checked + .indicator::after {
     background-color: var(--stsv-Input__color);
+  }
+
+  .sterling-radio.colorful .indicator {
+    background-color: var(--stsv-Input--colorful__background-color);
+    border-color: var(--stsv-Input--colorful__border-color);
+  }
+
+  .sterling-radio.colorful input:checked + .indicator {
+    background-color: var(--stsv-Input--colorful__background-color);
+    border-color: var(--stsv-Input--colorful__border-color);
+  }
+
+  .sterling-radio.colorful:not(.disabled):hover .indicator {
+    background-color: var(--stsv-Input--colorful__background-color--hover);
+    border-color: var(--stsv-Input--colorful__border-color--hover);
+  }
+
+  .sterling-radio.colorful input:checked + .indicator::after {
+    background-color: var(--stsv-Input--colorful__color);
   }
 
   .sterling-radio.disabled * {

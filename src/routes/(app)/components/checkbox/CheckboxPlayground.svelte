@@ -7,16 +7,18 @@
   let exampleRef: any;
   let disabled = false;
   let checked = false;
+  let colorful = false;
   let label = 'Sterling';
 </script>
 
 <Playground bind:this={exampleRef}>
   <div slot="component" class="component">
-    <Checkbox {disabled} bind:checked on:change={() => exampleRef.recordEvent('change')}
+    <Checkbox {colorful} {disabled} bind:checked on:change={() => exampleRef.recordEvent('change')}
       >{label}</Checkbox
     >
   </div>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="default slot (text)">
       <Input bind:value={label} composed />

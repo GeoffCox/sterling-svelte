@@ -3,7 +3,7 @@
 
   import { LIST_CONTEXT_KEY } from './List.constants';
   import type { ListContext } from './List.types';
-  import { readable } from 'svelte/store';
+  import { readable, writable } from 'svelte/store';
 
   /** Item is disabled when this is true or the containing list is disabled. **/
   export let disabled = false;
@@ -14,13 +14,15 @@
   // ----- GetContext ----- //
 
   const {
+    colorful,
     disabled: listDisabled,
     selectedValue,
     horizontal
   } = getContext<ListContext>(LIST_CONTEXT_KEY) || {
+    colorful: readable(false),
     disabled: readable(false),
-    selectedValue: undefined,
-    horizontal: false
+    selectedValue: writable(undefined),
+    horizontal: readable(false)
   };
 
   // ----- State ----- //
@@ -46,6 +48,7 @@
   aria-selected={selected}
   bind:this={itemRef}
   class="sterling-list-item"
+  class:colorful={$colorful}
   class:disabled={disabled || $listDisabled}
   class:item-disabled={disabled && !$listDisabled}
   class:selected
@@ -91,7 +94,7 @@
   .sterling-list-item {
     background-color: transparent;
     box-sizing: border-box;
-    color: var(--stsv-Input__color);
+    color: var(--stsv-Common__color);
     cursor: pointer;
     margin: 0;
     padding: 0.5em;
@@ -108,8 +111,18 @@
   }
 
   .sterling-list-item.selected {
-    background-color: var(--stsv-Input__background-color--selected);
-    color: var(--stsv-Input__color--selected);
+    background-color: var(--stsv-Button__background-color--active);
+    color: var(--stsv-Button__color--active);
+  }
+
+  .sterling-list-item.colorful:not(.disabled):not(.selected):hover {
+    background-color: var(--stsv-Button--colorful__background-color--hover);
+    color: var(--stsv-Button--colorful__color--hover);
+  }
+
+  .sterling-list-item.colorful.selected {
+    background-color: var(--stsv-Button--colorful__background-color--active);
+    color: var(--stsv-Button--colorful__color--active);
   }
 
   .sterling-list-item.disabled {

@@ -1,17 +1,17 @@
 export const neutralColors: Record<string, string> = {
-  neutral0: 'hsl(0, 0%, 0%)',
-  neutral10: 'hsl(0, 0%, 12%)',
-  neutral15: 'hsl(0, 0%, 15%)',
-  neutral20: 'hsl(0, 0%, 20%)',
-  neutral30: 'hsl(0, 0%, 30%)',
-  neutral45: 'hsl(0, 0%, 45%)',
-  neutral60: 'hsl(0, 0%, 60%)',
-  neutral75: 'hsl(0, 0%, 75%)',
-  neutral85: 'hsl(0, 0%, 85%)',
-  neutral92: 'hsl(0, 0%, 92%)',
-  neutral96: 'hsl(0, 0%, 96%)',
-  neutral98: 'hsl(0, 0%, 98%)',
-  neutral100: 'hsl(0, 0%, 100%)'
+  color0: 'hsl(0, 0%, 0%)',
+  color1: 'hsl(0, 0%, 12%)',
+  color2: 'hsl(0, 0%, 15%)',
+  color3: 'hsl(0, 0%, 20%)',
+  color4: 'hsl(0, 0%, 30%)',
+  color5: 'hsl(0, 0%, 45%)',
+  color6: 'hsl(0, 0%, 60%)',
+  color7: 'hsl(0, 0%, 75%)',
+  color8: 'hsl(0, 0%, 85%)',
+  color9: 'hsl(0, 0%, 92%)',
+  color10: 'hsl(0, 0%, 96%)',
+  color11: 'hsl(0, 0%, 98%)',
+  color12: 'hsl(0, 0%, 100%)'
 };
 
 /**
@@ -67,4 +67,20 @@ export const darkStatusColors = {
     borderColor: 'hsl(5, 100%, 40%)',
     color: 'hsl(5, 100%, 50%)'
   }
+};
+
+export const blueColors: Record<string, string> = {
+  color0: 'hsl(204, 100%, 0%)',
+  color1: 'hsl(204, 100%, 18%)',
+  color2: 'hsl(204, 100%, 25%)',
+  color3: 'hsl(204, 100%, 30%)',
+  color4: 'hsl(204, 100%, 35%)',
+  color5: 'hsl(204, 100%, 42%)',
+  color6: 'hsl(204, 100%, 50%)',
+  color7: 'hsl(204, 100%, 60%)',
+  color8: 'hsl(204, 100%, 70%)',
+  color9: 'hsl(204, 100%, 80%)',
+  color10: 'hsl(204, 100%, 90%)',
+  color11: 'hsl(204, 100%, 98%)',
+  color12: 'hsl(204, 100%, 100%)'
 };

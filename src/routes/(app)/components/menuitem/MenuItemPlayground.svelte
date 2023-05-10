@@ -9,6 +9,7 @@
   import { writable } from 'svelte/store';
 
   let exampleRef: any;
+  let colorful = false;
   let disabled = false;
 
   let renderChoice: 'performance' | 'quality' = 'performance';
@@ -40,7 +41,7 @@
       <MenuItem value="file-new" text="New" />
       <MenuItem value="open-file" text="Open..." />
       <MenuItem value="open-folder" text="Open Folder..." />
-      <MenuItem value="open-recent" text="Open Recent">
+      <MenuItem {colorful} value="open-recent" text="Open Recent">
         <MenuItem value="recent-1" text="Recent File 1" />
         <MenuItem value="recent-2" text="Recent File 2" />
         <MenuItem value="recent-3" text="Recent File 3" />
@@ -89,6 +90,7 @@
     </MenuItem>
   </svelte:fragment>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful (Recent Items)</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
   </svelte:fragment>
 </Playground>

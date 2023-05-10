@@ -128,9 +128,4 @@
     font-size: 1.2em;
     font-weight: normal;
   }
-
-  .tweaks-tip {
-    max-width: 300px;
-    padding: 1em;
-  }
 </style>

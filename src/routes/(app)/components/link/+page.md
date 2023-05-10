@@ -18,6 +18,7 @@ A styled `<a/>`.
 
   // HTMLLabelElement props are forwarded
 
+  let colorful: boolean = false;
   let variant: LinkVariant = 'regular';
 
   // ----- Events ----- //

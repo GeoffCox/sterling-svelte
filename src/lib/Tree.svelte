@@ -9,6 +9,7 @@
 
   // ----- Props ----- //
 
+  export let colorful = false;
   export let composed = false;
   export let disabled = false;
   export let selectedValue: string | undefined = undefined;
@@ -18,9 +19,10 @@
 
   let treeRef: HTMLDivElement;
 
-  const selectedValueStore = writable<string | undefined>(selectedValue);
-  const expandedValuesStore = writable<string[]>(expandedValues);
+  const colorfulStore = writable<boolean>(colorful);
   const disabledStore = writable<boolean>(disabled);
+  const expandedValuesStore = writable<string[]>(expandedValues);
+  const selectedValueStore = writable<string | undefined>(selectedValue);
 
   // ----- Methods ----- //
 
@@ -65,14 +67,19 @@
   }
 
   $: {
+    colorfulStore.set(colorful);
+  }
+
+  $: {
     disabledStore.set(disabled);
   }
 
   // ----- Set Context ----- //
   setContext<TreeContext>(TREE_CONTEXT_KEY, {
+    colorful: colorfulStore,
+    disabled: disabledStore,
     expandedValues: expandedValuesStore,
-    selectedValue: selectedValueStore,
-    disabled: disabledStore
+    selectedValue: selectedValueStore
   });
 </script>
 
@@ -81,6 +88,7 @@
   bind:this={treeRef}
   aria-disabled={disabled}
   class="sterling-tree"
+  class:colorful
   class:composed
   class:disabled
   class:using-keyboard={$usingKeyboard}
@@ -119,7 +127,7 @@
   {...$$restProps}
 >
   <div class="container">
-    <slot {composed} {disabled} />
+    <slot {colorful} {composed} {disabled} />
   </div>
 </div>
 

@@ -5,6 +5,7 @@
 
   // ----- Props ----- //
 
+  export let colorful = false;
   export let composed = false;
   export let disabled: boolean = false;
   export let min: number = 0;
@@ -179,6 +180,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   aria-valuenow={value}
   aria-valuemax={max}
   class="sterling-slider"
+  class:colorful
   class:composed
   class:disabled
   class:horizontal={!vertical}
@@ -244,13 +246,39 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
+  .sterling-slider.horizontal {
+    height: 2em;
+  }
+
   .sterling-slider.vertical {
     height: 100%;
+    width: 2em;
   }
+
+  .sterling-slider.composed,
+  .sterling-slider.composed:hover,
+  .sterling-slider.composed.focus,
+  .sterling-slider.composed.disabled {
+    background: none;
+    border: none;
+    outline: none;
+  }
+
+  /* ----- container ----- */
 
   .container {
     position: relative;
   }
+
+  .sterling-slider.horizontal .container {
+    margin: 0 0.75em;
+  }
+
+  .sterling-slider.vertical .container {
+    margin: 0.75em 0;
+  }
+
+  /* ----- track ----- */
 
   .track {
     position: absolute;
@@ -258,11 +286,57 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
+  .sterling-slider.horizontal .track {
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 3px;
+    transform: translate(0, -50%);
+  }
+
+  .sterling-slider.vertical .track {
+    bottom: 0;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0);
+    width: 3px;
+  }
+
+  .sterling-slider:focus-visible {
+    outline-color: var(--stsv-Common__outline-color);
+    outline-offset: var(--stsv-Common__outline-offset);
+    outline-style: var(--stsv-Common__outline-style);
+    outline-width: var(--stsv-Common__outline-width);
+  }
+
+  /* ----- fill ----- */
+
   .fill {
     background: var(--stsv-Display__color);
     position: absolute;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
+
+  .sterling-slider.horizontal .fill {
+    height: 3px;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
+  .sterling-slider.vertical .fill {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 3px;
+  }
+
+  .sterling-slider.colorful .fill {
+    background: var(--stsv-Common--colorful__border-color--selected);
+    position: absolute;
+    transition: background-color 250ms, color 250ms, border-color 250ms;
+  }
+
+  /* ----- thumb ----- */
 
   .thumb {
     background-color: var(--stsv-Button__background-color);
@@ -286,57 +360,9 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     width: 1.5em;
   }
 
-  /* ----- horizontal ----- */
-
-  .sterling-slider.horizontal {
-    height: 2em;
-  }
-
-  .sterling-slider.horizontal .container {
-    margin: 0 0.75em;
-  }
-
-  .sterling-slider.horizontal .track {
-    left: 0;
-    right: 0;
-    top: 50%;
-    height: 3px;
-    transform: translate(0, -50%);
-  }
-
-  .sterling-slider.horizontal .fill {
-    height: 3px;
-    top: 50%;
-    transform: translate(0, -50%);
-  }
-
   .sterling-slider.horizontal .thumb {
     top: 50%;
     transform: translate(-50%, -50%);
-  }
-
-  /* ----- vertical ----- */
-
-  .sterling-slider.vertical {
-    width: 2em;
-  }
-  .sterling-slider.vertical .container {
-    margin: 0.75em 0;
-  }
-
-  .sterling-slider.vertical .track {
-    bottom: 0;
-    left: 50%;
-    top: 0;
-    transform: translate(-50%, 0);
-    width: 3px;
-  }
-
-  .sterling-slider.vertical .fill {
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 3px;
   }
 
   .sterling-slider.vertical .thumb {
@@ -344,15 +370,11 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     transform: translate(-50%, 50%);
   }
 
-  /* ----- hover ----- */
-
   .thumb:hover {
     background-color: var(--stsv-Button__background-color--hover);
     border-color: var(--stsv-Button__border-color--hover);
     color: var(--stsv-Button__color--hover);
   }
-
-  /* ----- active ----- */
 
   .thumb:active {
     background-color: var(--stsv-Button__background-color--active);
@@ -360,15 +382,15 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     color: var(--stsv-Button__color--active);
   }
 
-  /* ----- focus ----- */
-  .sterling-slider:focus-visible {
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+  /* ----- thumb colorful ----- */
+
+  .sterling-slider.colorful .thumb {
+    background-color: var(--stsv-Button--colorful__background-color);
+    border-color: var(--stsv-Button--colorful__border-color);
+    color: var(--stsv-Button--colorful__color);
   }
 
-  /* ----- disabled ----- */
+  /* ----- thumb disabled ----- */
 
   .sterling-slider.disabled .thumb {
     cursor: not-allowed;
@@ -392,14 +414,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
     opacity: 1;
   }
 
-  .sterling-slider.composed,
-  .sterling-slider.composed:hover,
-  .sterling-slider.composed.focus,
-  .sterling-slider.composed.disabled {
-    background: none;
-    border: none;
-    outline: none;
-  }
+  /* ----- reduced motion ----- */
 
   @media (prefers-reduced-motion) {
     .sterling-slider,

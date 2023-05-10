@@ -5,6 +5,7 @@
   // ----- Props ----- //
 
   export let autoHeight = false;
+  export let colorful = false;
   export let disabled = false;
   export let resize: TextAreaResize = 'none';
   export let value: string = '';
@@ -74,7 +75,7 @@
   };
 </script>
 
-<div class="sterling-text-area" class:disabled>
+<div class="sterling-text-area" class:colorful class:disabled>
   <textarea
     bind:this={textAreaRef}
     bind:value
@@ -162,6 +163,24 @@
     outline-offset: var(--stsv-Common__outline-offset);
     outline-style: var(--stsv-Common__outline-style);
     outline-width: var(--stsv-Common__outline-width);
+  }
+
+  .sterling-text-area.colorful textarea {
+    background-color: var(--stsv-Input--colorful__background-color);
+    border-color: var(--stsv-Input--colorful__border-color);
+    color: var(--stsv-Input--colorful__color);
+  }
+
+  .sterling-text-area.colorful textarea:hover {
+    background-color: var(--stsv-Input--colorful__background-color--hover);
+    border-color: var(--stsv-Input--colorful__border-color--hover);
+    color: var(--stsv-Input--colorful__color--hover);
+  }
+
+  .sterling-text-area.colorful textarea:focus {
+    background-color: var(--stsv-Input--colorful__background-color--focus);
+    border-color: var(--stsv-Input--colorful__border-color--focus);
+    color: var(--stsv-Input--colorful__color--focus);
   }
 
   .sterling-text-area:disabled {

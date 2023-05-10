@@ -14,6 +14,7 @@ A styled `<input />`.
 
   // HTMLInputElement props are forwarded
 
+  let colorful: boolean = false;
   let composed = false;
 
   // ----- Events ----- //

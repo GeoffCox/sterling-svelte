@@ -16,6 +16,7 @@ A draggable 'thumb' on a line to set a value in a range.
 
   // HTMLDivElement props are forwarded
 
+  let colorful: boolean = false;
   let composed = false;
   let disabled: boolean = false;
   let min: number = 0;

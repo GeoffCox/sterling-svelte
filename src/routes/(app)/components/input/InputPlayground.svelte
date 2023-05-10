@@ -7,6 +7,7 @@
 
   let exampleRef: any;
 
+  let colorful = false;
   let composed = false;
   let disabled = false;
   let label = '';
@@ -19,6 +20,7 @@
     {#if label.length > 0}
       <Input
         bind:value
+        {colorful}
         {disabled}
         {placeholder}
         {composed}
@@ -28,6 +30,7 @@
     {:else}
       <Input
         bind:value
+        {colorful}
         {disabled}
         {placeholder}
         {composed}
@@ -37,6 +40,7 @@
     {/if}
   </svelte:fragment>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <LabelBox label="placeholder">

@@ -4,6 +4,8 @@ import type { Readable, Writable } from 'svelte/store';
  * Context for a Tree and its tree items.
  */
 export type TreeContext = {
+  colorful: Readable<boolean>;
+
   /** If the tree is disabled */
   disabled: Readable<boolean>;
 

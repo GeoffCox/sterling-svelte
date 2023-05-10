@@ -10,6 +10,7 @@
 
   // ----- Props ----- //
 
+  export let colorful: boolean = false;
   export let composed: boolean = false;
   export let disabled: boolean = false;
   export let open = false;
@@ -82,6 +83,7 @@
   aria-haspopup={true}
   aria-expanded={open}
   class="sterling-dropdown"
+  class:colorful
   class:composed
   class:disabled
   role="combobox"
@@ -118,16 +120,16 @@
   on:click_outside={onClickOutside}
   {...$$restProps}
 >
-  <slot name="value" {composed} {disabled} {open} />
-  <slot name="button" {composed} {disabled} {open}>
+  <slot name="value" {colorful} {composed} {disabled} {open} />
+  <slot name="button" {colorful} {composed} {disabled} {open}>
     <div class="button">
       <div class="chevron" />
     </div>
   </slot>
 
   <Popup reference={dropdownRef} open={!disabled && open}>
-    <div class="popup-content" bind:this={popupContentRef}>
-      <slot {composed} {disabled} {open} />
+    <div class="popup-content" class:colorful bind:this={popupContentRef}>
+      <slot {colorful} {composed} {disabled} {open} />
     </div>
   </Popup>
 </div>
@@ -165,6 +167,24 @@
     outline-offset: var(--stsv-Common__outline-offset);
     outline-style: var(--stsv-Common__outline-style);
     outline-width: var(--stsv-Common__outline-width);
+  }
+
+  .sterling-dropdown.colorful {
+    background-color: var(--stsv-Input--colorful__background-color);
+    border-color: var(--stsv-Input--colorful__border-color);
+    color: var(--stsv-Input--colorful__color);
+  }
+
+  .sterling-dropdown.colorful:hover {
+    background-color: var(--stsv-Input--colorful__background-color--hover);
+    border-color: var(--stsv-Input--colorful__border-color--hover);
+    color: var(--stsv-Input--colorful__color--hover);
+  }
+
+  .sterling-dropdown.colorful:focus {
+    background-color: var(--stsv-Input--colorful__background-color--focus);
+    border-color: var(--stsv-Input--colorful__border-color--focus);
+    color: var(--stsv-Input--colorful__color--focus);
   }
 
   .sterling-dropdown.disabled {
@@ -243,41 +263,24 @@
     transform-origin: 50% 50%;
   }
 
-  .popup {
-    background-color: var(--stsv-Common__background-color);
-    border-color: var(--stsv-Common__border-color);
-    border-radius: var(--stsv-Common__border-radius);
-    border-style: var(--stsv-Common__border-style);
-    border-width: var(--stsv-Common__border-width);
-    box-sizing: border-box;
-    color: var(--stsv-Common__color);
-    display: none;
-    overflow: visible;
-    outline: none;
-    position: absolute;
-    box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 4px -1px;
-    width: fit-content;
-    height: fit-content;
-    z-index: 1;
-  }
-
-  .popup.open {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-  }
-
   .popup-content {
     background-color: var(--stsv-Common__background-color);
     border-color: var(--stsv-Common__border-color);
     border-radius: var(--stsv-Common__border-radius);
     border-style: var(--stsv-Common__border-style);
     border-width: var(--stsv-Common__border-width);
+    color: var(--stsv-Common__color);
     padding: 0.25em;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     overflow: hidden;
+  }
+
+  .popup-content.colorful {
+    background-color: var(--stsv-Common--colorful__background-color);
+    border-color: var(--stsv-Common--colorful__border-color);
+    color: var(--stsv-Common--colorful__color);
   }
 
   @media (prefers-reduced-motion) {

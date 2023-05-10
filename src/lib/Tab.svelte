@@ -15,6 +15,7 @@
   let tabRef: HTMLButtonElement;
 
   const {
+    colorful,
     disabled: tabListDisabled,
     selectedValue,
     vertical
@@ -51,6 +52,7 @@
   bind:this={tabRef}
   aria-selected={selected}
   class="sterling-tab"
+  class:colorful={$colorful}
   disabled={_disabled}
   class:selected
   class:using-keyboard={$usingKeyboard}
@@ -142,22 +144,14 @@
     column-gap: 0.15em;
   }
 
-  .sterling-tab:hover {
-    background-color: var(--stsv-Common__background-color--hover);
-    color: var(--stsv-Common__color--hover);
-  }
-
-  .sterling-tab:active {
-    background-color: var(--stsv-Common__background-color--active);
-    color: var(--stsv-Common__color--active);
-  }
-
   .sterling-tab.using-keyboard:focus-visible {
     outline-color: var(--stsv-Common__outline-color);
     outline-offset: var(--stsv-Common__outline-offset);
     outline-style: var(--stsv-Common__outline-style);
     outline-width: var(--stsv-Common__outline-width);
   }
+
+  /* ----- disabled -----*/
 
   .sterling-tab:disabled {
     cursor: not-allowed;
@@ -181,6 +175,8 @@
     opacity: 1;
   }
 
+  /* ----- content -----*/
+
   .content {
     padding: 0 0.2em;
   }
@@ -188,6 +184,8 @@
   .sterling-tab.vertical .content .text {
     padding-top: 0.25em;
   }
+
+  /* ----- indicator -----*/
 
   .indicator {
     background-color: transparent;
@@ -205,23 +203,42 @@
     width: 0.4em;
   }
 
-  .sterling-tab:hover .indicator {
-    background-color: var(--stsv-Display__color--faint);
+  .sterling-tab:not(.selected):not(:active):hover .indicator {
+    background-color: var(--stsv-Common__border-color--hover);
+    opacity: 0.3;
   }
 
   .sterling-tab:active .indicator {
-    background-color: var(--stsv-Button__border-color--hover);
-  }
-
-  .sterling-tab:disabled .indicator,
-  .sterling-tab:disabled:hover .indicator,
-  .sterling-tab:disabled:active .indicator {
-    background-color: transparent;
+    background-color: var(--stsv-Common__border-color--active);
   }
 
   .sterling-tab.selected .indicator {
-    background-color: var(--stsv-Input__color);
+    background-color: var(--stsv-Common__border-color--selected);
   }
+
+  /* ----- indicator colorful -----*/
+
+  .sterling-tab.colorful:not(.selected):not(:active):hover .indicator {
+    background-color: var(--stsv-Common--colorful__border-color--hover);
+  }
+
+  .sterling-tab.colorful:active .indicator {
+    background-color: var(--stsv-Common--colorful__border-color--active);
+  }
+
+  .sterling-tab.colorful.selected .indicator {
+    background-color: var(--stsv-Common--colorful__border-color--active);
+  }
+
+  /* ----- indicator disabled -----*/
+
+  .sterling-tab:disabled:not(.selected) .indicator,
+  .sterling-tab:disabled:not(.selected):hover .indicator,
+  .sterling-tab:disabled:not(.selected):active .indicator {
+    background-color: transparent;
+  }
+
+  /* ----- reduced motion -----*/
 
   @media (prefers-reduced-motion) {
     .sterling-tab,

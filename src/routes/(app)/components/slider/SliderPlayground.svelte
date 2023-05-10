@@ -8,6 +8,7 @@
   let exampleRef: any;
 
   let value = 0;
+  let colorful = false;
   let disabled = false;
   let min = 0;
   let max = 100;
@@ -76,6 +77,7 @@
         bind:precision
         bind:step
         bind:vertical
+        {colorful}
         {disabled}
         on:change={(e) => exampleRef.recordEvent(`change value:${e.detail.value}`)}
       />
@@ -87,12 +89,14 @@
         bind:precision
         bind:step
         bind:vertical
+        {colorful}
         {disabled}
         on:change={(e) => exampleRef.recordEvent(`change value:${e.detail.value}`)}
       />
     {/if}
   </div>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="min">
       <Input value={min.toString()} on:change={onMinChange} composed />

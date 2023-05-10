@@ -18,6 +18,7 @@ A styled `<textarea/>`.
   // HTMLDivElement props are forwarded
 
   let autoHeight: boolean = false;
+  let colorful: boolean = false;
   let resize: TextAreaResize = 'none';
   let value: string;
 

@@ -24,6 +24,7 @@
   // ----- Props ----- //
 
   export let checked = false;
+  export let colorful = false;
   export let composed = false;
   export let disabled = false;
   export let value: string;
@@ -361,6 +362,7 @@
   aria-owns={menuId}
   bind:this={menuItemRef}
   class="sterling-menu-item"
+  class:colorful
   class:composed
   class:using-keyboard={usingKeyboard}
   data-value={value}
@@ -478,6 +480,26 @@
 
   .sterling-menu-item:focus {
     background-color: var(--stsv-Input__background-color--selected);
+  }
+
+  /** ----- colorful ----- */
+
+  .sterling-menu-item.colorful {
+    color: var(--stsv-Common--colorful__color);
+  }
+
+  .sterling-menu-item.colorful:hover {
+    background-color: var(--stsv-Button--colorful__background-color--hover);
+    color: var(--stsv-Button--colorful__color--hover);
+  }
+
+  .sterling-menu-item.colorful.using-keyboard:focus {
+    border-color: var(--stsv-Button--colorful__border-color--focus);
+  }
+
+  .sterling-menu-item.colorful:focus {
+    background-color: var(--stsv-Button--colorful__background-color--focus);
+    color: var(--stsv-Button--colorful__color--focus);
   }
 
   .sterling-menu-item.composed,

@@ -7,7 +7,7 @@
 
   import { TREE_CONTEXT_KEY, TREE_ITEM_CONTEXT_KEY } from './Tree.constants';
   import TreeItemDisplay from './TreeItemDisplay.svelte';
-  import { writable } from 'svelte/store';
+  import { readable, writable } from 'svelte/store';
   import { prefersReducedMotion } from './stores/prefersReducedMotion';
 
   // ----- Props ----
@@ -25,11 +25,17 @@
   // ----- Get Context ----- //
 
   const {
+    colorful,
+    disabled: treeDisabled,
     expandedValues,
-    selectedValue,
-    disabled: treeDisabled
+    selectedValue
   } = getContext<TreeContext>(TREE_CONTEXT_KEY);
-  const { depth = 0 } = getContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY) || {};
+  const { depth = 0 } = getContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY) || {
+    colorful: readable(false),
+    disabled: readable(false),
+    expandedValues: readable([]),
+    selectedValue: readable(undefined)
+  };
 
   // ----- State ----- //
 
@@ -326,6 +332,7 @@ A item in a Tree displaying the item and children.
   aria-expanded={expanded}
   bind:this={treeItemRef}
   class="sterling-tree-item"
+  class:colorful={$colorful}
   class:disabled={_disabled}
   data-value={value}
   role="treeitem"
@@ -371,10 +378,33 @@ A item in a Tree displaying the item and children.
     on:keydown={onKeydown}
   >
     <slot name="item" {depth} disabled={_disabled} {expanded} {hasChildren} {selected} {value}>
-      <TreeItemDisplay {depth} disabled={_disabled} {expanded} {hasChildren} {selected} {value}>
-        <svelte:fragment let:depth let:disabled let:expanded let:hasChildren let:selected let:value>
-          <slot name="label" {depth} {disabled} {expanded} {hasChildren} {selected} {value}
-            >{value}</slot
+      <TreeItemDisplay
+        colorful={$colorful}
+        {depth}
+        disabled={_disabled}
+        {expanded}
+        {hasChildren}
+        {selected}
+        {value}
+      >
+        <svelte:fragment
+          let:colorful
+          let:depth
+          let:disabled
+          let:expanded
+          let:hasChildren
+          let:selected
+          let:value
+        >
+          <slot
+            name="label"
+            {colorful}
+            {depth}
+            {disabled}
+            {expanded}
+            {hasChildren}
+            {selected}
+            {value}>{value}</slot
           >
         </svelte:fragment>
       </TreeItemDisplay>

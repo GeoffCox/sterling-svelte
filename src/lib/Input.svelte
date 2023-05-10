@@ -5,6 +5,7 @@
 
   // ----- Props ----- //
 
+  export let colorful = false;
   export let composed = false;
   export let disabled = false;
   export let id: string | undefined = undefined;
@@ -65,7 +66,7 @@
     <slot {composed} {disabled} {value} />
   </Label>
 {/if}
-<div class="sterling-input" class:composed class:disabled>
+<div class="sterling-input" class:colorful class:composed class:disabled>
   <input
     bind:this={inputRef}
     {disabled}
@@ -131,7 +132,7 @@
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
-  .sterling-input:hover input {
+  .sterling-input:hover input:not(:disabled) {
     background-color: var(--stsv-Input__background-color--hover);
     border-color: var(--stsv-Input__border-color--hover);
     color: var(--stsv-Input__color--hover);
@@ -145,6 +146,24 @@
     outline-offset: var(--stsv-Common__outline-offset);
     outline-style: var(--stsv-Common__outline-style);
     outline-width: var(--stsv-Common__outline-width);
+  }
+
+  .sterling-input.colorful input {
+    background-color: var(--stsv-Input--colorful__background-color);
+    border-color: var(--stsv-Input--colorful__border-color);
+    color: var(--stsv-Input--colorful__color);
+  }
+
+  .sterling-input.colorful:hover input:not(:disabled) {
+    background-color: var(--stsv-Input--colorful__background-color--hover);
+    border-color: var(--stsv-Input--colorful__border-color--hover);
+    color: var(--stsv-Input--colorful__color--hover);
+  }
+
+  .sterling-input.colorful input:focus {
+    background-color: var(--stsv-Input--colorful__background-color--focus);
+    border-color: var(--stsv-Input--colorful__border-color--focus);
+    color: var(--stsv-Input--colorful__color--focus);
   }
 
   .sterling-input.composed input,

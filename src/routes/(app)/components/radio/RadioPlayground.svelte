@@ -9,6 +9,7 @@
 
   const seed = [...Array(5).keys()];
 
+  let colorful = false;
   let disabled = false;
   let label = 'Sterling';
   let selectedValue = '';
@@ -21,6 +22,7 @@
     {#each possibleValues as possibleValue}
       <Radio
         bind:group={selectedValue}
+        {colorful}
         {disabled}
         name="choices"
         value={possibleValue}
@@ -30,6 +32,7 @@
     {/each}
   </div>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="label (prefix)">
       <Input bind:value={label} composed />

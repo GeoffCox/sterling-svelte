@@ -3,7 +3,6 @@
   import Playground from '../Playground.svelte';
 
   import type { ButtonShape, ButtonVariant } from '$lib';
-
   import { BUTTON_SHAPES, BUTTON_VARIANTS } from '$lib';
 
   import Button from '$lib/Button.svelte';
@@ -16,13 +15,20 @@
   let disabled = false;
   let shape: ButtonShape = 'rounded';
   let variant: ButtonVariant = 'regular';
+  let colorful = false;
   let withIcon = true;
   let withText = true;
 </script>
 
 <Playground bind:this={exampleRef}>
   <div class="component" slot="component">
-    <Button {disabled} {shape} {variant} on:click={() => exampleRef.recordEvent('click')}>
+    <Button
+      {colorful}
+      {disabled}
+      {shape}
+      {variant}
+      on:click={() => exampleRef.recordEvent('click')}
+    >
       {#if withIcon}
         <SvelteIcon />
       {/if}
@@ -32,6 +38,7 @@
     </Button>
   </div>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="shape" forwardClick>
       <Select bind:selectedValue={shape} composed>

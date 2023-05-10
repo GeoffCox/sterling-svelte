@@ -10,6 +10,7 @@
 
   let exampleRef: any;
 
+  let colorful = false;
   let composed = false;
   let disabled = false;
   let horizontal = false;
@@ -33,6 +34,7 @@
   <div class="component" class:horizontal slot="component">
     <List
       bind:selectedValue
+      {colorful}
       {composed}
       {disabled}
       {horizontal}
@@ -47,6 +49,7 @@
     </List>
   </div>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={horizontal}>horizontal</Checkbox>

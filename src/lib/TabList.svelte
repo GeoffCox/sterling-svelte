@@ -9,7 +9,8 @@
 
   // ----- Props ----- //
 
-  export let disabled: boolean = false;
+  export let colorful = false;
+  export let disabled = false;
   export let vertical = false;
   export let selectedValue: string | undefined = undefined;
 
@@ -18,10 +19,12 @@
   let tabListRef: HTMLDivElement;
   let lastSelectedTabRef: HTMLElement;
 
+  const colorfulStore = writable<boolean>(colorful);
   const disabledStore = writable<boolean>(disabled);
   const selectedValueStore = writable<string | undefined>(selectedValue);
   const verticalStore = writable<boolean>(vertical);
 
+  $: colorfulStore.set(colorful);
   $: disabledStore.set(disabled);
 
   $: selectedValueStore.set(selectedValue);
@@ -215,6 +218,7 @@
   // ----- Set Context ----- //
 
   setContext<TabListContext>(TAB_LIST_CONTEXT_KEY, {
+    colorful: colorfulStore,
     disabled: disabledStore,
     selectedValue: selectedValueStore,
     vertical: verticalStore
@@ -225,9 +229,10 @@
   aria-orientation={vertical ? 'vertical' : 'horizontal'}
   bind:this={tabListRef}
   class="sterling-tab-list"
-  role="tablist"
-  class:vertical
+  class:colorful
   class:disabled
+  class:vertical
+  role="tablist"
   on:blur
   on:click
   on:click={onClick}

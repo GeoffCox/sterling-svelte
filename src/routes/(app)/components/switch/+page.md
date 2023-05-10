@@ -17,9 +17,10 @@ A styled `<input type=checkbox/>`.
 
   // HTMLDivElement props are forwarded
 
-  let vertical: boolean = false;
-  let onText: string | undefined = undefined;
+  let colorful: boolean = false;
   let offText: string | undefined = undefined;
+  let onText: string | undefined = undefined;
+  let vertical: boolean = false;
 
   // ----- Events ----- //
 

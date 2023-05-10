@@ -5,6 +5,7 @@
   // ----- Props ----- //
 
   export let checked: boolean = false;
+  export let colorful: boolean = false;
   export let disabled: boolean = false;
   export let id: string | undefined = undefined;
 
@@ -37,7 +38,7 @@
 	@component
 	A styled HTML input type=checkbox element.
 -->
-<div class="sterling-checkbox" class:disabled>
+<div class="sterling-checkbox" class:colorful class:disabled>
   <div class="container">
     <input
       bind:this={inputRef}
@@ -146,7 +147,7 @@
     border-color: var(--stsv-Input__border-color);
   }
 
-  .sterling-checkbox:hover .indicator {
+  .sterling-checkbox:not(.disabled):hover .indicator {
     background-color: var(--stsv-Input__background-color--hover);
     border-color: var(--stsv-Input__border-color--hover);
   }
@@ -182,8 +183,26 @@
     opacity: 1;
   }
 
-  .sterling-checkbox:hover input:checked + .indicator::after {
+  .sterling-checkbox:not(.disabled):hover input:checked + .indicator::after {
     border-color: var(--stsv-Input__color--hover);
+  }
+
+  .sterling-checkbox.colorful .indicator {
+    background-color: var(--stsv-Input--colorful__background-color);
+    border-color: var(--stsv-Input--colorful__border-color);
+  }
+
+  .sterling-checkbox.colorful:not(.disabled):hover .indicator {
+    background-color: var(--stsv-Input--colorful__background-color--hover);
+    border-color: var(--stsv-Input--colorful__border-color--hover);
+  }
+
+  .sterling-checkbox.colorful .indicator::after {
+    border-color: var(--stsv-Input--colorful__color);
+  }
+
+  .sterling-checkbox.colorful:not(.disabled):hover input:checked + .indicator::after {
+    border-color: var(--stsv-Input--colorful__color--hover);
   }
 
   .sterling-checkbox.disabled,

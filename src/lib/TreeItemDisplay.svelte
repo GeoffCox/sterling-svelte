@@ -7,6 +7,7 @@
 
   // ----- Props ----- //
 
+  export let colorful = false;
   export let depth = 0;
   export let disabled = false;
   export let expanded = false;
@@ -42,6 +43,7 @@
 <div
   bind:this={divRef}
   class="sterling-tree-item-display"
+  class:colorful
   class:disabled={disabled && !$treeDisabled}
   class:item-disabled={disabled}
   class:expanded
@@ -81,7 +83,7 @@
   {...$$restProps}
 >
   <TreeChevron {expanded} {hasChildren} />
-  <slot {depth} {disabled} {expanded} {hasChildren} {selected} {value} />
+  <slot {colorful} {depth} {disabled} {expanded} {hasChildren} {selected} {value} />
 </div>
 
 <style>
@@ -110,8 +112,18 @@
   }
 
   .sterling-tree-item-display.selected {
-    background-color: var(--stsv-Input__background-color--selected);
-    color: var(--stsv-Input__color--selected);
+    background-color: var(--stsv-Button__background-color--active);
+    color: var(--stsv-Button__color--active);
+  }
+
+  .sterling-tree-item-display.colorful:not(.item-disabled):not(.selected):hover {
+    background-color: var(--stsv-Button--colorful__background-color--hover);
+    color: var(--stsv-Button--colorful__color--hover);
+  }
+
+  .sterling-tree-item-display.colorful.selected {
+    background-color: var(--stsv-Button--colorful__background-color--active);
+    color: var(--stsv-Button--colorful__color--active);
   }
 
   .sterling-tree-item-display.disabled {

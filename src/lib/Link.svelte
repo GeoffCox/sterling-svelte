@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { LinkVariant } from './Link.types';
 
+  export let colorful: boolean = false;
   export let href: string;
   export let disabled: boolean = false;
   export let variant: LinkVariant = 'regular';
@@ -25,6 +26,7 @@
 <a
   bind:this={linkRef}
   class="sterling-link"
+  class:colorful
   class:disabled
   class:ghost={variant === 'ghost'}
   class:undecorated={variant === 'undecorated'}
@@ -70,10 +72,10 @@
     border-left: none;
     border-right: none;
     border-radius: 0;
-    border-bottom-style: var(--stsv-Button__border-style);
-    border-bottom-width: calc(var(--stsv-Button__border-width));
-    border-bottom-color: var(--stsv-Button__border-color);
-    color: var(--stsv-Button__color);
+    border-bottom-style: var(--stsv-Common__border-style);
+    border-bottom-width: calc(var(--stsv-Common__border-width));
+    border-bottom-color: var(--stsv-Common__border-color);
+    color: var(--stsv-Common__color);
     cursor: pointer;
     font: inherit;
     text-decoration: none;
@@ -84,34 +86,78 @@
   }
 
   a:visited {
-    border-bottom-color: var(--stsv-Button__border-color);
+    border-bottom-color: var(--stsv-Common__border-color);
   }
+
+  a:hover {
+    border-bottom-color: var(--stsv-Common__border-color--hover);
+    color: var(--stsv-Common__color--hover);
+  }
+
+  a:active {
+    border-bottom-color: var(--stsv-Common__border-color--active);
+    color: var(--stsv-Common__color--active);
+  }
+
+  /* ----- colorful ----- */
+
+  a.colorful,
+  a.colorful:visited {
+    border-bottom-color: var(--stsv-Common--colorful__border-color);
+    color: var(--stsv-Common--colorful__color);
+  }
+
+  a.colorful:hover {
+    border-bottom-color: var(--stsv-Common--colorful__border-color--hover);
+    color: var(--stsv-Common--colorful__color--hover);
+  }
+
+  a.colorful:active {
+    border-bottom-color: var(--stsv-Common--colorful__border-color--active);
+    color: var(--stsv-Common--colorful__color--active);
+  }
+
+  /* ----- ghost ----- */
 
   a.ghost {
     border-bottom-color: transparent;
   }
 
-  a:hover {
-    border-bottom-color: var(--stsv-Button__border-color--hover);
-    color: var(--stsv-Button__color--hover);
+  a.ghost:hover {
+    border-bottom-color: var(--stsv-Common__border-color--hover);
   }
 
-  a:active {
-    border-bottom-color: var(--stsv-Button__border-color--active);
-    color: var(--stsv-Button__color--active);
+  a.ghost:active {
+    border-bottom-color: var(--stsv-Common__border-color--active);
   }
 
-  a.disabled {
+  /* ----- ghost colorful ----- */
+
+  a.ghost.colorful:hover {
+    border-bottom-color: var(--stsv-Common--colorful__border-color--hover);
+  }
+
+  a.ghost.colorful:active {
+    border-bottom-color: var(--stsv-Common--colorful__border-color--active);
+  }
+
+  /* ----- disabled ----- */
+
+  a.disabled,
+  a.disabled:visited,
+  a.disabled:hover,
+  a.disabled:active {
     border-bottom-color: var(--stsv-Common__border-color--disabled);
     color: var(--stsv-Common__color--disabled);
     cursor: not-allowed;
     pointer-events: none;
   }
 
+  /* ----- undecorated ----- */
   a.undecorated,
   a.undecorated:hover,
   a.undecorated:active,
   a.undecorated:visited {
-    border: none;
+    border-bottom-color: transparent;
   }
 </style>

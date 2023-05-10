@@ -5,6 +5,7 @@
   // ----- Props ----- //
 
   export let checked: boolean = false;
+  export let colorful: boolean = false;
   export let disabled: boolean = false;
   export let vertical: boolean = false;
 
@@ -48,7 +49,7 @@
 	@component
 	A styled HTML input type=checkbox element.
 -->
-<div class="sterling-switch" class:vertical class:disabled>
+<div class="sterling-switch" class:colorful class:disabled class:vertical>
   <input
     bind:this={inputRef}
     bind:checked
@@ -154,6 +155,8 @@
     grid-row: 1 / span 1;
   }
 
+  /* ----- input hidden ----- */
+
   input {
     font: inherit;
     margin: 0;
@@ -165,6 +168,8 @@
     top: 0;
     opacity: 0;
   }
+
+  /* ----- switch ----- */
 
   .switch {
     background-color: var(--stsv-Input__background-color);
@@ -197,6 +202,8 @@
     outline-width: var(--stsv-Common__outline-width);
   }
 
+  /* ----- switch vertical ----- */
+
   .sterling-switch:not(.vertical) .switch {
     width: 2em;
     height: 1.25em;
@@ -207,10 +214,34 @@
     height: 2em;
   }
 
+  /* ----- labels ----- */
+
   .off-label,
   .on-label {
     padding-top: var(--stsv-Button__border-width);
   }
+
+  /* ----- switch colorful ----- */
+
+  .sterling-switch.colorful .switch {
+    background-color: var(--stsv-Input--colorful__background-color);
+    border-color: var(--stsv-Input--colorful__border-color);
+    color: var(--stsv-Input--colorful__color);
+  }
+
+  .sterling-switch.colorful:hover .switch {
+    background-color: var(--stsv-Input--colorful__background-color--hover);
+    border-color: var(--stsv-Input--colorful__border-color--hover);
+    color: var(--stsv-Input_--colorful_color--hover);
+  }
+
+  .sterling-switch.colorful input:focus-visible ~ .switch {
+    background-color: var(--stsv-Input--colorful__background-color--focus);
+    border-color: var(--stsv-Input--colorful__border-color--focus);
+    color: var(--stsv-Common--colorful__color--focux);
+  }
+
+  /* ----- thumb ----- */
 
   .thumb {
     background-color: var(--stsv-Button__background-color);
@@ -240,6 +271,28 @@
     color: var(--stsv-Button__color--hover);
   }
 
+  /* ----- thumb colorful ----- */
+
+  .sterling-switch.colorful .thumb {
+    background-color: var(--stsv-Button--colorful__background-color);
+    border-color: var(--stsv-Button--colorful__border-color);
+    color: var(--stsv-Button--colorful__color);
+  }
+
+  .sterling-switch.colorful:hover .thumb {
+    background-color: var(--stsv-Button--colorful__background-color--hover);
+    border-color: var(--stsv-Button--colorful__border-color--hover);
+    color: var(--stsv-Button--colorful__color--hover);
+  }
+
+  .sterling-switch.colorful:active .thumb {
+    background-color: var(--stsv-Button--colorful__background-color--active);
+    border-color: var(--stsv-Button--colorful__border-color--active);
+    color: var(--stsv-Button--colorful__color--hover);
+  }
+
+  /* ----- thumb disabled ----- */
+
   .sterling-switch .thumb::after {
     background: var(--stsv-Disabled__background);
     bottom: 0;
@@ -257,6 +310,8 @@
     opacity: 1;
   }
 
+  /* ----- thumb vertical ----- */
+
   .sterling-switch:not(.vertical) .thumb {
     top: calc(-1 * var(--stsv-Button__border-width));
     transform: translateX(calc(var(--thumb-offset) - var(--stsv-Button__border-width)));
@@ -266,6 +321,8 @@
     left: calc(-1 * var(--stsv-Button__border-width));
     transform: translateY(calc(var(--thumb-offset) - var(--stsv-Button__border-width)));
   }
+
+  /* ----- reduced motion ----- */
 
   @media (prefers-reduced-motion) {
     .switch,

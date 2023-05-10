@@ -11,6 +11,7 @@
 
   let exampleRef: any;
 
+  let colorful = false;
   let disabled = false;
   let placeholder = 'Type your prose here';
   let autoHeight = false;
@@ -23,6 +24,7 @@
   <svelte:fragment slot="component">
     <TextArea
       bind:value
+      {colorful}
       {disabled}
       {placeholder}
       {resize}
@@ -32,6 +34,7 @@
     />
   </svelte:fragment>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="placeholder">
       <Input bind:value={placeholder} composed />

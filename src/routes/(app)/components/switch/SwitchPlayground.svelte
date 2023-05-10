@@ -10,6 +10,7 @@
 
   let exampleRef: any;
   let checked = false;
+  let colorful = false;
   let disabled = false;
   let vertical = false;
   let offText = 'off';
@@ -25,7 +26,7 @@
 <Playground bind:this={exampleRef}>
   <div slot="component">
     {#if customLabels}
-      <Switch bind:checked {disabled} {vertical} on:change={onSwitchChange}>
+      <Switch bind:checked {colorful} {disabled} {vertical} on:change={onSwitchChange}>
         <div class="chill" slot="offLabel" let:checked let:disabled let:inputId>
           <Label for={inputId}>
             <ChillIcon checked={!checked} {disabled} />
@@ -38,13 +39,22 @@
         </div>
       </Switch>
     {:else}
-      <Switch bind:checked {disabled} {vertical} {onText} {offText} on:change={onSwitchChange} />
+      <Switch
+        bind:checked
+        {colorful}
+        {disabled}
+        {vertical}
+        {onText}
+        {offText}
+        on:change={onSwitchChange}
+      />
     {/if}
   </div>
   <svelte:fragment slot="status">
     <div>checked: {checked}</div>
   </svelte:fragment>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="offText">
       <Input bind:value={offText} composed />

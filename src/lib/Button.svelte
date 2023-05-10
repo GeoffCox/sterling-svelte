@@ -6,6 +6,7 @@
   export let disabled: boolean = false;
   export let variant: ButtonVariant = 'regular';
   export let shape: ButtonShape = 'rounded';
+  export let colorful: boolean = false;
 
   // ----- State ----- //
 
@@ -33,6 +34,7 @@
 <button
   bind:this={buttonRef}
   class="sterling-button"
+  class:colorful
   class:square={shape === 'square'}
   class:circular={shape === 'circular'}
   class:outline={variant === 'outline'}
@@ -137,6 +139,23 @@
     outline-width: var(--stsv-Common__outline-width);
   }
 
+  button.colorful {
+    background-color: var(--stsv-Button--colorful__background-color);
+    border-color: var(--stsv-Button--colorful__border-color);
+    color: var(--stsv-Button--colorful__color);
+  }
+  button.colorful:hover {
+    background-color: var(--stsv-Button--colorful__background-color--hover);
+    border-color: var(--stsv-Button--colorful__border-color--hover);
+    color: var(--stsv-Button--colorful__color--hover);
+  }
+
+  button.colorful:active {
+    background-color: var(--stsv-Button--colorful__background-color--active);
+    border-color: var(--stsv-Button--colorful__border-color--active);
+    color: var(--stsv-Button--colorful__color--active);
+  }
+
   button.outline {
     background-color: transparent;
   }
@@ -147,6 +166,22 @@
 
   button.outline:active {
     background-color: var(--stsv-Button__background-color--active);
+  }
+
+  button.outline.colorful {
+    border-color: var(--stsv-Button--colorful__border-color);
+    color: var(--stsv-Button--colorful__border-color);
+  }
+  button.outline.colorful:hover {
+    background-color: var(--stsv-Button--colorful__background-color--hover);
+    border-color: var(--stsv-Button--colorful__border-color--hover);
+    color: var(--stsv-Button--colorful__color--hover);
+  }
+
+  button.outline.colorful:active {
+    background-color: var(--stsv-Button--colorful__background-color--active);
+    border-color: var(--stsv-Button--colorful__border-color--active);
+    color: var(--stsv-Button--colorful__color--active);
   }
 
   button.ghost {
@@ -166,6 +201,20 @@
 
   button.ghost:focus-visible {
     border-color: var(--stsv-Button__border-color--focus);
+  }
+
+  button.ghost.colorful {
+    color: var(--stsv-Button--colorful__border-color);
+  }
+
+  button.ghost.colorful:hover {
+    background-color: var(--stsv-Button--colorful__background-color--hover);
+    color: var(--stsv-Button--colorful__color--hover);
+  }
+
+  button.ghost.colorful:active {
+    background-color: var(--stsv-Button--colorful__background-color--active);
+    color: var(--stsv-Button--colorful__color--active);
   }
 
   button:disabled {

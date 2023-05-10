@@ -11,6 +11,7 @@
 
   let exampleRef: any;
 
+  let colorful = false;
   let composed = false;
   let disabled = false;
   let expandedValues: string[] = [];
@@ -30,6 +31,7 @@
   <div class="component" slot="component">
     <Tree
       bind:selectedValue
+      {colorful}
       {composed}
       {disabled}
       bind:expandedValues
@@ -42,6 +44,7 @@
     </Tree>
   </div>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <div class="edit-toggled">

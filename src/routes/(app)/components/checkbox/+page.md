@@ -14,6 +14,7 @@ A styled `<input type=checkbox />`.
 
   // HTMLInputElement props are forwarded
 
+  let colorful: boolean = false;
   let shape: ButtonShape = 'rounded';
   let variant: ButtonVariant = 'regular';
 

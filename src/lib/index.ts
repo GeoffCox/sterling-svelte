@@ -14,7 +14,12 @@ export { applyLightTheme } from './theme/applyLightTheme';
 export { applyTheme } from './theme/applyTheme';
 export { darkTheme } from './theme/darkTheme';
 export { lightTheme } from './theme/lightTheme';
-export { neutralColors, lightStatusColors, darkStatusColors } from './theme/colors';
+export {
+  neutralColors,
+  lightStatusColors,
+  darkStatusColors,
+  blueColors as blueAccentColors
+} from './theme/colors';
 export { toggleDarkTheme } from './theme/toggleDarkTheme';
 
 // ----- Component types ----- //
