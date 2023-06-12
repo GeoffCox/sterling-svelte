@@ -442,11 +442,11 @@
   .sterling-menu-item {
     background-color: transparent;
     border-color: transparent;
-    border-radius: var(--stsv-Button__border-radius);
+    border-radius: var(--stsv-button__border-radius);
     border-style: none;
     border-width: 0;
     box-sizing: border-box;
-    color: var(--stsv-Common__color);
+    color: var(--stsv-common__color);
     cursor: pointer;
     font: inherit;
     margin: 0;
@@ -462,8 +462,8 @@
   }
 
   .sterling-menu-item:hover {
-    background-color: var(--stsv-Button__background-color--hover);
-    color: var(--stsv-Button__color--hover);
+    background-color: var(--stsv-button__background-color--hover);
+    color: var(--stsv-button__color--hover);
   }
 
   .sterling-menu-item:focus {
@@ -471,35 +471,35 @@
   }
 
   .sterling-menu-item.using-keyboard:focus {
-    border-color: var(--stsv-Button__border-color--focus);
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+    border-color: var(--stsv-button__border-color--focus);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
   }
 
   .sterling-menu-item:focus {
-    background-color: var(--stsv-Input__background-color--selected);
+    background-color: var(--stsv-input__background-color--selected);
   }
 
   /** ----- colorful ----- */
 
   .sterling-menu-item.colorful {
-    color: var(--stsv-Common--colorful__color);
+    color: var(--stsv-common--colorful__color);
   }
 
   .sterling-menu-item.colorful:hover {
-    background-color: var(--stsv-Button--colorful__background-color--hover);
-    color: var(--stsv-Button--colorful__color--hover);
+    background-color: var(--stsv-button--colorful__background-color--hover);
+    color: var(--stsv-button--colorful__color--hover);
   }
 
   .sterling-menu-item.colorful.using-keyboard:focus {
-    border-color: var(--stsv-Button--colorful__border-color--focus);
+    border-color: var(--stsv-button--colorful__border-color--focus);
   }
 
   .sterling-menu-item.colorful:focus {
-    background-color: var(--stsv-Button--colorful__background-color--focus);
-    color: var(--stsv-Button--colorful__color--focus);
+    background-color: var(--stsv-button--colorful__background-color--focus);
+    color: var(--stsv-button--colorful__color--focus);
   }
 
   .sterling-menu-item.composed,

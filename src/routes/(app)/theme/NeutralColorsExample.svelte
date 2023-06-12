@@ -10,7 +10,7 @@
         style="background-color: {neutralColors[key]}"
         title={`${neutralColors[key]}`}
       />
-      <div class="name" style="color: {neutralColors[key]}">{key}</div>
+      <div class="name">{key}</div>
     </div>
   {/each}
 </div>
@@ -32,7 +32,7 @@
   }
 
   .swatch {
-    border: 1px dashed var(--stsv-Common__border-color);
+    border: 1px dashed var(--stsv-common__border-color);
     height: 1em;
     margin-bottom: 0.25em;
     width: 1em;

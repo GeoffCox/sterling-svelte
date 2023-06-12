@@ -128,13 +128,13 @@
   }
 
   textarea {
-    background-color: var(--stsv-Input__background-color);
-    border-color: var(--stsv-Input__border-color);
-    border-radius: var(--stsv-Input__border-radius);
-    border-style: var(--stsv-Input__border-style);
-    border-width: var(--stsv-Input__border-width);
+    background-color: var(--stsv-input__background-color);
+    border-color: var(--stsv-input__border-color);
+    border-radius: var(--stsv-input__border-radius);
+    border-style: var(--stsv-input__border-style);
+    border-width: var(--stsv-input__border-width);
     box-sizing: border-box;
-    color: var(--stsv-Input__color);
+    color: var(--stsv-input__color);
     display: block;
     font: inherit;
     line-height: inherit;
@@ -150,37 +150,37 @@
   }
 
   textarea:hover {
-    background-color: var(--stsv-Input__background-color--hover);
-    border-color: var(--stsv-Input__border-color--hover);
-    color: var(--stsv-Input__color--hover);
+    background-color: var(--stsv-input__background-color--hover);
+    border-color: var(--stsv-input__border-color--hover);
+    color: var(--stsv-input__color--hover);
   }
 
   textarea:focus {
-    background-color: var(--stsv-Input__background-color--focus);
-    border-color: var(--stsv-Input__border-color--focus);
-    color: var(--stsv-Input__color--focus);
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+    background-color: var(--stsv-input__background-color--focus);
+    border-color: var(--stsv-input__border-color--focus);
+    color: var(--stsv-input__color--focus);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
   }
 
   .sterling-text-area.colorful textarea {
-    background-color: var(--stsv-Input--colorful__background-color);
-    border-color: var(--stsv-Input--colorful__border-color);
-    color: var(--stsv-Input--colorful__color);
+    background-color: var(--stsv-input--colorful__background-color);
+    border-color: var(--stsv-input--colorful__border-color);
+    color: var(--stsv-input--colorful__color);
   }
 
   .sterling-text-area.colorful textarea:hover {
-    background-color: var(--stsv-Input--colorful__background-color--hover);
-    border-color: var(--stsv-Input--colorful__border-color--hover);
-    color: var(--stsv-Input--colorful__color--hover);
+    background-color: var(--stsv-input--colorful__background-color--hover);
+    border-color: var(--stsv-input--colorful__border-color--hover);
+    color: var(--stsv-input--colorful__color--hover);
   }
 
   .sterling-text-area.colorful textarea:focus {
-    background-color: var(--stsv-Input--colorful__background-color--focus);
-    border-color: var(--stsv-Input--colorful__border-color--focus);
-    color: var(--stsv-Input--colorful__color--focus);
+    background-color: var(--stsv-input--colorful__background-color--focus);
+    border-color: var(--stsv-input--colorful__border-color--focus);
+    color: var(--stsv-input--colorful__color--focus);
   }
 
   .sterling-text-area:disabled {
@@ -189,7 +189,13 @@
   }
 
   .sterling-text-area::after {
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 6px
+    );
     bottom: 0;
     content: '';
     left: 0;
@@ -206,7 +212,7 @@
   }
 
   textarea::placeholder {
-    color: var(--stsv-Common__color--subtle);
+    color: var(--stsv-common__color--subtle);
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 

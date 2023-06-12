@@ -19,96 +19,88 @@ export const oceanBlues: Record<string, string> = {
 
 export const oceanTheme: Theme = {
   // ----- Common ---- //
-  '--stsv-Common__background-color': oceanBlues.color2,
-  '--stsv-Common__border-color': oceanBlues.color9,
-  '--stsv-Common__border-radius': '0',
-  '--stsv-Common__border-style': 'solid',
-  '--stsv-Common__border-width': '2px',
-  '--stsv-Common__color': oceanBlues.color12,
+  'stsv-common__background-color': oceanBlues.color2,
+  'stsv-common__border-color': oceanBlues.color9,
+  'stsv-common__border-radius': '0',
+  'stsv-common__border-style': 'solid',
+  'stsv-common__border-width': '2px',
+  'stsv-common__color': oceanBlues.color12,
 
   // outline
-  '--stsv-Common__outline-color': oceanBlues.color12,
-  '--stsv-Common__outline-offset': '0',
-  '--stsv-Common__outline-style': 'solid',
-  '--stsv-Common__outline-width': '2px',
+  'stsv-common__outline-color': oceanBlues.color12,
+  'stsv-common__outline-offset': '0',
+  'stsv-common__outline-style': 'solid',
+  'stsv-common__outline-width': '2px',
 
   // disabled
-  '--stsv-Common__background-color--disabled': oceanBlues.color5,
-  '--stsv-Common__border-color--disabled': oceanBlues.color9,
-  '--stsv-Common__color--disabled': oceanBlues.color9,
+  'stsv-common__background-color--disabled': oceanBlues.color5,
+  'stsv-common__border-color--disabled': oceanBlues.color9,
+  'stsv-common__color--disabled': oceanBlues.color9,
 
-  '--stsv-Common__background-color1--disabled': 'hsla(0, 0%, 0%, 20%)',
-  '--stsv-Common__background-color2--disabled': `hsla(0, 0%, 100%, 20%)`,
-  '--stsv-Disabled__background':
-    'repeating-linear-gradient(' +
-    '45deg,' +
-    'var(--stsv-Common__background-color1--disabled),' +
-    'var(--stsv-Common__background-color1--disabled) 3px,' +
-    'var(--stsv-Common__background-color2--disabled) 3px,' +
-    'var(--stsv-Common__background-color2--disabled) 6px' +
-    ')',
+  'stsv-common__background-color1--disabled': 'hsla(0, 0%, 0%, 20%)',
+  'stsv-common__background-color2--disabled': `hsla(0, 0%, 100%, 20%)`,
 
   // ----- Button ----- //
 
-  '--stsv-Button__background-color': oceanBlues.color5,
-  '--stsv-Button__border-color': oceanBlues.color9,
-  '--stsv-Button__border-radius': '8px',
-  '--stsv-Button__border-style': 'solid',
-  '--stsv-Button__border-width': '2px',
-  '--stsv-Button__color': oceanBlues.color12,
+  'stsv-button__background-color': oceanBlues.color5,
+  'stsv-button__border-color': oceanBlues.color9,
+  'stsv-button__border-radius': '8px',
+  'stsv-button__border-style': 'solid',
+  'stsv-button__border-width': '2px',
+  'stsv-button__color': oceanBlues.color12,
 
   // hover
-  '--stsv-Button__background-color--hover': oceanBlues.color5,
-  '--stsv-Button__border-color--hover': oceanBlues.color10,
-  '--stsv-Button__color--hover': oceanBlues.color12,
+  'stsv-button__background-color--hover': oceanBlues.color5,
+  'stsv-button__border-color--hover': oceanBlues.color10,
+  'stsv-button__color--hover': oceanBlues.color12,
 
   // active
-  '--stsv-Button__background-color--active': oceanBlues.color6,
-  '--stsv-Button__border-color--active': oceanBlues.color11,
-  '--stsv-Button__color--active': oceanBlues.color11,
+  'stsv-button__background-color--active': oceanBlues.color6,
+  'stsv-button__border-color--active': oceanBlues.color11,
+  'stsv-button__color--active': oceanBlues.color11,
 
   // focus
-  '--stsv-Button__background-color--focus': oceanBlues.color5,
-  '--stsv-Button__border-color--focus': oceanBlues.color12,
-  '--stsv-Button__color--focus': oceanBlues.color12,
+  'stsv-button__background-color--focus': oceanBlues.color5,
+  'stsv-button__border-color--focus': oceanBlues.color12,
+  'stsv-button__color--focus': oceanBlues.color12,
 
   // ----- Input ----- //
-  '--stsv-Input__background-color': oceanBlues.color4,
-  '--stsv-Input__border-color': oceanBlues.color9,
-  '--stsv-Input__border-radius': '3px',
-  '--stsv-Input__border-style': 'solid',
-  '--stsv-Input__border-width': '2px',
-  '--stsv-Input__color': oceanBlues.color12,
+  'stsv-input__background-color': oceanBlues.color4,
+  'stsv-input__border-color': oceanBlues.color9,
+  'stsv-input__border-radius': '3px',
+  'stsv-input__border-style': 'solid',
+  'stsv-input__border-width': '2px',
+  'stsv-input__color': oceanBlues.color12,
 
   // hover
-  '--stsv-Input__background-color--hover': oceanBlues.color2,
-  '--stsv-Input__border-color--hover': oceanBlues.color10,
-  '--stsv-Input__color--hover': oceanBlues.color12,
+  'stsv-input__background-color--hover': oceanBlues.color2,
+  'stsv-input__border-color--hover': oceanBlues.color10,
+  'stsv-input__color--hover': oceanBlues.color12,
 
   // focus
-  '--stsv-Input__background-color--focus': oceanBlues.color2,
-  '--stsv-Input__border-color--focus': oceanBlues.color12,
-  '--stsv-Input__color--focus': oceanBlues.color12,
+  'stsv-input__background-color--focus': oceanBlues.color2,
+  'stsv-input__border-color--focus': oceanBlues.color12,
+  'stsv-input__color--focus': oceanBlues.color12,
 
   // selected
-  '--stsv-Input__background-color--selected': oceanBlues.color6,
-  '--stsv-Input__border-color--selected': oceanBlues.color11,
-  '--stsv-Input__color--selected': oceanBlues.color12,
+  'stsv-input__background-color--selected': oceanBlues.color6,
+  'stsv-input__border-color--selected': oceanBlues.color11,
+  'stsv-input__color--selected': oceanBlues.color12,
 
   // ----- Status ----- //
-  '--stsv-Info__background-color': darkStatusColors.info.backgroundColor,
-  '--stsv-Info__border-color': darkStatusColors.info.borderColor,
-  '--stsv-Info__color': darkStatusColors.info.color,
+  'stsv-status--info__background-color': darkStatusColors.info.backgroundColor,
+  'stsv-status--info__border-color': darkStatusColors.info.borderColor,
+  'stsv-status--info__color': darkStatusColors.info.color,
 
-  '--stsv-Success__background-color': darkStatusColors.success.backgroundColor,
-  '--stsv-Success__border-color': darkStatusColors.success.borderColor,
-  '--stsv-Success__color': darkStatusColors.success.color,
+  'stsv-status--success__background-color': darkStatusColors.success.backgroundColor,
+  'stsv-status--success__border-color': darkStatusColors.success.borderColor,
+  'stsv-status--success__color': darkStatusColors.success.color,
 
-  '--stsv-Warning__background-color': darkStatusColors.warning.backgroundColor,
-  '--stsv-Warning__border-color': darkStatusColors.warning.borderColor,
-  '--stsv-Warning__color': darkStatusColors.warning.color,
+  'stsv-status--warning__background-color': darkStatusColors.warning.backgroundColor,
+  'stsv-status--warning__border-color': darkStatusColors.warning.borderColor,
+  'stsv-status--warning__color': darkStatusColors.warning.color,
 
-  '--stsv-Error__background-color': darkStatusColors.error.backgroundColor,
-  '--stsv-Error__border-color': darkStatusColors.error.borderColor,
-  '--stsv-Error__color': darkStatusColors.error.color
+  'stsv-status--error__background-color': darkStatusColors.error.backgroundColor,
+  'stsv-status--error__border-color': darkStatusColors.error.borderColor,
+  'stsv-status--error__color': darkStatusColors.error.color
 };

@@ -82,13 +82,13 @@
   button {
     align-content: center;
     align-items: center;
-    background-color: var(--stsv-Button__background-color);
-    border-color: var(--stsv-Button__border-color);
-    border-radius: var(--stsv-Button__border-radius);
-    border-style: var(--stsv-Button__border-style);
-    border-width: var(--stsv-Button__border-width);
+    background-color: var(--stsv-button__background-color);
+    border-color: var(--stsv-button__border-color);
+    border-radius: var(--stsv-button__border-radius);
+    border-style: var(--stsv-button__border-style);
+    border-width: var(--stsv-button__border-width);
     box-sizing: border-box;
-    color: var(--stsv-Button__color);
+    color: var(--stsv-button__color);
     cursor: pointer;
     display: inline-flex;
     flex-direction: row;
@@ -120,40 +120,40 @@
   }
 
   button:hover {
-    background-color: var(--stsv-Button__background-color--hover);
-    border-color: var(--stsv-Button__border-color--hover);
-    color: var(--stsv-Button__color--hover);
+    background-color: var(--stsv-button__background-color--hover);
+    border-color: var(--stsv-button__border-color--hover);
+    color: var(--stsv-button__color--hover);
   }
 
   button:active {
-    background-color: var(--stsv-Button__background-color--active);
-    border-color: var(--stsv-Button__border-color--active);
-    color: var(--stsv-Button__color--active);
+    background-color: var(--stsv-button__background-color--active);
+    border-color: var(--stsv-button__border-color--active);
+    color: var(--stsv-button__color--active);
   }
 
   button:focus-visible {
-    border-color: var(--stsv-Button__border-color--focus);
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+    border-color: var(--stsv-button__border-color--focus);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
   }
 
   button.colorful {
-    background-color: var(--stsv-Button--colorful__background-color);
-    border-color: var(--stsv-Button--colorful__border-color);
-    color: var(--stsv-Button--colorful__color);
+    background-color: var(--stsv-button--colorful__background-color);
+    border-color: var(--stsv-button--colorful__border-color);
+    color: var(--stsv-button--colorful__color);
   }
   button.colorful:hover {
-    background-color: var(--stsv-Button--colorful__background-color--hover);
-    border-color: var(--stsv-Button--colorful__border-color--hover);
-    color: var(--stsv-Button--colorful__color--hover);
+    background-color: var(--stsv-button--colorful__background-color--hover);
+    border-color: var(--stsv-button--colorful__border-color--hover);
+    color: var(--stsv-button--colorful__color--hover);
   }
 
   button.colorful:active {
-    background-color: var(--stsv-Button--colorful__background-color--active);
-    border-color: var(--stsv-Button--colorful__border-color--active);
-    color: var(--stsv-Button--colorful__color--active);
+    background-color: var(--stsv-button--colorful__background-color--active);
+    border-color: var(--stsv-button--colorful__border-color--active);
+    color: var(--stsv-button--colorful__color--active);
   }
 
   button.outline {
@@ -161,27 +161,27 @@
   }
 
   button.outline:hover {
-    background-color: var(--stsv-Button__background-color--hover);
+    background-color: var(--stsv-button__background-color--hover);
   }
 
   button.outline:active {
-    background-color: var(--stsv-Button__background-color--active);
+    background-color: var(--stsv-button__background-color--active);
   }
 
   button.outline.colorful {
-    border-color: var(--stsv-Button--colorful__border-color);
-    color: var(--stsv-Button--colorful__border-color);
+    border-color: var(--stsv-button--colorful__border-color);
+    color: var(--stsv-button--colorful__border-color);
   }
   button.outline.colorful:hover {
-    background-color: var(--stsv-Button--colorful__background-color--hover);
-    border-color: var(--stsv-Button--colorful__border-color--hover);
-    color: var(--stsv-Button--colorful__color--hover);
+    background-color: var(--stsv-button--colorful__background-color--hover);
+    border-color: var(--stsv-button--colorful__border-color--hover);
+    color: var(--stsv-button--colorful__color--hover);
   }
 
   button.outline.colorful:active {
-    background-color: var(--stsv-Button--colorful__background-color--active);
-    border-color: var(--stsv-Button--colorful__border-color--active);
-    color: var(--stsv-Button--colorful__color--active);
+    background-color: var(--stsv-button--colorful__background-color--active);
+    border-color: var(--stsv-button--colorful__border-color--active);
+    color: var(--stsv-button--colorful__color--active);
   }
 
   button.ghost {
@@ -190,31 +190,31 @@
   }
 
   button.ghost:hover {
-    background-color: var(--stsv-Button__background-color--hover);
+    background-color: var(--stsv-button__background-color--hover);
     border-color: transparent;
   }
 
   button.ghost:active {
-    background-color: var(--stsv-Button__background-color--active);
+    background-color: var(--stsv-button__background-color--active);
     border-color: transparent;
   }
 
   button.ghost:focus-visible {
-    border-color: var(--stsv-Button__border-color--focus);
+    border-color: var(--stsv-button__border-color--focus);
   }
 
   button.ghost.colorful {
-    color: var(--stsv-Button--colorful__border-color);
+    color: var(--stsv-button--colorful__border-color);
   }
 
   button.ghost.colorful:hover {
-    background-color: var(--stsv-Button--colorful__background-color--hover);
-    color: var(--stsv-Button--colorful__color--hover);
+    background-color: var(--stsv-button--colorful__background-color--hover);
+    color: var(--stsv-button--colorful__color--hover);
   }
 
   button.ghost.colorful:active {
-    background-color: var(--stsv-Button--colorful__background-color--active);
-    color: var(--stsv-Button--colorful__color--active);
+    background-color: var(--stsv-button--colorful__background-color--active);
+    color: var(--stsv-button--colorful__color--active);
   }
 
   button:disabled {
@@ -229,7 +229,13 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 6px
+    );
     pointer-events: none;
   }
 

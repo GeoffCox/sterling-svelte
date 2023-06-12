@@ -74,7 +74,7 @@
   }
 
   .component {
-    border: 1px dashed var(--stsv-Common__border-color);
+    border: 1px dashed var(--stsv-common__border-color);
     border-radius: 10px;
     box-sizing: border-box;
     display: block;
@@ -93,7 +93,7 @@
   }
 
   .panel {
-    border: 2px double var(--stsv-Common__border-color);
+    border: 2px double var(--stsv-common__border-color);
     padding: 1em;
     display: grid;
     grid-template-columns: 1fr;
@@ -115,7 +115,7 @@
   }
 
   .event-timestamp {
-    color: var(--stsv-Info__color);
+    color: var(--stsv-status--info__color);
   }
 
   h2 {

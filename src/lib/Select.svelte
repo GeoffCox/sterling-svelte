@@ -236,7 +236,7 @@
       <div class="chevron" />
     </slot>
   </div>
-  <Popup reference={selectRef} bind:open id={popupId}>
+  <Popup reference={selectRef} bind:open id={popupId} persistent>
     <div class="popup-content">
       <List
         bind:this={listRef}
@@ -258,12 +258,12 @@
   .sterling-select {
     align-content: center;
     align-items: center;
-    background-color: var(--stsv-Input__background-color);
-    border-color: var(--stsv-Input__border-color);
-    border-radius: var(--stsv-Input__border-radius);
-    border-style: var(--stsv-Input__border-style);
-    border-width: var(--stsv-Input__border-width);
-    color: var(--stsv-Input__color);
+    background-color: var(--stsv-input__background-color);
+    border-color: var(--stsv-input__border-color);
+    border-radius: var(--stsv-input__border-radius);
+    border-style: var(--stsv-input__border-style);
+    border-width: var(--stsv-input__border-width);
+    color: var(--stsv-input__color);
     cursor: pointer;
     display: grid;
     grid-template-columns: 1fr auto;
@@ -275,19 +275,19 @@
   }
 
   .sterling-select:hover {
-    background-color: var(--stsv-Input__background-color--hover);
-    border-color: var(--stsv-Input__border-color--hover);
-    color: var(--stsv-Input__color--hover);
+    background-color: var(--stsv-input__background-color--hover);
+    border-color: var(--stsv-input__border-color--hover);
+    color: var(--stsv-input__color--hover);
   }
 
   .sterling-select:focus {
-    background-color: var(--stsv-Input__background-color--focus);
-    border-color: var(--stsv-Input__border-color--focus);
-    color: var(--stsv-Input__color--focus);
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+    background-color: var(--stsv-input__background-color--focus);
+    border-color: var(--stsv-input__border-color--focus);
+    color: var(--stsv-input__color--focus);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
   }
 
   .sterling-select.disabled {
@@ -296,7 +296,13 @@
   }
 
   .sterling-select::after {
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 6px
+    );
     bottom: 0;
     content: '';
     left: 0;
@@ -366,11 +372,11 @@
   }
 
   .popup-content {
-    background-color: var(--stsv-Common__background-color);
-    border-color: var(--stsv-Common__border-color);
-    border-radius: var(--stsv-Common__border-radius);
-    border-style: var(--stsv-Common__border-style);
-    border-width: var(--stsv-Common__border-width);
+    background-color: var(--stsv-common__background-color);
+    border-color: var(--stsv-common__border-color);
+    border-radius: var(--stsv-common__border-radius);
+    border-style: var(--stsv-common__border-style);
+    border-width: var(--stsv-common__border-width);
     padding: 0.25em;
     display: grid;
     grid-template-columns: 1fr;

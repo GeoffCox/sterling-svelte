@@ -198,17 +198,17 @@ A styled &lt;dialog&gt; element
   }
 
   .header {
-    background-color: var(--stsv-Common__background-color--secondary);
+    background-color: var(--stsv-common__background-color--secondary);
   }
 
   .content {
-    background-color: var(--stsv-Common__background-color);
-    border-color: var(--stsv-Common__border-color);
-    border-radius: var(--stsv-Common__border-radius);
-    border-style: var(--stsv-Common__border-style);
-    border-width: var(--stsv-Common__border-width);
+    background-color: var(--stsv-common__background-color);
+    border-color: var(--stsv-common__border-color);
+    border-radius: var(--stsv-common__border-radius);
+    border-style: var(--stsv-common__border-style);
+    border-width: var(--stsv-common__border-width);
     box-sizing: border-box;
-    color: var(--stsv-Common__color);
+    color: var(--stsv-common__color);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto auto;
@@ -281,8 +281,8 @@ A styled &lt;dialog&gt; element
   }
 
   .separator {
-    background-color: var(--stsv-Common__background-color--secondary);
-    height: var(--stsv-Common__border-width);
+    background-color: var(--stsv-common__background-color--secondary);
+    height: var(--stsv-common__border-width);
     margin: 0 0.25em;
   }
 

@@ -4,13 +4,16 @@
   import { onMount } from 'svelte';
   import { autoUpdate, computePosition, flip, offset } from '@floating-ui/dom';
   import { portal } from './actions/portal';
+  import type { FloatingOffsetOptions } from './floating-ui.types';
 
   // ----- Props ----- //
 
-  export let placement: Placement = 'bottom-start';
+  export let offsetOptions: FloatingOffsetOptions = { mainAxis: 0, crossAxis: 0 };
   export let open: boolean = false;
-  export let reference: HTMLElement;
+  export let persistent: boolean = false;
+  export let placement: Placement = 'bottom-start';
   export let portalHost: HTMLElement | undefined = undefined;
+  export let reference: HTMLElement;
 
   // ----- State ----- //
 
@@ -22,18 +25,21 @@
   const hostId = 'SterlingPopoverPortal';
 
   const ensurePortalHost = () => {
-    if (portalHost) {
-      return portalHost;
-    }
+    if (document) {
+      if (portalHost) {
+        return portalHost;
+      }
 
-    let host = document.querySelector(`#${hostId}`) as HTMLElement;
-    if (!host) {
-      host = document.createElement('div');
-      host.id = hostId;
-      host.style.overflow = 'visible';
-      document.body.append(host);
+      let host = document.querySelector(`#${hostId}`) as HTMLElement;
+      if (!host) {
+        console.log('creating portal host');
+        host = document.createElement('div');
+        host.id = hostId;
+        host.style.overflow = 'visible';
+        document.body.append(host);
+      }
+      portalHost = host;
     }
-    portalHost = host;
   };
 
   // ----- Body Height Change ----- //
@@ -47,7 +53,7 @@
 
   // ----- Position ----- //
 
-  const middleware = [offset({ mainAxis: -2 }), flip()];
+  $: middleware = [offset(offsetOptions), flip()];
 
   const computePopupPosition = async () => {
     if (reference && popupRef) {
@@ -70,7 +76,7 @@
   };
 
   $: popupRef, reference, autoUpdateMenuPosition();
-  $: open, bodyHeight, placement, computePopupPosition();
+  $: open, bodyHeight, middleware, placement, computePopupPosition();
 
   // ----- EventHandlers ----- //
   onMount(() => {
@@ -83,46 +89,50 @@
       resizeObserver.unobserve(document.body);
     };
   });
+
+  ensurePortalHost();
 </script>
 
-<div use:portal={{ target: portalHost ?? document.body }} class="sterling-popover-portal">
-  <div
-    bind:this={popupRef}
-    class="sterling-popover"
-    class:open
-    on:blur
-    on:click
-    on:copy
-    on:cut
-    on:dblclick
-    on:dragend
-    on:dragenter
-    on:dragleave
-    on:dragover
-    on:dragstart
-    on:drop
-    on:focus
-    on:focusin
-    on:focusout
-    on:keydown
-    on:keypress
-    on:keyup
-    on:mousedown
-    on:mouseenter
-    on:mouseleave
-    on:mousemove
-    on:mouseover
-    on:mouseout
-    on:mouseup
-    on:scroll
-    on:wheel
-    on:paste
-    {...$$restProps}
-    style="left:{popupPosition.x}px; top:{popupPosition.y}px"
-  >
-    <slot />
+{#if open || persistent}
+  <div use:portal={{ target: portalHost ?? document.body }} class="sterling-popover-portal">
+    <div
+      bind:this={popupRef}
+      class="sterling-popover"
+      class:open
+      on:blur
+      on:click
+      on:copy
+      on:cut
+      on:dblclick
+      on:dragend
+      on:dragenter
+      on:dragleave
+      on:dragover
+      on:dragstart
+      on:drop
+      on:focus
+      on:focusin
+      on:focusout
+      on:keydown
+      on:keypress
+      on:keyup
+      on:mousedown
+      on:mouseenter
+      on:mouseleave
+      on:mousemove
+      on:mouseover
+      on:mouseout
+      on:mouseup
+      on:scroll
+      on:wheel
+      on:paste
+      {...$$restProps}
+      style="left:{popupPosition.x}px; top:{popupPosition.y}px"
+    >
+      <slot />
+    </div>
   </div>
-</div>
+{/if}
 
 <style>
   .sterling-popover-portal {

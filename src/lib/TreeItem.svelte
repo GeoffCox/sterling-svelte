@@ -12,6 +12,7 @@
 
   // ----- Props ----
   export let disabled = false;
+  export let label: string | undefined = undefined;
   export let value: string;
 
   // ----- Media Queries ----- //
@@ -404,7 +405,7 @@ A item in a Tree displaying the item and children.
             {expanded}
             {hasChildren}
             {selected}
-            {value}>{value}</slot
+            {value}>{label || value}</slot
           >
         </svelte:fragment>
       </TreeItemDisplay>

@@ -299,19 +299,19 @@
     background-color: transparent;
     background-image: repeating-linear-gradient(
         45deg,
-        var(--stsv-Common__color) 25%,
+        var(--stsv-common__color) 25%,
         transparent 25%,
         transparent 75%,
-        var(--stsv-Common__color) 75%,
-        var(--stsv-Common__color)
+        var(--stsv-common__color) 75%,
+        var(--stsv-common__color)
       ),
       repeating-linear-gradient(
         45deg,
-        var(--stsv-Common__color) 25%,
-        var(--stsv-Common__background-color) 25%,
-        var(--stsv-Common__background-color) 75%,
-        var(--stsv-Common__color) 75%,
-        var(--stsv-Common__color)
+        var(--stsv-common__color) 25%,
+        var(--stsv-common__background-color) 25%,
+        var(--stsv-common__background-color) 75%,
+        var(--stsv-common__color) 75%,
+        var(--stsv-common__color)
       );
     background-position: 0 0, 4px 4px;
     background-size: 8px 8px;
@@ -324,7 +324,7 @@
     border-color: var(--swatch__border-color, transparent);
     border-radius: var(--swatch__border-radius, 0);
     border-style: var(--swatch__border-style, solid);
-    border-width: var(--swatch__border-width, var(--stsv-Common__border-width));
+    border-width: var(--swatch__border-width, var(--stsv-common__border-width));
     outline-color: var(--swatch__outline-color);
     outline-offset: var(--swatch__outline-offset);
     outline-style: var(--swatch__outline-style);
@@ -351,7 +351,7 @@
   }
 
   .color-vars > div {
-    border-left: 1px solid var(--stsv-Common__border-color);
+    border-left: 1px solid var(--stsv-common__border-color);
     box-sizing: border-box;
     padding-left: 0.5em;
   }
@@ -366,12 +366,16 @@
     z-index: 2;
   }
 
+  svg {
+    pointer-events: none;
+  }
+
   .line {
-    stroke: var(--stsv-Common__color);
+    stroke: var(--stsv-common__color);
     stroke-width: 1px;
   }
 
   .dot {
-    fill: var(--stsv-Common__color);
+    fill: var(--stsv-common__color);
   }
 </style>

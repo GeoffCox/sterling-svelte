@@ -43,7 +43,7 @@
     justify-self: center;
     width: 100%;
     height: 20px;
-    border: 1px solid var(--stsv-Common__border-color);
+    border: 1px solid var(--stsv-common__border-color);
   }
 
   .popup {

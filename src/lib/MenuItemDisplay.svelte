@@ -106,7 +106,13 @@
   }
 
   .sterling-menu-item-display::after {
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 6px
+    );
     bottom: 0;
     content: '';
     left: 0;

@@ -41,8 +41,8 @@ A styled line to visually separate menu items in a menu.
 
 <style>
   .sterling-menu-item-separator {
-    height: var(--stsv-Common__border-width);
-    background-color: var(--stsv-Common__border-color);
+    height: var(--stsv-common__border-width);
+    background-color: var(--stsv-common__border-color);
     margin: 0.1em 0;
   }
 </style>

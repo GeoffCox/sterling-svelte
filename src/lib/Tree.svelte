@@ -133,13 +133,13 @@
 
 <style>
   .sterling-tree {
-    background-color: var(--stsv-Common__background-color);
-    border-color: var(--stsv-Common__border-color);
-    border-radius: var(--stsv-Common__border-radius);
-    border-style: var(--stsv-Common__border-style);
-    border-width: var(--stsv-Common__border-width);
+    background-color: var(--stsv-common__background-color);
+    border-color: var(--stsv-common__border-color);
+    border-radius: var(--stsv-common__border-radius);
+    border-style: var(--stsv-common__border-style);
+    border-width: var(--stsv-common__border-width);
     box-sizing: border-box;
-    color: var(--stsv-Common__color);
+    color: var(--stsv-common__color);
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
@@ -148,17 +148,17 @@
   }
 
   .sterling-tree:hover {
-    border-color: var(--stsv-Input__border-color--hover);
-    color: var(--stsv-Input__color--hover);
+    border-color: var(--stsv-input__border-color--hover);
+    color: var(--stsv-input__color--hover);
   }
 
   .sterling-tree.using-keyboard:focus-within {
-    border-color: var(--stsv-Button__border-color--focus);
-    color: var(--stsv-Input__color--focus);
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+    border-color: var(--stsv-button__border-color--focus);
+    color: var(--stsv-input__color--focus);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
   }
 
   .sterling-tree.composed,
@@ -184,7 +184,13 @@
   }
 
   .container::after {
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 6px
+    );
     bottom: 0;
     content: '';
     left: 0;

@@ -205,12 +205,12 @@
   }
 
   .sterling-tooltip {
-    background-color: var(--stsv-Common__background-color);
-    border-color: var(--stsv-Common__border-color);
-    border-radius: var(--stsv-Common__border-radius);
-    border-style: var(--stsv-Common__border-style);
-    border-width: var(--stsv-Common__border-width);
-    color: var(--stsv-Common__color);
+    background-color: var(--stsv-common__background-color);
+    border-color: var(--stsv-common__border-color);
+    border-radius: var(--stsv-common__border-radius);
+    border-style: var(--stsv-common__border-style);
+    border-width: var(--stsv-common__border-width);
+    color: var(--stsv-common__color);
     position: absolute;
     overflow: visible;
     box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 4px -1px;
@@ -221,11 +221,11 @@
     position: absolute;
     width: 10px;
     height: 10px;
-    background-color: var(--stsv-Common__background-color);
-    border-color: var(--stsv-Common__border-color);
-    border-radius: var(--stsv-Common__border-radius);
-    border-style: var(--stsv-Common__border-style);
-    border-width: var(--stsv-Common__border-width);
+    background-color: var(--stsv-common__background-color);
+    border-color: var(--stsv-common__border-color);
+    border-radius: var(--stsv-common__border-radius);
+    border-style: var(--stsv-common__border-style);
+    border-width: var(--stsv-common__border-width);
     clip-path: polygon(0% 1%, 100% 1%, 100% 100%, 0% 1%);
   }
 </style>

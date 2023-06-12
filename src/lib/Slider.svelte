@@ -10,7 +10,7 @@
   export let disabled: boolean = false;
   export let min: number = 0;
   export let max: number = 100;
-  export let precision: number = 0;
+  export let precision: number | undefined = undefined;
   export let step: number | undefined = undefined;
   export let value: number = 0;
   export let vertical: boolean = false;
@@ -44,30 +44,23 @@
 
   // ----- Value tracking ----- //
 
-  const getPrecision = (value?: number): number => {
-    if (value !== undefined && Number !== null && !Number.isNaN(value)) {
-      const text = value.toString();
-      const position = text.indexOf('.');
-      if (position !== -1) {
-        const fraction = text.substring(position + 1);
-        if (fraction) {
-          return fraction.length;
-        }
-      }
-    }
-    return 0;
-  };
-
-  // use the highest precision
-  $: highestPrecision = Math.max(
-    precision,
-    getPrecision(min),
-    getPrecision(max),
-    getPrecision(step)
-  );
+  // const getPrecision = (value?: number): number => {
+  //   if (value !== undefined && Number !== null && !Number.isNaN(value)) {
+  //     const text = value.toString();
+  //     const position = text.indexOf('.');
+  //     if (position !== -1) {
+  //       const fraction = text.substring(position + 1);
+  //       if (fraction) {
+  //         return fraction.length;
+  //       }
+  //     }
+  //   }
+  //   return 0;
+  // };
 
   const setValue = (newValue: number) => {
-    value = round(Math.max(min, Math.min(max, newValue)), highestPrecision);
+    const clamped = Math.max(min, Math.min(max, newValue));
+    value = precision !== undefined ? round(clamped, precision) : clamped;
   };
 
   // ensure min <= max
@@ -77,24 +70,7 @@
     }
   }
 
-  // ensure min <= value <= max
-  // ensure that value is rounded to highestPrecision
-  $: {
-    if (value < min || value > max || value !== round(value, highestPrecision)) {
-      setValue(value);
-    }
-  }
-
-  // Ensure value snaps to the step
-  $: {
-    if (step) {
-      let stepValue = Math.max(min, Math.min(value, max));
-      stepValue = Math.round(stepValue / step) * step + min;
-      if (stepValue !== value) {
-        setValue(stepValue);
-      }
-    }
-  }
+  $: min, max, precision, setValue(value);
 
   // Compute the ratio of the value to the range
   $: ratio = (value - min) / (max - min);
@@ -282,7 +258,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
 
   .track {
     position: absolute;
-    background: var(--stsv-Common__background-color--secondary);
+    background: var(--stsv-common__background-color--secondary);
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
@@ -303,16 +279,16 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   }
 
   .sterling-slider:focus-visible {
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
   }
 
   /* ----- fill ----- */
 
   .fill {
-    background: var(--stsv-Common__color);
+    background: var(--stsv-common__color);
     position: absolute;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
@@ -331,7 +307,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   }
 
   .sterling-slider.colorful .fill {
-    background: var(--stsv-Input--colorful__border-color--selected);
+    background: var(--stsv-input--colorful__border-color--selected);
     position: absolute;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
@@ -339,13 +315,13 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   /* ----- thumb ----- */
 
   .thumb {
-    background-color: var(--stsv-Button__background-color);
-    border-color: var(--stsv-Button__border-color);
+    background-color: var(--stsv-button__background-color);
+    border-color: var(--stsv-button__border-color);
     border-radius: 10000px;
-    border-style: var(--stsv-Button__border-style);
-    border-width: var(--stsv-Button__border-width);
+    border-style: var(--stsv-button__border-style);
+    border-width: var(--stsv-button__border-width);
     box-sizing: border-box;
-    color: var(--stsv-Button__color);
+    color: var(--stsv-button__color);
     cursor: pointer;
     display: block;
     font: inherit;
@@ -371,23 +347,23 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   }
 
   .thumb:hover {
-    background-color: var(--stsv-Button__background-color--hover);
-    border-color: var(--stsv-Button__border-color--hover);
-    color: var(--stsv-Button__color--hover);
+    background-color: var(--stsv-button__background-color--hover);
+    border-color: var(--stsv-button__border-color--hover);
+    color: var(--stsv-button__color--hover);
   }
 
   .thumb:active {
-    background-color: var(--stsv-Button__background-color--active);
-    border-color: var(--stsv-Button__border-color--active);
-    color: var(--stsv-Button__color--active);
+    background-color: var(--stsv-button__background-color--active);
+    border-color: var(--stsv-button__border-color--active);
+    color: var(--stsv-button__color--active);
   }
 
   /* ----- thumb colorful ----- */
 
   .sterling-slider.colorful .thumb {
-    background-color: var(--stsv-Button--colorful__background-color);
-    border-color: var(--stsv-Button--colorful__border-color);
-    color: var(--stsv-Button--colorful__color);
+    background-color: var(--stsv-button--colorful__background-color);
+    border-color: var(--stsv-button--colorful__border-color);
+    color: var(--stsv-button--colorful__color);
   }
 
   /* ----- thumb disabled ----- */
@@ -398,7 +374,13 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   }
 
   .sterling-slider .thumb::after {
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2_disabled) 3px,
+      var(--stsv-common__background-color2_disabled) 6px
+    );
     bottom: 0;
     content: '';
     left: 0;

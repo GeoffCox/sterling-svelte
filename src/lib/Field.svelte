@@ -200,13 +200,13 @@
 
 <style>
   .sterling-field {
-    background-color: var(--stsv-Input__background-color);
-    border-color: var(--stsv-Input__border-color);
-    border-radius: var(--stsv-Input__border-radius);
-    border-style: var(--stsv-Input__border-style);
-    border-width: var(--stsv-Input__border-width);
+    background-color: var(--stsv-input__background-color);
+    border-color: var(--stsv-input__border-color);
+    border-radius: var(--stsv-input__border-radius);
+    border-style: var(--stsv-input__border-style);
+    border-width: var(--stsv-input__border-width);
     box-sizing: border-box;
-    color: var(--stsv-Input__color);
+    color: var(--stsv-input__color);
     display: flex;
     flex-direction: column;
     font: inherit;
@@ -218,18 +218,18 @@
   }
 
   .sterling-field:not(.disabled):hover {
-    background-color: var(--stsv-Input__background-color--hover);
-    border-color: var(--stsv-Input__border-color--hover);
-    color: var(--stsv-Input__color--hover);
+    background-color: var(--stsv-input__background-color--hover);
+    border-color: var(--stsv-input__border-color--hover);
+    color: var(--stsv-input__color--hover);
   }
 
   .sterling-field.using-keyboard:focus-within {
-    border-color: var(--stsv-Input__border-color--focus);
-    color: var(--stsv-Input__color--focus);
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+    border-color: var(--stsv-input__border-color--focus);
+    color: var(--stsv-input__color--focus);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
   }
 
   .sterling-field.disabled {
@@ -241,7 +241,7 @@
   }
 
   .label-text {
-    color: var(--stsv-Common__color--secondary);
+    color: var(--stsv-common__color--secondary);
     font-size: 0.8em;
     margin: 0.5em 0.7em 0.2em 0.2em;
   }
@@ -257,35 +257,35 @@
   .message {
     box-sizing: border-box;
     font-size: 0.8em;
-    background-color: var(--stsv-Common__background-color--secondary);
-    color: var(--stsv-Common__color--secondary);
+    background-color: var(--stsv-common__background-color--secondary);
+    color: var(--stsv-common__color--secondary);
     padding: 0.5em;
     width: 100%;
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
   .message.info {
-    background-color: var(--stsv-Info__background-color);
-    border-color: var(--stsv-Info__border-color);
-    color: var(--stsv-Info__color);
+    background-color: var(--stsv-status--info__background-color);
+    border-color: var(--stsv-status--info__border-color);
+    color: var(--stsv-status--info__color);
   }
 
   .message.success {
-    background-color: var(--stsv-Success__background-color);
-    border-color: var(--stsv-Success__border-color);
-    color: var(--stsv-Success__color);
+    background-color: var(--stsv-status--success__background-color);
+    border-color: var(--stsv-status--success__border-color);
+    color: var(--stsv-status--success__color);
   }
 
   .message.warning {
-    background-color: var(--stsv-Warning__background-color);
-    border-color: var(--stsv-Warning__border-color);
-    color: var(--stsv-Warning__color);
+    background-color: var(--stsv-status--warning__background-color);
+    border-color: var(--stsv-status--warning__border-color);
+    color: var(--stsv-status--warning__color);
   }
 
   .message.error {
-    background-color: var(--stsv-Error__background-color);
-    border-color: var(--stsv__Error-color);
-    color: var(--stsv-Error__color);
+    background-color: var(--stsv-status--error__background-color);
+    border-color: var(--stsv_--error-color);
+    color: var(--stsv-status--error__color);
   }
 
   .required {

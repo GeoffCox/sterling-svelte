@@ -296,13 +296,13 @@ A list of items where a single item can be selected.
 
 <style>
   .sterling-list {
-    background-color: var(--stsv-Common__background-color);
-    border-color: var(--stsv-Input__border-color);
-    border-radius: var(--stsv-Input__border-radius);
-    border-style: var(--stsv-Input__border-style);
-    border-width: var(--stsv-Input__border-width);
+    background-color: var(--stsv-common__background-color);
+    border-color: var(--stsv-input__border-color);
+    border-radius: var(--stsv-input__border-radius);
+    border-style: var(--stsv-input__border-style);
+    border-width: var(--stsv-input__border-width);
     box-sizing: border-box;
-    color: var(--stsv-Input__color);
+    color: var(--stsv-input__color);
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
@@ -321,17 +321,17 @@ A list of items where a single item can be selected.
   }
 
   .sterling-list:hover {
-    border-color: var(--stsv-Input__border-color--hover);
-    color: var(--stsv-Input__color--hover);
+    border-color: var(--stsv-input__border-color--hover);
+    color: var(--stsv-input__color--hover);
   }
 
   .sterling-list.using-keyboard:focus-within {
-    border-color: var(--stsv-Input__border-color--focus);
-    color: var(--stsv-Input__color--focus);
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+    border-color: var(--stsv-input__border-color--focus);
+    color: var(--stsv-input__color--focus);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
   }
 
   .sterling-list.composed,
@@ -361,7 +361,13 @@ A list of items where a single item can be selected.
   }
 
   .container::after {
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 6px
+    );
     content: '';
     bottom: 0;
     left: 0;

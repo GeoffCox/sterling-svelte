@@ -81,7 +81,7 @@ by a parent don't affect the child component.
 Sterling-svelte components provide a consistent style.
 You can change the style across components by changing the theme (CSS variables).
 
-For example, `Button` uses the theme variable `--stsv-Button__background-color` to set its background color at rest.
+For example, `Button` uses the theme variable `--stsv-button__background-color` to set its background color at rest.
 If you change this variable to another color, then `Button`'s background will change.
 
 ## Components portal to float UI above the page

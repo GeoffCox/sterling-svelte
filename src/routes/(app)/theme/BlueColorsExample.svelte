@@ -32,7 +32,7 @@
   }
 
   .swatch {
-    border: 1px dashed var(--stsv-Common__border-color);
+    border: 1px dashed var(--stsv-common__border-color);
     height: 1em;
     margin-bottom: 0.25em;
     width: 1em;

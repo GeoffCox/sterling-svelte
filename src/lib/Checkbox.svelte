@@ -129,10 +129,10 @@
 		and there is not a parent CSS selector.
 	*/
   .indicator {
-    background-color: var(--stsv-Input__background-color);
-    border-color: var(--stsv-Input__border-color);
-    border-style: var(--stsv-Input__border-style);
-    border-width: var(--stsv-Input__border-width);
+    background-color: var(--stsv-input__background-color);
+    border-color: var(--stsv-input__border-color);
+    border-style: var(--stsv-input__border-style);
+    border-width: var(--stsv-input__border-width);
     box-sizing: border-box;
     display: inline-block;
     height: 20px;
@@ -143,27 +143,27 @@
   }
 
   input:checked + .indicator {
-    background-color: var(--stsv-Input__background-color);
-    border-color: var(--stsv-Input__border-color);
+    background-color: var(--stsv-input__background-color);
+    border-color: var(--stsv-input__border-color);
   }
 
   .sterling-checkbox:not(.disabled):hover .indicator {
-    background-color: var(--stsv-Input__background-color--hover);
-    border-color: var(--stsv-Input__border-color--hover);
+    background-color: var(--stsv-input__background-color--hover);
+    border-color: var(--stsv-input__border-color--hover);
   }
 
   input:focus-visible + .indicator {
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
   }
 
   /*
 		The checkmark is a rotated L centered in the box.
 	*/
   .indicator::after {
-    border-color: var(--stsv-Input__color);
+    border-color: var(--stsv-input__color);
     border-style: solid;
     border-width: 0 3px 3px 0;
     box-sizing: border-box;
@@ -184,25 +184,25 @@
   }
 
   .sterling-checkbox:not(.disabled):hover input:checked + .indicator::after {
-    border-color: var(--stsv-Input__color--hover);
+    border-color: var(--stsv-input__color--hover);
   }
 
   .sterling-checkbox.colorful .indicator {
-    background-color: var(--stsv-Input--colorful__background-color);
-    border-color: var(--stsv-Input--colorful__border-color);
+    background-color: var(--stsv-input--colorful__background-color);
+    border-color: var(--stsv-input--colorful__border-color);
   }
 
   .sterling-checkbox.colorful:not(.disabled):hover .indicator {
-    background-color: var(--stsv-Input--colorful__background-color--hover);
-    border-color: var(--stsv-Input--colorful__border-color--hover);
+    background-color: var(--stsv-input--colorful__background-color--hover);
+    border-color: var(--stsv-input--colorful__border-color--hover);
   }
 
   .sterling-checkbox.colorful .indicator::after {
-    border-color: var(--stsv-Input--colorful__color);
+    border-color: var(--stsv-input--colorful__color);
   }
 
   .sterling-checkbox.colorful:not(.disabled):hover input:checked + .indicator::after {
-    border-color: var(--stsv-Input--colorful__color--hover);
+    border-color: var(--stsv-input--colorful__color--hover);
   }
 
   .sterling-checkbox.disabled,
@@ -211,7 +211,13 @@
   }
 
   .container::after {
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 6px
+    );
     bottom: 0;
     content: '';
     left: 0;

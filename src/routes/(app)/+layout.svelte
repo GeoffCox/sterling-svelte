@@ -243,8 +243,8 @@
   @import '@fontsource/source-code-pro';
 
   :global(:root) {
-    color: var(--stsv-Common__color);
-    background-color: var(--stsv-Common__background-color);
+    color: var(--stsv-common__color);
+    background-color: var(--stsv-common__background-color);
   }
 
   :global(html) {
@@ -273,25 +273,25 @@
   :global(code) {
     font-size: 1em;
     font-family: 'Source Code Pro', monospace;
-    color: var(--stsv-Info__color);
+    color: var(--stsv-status--info__color);
   }
 
   :global(pre),
   :global(pre) :global(code) {
     font-size: 14px;
     font-family: 'Source Code Pro', monospace;
-    color: var(--stsv-Common__color);
+    color: var(--stsv-common__color);
   }
 
   :global(blockquote) {
-    background-color: var(--stsv-Common__background-color--faint);
-    color: var(--stsv-Common__color--secondary);
+    background-color: var(--stsv-common__background-color--faint);
+    color: var(--stsv-common__color--secondary);
     padding: 1em;
     margin: 0;
   }
 
   :global(table) {
-    border: 1px solid var(--stsv-Common__border-color);
+    border: 1px solid var(--stsv-common__border-color);
     width: max-content;
     border-collapse: collapse;
   }
@@ -299,17 +299,17 @@
   :global(th) {
     font-weight: lighter;
     font-size: 1.1em;
-    background: var(--stsv-Common__background-color--secondary);
-    color: var(--stsv---Common__color--secondary);
+    background: var(--stsv-common__background-color--secondary);
+    color: var(--stsv-Common__color--secondary);
     padding: 0.5em;
     text-align: start;
-    border: 1px solid var(--stsv-Common__border-color);
+    border: 1px solid var(--stsv-common__border-color);
   }
 
   :global(td) {
     padding: 0.5em;
     text-align: start;
-    border: 1px solid var(--stsv-Common__border-color);
+    border: 1px solid var(--stsv-common__border-color);
   }
 
   :global(li) {
@@ -328,7 +328,7 @@
     grid-template-columns: auto 1fr auto auto;
     grid-template-rows: auto auto;
     padding: 2em 0 1em 0;
-    border-bottom: 1px solid var(--stsv-Common__border-color);
+    border-bottom: 1px solid var(--stsv-common__border-color);
   }
 
   .header .hamburger-menu {
@@ -391,8 +391,8 @@
   .nav {
     display: flex;
     flex-direction: column;
-    background-color: var(--stsv-Common__background-color);
-    border-right: 1px solid var(--stsv-Common__border-color);
+    background-color: var(--stsv-common__background-color);
+    border-right: 1px solid var(--stsv-common__border-color);
     padding: 1em;
   }
 

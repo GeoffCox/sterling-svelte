@@ -72,10 +72,10 @@
     border-left: none;
     border-right: none;
     border-radius: 0;
-    border-bottom-style: var(--stsv-Common__border-style);
-    border-bottom-width: calc(var(--stsv-Common__border-width));
-    border-bottom-color: var(--stsv-Common__border-color);
-    color: var(--stsv-Common__color);
+    border-bottom-style: var(--stsv-common__border-style);
+    border-bottom-width: calc(var(--stsv-common__border-width));
+    border-bottom-color: var(--stsv-common__border-color);
+    color: var(--stsv-common__color);
     cursor: pointer;
     font: inherit;
     text-decoration: none;
@@ -86,35 +86,35 @@
   }
 
   a:visited {
-    border-bottom-color: var(--stsv-Input__border-color);
+    border-bottom-color: var(--stsv-input__border-color);
   }
 
   a:hover {
-    border-bottom-color: var(--stsv-Input__border-color--hover);
-    color: var(--stsv-Input__color--hover);
+    border-bottom-color: var(--stsv-input__border-color--hover);
+    color: var(--stsv-input__color--hover);
   }
 
   a:active {
-    border-bottom-color: var(--stsv-Input__border-color--active);
-    color: var(--stsv-Input__color--active);
+    border-bottom-color: var(--stsv-input__border-color--active);
+    color: var(--stsv-input__color--active);
   }
 
   /* ----- colorful ----- */
 
   a.colorful,
   a.colorful:visited {
-    border-bottom-color: var(--stsv-Input--colorful__border-color);
-    color: var(--stsv-Input--colorful__color);
+    border-bottom-color: var(--stsv-input--colorful__border-color);
+    color: var(--stsv-input--colorful__color);
   }
 
   a.colorful:hover {
-    border-bottom-color: var(--stsv-Input--colorful__border-color--hover);
-    color: var(--stsv-Input--colorful__color--hover);
+    border-bottom-color: var(--stsv-input--colorful__border-color--hover);
+    color: var(--stsv-input--colorful__color--hover);
   }
 
   a.colorful:active {
-    border-bottom-color: var(--stsv-Input--colorful__border-color--active);
-    color: var(--stsv-Input--colorful__color--active);
+    border-bottom-color: var(--stsv-input--colorful__border-color--active);
+    color: var(--stsv-input--colorful__color--active);
   }
 
   /* ----- ghost ----- */
@@ -124,21 +124,21 @@
   }
 
   a.ghost:hover {
-    border-bottom-color: var(--stsv-Input__border-color--hover);
+    border-bottom-color: var(--stsv-input__border-color--hover);
   }
 
   a.ghost:active {
-    border-bottom-color: var(--stsv-Input__border-color--active);
+    border-bottom-color: var(--stsv-input__border-color--active);
   }
 
   /* ----- ghost colorful ----- */
 
   a.ghost.colorful:hover {
-    border-bottom-color: var(--stsv-Input--colorful__border-color--hover);
+    border-bottom-color: var(--stsv-input--colorful__border-color--hover);
   }
 
   a.ghost.colorful:active {
-    border-bottom-color: var(--stsv-Input--colorful__border-color--active);
+    border-bottom-color: var(--stsv-input--colorful__border-color--active);
   }
 
   /* ----- disabled ----- */
@@ -147,8 +147,8 @@
   a.disabled:visited,
   a.disabled:hover,
   a.disabled:active {
-    border-bottom-color: var(--stsv-Common__border-color--disabled);
-    color: var(--stsv-Common__color--disabled);
+    border-bottom-color: var(--stsv-common__border-color--disabled);
+    color: var(--stsv-common__color--disabled);
     cursor: not-allowed;
     pointer-events: none;
   }

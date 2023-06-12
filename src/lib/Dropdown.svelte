@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
 
-  import Popup from './Popover.svelte';
+  import Popover from './Popover.svelte';
 
   import { clickOutside } from './actions/clickOutside';
   import { idGenerator } from './idGenerator';
@@ -127,23 +127,23 @@
     </div>
   </slot>
 
-  <Popup reference={dropdownRef} open={!disabled && open}>
+  <Popover reference={dropdownRef} open={!disabled && open}>
     <div class="popup-content" class:colorful bind:this={popupContentRef}>
       <slot {colorful} {composed} {disabled} {open} />
     </div>
-  </Popup>
+  </Popover>
 </div>
 
 <style>
   .sterling-dropdown {
     align-content: stretch;
     align-items: stretch;
-    background-color: var(--stsv-Input__background-color);
-    border-color: var(--stsv-Input__border-color);
-    border-radius: var(--stsv-Input__border-radius);
-    border-style: var(--stsv-Input__border-style);
-    border-width: var(--stsv-Input__border-width);
-    color: var(--stsv-Input__color);
+    background-color: var(--stsv-input__background-color);
+    border-color: var(--stsv-input__border-color);
+    border-radius: var(--stsv-button__border-radius);
+    border-style: var(--stsv-input__border-style);
+    border-width: var(--stsv-input__border-width);
+    color: var(--stsv-input__color);
     display: grid;
     grid-template-columns: 1fr 2em;
     grid-template-rows: auto;
@@ -154,37 +154,37 @@
   }
 
   .sterling-dropdown:hover {
-    background-color: var(--stsv-Input__background-color--hover);
-    border-color: var(--stsv-Input__border-color--hover);
-    color: var(--stsv-Input__color--hover);
+    background-color: var(--stsv-input__background-color--hover);
+    border-color: var(--stsv-input__border-color--hover);
+    color: var(--stsv-input__color--hover);
   }
 
   .sterling-dropdown:focus {
-    background-color: var(--stsv-Input__background-color--focus);
-    border-color: var(--stsv-Input__border-color--focus);
-    color: var(--stsv-Input__color--focus);
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+    background-color: var(--stsv-input__background-color--focus);
+    border-color: var(--stsv-input__border-color--focus);
+    color: var(--stsv-input__color--focus);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
   }
 
   .sterling-dropdown.colorful {
-    background-color: var(--stsv-Input--colorful__background-color);
-    border-color: var(--stsv-Input--colorful__border-color);
-    color: var(--stsv-Input--colorful__color);
+    background-color: var(--stsv-input--colorful__background-color);
+    border-color: var(--stsv-input--colorful__border-color);
+    color: var(--stsv-input--colorful__color);
   }
 
   .sterling-dropdown.colorful:hover {
-    background-color: var(--stsv-Input--colorful__background-color--hover);
-    border-color: var(--stsv-Input--colorful__border-color--hover);
-    color: var(--stsv-Input--colorful__color--hover);
+    background-color: var(--stsv-input--colorful__background-color--hover);
+    border-color: var(--stsv-input--colorful__border-color--hover);
+    color: var(--stsv-input--colorful__color--hover);
   }
 
   .sterling-dropdown.colorful:focus {
-    background-color: var(--stsv-Input--colorful__background-color--focus);
-    border-color: var(--stsv-Input--colorful__border-color--focus);
-    color: var(--stsv-Input--colorful__color--focus);
+    background-color: var(--stsv-input--colorful__background-color--focus);
+    border-color: var(--stsv-input--colorful__border-color--focus);
+    color: var(--stsv-input--colorful__color--focus);
   }
 
   .sterling-dropdown.disabled {
@@ -193,7 +193,13 @@
   }
 
   .sterling-dropdown::after {
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 6px
+    );
     bottom: 0;
     content: '';
     left: 0;
@@ -234,7 +240,8 @@
     background: none;
     margin: 0;
     height: 100%;
-    width: 32px;
+    min-width: 2em;
+    min-height: 2em;
   }
 
   .chevron::after {
@@ -264,12 +271,12 @@
   }
 
   .popup-content {
-    background-color: var(--stsv-Common__background-color);
-    border-color: var(--stsv-Common__border-color);
-    border-radius: var(--stsv-Common__border-radius);
-    border-style: var(--stsv-Common__border-style);
-    border-width: var(--stsv-Common__border-width);
-    color: var(--stsv-Common__color);
+    background-color: var(--stsv-common__background-color);
+    border-color: var(--stsv-common__border-color);
+    border-radius: var(--stsv-common__border-radius);
+    border-style: var(--stsv-common__border-style);
+    border-width: var(--stsv-common__border-width);
+    color: var(--stsv-common__color);
     padding: 0.25em;
     display: grid;
     grid-template-columns: 1fr;
@@ -278,9 +285,9 @@
   }
 
   .popup-content.colorful {
-    background-color: var(--stsv-Common--colorful__background-color);
-    border-color: var(--stsv-Common--colorful__border-color);
-    color: var(--stsv-Common--colorful__color);
+    background-color: var(--stsv-common--colorful__background-color);
+    border-color: var(--stsv-common--colorful__border-color);
+    color: var(--stsv-common--colorful__color);
   }
 
   @media (prefers-reduced-motion) {

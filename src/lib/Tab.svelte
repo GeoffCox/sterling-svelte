@@ -107,13 +107,13 @@
   .sterling-tab {
     align-content: center;
     align-items: center;
-    background-color: var(--stsv-Common__background-color);
+    background-color: var(--stsv-common__background-color);
     border-color: transparent;
-    border-radius: var(--stsv-Button__border-radius);
-    border-style: var(--stsv-Common__border-style);
+    border-radius: var(--stsv-button__border-radius);
+    border-style: var(--stsv-common__border-style);
     border-width: 0;
     box-sizing: border-box;
-    color: var(--stsv-Common__color);
+    color: var(--stsv-common__color);
     cursor: pointer;
     display: grid;
     font: inherit;
@@ -145,10 +145,10 @@
   }
 
   .sterling-tab.using-keyboard:focus-visible {
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
   }
 
   /* ----- disabled -----*/
@@ -159,7 +159,13 @@
   }
 
   .sterling-tab::after {
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 6px
+    );
     bottom: 0;
     content: '';
     left: 0;
@@ -204,30 +210,30 @@
   }
 
   .sterling-tab:not(.selected):not(:active):hover .indicator {
-    background-color: var(--stsv-Input__border-color--hover);
+    background-color: var(--stsv-input__border-color--hover);
     opacity: 0.3;
   }
 
   .sterling-tab:active .indicator {
-    background-color: var(--stsv-Input__border-color--active);
+    background-color: var(--stsv-input__border-color--active);
   }
 
   .sterling-tab.selected .indicator {
-    background-color: var(--stsv-Input__border-color--selected);
+    background-color: var(--stsv-input__border-color--selected);
   }
 
   /* ----- indicator colorful -----*/
 
   .sterling-tab.colorful:not(.selected):not(:active):hover .indicator {
-    background-color: var(--stsv-Input--colorful__border-color--hover);
+    background-color: var(--stsv-input--colorful__border-color--hover);
   }
 
   .sterling-tab.colorful:active .indicator {
-    background-color: var(--stsv-Input--colorful__border-color--active);
+    background-color: var(--stsv-input--colorful__border-color--active);
   }
 
   .sterling-tab.colorful.selected .indicator {
-    background-color: var(--stsv-Input--colorful__border-color--active);
+    background-color: var(--stsv-input--colorful__border-color--active);
   }
 
   /* ----- indicator disabled -----*/

@@ -93,14 +93,14 @@
     align-content: flex-start;
     align-items: flex-start;
     display: block;
-    background: var(--stsv-Common__background-color);
+    background: var(--stsv-common__background-color);
     box-sizing: border-box;
     height: 1em;
     padding: 0.25em;
-    border-width: var(--stsv-Common__border-width);
-    border-style: var(--stsv-Common__border-style);
-    border-color: var(--stsv-Common__border-color);
-    border-radius: var(--stsv-Common__border-radius);
+    border-width: var(--stsv-common__border-width);
+    border-style: var(--stsv-common__border-style);
+    border-color: var(--stsv-common__border-color);
+    border-radius: var(--stsv-common__border-radius);
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
@@ -112,7 +112,7 @@
   }
 
   .indicator {
-    background-color: var(--stsv-Common__border-color);
+    background-color: var(--stsv-common__border-color);
     box-sizing: border-box;
     height: 100%;
     min-height: 1px;
@@ -144,30 +144,30 @@
   /* ----- Colorful ----- */
 
   .indicator.info {
-    background-color: var(--stsv-Info__border-color);
+    background-color: var(--stsv-status--info__border-color);
   }
 
   .indicator.success {
-    background-color: var(--stsv-Success__border-color);
+    background-color: var(--stsv-status--success__border-color);
   }
 
   .indicator.warning {
-    background-color: var(--stsv-Warning__border-color);
+    background-color: var(--stsv-status--warning__border-color);
   }
 
   .indicator.error {
-    background-color: var(--stsv-Error__border-color);
+    background-color: var(--stsv-status--error__border-color);
   }
 
   /* ----- Disabled ----- */
 
   .sterling-progress.disabled {
-    background: var(--stsv-Common__background-color--disabled);
-    border-color: var(--stsv-Common__border-color--disabled);
+    background: var(--stsv-common__background-color--disabled);
+    border-color: var(--stsv-common__border-color--disabled);
   }
 
   .sterling-progress.disabled .indicator {
-    background-color: var(--stsv-Common__color--disabled);
+    background-color: var(--stsv-common__color--disabled);
   }
 
   @media (prefers-reduced-motion) {

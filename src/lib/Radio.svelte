@@ -184,10 +184,10 @@
 		and there is not a parent CSS selector.
 	*/
   .indicator {
-    background-color: var(--stsv-Input__background-color);
-    border-color: var(--stsv-Input__border-color);
-    border-style: var(--stsv-Input__border-style);
-    border-width: var(--stsv-Input__border-width);
+    background-color: var(--stsv-input__background-color);
+    border-color: var(--stsv-input__border-color);
+    border-style: var(--stsv-input__border-style);
+    border-width: var(--stsv-input__border-width);
     border-radius: 10000px;
     box-sizing: border-box;
     display: inline-block;
@@ -199,20 +199,20 @@
   }
 
   input:checked + .indicator {
-    background-color: var(--stsv-Input__background-color);
-    border-color: var(--stsv-Input__border-color);
+    background-color: var(--stsv-input__background-color);
+    border-color: var(--stsv-input__border-color);
   }
 
   .sterling-radio:not(.disabled):hover .indicator {
-    background-color: var(--stsv-Input__background-color--hover);
-    border-color: var(--stsv-Input__border-color--hover);
+    background-color: var(--stsv-input__background-color--hover);
+    border-color: var(--stsv-input__border-color--hover);
   }
 
   input:focus-visible + .indicator {
-    outline-color: var(--stsv-Common__outline-color);
-    outline-offset: var(--stsv-Common__outline-offset);
-    outline-style: var(--stsv-Common__outline-style);
-    outline-width: var(--stsv-Common__outline-width);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
   }
 
   .indicator::after {
@@ -229,26 +229,26 @@
   }
 
   input:checked + .indicator::after {
-    background-color: var(--stsv-Input__color);
+    background-color: var(--stsv-input__color);
   }
 
   .sterling-radio.colorful .indicator {
-    background-color: var(--stsv-Input--colorful__background-color);
-    border-color: var(--stsv-Input--colorful__border-color);
+    background-color: var(--stsv-input--colorful__background-color);
+    border-color: var(--stsv-input--colorful__border-color);
   }
 
   .sterling-radio.colorful input:checked + .indicator {
-    background-color: var(--stsv-Input--colorful__background-color);
-    border-color: var(--stsv-Input--colorful__border-color);
+    background-color: var(--stsv-input--colorful__background-color);
+    border-color: var(--stsv-input--colorful__border-color);
   }
 
   .sterling-radio.colorful:not(.disabled):hover .indicator {
-    background-color: var(--stsv-Input--colorful__background-color--hover);
-    border-color: var(--stsv-Input--colorful__border-color--hover);
+    background-color: var(--stsv-input--colorful__background-color--hover);
+    border-color: var(--stsv-input--colorful__border-color--hover);
   }
 
   .sterling-radio.colorful input:checked + .indicator::after {
-    background-color: var(--stsv-Input--colorful__color);
+    background-color: var(--stsv-input--colorful__color);
   }
 
   .sterling-radio.disabled * {
@@ -256,7 +256,13 @@
   }
 
   .container::after {
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 6px
+    );
     border-radius: 10000px;
     bottom: 0;
     content: '';

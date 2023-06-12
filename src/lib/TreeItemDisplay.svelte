@@ -92,7 +92,7 @@
     align-items: center;
     background-color: transparent;
     box-sizing: border-box;
-    color: var(--stsv-Input__color);
+    color: var(--stsv-input__color);
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 0.25em;
@@ -107,23 +107,23 @@
   }
 
   .sterling-tree-item-display:not(.item-disabled):not(.selected):hover {
-    background-color: var(--stsv-Button__background-color--hover);
-    color: var(--stsv-Button__color--hover);
+    background-color: var(--stsv-button__background-color--hover);
+    color: var(--stsv-button__color--hover);
   }
 
   .sterling-tree-item-display.selected {
-    background-color: var(--stsv-Button__background-color--active);
-    color: var(--stsv-Button__color--active);
+    background-color: var(--stsv-button__background-color--active);
+    color: var(--stsv-button__color--active);
   }
 
   .sterling-tree-item-display.colorful:not(.item-disabled):not(.selected):hover {
-    background-color: var(--stsv-Button--colorful__background-color--hover);
-    color: var(--stsv-Button--colorful__color--hover);
+    background-color: var(--stsv-button--colorful__background-color--hover);
+    color: var(--stsv-button--colorful__color--hover);
   }
 
   .sterling-tree-item-display.colorful.selected {
-    background-color: var(--stsv-Button--colorful__background-color--active);
-    color: var(--stsv-Button--colorful__color--active);
+    background-color: var(--stsv-button--colorful__background-color--active);
+    color: var(--stsv-button--colorful__color--active);
   }
 
   .sterling-tree-item-display.disabled {
@@ -132,7 +132,13 @@
   }
 
   .sterling-tree-item-display::after {
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 6px
+    );
     bottom: 0;
     content: '';
     left: 0;

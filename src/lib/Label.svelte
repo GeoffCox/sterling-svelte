@@ -59,13 +59,13 @@
 
 <style>
   label {
-    color: var(--stsv-Common__color);
+    color: var(--stsv-common__color);
     transition: color 250ms;
     font: inherit;
   }
 
   label.disabled {
-    color: var(--stsv-Common__color--disabled);
+    color: var(--stsv-common__color--disabled);
   }
 
   @media (prefers-reduced-motion) {

@@ -94,7 +94,7 @@
   .sterling-list-item {
     background-color: transparent;
     box-sizing: border-box;
-    color: var(--stsv-Common__color);
+    color: var(--stsv-common__color);
     cursor: pointer;
     margin: 0;
     padding: 0.5em;
@@ -106,23 +106,23 @@
   }
 
   .sterling-list-item:not(.disabled):not(.selected):hover {
-    background-color: var(--stsv-Button__background-color--hover);
-    color: var(--stsv-Button__color--hover);
+    background-color: var(--stsv-button__background-color--hover);
+    color: var(--stsv-button__color--hover);
   }
 
   .sterling-list-item.selected {
-    background-color: var(--stsv-Button__background-color--active);
-    color: var(--stsv-Button__color--active);
+    background-color: var(--stsv-button__background-color--active);
+    color: var(--stsv-button__color--active);
   }
 
   .sterling-list-item.colorful:not(.disabled):not(.selected):hover {
-    background-color: var(--stsv-Button--colorful__background-color--hover);
-    color: var(--stsv-Button--colorful__color--hover);
+    background-color: var(--stsv-button--colorful__background-color--hover);
+    color: var(--stsv-button--colorful__color--hover);
   }
 
   .sterling-list-item.colorful.selected {
-    background-color: var(--stsv-Button--colorful__background-color--active);
-    color: var(--stsv-Button--colorful__color--active);
+    background-color: var(--stsv-button--colorful__background-color--active);
+    color: var(--stsv-button--colorful__color--active);
   }
 
   .sterling-list-item.disabled {
@@ -131,7 +131,13 @@
   }
 
   .sterling-list-item::after {
-    background: var(--stsv-Disabled__background);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--stsv-common__background-color1--disabled),
+      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 3px,
+      var(--stsv-common__background-color2--disabled) 6px
+    );
     bottom: 0;
     content: '';
     left: 0;

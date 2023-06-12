@@ -44,7 +44,7 @@
   }
 
   .backing {
-    background: var(--stsv-Common__background-color);
+    background: var(--stsv-common__background-color);
     box-shadow: inset 1px 1px 2px gray;
     display: grid;
     grid-template-columns: 1fr;
