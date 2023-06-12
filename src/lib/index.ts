@@ -57,9 +57,11 @@ export {
 // ----- Components ----- //
 import Button from './Button.svelte';
 import Checkbox from './Checkbox.svelte';
+import ColorPicker from './ColorPicker.svelte';
 import Dialog from './Dialog.svelte';
 import Dropdown from './Dropdown.svelte';
 import Field from './Field.svelte';
+import HslColorSliders from './HslColorSliders.svelte';
 import Input from './Input.svelte';
 import Label from './Label.svelte';
 import Link from './Link.svelte';
@@ -74,6 +76,7 @@ import MenuSeparator from './MenuSeparator.svelte';
 import Popover from './Popover.svelte';
 import Progress from './Progress.svelte';
 import Radio from './Radio.svelte';
+import RgbColorSliders from './RgbColorSliders.svelte';
 import Select from './Select.svelte';
 import Slider from './Slider.svelte';
 import Switch from './Switch.svelte';
@@ -89,9 +92,11 @@ import TreeItemDisplay from './TreeItemDisplay.svelte';
 export {
   Button,
   Checkbox,
+  ColorPicker,
   Dialog,
   Dropdown,
   Field,
+  HslColorSliders,
   Input,
   Label,
   Link,
@@ -106,6 +111,7 @@ export {
   Popover,
   Progress,
   Radio,
+  RgbColorSliders,
   Select,
   Slider,
   Switch,

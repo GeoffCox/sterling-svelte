@@ -5,7 +5,9 @@ export const neutralColors: Record<string, string> = {
   color3: 'hsl(0, 0%, 20%)',
   color4: 'hsl(0, 0%, 30%)',
   color5: 'hsl(0, 0%, 45%)',
+
   color6: 'hsl(0, 0%, 60%)',
+
   color7: 'hsl(0, 0%, 75%)',
   color8: 'hsl(0, 0%, 85%)',
   color9: 'hsl(0, 0%, 92%)',

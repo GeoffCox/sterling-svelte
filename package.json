@@ -40,6 +40,7 @@
     "@sveltejs/kit": "^1.5.0",
     "@sveltejs/package": "^1.0.0",
     "@types/lodash-es": "^4.17.6",
+    "@types/tinycolor2": "^1.4.3",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
     "eslint": "^8.28.0",
@@ -59,6 +60,7 @@
   "dependencies": {
     "@floating-ui/dom": "^1.1.0",
     "keyborg": "^2.0.0",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "tinycolor2": "^1.6.0"
   }
 }
