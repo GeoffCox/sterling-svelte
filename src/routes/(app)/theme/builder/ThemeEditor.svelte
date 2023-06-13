@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Theme } from '$lib';
   import DisabledSwatchEditor from './DisabledSwatchEditor.svelte';
-  import Swatch from './EditorSwatch.svelte';
+  import Swatch from './SwatchEditor.svelte';
 
   export let theme: Record<string, string>;
 </script>

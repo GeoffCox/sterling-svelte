@@ -1,6 +1,6 @@
 <script lang="ts">
   import { lightTheme } from '$lib';
-  import Swatch from './EditorSwatch.svelte';
+  import Swatch from './SwatchEditor.svelte';
   import ThemeBuilderNav from './archive/ThemeBuilderNav.svelte';
   import { reduce } from 'lodash-es';
   import ThemeEditor from './ThemeEditor.svelte';
