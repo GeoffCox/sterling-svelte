@@ -54,7 +54,12 @@
   };
 
   export const focus = (options?: FocusOptions) => {
-    tabListRef?.focus(options);
+    let selectedItem = getSelectedTabElement();
+    if (selectedValue && selectedItem) {
+      selectTab(selectedValue, selectedItem as HTMLElement);
+    } else {
+      selectFirstTab();
+    }
   };
 
   // ----- Selection ----- //
@@ -103,8 +108,8 @@
   };
 
   export const selectPreviousTab = () => {
-    let selectedItem = getSelectedTabElement();
-    let candidate = selectedItem?.previousElementSibling;
+    let selectedTab = getSelectedTabElement();
+    let candidate = selectedTab?.previousElementSibling;
     while (candidate && !isElementTab(candidate)) {
       candidate = candidate.previousElementSibling;
     }
@@ -119,8 +124,8 @@
   };
 
   export const selectNextTab = () => {
-    let selectedItem = getSelectedTabElement();
-    let candidate = selectedItem?.nextElementSibling;
+    let selectedTab = getSelectedTabElement();
+    let candidate = selectedTab?.nextElementSibling;
     while (candidate && !isElementTab(candidate)) {
       candidate = candidate.nextElementSibling;
     }
