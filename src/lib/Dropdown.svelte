@@ -62,9 +62,15 @@
   const onKeydown = (event: KeyboardEvent) => {
     if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
       switch (event.key) {
+        case ' ':
+          open = !open;
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
         case 'Escape':
           open = false;
           event.preventDefault();
+          event.stopPropagation();
           return false;
       }
     }

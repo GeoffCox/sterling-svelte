@@ -90,6 +90,12 @@
     };
   });
 
+  const onKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      open = false;
+    }
+  };
+
   ensurePortalHost();
 </script>
 
@@ -126,6 +132,7 @@
       on:scroll
       on:wheel
       on:paste
+      on:keydown={onKeydown}
       {...$$restProps}
       style="left:{popupPosition.x}px; top:{popupPosition.y}px"
     >
