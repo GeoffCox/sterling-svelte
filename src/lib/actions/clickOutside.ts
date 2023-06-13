@@ -16,7 +16,7 @@ export const clickOutside = (node: HTMLElement, params?: Params) => {
     if (
       targetNode &&
       !node.contains(targetNode) &&
-      (!ignoreOthers || ignoreOthers.every((x) => !x.contains(targetNode)))
+      (!ignoreOthers || ignoreOthers.filter(Boolean).every((x) => !x.contains(targetNode)))
     ) {
       node.dispatchEvent(
         new CustomEvent<svelte.JSX.ClickOutsideEventDetail>('click_outside', {
