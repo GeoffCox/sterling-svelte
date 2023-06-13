@@ -12,11 +12,16 @@
   import HslColorSliders from './HslColorSliders.svelte';
   import HexColorSliders from './HexColorSliders.svelte';
   import { round } from 'lodash-es';
+  import { trapKeyboardFocus } from './actions/trapKeyboardFocus';
+
+  // ----- Constants ----- //
+
+  const defaultColorText = '#000000';
 
   // ----- Props ----- //
 
-  export let colorText = '#00ffff';
-  export let colorFormat: ColorFormat = 'hsl';
+  export let colorText: string = defaultColorText;
+  export let colorFormat: ColorFormat = 'hex';
 
   // ----- State ----- //
 
@@ -143,6 +148,11 @@
 
   const onInputBlur = async () => {
     if (!updating) {
+      if (colorText.trim().length === 0) {
+        colorText = defaultColorText;
+        return;
+      }
+
       const color = tinycolor(colorText);
       if (color.isValid) {
         updating = true;
@@ -171,13 +181,28 @@
   };
 
   const onInputKeydown = (event: KeyboardEvent) => {
-    if (event.key === 'Tab' && open) {
-      setTimeout(() => {
-        tabListRef?.focus();
-        console.log('tab');
-      }, 0);
-      event.preventDefault();
+    switch (event.key) {
+      case 'Tab':
+        if (open) {
+          setTimeout(() => {
+            tabListRef?.focus();
+          }, 0);
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        }
+        break;
+      case 'Escape':
+        if (open) {
+          open = false;
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        }
+        break;
     }
+    // prevent typing from bubbling to the dropdown
+    event.stopImmediatePropagation();
   };
 
   // -----Initialization ----- //
@@ -188,23 +213,21 @@
   <Dropdown bind:open>
     <div class="value" slot="value">
       <div class="color-box" style="background-color: {colorText}" />
-      <div class="color-text">
-        <Input
-          bind:value={colorText}
-          composed
-          on:blur={onInputBlur}
-          on:click={onInputClick}
-          on:keydown={onInputKeydown}
-          spellcheck="false"
-        />
-      </div>
+      <Input
+        bind:value={colorText}
+        composed
+        on:blur={onInputBlur}
+        on:click={onInputClick}
+        on:keydown={onInputKeydown}
+        spellcheck="false"
+      />
     </div>
-    <div class="popup">
+    <div class="popup" use:trapKeyboardFocus>
       <div class="tabs" bind:this={tabsRef}>
         <TabList bind:this={tabListRef} bind:selectedValue={colorFormat}>
-          <Tab value="hsl">hsl</Tab>
           <Tab value="hex">hex</Tab>
           <Tab value="rgb">rgb</Tab>
+          <Tab value="hsl">hsl</Tab>
         </TabList>
       </div>
       <div class="sliders">
@@ -224,22 +247,17 @@
   .value {
     display: grid;
     align-items: center;
+    justify-content: stretch;
     justify-items: stretch;
     grid-template-columns: auto 1fr;
     padding-left: 0.5em;
+    width: 250px;
   }
 
   .color-box {
     width: 1em;
     height: 1em;
     border: 1px dashed var(--stsv-common__border-color);
-  }
-
-  .color-text {
-    display: grid;
-    place-content: stretch;
-    place-items: stretch;
-    width: fit-content;
   }
 
   .popup {

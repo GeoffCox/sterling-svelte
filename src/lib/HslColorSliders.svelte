@@ -239,6 +239,7 @@
   .alpha :global(.fill) {
     background-color: transparent;
   }
+
   .alpha :global(.track) {
     background-color: transparent;
     background-image: linear-gradient(to right, #ffffff, #ffffff 1px, #000000 1px, #000000);

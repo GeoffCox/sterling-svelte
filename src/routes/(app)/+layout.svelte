@@ -25,6 +25,7 @@
   const components = [
     'Button',
     'Checkbox',
+    'ColorPicker',
     'Dialog',
     'Dropdown',
     'Field',
