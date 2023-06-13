@@ -3,34 +3,33 @@
 
   import Input from '$lib/Input.svelte';
   import Slider from '$lib/Slider.svelte';
-  import { round } from 'lodash-es';
 
   // ----- Props ----- //
   export let red: number = 0;
   export let green: number = 0;
   export let blue: number = 0;
-  export let alpha: number = 1;
+  export let alpha: number = 255;
 
   // ----- State ----- //
-  let redText = red.toString();
-  let greenText = green.toString();
-  let blueText = blue.toString();
-  let alphaText = alpha.toString();
+  let redText = red.toString(16).padStart(2, '0');
+  let greenText = green.toString(16).padStart(2, '0');
+  let blueText = blue.toString(16).padStart(2, '0');
+  let alphaText = alpha.toString(16).padStart(2, '0');
 
   $: {
-    redText = red.toString();
+    redText = red.toString(16).padStart(2, '0');
   }
 
   $: {
-    greenText = green.toString();
+    greenText = green.toString(16).padStart(2, '0');
   }
 
   $: {
-    blueText = blue.toString();
+    blueText = blue.toString(16).padStart(2, '0');
   }
 
   $: {
-    alphaText = alpha.toString();
+    alphaText = alpha.toString(16).padStart(2, '0');
   }
 
   // ----- Events ----- //
@@ -45,55 +44,36 @@
 
   // ----- Event Handlers ----- //
 
-  const parseRgbValue = (text?: string, defaultValue: number = 0) => {
-    if (!text) {
-      return defaultValue;
-    }
-
-    const newValue = text ? Number.parseFloat(text) : defaultValue;
-
-    if (newValue && newValue !== Number.NaN) {
-      return Math.round(Math.max(0, Math.min(255, newValue)));
-    }
-
-    return defaultValue;
-  };
-
   const onRedInputChange = (event: Event) => {
     const inputChangeEvent = event as Event & {
       currentTarget: EventTarget & HTMLInputElement;
     };
-
-    red = parseRgbValue(inputChangeEvent?.currentTarget?.value, red);
+    const text = inputChangeEvent?.currentTarget?.value;
+    red = text ? Number.parseInt(text, 16) : red;
   };
 
   const onGreenInputChange = (event: Event) => {
     const inputChangeEvent = event as Event & {
       currentTarget: EventTarget & HTMLInputElement;
     };
-
-    green = parseRgbValue(inputChangeEvent?.currentTarget?.value, green);
+    const text = inputChangeEvent?.currentTarget?.value;
+    green = text ? Number.parseInt(text, 16) : green;
   };
 
   const onBlueInputChange = (event: Event) => {
     const inputChangeEvent = event as Event & {
       currentTarget: EventTarget & HTMLInputElement;
     };
-
-    blue = parseRgbValue(inputChangeEvent?.currentTarget?.value, blue);
+    const text = inputChangeEvent?.currentTarget?.value;
+    blue = text ? Number.parseInt(text, 16) : blue;
   };
 
   const onAlphaInputchange = (event: Event) => {
     const inputChangeEvent = event as Event & {
       currentTarget: EventTarget & HTMLInputElement;
     };
-
     const text = inputChangeEvent?.currentTarget?.value;
-    const newValue = text ? Number.parseFloat(text) : alpha;
-
-    if (newValue && newValue !== Number.NaN) {
-      alpha = round(Math.max(0, Math.min(1, newValue)), 2);
-    }
+    alpha = text ? Number.parseInt(text, 16) : alpha;
   };
 </script>
 
@@ -114,7 +94,7 @@
     <div class="alpha-hatch" />
     <div class="alpha-gradient" />
     <div class="slider alpha-slider">
-      <Slider min={0} max={1} precision={2} bind:value={alpha} />
+      <Slider min={0} max={255} precision={0} bind:value={alpha} />
     </div>
   </div>
   <Input bind:value={alphaText} on:change={(e) => onAlphaInputchange(e)} />

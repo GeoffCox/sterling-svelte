@@ -61,6 +61,7 @@ import ColorPicker from './ColorPicker.svelte';
 import Dialog from './Dialog.svelte';
 import Dropdown from './Dropdown.svelte';
 import Field from './Field.svelte';
+import HexColorSliders from './HexColorSliders.svelte';
 import HslColorSliders from './HslColorSliders.svelte';
 import Input from './Input.svelte';
 import Label from './Label.svelte';
@@ -96,6 +97,7 @@ export {
   Dialog,
   Dropdown,
   Field,
+  HexColorSliders,
   HslColorSliders,
   Input,
   Label,

@@ -1,26 +1,16 @@
 <script lang="ts">
-  import { round } from 'lodash-es';
   import { createEventDispatcher } from 'svelte';
-  import tinycolor from 'tinycolor2';
 
   import Input from '$lib/Input.svelte';
   import Slider from '$lib/Slider.svelte';
+  import { round } from 'lodash-es';
 
   // ----- Props ----- //
 
   export let hue: number = 180;
   export let saturation: number = 100;
   export let lightness: number = 50;
-  export let alpha: number = 100;
-
-  /**
-   * To round-trip convert between RGB and HSL, the minimum precision required is 3.
-   * HSL values can have up to 19 decimal places when converted from RGB, but the
-   * the colors cannot be distinguished between by the human eye.
-   */
-  export let precision: number = 3;
-
-  export let alphaPrecision: number | undefined = 0;
+  export let alpha: number = 1;
 
   // ----- State ----- //
   let hueText = hue.toString();
@@ -60,12 +50,12 @@
     const inputChangeEvent = event as Event & {
       currentTarget: EventTarget & HTMLInputElement;
     };
-    let text = inputChangeEvent?.currentTarget?.value;
 
-    let newValue = text ? Number.parseFloat(text) : hue;
+    const text = inputChangeEvent?.currentTarget?.value;
+    const newValue = text ? Number.parseFloat(text) : hue;
 
     if (newValue && newValue !== Number.NaN) {
-      hue = round(Math.max(0, Math.min(360, newValue)), precision);
+      hue = Math.round(Math.max(0, Math.min(360, newValue)));
       hueText = hue.toString();
     }
   };
@@ -74,12 +64,12 @@
     const inputChangeEvent = event as Event & {
       currentTarget: EventTarget & HTMLInputElement;
     };
-    let text = inputChangeEvent?.currentTarget?.value?.replace(/%/g, '');
 
-    let newValue = text ? Number.parseFloat(text) : saturation;
+    const text = inputChangeEvent?.currentTarget?.value?.replace(/%/g, '');
+    const newValue = text ? Number.parseFloat(text) : saturation;
 
     if (newValue && newValue !== Number.NaN) {
-      saturation = round(Math.max(0, Math.min(100, newValue)), precision);
+      saturation = Math.round(Math.max(0, Math.min(100, newValue)));
       saturationText = saturation.toString();
     }
   };
@@ -88,12 +78,12 @@
     const inputChangeEvent = event as Event & {
       currentTarget: EventTarget & HTMLInputElement;
     };
-    let text = inputChangeEvent?.currentTarget?.value?.replace(/%/g, '');
 
-    let newValue = text ? Number.parseFloat(text) : lightness;
+    const text = inputChangeEvent?.currentTarget?.value?.replace(/%/g, '');
+    const newValue = text ? Number.parseFloat(text) : lightness;
 
     if (newValue && newValue !== Number.NaN) {
-      lightness = round(Math.max(0, Math.min(100, newValue)), precision);
+      lightness = Math.round(Math.max(0, Math.min(100, newValue)));
       lightnessText = lightness.toString();
     }
   };
@@ -102,54 +92,38 @@
     const inputChangeEvent = event as Event & {
       currentTarget: EventTarget & HTMLInputElement;
     };
-    let text = inputChangeEvent?.currentTarget?.value?.replace(/%/g, '');
 
-    let newValue = text ? Number.parseFloat(text) : alpha;
+    const text = inputChangeEvent?.currentTarget?.value;
+    const newValue = text ? Number.parseFloat(text) : alpha;
 
     if (newValue && newValue !== Number.NaN) {
-      alpha = round(Math.max(0, Math.min(100, newValue)), alphaPrecision);
+      alpha = round(Math.max(0, Math.min(1, newValue)), 2);
       alphaText = alpha.toString();
     }
   };
-
-  // ----- Constants for gradient slider backgrounds ----- //
-
-  const hues = [
-    { hue: 0, offset: 0 },
-    { hue: 60, offset: 17 },
-    { hue: 120, offset: 33 },
-    { hue: 180, offset: 50 },
-    { hue: 240, offset: 67 },
-    { hue: 300, offset: 83 },
-    { hue: 0, offset: 100 }
-  ];
-
-  const hueStops = hues
-    .map((h) => `${tinycolor({ h: h.hue, s: 1, l: 0.5 }).toHslString()} ${h.offset}%`)
-    .join(', ');
 </script>
 
 <div class="sterling-hsl-color-sliders">
-  <div class="hue" style={`background: linear-gradient(to right,${hueStops});`}>
-    <Slider min={0} max={360} {precision} bind:value={hue} />
+  <div class="hue">
+    <Slider min={0} max={360} precision={0} bind:value={hue} />
   </div>
   <Input bind:value={hueText} on:change={(e) => onHueInputChange(e)} />
   <div class="saturation" style={`--hue:${hue};`}>
-    <Slider min={0} max={100} {precision} bind:value={saturation} />
+    <Slider min={0} max={100} precision={0} bind:value={saturation} />
   </div>
   <Input bind:value={saturationText} on:change={(e) => onSaturationInputChange(e)} />
   <div class="lightness" style={`--hue:${hue};--saturation:${saturation}%;`}>
-    <Slider min={0} max={100} {precision} bind:value={lightness} />
+    <Slider min={0} max={100} precision={0} bind:value={lightness} />
   </div>
   <Input bind:value={lightnessText} on:change={(e) => onLightnessInputChange(e)} />
   <div class="alpha" style={`--hue:${hue};--saturation:${saturation}%;--lightness:${lightness}%`}>
     <div class="alpha-hatch" />
     <div class="alpha-gradient" />
     <div class="alpha-slider">
-      <Slider min={0} max={100} precision={alphaPrecision} bind:value={alpha} />
+      <Slider min={0} max={1} precision={2} step={0.01} bind:value={alpha} />
     </div>
   </div>
-  <Input value={`${round(alpha, alphaPrecision)}`} on:change={(e) => onAlphaInputchange(e)} />
+  <Input bind:value={alphaText} on:change={(e) => onAlphaInputchange(e)} />
 </div>
 
 <style>
@@ -159,6 +133,19 @@
     grid-template-columns: 1fr 5em;
     column-gap: 0.5em;
     row-gap: 0.25em;
+  }
+
+  .hue {
+    background: linear-gradient(
+      to right,
+      hsl(0, 100%, 50%) 0%,
+      hsl(60, 100%, 50%) 17%,
+      hsl(120, 100%, 50%) 33%,
+      hsl(180, 100%, 50%) 50%,
+      hsl(240, 100%, 50%) 67%,
+      hsl(300, 100%, 50%) 83%,
+      hsl(0, 100%, 50%) 100%
+    );
   }
 
   .hue :global(.fill) {

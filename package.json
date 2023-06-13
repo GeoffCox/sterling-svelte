@@ -58,9 +58,9 @@
   },
   "type": "module",
   "dependencies": {
+    "@ctrl/tinycolor": "^3.6.0",
     "@floating-ui/dom": "^1.1.0",
     "keyborg": "^2.0.0",
-    "lodash-es": "^4.17.21",
-    "tinycolor2": "^1.6.0"
+    "lodash-es": "^4.17.21"
   }
 }
