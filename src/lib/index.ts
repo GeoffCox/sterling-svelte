@@ -2,6 +2,7 @@
 export { clickOutside } from './actions/clickOutside';
 export { forwardEvents } from './actions/forwardEvents';
 export { portal } from './actions/portal';
+export { trapKeyboardFocus } from './actions/trapKeyboardFocus';
 
 // ----- functions ----- //
 export { idGenerator } from './idGenerator';
