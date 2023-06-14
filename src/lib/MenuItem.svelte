@@ -401,7 +401,7 @@
   on:pointerover
   on:pointerout
   on:pointerup
-  on:wheel
+  on:wheel|passive
   on:click={onClick}
   on:keydown={onKeyDown}
   on:mouseenter={onMouseEnter}

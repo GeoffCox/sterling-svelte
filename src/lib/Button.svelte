@@ -72,7 +72,7 @@
   on:pointerover
   on:pointerout
   on:pointerup
-  on:wheel
+  on:wheel|passive
   {...$$restProps}
 >
   <slot {shape} {variant} />

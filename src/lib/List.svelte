@@ -285,7 +285,7 @@ A list of items where a single item can be selected.
   on:mouseout
   on:mouseup
   on:scroll
-  on:wheel
+  on:wheel|passive
   on:paste
   {...$$restProps}
 >

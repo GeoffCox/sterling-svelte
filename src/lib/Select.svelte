@@ -215,7 +215,7 @@
   on:mouseover
   on:mouseout
   on:mouseup
-  on:wheel
+  on:wheel|passive
   on:paste
   on:click={onSelectClick}
   on:click_outside={() => (open = false)}

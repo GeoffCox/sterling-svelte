@@ -114,7 +114,7 @@
     on:select
     on:submit
     on:reset
-    on:wheel
+    on:wheel|passive
     on:input={onInput}
     {...$$restProps}
   />

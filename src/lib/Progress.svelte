@@ -71,7 +71,7 @@
   on:pointerover
   on:pointerout
   on:pointerup
-  on:wheel
+  on:wheel|passive
   {...$$restProps}
 >
   <div class="container" bind:clientWidth bind:clientHeight>

@@ -91,7 +91,7 @@
   on:pointerover
   on:pointerout
   on:pointerup
-  on:wheel
+  on:wheel|passive
 >
   <div class="content">
     <slot disabled={_disabled} {selected} {value} {text}>
@@ -215,7 +215,7 @@
   }
 
   .sterling-tab:active .indicator {
-    background-color: var(--stsv-input__border-color--active);
+    background-color: var(--stsv-input__border-color--selected);
   }
 
   .sterling-tab.selected .indicator {
@@ -229,11 +229,11 @@
   }
 
   .sterling-tab.colorful:active .indicator {
-    background-color: var(--stsv-input--colorful__border-color--active);
+    background-color: var(--stsv-input--colorful__border-color--selected);
   }
 
   .sterling-tab.colorful.selected .indicator {
-    background-color: var(--stsv-input--colorful__border-color--active);
+    background-color: var(--stsv-input--colorful__border-color--selected);
   }
 
   /* ----- indicator disabled -----*/

@@ -159,7 +159,7 @@
   on:mouseout
   on:mouseup
   on:scroll
-  on:wheel
+  on:wheel|passive
   on:paste
   {...$$restProps}
 >

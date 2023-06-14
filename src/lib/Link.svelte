@@ -61,7 +61,7 @@
   on:pointerover
   on:pointerout
   on:pointerup
-  on:wheel
+  on:wheel|passive
   {...$$restProps}><slot {disabled} {href} {variant} /></a
 >
 
@@ -95,7 +95,7 @@
   }
 
   a:active {
-    border-bottom-color: var(--stsv-input__border-color--active);
+    border-bottom-color: var(--stsv-input__border-color--selected);
     color: var(--stsv-input__color--active);
   }
 
@@ -113,7 +113,7 @@
   }
 
   a.colorful:active {
-    border-bottom-color: var(--stsv-input--colorful__border-color--active);
+    border-bottom-color: var(--stsv-input--colorful__border-color--selected);
     color: var(--stsv-input--colorful__color--active);
   }
 
@@ -128,7 +128,7 @@
   }
 
   a.ghost:active {
-    border-bottom-color: var(--stsv-input__border-color--active);
+    border-bottom-color: var(--stsv-input__border-color--selected);
   }
 
   /* ----- ghost colorful ----- */
@@ -138,7 +138,7 @@
   }
 
   a.ghost.colorful:active {
-    border-bottom-color: var(--stsv-input--colorful__border-color--active);
+    border-bottom-color: var(--stsv-input--colorful__border-color--selected);
   }
 
   /* ----- disabled ----- */

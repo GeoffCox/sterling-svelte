@@ -5,15 +5,36 @@
 
   import { clickOutside } from './actions/clickOutside';
   import { idGenerator } from './idGenerator';
+  import { prefersReducedMotion } from './stores/prefersReducedMotion';
+  import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
 
   const popupId = idGenerator.nextId('Dropdown-popup');
 
   // ----- Props ----- //
 
-  export let colorful: boolean = false;
-  export let composed: boolean = false;
-  export let disabled: boolean = false;
+  /**
+   * Applies colorful styles from the theme.
+   */
+  export let colorful = false;
+
+  /**
+   * Displays the dropdown so its container handles border and focus.
+   */
+  export let composed = false;
+
+  /**
+   * Disables the dropdown.
+   */
+  export let disabled = false;
+
+  /**
+   * Controls if the dropdown is open.
+   */
   export let open = false;
+
+  /**
+   * Keeps the dropdown open when clicking outside.
+   */
   export let stayOpenOnClickAway = false;
 
   // ----- State ----- //
@@ -81,6 +102,14 @@
       open = false;
     }
   };
+
+  // ----- Animation ----- //
+
+  const slideNoOp = (node: Element, params?: SlideParams): TransitionConfig => {
+    return { delay: 0, duration: 0 };
+  };
+
+  $: slideMotion = !$prefersReducedMotion ? slide : slideNoOp;
 </script>
 
 <div
@@ -121,7 +150,7 @@
   on:mouseover
   on:mouseout
   on:mouseup
-  on:wheel
+  on:wheel|passive
   on:paste
   on:click_outside={onClickOutside}
   {...$$restProps}
@@ -134,7 +163,12 @@
   </slot>
 
   <Popover reference={dropdownRef} open={!disabled && open}>
-    <div class="popup-content" class:colorful bind:this={popupContentRef}>
+    <div
+      class="popup-content"
+      transition:slideMotion={{ duration: 200 }}
+      class:colorful
+      bind:this={popupContentRef}
+    >
       <slot {colorful} {composed} {disabled} {open} />
     </div>
   </Popover>
@@ -196,6 +230,10 @@
   .sterling-dropdown.disabled {
     cursor: not-allowed;
     outline: none;
+  }
+
+  .sterling-dropdown.disabled .button {
+    cursor: not-allowed;
   }
 
   .sterling-dropdown::after {

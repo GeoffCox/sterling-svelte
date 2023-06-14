@@ -197,7 +197,7 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   on:pointerout
   on:pointerup
   on:pointerup={onPointerUp}
-  on:wheel
+  on:wheel|passive
   {...$$restProps}
 >
   <div

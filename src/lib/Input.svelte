@@ -104,7 +104,7 @@
     on:select
     on:submit
     on:reset
-    on:wheel
+    on:wheel|passive
     {...$$restProps}
   />
 </div>

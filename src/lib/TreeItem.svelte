@@ -15,7 +15,7 @@
   export let label: string | undefined = undefined;
   export let value: string;
 
-  // ----- Media Queries ----- //
+  // ----- Animation ----- //
 
   const slidNoOp = (node: Element, params?: SlideParams): TransitionConfig => {
     return { delay: 0, duration: 0 };
@@ -367,7 +367,7 @@ A item in a Tree displaying the item and children.
   on:pointerover
   on:pointerout
   on:pointerup
-  on:wheel
+  on:wheel|passive
   {...$$restProps}
 >
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
