@@ -37,8 +37,8 @@ export const oceanTheme: Theme = {
   'stsv-common__border-color--disabled': oceanBlues.color9,
   'stsv-common__color--disabled': oceanBlues.color9,
 
-  'stsv-common__background-color1--disabled': 'hsla(0, 0%, 0%, 20%)',
-  'stsv-common__background-color2--disabled': `hsla(0, 0%, 100%, 20%)`,
+  'stsv-common__background-color1--disabled': 'hsla(0, 0%, 0%, 0.2)',
+  'stsv-common__background-color2--disabled': `hsla(0, 0%, 100%, 0.2)`,
 
   // ----- Button ----- //
 

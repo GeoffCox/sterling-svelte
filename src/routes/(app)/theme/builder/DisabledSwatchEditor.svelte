@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
 
   import ColorPicker from '$lib/ColorPicker.svelte';
+  import SvelteIcon from '../../SvelteIcon.svelte';
 
   export let color1Name: string | undefined = undefined;
   export let color1Value: string | undefined = undefined;
@@ -121,7 +122,7 @@
 <div bind:this={swatchRef} bind:clientWidth bind:clientHeight class="swatch" {style}>
   <div class="color-area">
     <div class="color-background" />
-    <div bind:this={colorBlockRef} class="color-block"><span>T</span></div>
+    <div bind:this={colorBlockRef} class="color-block"><SvelteIcon /></div>
     <div class="disabled-block" />
   </div>
   <div class="color-vars">
@@ -219,7 +220,11 @@
   .color-block {
     align-items: center;
     background: white;
-    border: 1px solid black;
+    background-color: var(--stsv-common__background-color);
+    border-color: var(--stsv-common__border-color);
+    border-radius: var(--stsv-common__border-radius);
+    border-style: var(--stsv-common__border-style);
+    border-width: var(--stsv-common__border-width);
     display: grid;
     grid-row-start: 1;
     grid-column-start: 1;

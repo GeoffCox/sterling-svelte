@@ -1,8 +1,6 @@
 <script lang="ts">
   import { lightTheme } from '$lib';
   import Swatch from './SwatchEditor.svelte';
-  import ThemeBuilderNav from './archive/ThemeBuilderNav.svelte';
-  import { reduce } from 'lodash-es';
   import ThemeEditor from './ThemeEditor.svelte';
 
   let theme = Object.assign({}, lightTheme) as Record<string, string>;

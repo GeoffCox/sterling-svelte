@@ -12,6 +12,8 @@
   export let lightness: number = 50;
   export let alpha: number = 1;
 
+  export let colorful = false;
+
   // ----- State ----- //
   let hueText = hue.toString();
   let saturationText = saturation.toString();
@@ -104,26 +106,29 @@
 </script>
 
 <div class="sterling-hsl-color-sliders">
-  <div class="hue">
-    <Slider min={0} max={360} precision={0} bind:value={hue} />
+  <div class="slider hue">
+    <Slider min={0} max={360} precision={0} bind:value={hue} {colorful} />
   </div>
-  <Input bind:value={hueText} on:change={(e) => onHueInputChange(e)} />
-  <div class="saturation" style={`--hue:${hue};`}>
-    <Slider min={0} max={100} precision={0} bind:value={saturation} />
+  <Input bind:value={hueText} {colorful} on:change={(e) => onHueInputChange(e)} />
+  <div class="slider saturation" style={`--hue:${hue};`}>
+    <Slider min={0} max={100} precision={0} bind:value={saturation} {colorful} />
   </div>
-  <Input bind:value={saturationText} on:change={(e) => onSaturationInputChange(e)} />
-  <div class="lightness" style={`--hue:${hue};--saturation:${saturation}%;`}>
-    <Slider min={0} max={100} precision={0} bind:value={lightness} />
+  <Input bind:value={saturationText} {colorful} on:change={(e) => onSaturationInputChange(e)} />
+  <div class="slider lightness" style={`--hue:${hue};--saturation:${saturation}%;`}>
+    <Slider min={0} max={100} precision={0} bind:value={lightness} {colorful} />
   </div>
-  <Input bind:value={lightnessText} on:change={(e) => onLightnessInputChange(e)} />
-  <div class="alpha" style={`--hue:${hue};--saturation:${saturation}%;--lightness:${lightness}%`}>
+  <Input bind:value={lightnessText} {colorful} on:change={(e) => onLightnessInputChange(e)} />
+  <div
+    class="slider alpha"
+    style={`--hue:${hue};--saturation:${saturation}%;--lightness:${lightness}%`}
+  >
     <div class="alpha-hatch" />
     <div class="alpha-gradient" />
     <div class="alpha-slider">
-      <Slider min={0} max={1} precision={2} step={0.01} bind:value={alpha} />
+      <Slider min={0} max={1} precision={2} step={0.01} bind:value={alpha} {colorful} />
     </div>
   </div>
-  <Input bind:value={alphaText} on:change={(e) => onAlphaInputchange(e)} />
+  <Input bind:value={alphaText} {colorful} on:change={(e) => onAlphaInputchange(e)} />
 </div>
 
 <style>
@@ -148,10 +153,12 @@
     );
   }
 
-  .hue :global(.fill) {
+  .slider :global(.fill),
+  .slider :global(.sterling-slider.colorful .fill) {
     background-color: transparent;
   }
-  .hue :global(.track) {
+  .slider :global(.track),
+  .slider :global(.sterling-slider.colorful .track) {
     background-color: transparent;
     opacity: 0.1;
     background-image: linear-gradient(to right, #7f3a3a, #ffffff 1px, #000000 1px, #000000);
@@ -166,16 +173,6 @@
     );
   }
 
-  .saturation :global(.fill) {
-    background-color: transparent;
-  }
-  .saturation :global(.track) {
-    background-color: transparent;
-    opacity: 0.1;
-    background-image: linear-gradient(to right, #ffffff, #ffffff 1px, #000000 1px, #000000);
-    background-size: 2px 100%;
-  }
-
   .lightness {
     background: linear-gradient(
       to right,
@@ -183,16 +180,6 @@
       hsl(var(--hue), var(--saturation), 50%) 50%,
       hsl(var(--hue), var(--saturation), 100%) 100%
     );
-  }
-
-  .lightness :global(.fill) {
-    background-color: transparent;
-  }
-  .lightness :global(.track) {
-    background-color: transparent;
-    opacity: 0.1;
-    background-image: linear-gradient(to right, #ffffff, #ffffff 1px, #000000 1px, #000000);
-    background-size: 2px 100%;
   }
 
   .alpha {
@@ -234,16 +221,5 @@
       hsla(var(--hue), var(--saturation), var(--lightness), 0) 0%,
       hsla(var(--hue), var(--saturation), var(--lightness), 1) 100%
     );
-  }
-
-  .alpha :global(.fill) {
-    background-color: transparent;
-  }
-
-  .alpha :global(.track) {
-    background-color: transparent;
-    background-image: linear-gradient(to right, #ffffff, #ffffff 1px, #000000 1px, #000000);
-    background-size: 2px 100%;
-    opacity: 0.1;
   }
 </style>

@@ -30,8 +30,8 @@ export const lightTheme: Theme = {
   'stsv-common__border-color--disabled': neutralColors.color7,
   'stsv-common__color--disabled': neutralColors.color7,
 
-  'stsv-common__background-color1--disabled': 'hsla(0, 0%, 0%, 20%)',
-  'stsv-common__background-color2--disabled': `hsla(0, 0%, 100%, 20%)`,
+  'stsv-common__background-color1--disabled': 'hsla(0, 0%, 0%, 0.2)',
+  'stsv-common__background-color2--disabled': `hsla(0, 0%, 100%, 0.2)`,
 
   // ----- Common--colorful (15) ---- //
   'stsv-common--colorful__background-color': blueColors.color12,

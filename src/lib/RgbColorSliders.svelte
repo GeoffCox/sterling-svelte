@@ -11,6 +11,8 @@
   export let blue: number = 0;
   export let alpha: number = 1;
 
+  export let colorful = false;
+
   // ----- State ----- //
   let redText = red.toString();
   let greenText = green.toString();
@@ -99,25 +101,25 @@
 
 <div class="sterling-rgb-color-sliders">
   <div class="slider red-slider">
-    <Slider min={0} max={255} precision={0} bind:value={red} />
+    <Slider {colorful} min={0} max={255} precision={0} bind:value={red} />
   </div>
-  <Input bind:value={redText} on:change={(e) => onRedInputChange(e)} />
+  <Input {colorful} bind:value={redText} on:change={(e) => onRedInputChange(e)} />
   <div class="slider green-slider">
-    <Slider min={0} max={255} precision={0} bind:value={green} />
+    <Slider {colorful} min={0} max={255} precision={0} bind:value={green} />
   </div>
-  <Input bind:value={greenText} on:change={(e) => onGreenInputChange(e)} />
+  <Input {colorful} bind:value={greenText} on:change={(e) => onGreenInputChange(e)} />
   <div class="slider blue-slider">
-    <Slider min={0} max={255} precision={0} bind:value={blue} />
+    <Slider {colorful} min={0} max={255} precision={0} bind:value={blue} />
   </div>
-  <Input bind:value={blueText} on:change={(e) => onBlueInputChange(e)} />
+  <Input {colorful} bind:value={blueText} on:change={(e) => onBlueInputChange(e)} />
   <div class="alpha" style={`--red:${red};--green:${green};--blue:${blue}`}>
     <div class="alpha-hatch" />
     <div class="alpha-gradient" />
     <div class="slider alpha-slider">
-      <Slider min={0} max={1} precision={2} bind:value={alpha} />
+      <Slider {colorful} min={0} max={1} precision={2} bind:value={alpha} />
     </div>
   </div>
-  <Input bind:value={alphaText} on:change={(e) => onAlphaInputchange(e)} />
+  <Input {colorful} bind:value={alphaText} on:change={(e) => onAlphaInputchange(e)} />
 </div>
 
 <style>
@@ -129,11 +131,13 @@
     row-gap: 0.25em;
   }
 
-  .slider :global(.fill) {
+  .slider :global(.fill),
+  .slider :global(.sterling-slider.colorful .fill) {
     background-color: transparent;
   }
 
-  .slider :global(.track) {
+  .slider :global(.track),
+  .slider :global(.sterling-slider.colorful .track) {
     background-color: transparent;
     background-image: linear-gradient(to right, #ffffff, #ffffff 1px, #000000 1px, #000000);
     background-size: 2px 100%;

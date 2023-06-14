@@ -23,6 +23,12 @@
   export let colorText: string = defaultColorText;
   export let colorFormat: ColorFormat = 'hex';
 
+  export let colorful: boolean = false;
+  export let composed: boolean = false;
+  export let disabled: boolean = false;
+  export let open = false;
+  export let stayOpenOnClickAway = false;
+
   // ----- State ----- //
 
   let hue: number = 0;
@@ -36,7 +42,6 @@
   let alpha: number = 1;
   let hexAlpha: number = 255;
 
-  let open = false;
   let updating = false;
 
   let tabListRef: TabList;
@@ -209,39 +214,39 @@
   updateColorsFromText();
 </script>
 
-<div class="sterling-color-picker">
-  <Dropdown bind:open>
-    <div class="value" slot="value">
-      <div class="color-box" style="background-color: {colorText}" />
-      <Input
-        bind:value={colorText}
-        composed
-        on:blur={onInputBlur}
-        on:click={onInputClick}
-        on:keydown={onInputKeydown}
-        spellcheck="false"
-      />
+<Dropdown bind:open {colorful} {composed} {disabled} {stayOpenOnClickAway}>
+  <div class="value" slot="value">
+    <div class="color-box" style="background-color: {colorText}" />
+    <Input
+      bind:value={colorText}
+      {colorful}
+      {disabled}
+      composed
+      on:blur={onInputBlur}
+      on:click={onInputClick}
+      on:keydown={onInputKeydown}
+      spellcheck="false"
+    />
+  </div>
+  <div class="popup" use:trapKeyboardFocus>
+    <div class="tabs" bind:this={tabsRef}>
+      <TabList bind:this={tabListRef} bind:selectedValue={colorFormat} {colorful}>
+        <Tab value="hex">hex</Tab>
+        <Tab value="rgb">rgb</Tab>
+        <Tab value="hsl">hsl</Tab>
+      </TabList>
     </div>
-    <div class="popup" use:trapKeyboardFocus>
-      <div class="tabs" bind:this={tabsRef}>
-        <TabList bind:this={tabListRef} bind:selectedValue={colorFormat}>
-          <Tab value="hex">hex</Tab>
-          <Tab value="rgb">rgb</Tab>
-          <Tab value="hsl">hsl</Tab>
-        </TabList>
-      </div>
-      <div class="sliders">
-        {#if colorFormat === 'rgb'}
-          <RgbColorSliders bind:red bind:green bind:blue bind:alpha />
-        {:else if colorFormat === 'hex'}
-          <HexColorSliders bind:red bind:green bind:blue bind:alpha={hexAlpha} />
-        {:else if colorFormat === 'hsl'}
-          <HslColorSliders bind:hue bind:saturation bind:lightness bind:alpha />
-        {/if}
-      </div>
+    <div class="sliders">
+      {#if colorFormat === 'rgb'}
+        <RgbColorSliders bind:red bind:green bind:blue bind:alpha {colorful} />
+      {:else if colorFormat === 'hex'}
+        <HexColorSliders bind:red bind:green bind:blue bind:alpha={hexAlpha} {colorful} />
+      {:else if colorFormat === 'hsl'}
+        <HslColorSliders bind:hue bind:saturation bind:lightness bind:alpha {colorful} />
+      {/if}
     </div>
-  </Dropdown>
-</div>
+  </div>
+</Dropdown>
 
 <style>
   .value {
