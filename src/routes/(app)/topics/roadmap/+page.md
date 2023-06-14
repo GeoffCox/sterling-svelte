@@ -41,6 +41,10 @@ This will include components that have standards for behavior and accessibility.
 | Field             | form           | label               | 0.0.18                |
 | Dropdown          | form           |                     | 0.0.19                |
 | Link              | navigation     | a                   | 0.0.20                |
+| ColorPicker       | form           |                     | 0.0.27                |
+| HexColorSliders   | form           |                     | 0.0.27                |
+| HslColorSliders   | form           |                     | 0.0.27                |
+| RgbColorSliders   | form           |                     | 0.0.27                |
 
 <br/>
 
@@ -85,7 +89,6 @@ There are many reasons a component may never be added to sterling-svelte even th
 
 - Calendar
 - ChoiceGroup, RadioGroup, ToggleButton
-- ColorPicker
 - DatePicker
 - Drawer / Panel
 - Rating
@@ -102,5 +105,4 @@ There are many reasons a component may never be added to sterling-svelte even th
 ### Surfaces
 
 - Accordion
-- Popover
 - Split, Splitter

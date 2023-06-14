@@ -49,15 +49,4 @@ You can import components from svelte files under `*.svelte` (recommended) or fr
 </div>
 ```
 
-## 4. Go forth and code
-
-All the sterling-svelte components are designed and implemented to take advantage of Svelte's great features.
-They have properties allowing you control over appearance and behavior. You can provide or replace content through slots.
-You can bind to values or listen to events to handle changes.
-
-Several components are simply styled native HTML elements. These components accept all the native
-element's properties and raise all the native element's events. You can quickly substitute them for native elements.
-
-Every component is designed to follow the theme, meets accessbility (ARIA) and a11y standards, and is built for composition.
-
-Enjoy!
+**_Enjoy!_**

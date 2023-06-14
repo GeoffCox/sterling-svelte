@@ -157,7 +157,7 @@ For example, `Tree` sets a `TreeContext` context that tells `TreeItem` if the tr
 and the selected value. `TreeItem` sets a `TreeItemContext` that tells `TreeItem` children, if the item is disabled and
 the depth of the children.
 
-## Components locate across hiearchy with role and data-props
+## Components locate elements using role and data-props
 
 Slots don't allow components to know what type of elements are filling the slot.
 Other times there may be sibling or parent elements a component doesn't know about because they are not within

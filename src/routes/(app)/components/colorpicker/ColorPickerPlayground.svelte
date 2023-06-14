@@ -3,16 +3,38 @@
 
   import ColorPicker from '$lib/ColorPicker.svelte';
   import type { ColorFormat } from '$lib/ColorPicker.types';
+  import Checkbox from '$lib/Checkbox.svelte';
 
   let exampleRef: any;
 
-  let colorText = '#00ffff';
-  let colorFormat: ColorFormat = 'hex';
+  let colorText = 'hsla(222, 50%, 70%, 0.5)';
+  let colorFormat: ColorFormat = 'hsl';
+
+  let colorful = false;
+  let composed = false;
+  let disabled = false;
+  let open = false;
+  let stayOpenOnClickAway = false;
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground bind:this={exampleRef} noEvents>
   <svelte:fragment slot="component">
-    <ColorPicker bind:colorText bind:colorFormat />
+    <ColorPicker
+      bind:colorText
+      bind:colorFormat
+      bind:open
+      {colorful}
+      {composed}
+      {disabled}
+      {stayOpenOnClickAway}
+    />
+  </svelte:fragment>
+  <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
+    <Checkbox bind:checked={composed}>composed</Checkbox>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Checkbox bind:checked={open}>open</Checkbox>
+    <Checkbox bind:checked={stayOpenOnClickAway}>stayOpenOnClickAway</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>colorText: {colorText}</div>

@@ -6,8 +6,9 @@
 
 A value and button where a dropdown can be opened for changing the value.
 
-- Set arbitrary content for the value and popup.
+- Set content of the displayed value and the dropdown.
 - The dropown is dynamically positioned based on avaiable screen space.
+- The dropdown opens with a slide animation.
 
 <Playground />
 
@@ -15,19 +16,32 @@ A value and button where a dropdown can be opened for changing the value.
 <script lang="ts">
   // ----- Props ----- //
 
-  // HTMLDivElement props are forwarded
+  /**
+   * Applies colorful styles from the theme.
+   */
+  export let colorful = false;
 
-  /** when true, the component should be styled to be hosted within a container component. */
-  let composed: boolean = false;
-  let disabled: boolean = false;
-  let open = false;
+  /**
+   * Displays the dropdown so its container handles border and focus.
+   */
+  export let composed = false;
 
-  /** when true, then clicking outside the dropdown won't close it. */
-  let stayOpenOnClickAway = false;
+  /**
+   * Disables the dropdown.
+   */
+  export let disabled = false;
+
+  /**
+   * Controls if the dropdown is open.
+   */
+  export let open = false;
+
+  /**
+   * Keeps the dropdown open when clicking outside.
+   */
+  export let stayOpenOnClickAway = false;
 
   // ----- Events ----- //
-
-  // HTMLDivElement events are bubbled
 
   dispatch('open', { open });
 
@@ -41,11 +55,11 @@ A value and button where a dropdown can be opened for changing the value.
 <!-- Anatomy -->
 
 <div>
-  <slot name="value" {composed} {disabled} {open} />
-  <slot name="button" {composed} {disabled} {open} />
-  <!-- popup -->
-  <div>
-    <slot {composed} {disabled} {open} />
-  </div>
+  <slot name="value" {colorful} {composed} {disabled} {open} />
+  <slot name="button" {colorful} {composed} {disabled} {open} />
+  <!-- dropdown -->
+  <Popover>
+    <slot {colorful} {composed} {disabled} {open} />
+  </Popover>
 </div>
 ```

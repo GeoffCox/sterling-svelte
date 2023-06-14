@@ -1,7 +1,6 @@
 # Actions
 
-Sterling-svelte has some actions that it uses to implement components.
-These are exported from the library for use in your components.
+Sterling-svelte exports the actions used within its components.
 
 ## clickOutside
 
@@ -14,7 +13,9 @@ Raises an event anytime the user clicks outside the bounds of the element.
   };
 </script>
 
-<div use:clickOutside on:click_outside={onClickOutside}>sterling-svelte</div>
+<div use:clickOutside on:click_outside={onClickOutside}>
+  <!-- content here -->
+</div>
 ```
 
 ## forwardEvents
@@ -42,6 +43,16 @@ Useful in scenarios like menus when you want to move an element outside of its p
 
 ```svelte
 <div use:portal={{ target: document.body }}>
-  <div>sterling-svelte</div>
+  <!-- content here -->
+</div>
+```
+
+## trapKeyboardFocus
+
+Keeps the keyboard focus within the children of an element by handling 'Tab' keyboard events.
+
+```svelte
+<div use:trapKeyboardFocus>
+  <!-- content with focusable children here -->
 </div>
 ```
