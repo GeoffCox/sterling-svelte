@@ -1,4 +1,8 @@
-<div class="swatch"><span>T</span></div>
+<script lang="ts">
+  import SvelteIcon from '../SvelteIcon.svelte';
+</script>
+
+<div class="swatch"><SvelteIcon /></div>
 
 <style>
   .swatch {

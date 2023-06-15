@@ -187,6 +187,107 @@
     colorName="--stsv-status--error__color"
     bind:colorValue={theme['stsv-status--error__color']}
   />
+  <h1>Colorful</h1>
+  <h2>Common</h2>
+  <Swatch
+    backgroundColorName="--stsv-common--colorful__background-color"
+    bind:backgroundColorValue={theme['stsv-common--colorful__background-color']}
+    borderColorName="--stsv-common--colorful__border-color"
+    bind:borderColorValue={theme['stsv-common--colorful__border-color']}
+    colorName="--stsv-common--colorful__color"
+    bind:colorValue={theme['stsv-common--colorful__color']}
+  />
+  <h3>Common - Secondary, Subtle, and Faint</h3>
+  <Swatch
+    backgroundColorName="--stsv-common--colorful__background-color--secondary"
+    bind:backgroundColorValue={theme['stsv-common--colorful__background-color--secondary']}
+    colorName="--stsv-common--colorful__color--secondary"
+    bind:colorValue={theme['stsv-common--colorful__color--secondary']}
+  />
+  <Swatch
+    backgroundColorName="--stsv-common--colorful__background-color--subtle"
+    bind:backgroundColorValue={theme['stsv-common--colorful__background-color--subtle']}
+    colorName="--stsv-common--colorful__color--subtle"
+    bind:colorValue={theme['stsv-common--colorful__color--subtle']}
+  />
+  <Swatch
+    backgroundColorName="--stsv-common--colorful__background-color--faint"
+    bind:backgroundColorValue={theme['stsv-common--colorful__background-color--faint']}
+    colorName="--stsv-common--colorful__color--faint"
+    bind:colorValue={theme['stsv-common--colorful__color--faint']}
+  />
+  <h2>Button</h2>
+  <Swatch
+    backgroundColorName="--stsv-button--colorful__background-color"
+    bind:backgroundColorValue={theme['stsv-button--colorful__background-color']}
+    borderColorName="--stsv-button--colorful__border-color"
+    bind:borderColorValue={theme['stsv-button--colorful__border-color']}
+    colorName="--stsv-button--colorful__color"
+    bind:colorValue={theme['stsv-button--colorful__color']}
+  />
+  <h3>Button - Hover</h3>
+  <Swatch
+    backgroundColorName="--stsv-button--colorful__background-color--hover"
+    bind:backgroundColorValue={theme['stsv-button--colorful__background-color--hover']}
+    borderColorName="--stsv-button--colorful__border-color--hover"
+    bind:borderColorValue={theme['stsv-button--colorful__border-color--hover']}
+    colorName="--stsv-button--colorful__color--hover"
+    bind:colorValue={theme['stsv-button--colorful__color--hover']}
+  />
+  <h3>Button - Focus</h3>
+  <Swatch
+    backgroundColorName="--stsv-button--colorful__background-color--focus"
+    bind:backgroundColorValue={theme['stsv-button--colorful__background-color--focus']}
+    borderColorName="--stsv-button--colorful__border-color--focus"
+    bind:borderColorValue={theme['stsv-button--colorful__border-color--focus']}
+    colorName="--stsv-button--colorful__color--focus"
+    bind:colorValue={theme['stsv-button--colorful__color--focus']}
+  />
+  <h3>Button - Active</h3>
+  <Swatch
+    backgroundColorName="--stsv-button--colorful__background-color--active"
+    bind:backgroundColorValue={theme['stsv-button--colorful__background-color--active']}
+    borderColorName="--stsv-button--colorful__border-color--active"
+    bind:borderColorValue={theme['stsv-button--colorful__border-color--active']}
+    colorName="--stsv-button--colorful__color--active"
+    bind:colorValue={theme['stsv-button--colorful__color--active']}
+  />
+  <h2>Input</h2>
+  <Swatch
+    backgroundColorName="--stsv-input--colorful__background-color"
+    bind:backgroundColorValue={theme['stsv-input--colorful__background-color']}
+    borderColorName="--stsv-input--colorful__border-color"
+    bind:borderColorValue={theme['stsv-input--colorful__border-color']}
+    colorName="--stsv-input--colorful__color"
+    bind:colorValue={theme['stsv-input--colorful__color']}
+  />
+  <h3>Input - Hover</h3>
+  <Swatch
+    backgroundColorName="--stsv-input--colorful__background-color--hover"
+    bind:backgroundColorValue={theme['stsv-input--colorful__background-color--hover']}
+    borderColorName="--stsv-input--colorful__border-color--hover"
+    bind:borderColorValue={theme['stsv-input--colorful__border-color--hover']}
+    colorName="--stsv-input--colorful__color--hover"
+    bind:colorValue={theme['stsv-input--colorful__color--hover']}
+  />
+  <h3>Input - Focus</h3>
+  <Swatch
+    backgroundColorName="--stsv-input--colorful__background-color--focus"
+    bind:backgroundColorValue={theme['stsv-input--colorful__background-color--focus']}
+    borderColorName="--stsv-input--colorful__border-color--focus"
+    bind:borderColorValue={theme['stsv-input--colorful__border-color--focus']}
+    colorName="--stsv-input--colorful__color--focus"
+    bind:colorValue={theme['stsv-input--colorful__color--focus']}
+  />
+  <h3>Input - Selected</h3>
+  <Swatch
+    backgroundColorName="--stsv-input--colorful__background-color--selected"
+    bind:backgroundColorValue={theme['stsv-input--colorful__background-color--selected']}
+    borderColorName="--stsv-input--colorful__border-color--selected"
+    bind:borderColorValue={theme['stsv-input--colorful__border-color--selected']}
+    colorName="--stsv-input--colorful__color--selected"
+    bind:colorValue={theme['stsv-input--colorful__color--selected']}
+  />
 </div>
 
 <style>

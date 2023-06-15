@@ -291,6 +291,7 @@
     grid-row: 1/ 2;
     place-content: stretch;
     place-items: stretch;
+    align-self: center;
   }
 
   .color-background {

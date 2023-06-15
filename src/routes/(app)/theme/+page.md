@@ -24,11 +24,41 @@ borderWidth="--stsv-common__border-width"
 color="--stsv-common__color"
 />
 <br/>
+
+### Common - Outline
+
+Outline colors are used across components to indicate keyboard focus.
+<Swatch 
+outlineColor="--stsv-common__outline-color"
+outlineOffset="--stsv-common__outline-offset"
+outlineStyle="--stsv-common__outline-style"
+outlineWidth="--stsv-common__outline-width"
+/>
+<br/>
+
+### Common - Disabled
+
+Components indicate disabled state as an overlay with a diagonal striped pattern.
+
+<br/>
+<DisabledSwatch />
+<br/>
+
+- The pattern is taken from the diagonal "NO STEP" pattern on aircraft.
+- The stripes are white and black with low opacity and work well across light and dark themes.
+
+> Traditionally, disabled state is indicated using dimmed colors of the component often
+> centering aroound a midline gray. This tends to damage contrast when the background,
+> border, and foreground colors are near the disabled colors.
+
+<br/>
+
+### Common - Secondary, Subtle, and Faint
+
 Secondary, subtle, and faint colors are used for less important text, placeholders, visually separate regions, and decorations.
 
 > The background-color and color pairs do not guarantee sufficient accessibility contrast.
 
-<br/>
 <br/>
 <Swatch 
 backgroundColor="--stsv-common__background-color--secondary" 
@@ -45,32 +75,8 @@ backgroundColor="--stsv-common__background-color--faint"
 color="--stsv-common__color--faint"
 />
 <br/>
-Outline colors are used across components to indicate keyboard focus.
-<br/>
-<br/>
-<Swatch 
-outlineColor="--stsv-common__outline-color"
-outlineOffset="--stsv-common__outline-offset"
-outlineStyle="--stsv-common__outline-style"
-outlineWidth="--stsv-common__outline-width"
-/>
-<br/>
-Components indicate disabled state as an overlay with a diagonal striped pattern.
 
-- The pattern is taken from the diagonal "NO STEP" pattern on aircraft.
-- The stripes are white and black with low opacity and work well across light and dark themes.
-
-> Traditionally, disabled state is indicated using dimmed colors of the component often
-> centering aroound a midline gray. This tends to damange contrast when the background,
-> border, and foreground colors are near the disabled colors.
-
-<br/>
-<br/>
-<DisabledSwatch />
-<br/>
-<br/>
-
-### Button
+## Button
 
 These are used for clickable buttons that take action.
 
@@ -83,6 +89,9 @@ borderWidth="--stsv-button__border-width"
 color="--stsv-button__color"
 />
 <br/>
+
+### Button - Hover
+
 <Swatch 
 backgroundColor="--stsv-button__background-color--hover" 
 borderColor="--stsv-button__border-color--hover"
@@ -92,6 +101,9 @@ borderWidth="--stsv-button__border-width"
 color="--stsv-button__color--hover"
 />
 <br/>
+
+### Button - Focus
+
 <Swatch 
 backgroundColor="--stsv-button__background-color--focus" 
 borderColor="--stsv-button__border-color--focus"
@@ -100,7 +112,11 @@ borderStyle="--stsv-button__border-style"
 borderWidth="--stsv-button__border-width"
 color="--stsv-button__color--focus"
 />
-<br/><Swatch 
+<br/>
+
+### Button - Active
+
+<Swatch 
 backgroundColor="--stsv-button__background-color--active" 
 borderColor="--stsv-button__border-color--active"
 borderRadius="--stsv-button__border-radius"
@@ -110,7 +126,7 @@ color="--stsv-button__color--active"
 />
 <br/>
 
-### Input
+## Input
 
 These are used with interactive input controls (e.g. checkbox, text input, radio)
 
@@ -123,6 +139,9 @@ borderWidth="--stsv-input__border-width"
 color="--stsv-input__color"
 />
 <br/>
+
+### Input - Hover
+
 <Swatch 
 backgroundColor="--stsv-input__background-color--hover" 
 borderColor="--stsv-input__border-color--hover"
@@ -132,6 +151,9 @@ borderWidth="--stsv-input__border-width"
 color="--stsv-input__color--hover"
 />
 <br/>
+
+### Input - Focus
+
 <Swatch 
 backgroundColor="--stsv-input__background-color--focus" 
 borderColor="--stsv-input__border-color--focus"
@@ -141,109 +163,18 @@ borderWidth="--stsv-input__border-width"
 color="--stsv-input__color--focus"
 />
 
-## Colorful
-
-Many components provde a `colorful` prop to apply accent colors.
-
-Notice that the default neutral styling, hover and focus states get darker.
-With colorful, hover and focus states get lighter.
-This is because the eye perceives darker neutrals as active, and brighter colors as lit up.
-
-### Common
+### Input - Selected
 
 <Swatch 
-backgroundColor="--stsv-common--colorful__background-color" 
-borderColor="--stsv-common--colorful__border-color"
-borderRadius="--stsv-common__border-radius"
-borderStyle="--stsv-common__border-style"
-borderWidth="--stsv-common__border-width"
-color="--stsv-common--colorful__color"
-/>
-<br/>
-<br/>
-<Swatch 
-backgroundColor="--stsv-common--colorful__background-color--secondary" 
-color="--stsv-common--colorful__color--secondary"
-/>
-<br/>
-<Swatch 
-backgroundColor="--stsv-common--colorful__background-color--subtle" 
-color="--stsv-common--colorful__color--subtle"
-/>
-<br/>
-<Swatch 
-backgroundColor="--stsv-common--colorful__background-color--faint" 
-color="--stsv-common--colorful__color--faint"
-/>
-
-### Button
-
-<Swatch 
-backgroundColor="--stsv-button--colorful__background-color" 
-borderColor="--stsv-button--colorful__border-color"
-borderRadius="--stsv-button__border-radius"
-borderStyle="--stsv-button__border-style"
-borderWidth="--stsv-button__border-width"
-color="--stsv-button--colorful__color"
-/>
-<br/>
-<Swatch 
-backgroundColor="--stsv-button--colorful__background-color--hover" 
-borderColor="--stsv-button--colorful__border-color--hover"
-borderRadius="--stsv-button__border-radius"
-borderStyle="--stsv-button__border-style"
-borderWidth="--stsv-button__border-width"
-color="--stsv-button--colorful__color--hover"
-/>
-<br/>
-<Swatch 
-backgroundColor="--stsv-button--colorful__background-color--focus" 
-borderColor="--stsv-button--colorful__border-color--focus"
-borderRadius="--stsv-button__border-radius"
-borderStyle="--stsv-button__border-style"
-borderWidth="--stsv-button__border-width"
-color="--stsv-button--colorful__color--focus"
-/>
-<br/>
-<Swatch 
-backgroundColor="--stsv-button--colorful__background-color--active" 
-borderColor="--stsv-button--colorful__border-color--active"
-borderRadius="--stsv-button__border-radius"
-borderStyle="--stsv-button__border-style"
-borderWidth="--stsv-button__border-width"
-color="--stsv-button--colorful__color--active"
-/>
-
-### Input
-
-<Swatch 
-backgroundColor="--stsv-input--colorful__background-color" 
-borderColor="--stsv-input--colorful__border-color"
+backgroundColor="--stsv-input__background-color--selected" 
+borderColor="--stsv-input__border-color--selected"
 borderRadius="--stsv-input__border-radius"
 borderStyle="--stsv-input__border-style"
 borderWidth="--stsv-input__border-width"
-color="--stsv-input--colorful__color"
-/>
-<br/>
-<Swatch 
-backgroundColor="--stsv-input--colorful__background-color--hover" 
-borderColor="--stsv-input--colorful__border-color--hover"
-borderRadius="--stsv-input__border-radius"
-borderStyle="--stsv-input__border-style"
-borderWidth="--stsv-input__border-width"
-color="--stsv-input--colorful__color--hover"
-/>
-<br/>
-<Swatch 
-backgroundColor="--stsv-input--colorful__background-color--focus" 
-borderColor="--stsv-input--colorful__border-color--focus"
-borderRadius="--stsv-input__border-radius"
-borderStyle="--stsv-input__border-style"
-borderWidth="--stsv-input__border-width"
-color="--stsv-input--colorful__color--focus"
+color="--stsv-input__color--selected"
 />
 
-## Status colors
+## Status Colors
 
 Several colors can be used to give meaning to status.
 
@@ -271,6 +202,136 @@ borderColor="--stsv-status--error__border-color"
 color="--stsv-status--error__color"
 />
 <br/>
+
+# Colorful
+
+Many components provde a `colorful` prop to apply accent colors.
+
+Notice that the default neutral styling, hover and focus states get darker.
+With colorful, hover and focus states get lighter.
+This is because the eye perceives darker neutrals as active, and brighter colors as lit up.
+
+## Common
+
+<Swatch 
+backgroundColor="--stsv-common--colorful__background-color" 
+borderColor="--stsv-common--colorful__border-color"
+borderRadius="--stsv-common__border-radius"
+borderStyle="--stsv-common__border-style"
+borderWidth="--stsv-common__border-width"
+color="--stsv-common--colorful__color"
+/>
+<br/>
+
+### Common - Secondary, Subtle, and Faint
+
+<Swatch 
+backgroundColor="--stsv-common--colorful__background-color--secondary" 
+color="--stsv-common--colorful__color--secondary"
+/>
+<br/>
+<Swatch 
+backgroundColor="--stsv-common--colorful__background-color--subtle" 
+color="--stsv-common--colorful__color--subtle"
+/>
+<br/>
+<Swatch 
+backgroundColor="--stsv-common--colorful__background-color--faint" 
+color="--stsv-common--colorful__color--faint"
+/>
+
+## Button
+
+<Swatch 
+backgroundColor="--stsv-button--colorful__background-color" 
+borderColor="--stsv-button--colorful__border-color"
+borderRadius="--stsv-button__border-radius"
+borderStyle="--stsv-button__border-style"
+borderWidth="--stsv-button__border-width"
+color="--stsv-button--colorful__color"
+/>
+<br/>
+
+### Button - Hover
+
+<Swatch 
+backgroundColor="--stsv-button--colorful__background-color--hover" 
+borderColor="--stsv-button--colorful__border-color--hover"
+borderRadius="--stsv-button__border-radius"
+borderStyle="--stsv-button__border-style"
+borderWidth="--stsv-button__border-width"
+color="--stsv-button--colorful__color--hover"
+/>
+<br/>
+
+### Button - Focus
+
+<Swatch 
+backgroundColor="--stsv-button--colorful__background-color--focus" 
+borderColor="--stsv-button--colorful__border-color--focus"
+borderRadius="--stsv-button__border-radius"
+borderStyle="--stsv-button__border-style"
+borderWidth="--stsv-button__border-width"
+color="--stsv-button--colorful__color--focus"
+/>
+<br/>
+
+### Button - Active
+
+<Swatch 
+backgroundColor="--stsv-button--colorful__background-color--active" 
+borderColor="--stsv-button--colorful__border-color--active"
+borderRadius="--stsv-button__border-radius"
+borderStyle="--stsv-button__border-style"
+borderWidth="--stsv-button__border-width"
+color="--stsv-button--colorful__color--active"
+/>
+
+## Input
+
+<Swatch 
+backgroundColor="--stsv-input--colorful__background-color" 
+borderColor="--stsv-input--colorful__border-color"
+borderRadius="--stsv-input__border-radius"
+borderStyle="--stsv-input__border-style"
+borderWidth="--stsv-input__border-width"
+color="--stsv-input--colorful__color"
+/>
+<br/>
+
+### Input - Hover
+
+<Swatch 
+backgroundColor="--stsv-input--colorful__background-color--hover" 
+borderColor="--stsv-input--colorful__border-color--hover"
+borderRadius="--stsv-input__border-radius"
+borderStyle="--stsv-input__border-style"
+borderWidth="--stsv-input__border-width"
+color="--stsv-input--colorful__color--hover"
+/>
+<br/>
+
+### Input - Focus
+
+<Swatch 
+backgroundColor="--stsv-input--colorful__background-color--focus" 
+borderColor="--stsv-input--colorful__border-color--focus"
+borderRadius="--stsv-input__border-radius"
+borderStyle="--stsv-input__border-style"
+borderWidth="--stsv-input__border-width"
+color="--stsv-input--colorful__color--focus"
+/>
+
+### Input - Selected
+
+<Swatch 
+backgroundColor="--stsv-input--colorful__background-color--selected" 
+borderColor="--stsv-input--colorful__border-color--selected"
+borderRadius="--stsv-input__border-radius"
+borderStyle="--stsv-input__border-style"
+borderWidth="--stsv-input__border-width"
+color="--stsv-input--colorful__color--selected"
+/>
 
 ## Neutrals
 
