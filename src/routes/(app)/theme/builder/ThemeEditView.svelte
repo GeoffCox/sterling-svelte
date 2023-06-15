@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { Theme } from '$lib';
   import DisabledSwatchEditor from './DisabledSwatchEditor.svelte';
   import Swatch from './SwatchEditor.svelte';
 
