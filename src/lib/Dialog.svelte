@@ -40,7 +40,7 @@
     const targetNode = event?.target as Node;
     // the content must be used as the container because dialog::backdrop is considered
     // part of the HTMLDialogElement
-    if (targetNode && !contentRef.contains(targetNode) && backdropCloses) {
+    if (targetNode && !contentRef?.contains(targetNode) && backdropCloses) {
       open = false;
     }
   };
