@@ -26,7 +26,7 @@ export { toggleDarkTheme } from './theme/toggleDarkTheme';
 // ----- Component types ----- //
 export type { ButtonVariant, ButtonShape } from './Button.types';
 export type { FieldStatus } from './Field.types';
-export type { FloatingPlacement } from './floating-ui.types';
+export type { FloatingPlacement, FloatingOffsetOptions } from './floating-ui.types';
 export type { LinkVariant } from './Link.types';
 export type { ListContext } from './List.types';
 export type { MenuBarContext } from './MenuBar.types';
