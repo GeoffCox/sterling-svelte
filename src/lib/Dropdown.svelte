@@ -155,7 +155,9 @@
   on:click_outside={onClickOutside}
   {...$$restProps}
 >
-  <slot name="value" {colorful} {composed} {disabled} {open} />
+  <div class="value">
+    <slot name="value" {colorful} {composed} {disabled} {open} />
+  </div>
   <slot name="button" {colorful} {composed} {disabled} {open}>
     <div class="button">
       <div class="chevron" />
@@ -185,9 +187,10 @@
     border-width: var(--stsv-input__border-width);
     color: var(--stsv-input__color);
     display: grid;
-    grid-template-columns: 1fr 2em;
+    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-rows: auto;
     outline: none;
+    overflow: hidden;
     padding: 0;
     position: relative;
     transition: background-color 250ms, color 250ms, border-color 250ms;
@@ -272,9 +275,12 @@
     opacity: 0;
   }
 
+  .value {
+    overflow: hidden;
+  }
+
   .button {
-    grid-column-start: 2;
-    grid-row-start: 1;
+    align-self: flex-end;
     cursor: pointer;
   }
 
