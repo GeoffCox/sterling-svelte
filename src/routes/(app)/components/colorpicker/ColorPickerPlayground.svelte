@@ -4,7 +4,6 @@
   import ColorPicker from '$lib/ColorPicker.svelte';
   import type { ColorFormat } from '$lib/ColorPicker.types';
   import Checkbox from '$lib/Checkbox.svelte';
-  import NamedColorPalette from '$lib/NamedColorPalette.svelte';
 
   let exampleRef: any;
 
@@ -29,7 +28,6 @@
       {disabled}
       {stayOpenOnClickAway}
     />
-    <NamedColorPalette />
   </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={colorful}>colorful</Checkbox>

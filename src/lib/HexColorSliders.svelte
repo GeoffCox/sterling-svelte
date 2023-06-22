@@ -155,16 +155,37 @@
     background-color: #eee;
     opacity: 0.1;
     background-image: repeating-linear-gradient(
-        45deg,
+        var(--stsv-common--disabled__stripe-angle),
         #444 25%,
         transparent 25%,
         transparent 75%,
         #444 75%,
         #444
       ),
-      repeating-linear-gradient(45deg, #444 25%, #eee 25%, #eee 75%, #444 75%, #444),
-      repeating-linear-gradient(-45deg, #444 25%, transparent 25%, transparent 75%, #444 75%, #444),
-      repeating-linear-gradient(-45deg, #444 25%, #eee 25%, #eee 75%, #444 75%, #444);
+      repeating-linear-gradient(
+        var(--stsv-common--disabled__stripe-angle),
+        #444 25%,
+        #eee 25%,
+        #eee 75%,
+        #444 75%,
+        #444
+      ),
+      repeating-linear-gradient(
+        -var(--stsv-common--disabled__stripe-angle),
+        #444 25%,
+        transparent 25%,
+        transparent 75%,
+        #444 75%,
+        #444
+      ),
+      repeating-linear-gradient(
+        -var(--stsv-common--disabled__stripe-angle),
+        #444 25%,
+        #eee 25%,
+        #eee 75%,
+        #444 75%,
+        #444
+      );
     background-position: 0 0, 4px 4px;
     background-size: 8px 8px;
   }

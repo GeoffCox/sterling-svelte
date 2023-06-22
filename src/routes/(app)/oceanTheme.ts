@@ -33,12 +33,10 @@ export const oceanTheme: Theme = {
   'stsv-common__outline-width': '2px',
 
   // disabled
-  'stsv-common__background-color--disabled': oceanBlues.color5,
-  'stsv-common__border-color--disabled': oceanBlues.color9,
-  'stsv-common__color--disabled': oceanBlues.color9,
-
-  'stsv-common__background-color1--disabled': 'hsla(0, 0%, 0%, 0.2)',
-  'stsv-common__background-color2--disabled': `hsla(0, 0%, 100%, 0.2)`,
+  'stsv-common--disabled__stripe-color': 'hsla(0, 0%, 0%, 0.2)',
+  'stsv-common--disabled__stripe-color--alt': `hsla(0, 0%, 100%, 0.2)`,
+  'stsv-common--disabled__stripe-angle': '135deg',
+  'stsv-common--disabled__stripe-width': '3px',
 
   // ----- Button ----- //
 

@@ -88,20 +88,37 @@
 
 <style>
   .sterling-progress {
-    display: inline-flex;
-    flex-direction: column;
     align-content: flex-start;
     align-items: flex-start;
-    display: block;
     background: var(--stsv-common__background-color);
-    box-sizing: border-box;
-    height: 1em;
-    padding: 0.25em;
     border-width: var(--stsv-common__border-width);
     border-style: var(--stsv-common__border-style);
     border-color: var(--stsv-common__border-color);
     border-radius: var(--stsv-common__border-radius);
+    box-sizing: border-box;
+    display: block;
+    height: 1em;
+    padding: 0.25em;
+    position: relative;
     transition: background-color 250ms, color 250ms, border-color 250ms;
+  }
+
+  .sterling-progress.disabled::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      var(--stsv-common--disabled__stripe-angle),
+      var(--stsv-common--disabled__stripe-color),
+      var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
+      var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
+      var(--stsv-common--disabled__stripe-color--alt)
+        calc(2 * var(--stsv-common--disabled__stripe-width))
+    );
+    pointer-events: none;
   }
 
   .container {
@@ -157,17 +174,6 @@
 
   .indicator.error {
     background-color: var(--stsv-status--error__border-color);
-  }
-
-  /* ----- Disabled ----- */
-
-  .sterling-progress.disabled {
-    background: var(--stsv-common__background-color--disabled);
-    border-color: var(--stsv-common__border-color--disabled);
-  }
-
-  .sterling-progress.disabled .indicator {
-    background-color: var(--stsv-common__color--disabled);
   }
 
   @media (prefers-reduced-motion) {

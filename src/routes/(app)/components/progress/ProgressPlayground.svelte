@@ -12,6 +12,7 @@
   import { PROGRESS_COLORFULS } from '$lib';
 
   let colorful: ProgressColorful = 'none';
+  let disabled = false;
   let max = 100;
   let percent: number;
   let value = 35;
@@ -36,22 +37,23 @@
 <Playground>
   <div class="component" slot="component">
     <div class="progress" class:vertical>
-      <Progress {colorful} {value} {max} bind:percent {vertical} />
+      <Progress {colorful} {disabled} {value} {max} bind:percent {vertical} />
     </div>
   </div>
   <svelte:fragment slot="props">
     <div class="slider">
       <Slider bind:value min={0} {max} />
     </div>
-    <Field label="max">
-      <Input value={max.toString()} on:change={onMaxChange} composed />
-    </Field>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Field label="colorful" forwardClick>
       <Select bind:selectedValue={colorful} composed>
         {#each PROGRESS_COLORFULS as progressColorful}
           <ListItem value={progressColorful}>{progressColorful}</ListItem>
         {/each}
       </Select>
+    </Field>
+    <Field label="max">
+      <Input value={max.toString()} on:change={onMaxChange} composed />
     </Field>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>

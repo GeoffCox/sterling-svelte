@@ -2,13 +2,21 @@
   import { onMount } from 'svelte';
 
   import ColorPicker from '$lib/ColorPicker.svelte';
+  import Input from '$lib/Input.svelte';
   import SvelteIcon from '../../SvelteIcon.svelte';
+  import Slider from '$lib/Slider.svelte';
 
   export let color1Name: string | undefined = undefined;
   export let color1Value: string | undefined = undefined;
 
   export let color2Name: string | undefined = undefined;
   export let color2Value: string | undefined = undefined;
+
+  export let stripeAngle: string | undefined = undefined;
+  export let stripeAngleValue: string | undefined = undefined;
+
+  export let stripeWidth: string | undefined = undefined;
+  export let stripeWidthValue: string | undefined = undefined;
 
   // if values are not set then use the name as a CSS variable value
   const getVarValue = (name: string | undefined) => {
@@ -24,6 +32,8 @@
 
   color1Value = color1Value || getVarValue(color1Name);
   color2Value = color2Value || getVarValue(color2Name);
+  stripeAngleValue = stripeAngleValue || getVarValue(stripeAngle);
+  stripeWidthValue = stripeWidthValue || getVarValue(stripeWidth);
 
   // ----- State ----- //
 
@@ -34,6 +44,8 @@
   let colorBlockRef: HTMLDivElement;
   let color1NameRef: HTMLDivElement;
   let color2NameRef: HTMLDivElement;
+  let stripeAngleNameRef: HTMLDivElement;
+  let stripeWidthNameRef: HTMLDivElement;
 
   let coordinates = {
     svg: { width: 0, height: 0 },
@@ -46,6 +58,8 @@
   const isPropSet = {
     color1: color1Name !== undefined,
     color2: color2Name !== undefined,
+    stripeAngle: stripeAngle !== undefined,
+    stripeWidth: stripeWidth !== undefined,
     colors: false
   };
 
@@ -67,14 +81,15 @@
       let firstColorNameRef: HTMLDivElement | undefined = undefined;
       let lastColorNameRef: HTMLDivElement | undefined = undefined;
 
-      firstColorNameRef = color1NameRef || color2NameRef;
-      lastColorNameRef = color2NameRef || color1NameRef;
+      firstColorNameRef =
+        color1NameRef || color2NameRef || stripeAngleNameRef || stripeWidthNameRef;
+      lastColorNameRef = stripeWidthNameRef || stripeAngleNameRef || color2NameRef || color1NameRef;
 
       if (firstColorNameRef && lastColorNameRef) {
         const textRect1 = firstColorNameRef.getBoundingClientRect();
         const textRect2 = lastColorNameRef.getBoundingClientRect();
         newCoordinates.colorsDot = {
-          x: colorBlockRect.left - swatchRect.left - 2 + colorBlockRect.width,
+          x: colorBlockRect.left - swatchRect.left - 8 + colorBlockRect.width,
           y: colorBlockRect.top - swatchRect.top + colorBlockRect.height / 2
         };
         newCoordinates.colorsLine = {
@@ -112,11 +127,13 @@
 
     isPropSet.color1 && cssVars.push(`--swatch__color1: ${color1Value};`);
     isPropSet.color2 && cssVars.push(`--swatch__color2: ${color2Value};`);
+    isPropSet.stripeAngle && cssVars.push(`--swatch__stripe-angle: ${stripeAngleValue};`);
+    isPropSet.stripeWidth && cssVars.push(`--swatch__stripe-width: ${stripeWidthValue};`);
 
     style = cssVars.join('');
   };
 
-  $: color1Name, color1Value, color2Name, color2Value, updateStyle();
+  $: color1Value, color2Value, stripeAngleValue, stripeWidthValue, updateStyle();
 </script>
 
 <div bind:this={swatchRef} bind:clientWidth bind:clientHeight class="swatch" {style}>
@@ -137,6 +154,18 @@
         {color2Name}
       </div>
       <ColorPicker bind:colorText={color2Value} />
+    {/if}
+    {#if isPropSet.stripeAngle}
+      <div bind:this={stripeAngleNameRef} class="stripe-angle-name">
+        {stripeAngle}
+      </div>
+      <Input bind:value={stripeAngleValue} />
+    {/if}
+    {#if isPropSet.stripeWidth}
+      <div bind:this={stripeWidthNameRef} class="stripe-width-name">
+        {stripeWidth}
+      </div>
+      <Input bind:value={stripeWidthValue} />
     {/if}
   </div>
   {#if mounted}
@@ -239,11 +268,11 @@
   .disabled-block {
     align-items: center;
     background: repeating-linear-gradient(
-      45deg,
+      var(--swatch__stripe-angle),
       var(--swatch__color1),
-      var(--swatch__color1) 3px,
-      var(--swatch__color2) 3px,
-      var(--swatch__color2) 6px
+      var(--swatch__color1) var(--swatch__stripe-width),
+      var(--swatch__color2) var(--swatch__stripe-width),
+      var(--swatch__color2) calc(2 * var(--swatch__stripe-width))
     );
     display: grid;
     grid-row-start: 1;

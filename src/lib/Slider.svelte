@@ -375,9 +375,9 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
 
   .sterling-slider .thumb::after {
     background: repeating-linear-gradient(
-      45deg,
-      var(--stsv-common__background-color1--disabled),
-      var(--stsv-common__background-color1--disabled) 3px,
+      var(--stsv-common--disabled__stripe-angle),
+      var(--stsv-common--disabled__stripe-color),
+      var(--stsv-common--disabled__stripe-color) 3px,
       var(--stsv-common__background-color2_disabled) 3px,
       var(--stsv-common__background-color2_disabled) 6px
     );

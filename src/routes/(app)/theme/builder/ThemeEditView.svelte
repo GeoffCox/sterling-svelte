@@ -33,19 +33,15 @@
     bind:outlineWidthValue={theme['stsv-common__outline-width']}
   />
   <h3>Common - Disabled</h3>
-  <Swatch
-    backgroundColorName="--stsv-common__background-color--disabled"
-    bind:backgroundColorValue={theme['stsv-common__background-color--disabled']}
-    borderColorName="--stsv-common__border-color--disabled"
-    bind:borderColorValue={theme['stsv-common__border-color--disabled']}
-    colorName="--stsv-common__color--disabled"
-    bind:colorValue={theme['stsv-common__color--disabled']}
-  />
   <DisabledSwatchEditor
-    color1Name="--stsv-common__background-color1--disabled"
-    color1Value={theme['stsv-common__background-color1--disabled']}
-    color2Name="--stsv-common__background-color2--disabled"
-    color2Value={theme['stsv-common__background-color2--disabled']}
+    color1Name="--stsv-common--disabled__stripe-color"
+    color1Value={theme['stsv-common--disabled__stripe-color']}
+    color2Name="--stsv-common--disabled__stripe-color--alt"
+    color2Value={theme['stsv-common--disabled__stripe-color--alt']}
+    stripeAngle="--stsv-common--disabled__stripe-angle"
+    stripeAngleValue={theme['stsv-common--disabled__stripe-angle']}
+    stripeWidth="--stsv-common--disabled__stripe-width"
+    stripeWidthValue={theme['stsv-common--disabled__stripe-width']}
   />
   <h3>Common - Secondary, Subtle, and Faint</h3>
   <Swatch

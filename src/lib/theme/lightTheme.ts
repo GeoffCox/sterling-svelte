@@ -2,7 +2,7 @@ import type { Theme } from './types';
 import { blueColors, lightStatusColors, neutralColors } from './colors';
 
 export const lightTheme: Theme = {
-  // ----- Common (18) ---- //
+  // ----- Common ---- //
   'stsv-common__background-color': neutralColors.color12,
   'stsv-common__border-color': neutralColors.color5,
   'stsv-common__border-radius': '0',
@@ -26,14 +26,12 @@ export const lightTheme: Theme = {
   'stsv-common__outline-width': '2px',
 
   // disabled
-  'stsv-common__background-color--disabled': neutralColors.color10,
-  'stsv-common__border-color--disabled': neutralColors.color7,
-  'stsv-common__color--disabled': neutralColors.color7,
+  'stsv-common--disabled__stripe-color': 'hsla(0, 0%, 0%, 0.2)',
+  'stsv-common--disabled__stripe-color--alt': `hsla(0, 0%, 100%, 0.2)`,
+  'stsv-common--disabled__stripe-angle': '135deg',
+  'stsv-common--disabled__stripe-width': '3px',
 
-  'stsv-common__background-color1--disabled': 'hsla(0, 0%, 0%, 0.2)',
-  'stsv-common__background-color2--disabled': `hsla(0, 0%, 100%, 0.2)`,
-
-  // ----- Common--colorful (15) ---- //
+  // ----- Common--colorful ---- //
   'stsv-common--colorful__background-color': blueColors.color12,
   'stsv-common--colorful__border-color': blueColors.color4,
   'stsv-common--colorful__color': blueColors.color3,
@@ -47,7 +45,7 @@ export const lightTheme: Theme = {
   'stsv-common--colorful__background-color--faint': blueColors.color11,
   'stsv-common--colorful__color--faint': blueColors.color9,
 
-  // ----- Button (15) ----- //
+  // ----- Button ----- //
 
   'stsv-button__background-color': neutralColors.color10,
   'stsv-button__border-color': neutralColors.color5,
@@ -71,7 +69,7 @@ export const lightTheme: Theme = {
   'stsv-button__border-color--active': neutralColors.color3,
   'stsv-button__color--active': neutralColors.color1,
 
-  // ----- Button--colorful (12) ---- //
+  // ----- Button--colorful ---- //
 
   'stsv-button--colorful__background-color': blueColors.color6,
   'stsv-button--colorful__border-color': blueColors.color4,
@@ -92,7 +90,7 @@ export const lightTheme: Theme = {
   'stsv-button--colorful__border-color--active': blueColors.color3,
   'stsv-button--colorful__color--active': blueColors.color12,
 
-  // ----- Input (15) ----- //
+  // ----- Input ----- //
   'stsv-input__background-color': neutralColors.color11,
   'stsv-input__border-color': neutralColors.color5,
   'stsv-input__border-radius': '3px',
@@ -115,7 +113,7 @@ export const lightTheme: Theme = {
   'stsv-input__border-color--selected': neutralColors.color3,
   'stsv-input__color--selected': neutralColors.color2,
 
-  // ----- Input--colorful (12) ---- //
+  // ----- Input--colorful ---- //
 
   'stsv-input--colorful__background-color': blueColors.color11,
   'stsv-input--colorful__border-color': blueColors.color4,
@@ -136,7 +134,7 @@ export const lightTheme: Theme = {
   'stsv-input--colorful__border-color--selected': blueColors.color3,
   'stsv-input--colorful__color--selected': blueColors.color2,
 
-  // ----- Status (12) ----- //
+  // ----- Status ----- //
   'stsv-status--info__background-color': lightStatusColors.info.backgroundColor,
   'stsv-status--info__border-color': lightStatusColors.info.borderColor,
   'stsv-status--info__color': lightStatusColors.info.color,

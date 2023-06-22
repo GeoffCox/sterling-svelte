@@ -238,11 +238,12 @@
 
   .sterling-dropdown::after {
     background: repeating-linear-gradient(
-      45deg,
-      var(--stsv-common__background-color1--disabled),
-      var(--stsv-common__background-color1--disabled) 3px,
-      var(--stsv-common__background-color2--disabled) 3px,
-      var(--stsv-common__background-color2--disabled) 6px
+      var(--stsv-common--disabled__stripe-angle),
+      var(--stsv-common--disabled__stripe-color),
+      var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
+      var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
+      var(--stsv-common--disabled__stripe-color--alt)
+        calc(2 * var(--stsv-common--disabled__stripe-width))
     );
     bottom: 0;
     content: '';
