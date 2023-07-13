@@ -4,37 +4,41 @@
 
 # Link
 
-A styled `<a/>`.
+A styled HTML `a` link or anchor element.
 
-<Playground />
+## Types
+
+```ts
+type LinkVariant = 'regular' | 'ghost' | 'undecorated';
+```
+
+## Props
+
+HTMLAnchorElement props are included.
+
+```ts
+/** When true, applies colorful theme styles. */
+let colorful: boolean = false;
+
+let variant: LinkVariant = 'regular';
+```
+
+## Events
+
+HTMLAnchorElement events are included.
+
+## Methods
+
+HTMLAnchorElement `blur`, `click`, and `focus` methods are included.
+
+## Anatomy
 
 ```svelte
-<script lang="ts">
-  // ----- Types ----- //
-
-  type LinkVariant = 'regular' | 'ghost' | 'undecorated';
-
-  // ----- Props ----- //
-
-  // HTMLLabelElement props are forwarded
-
-  let colorful: boolean = false;
-  let variant: LinkVariant = 'regular';
-
-  // ----- Events ----- //
-
-  // HTMLLabelElement events are bubbled
-
-  // ----- Methods ----- //
-
-  function click();
-  function blur();
-  function focus(options: FocusOptions);
-</script>
-
-<!-- Anatomy -->
-
 <a>
   <slot {disabled} {href} {variant} />
 </a>
 ```
+
+## Playground
+
+<Playground />

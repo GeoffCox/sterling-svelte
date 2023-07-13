@@ -4,56 +4,54 @@
 
 # Dropdown
 
-A value and button where a dropdown can be opened for changing the value.
+Displays a value and button that opens a dropdown for changing the value.
 
-- Set content of the displayed value and the dropdown.
-- The dropown is dynamically positioned based on avaiable screen space.
-- The dropdown opens with a slide animation.
+- Use the value slot to display the value.
+- Use the default slot to set content in the dropdown.
+- Use the button slot to replace the default chevron button.
 
-<Playground />
+## Props
+
+HTMLDivElement props are included.
+
+```ts
+/** When true, applies colorful theme styles. */
+export let colorful = false;
+
+/** When true, allows the container to handle borders and focus borders.  */
+export let composed = false;
+
+/**
+ * Disables the dropdown.
+ */
+export let disabled = false;
+
+/**
+ * Controls if the dropdown is open.
+ */
+export let open = false;
+
+/**
+ * Keeps the dropdown open when clicking outside.
+ */
+export let stayOpenOnClickAway = false;
+```
+
+## Events
+
+HTMLDivElement events are included.
+
+```ts
+dispatch('open', { open });
+```
+
+## Methods
+
+HTMLDivElement blur(), click(), and focus() methods are included.
+
+## Anatomy
 
 ```svelte
-<script lang="ts">
-  // ----- Props ----- //
-
-  /**
-   * Applies colorful styles from the theme.
-   */
-  export let colorful = false;
-
-  /**
-   * Displays the dropdown so its container handles border and focus.
-   */
-  export let composed = false;
-
-  /**
-   * Disables the dropdown.
-   */
-  export let disabled = false;
-
-  /**
-   * Controls if the dropdown is open.
-   */
-  export let open = false;
-
-  /**
-   * Keeps the dropdown open when clicking outside.
-   */
-  export let stayOpenOnClickAway = false;
-
-  // ----- Events ----- //
-
-  dispatch('open', { open });
-
-  // ----- Methods ----- //
-
-  function click();
-  function blur();
-  function focus(options: FocusOptions);
-</script>
-
-<!-- Anatomy -->
-
 <div>
   <slot name="value" {colorful} {composed} {disabled} {open} />
   <slot name="button" {colorful} {composed} {disabled} {open} />
@@ -63,3 +61,7 @@ A value and button where a dropdown can be opened for changing the value.
   </Popover>
 </div>
 ```
+
+## Playground
+
+<Playground />

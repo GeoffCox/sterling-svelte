@@ -1,16 +1,22 @@
 <script lang="ts">
-  import Label from '$lib/Label.svelte';
   import { idGenerator } from './idGenerator';
 
   // ----- Props ----- //
 
   export let checked: boolean = false;
-  export let colorful: boolean = false;
-  export let disabled: boolean = false;
-  export let vertical: boolean = false;
+  export let disabled = false;
 
-  export let onText: string | undefined = undefined;
+  /** When true, applies colorful theme styles. */
+  export let colorful = false;
+
+  /** The text appearing on the off position side when the offLabel slot is not replaced. */
   export let offText: string | undefined = undefined;
+
+  /** The text appearing on the on position side when the onLabel slot is not replaced. */
+  export let onText: string | undefined = undefined;
+
+  /** When true, the switch is displayed vertically. */
+  export let vertical = false;
 
   // ----- State ----- //
 
@@ -87,7 +93,7 @@
     <div class="off-label">
       <slot name="offLabel" {checked} {disabled} {inputId} {offText} {vertical}>
         {#if offText}
-          <Label for={inputId} {disabled}>{offText}</Label>
+          <label for={inputId}>{offText}</label>
         {/if}
       </slot>
     </div>
@@ -105,7 +111,7 @@
     <div class="on-label">
       <slot name="onLabel" {checked} {disabled} {inputId} {onText} {vertical}>
         {#if onText}
-          <Label for={inputId} {disabled}>{onText}</Label>
+          <label for={inputId}>{onText}</label>
         {/if}
       </slot>
     </div>
@@ -216,6 +222,12 @@
 
   /* ----- labels ----- */
 
+  label {
+    color: var(--stsv-common__color);
+    transition: color 250ms;
+    font: inherit;
+  }
+
   .off-label,
   .on-label {
     padding-top: var(--stsv-button__border-width);
@@ -303,6 +315,7 @@
         calc(2 * var(--stsv-common--disabled__stripe-width))
     );
     bottom: 0;
+    border-radius: 10000px;
     content: '';
     left: 0;
     opacity: 0;
@@ -334,7 +347,8 @@
   @media (prefers-reduced-motion) {
     .switch,
     .thumb,
-    .thumb::after {
+    .thumb::after,
+    label {
       transition: none;
     }
   }

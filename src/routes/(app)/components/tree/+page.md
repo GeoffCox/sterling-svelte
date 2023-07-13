@@ -4,59 +4,71 @@
 
 # Tree
 
-A hierarchy of items that can be expanded or collapsed.
-A single tree item can be selected.
+A hierarchy of items that can be expanded or collapsed where a single item can be selected.
 
-- Get or set the expanded tree items.
-- Get or set the selected tree item.
-- TreeItem provides the mouse and keyboard interactions.
+## Types
 
-<Playground />
+```ts
+/**
+ * The context for a Tree and its descendants.
+ */
+export type TreeContext = {
+  /** When true, applies colorful theme styles. */
+  colorful: Readable<boolean>;
+
+  /** When true, the tree and its descendants are disabled */
+  disabled: Readable<boolean>;
+
+  /** The values of items that are expanded. */
+  expandedValues: Writable<string[]>;
+
+  /** The value of the currently selected item. */
+  selectedValue: Writable<string | undefined>;
+};
+```
+
+## Props
+
+HTMLDivElement props are included.
+
+```ts
+/** When true, applies colorful theme styles. */
+export let colorful = false;
+
+/** When true, allows the container to handle borders and focus borders.  */
+export let composed = false;
+
+/** When true, the tree and its descendants are disabled */
+export let disabled = false;
+
+/** The value of the currently selected item. */
+export let selectedValue: string | undefined = undefined;
+
+/** The values of items that are expanded. */
+export let expandedValues: string[] = [];
+```
+
+## Events
+
+HTMLDivElement events are included.
+
+```ts
+dispatch('expandCollapse', { expandedValues });
+dispatch('select', { selectedValue });
+```
+
+## Methods
+
+HTMLDivElement `blur`, `click`, and `focus` methods are included.
+
+## Anatomy
 
 ```svelte
-<script lang="ts">
-  // ----- Props ----- //
-
-  // HTMLDivElement props are forwarded
-
-  let composed = false;
-  let disabled = false;
-  let selectedValue: string | undefined = undefined;
-  let expandedValues: string[] = [];
-
-  // ----- Methods ----- //
-
-  function blur();
-  function click();
-  function focus(options: FocusOptions);
-
-  // ----- Events ----- //
-
-  // HTMLDivElement events are bubbled
-
-  dispatch('expandCollapse', { expandedValues });
-  dispatch('select', { selectedValue });
-
-  // ----- Context ----- //
-
-  type TreeContext = {
-    /** If the tree is disabled */
-    disabled: Readable<boolean>;
-
-    /**
-     * The values of the expanded tree tree items.
-     */
-    expandedValues: Writable<string[]>;
-    /**
-     * The value of the selected tree item.
-     */
-    selectedValue: Writable<string | undefined>;
-  };
-</script>
-
-<!-- Anatomy -->
-
 <div>
-  <slot {composed} {disabled} />
+  <slot {colorful} {composed} {disabled} />
 </div>
 ```
+
+## Playground
+
+<Playground />

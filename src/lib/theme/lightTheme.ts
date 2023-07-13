@@ -147,7 +147,7 @@ export const lightTheme: Theme = {
   'stsv-status--warning__border-color': lightStatusColors.warning.borderColor,
   'stsv-status--warning__color': lightStatusColors.warning.color,
 
-  'stsv-status--error__background-color': lightStatusColors.error.backgroundColor,
-  'stsv-status--error__border-color': lightStatusColors.error.borderColor,
-  'stsv-status--error__color': lightStatusColors.error.color
+  'stsv-status--danger__background-color': lightStatusColors.error.backgroundColor,
+  'stsv-status--danger__border-color': lightStatusColors.error.borderColor,
+  'stsv-status--danger__color': lightStatusColors.error.color
 };

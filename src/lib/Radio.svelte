@@ -1,21 +1,20 @@
 <script lang="ts">
   import { idGenerator } from './idGenerator';
 
-  import Label from './Label.svelte';
-
   // ----- Props ----- //
 
+  export let checked: boolean = false;
+  export let disabled: boolean = false;
   /*
    * bind:group doesn't seem to work properly (yet) in a nested radio.
    * The workaround is to export `checked` and `group` properties
    * and implement the same behavior.
    */
-
-  export let colorful = false;
-  export let checked: boolean = false;
-  export let disabled: boolean = false;
   export let group: any | undefined | null = undefined;
   export let id: string | undefined = undefined;
+
+  /** When true, applies colorful theme styles. */
+  export let colorful = false;
 
   // ensure initial state is consistent
   if (checked && $$restProps.value !== group) {
@@ -131,11 +130,9 @@
     <div class="indicator" />
   </div>
   {#if $$slots.default}
-    <Label {disabled} for={id}>
-      <slot {checked} {disabled} {group} inputId={id} value={$$restProps.value}>
-        {$$restProps.value}
-      </slot>
-    </Label>
+    <label for={id}>
+      <slot {colorful} {checked} {disabled} {group} inputId={id} value={$$restProps.value} />
+    </label>
   {/if}
 </div>
 
@@ -276,6 +273,12 @@
     transition: opacity 250ms;
   }
 
+  label {
+    color: var(--stsv-common__color);
+    transition: color 250ms;
+    font: inherit;
+  }
+
   .sterling-radio.disabled .container::after {
     opacity: 1;
   }
@@ -283,7 +286,8 @@
   @media (prefers-reduced-motion) {
     .indicator,
     .indicator::after,
-    .container::after {
+    .container::after,
+    label {
       transition: none;
     }
   }

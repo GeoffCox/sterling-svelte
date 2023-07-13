@@ -197,9 +197,9 @@ color="--stsv-status--warning__color"
 />
 <br/>
 <Swatch
-backgroundColor="--stsv-status--error__background-color"
-borderColor="--stsv-status--error__border-color"
-color="--stsv-status--error__color"
+backgroundColor="--stsv-status--danger__background-color"
+borderColor="--stsv-status--danger__border-color"
+color="--stsv-status--danger__color"
 />
 <br/>
 

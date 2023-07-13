@@ -4,12 +4,12 @@
   import MenuSeparator from '$lib/MenuSeparator.svelte';
 </script>
 
-<Playground>
+<Playground noEvents>
   <svelte:fragment slot="component">
     <div class="area">
       <MenuSeparator />
     </div>
-  </svelte:fragment>>
+  </svelte:fragment>
 </Playground>
 
 <style>

@@ -1,16 +1,27 @@
 <script lang="ts">
-  import type { ProgressColorful } from './Progress.types';
+  import type { ProgressStatus } from './Progress.types';
 
+  //----- Props ----- //
+
+  /** The value between 0 and max. */
   export let value = 0;
+
+  /** The maximum value. */
   export let max = 100;
 
+  /** A read-only percentage between 0 and 100 calculated from value and max */
   export let percent = 0;
 
+  /** When true, the progress bar is displayed vertically. */
   export let vertical: boolean = false;
 
-  export let colorful: ProgressColorful = 'none';
+  /** Changes the color of the progress bar. */
+  export let status: ProgressStatus = 'none';
 
+  /** When true, the progress bar is disabled. */
   export let disabled = false;
+
+  //----- State ----- //
 
   let clientHeight: number;
   let clientWidth: number;
@@ -26,7 +37,7 @@
   $: percentWidth = clientWidth * ratio;
 
   $: indicatorStyle = vertical ? `height: ${percentHeight}px` : `width: ${percentWidth}px`;
-  $: indicatorColor = colorful === 'auto' ? (percent === 100 ? 'success' : 'info') : colorful;
+  $: indicatorColor = status === 'auto' ? (percent === 100 ? 'success' : 'info') : status;
 </script>
 
 <!--
@@ -80,7 +91,7 @@
       class:info={indicatorColor === 'info'}
       class:success={indicatorColor === 'success'}
       class:warning={indicatorColor === 'warning'}
-      class:error={indicatorColor === 'error'}
+      class:error={indicatorColor === 'danger'}
       style={indicatorStyle}
     />
   </div>
@@ -173,7 +184,7 @@
   }
 
   .indicator.error {
-    background-color: var(--stsv-status--error__border-color);
+    background-color: var(--stsv-status--danger__border-color);
   }
 
   @media (prefers-reduced-motion) {

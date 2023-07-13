@@ -10,6 +10,7 @@
   export let blue: number = 0;
   export let alpha: number = 255;
 
+  /** When true, applies colorful theme styles. */
   export let colorful = false;
 
   // ----- State ----- //

@@ -1,15 +1,15 @@
 import type { Readable } from 'svelte/store';
 
 /**
- * The context for a tree item.
+ * The context for a tree item and its descendants.
  */
 export type TreeItemContext = {
   /**
-   * How many levels deep this tree item is in the tree hierarchy.
-   * A top level item's depth is zero.
+   * The depth of this tree item within the tree hierarchy.
+   * Starts at zero.
    */
   depth: number;
 
-  /** If the tree item is disabled */
+  /** When true, the three item is disabled. */
   disabled: Readable<boolean>;
 };

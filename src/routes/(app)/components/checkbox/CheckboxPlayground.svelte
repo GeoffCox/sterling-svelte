@@ -1,6 +1,6 @@
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
   import Playground from '../Playground.svelte';
 
@@ -20,9 +20,9 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Field label="default slot (text)">
+    <Label text="default slot (text)">
       <Input bind:value={label} composed />
-    </Field>
+    </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>checked: {checked}</div>

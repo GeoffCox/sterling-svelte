@@ -4,46 +4,51 @@
 
 # Input
 
-A styled `<input />`.
+A styled HTML `input`.
 
-<Playground />
+## Props
+
+HTMLInputElement props are included.
+
+```ts
+/** When true, applies colorful theme styles. */
+export let colorful = false;
+
+/** When true, allows the container to handle borders and focus borders.  */
+export let composed = false;
+```
+
+## Events
+
+// HTMLInputElement events are included.
+
+## Methods
+
+```ts
+function blur();
+function click();
+function focus(options: FocusOptions);
+function select();
+function setSelectionRange(
+  start: number | null,
+  end: number | null,
+  direction?: 'forward' | 'backward' | 'none'
+);
+function setRangeText(
+  replacement: string,
+  start?: number,
+  end?: number,
+  selectionMode?: SelectionMode
+);
+```
+
+## Anatomy
 
 ```svelte
-<script lang="ts">
-  // ----- Props ----- //
-
-  // HTMLInputElement props are forwarded
-
-  let colorful: boolean = false;
-  let composed = false;
-
-  // ----- Events ----- //
-
-  // HTMLInputElement events are bubbled
-
-  // ----- Methods ----- //
-
-  function blur();
-  function click();
-  function focus(options: FocusOptions);
-  function select();
-  function setSelectionRange(
-    start: number | null,
-    end: number | null,
-    direction?: 'forward' | 'backward' | 'none'
-  );
-  function setRangeText(
-    replacement: string,
-    start?: number,
-    end?: number,
-    selectionMode?: SelectionMode
-  );
-</script>
-
-<!-- Anatomy -->
-
-<Label>
+<label>
   <slot {composed} {disabled} {value} />
-</Label>
+</label>
 <input />
 ```
+
+<Playground />

@@ -2,8 +2,8 @@
   import Input from '$lib/Input.svelte';
   import Playground from '../Playground.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
-  import LabelBox from '$lib/Field.svelte';
-  import Field from '$lib/Field.svelte';
+  import LabelBox from '$lib/Label.svelte';
+  import Label from '$lib/Label.svelte';
 
   let exampleRef: any;
 
@@ -43,12 +43,12 @@
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <LabelBox label="placeholder">
+    <LabelBox text="placeholder">
       <Input bind:value={placeholder} composed />
     </LabelBox>
-    <Field label="default slot (text)">
+    <Label text="default slot (text)">
       <Input bind:value={label} composed />
-    </Field>
+    </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>value: {value}</div>

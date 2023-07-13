@@ -25,13 +25,13 @@ export { toggleDarkTheme } from './theme/toggleDarkTheme';
 
 // ----- Component types ----- //
 export type { ButtonVariant, ButtonShape } from './Button.types';
-export type { FieldStatus } from './Field.types';
+export type { LabelStatus } from './Label.types';
 export type { FloatingPlacement, FloatingOffsetOptions } from './floating-ui.types';
 export type { LinkVariant } from './Link.types';
 export type { ListContext } from './List.types';
 export type { MenuBarContext } from './MenuBar.types';
 export type { MenuItemContext, MenuItemRegistration, MenuItemRole } from './MenuItem.types';
-export type { ProgressColorful } from './Progress.types';
+export type { ProgressStatus as ProgressColorful } from './Progress.types';
 export type { TabListContext } from './TabList.types';
 export type { TextAreaResize } from './TextArea.types';
 export type { TooltipShowOn } from './Tooltip.types';
@@ -40,13 +40,13 @@ export type { TreeItemContext } from './TreeItem.types';
 
 // ----- Component constants ----- //
 export { BUTTON_SHAPES, BUTTON_VARIANTS } from './Button.constants';
-export { FIELD_STATUSES } from './Field.constants';
+export { LABEL_STATUSES } from './Label.constants';
 export { FLOATING_PLACEMENTS } from './floating-ui.constants';
 export { LINK_VARIANTS } from './Link.constants';
 export { LIST_CONTEXT_KEY } from './List.constants';
 export { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
 export { MENU_ITEM_CONTEXT_KEY, MENU_ITEM_ROLES } from './MenuItem.constants';
-export { PROGRESS_COLORFULS } from './Progress.constants';
+export { PROGRESS_STATUSES } from './Progress.constants';
 export { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
 export { TEXT_AREA_RESIZES } from './TextArea.constants';
 export { TOOLTIP_SHOW_ONS } from './Tooltip.constants';
@@ -61,11 +61,10 @@ import Checkbox from './Checkbox.svelte';
 import ColorPicker from './ColorPicker.svelte';
 import Dialog from './Dialog.svelte';
 import Dropdown from './Dropdown.svelte';
-import Field from './Field.svelte';
+import Label from './Label.svelte';
 import HexColorSliders from './HexColorSliders.svelte';
 import HslColorSliders from './HslColorSliders.svelte';
 import Input from './Input.svelte';
-import Label from './Label.svelte';
 import Link from './Link.svelte';
 import List from './List.svelte';
 import ListItem from './ListItem.svelte';
@@ -97,7 +96,6 @@ export {
   ColorPicker,
   Dialog,
   Dropdown,
-  Field,
   HexColorSliders,
   HslColorSliders,
   Input,

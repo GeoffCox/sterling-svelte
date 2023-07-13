@@ -8,20 +8,18 @@
   // ----- Props ----- //
 
   /**
-   * If the dialog is open
+   * When true, the dialog is open; otherwise the dialog is closed.
    */
   export let open = false;
 
   /**
    * The return value from the dialog.
-   * After the dialog closes,
-   * - empty string indicates cancellation
-   * - values indicate form submission
+   * After the dialog closes: Empty string indicates cancellation and a value indicates form submission.
    */
   export let returnValue = '';
 
   /**
-   * If clicking outside the dialog causes the dialog close
+   * When true, clicking outside the dialog causes the dialog close.
    */
   export let backdropCloses = false;
 

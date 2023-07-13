@@ -147,9 +147,9 @@ export const darkTheme: Theme = {
   'stsv-status--warning__border-color': darkStatusColors.warning.borderColor,
   'stsv-status--warning__color': darkStatusColors.warning.color,
 
-  'stsv-status--error__background-color': darkStatusColors.error.backgroundColor,
-  'stsv-status--error__border-color': darkStatusColors.error.borderColor,
-  'stsv-status--error__color': darkStatusColors.error.color,
+  'stsv-status--danger__background-color': darkStatusColors.error.backgroundColor,
+  'stsv-status--danger__border-color': darkStatusColors.error.borderColor,
+  'stsv-status--danger__color': darkStatusColors.error.color,
 
   // ----- Colorful (18) ---- //
   'stsv-Colorful__background-color': blueColors.color4,

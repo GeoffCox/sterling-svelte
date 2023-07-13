@@ -1,7 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
+  /** When true, the chevron rotates to indicate children are visible. */
   export let expanded = false;
+
+  /** When true, the chevron is displayed, otherwise a dot is displayed. */
   export let hasChildren = false;
 
   let previousExpanded = expanded;

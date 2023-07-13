@@ -23,13 +23,26 @@
 
   // ----- Props ----- //
 
+  /** If the menu item is checked. Used when role='menuitemcheckbox' or role='menuitemradio'*/
   export let checked = false;
+
+  /** When true, applies colorful theme styles. */
   export let colorful = false;
+
+  /** When true, allows the container to handle borders and focus borders.  */
   export let composed = false;
+
+  /** If the menu item is disabled. */
   export let disabled = false;
-  export let value: string;
+
+  /** The role of the menu item */
   export let role: MenuItemRole = 'menuitem';
+
+  /** The text of the menu item when the item slot is not filled.*/
   export let text: string | undefined = undefined;
+
+  /** The value uniquely identifying this menu item within the menu hierarchy. */
+  export let value: string;
 
   // ----- Get Context ----- //
 

@@ -6,45 +6,62 @@
 
 A single item that can be selected from a dropdown list of items.
 
-- The dropdown is dynamically positioned based on avaiable screen space.
-  <Playground />
+> The HTML `select` element does not support adequate custom styling. Select provides a custom solution.
+
+## Props
+
+HTMLDivElement props are included.
+
+```ts
+/** When true, allows the container to handle borders and focus borders.  */
+export let composed: boolean = false;
+
+/** When true, the dropdown is open. */
+export let open = false;
+
+/** The value of the selected item.*/
+export let selectedValue: string | undefined = undefined;
+```
+
+## Events
+
+HTMLDivElement events are included.
+
+```ts
+dispatch('pending', { value });
+dispatch('select', { value });
+```
+
+## Methods
+
+HTMLDivElement `blur`, `click`, and `focus` methods are included.
+
+```ts
+function scrollToSelectedItem();
+```
+
+## Anatomy
+
+Fill the default slot with ListItem components to display in the dropdown.
 
 ```svelte
-<script lang="ts">
-  // ----- Props ----- //
-
-  // HTMLDivElement props are forwarded
-
-  let composed: boolean = false;
-  let disabled: boolean = false;
-  let open = false;
-  let selectedValue: string | undefined = undefined;
-
-  // ----- Events ----- //
-
-  // HTMLDivElement events are bubbled
-
-  dispatch('pending', { value });
-  dispatch('select', { value });
-
-  // ----- Methods ----- //
-
-  function blur();
-  function click();
-  function focus(options: FocusOptions);
-  function scrollToSelectedItem();
-</script>
-
-<!-- Anatomy -->
-
 <div>
-  <slot name="value" {disabled} {open} {selectedValue} />
-  <slot name="button" {disabled} {open} {selectedValue} />
-  <!-- popup -->
   <div>
-    <List>
-      <slot />
-    </List>
+    <slot name="value" {disabled} {open} {selectedValue} />
   </div>
+  <div>
+    <slot name="button" {disabled} {open} {selectedValue} />
+  </div>
+  <Popover>
+    <div>
+      <List>
+        <slot />
+      </List>
+    </div>
+  </Popover>
 </div>
 ```
+
+## Playground
+
+  <Playground />

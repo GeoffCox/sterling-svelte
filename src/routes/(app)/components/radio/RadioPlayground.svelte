@@ -3,7 +3,7 @@
   import Playground from '../Playground.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
 
   let exampleRef: any;
 
@@ -34,9 +34,9 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Field label="label (prefix)">
+    <Label text="label (prefix)">
       <Input bind:value={label} composed />
-    </Field>
+    </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>

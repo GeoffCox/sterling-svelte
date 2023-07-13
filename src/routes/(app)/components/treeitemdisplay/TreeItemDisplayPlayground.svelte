@@ -5,7 +5,7 @@
   import Slider from '$lib/Slider.svelte';
 
   import TreeItemDisplay from '$lib/TreeItemDisplay.svelte';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
 
   let exampleRef: any;
 
@@ -15,28 +15,11 @@
   let hasChildren = true;
   let selected = false;
   let depth = 0;
-
-  let itemDepth = depth;
-  let allowDepthChange = false;
-
-  $: {
-    if (allowDepthChange) {
-      itemDepth = depth;
-    }
-    allowDepthChange = false;
-  }
 </script>
 
 <Playground bind:this={exampleRef}>
   <div class="component" slot="component">
-    <TreeItemDisplay
-      value="sterling"
-      depth={itemDepth}
-      {disabled}
-      {expanded}
-      {hasChildren}
-      {selected}
-    >
+    <TreeItemDisplay value="sterling" {depth} {disabled} {expanded} {hasChildren} {selected}>
       {label}
     </TreeItemDisplay>
   </div>
@@ -45,14 +28,14 @@
     <Checkbox bind:checked={expanded}>expanded</Checkbox>
     <Checkbox bind:checked={hasChildren}>hasChildren</Checkbox>
     <Checkbox bind:checked={selected}>selected</Checkbox>
-    <Field label="depth: {depth}">
+    <Label text="depth: {depth}">
       <div class="slider">
-        <Slider maxValue="20" bind:value={depth} on:mouseup={() => (allowDepthChange = true)} />
+        <Slider max={20} step={1} precision={0} bind:value={depth} />
       </div>
-    </Field>
-    <Field label="default slot">
+    </Label>
+    <Label text="default slot">
       <Input bind:value={label} composed />
-    </Field>
+    </Label>
   </svelte:fragment>
 </Playground>
 

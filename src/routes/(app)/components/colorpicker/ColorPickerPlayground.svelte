@@ -14,27 +14,17 @@
   let composed = false;
   let disabled = false;
   let open = false;
-  let stayOpenOnClickAway = false;
 </script>
 
 <Playground bind:this={exampleRef} noEvents>
   <svelte:fragment slot="component">
-    <ColorPicker
-      bind:colorText
-      bind:colorFormat
-      bind:open
-      {colorful}
-      {composed}
-      {disabled}
-      {stayOpenOnClickAway}
-    />
+    <ColorPicker bind:colorText bind:colorFormat bind:open {colorful} {composed} {disabled} />
   </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
-    <Checkbox bind:checked={stayOpenOnClickAway}>stayOpenOnClickAway</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>colorText: {colorText}</div>

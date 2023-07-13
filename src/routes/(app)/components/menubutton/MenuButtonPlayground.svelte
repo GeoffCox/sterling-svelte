@@ -8,6 +8,7 @@
 
   let exampleRef: any;
   let disabled = false;
+  let open = false;
 
   let renderChoice: 'performance' | 'quality' = 'performance';
   let autoSave: boolean = false;
@@ -15,7 +16,7 @@
 
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
-    <MenuButton {disabled} value="file">
+    <MenuButton bind:open {disabled} value="file">
       File
       <svelte:fragment slot="items">
         <MenuItem value="file-new" text="New" />
@@ -59,5 +60,6 @@
   </svelte:fragment>>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Checkbox bind:checked={open}>open</Checkbox>
   </svelte:fragment>
 </Playground>

@@ -5,14 +5,30 @@
 
   // ----- Props ----- //
 
+  /** When true, applies colorful theme styles */
   export let colorful = false;
+  /** When true, allows the container to handle borders and focus borders  */
   export let composed = false;
+
+  /** When true, the slider is disabled. */
   export let disabled: boolean = false;
+
+  /** The minimum value of the slider. */
   export let min: number = 0;
+
+  /** The maximum value of the slider */
   export let max: number = 100;
+
+  /** The number of decimal places for rounding the value */
   export let precision: number | undefined = undefined;
-  export let step: number | undefined = undefined;
+
+  /** The amount the value changes when moving by arrow keys */
+  export let step: number = 1;
+
+  /** The value of the slider */
   export let value: number = 0;
+
+  /** When true, the slider is displayed vertically */
   export let vertical: boolean = false;
 
   // ----- State ----- //
@@ -74,7 +90,6 @@
 
   // Compute the ratio of the value to the range
   $: ratio = (value - min) / (max - min);
-  $: changeBy = step ? step : 1;
 
   const setValueByOffset = (offset: number) => {
     if (sliderSize > 0) {
@@ -132,13 +147,13 @@
       switch (event.code) {
         case 'ArrowDown':
         case 'ArrowLeft':
-          setValue(value - changeBy);
+          setValue(value - step);
           event.preventDefault();
           event.stopPropagation();
           return;
         case 'ArrowRight':
         case 'ArrowUp':
-          setValue(value + changeBy);
+          setValue(value + step);
           event.preventDefault();
           event.stopPropagation();
           return;

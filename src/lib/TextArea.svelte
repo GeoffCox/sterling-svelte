@@ -4,11 +4,17 @@
 
   // ----- Props ----- //
 
-  export let autoHeight = false;
-  export let colorful = false;
   export let disabled = false;
-  export let resize: TextAreaResize = 'none';
   export let value: string = '';
+
+  /** When true, the text area will resize itself vertically to fit the current text.*/
+  export let autoHeight = false;
+
+  /** When true, applies colorful theme styles. */
+  export let colorful = false;
+
+  /** Sets the resize handle in the lower corner of the text area. */
+  export let resize: TextAreaResize = 'none';
 
   // ----- State ----- //
 

@@ -1,17 +1,30 @@
 <script lang="ts">
-  import { portal } from './actions/portal';
   import type { ComputePositionReturn } from '@floating-ui/core';
   import { arrow, autoUpdate, computePosition, flip, offset } from '@floating-ui/dom';
   import { onMount } from 'svelte';
-  import type { TooltipShowOn } from './Tooltip.types';
-  import { fade } from 'svelte/transition';
-  import type { FloatingPlacement } from './floating-ui.types';
+  import { fade, type FadeParams, type TransitionConfig } from 'svelte/transition';
 
+  import { portal } from './actions/portal';
+  import type { TooltipShowOn } from './Tooltip.types';
+  import type { FloatingPlacement } from './floating-ui.types';
+  import { prefersReducedMotion } from './stores/prefersReducedMotion';
+
+  /** When true, the tooltip is disabled and will not be shown. */
   export let disabled = false;
-  export let showOn: TooltipShowOn | undefined = undefined;
+
+  /** When to show the tooltip */
+  export let showOn: TooltipShowOn = 'hover';
+
+  /** How long the mouse must hover over the item to show the tooltip. */
   export let hoverDelayMilliseconds: number = 1000;
+
+  /** When true, the tooltip is open (i.e. visible) */
   export let open = false;
+
+  /** Where to place the tooltip relative to the content. */
   export let placement: FloatingPlacement = 'top';
+
+  /** An optional portal host for floating the tooltip above other content. Defaults to body.*/
   export let portalTarget: HTMLElement | undefined = undefined;
 
   let originRef: HTMLDivElement;
@@ -164,6 +177,14 @@
 
   $: reference, showOn, autoShowUpdate();
 
+  // ----- Animation ----- //
+
+  const fadeNoOp = (node: Element, params?: FadeParams): TransitionConfig => {
+    return { delay: 0, duration: 0 };
+  };
+
+  $: fadeMotion = !$prefersReducedMotion ? fade : fadeNoOp;
+
   // ----- EventHandlers ----- //
 
   let mounted = false;
@@ -183,9 +204,45 @@
   <div
     class="sterling-tooltip-portal"
     use:portal={{ target: document.body }}
-    transition:fade={{ duration: 250 }}
+    transition:fadeMotion={{ duration: 250 }}
   >
-    <div bind:this={tooltipRef} class="sterling-tooltip" style={tipStyle}>
+    <div
+      bind:this={tooltipRef}
+      class="sterling-tooltip"
+      style={tipStyle}
+      on:blur
+      on:click
+      on:dblclick
+      on:dragend
+      on:dragenter
+      on:dragleave
+      on:dragover
+      on:dragstart
+      on:drop
+      on:focus
+      on:focusin
+      on:focusout
+      on:keydown
+      on:keypress
+      on:keyup
+      on:mousedown
+      on:mouseenter
+      on:mouseleave
+      on:mousemove
+      on:mouseover
+      on:mouseout
+      on:mouseup
+      on:pointercancel
+      on:pointerdown
+      on:pointerenter
+      on:pointerleave
+      on:pointermove
+      on:pointerover
+      on:pointerout
+      on:pointerup
+      on:wheel|passive
+      {...$$restProps}
+    >
       <div class="arrow" bind:this={arrowRef} style={arrowStyle} />
       <slot name="tip" />
     </div>

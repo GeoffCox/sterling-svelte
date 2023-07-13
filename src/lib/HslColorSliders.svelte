@@ -12,6 +12,7 @@
   export let lightness: number = 50;
   export let alpha: number = 1;
 
+  /** When true, applies colorful theme styles. */
   export let colorful = false;
 
   // ----- State ----- //

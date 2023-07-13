@@ -1,13 +1,14 @@
 <script lang="ts">
   import { idGenerator } from './idGenerator';
-  import Label from './Label.svelte';
 
   // ----- Props ----- //
 
   export let checked: boolean = false;
-  export let colorful: boolean = false;
   export let disabled: boolean = false;
   export let id: string | undefined = undefined;
+
+  /** When true, applies colorful theme styles. */
+  export let colorful = false;
 
   // ----- State ----- //
 
@@ -76,11 +77,9 @@
     <div class="indicator" />
   </div>
   {#if $$slots.default}
-    <Label for={id}>
-      <slot {checked} {disabled} inputId={id} value={$$restProps.value}>
-        {$$restProps.value}
-      </slot>
-    </Label>
+    <label for={id}>
+      <slot {checked} {colorful} {disabled} inputId={id} value={$$restProps.value} />
+    </label>
   {/if}
 </div>
 
@@ -230,6 +229,12 @@
     transition: opacity 250ms;
   }
 
+  label {
+    color: var(--stsv-common__color);
+    transition: color 250ms;
+    font: inherit;
+  }
+
   .sterling-checkbox.disabled .container::after {
     opacity: 1;
   }
@@ -237,7 +242,8 @@
   @media (prefers-reduced-motion) {
     .indicator,
     .indicator::after,
-    .container::after {
+    .container::after,
+    label {
       transition: none;
     }
   }

@@ -14,10 +14,11 @@
 
   // ----- Props ----- //
 
+  /** When true, the menu is open. */
   export let open = false;
-  export let shape: ButtonShape = 'rounded';
+
+  /** The value uniquely identifying this menu button as the root of the menu hierarchy. */
   export let value: string;
-  export let variant: ButtonVariant = 'regular';
 
   // ----- State ----- //
 
@@ -134,8 +135,6 @@
   aria-owns={menuId}
   data-value={value}
   data-root-value={value}
-  {variant}
-  {shape}
   on:blur
   on:click
   on:click={onClick}

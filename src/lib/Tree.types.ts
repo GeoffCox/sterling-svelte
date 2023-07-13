@@ -1,20 +1,18 @@
 import type { Readable, Writable } from 'svelte/store';
 
 /**
- * Context for a Tree and its tree items.
+ * The context for a Tree and its descendants.
  */
 export type TreeContext = {
+  /** When true, applies colorful theme styles. */
   colorful: Readable<boolean>;
 
-  /** If the tree is disabled */
+  /** When true, the tree and its descendants are disabled */
   disabled: Readable<boolean>;
 
-  /**
-   * The values of the expanded tree tree items.
-   */
+  /** The values of items that are expanded. */
   expandedValues: Writable<string[]>;
-  /**
-   * The value of the selected tree item.
-   */
+
+  /** The value of the currently selected item. */
   selectedValue: Writable<string | undefined>;
 };

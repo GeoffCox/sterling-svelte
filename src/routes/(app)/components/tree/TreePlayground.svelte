@@ -7,7 +7,7 @@
   import Button from '$lib/Button.svelte';
   import CoffeeTreeItem from './CoffeeTreeItem.svelte';
   import { coffeeTree } from '../../_sampleData/coffeeTree';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
 
   let exampleRef: any;
 
@@ -48,15 +48,15 @@
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <div class="edit-toggled">
-      <Field label="expandedValues (comma separated)">
+      <Label text="expandedValues (comma separated)">
         <Input bind:value={expandedValuesText} composed />
-      </Field>
+      </Label>
       <Button on:click={getExpandedValues}>Get</Button>
       <Button on:click={setExpandedValues}>Set</Button>
     </div>
-    <Field label="selectedValue">
+    <Label text="selectedValue">
       <Input bind:value={selectedValue} composed />
-    </Field>
+    </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>

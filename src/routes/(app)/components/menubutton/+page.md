@@ -6,38 +6,41 @@
 
 A Button that shows a menu when clicked.
 
-<Playground />
+## Props
+
+Button props are included.
+
+```ts
+/** When true, the menu is open. */
+export let open = false;
+
+/** The value uniquely identifying this menu button as the root of the menu hierarchy. */
+export let value: string;
+```
+
+## Events
+
+Button events are included.
+
+```ts
+dispatch('close', { value });
+dispatch('open', { value });
+dispatch('select', { value });
+```
+
+## Methods
+
+Button `blur`, `click`, and `focus` methods are included.
+
+## Anatomy
 
 ```svelte
-<script lang="ts">
-  // ----- Props ----- //
-
-  // HTMLDivElement props are forwarded
-
-  let open = false;
-  let shape: ButtonShape = 'rounded';
-  let value: string;
-  let variant: ButtonVariant = 'regular';
-
-  // ----- Events ----- //
-
-  // HTMLDivElement events are bubbled
-
-  dispatch('close', { value });
-  dispatch('open', { value });
-  dispatch('select', { value });
-
-  // ----- Methods ----- //
-
-  function blur();
-  function click();
-  function focus(options: FocusOptions);
-</script>
-
-<!-- Anatomy -->
-
 <Button>
   <slot {shape} {variant} />
   <slot name="items" />
 </Button>
 ```
+
+## Playground
+
+<Playground />

@@ -4,22 +4,22 @@
 
 # MenuSeparator
 
-A line between groups of menu items.
+A visual line separating groups of menu items.
 
-<Playground />
+## Props
+
+HTMLDivElement props are included.
+
+## Events
+
+HTMLDivElement events are included.
+
+## Anatomy
 
 ```svelte
-<script lang="ts">
-  // ----- Props ----- //
-
-  // HTMLDivElement props are forwarded
-
-  // ----- Events ----- //
-
-  // HTMLDivElement events are bubbled
-</script>
-
-<!-- Anatomy -->
-
 <div />
 ```
+
+## Playground
+
+<Playground />

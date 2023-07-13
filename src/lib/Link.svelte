@@ -1,9 +1,12 @@
 <script lang="ts">
   import type { LinkVariant } from './Link.types';
 
-  export let colorful: boolean = false;
   export let href: string;
   export let disabled: boolean = false;
+
+  /** When true, applies colorful theme styles. */
+  export let colorful = false;
+
   export let variant: LinkVariant = 'regular';
 
   let linkRef: HTMLAnchorElement;

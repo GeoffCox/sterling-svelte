@@ -1,4 +1,4 @@
-import type { PROGRESS_COLORFULS } from './Progress.constants';
+import type { PROGRESS_STATUSES } from './Progress.constants';
 
-type ProgressColorfulTuple = typeof PROGRESS_COLORFULS;
-export type ProgressColorful = ProgressColorfulTuple[number];
+type ProgressStatusTuple = typeof PROGRESS_STATUSES;
+export type ProgressStatus = ProgressStatusTuple[number];

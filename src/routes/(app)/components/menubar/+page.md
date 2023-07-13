@@ -6,41 +6,45 @@
 
 A horizontal list of menu items typically at the top of a window.
 
-- Children can be MenuItem or non-MenuItem components
-- Bubbles events for MenuItem descendants
+- You can mix MenuItem components with non-menu item content such as a search box or buttons.
 
-<Playground />
+## Types
+
+```ts
+type MenuBarContext = {
+  openPreviousMenuBarItem?: () => void;
+  openNextMenuBarItem?: () => void;
+};
+```
+
+## Props
+
+HTMLDivElement props are included.
+
+## Events
+
+HTMLDivElement events are included.
+
+MenuItem events are bubbled up the hiearchy of menus.
+
+```ts
+dispatch('close', { value });
+dispatch('open', { value });
+dispatch('select', { value });
+```
+
+## Methods
+
+HTMLDivElement `blur`, and `focus` methods are included.
+
+## Anatomy
 
 ```svelte
-<script lang="ts">
-  // ----- Props ----- //
-
-  // HTMLDivElement props are forwarded
-
-  // ----- Events ----- //
-
-  // HTMLDivElement events are bubbled
-
-  dispatch('close', { value });
-  dispatch('open', { value });
-  dispatch('select', { value });
-
-  // ----- Methods ----- //
-
-  function blur();
-  function focus(options: FocusOptions);
-
-  // ----- Context ----- //
-
-  type MenuBarContext = {
-    openPreviousMenuBarItem?: () => void;
-    openNextMenuBarItem?: () => void;
-  };
-</script>
-
-<!-- Anatomy -->
-
 <div>
   <slot />
 </div>
 ```
+
+## Playground
+
+<Playground />

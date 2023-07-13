@@ -176,12 +176,12 @@
   />
   <h3>Status - Error</h3>
   <Swatch
-    backgroundColorName="--stsv-status--error__background-color"
-    bind:backgroundColorValue={theme['stsv-status--error__background-color']}
-    borderColorName="--stsv-status--error__border-color"
-    bind:borderColorValue={theme['stsv-status--error__border-color']}
-    colorName="--stsv-status--error__color"
-    bind:colorValue={theme['stsv-status--error__color']}
+    backgroundColorName="--stsv-status--danger__background-color"
+    bind:backgroundColorValue={theme['stsv-status--danger__background-color']}
+    borderColorName="--stsv-status--danger__border-color"
+    bind:borderColorValue={theme['stsv-status--danger__border-color']}
+    colorName="--stsv-status--danger__color"
+    bind:colorValue={theme['stsv-status--danger__color']}
   />
   <h1>Colorful</h1>
   <h2>Common</h2>

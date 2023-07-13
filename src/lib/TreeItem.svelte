@@ -11,8 +11,14 @@
   import { prefersReducedMotion } from './stores/prefersReducedMotion';
 
   // ----- Props ----
+
+  /** When true, the item is disabled. */
   export let disabled = false;
-  export let label: string | undefined = undefined;
+
+  /** The text for the item when the item and label slots are not filled. */
+  export let text: string | undefined = undefined;
+
+  /** The value uniquely identifying this item within the tree. */
   export let value: string;
 
   // ----- Animation ----- //
@@ -405,7 +411,7 @@ A item in a Tree displaying the item and children.
             {expanded}
             {hasChildren}
             {selected}
-            {value}>{label || value}</slot
+            {value}>{text || value}</slot
           >
         </svelte:fragment>
       </TreeItemDisplay>

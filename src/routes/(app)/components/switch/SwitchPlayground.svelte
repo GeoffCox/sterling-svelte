@@ -1,12 +1,11 @@
 <script lang="ts">
-  import Label from '$lib/Label.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Switch from '$lib/Switch.svelte';
   import Playground from '../Playground.svelte';
   import ChillIcon from './ChillIcon.svelte';
   import HeatIcon from './HeatIcon.svelte';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
 
   let exampleRef: any;
   let checked = false;
@@ -28,14 +27,14 @@
     {#if customLabels}
       <Switch bind:checked {colorful} {disabled} {vertical} on:change={onSwitchChange}>
         <div class="chill" slot="offLabel" let:checked let:disabled let:inputId>
-          <Label for={inputId}>
+          <label for={inputId}>
             <ChillIcon checked={!checked} {disabled} />
-          </Label>
+          </label>
         </div>
         <div class="heat" slot="onLabel" let:checked let:disabled let:inputId>
-          <Label for={inputId}>
+          <label for={inputId}>
             <HeatIcon {checked} {disabled} />
-          </Label>
+          </label>
         </div>
       </Switch>
     {:else}
@@ -56,12 +55,12 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Field label="offText">
+    <Label text="offText">
       <Input bind:value={offText} composed />
-    </Field>
-    <Field label="onText">
+    </Label>
+    <Label text="onText">
       <Input bind:value={onText} composed />
-    </Field>
+    </Label>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">

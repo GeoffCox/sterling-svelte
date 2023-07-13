@@ -6,15 +6,15 @@
   import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
   import Select from '$lib/Select.svelte';
-  import type { ProgressColorful } from '$lib/Progress.types';
+  import type { ProgressStatus } from '$lib/Progress.types';
   import ListItem from '$lib/ListItem.svelte';
-  import Field from '$lib/Field.svelte';
-  import { PROGRESS_COLORFULS } from '$lib';
+  import Label from '$lib/Label.svelte';
+  import { PROGRESS_STATUSES } from '$lib';
 
-  let colorful: ProgressColorful = 'none';
   let disabled = false;
   let max = 100;
   let percent: number;
+  let status: ProgressStatus = 'none';
   let value = 35;
   let vertical = false;
 
@@ -37,7 +37,7 @@
 <Playground>
   <div class="component" slot="component">
     <div class="progress" class:vertical>
-      <Progress {colorful} {disabled} {value} {max} bind:percent {vertical} />
+      <Progress {status} {disabled} {value} {max} bind:percent {vertical} />
     </div>
   </div>
   <svelte:fragment slot="props">
@@ -45,16 +45,16 @@
       <Slider bind:value min={0} {max} />
     </div>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Field label="colorful" forwardClick>
-      <Select bind:selectedValue={colorful} composed>
-        {#each PROGRESS_COLORFULS as progressColorful}
-          <ListItem value={progressColorful}>{progressColorful}</ListItem>
+    <Label text="status" forwardClick>
+      <Select bind:selectedValue={status} composed>
+        {#each PROGRESS_STATUSES as progressStatus}
+          <ListItem value={progressStatus}>{progressStatus}</ListItem>
         {/each}
       </Select>
-    </Field>
-    <Field label="max">
+    </Label>
+    <Label text="max">
       <Input value={max.toString()} on:change={onMaxChange} composed />
-    </Field>
+    </Label>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="status">

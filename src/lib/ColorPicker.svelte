@@ -20,14 +20,23 @@
 
   // ----- Props ----- //
 
+  /** The color value in HEX, RGB, or HSL format */
   export let colorText: string = defaultColorText;
+
+  /** The current color format */
   export let colorFormat: ColorFormat = 'hex';
 
-  export let colorful: boolean = false;
+  /** When true, applies colorful theme styles. */
+  export let colorful = false;
+
+  /** When true, allows the container to handle borders and focus borders.  */
   export let composed: boolean = false;
+
+  /** If the picker is disabled */
   export let disabled: boolean = false;
-  export let open = false;
-  export let stayOpenOnClickAway = false;
+
+  /** If the picker dropdown is open */
+  export let open: boolean = false;
 
   // ----- State ----- //
 
@@ -214,7 +223,39 @@
   updateColorsFromText();
 </script>
 
-<Dropdown bind:open {colorful} {composed} {disabled} {stayOpenOnClickAway}>
+<Dropdown
+  bind:open
+  {colorful}
+  {composed}
+  {disabled}
+  on:blur
+  on:click
+  on:copy
+  on:cut
+  on:dblclick
+  on:dragend
+  on:dragenter
+  on:dragleave
+  on:dragover
+  on:dragstart
+  on:drop
+  on:focus
+  on:focusin
+  on:focusout
+  on:keydown
+  on:keypress
+  on:keyup
+  on:mousedown
+  on:mouseenter
+  on:mouseleave
+  on:mousemove
+  on:mouseover
+  on:mouseout
+  on:mouseup
+  on:wheel
+  on:paste
+  {...$$restProps}
+>
   <div class="value" slot="value">
     <div class="color-box" style="background-color: {colorText}" />
     <Input

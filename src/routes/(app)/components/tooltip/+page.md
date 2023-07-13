@@ -6,43 +6,59 @@
 
 Descriptive information that floats above and near another element.
 
-- Set if hover or click shows the tooltip
-- Set the delay before the tooltip is shown
-- Set another element as the portal target
+## Types
 
-<Playground />
+```ts
+type TooltipShowOn = `'click'` | `'hover'`;
+
+type FloatingPlacement =
+  | `'top'`
+  | `'right'`
+  | `'bottom'`
+  | `'left'`
+  | `'top-start'`
+  | `'right-start'`
+  | `'bottom-start'`
+  | `'left-start'`
+  | `'top-end'`
+  | `'right-end'`
+  | `'bottom-end'`
+  | `'left-end'`;
+```
+
+## Props
+
+HTMLDivElement props are included.
+
+```ts
+/** When true, the tooltip is disabled and will not be shown. */
+export let disabled = false;
+
+/** When to show the tooltip */
+export let showOn: TooltipShowOn = 'hover';
+
+/** How long the mouse must hover over the item to show the tooltip. */
+export let hoverDelayMilliseconds: number = 1000;
+
+/** When true, the tooltip is open (i.e. visible) */
+export let open = false;
+
+/** Where to place the tooltip relative to the content. */
+export let placement: FloatingPlacement = 'top';
+
+/** An optional portal host for floating the tooltip above other content. Defaults to body.*/
+export let portalTarget: HTMLElement | undefined = undefined;
+```
+
+## Events
+
+HTMLDivElement events are included.
+
+## Anatomy
+
+The tooltip is anchored to a sibling element that appears directly after the default slot content.
 
 ```svelte
-<script lang="ts">
-  // ----- Types ----- //
-  type TooltipShowOn = `'click'` | `'hover'`;
-
-  type FloatingPlacement =
-    | `'top'`
-    | `'right'`
-    | `'bottom'`
-    | `'left'`
-    | `'top-start'`
-    | `'right-start'`
-    | `'bottom-start'`
-    | `'left-start'`
-    | `'top-end'`
-    | `'right-end'`
-    | `'bottom-end'`
-    | `'left-end'`;
-
-  // ----- Props ----- //
-
-  let disabled = false;
-  let showOn: TooltipShowOn | undefined = undefined;
-  let hoverDelayMilliseconds: number = 1000;
-  let open = false;
-  let placement: FloatingPlacement = 'top';
-  let portalTarget: HTMLElement | undefined = undefined;
-</script>
-
-<!-- Anatomy -->
-
 <slot {disabled} {open} />
 <!-- anchor point -->
 <div />
@@ -54,3 +70,7 @@ Descriptive information that floats above and near another element.
   </div>
 </div>
 ```
+
+## Playground
+
+<Playground />

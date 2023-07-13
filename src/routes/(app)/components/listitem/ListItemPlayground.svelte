@@ -7,7 +7,7 @@
   import { readable, writable } from 'svelte/store';
   import type { ListContext } from '$lib';
   import { LIST_CONTEXT_KEY } from '$lib/List.constants';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
 
   let exampleRef: any;
 
@@ -41,9 +41,9 @@
   </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Field label="text">
+    <Label text="text">
       <Input bind:value={text} composed />
-    </Field>
+    </Label>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Checkbox bind:checked={colorful}>colorful</Checkbox>

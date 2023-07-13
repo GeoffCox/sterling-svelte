@@ -1,15 +1,17 @@
 <script lang="ts">
   import { idGenerator } from './idGenerator';
 
-  import Label from './Label.svelte';
-
   // ----- Props ----- //
 
-  export let colorful = false;
-  export let composed = false;
   export let disabled = false;
   export let id: string | undefined = undefined;
   export let value: string = '';
+
+  /** When true, applies colorful theme styles. */
+  export let colorful = false;
+
+  /** When true, allows the container to handle borders and focus borders.  */
+  export let composed = false;
 
   // ----- State ----- //
 
@@ -62,9 +64,9 @@
 </script>
 
 {#if $$slots.default}
-  <Label {disabled} for={id}>
+  <label for={id}>
     <slot {composed} {disabled} {value} />
-  </Label>
+  </label>
 {/if}
 <div class="sterling-input" class:colorful class:composed class:disabled>
   <input
@@ -204,6 +206,12 @@
     top: 0;
     pointer-events: none;
     transition: opacity 250ms;
+  }
+
+  label {
+    color: var(--stsv-common__color);
+    transition: color 250ms;
+    font: inherit;
   }
 
   .sterling-input.disabled::after {

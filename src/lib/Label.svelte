@@ -1,32 +1,154 @@
 <script lang="ts">
-  export let disabled = false;
+  import type { LabelStatus } from './Label.types';
+  import Tooltip from './Tooltip.svelte';
+  import { usingKeyboard } from './stores/usingKeyboard';
+
+  // ----- Props ----- //
+
+  let htmlFor: string | undefined = undefined;
+  export { htmlFor as for };
+
+  /**
+   * If true, then clicking the label invokes a click on the input.
+   * Only necessary when the label is not associated with the input through containment or the for/id relationship.
+   */
+  export let forwardClick = false;
+
+  /** The text to display in the label if the text slot is not filled */
+  export let text: string | undefined = undefined;
+
+  /** The status message to display */
+  export let message: string | undefined = undefined;
+
+  /** When true, a required indicator is displayed */
+  export let required = false;
+
+  /** The reason the value is required */
+  export let requiredReason = 'required';
+
+  /** The status of the label */
+  export let status: LabelStatus = 'none';
 
   // ----- State ----- //
 
   let labelRef: HTMLLabelElement;
+  let targetDisabled = false;
+  let targetRef: HTMLElement | null = null;
+
+  const findTarget = () => {
+    let candidate: HTMLElement | null = null;
+    if (htmlFor) {
+      candidate = labelRef?.querySelector<HTMLElement>(`[id="${htmlFor}"]`);
+    }
+    if (!candidate) {
+      candidate = labelRef?.querySelector<HTMLElement>(
+        'a[href], ' +
+          'audio[controls], ' +
+          'button, ' +
+          'details, ' +
+          'div[contenteditable], ' +
+          'form, ' +
+          'input, ' +
+          'select, ' +
+          'textarea, ' +
+          'video[controls], ' +
+          '[tabindex]:not([tabindex="-1"])'
+      );
+    }
+
+    targetRef = candidate;
+  };
+
+  const isElementDisabled = (element: HTMLElement | null) => {
+    if (element) {
+      return (
+        element.getAttribute('aria-disabled') === 'true' ||
+        element?.matches(':disabled') ||
+        (element as any)?.disabled === true ||
+        element?.classList.contains('disabled')
+      );
+    }
+    return false;
+  };
+
+  $: $$slots.default, labelRef, htmlFor, findTarget();
+
+  $: {
+    targetDisabled = isElementDisabled(targetRef);
+  }
+
+  const mutationCallback: MutationCallback = (mutations) => {
+    let disabled: boolean | undefined = undefined;
+    for (let i = 0; i < mutations.length; i++) {
+      const mutation = mutations[i];
+      if (mutation.type === 'attributes') {
+        if (
+          mutation.attributeName === 'aria-disabled' ||
+          mutation.attributeName === 'disabled' ||
+          mutation.attributeName === 'class'
+        ) {
+          if (isElementDisabled(targetRef)) {
+            // a mutation caused the target to be disabled
+            disabled = true;
+            break;
+          }
+
+          // a mutation caused the target to be enabled
+          disabled = false;
+        }
+      }
+    }
+
+    // if we found a mutation that changed disabled, then set targetDisabled
+    if (disabled !== undefined) {
+      targetDisabled = disabled;
+    }
+  };
+
+  let mutationObserver = new MutationObserver(mutationCallback);
+
+  $: {
+    mutationObserver.disconnect();
+    if (targetRef) {
+      mutationObserver.observe(targetRef, {
+        attributes: true
+      });
+    }
+  }
 
   // ----- Methods ----- //
-
-  export const blur = () => {
-    labelRef?.blur();
-  };
 
   export const click = () => {
     labelRef?.click();
   };
 
+  export const blur = () => {
+    labelRef?.blur();
+  };
+
   export const focus = (options?: FocusOptions) => {
-    labelRef?.focus();
+    labelRef?.focus(options);
+  };
+
+  // ----- Event Handlers ----- //
+
+  const onClick = () => {
+    if (forwardClick) {
+      targetRef?.click();
+    }
   };
 </script>
 
 <label
   bind:this={labelRef}
-  aria-disabled={disabled}
+  aria-disabled={targetDisabled}
   class="sterling-label"
-  class:disabled
+  class:disabled={targetDisabled}
+  class:using-keyboard={$usingKeyboard}
+  for={htmlFor}
   on:blur
   on:click
+  on:click={onClick}
   on:copy
   on:cut
   on:dblclick
@@ -54,22 +176,151 @@
   on:paste
   {...$$restProps}
 >
-  <slot {disabled} />
+  {#if text || $$slots.text}
+    <slot name="text" disabled={targetDisabled} for={htmlFor} {forwardClick} {text} {required}>
+      <div class="text">
+        {text}
+      </div>
+    </slot>
+  {/if}
+  {#if $$slots.default}
+    <div class="content">
+      <slot />
+    </div>
+  {/if}
+  {#if message}
+    <slot name="message" disabled={targetDisabled} {message} {required} {status}>
+      <div
+        class="message"
+        class:info={status === 'info'}
+        class:success={status === 'success'}
+        class:warning={status === 'warning'}
+        class:error={status === 'danger'}
+      >
+        {message}
+      </div>
+    </slot>
+  {/if}
+  {#if required}
+    <slot name="required" {requiredReason}>
+      <Tooltip showOn="hover">
+        <span class="required-reason" slot="tip">{requiredReason}</span>
+        <div class="required">*</div>
+      </Tooltip>
+    </slot>
+  {/if}
 </label>
 
 <style>
-  label {
-    color: var(--stsv-common__color);
-    transition: color 250ms;
+  .sterling-label {
+    background-color: var(--stsv-input__background-color);
+    border-color: var(--stsv-input__border-color);
+    border-radius: var(--stsv-input__border-radius);
+    border-style: var(--stsv-input__border-style);
+    border-width: var(--stsv-input__border-width);
+    box-sizing: border-box;
+    color: var(--stsv-input__color);
+    display: flex;
+    flex-direction: column;
     font: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    position: relative;
+    transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
-  label.disabled {
-    color: var(--stsv-common__color--disabled);
+  .sterling-label:not(.disabled):hover {
+    background-color: var(--stsv-input__background-color--hover);
+    border-color: var(--stsv-input__border-color--hover);
+    color: var(--stsv-input__color--hover);
+  }
+
+  .sterling-label.using-keyboard:focus-within {
+    border-color: var(--stsv-input__border-color--focus);
+    color: var(--stsv-input__color--focus);
+    outline-color: var(--stsv-common__outline-color);
+    outline-offset: var(--stsv-common__outline-offset);
+    outline-style: var(--stsv-common__outline-style);
+    outline-width: var(--stsv-common__outline-width);
+  }
+
+  .sterling-label.disabled {
+    cursor: not-allowed;
+  }
+
+  .sterling-label.disabled * {
+    cursor: not-allowed;
+  }
+
+  .text {
+    color: var(--stsv-common__color--secondary);
+    font-size: 0.8em;
+    margin: 0.5em 0.7em 0.2em 0.2em;
+  }
+
+  .text:empty {
+    margin: 0;
+  }
+
+  .content {
+    display: grid;
+  }
+
+  .message {
+    box-sizing: border-box;
+    font-size: 0.8em;
+    background-color: var(--stsv-common__background-color--secondary);
+    color: var(--stsv-common__color--secondary);
+    padding: 0.5em;
+    width: 100%;
+    transition: background-color 250ms, color 250ms, border-color 250ms;
+  }
+
+  .message.info {
+    background-color: var(--stsv-status--info__background-color);
+    border-color: var(--stsv-status--info__border-color);
+    color: var(--stsv-status--info__color);
+  }
+
+  .message.success {
+    background-color: var(--stsv-status--success__background-color);
+    border-color: var(--stsv-status--success__border-color);
+    color: var(--stsv-status--success__color);
+  }
+
+  .message.warning {
+    background-color: var(--stsv-status--warning__background-color);
+    border-color: var(--stsv-status--warning__border-color);
+    color: var(--stsv-status--warning__color);
+  }
+
+  .message.error {
+    background-color: var(--stsv-status--danger__background-color);
+    border-color: var(--stsv_--danger-color);
+    color: var(--stsv-status--danger__color);
+  }
+
+  .required {
+    text-align: center;
+    font-weight: bold;
+    box-sizing: border-box;
+    width: 1em;
+    height: 1em;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .required-reason {
+    display: block;
+    padding: 4px;
   }
 
   @media (prefers-reduced-motion) {
-    label {
+    .sterling-label,
+    .sterling-label::after,
+    .message {
       transition: none;
     }
   }

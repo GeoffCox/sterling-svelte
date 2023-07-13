@@ -4,43 +4,51 @@
 
 # Switch
 
-A styled `<input type=checkbox/>`.
+A styled HTML `input` element with `type=checkbox`.
 
-- Horizontal or vertical layout
-- On/Off labels for switch positions
+> The `input type=checkbox` element is difficult to restyle with CSS.The input is hidden and the styled indicator rendered independently.
 
-<Playground />
+## Props
+
+HTMLInputElement props are included.
+
+```ts
+/** When true, applies colorful theme styles. */
+export let colorful = false;
+
+/** The text appearing on the off position side when the offLabel slot is not replaced. */
+export let offText: string | undefined = undefined;
+
+/** The text appearing on the on position side when the onLabel slot is not replaced. */
+export let onText: string | undefined = undefined;
+
+/** When true, the switch is displayed vertically. */
+export let vertical = false;
+```
+
+## Events
+
+HTMLInputElement events are included.
+
+## Methods
+
+HTMLInputElement `blur`, `click`, and `focus` methods are included.
+
+## Anatomy
 
 ```svelte
-<script lang="ts">
-  // ----- Props ----- //
-
-  // HTMLDivElement props are forwarded
-
-  let colorful: boolean = false;
-  let offText: string | undefined = undefined;
-  let onText: string | undefined = undefined;
-  let vertical: boolean = false;
-
-  // ----- Events ----- //
-
-  // HTMLDivElement events are bubbled
-
-  // ----- Methods ----- //
-
-  function blur();
-  function click();
-  function focus(options: FocusOptions);
-</script>
-
-<!-- Anatomy -->
-
 <div>
    <!-- hidden -->
   <input />
+  <!-- optional off label -->
   <slot name="offLabel" {checked} {disabled} {inputId} {offText} {vertical} />
-    <!-- toggle -->
+  <!-- toggle -->
   <div />
-   <slot name="onLabel" {checked} {disabled} {inputId} {onText} {vertical}>
+  <!-- optional on label -->
+  <slot name="onLabel" {checked} {disabled} {inputId} {onText} {vertical}>
 </div>
 ```
+
+## Playground
+
+<Playground />

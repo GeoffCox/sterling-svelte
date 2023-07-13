@@ -1,1 +1,1 @@
-export const PROGRESS_COLORFULS = ['none', 'auto', 'info', 'success', 'warning', 'error'];
+export const PROGRESS_STATUSES = ['none', 'auto', 'info', 'success', 'warning', 'danger'];

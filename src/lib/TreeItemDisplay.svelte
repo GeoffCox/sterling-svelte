@@ -7,6 +7,7 @@
 
   // ----- Props ----- //
 
+  /** When true, applies colorful theme styles. */
   export let colorful = false;
   export let depth = 0;
   export let disabled = false;

@@ -5,13 +5,19 @@
   import { writable } from 'svelte/store';
 
   import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
-  import { usingKeyboard } from './stores/usingKeyboard';
 
   // ----- Props ----- //
 
+  /** When true, applies colorful theme styles. */
   export let colorful = false;
+
+  /** When true, the tab list and its tabs are disabled. */
   export let disabled = false;
+
+  /** When true, the tab list is displayed vertically. */
   export let vertical = false;
+
+  /** The value of the currently selected tab. */
   export let selectedValue: string | undefined = undefined;
 
   // ----- State ----- //

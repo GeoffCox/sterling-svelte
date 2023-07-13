@@ -6,7 +6,7 @@
 
 A list of menu items.
 
-- Menu is a building block of menus:
+- Menu is a building block for menu components:
   - <Link href="menubar">MenuBar</Link>
   - <Link href="menubutton">MenuButton</Link>
   - <Link href="menuitem">MenuItem</Link>
@@ -14,24 +14,28 @@ A list of menu items.
 - Manages position based on the reference element
 - The menu floats above other element via portaling
 
+## Props
+
+HTMLDivElement props are included.
+
+## Events
+
+HTMLDivElement events are included.
+
+## Methods
+
+HTMLDivElement `blur`, and `focus` methods are included.
+
+```ts
+export const focusFirstMenuItem();
+export const focusPreviousMenuItem();
+export const focusNextMenuItem();
+export const focusLastMenuItem();
+```
+
+## Anatomy
+
 ```svelte
-<script lang="ts">
-  // ----- Props ----- //
-
-  // HTMLDivElement props are forwarded
-
-  // ----- Events ----- //
-
-  // HTMLDivElement events are bubbled
-
-  // ----- Methods ----- //
-
-  function blur();
-  function focus(options: FocusOptions);
-</script>
-
-<!-- Anatomy -->
-
 <div>
   <slot />
 </div>

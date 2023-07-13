@@ -4,40 +4,44 @@
 
 # Checkbox
 
-A styled `<input type=checkbox />`.
+A styled HTML `input` element with `type=checkbox`.
 
-<Playground />
+> The `input type=checkbox` element is difficult to restyle with CSS. The input is hidden and the styled indicator rendered independently.
+
+## Props
+
+HTMLInputElement props are included.
+
+```ts
+/** When true, applies colorful theme styles. */
+export let colorful = false;
+```
+
+## Events
+
+HTMLInputElement events are included.
+
+## Methods
+
+HTMLInputElement `blur`, `click`, and `focus` methods are included.
+
+## Anatomy
+
+Use the default slot to provide content for the optional label.
 
 ```svelte
-<script lang="ts">
-  // ----- Props ----- //
-
-  // HTMLInputElement props are forwarded
-
-  let colorful: boolean = false;
-  let shape: ButtonShape = 'rounded';
-  let variant: ButtonVariant = 'regular';
-
-  // ----- Events ----- //
-
-  // HTMLInputElement events are bubbled
-
-  // ----- Methods ----- //
-
-  function click();
-  function blur();
-  function focus(options: FocusOptions);
-</script>
-
-<!-- Anatomy -->
-
 <div>
-  <!-- hidden -->
+  <!-- hidden-->
   <input />
   <!-- checkmark -->
   <div />
-  <Label>
-    <slot {checked} {disabled} inputId={id} {value} />
-  </Label>
+  <!-- label (optional) -->
+  <label>
+    <slot {checked} {colorful} {disabled} inputId={id} {value} />
+  </label>
 </div>
 ```
+
+## Playground
+
+<Playground />

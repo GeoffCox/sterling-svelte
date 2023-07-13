@@ -7,7 +7,7 @@
   import ListItem from '$lib/ListItem.svelte';
   import Select from '$lib/Select.svelte';
   import Slider from '$lib/Slider.svelte';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
   import { FLOATING_PLACEMENTS, TOOLTIP_SHOW_ONS, type FloatingPlacement } from '$lib';
 
   let disabled = false;
@@ -28,27 +28,27 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
-    <Field label="autoShow">
+    <Label text="autoShow">
       <Select bind:selectedValue={showOn} composed>
         {#each TOOLTIP_SHOW_ONS as tooltipShowOn}
           <ListItem value={tooltipShowOn}>{tooltipShowOn}</ListItem>
         {/each}
       </Select>
-    </Field>
-    <Field label="placement">
+    </Label>
+    <Label text="placement">
       <Select bind:selectedValue={placement} composed>
         {#each FLOATING_PLACEMENTS as floatingPlacement}
           <ListItem value={floatingPlacement}>{floatingPlacement}</ListItem>
         {/each}
       </Select>
-    </Field>
-    <Field label="tip (text)">
+    </Label>
+    <Label text="tip (text)">
       <Input bind:value={tipText} composed />
-    </Field>
+    </Label>
     <div class="delay-slider">
-      <Field label={`hoverDelayMilliseconds: ${hoverDelayMilliseconds}ms`}>
+      <Label text={`hoverDelayMilliseconds: ${hoverDelayMilliseconds}ms`}>
         <Slider bind:value={hoverDelayMilliseconds} min={0} max={3000} />
-      </Field>
+      </Label>
     </div>
   </svelte:fragment>
 </Playground>

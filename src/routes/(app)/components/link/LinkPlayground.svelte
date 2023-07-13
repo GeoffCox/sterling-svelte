@@ -7,7 +7,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Select from '$lib/Select.svelte';
   import ListItem from '$lib/ListItem.svelte';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
   import Link from '$lib/Link.svelte';
   import type { LinkVariant } from '$lib/Link.types';
 
@@ -33,13 +33,13 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Field label="variant" forwardClick>
+    <Label text="variant" forwardClick>
       <Select bind:selectedValue={variant} composed>
         {#each LINK_VARIANTS as linkVariant}
           <ListItem value={linkVariant}>{linkVariant}</ListItem>
         {/each}
       </Select>
-    </Field>
+    </Label>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Checkbox bind:checked={withText}>with text</Checkbox>

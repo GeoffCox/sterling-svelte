@@ -4,7 +4,7 @@
   import TabList from '$lib/TabList.svelte';
   import Tab from '$lib/Tab.svelte';
   import Input from '$lib/Input.svelte';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
 
   let exampleRef: any;
 
@@ -35,9 +35,9 @@
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
-    <Field label="selectedValue">
+    <Label text="selectedValue">
       <Input bind:value={selectedValue} composed />
-    </Field>
+    </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>

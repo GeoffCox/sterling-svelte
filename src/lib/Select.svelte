@@ -10,9 +10,15 @@
 
   // ----- Props ----- //
 
-  export let composed: boolean = false;
   export let disabled: boolean = false;
+
+  /** When true, allows the container to handle borders and focus borders.  */
+  export let composed: boolean = false;
+
+  /** When true, the dropdown is open. */
   export let open = false;
+
+  /** The value of the selected item.*/
   export let selectedValue: string | undefined = undefined;
 
   // ----- State ----- //

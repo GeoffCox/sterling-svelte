@@ -3,7 +3,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Playground from '../Playground.svelte';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
 
   let exampleRef: any;
 
@@ -98,18 +98,18 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Field label="min">
+    <Label text="min">
       <Input value={min.toString()} on:change={onMinChange} composed />
-    </Field>
-    <Field label="max">
+    </Label>
+    <Label text="max">
       <Input value={max.toString()} on:change={onMaxChange} composed />
-    </Field>
-    <Field label="precision">
+    </Label>
+    <Label text="precision">
       <Input value={precision.toString()} on:change={onPrecisionChange} composed />
-    </Field>
-    <Field label="step">
+    </Label>
+    <Label text="step">
       <Input value={step?.toString()} on:change={onStepChange} composed />
-    </Field>
+    </Label>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="status">

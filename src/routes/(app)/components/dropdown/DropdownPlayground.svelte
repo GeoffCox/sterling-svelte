@@ -5,7 +5,7 @@
 
   import Dropdown from '$lib/Dropdown.svelte';
   import Switch from '$lib/Switch.svelte';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
   import Slider from '$lib/Slider.svelte';
   import AnimatedProgress from './AnimatedProgress.svelte';
 
@@ -40,9 +40,9 @@
         <div class="settings">
           <Switch bind:checked={animate} onText="Animate" />
           <Switch bind:checked={reverse} onText="Reverse" />
-          <Field label={`Speed: ${speed}`}>
+          <Label text={`Speed: ${speed}`}>
             <Slider bind:value={speed} composed />
-          </Field>
+          </Label>
         </div>
       </div></Dropdown
     >
@@ -62,8 +62,11 @@
 <style>
   .value {
     width: 250px;
-    height: 1.2em;
+    height: 2em;
     padding: 0.5em;
+    display: grid;
+    justify-items: stretch;
+    align-items: center;
   }
 
   .settings {

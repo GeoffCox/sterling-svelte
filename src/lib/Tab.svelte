@@ -6,9 +6,20 @@
   import { usingKeyboard } from './stores/usingKeyboard';
 
   // ----- Props ----- //
+
+  /**
+   * When true, the tab is disabled.
+   * The tab is also disabled if the tab list is disabled.
+   */
   export let disabled = false;
+
+  /** When true, the tab is selected. */
   export let selected = false;
+
+  /** The text of the tab when the default slot is not replaced. */
   export let text: string | undefined = undefined;
+
+  /** The value uniquely identifying this item within the tab list. */
   export let value: string;
 
   // ----- State ----- //

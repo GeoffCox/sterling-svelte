@@ -4,9 +4,12 @@
   // ----- Props ----- //
 
   export let disabled: boolean = false;
+
   export let variant: ButtonVariant = 'regular';
   export let shape: ButtonShape = 'rounded';
-  export let colorful: boolean = false;
+
+  /** When true, applies colorful theme styles. */
+  export let colorful = false;
 
   // ----- State ----- //
 
@@ -75,7 +78,7 @@
   on:wheel|passive
   {...$$restProps}
 >
-  <slot {shape} {variant} />
+  <slot {disabled} {colorful} {shape} {variant} />
 </button>
 
 <style>

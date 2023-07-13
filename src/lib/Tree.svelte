@@ -9,10 +9,19 @@
 
   // ----- Props ----- //
 
+  /** When true, applies colorful theme styles. */
   export let colorful = false;
+
+  /** When true, allows the container to handle borders and focus borders.  */
   export let composed = false;
+
+  /** When true, the tree and its descendants are disabled */
   export let disabled = false;
+
+  /** The value of the currently selected item. */
   export let selectedValue: string | undefined = undefined;
+
+  /** The values of items that are expanded. */
   export let expandedValues: string[] = [];
 
   // ----- State ----- //

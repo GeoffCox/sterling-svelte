@@ -6,7 +6,7 @@
   import { countries } from '../../_sampleData/countries';
   import ListItem from '$lib/ListItem.svelte';
   import { debounce } from 'lodash-es';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
 
   let exampleRef: any;
 
@@ -53,9 +53,9 @@
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={horizontal}>horizontal</Checkbox>
-    <Field label="selectedValue">
+    <Label text="selectedValue">
       <Input bind:value={selectedValueText} composed />
-    </Field>
+    </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>

@@ -12,14 +12,10 @@
 
   // ----- Props ----- //
 
-  /**
-   * Applies colorful styles from the theme.
-   */
+  /** When true, applies colorful theme styles. */
   export let colorful = false;
 
-  /**
-   * Displays the dropdown so its container handles border and focus.
-   */
+  /** When true, allows the container to handle borders and focus borders.  */
   export let composed = false;
 
   /**
@@ -280,7 +276,7 @@
   }
 
   .button {
-    align-self: flex-end;
+    align-self: center;
     cursor: pointer;
   }
 

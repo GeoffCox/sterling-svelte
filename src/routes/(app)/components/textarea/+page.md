@@ -4,50 +4,39 @@
 
 # TextArea
 
-A styled `<textarea/>`.
+A styled HTML `textarea` element.
 
-- Automatically adjust the height to fit content.
-- Add a resize handle to the corner of the text area.
+## Props
 
-<Playground />
+HTMLTextArea props are included.
+
+```ts
+/** When true, the text area will resize itself vertically to fit the current text.*/
+export let autoHeight = false;
+
+/** When true, applies colorful theme styles. */
+export let colorful = false;
+
+/** Sets the resize handle in the lower corner of the text area. */
+export let resize: TextAreaResize = 'none';
+```
+
+## Events
+
+HTMLTextArea events are included.
+
+## Methods
+
+HTMLTextArea `blur`, `click`, `focus`, `select`, `setRangeText` and `setSelectionRanges` methods are included.
+
+## Anatomy
 
 ```svelte
-<script lang="ts">
-  // ----- Props ----- //
-
-  // HTMLDivElement props are forwarded
-
-  let autoHeight: boolean = false;
-  let colorful: boolean = false;
-  let resize: TextAreaResize = 'none';
-  let value: string;
-
-  // ----- Events ----- //
-
-  // HTMLDivElement events are bubbled
-
-  dispatch('select', { value });
-
-  // ----- Methods ----- //
-
-  function blur();
-  function focus(options: FocusOptions);
-  function click();
-  function select();
-  function setSelectionRange(
-    start: number | null,
-    end: number | null,
-    direction?: 'forward' | 'backward' | 'none'
-  );
-  function setRangeText(
-    replacement: string,
-    start?: number,
-    end?: number,
-    selectionMode?: SelectionMode
-  );
-</script>
-
-<!-- Anatomy -->
-
-<textarea />
+<div>
+  <textarea />
+</div>
 ```
+
+## Playground
+
+ <Playground/>

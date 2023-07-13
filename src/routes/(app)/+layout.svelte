@@ -4,7 +4,7 @@
   import { base } from '$app/paths';
   import { oceanTheme } from './oceanTheme';
   import Input from '$lib/Input.svelte';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
   import Link from '$lib/Link.svelte';
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuButton from '$lib/MenuButton.svelte';
@@ -14,12 +14,14 @@
   import ThemeIcon from './ThemeIcon.svelte';
   import CodeTheme from './CodeTheme.svelte';
   import GitHubIcon from './GitHubIcon.svelte';
+  import { fluentLightTheme } from './fluentLightTheme';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
     light: 'light',
     dark: 'dark',
-    ocean: 'ocean (dark)'
+    ocean: 'ocean (dark)',
+    fluentLight: 'fluent-ui-esque (light)'
   };
 
   const components = [
@@ -28,7 +30,6 @@
     'ColorPicker',
     'Dialog',
     'Dropdown',
-    'Field',
     'Input',
     'Label',
     'Link',
@@ -74,6 +75,9 @@
         break;
       case 'ocean':
         applyTheme(node, { ...themeParams, theme: oceanTheme });
+        break;
+      case 'fluentLight':
+        applyTheme(node, { ...themeParams, theme: fluentLightTheme });
         break;
       case 'auto':
       default:
@@ -219,12 +223,12 @@
           </div>
           <div class="nav-header">Components</div>
           <div class="filter">
-            <Field for="filter-components">
+            <Label for="filter-components">
               <div class="filter-flex">
                 <Input id="filter-components" bind:value={filterText} composed />
                 <FilterIcon />
               </div>
-            </Field>
+            </Label>
           </div>
           <div class="nav-section">
             {#each filteredComponents as component}
@@ -434,7 +438,7 @@
     flex-direction: column;
     place-content: start;
     place-items: start;
-    padding: 0 1em 10em 1em;
+    padding: 0 1em 25em 1em;
   }
 
   @media (max-width: 1000px) {

@@ -6,7 +6,7 @@
   import type { TextAreaResize } from '$lib/TextArea.types';
   import Select from '$lib/Select.svelte';
   import ListItem from '$lib/ListItem.svelte';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
   import { TEXT_AREA_RESIZES } from '$lib';
 
   let exampleRef: any;
@@ -36,16 +36,16 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Field label="placeholder">
+    <Label text="placeholder">
       <Input bind:value={placeholder} composed />
-    </Field>
-    <Field label="resize" forwardClick>
+    </Label>
+    <Label text="resize" forwardClick>
       <Select bind:selectedValue={resize} composed>
         {#each TEXT_AREA_RESIZES as resizeValue}
           <ListItem value={resizeValue}>{resizeValue}</ListItem>
         {/each}
       </Select>
-    </Field>
+    </Label>
     <Checkbox bind:checked={autoHeight}>Auto height</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="status">

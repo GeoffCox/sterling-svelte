@@ -9,10 +9,19 @@
 
   // ----- Props ----- //
 
+  /** When true, applies colorful theme styles. */
   export let colorful = false;
+
+  /** When true, allows the container to handle borders and focus borders.  */
   export let composed = false;
+
+  /** If the list and all its items are disabled. */
   export let disabled: boolean = false;
+
+  /** When true, items are arranged horizontally. */
   export let horizontal = false;
+
+  /** The value of the currently selected item. */
   export let selectedValue: string | undefined = undefined;
 
   // ----- State ----- //

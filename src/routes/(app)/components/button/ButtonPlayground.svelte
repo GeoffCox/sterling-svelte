@@ -9,7 +9,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Select from '$lib/Select.svelte';
   import ListItem from '$lib/ListItem.svelte';
-  import Field from '$lib/Field.svelte';
+  import Label from '$lib/Label.svelte';
 
   let exampleRef: any;
   let disabled = false;
@@ -40,20 +40,20 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Field label="shape" forwardClick>
+    <Label text="shape" forwardClick>
       <Select bind:selectedValue={shape} composed>
         {#each BUTTON_SHAPES as variantItem}
           <ListItem value={variantItem}>{variantItem}</ListItem>
         {/each}
       </Select>
-    </Field>
-    <Field label="variant" forwardClick>
+    </Label>
+    <Label text="variant" forwardClick>
       <Select bind:selectedValue={variant} composed>
         {#each BUTTON_VARIANTS as variantItem}
           <ListItem value={variantItem}>{variantItem}</ListItem>
         {/each}
       </Select>
-    </Field>
+    </Label>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Checkbox bind:checked={withText}>with text</Checkbox>
