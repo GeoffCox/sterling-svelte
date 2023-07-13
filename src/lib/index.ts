@@ -31,7 +31,7 @@ export type { LinkVariant } from './Link.types';
 export type { ListContext } from './List.types';
 export type { MenuBarContext } from './MenuBar.types';
 export type { MenuItemContext, MenuItemRegistration, MenuItemRole } from './MenuItem.types';
-export type { ProgressStatus as ProgressColorful } from './Progress.types';
+export type { ProgressStatus } from './Progress.types';
 export type { TabListContext } from './TabList.types';
 export type { TextAreaResize } from './TextArea.types';
 export type { TooltipShowOn } from './Tooltip.types';
@@ -50,10 +50,7 @@ export { PROGRESS_STATUSES } from './Progress.constants';
 export { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
 export { TEXT_AREA_RESIZES } from './TextArea.constants';
 export { TOOLTIP_SHOW_ONS } from './Tooltip.constants';
-export {
-  TREE_CONTEXT_KEY as treeContextKey,
-  TREE_ITEM_CONTEXT_KEY as treeItemContextKey
-} from './Tree.constants';
+export { TREE_CONTEXT_KEY, TREE_ITEM_CONTEXT_KEY } from './Tree.constants';
 
 // ----- Components ----- //
 import Button from './Button.svelte';

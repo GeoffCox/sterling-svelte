@@ -170,7 +170,7 @@
   {...$$restProps}
 >
   <div class="reference" bind:this={reference} use:clickOutside on:click_outside={onClickOutside}>
-    <slot {shape} {variant} />
+    <slot shape={$$restProps.shape} variant={$$restProps.variant} />
   </div>
   <Popover {reference} placement="bottom-start" {open}>
     <Menu bind:this={menuRef} id={menuId} {reference} {open}>
