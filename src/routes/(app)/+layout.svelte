@@ -40,6 +40,7 @@
     'MenuButton',
     'MenuItem',
     'MenuSeparator',
+    'Popover',
     'Progress',
     'Radio',
     'Select',
