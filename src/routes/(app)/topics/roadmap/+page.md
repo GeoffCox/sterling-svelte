@@ -52,10 +52,7 @@ This will include components that have standards for behavior and accessibility.
 
 ## Under consideration
 
-Lots of component libraries seem to collapse under their own weight over time.
-While Svelt's tree-shaking compilation removes unused components, each component requires a commitment to consistency, upkeep, and integration.
-
-There are many reasons a component may never be added to sterling-svelte even though it is popular in other component libraries.
+Even if a component is popular in other libraries, it may not be added to sterling-svelte:
 
 - too many features or customizations
 - low value (i.e. any developer could create it in 5 minutes)
