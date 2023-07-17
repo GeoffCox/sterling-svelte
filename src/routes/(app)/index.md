@@ -2,7 +2,7 @@
 
 - lightweight (`< 300K`)
 - minimal and classic design
-- fast rendering performance thanks to Svelte
+- fast rendering performance thanks to Svelte 4
 - ideomatic Svelte
 - for modern, evergreen browsers
 - follows aria accessibility standards

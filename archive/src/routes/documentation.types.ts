@@ -66,7 +66,7 @@ export type SlotDocData = {
 };
 
 export type PlaygroundDocData = {
-  component: typeof SvelteComponent;
+  component: typeof SvelteComponent<any>;
 };
 
 export type ComponentDocData = {

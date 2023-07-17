@@ -90,8 +90,8 @@
   role="menu"
   class:open
   data-root-value={rootValue}
-  in:slideMotion={{ duration: 300 }}
-  out:slideMotion={{ duration: 100 }}
+  in:slideMotion|global={{ duration: 300 }}
+  out:slideMotion|global={{ duration: 100 }}
   on:blur
   on:click
   on:copy

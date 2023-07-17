@@ -163,7 +163,7 @@
   <Popover reference={dropdownRef} open={!disabled && open}>
     <div
       class="popup-content"
-      transition:slideMotion={{ duration: 200 }}
+      transition:slideMotion|global={{ duration: 200 }}
       class:colorful
       bind:this={popupContentRef}
     >

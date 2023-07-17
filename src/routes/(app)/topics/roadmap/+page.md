@@ -47,6 +47,7 @@ This will include components that have standards for behavior and accessibility.
 | RgbColorSliders   | form           |                     | 0.0.27                |
 | Label retired     | form           | label               | 0.0.28                |
 | Field -> Label    | form           | label               | 0.0.28                |
+| -> Svelte 4!      |                |                     | 0.030                 |
 
 <br/>
 

@@ -204,7 +204,7 @@
   <div
     class="sterling-tooltip-portal"
     use:portal={{ target: document.body }}
-    transition:fadeMotion={{ duration: 250 }}
+    transition:fadeMotion|global={{ duration: 250 }}
   >
     <div
       bind:this={tooltipRef}
