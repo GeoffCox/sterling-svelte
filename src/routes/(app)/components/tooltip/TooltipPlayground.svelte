@@ -3,53 +3,65 @@
   import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
   import Tooltip from '$lib/Tooltip.svelte';
-  import type { TooltipShowOn } from '$lib/Tooltip.types';
   import ListItem from '$lib/ListItem.svelte';
   import Select from '$lib/Select.svelte';
   import Slider from '$lib/Slider.svelte';
   import Label from '$lib/Label.svelte';
-  import { FLOATING_PLACEMENTS, TOOLTIP_SHOW_ONS, type FloatingPlacement } from '$lib';
+  import type { PopoverPlacement } from '$lib/Popover.types';
+  import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
 
+  let colorful = false;
+  let crossAxisOffset = 0;
   let disabled = false;
-  let showOn: TooltipShowOn = 'hover';
   let hoverDelayMilliseconds = 1000;
-  let placement: FloatingPlacement = 'top';
-  let open = false;
-  let tipText = 'Tooltip';
+  let mainAxisOffset = 0;
+  let open = true;
+  let placement: PopoverPlacement = 'top-start';
+  let tipText = 'sterling-svelte';
 </script>
 
-<Playground>
+<Playground noEvents>
   <div slot="component">
-    <Tooltip bind:open {disabled} {showOn} {hoverDelayMilliseconds} {placement}>
-      <div>Sterling</div>
-      <div class="tip" slot="tip">{tipText}</div>
+    <Tooltip
+      {colorful}
+      {crossAxisOffset}
+      {disabled}
+      {hoverDelayMilliseconds}
+      {mainAxisOffset}
+      bind:open
+      {placement}
+    >
+      <div class="reference">Hover over me</div>
+      <div class="tip-text" slot="tip">{tipText}</div>
     </Tooltip>
   </div>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Checkbox bind:checked={open}>open</Checkbox>
-    <Label text="autoShow">
-      <Select bind:selectedValue={showOn} composed>
-        {#each TOOLTIP_SHOW_ONS as tooltipShowOn}
-          <ListItem value={tooltipShowOn}>{tooltipShowOn}</ListItem>
-        {/each}
-      </Select>
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
+    <Label text="crossAxisOffset {crossAxisOffset}">
+      <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
     </Label>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <div class="delay-slider">
+      <Label text={`hoverDelayMilliseconds: ${hoverDelayMilliseconds}ms`}>
+        <Slider bind:value={hoverDelayMilliseconds} min={0} max={3000} precision={0} />
+      </Label>
+    </div>
+    <Label text="mainAxisOffset: {mainAxisOffset}">
+      <Slider min={-25} max={25} precision={0} bind:value={mainAxisOffset} />
+    </Label>
+    <Checkbox bind:checked={open}>open</Checkbox>
     <Label text="placement">
       <Select bind:selectedValue={placement} composed>
-        {#each FLOATING_PLACEMENTS as floatingPlacement}
-          <ListItem value={floatingPlacement}>{floatingPlacement}</ListItem>
+        {#each POPOVER_PLACEMENTS as placementItem}
+          <ListItem value={placementItem}>{placementItem}</ListItem>
         {/each}
       </Select>
     </Label>
+  </svelte:fragment>
+  <svelte:fragment slot="tweaks">
     <Label text="tip (text)">
       <Input bind:value={tipText} composed />
     </Label>
-    <div class="delay-slider">
-      <Label text={`hoverDelayMilliseconds: ${hoverDelayMilliseconds}ms`}>
-        <Slider bind:value={hoverDelayMilliseconds} min={0} max={3000} />
-      </Label>
-    </div>
   </svelte:fragment>
 </Playground>
 
@@ -58,8 +70,7 @@
     width: 300px;
   }
 
-  .tip {
-    font-size: 0.8em;
+  .tip-text {
     padding: 0.75em 1.5em;
   }
 </style>

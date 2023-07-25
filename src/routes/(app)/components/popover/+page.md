@@ -1,36 +1,33 @@
 <script>
+    import Link from '$lib/Link.svelte';
     import Playground from './PopoverPlayground.svelte';
 </script>
 
 # Popover
 
-Floats content above other content via portaling.
+Floats content above other content.
+This is done by portaling where elements are moved to the end of the `body` so they appear above other elements.
 
-Portaling is when elements are moved to the end of the `body` so they appear higher in the z-order than other elements.
+Popover does not provide any styling (background, border, etc.) around the floating content.
+
+The amazing <Link href="https://floating-ui.com/" target="_blank">Floating UI</Link> package provides positioning.
 
 ## Types
 
 ```ts
-type TooltipShowOn = `'click'` | `'hover'`;
-
-type FloatingOffsetOptions = {
-  mainAxis?: number;
-  crossAxis?: number;
-};
-
-type FloatingPlacement =
-  | `'top'`
-  | `'right'`
-  | `'bottom'`
-  | `'left'`
-  | `'top-start'`
-  | `'right-start'`
-  | `'bottom-start'`
-  | `'left-start'`
-  | `'top-end'`
-  | `'right-end'`
-  | `'bottom-end'`
-  | `'left-end'`;
+type PopoverPlacement =
+  | 'top-start'
+  | 'top'
+  | 'top-end'
+  | 'right-start'
+  | 'right'
+  | 'right-end'
+  | 'bottom-end'
+  | 'bottom'
+  | 'bottom-start'
+  | 'left-end'
+  | 'left'
+  | 'left-start';
 ```
 
 ## Props
@@ -38,23 +35,26 @@ type FloatingPlacement =
 HTMLDivElement props are included.
 
 ```ts
-/** Offsets for nudging the content away from its reference */
-export let offsetOptions: FloatingOffsetOptions = { mainAxis: 0, crossAxis: 0 };
+/** Conditionally renders content when open. */
+export let conditionalRender: boolean = true;
+
+/** The offset along the side of the reference element. */
+export let crossAxisOffset = 0;
+
+/** The offset towards or away from the side of the reference element. */
+export let mainAxisOffset = 0;
 
 /** When true, the popover is open and visible. */
 export let open: boolean = false;
 
-/** When true, the popover does not close when the user clicks away from it. */
-export let persistent: boolean = false;
+/** How the popover should be positioned relative to the reference element. */
+export let placement: PopoverPlacement = 'bottom-start';
 
-/** Where the popover should appear relative to its reference. */
-export let placement: FloatingPlacement = 'bottom-start';
-
-/** The host container for the popover. Defaults to 'body/#SterlingPopoverPortal'*/
+/** The host container for the popover. '*/
 export let portalHost: HTMLElement | undefined = undefined;
 
 /** The reference to the element anchoring the position of the popover. */
-export let reference: HTMLElement;
+export let reference: HTMLElement | undefined;
 ```
 
 ## Events

@@ -21,11 +21,9 @@
   const onResetDialogClose = (event: CustomEvent<{ returnValue: string }>) => {
     switch (event.detail.returnValue) {
       case 'light':
-        console.log('resetting to light theme');
         theme = Object.assign({}, lightTheme) as Record<string, string>;
         break;
       case 'dark':
-        console.log('resetting to dark theme');
         theme = Object.assign({}, darkTheme) as Record<string, string>;
         break;
     }

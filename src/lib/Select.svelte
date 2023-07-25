@@ -4,7 +4,7 @@
   import { clickOutside } from './actions/clickOutside';
   import { idGenerator } from './idGenerator';
   import List from './List.svelte';
-  import Popup from './Popover.svelte';
+  import Popover from './Popover.svelte';
 
   const popupId = idGenerator.nextId('Select-popup');
 
@@ -242,7 +242,7 @@
       <div class="chevron" />
     </slot>
   </div>
-  <Popup reference={selectRef} bind:open id={popupId} persistent>
+  <Popover reference={selectRef} bind:open id={popupId} conditionalRender={false}>
     <div class="popup-content">
       <List
         bind:this={listRef}
@@ -257,7 +257,7 @@
         <slot />
       </List>
     </div>
-  </Popup>
+  </Popover>
 </div>
 
 <style>

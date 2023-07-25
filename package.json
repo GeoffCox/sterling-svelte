@@ -1,6 +1,6 @@
 {
   "name": "@geoffcox/sterling-svelte",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "author": "Geoff Cox",
   "description": "A modern, accessible, and lightweight component library for Svelte.",
   "license": "MIT",
@@ -10,12 +10,22 @@
   "homepage": "https://github.com/GeoffCox/sterling-svelte/blob/main/README.md",
   "keywords": [
     "svelte",
+    "svelte 4",
+    "sveltekit",
     "design system",
     "component",
+    "components",
     "controls",
-    "sveltekit",
     "typescript",
-    "javascript"
+    "javascript",
+    "button",
+    "checkbox",
+    "list",
+    "menu",
+    "radio",
+    "select",
+    "textarea",
+    "tree"
   ],
   "scripts": {
     "build": "vite build && npm run package",

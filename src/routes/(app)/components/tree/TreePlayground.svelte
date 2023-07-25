@@ -3,11 +3,12 @@
   import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
 
-  import Tree from '$lib/Tree.svelte';
+  import { coffeeTree } from '../../_sampleData/coffeeTree';
+
   import Button from '$lib/Button.svelte';
   import CoffeeTreeItem from './CoffeeTreeItem.svelte';
-  import { coffeeTree } from '../../_sampleData/coffeeTree';
   import Label from '$lib/Label.svelte';
+  import Tree from '$lib/Tree.svelte';
 
   let exampleRef: any;
 
@@ -47,12 +48,12 @@
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Label text="expandedValues (comma separated)">
+      <Input bind:value={expandedValuesText} composed />
+    </Label>
     <div class="edit-toggled">
-      <Label text="expandedValues (comma separated)">
-        <Input bind:value={expandedValuesText} composed />
-      </Label>
-      <Button on:click={getExpandedValues}>Get</Button>
-      <Button on:click={setExpandedValues}>Set</Button>
+      <Button shape="circular" on:click={getExpandedValues}>Get</Button>
+      <Button shape="circular" on:click={setExpandedValues}>Set</Button>
     </div>
     <Label text="selectedValue">
       <Input bind:value={selectedValue} composed />
@@ -72,8 +73,9 @@
   }
 
   .edit-toggled {
-    display: grid;
-    grid-template-columns: auto 1fr 1fr;
+    display: flex;
+    justify-items: flex-end;
+    justify-self: flex-end;
     align-items: center;
     column-gap: 1em;
   }

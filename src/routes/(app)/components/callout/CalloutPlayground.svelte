@@ -6,16 +6,17 @@
   import Slider from '$lib/Slider.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
-  import Popover from '$lib/Popover.svelte';
   import type { PopoverPlacement } from '$lib/Popover.types';
   import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
+  import Callout from '$lib/Callout.svelte';
 
+  let colorful = false;
   let crossAxisOffset = 0;
   let mainAxisOffset = 0;
   let open = true;
   let placement: PopoverPlacement = 'top-start';
-  let popoverText = 'sterling-svelte';
   let reference: HTMLDivElement;
+  let calloutText: string = 'sterling-svelte';
 </script>
 
 <Playground noEvents>
@@ -23,11 +24,12 @@
     <div class="reference" bind:this={reference}>
       The reference anchor for positioning the popover.
     </div>
-    <Popover bind:open {reference} {mainAxisOffset} {crossAxisOffset} {placement}>
-      <div class="popover-text">{popoverText}</div>
-    </Popover>
+    <Callout {colorful} {crossAxisOffset} {mainAxisOffset} bind:open {placement} {reference}>
+      <div class="callout-text">{calloutText}</div>
+    </Callout>
   </div>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Label text="crossAxisOffset {crossAxisOffset}">
       <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
     </Label>
@@ -44,19 +46,14 @@
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
-    <Label text="popover (text)">
-      <Input bind:value={popoverText} composed />
+    <Label text="callout (text)">
+      <Input bind:value={calloutText} composed />
     </Label>
   </svelte:fragment>
 </Playground>
 
 <style>
-  .popover-text {
-    background-color: var(--stsv-common__background-color);
-    border-color: var(--stsv-input__border-color);
-    border-style: var(--stsv-input__border-style);
-    border-width: var(--stsv-input__border-width);
-    color: var(--stsv-common__color);
+  .callout-text {
     padding: 1em;
   }
 
@@ -68,5 +65,6 @@
     display: grid;
     place-items: center;
     align-items: center;
+    text-align: center;
   }
 </style>
