@@ -52,6 +52,7 @@ export { TREE_CONTEXT_KEY, TREE_ITEM_CONTEXT_KEY } from './Tree.constants';
 
 // ----- Components ----- //
 import Button from './Button.svelte';
+import Callout from './Callout.svelte';
 import Checkbox from './Checkbox.svelte';
 import ColorPicker from './ColorPicker.svelte';
 import Dialog from './Dialog.svelte';
@@ -87,6 +88,7 @@ import TreeItemDisplay from './TreeItemDisplay.svelte';
 
 export {
   Button,
+  Callout,
   Checkbox,
   ColorPicker,
   Dialog,

@@ -16,6 +16,7 @@
   import TreePictureFrame from './TreePictureFrame.svelte';
   import MenuButtonPictureFrame from './MenuButtonPictureFrame.svelte';
   import ColorPickerPictureFrame from './ColorPickerPictureFrame.svelte';
+  import CalloutPictureFrame from './CalloutPictureFrame.svelte';
 
   let sliderValue = 35;
   let sliderVerticalValue = 35;
@@ -86,6 +87,9 @@
     <div class="colorpicker-frame">
       <ColorPickerPictureFrame />
     </div>
+    <div class="callout-frame">
+      <CalloutPictureFrame />
+    </div>
   </div>
 </div>
 
@@ -139,7 +143,7 @@
 
   .row7 {
     display: grid;
-    grid-template-areas: '. colorpicker . .';
+    grid-template-areas: '. colorpicker . callout';
     gap: 1em;
   }
 
@@ -211,5 +215,9 @@
 
   .colorpicker-frame {
     grid-area: colorpicker;
+  }
+
+  .callout-frame {
+    grid-area: callout;
   }
 </style>

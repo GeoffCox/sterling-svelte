@@ -323,6 +323,7 @@
     border-radius: var(--stsv-common__border-radius);
     border-style: var(--stsv-common__border-style);
     border-width: var(--stsv-common__border-width);
+    box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 4px -1px;
     color: var(--stsv-common__color);
     padding: 0.25em;
     display: grid;
