@@ -31,6 +31,10 @@ export const darkTheme: Theme = {
   'stsv-common--disabled__stripe-angle': '135deg',
   'stsv-common--disabled__stripe-width': '3px',
 
+  // shadows
+  'stsv-common__box-shadow': '2px 2px 4px 0px rgba(128, 128, 128, 0.7)',
+  'stsv-common__box-shadow--inset': `1px 1px 2px rgba(128, 128, 128, 0.7)`,
+
   // ----- Common--colorful (15) ---- //
   'stsv-common--colorful__background-color': blueColors.color1,
   'stsv-common--colorful__border-color': blueColors.color8,

@@ -38,6 +38,10 @@ export const oceanTheme: Theme = {
   'stsv-common--disabled__stripe-angle': '135deg',
   'stsv-common--disabled__stripe-width': '3px',
 
+  // shadows
+  'stsv-common__box-shadow': `2px 2px 4px 0px ${oceanBlues.color6}`,
+  'stsv-common__box-shadow--inset': `1px 1px 2px ${oceanBlues.color6}`,
+
   // ----- Button ----- //
 
   'stsv-button__background-color': oceanBlues.color5,

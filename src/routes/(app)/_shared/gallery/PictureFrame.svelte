@@ -22,21 +22,21 @@
 <style>
   .frame {
     display: block;
-    border: 0.25em solid black;
-    background: #fcfcfc;
+    border: 0.25em solid var(--stsv-common__color);
+    background: var(--stsv-common__background-color--secondary);
     filter: drop-shadow(3px 4px 4px rgba(0, 0, 0, 0.5));
     overflow: hidden;
     box-sizing: border-box;
   }
 
   .matting {
-    background: #fff;
+    background: var(--stsv-common__background-color);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
     padding: 0.75em;
     padding-bottom: 0.5em;
-    box-shadow: inset 1px 1px 2px #ccc;
+    box-shadow: inset 1px 1px 2px var(--stsv-common__color--secondary);
     overflow: hidden;
     place-items: center;
     place-content: center;
@@ -45,7 +45,7 @@
 
   .backing {
     background: var(--stsv-common__background-color);
-    box-shadow: inset 1px 1px 2px gray;
+    box-shadow: var(--stsv-common__box-shadow--inset);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
@@ -62,7 +62,7 @@
 
   .name {
     font-size: 0.7em;
-    color: #333;
+    color: var(--stsv-common__color);
     margin-top: 0.5em;
     font-family: 'Source Code Pro', monospace;
     align-self: flex-end;
