@@ -49,14 +49,14 @@
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="expandedValues (comma separated)">
-      <Input bind:value={expandedValuesText} composed />
+      <Input bind:value={expandedValuesText} />
     </Label>
     <div class="edit-toggled">
       <Button shape="circular" on:click={getExpandedValues}>Get</Button>
       <Button shape="circular" on:click={setExpandedValues}>Set</Button>
     </div>
     <Label text="selectedValue">
-      <Input bind:value={selectedValue} composed />
+      <Input bind:value={selectedValue} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">

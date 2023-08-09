@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { LabelStatus } from './Label.types';
+  import type { LabelStatus, LabelVariant } from './Label.types';
   import Tooltip from './Tooltip.svelte';
   import { usingKeyboard } from './stores/usingKeyboard';
 
@@ -7,6 +7,9 @@
 
   let htmlFor: string | undefined = undefined;
   export { htmlFor as for };
+
+  /** When true, applies colorful theme styles. */
+  export let colorful = false;
 
   /**
    * If true, then clicking the label invokes a click on the input.
@@ -28,6 +31,9 @@
 
   /** The status of the label */
   export let status: LabelStatus = 'none';
+
+  /** Changes the overall style of the label. */
+  export let variant: LabelVariant = 'regular';
 
   // ----- State ----- //
 
@@ -143,7 +149,11 @@
   bind:this={labelRef}
   aria-disabled={targetDisabled}
   class="sterling-label"
+  class:colorful
   class:disabled={targetDisabled}
+  class:regular={variant === 'regular'}
+  class:inline={variant === 'inline'}
+  class:container={variant === 'container'}
   class:using-keyboard={$usingKeyboard}
   for={htmlFor}
   on:blur
@@ -213,15 +223,15 @@
 
 <style>
   .sterling-label {
-    background-color: var(--stsv-input__background-color);
-    border-color: var(--stsv-input__border-color);
-    border-radius: var(--stsv-input__border-radius);
-    border-style: var(--stsv-input__border-style);
-    border-width: var(--stsv-input__border-width);
+    background-color: transparent;
+    border: none;
     box-sizing: border-box;
     color: var(--stsv-input__color);
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: 'text' 'content' 'message';
+    row-gap: 0.0625em;
+    align-items: center;
     font: inherit;
     margin: 0;
     overflow: visible;
@@ -230,20 +240,69 @@
     transition: background-color 250ms, color 250ms, border-color 250ms;
   }
 
-  .sterling-label:not(.disabled):hover {
+  /* ----- variant: inline ----- */
+
+  .sterling-label.inline {
+    background-color: transparent;
+    border-color: transparent;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-template-areas: 'text content' '. message';
+  }
+
+  /* ----- variant: container ----- */
+
+  .sterling-label.container {
+    background-color: var(--stsv-input__background-color);
+    border-color: var(--stsv-input__border-color);
+    border-radius: var(--stsv-input__border-radius);
+    border-style: var(--stsv-input__border-style);
+    border-width: var(--stsv-input__border-width);
+  }
+
+  .sterling-label.container:not(.disabled):hover {
     background-color: var(--stsv-input__background-color--hover);
     border-color: var(--stsv-input__border-color--hover);
     color: var(--stsv-input__color--hover);
   }
 
-  .sterling-label.using-keyboard:focus-within {
+  .sterling-label.container:focus-within,
+  .sterling-label.container:focus-within:hover {
+    background-color: var(--stsv-input__background-color--focus);
     border-color: var(--stsv-input__border-color--focus);
     color: var(--stsv-input__color--focus);
+  }
+
+  .sterling-label.container.using-keyboard:focus-within {
     outline-color: var(--stsv-common__outline-color);
     outline-offset: var(--stsv-common__outline-offset);
     outline-style: var(--stsv-common__outline-style);
     outline-width: var(--stsv-common__outline-width);
   }
+
+  /* ----- colorful, variant:container ----- */
+
+  .sterling-label.container.colorful {
+    background-color: var(--stsv-input--colorful__background-color);
+    border-color: var(--stsv-input--colorful__border-color);
+    color: var(--stsv-input--colorful__color--hover);
+  }
+
+  .sterling-label.container.colorful:hover {
+    background-color: var(--stsv-input--colorful__background-color--hover);
+    border-color: var(--stsv-input--colorful__border-color--hover);
+    color: var(--stsv-input--colorful__color--hover--hover);
+  }
+
+  .sterling-label.container.colorful:focus-within,
+  .sterling-label.container.colorful:focus-within:hover {
+    background-color: var(--stsv-input--colorful__background-color--focus);
+    border-color: var(--stsv-input--colorful__border-color--focus);
+    color: var(--stsv-input--colorful__color--hover--focus);
+  }
+
+  /* ----- disabled ----- */
 
   .sterling-label.disabled {
     cursor: not-allowed;
@@ -253,9 +312,12 @@
     cursor: not-allowed;
   }
 
+  /* ----- text ----- */
+
   .text {
     color: var(--stsv-common__color--secondary);
     font-size: 0.8em;
+    grid-area: text;
     margin: 0.5em 0.7em 0.2em 0.2em;
   }
 
@@ -263,8 +325,13 @@
     margin: 0;
   }
 
+  .sterling-label.colorful .text {
+    color: var(--stsv-common--colorful__color--secondary);
+  }
+
   .content {
     display: grid;
+    grid-area: content;
   }
 
   .message {
@@ -272,6 +339,7 @@
     font-size: 0.8em;
     background-color: var(--stsv-common__background-color--secondary);
     color: var(--stsv-common__color--secondary);
+    grid-area: message;
     padding: 0.5em;
     width: 100%;
     transition: background-color 250ms, color 250ms, border-color 250ms;

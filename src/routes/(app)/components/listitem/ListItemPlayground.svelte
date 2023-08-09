@@ -42,7 +42,7 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="text">
-      <Input bind:value={text} composed />
+      <Input bind:value={text} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">

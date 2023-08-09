@@ -20,27 +20,18 @@ export let composed = false;
 
 ## Events
 
-// HTMLInputElement events are included.
+HTMLInputElement events are included.
 
 ## Methods
 
-```ts
-function blur();
-function click();
-function focus(options: FocusOptions);
-function select();
-function setSelectionRange(
-  start: number | null,
-  end: number | null,
-  direction?: 'forward' | 'backward' | 'none'
-);
-function setRangeText(
-  replacement: string,
-  start?: number,
-  end?: number,
-  selectionMode?: SelectionMode
-);
-```
+The following HTMLInputElement methods are included:
+
+- `blur`
+- `click`
+- `focus`
+- `select`
+- `setRangeText`
+- `setSelectionRange`
 
 ## Anatomy
 

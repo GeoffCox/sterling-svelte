@@ -56,10 +56,10 @@
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="offText">
-      <Input bind:value={offText} composed />
+      <Input bind:value={offText} />
     </Label>
     <Label text="onText">
-      <Input bind:value={onText} composed />
+      <Input bind:value={onText} />
     </Label>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>

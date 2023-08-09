@@ -34,7 +34,7 @@
       </div>
     </Label>
     <Label text="default slot">
-      <Input bind:value={label} composed />
+      <Input bind:value={label} />
     </Label>
   </svelte:fragment>
 </Playground>

@@ -41,24 +41,25 @@
     </div>
   </div>
   <svelte:fragment slot="props">
-    <div class="slider">
-      <Slider bind:value min={0} {max} />
-    </div>
+    <Label text="value: {value}">
+      <div class="slider">
+        <Slider bind:value min={0} {max} />
+      </div>
+    </Label>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="status" forwardClick>
-      <Select bind:selectedValue={status} composed>
+      <Select bind:selectedValue={status}>
         {#each PROGRESS_STATUSES as progressStatus}
           <ListItem value={progressStatus}>{progressStatus}</ListItem>
         {/each}
       </Select>
     </Label>
     <Label text="max">
-      <Input value={max.toString()} on:change={onMaxChange} composed />
+      <Input value={max.toString()} on:change={onMaxChange} />
     </Label>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="status">
-    <div>value: {value}</div>
     <div>percent: {percent}%</div>
   </svelte:fragment>
 </Playground>

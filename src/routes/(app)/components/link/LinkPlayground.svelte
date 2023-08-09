@@ -34,7 +34,7 @@
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="variant" forwardClick>
-      <Select bind:selectedValue={variant} composed>
+      <Select bind:selectedValue={variant}>
         {#each LINK_VARIANTS as linkVariant}
           <ListItem value={linkVariant}>{linkVariant}</ListItem>
         {/each}

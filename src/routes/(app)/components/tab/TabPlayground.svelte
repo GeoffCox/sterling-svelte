@@ -51,7 +51,7 @@
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={selected}>selected</Checkbox>
     <Label text="text">
-      <Input bind:value={text} composed />
+      <Input bind:value={text} />
     </Label>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>

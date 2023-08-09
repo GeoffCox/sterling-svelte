@@ -41,10 +41,10 @@ export const lightTheme: Theme = {
   'stsv-common--colorful__color': blueColors.color3,
 
   'stsv-common--colorful__background-color--secondary': blueColors.color9,
-  'stsv-common--colorful__color--secondary': blueColors.color5,
+  'stsv-common--colorful__color--secondary': blueColors.color6,
 
   'stsv-common--colorful__background-color--subtle': blueColors.color10,
-  'stsv-common--colorful__color--subtle': blueColors.color7,
+  'stsv-common--colorful__color--subtle': blueColors.color8,
 
   'stsv-common--colorful__background-color--faint': blueColors.color11,
   'stsv-common--colorful__color--faint': blueColors.color9,
@@ -96,25 +96,25 @@ export const lightTheme: Theme = {
 
   // ----- Input ----- //
   'stsv-input__background-color': neutralColors.color11,
-  'stsv-input__border-color': neutralColors.color5,
+  'stsv-input__border-color': neutralColors.color6,
   'stsv-input__border-radius': '3px',
   'stsv-input__border-style': 'solid',
   'stsv-input__border-width': '2px',
   'stsv-input__color': neutralColors.color2,
 
   // hover
-  'stsv-input__background-color--hover': neutralColors.color12,
+  'stsv-input__background-color--hover': neutralColors.color10,
   'stsv-input__border-color--hover': neutralColors.color4,
   'stsv-input__color--hover': neutralColors.color2,
 
   // focus
-  'stsv-input__background-color--focus': neutralColors.color12,
-  'stsv-input__border-color--focus': neutralColors.color4,
+  'stsv-input__background-color--focus': neutralColors.color9,
+  'stsv-input__border-color--focus': neutralColors.color2,
   'stsv-input__color--focus': neutralColors.color2,
 
   // selected
-  'stsv-input__background-color--selected': neutralColors.color9,
-  'stsv-input__border-color--selected': neutralColors.color3,
+  'stsv-input__background-color--selected': neutralColors.color8,
+  'stsv-input__border-color--selected': neutralColors.color2,
   'stsv-input__color--selected': neutralColors.color2,
 
   // ----- Input--colorful ---- //
@@ -124,17 +124,17 @@ export const lightTheme: Theme = {
   'stsv-input--colorful__color': blueColors.color2,
 
   // hover
-  'stsv-input--colorful__background-color--hover': blueColors.color12,
+  'stsv-input--colorful__background-color--hover': blueColors.color10,
   'stsv-input--colorful__border-color--hover': blueColors.color5,
   'stsv-input--colorful__color--hover': blueColors.color2,
 
   // focus
-  'stsv-input--colorful__background-color--focus': blueColors.color12,
+  'stsv-input--colorful__background-color--focus': blueColors.color9,
   'stsv-input--colorful__border-color--focus': blueColors.color5,
   'stsv-input--colorful__color--focus': blueColors.color2,
 
   // selected
-  'stsv-input--colorful__background-color--selected': blueColors.color9,
+  'stsv-input--colorful__background-color--selected': blueColors.color8,
   'stsv-input--colorful__border-color--selected': blueColors.color3,
   'stsv-input--colorful__color--selected': blueColors.color2,
 

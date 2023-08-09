@@ -1,39 +1,46 @@
 <script lang="ts">
-  import Input from '$lib/Input.svelte';
-  import Playground from '../Playground.svelte';
+  import { INPUT_VARIANTS, type InputVariant } from '$lib';
+
   import Checkbox from '$lib/Checkbox.svelte';
-  import LabelBox from '$lib/Label.svelte';
+  import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
+  import LabelBox from '$lib/Label.svelte';
+  import ListItem from '$lib/ListItem.svelte';
+  import Select from '$lib/Select.svelte';
+
+  import Playground from '../Playground.svelte';
 
   let exampleRef: any;
 
   let colorful = false;
   let composed = false;
   let disabled = false;
-  let label = '';
+  let label = 'sterling-svelte';
   let placeholder = '';
   let value = '';
+  let variant: InputVariant = 'regular';
 </script>
 
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
     {#if label.length > 0}
       <Input
-        bind:value
         {colorful}
+        {composed}
         {disabled}
         {placeholder}
-        {composed}
+        {variant}
+        bind:value
         on:input={() => exampleRef.recordEvent('input')}
         on:change={() => exampleRef.recordEvent('change')}>{label}</Input
       >
     {:else}
       <Input
-        bind:value
         {colorful}
+        {composed}
         {disabled}
         {placeholder}
-        {composed}
+        bind:value
         on:input={() => exampleRef.recordEvent('input')}
         on:change={() => exampleRef.recordEvent('change')}
       />
@@ -44,10 +51,17 @@
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <LabelBox text="placeholder">
-      <Input bind:value={placeholder} composed />
+      <Input bind:value={placeholder} />
     </LabelBox>
     <Label text="default slot (text)">
-      <Input bind:value={label} composed />
+      <Input bind:value={label} />
+    </Label>
+    <Label text="variant" forwardClick>
+      <Select bind:selectedValue={variant}>
+        {#each INPUT_VARIANTS as variantItem}
+          <ListItem value={variantItem}>{variantItem}</ListItem>
+        {/each}
+      </Select>
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">

@@ -14,6 +14,8 @@ A label container for an interactive element such as an input, select, list, or 
 
 ```ts
 type LabelStatus = 'none' | 'info' | 'success' | 'warning' | 'danger';
+
+type LabelVariant = 'regular' | 'container' | 'inline';
 ```
 
 ## Props
@@ -21,9 +23,13 @@ type LabelStatus = 'none' | 'info' | 'success' | 'warning' | 'danger';
 HTMLLabelElement props are included.
 
 ```ts
+/** When true, applies colorful theme styles. */
+export let colorful = false;
+
 /**
  * If true, then clicking the label invokes a click on the input.
- * Only necessary when the label is not associated with the input through containment or the for/id relationship.
+ * Only necessary when the label is not associated with the input through
+ * containment or the for/id relationship.
  */
 export let forwardClick = false;
 
@@ -58,6 +64,9 @@ export let requiredReason = 'required';
 
 /** The status of the label */
 export let status: LabelStatus = 'none';
+
+/** Changes the overall style of the label. */
+export let variant: LabelVariant = 'regular';
 ```
 
 ## Events

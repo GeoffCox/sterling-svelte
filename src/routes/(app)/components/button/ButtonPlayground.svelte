@@ -41,14 +41,14 @@
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="shape" forwardClick>
-      <Select bind:selectedValue={shape} composed>
+      <Select bind:selectedValue={shape}>
         {#each BUTTON_SHAPES as variantItem}
           <ListItem value={variantItem}>{variantItem}</ListItem>
         {/each}
       </Select>
     </Label>
     <Label text="variant" forwardClick>
-      <Select bind:selectedValue={variant} composed>
+      <Select bind:selectedValue={variant}>
         {#each BUTTON_VARIANTS as variantItem}
           <ListItem value={variantItem}>{variantItem}</ListItem>
         {/each}

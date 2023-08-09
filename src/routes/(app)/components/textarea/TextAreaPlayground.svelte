@@ -13,7 +13,7 @@
 
   let colorful = false;
   let disabled = false;
-  let placeholder = 'Type your prose here';
+  let placeholder = '';
   let autoHeight = false;
   let value = '';
 
@@ -37,10 +37,10 @@
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="placeholder">
-      <Input bind:value={placeholder} composed />
+      <Input bind:value={placeholder} />
     </Label>
     <Label text="resize" forwardClick>
-      <Select bind:selectedValue={resize} composed>
+      <Select bind:selectedValue={resize}>
         {#each TEXT_AREA_RESIZES as resizeValue}
           <ListItem value={resizeValue}>{resizeValue}</ListItem>
         {/each}

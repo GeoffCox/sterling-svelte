@@ -99,16 +99,16 @@
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="min">
-      <Input value={min.toString()} on:change={onMinChange} composed />
+      <Input value={min.toString()} on:change={onMinChange} />
     </Label>
     <Label text="max">
-      <Input value={max.toString()} on:change={onMaxChange} composed />
+      <Input value={max.toString()} on:change={onMaxChange} />
     </Label>
     <Label text="precision">
-      <Input value={precision.toString()} on:change={onPrecisionChange} composed />
+      <Input value={precision.toString()} on:change={onPrecisionChange} />
     </Label>
     <Label text="step">
-      <Input value={step?.toString()} on:change={onStepChange} composed />
+      <Input value={step?.toString()} on:change={onStepChange} />
     </Label>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>

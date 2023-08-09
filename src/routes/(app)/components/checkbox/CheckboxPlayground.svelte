@@ -8,7 +8,7 @@
   let disabled = false;
   let checked = false;
   let colorful = false;
-  let label = 'Sterling';
+  let label = 'sterling-svelte';
 </script>
 
 <Playground bind:this={exampleRef}>
@@ -21,7 +21,7 @@
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="default slot (text)">
-      <Input bind:value={label} composed />
+      <Input bind:value={label} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">

@@ -11,7 +11,7 @@
 
   let colorful = false;
   let disabled = false;
-  let label = 'Sterling';
+  let label = 'sterling-svelte';
   let selectedValue = '';
 
   $: possibleValues = seed.map((x) => `${label}-${x}`);
@@ -35,7 +35,7 @@
     <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="label (prefix)">
-      <Input bind:value={label} composed />
+      <Input bind:value={label} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">

@@ -73,16 +73,16 @@ export const darkStatusColors = {
 
 export const blueColors: Record<string, string> = {
   color0: 'hsl(204, 100%, 0%)',
-  color1: 'hsl(204, 100%, 18%)',
-  color2: 'hsl(204, 100%, 25%)',
-  color3: 'hsl(204, 100%, 30%)',
-  color4: 'hsl(204, 100%, 35%)',
-  color5: 'hsl(204, 100%, 42%)',
-  color6: 'hsl(204, 100%, 50%)',
-  color7: 'hsl(204, 100%, 60%)',
-  color8: 'hsl(204, 100%, 70%)',
-  color9: 'hsl(204, 100%, 80%)',
-  color10: 'hsl(204, 100%, 90%)',
+  color1: 'hsl(204, 100%, 12%)',
+  color2: 'hsl(204, 100%, 15%)',
+  color3: 'hsl(204, 100%, 20%)',
+  color4: 'hsl(204, 80%, 30%)',
+  color5: 'hsl(204, 80%, 45%)',
+  color6: 'hsl(204, 80%, 60%)',
+  color7: 'hsl(204, 90%, 75%)',
+  color8: 'hsl(204, 100%, 85%)',
+  color9: 'hsl(204, 100%, 92%)',
+  color10: 'hsl(204, 100%, 96%)',
   color11: 'hsl(204, 100%, 98%)',
   color12: 'hsl(204, 100%, 100%)'
 };

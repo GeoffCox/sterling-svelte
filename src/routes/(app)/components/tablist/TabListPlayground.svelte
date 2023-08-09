@@ -36,7 +36,7 @@
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
     <Label text="selectedValue">
-      <Input bind:value={selectedValue} composed />
+      <Input bind:value={selectedValue} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">

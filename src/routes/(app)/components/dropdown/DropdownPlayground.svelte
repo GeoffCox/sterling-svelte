@@ -41,7 +41,7 @@
           <Switch bind:checked={animate} onText="Animate" />
           <Switch bind:checked={reverse} onText="Reverse" />
           <Label text={`Speed: ${speed}`}>
-            <Slider bind:value={speed} composed />
+            <Slider bind:value={speed} />
           </Label>
         </div>
       </div></Dropdown

@@ -28,7 +28,7 @@
     </Popover>
   </div>
   <svelte:fragment slot="props">
-    <Label text="crossAxisOffset {crossAxisOffset}">
+    <Label text="crossAxisOffset: {crossAxisOffset}">
       <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
     </Label>
     <Label text="mainAxisOffset: {mainAxisOffset}">
@@ -36,7 +36,7 @@
     </Label>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Label text="placement">
-      <Select bind:selectedValue={placement} composed>
+      <Select bind:selectedValue={placement}>
         {#each POPOVER_PLACEMENTS as placementItem}
           <ListItem value={placementItem}>{placementItem}</ListItem>
         {/each}
@@ -45,7 +45,7 @@
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Label text="popover (text)">
-      <Input bind:value={popoverText} composed />
+      <Input bind:value={popoverText} />
     </Label>
   </svelte:fragment>
 </Playground>
