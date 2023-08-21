@@ -1,0 +1,57 @@
+.sterling-menu-item {
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 8px;
+  border-style: none;
+  border-width: 0;
+  box-sizing: border-box;
+  color: var(--stsv-common__color);
+  cursor: pointer;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  outline: none;
+  overflow: hidden;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  transition: background-color 250ms, color 250ms, border-color 250ms;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.sterling-menu-item:hover {
+  background-color: var(--stsv-button__background-color--hover);
+  color: var(--stsv-button__color--hover);
+}
+
+.sterling-menu-item:focus {
+  outline: none;
+}
+
+.sterling-menu-item.using-keyboard:focus {
+  border-color: var(--stsv-button__border-color--focus);
+  outline-color: var(--stsv-common__outline-color);
+  outline-offset: 0;
+  outline-style: solid;
+  outline-width: 2px;
+}
+
+.sterling-menu-item:focus {
+  background-color: var(--stsv-input__background-color--selected);
+}
+
+.sterling-menu-item.composed,
+.sterling-menu-item.composed:focus,
+.sterling-menu-item.composed:hover {
+  border-width: 0;
+  border-color: transparent;
+  outline: none;
+  background-color: transparent;
+}
+
+@media (prefers-reduced-motion) {
+  .sterling-menu-item {
+    transition: none;
+  }
+}

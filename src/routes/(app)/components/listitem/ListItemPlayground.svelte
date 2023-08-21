@@ -11,23 +11,23 @@
 
   let exampleRef: any;
 
-  let colorful = false;
+  let variant = '';
   let disabled = false;
   let selected = false;
   let text = 'Sterling';
 
-  const colorfulStore = writable<boolean>(colorful);
+  const variantStore = writable<string>('');
   const disabledStore = writable<boolean>(false);
   const selectedValueStore = writable<string | undefined>('');
 
   setContext<ListContext>(LIST_CONTEXT_KEY, {
-    colorful: colorfulStore,
+    variant: variantStore,
     disabled: disabledStore,
     selectedValue: selectedValueStore
   });
 
   $: {
-    colorfulStore.set(colorful);
+    variantStore.set(variant);
   }
 
   $: {
@@ -37,7 +37,7 @@
 
 <Playground bind:this={exampleRef} noEvents>
   <svelte:fragment slot="component">
-    <ListItem {colorful} {disabled} value="sterling">{text}</ListItem>
+    <ListItem {variant} {disabled} value="sterling">{text}</ListItem>
   </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
@@ -46,7 +46,9 @@
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
-    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={selected}>selected</Checkbox>
+    <Label text="variant" forwardClick>
+      <Input bind:value={variant} />
+    </Label>
   </svelte:fragment>
 </Playground>

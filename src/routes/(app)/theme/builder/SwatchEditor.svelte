@@ -513,7 +513,7 @@
     border-color: var(--swatch__border-color, transparent);
     border-radius: var(--swatch__border-radius, 0);
     border-style: var(--swatch__border-style, solid);
-    border-width: var(--swatch__border-width, var(--stsv-common__border-width));
+    border-width: var(--swatch__border-width, 2px);
     outline-color: var(--swatch__outline-color);
     outline-offset: var(--swatch__outline-offset);
     outline-style: var(--swatch__outline-style);

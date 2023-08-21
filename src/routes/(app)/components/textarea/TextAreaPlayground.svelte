@@ -11,11 +11,11 @@
 
   let exampleRef: any;
 
-  let colorful = false;
   let disabled = false;
   let placeholder = '';
   let autoHeight = false;
   let value = '';
+  let variant = '';
 
   let resize: TextAreaResize = 'none';
 </script>
@@ -24,17 +24,17 @@
   <svelte:fragment slot="component">
     <TextArea
       bind:value
-      {colorful}
+      {autoHeight}
       {disabled}
       {placeholder}
       {resize}
-      {autoHeight}
+      {variant}
       on:input={() => exampleRef.recordEvent('input')}
       on:change={() => exampleRef.recordEvent('change')}
     />
   </svelte:fragment>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={colorful}>colorful</Checkbox>
+    <Checkbox bind:checked={autoHeight}>autoHeight</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="placeholder">
       <Input bind:value={placeholder} />
@@ -46,7 +46,9 @@
         {/each}
       </Select>
     </Label>
-    <Checkbox bind:checked={autoHeight}>Auto height</Checkbox>
+    <Label text="variant" forwardClick>
+      <Input bind:value={variant} />
+    </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div class="value">value: {value}</div>

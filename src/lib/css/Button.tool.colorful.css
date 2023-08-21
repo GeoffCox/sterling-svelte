@@ -1,0 +1,13 @@
+.sterling-button.tool.colorful {
+  color: var(--stsv-button--colorful__border-color);
+}
+
+.sterling-button.tool.colorful:hover {
+  background-color: var(--stsv-button--colorful__background-color--hover);
+  color: var(--stsv-button--colorful__color--hover);
+}
+
+.sterling-button.tool.colorful:active {
+  background-color: var(--stsv-button--colorful__background-color--active);
+  color: var(--stsv-button--colorful__color--active);
+}

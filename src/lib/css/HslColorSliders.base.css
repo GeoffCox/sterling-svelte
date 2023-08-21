@@ -1,0 +1,111 @@
+.sterling-hsl-color-sliders {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 5em;
+  column-gap: 0.5em;
+  row-gap: 0.25em;
+}
+
+.sterling-hsl-color-sliders .hue {
+  background: linear-gradient(
+    to right,
+    hsl(0, 100%, 50%) 0%,
+    hsl(60, 100%, 50%) 17%,
+    hsl(120, 100%, 50%) 33%,
+    hsl(180, 100%, 50%) 50%,
+    hsl(240, 100%, 50%) 67%,
+    hsl(300, 100%, 50%) 83%,
+    hsl(0, 100%, 50%) 100%
+  );
+}
+
+.sterling-hsl-color-sliders .slider :global(.fill),
+.sterling-hsl-color-sliders .slider :global(.sterling-slider.colorful .fill) {
+  background-color: transparent;
+}
+.sterling-hsl-color-sliders .slider :global(.track),
+.sterling-hsl-color-sliders .slider :global(.sterling-slider.colorful .track) {
+  background-color: transparent;
+  opacity: 0.1;
+  background-image: linear-gradient(to right, #7f3a3a, #ffffff 1px, #000000 1px, #000000);
+  background-size: 2px 100%;
+}
+
+.sterling-hsl-color-sliders .saturation {
+  background: linear-gradient(
+    to right,
+    hsl(var(--hue), 0%, 50%) 0%,
+    hsl(var(--hue), 100%, 50%) 100%
+  );
+}
+
+.lightness {
+  background: linear-gradient(
+    to right,
+    hsl(var(--hue), var(--saturation), 0%) 0%,
+    hsl(var(--hue), var(--saturation), 50%) 50%,
+    hsl(var(--hue), var(--saturation), 100%) 100%
+  );
+}
+
+.alpha {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  place-content: stretch;
+  place-items: stretch;
+}
+
+.alpha-gradient,
+.alpha-hatch,
+.alpha-slider {
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 1;
+}
+
+.alpha-hatch {
+  background-color: #eee;
+  opacity: 0.1;
+  background-image: repeating-linear-gradient(
+      var(--stsv-common--disabled__stripe-angle),
+      #444 25%,
+      transparent 25%,
+      transparent 75%,
+      #444 75%,
+      #444
+    ),
+    repeating-linear-gradient(
+      var(--stsv-common--disabled__stripe-angle),
+      #444 25%,
+      #eee 25%,
+      #eee 75%,
+      #444 75%,
+      #444
+    ),
+    repeating-linear-gradient(
+      -var(--stsv-common--disabled__stripe-angle),
+      #444 25%,
+      transparent 25%,
+      transparent 75%,
+      #444 75%,
+      #444
+    ),
+    repeating-linear-gradient(
+      -var(--stsv-common--disabled__stripe-angle),
+      #444 25%,
+      #eee 25%,
+      #eee 75%,
+      #444 75%,
+      #444
+    );
+  background-position: 0 0, 4px 4px;
+  background-size: 8px 8px;
+}
+
+.alpha-gradient {
+  background: linear-gradient(
+    to right,
+    hsla(var(--hue), var(--saturation), var(--lightness), 0) 0%,
+    hsla(var(--hue), var(--saturation), var(--lightness), 1) 100%
+  );
+}

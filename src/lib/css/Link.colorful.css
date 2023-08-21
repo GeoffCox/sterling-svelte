@@ -1,0 +1,15 @@
+.sterling-link.colorful,
+.sterling-link.colorful:visited {
+  border-bottom-color: var(--stsv-input--colorful__border-color);
+  color: var(--stsv-input--colorful__color);
+}
+
+.sterling-link.colorful:hover {
+  border-bottom-color: var(--stsv-input--colorful__border-color--hover);
+  color: var(--stsv-input--colorful__color--hover);
+}
+
+.sterling-link.colorful:active {
+  border-bottom-color: var(--stsv-input--colorful__border-color--selected);
+  color: var(--stsv-input--colorful__color--active);
+}

@@ -21,6 +21,8 @@
   /** The value of the selected item.*/
   export let selectedValue: string | undefined = undefined;
 
+  export let variant: string = '';
+
   // ----- State ----- //
 
   // Tracks the previous open state
@@ -97,7 +99,7 @@
 
   // ----- Event Handlers ----- //
 
-  const onSelectClick: svelte.JSX.MouseEventHandler<HTMLDivElement> = (event) => {
+  const onSelectClick = (event: MouseEvent) => {
     if (!disabled) {
       open = !open;
       event.preventDefault();
@@ -105,7 +107,7 @@
     }
   };
 
-  const onSelectKeydown: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
+  const onSelectKeydown = (event: KeyboardEvent) => {
     if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
       switch (event.key) {
         case ' ':
@@ -146,7 +148,7 @@
     }
   };
 
-  const onListKeydown: svelte.JSX.KeyboardEventHandler<any> = (event) => {
+  const onListKeydown = (event: KeyboardEvent) => {
     if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
       switch (event.key) {
         case 'Enter':
@@ -171,7 +173,7 @@
     }
   };
 
-  const onListClick: svelte.JSX.MouseEventHandler<any> = (event) => {
+  const onListClick = (event: MouseEvent) => {
     open = false;
     event.preventDefault();
     event.stopPropagation();
@@ -191,7 +193,7 @@
   aria-controls={popupId}
   aria-haspopup="listbox"
   aria-expanded={open}
-  class="sterling-select"
+  class={`sterling-select ${variant}`}
   class:composed
   class:disabled
   role="combobox"
@@ -243,7 +245,7 @@
     </slot>
   </div>
   <Popover reference={selectRef} bind:open id={popupId} conditionalRender={false}>
-    <div class="popup-content">
+    <div class="sterling-select-popup-content">
       <List
         bind:this={listRef}
         composed
@@ -259,144 +261,3 @@
     </div>
   </Popover>
 </div>
-
-<style>
-  .sterling-select {
-    align-content: center;
-    align-items: center;
-    background-color: var(--stsv-input__background-color);
-    border-color: var(--stsv-input__border-color);
-    border-radius: var(--stsv-input__border-radius);
-    border-style: var(--stsv-input__border-style);
-    border-width: var(--stsv-input__border-width);
-    color: var(--stsv-input__color);
-    cursor: pointer;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto;
-    outline: none;
-    padding: 0;
-    position: relative;
-    transition: background-color 250ms, color 250ms, border-color 250ms;
-  }
-
-  .sterling-select:hover {
-    background-color: var(--stsv-input__background-color--hover);
-    border-color: var(--stsv-input__border-color--hover);
-    color: var(--stsv-input__color--hover);
-  }
-
-  .sterling-select:focus {
-    background-color: var(--stsv-input__background-color--focus);
-    border-color: var(--stsv-input__border-color--focus);
-    color: var(--stsv-input__color--focus);
-    outline-color: var(--stsv-common__outline-color);
-    outline-offset: var(--stsv-common__outline-offset);
-    outline-style: var(--stsv-common__outline-style);
-    outline-width: var(--stsv-common__outline-width);
-  }
-
-  .sterling-select.disabled {
-    cursor: not-allowed;
-    outline: none;
-  }
-
-  .sterling-select::after {
-    background: repeating-linear-gradient(
-      var(--stsv-common--disabled__stripe-angle),
-      var(--stsv-common--disabled__stripe-color),
-      var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
-      var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
-      var(--stsv-common--disabled__stripe-color--alt)
-        calc(2 * var(--stsv-common--disabled__stripe-width))
-    );
-    bottom: 0;
-    content: '';
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    pointer-events: none;
-    transition: opacity 250ms;
-  }
-
-  .sterling-select.disabled::after {
-    opacity: 1;
-  }
-
-  .sterling-select.composed,
-  .sterling-select.composed:hover,
-  .sterling-select.composed.focus,
-  .sterling-select.composed.disabled {
-    background: none;
-    border: none;
-    outline: none;
-  }
-
-  .sterling-select.composed.disabled::after {
-    opacity: 0;
-  }
-
-  .value {
-    padding: 0.5em;
-  }
-
-  .chevron {
-    display: block;
-    position: relative;
-    border: none;
-    background: none;
-    margin: 0;
-    height: 100%;
-    width: 32px;
-  }
-
-  .chevron::after {
-    position: absolute;
-    content: '';
-    top: 50%;
-    left: 50%;
-    width: 7px;
-    height: 7px;
-    border-right: 3px solid currentColor;
-    border-top: 3px solid currentColor;
-    /* 
-			The chevron is a right triangle, rotated to face down.
-			It should be moved up so it is centered vertically after rotation.
-			The amount to move is the hypotenuse of the right triangle of the chevron.
-		    For a right triangle with equal a and b where c=1
-			a^2 + b^2 = c^2 	
-		    a^2 + a^2 = c^2 
-		    2a^2 = c^2
-			2a^2 = 1
-			a^2 = 0.5
-			a = sqrt(0.5)
-			a = 0.707
-		*/
-    transform: translate(-50%, calc(-50% / 0.707)) rotate(135deg);
-    transform-origin: 50% 50%;
-  }
-
-  .popup-content {
-    background-color: var(--stsv-common__background-color);
-    border-color: var(--stsv-common__border-color);
-    border-radius: var(--stsv-common__border-radius);
-    border-style: var(--stsv-common__border-style);
-    border-width: var(--stsv-common__border-width);
-    box-shadow: var(--stsv-common__box-shadow);
-    padding: 0.25em;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    overflow: hidden;
-    max-height: 20em;
-  }
-
-  @media (prefers-reduced-motion) {
-    .sterling-select,
-    .sterling-select::after {
-      transition: none;
-    }
-  }
-</style>

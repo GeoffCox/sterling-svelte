@@ -26,9 +26,6 @@
   /** The current color format */
   export let colorFormat: ColorFormat = 'hex';
 
-  /** When true, applies colorful theme styles. */
-  export let colorful = false;
-
   /** When true, allows the container to handle borders and focus borders.  */
   export let composed: boolean = false;
 
@@ -37,6 +34,8 @@
 
   /** If the picker dropdown is open */
   export let open: boolean = false;
+
+  export let variant: string = '';
 
   // ----- State ----- //
 
@@ -223,94 +222,70 @@
   updateColorsFromText();
 </script>
 
-<Dropdown
-  bind:open
-  {colorful}
-  {composed}
-  {disabled}
-  on:blur
-  on:click
-  on:copy
-  on:cut
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:wheel
-  on:paste
-  {...$$restProps}
->
-  <div class="value" slot="value">
-    <div class="color-box" style="background-color: {colorText}" />
-    <Input
-      bind:value={colorText}
-      {colorful}
-      {disabled}
-      composed
-      on:blur={onInputBlur}
-      on:click={onInputClick}
-      on:keydown={onInputKeydown}
-      spellcheck="false"
-    />
-  </div>
-  <div class="popup" use:trapKeyboardFocus>
-    <div class="tabs" bind:this={tabsRef}>
-      <TabList bind:this={tabListRef} bind:selectedValue={colorFormat} {colorful}>
-        <Tab value="hex">hex</Tab>
-        <Tab value="rgb">rgb</Tab>
-        <Tab value="hsl">hsl</Tab>
-      </TabList>
+<div class={`sterling-color-picker ${variant}`}>
+  <Dropdown
+    bind:open
+    {composed}
+    {disabled}
+    {variant}
+    on:blur
+    on:click
+    on:copy
+    on:cut
+    on:dblclick
+    on:dragend
+    on:dragenter
+    on:dragleave
+    on:dragover
+    on:dragstart
+    on:drop
+    on:focus
+    on:focusin
+    on:focusout
+    on:keydown
+    on:keypress
+    on:keyup
+    on:mousedown
+    on:mouseenter
+    on:mouseleave
+    on:mousemove
+    on:mouseover
+    on:mouseout
+    on:mouseup
+    on:wheel
+    on:paste
+    {...$$restProps}
+  >
+    <div class="value" slot="value">
+      <div class="color-box" style="background-color: {colorText}" />
+      <Input
+        bind:value={colorText}
+        {disabled}
+        composed
+        on:blur={onInputBlur}
+        on:click={onInputClick}
+        on:keydown={onInputKeydown}
+        spellcheck="false"
+        {variant}
+      />
     </div>
-    <div class="sliders">
-      {#if colorFormat === 'rgb'}
-        <RgbColorSliders bind:red bind:green bind:blue bind:alpha {colorful} />
-      {:else if colorFormat === 'hex'}
-        <HexColorSliders bind:red bind:green bind:blue bind:alpha={hexAlpha} {colorful} />
-      {:else if colorFormat === 'hsl'}
-        <HslColorSliders bind:hue bind:saturation bind:lightness bind:alpha {colorful} />
-      {/if}
+    <div class="sterling-color-picker-popup" use:trapKeyboardFocus>
+      <div class="tabs" bind:this={tabsRef}>
+        <TabList bind:this={tabListRef} bind:selectedValue={colorFormat} {variant}>
+          <Tab value="hex">hex</Tab>
+          <Tab value="rgb">rgb</Tab>
+          <Tab value="hsl">hsl</Tab>
+        </TabList>
+      </div>
+      <div class="sliders">
+        {#if colorFormat === 'rgb'}
+          <RgbColorSliders bind:red bind:green bind:blue bind:alpha {variant} />
+        {:else if colorFormat === 'hex'}
+          <HexColorSliders bind:red bind:green bind:blue bind:alpha={hexAlpha} {variant} />
+        {:else if colorFormat === 'hsl'}
+          <HslColorSliders bind:hue bind:saturation bind:lightness bind:alpha {variant} />
+        {/if}
+      </div>
     </div>
-  </div>
-</Dropdown>
-
-<style>
-  .value {
-    display: grid;
-    align-items: center;
-    justify-content: stretch;
-    justify-items: stretch;
-    grid-template-columns: auto 1fr;
-    padding-left: 0.5em;
-    width: 250px;
-  }
-
-  .color-box {
-    width: 1em;
-    height: 1em;
-    border: 1px dashed var(--stsv-common__border-color);
-  }
-
-  .popup {
-    width: fit-content;
-    min-width: 500px;
-    display: grid;
-    align-items: center;
-    padding: 0.25em;
-  }
-</style>
+  </Dropdown>
+</div>

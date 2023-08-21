@@ -14,7 +14,7 @@
   let autoSave: boolean = false;
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground bind:this={exampleRef} noEvents>
   <svelte:fragment slot="component">
     <MenuButton bind:open {disabled} value="file">
       File
@@ -57,7 +57,7 @@
         <MenuItem value="file-quit" text="Quit" />
       </svelte:fragment>
     </MenuButton>
-  </svelte:fragment>>
+  </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>

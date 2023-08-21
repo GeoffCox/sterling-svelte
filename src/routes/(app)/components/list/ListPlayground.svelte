@@ -10,12 +10,12 @@
 
   let exampleRef: any;
 
-  let colorful = false;
   let composed = false;
   let disabled = false;
   let horizontal = false;
   let selectedValue: string | undefined = undefined;
   let selectedValueText: string | undefined = '';
+  let variant = '';
 
   const updateSelectedValue = debounce((value?: string) => {
     selectedValue = value;
@@ -34,11 +34,11 @@
   <div class="component" class:horizontal slot="component">
     <List
       bind:selectedValue
-      {colorful}
       {composed}
       {disabled}
       {horizontal}
       selectionKeys="tab"
+      {variant}
       on:select={(event) => {
         exampleRef.recordEvent(`select:${event.detail.value}`);
       }}
@@ -49,12 +49,14 @@
     </List>
   </div>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={horizontal}>horizontal</Checkbox>
     <Label text="selectedValue">
       <Input bind:value={selectedValueText} />
+    </Label>
+    <Label text="variant" forwardClick>
+      <Input bind:value={variant} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">

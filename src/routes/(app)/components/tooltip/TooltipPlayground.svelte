@@ -10,7 +10,6 @@
   import type { PopoverPlacement } from '$lib/Popover.types';
   import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
 
-  let colorful = false;
   let crossAxisOffset = 0;
   let disabled = false;
   let hoverDelayMilliseconds = 1000;
@@ -18,25 +17,25 @@
   let open = true;
   let placement: PopoverPlacement = 'top-start';
   let tipText = 'sterling-svelte';
+  let variant = '';
 </script>
 
 <Playground noEvents>
   <div slot="component">
     <Tooltip
-      {colorful}
       {crossAxisOffset}
       {disabled}
       {hoverDelayMilliseconds}
       {mainAxisOffset}
       bind:open
       {placement}
+      {variant}
     >
       <div class="reference">Hover over me</div>
       <div class="tip-text" slot="tip">{tipText}</div>
     </Tooltip>
   </div>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Label text="crossAxisOffset: {crossAxisOffset}">
       <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
     </Label>
@@ -56,6 +55,9 @@
           <ListItem value={placementItem}>{placementItem}</ListItem>
         {/each}
       </Select>
+    </Label>
+    <Label text="variant" forwardClick>
+      <Input bind:value={variant} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">

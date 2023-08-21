@@ -30,6 +30,8 @@
   /** The host container for the callout. */
   export let portalHost: HTMLElement | undefined = undefined;
 
+  export let variant: string = '';
+
   // ----- State ----- //
   let originRef: HTMLDivElement;
 
@@ -99,6 +101,7 @@
   {placement}
   {portalHost}
   {reference}
+  {variant}
   on:blur
   on:click
   on:dblclick
@@ -132,14 +135,5 @@
   on:wheel
   {...$$restProps}
 >
-  <slot name="tip" />
+  <slot name="tip" {placement} {variant} />
 </Callout>
-
-<style>
-  .sterling-tooltip-origin {
-    display: block;
-    background: transparent;
-    width: 0px;
-    height: 0px;
-  }
-</style>

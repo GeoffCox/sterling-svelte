@@ -10,13 +10,13 @@
   import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
   import Callout from '$lib/Callout.svelte';
 
-  let colorful = false;
   let crossAxisOffset = 0;
   let mainAxisOffset = 0;
   let open = true;
   let placement: PopoverPlacement = 'top-start';
   let reference: HTMLDivElement;
   let calloutText: string = 'sterling-svelte';
+  let variant = '';
 </script>
 
 <Playground noEvents>
@@ -24,12 +24,11 @@
     <div class="reference" bind:this={reference}>
       The reference anchor for positioning the popover.
     </div>
-    <Callout {colorful} {crossAxisOffset} {mainAxisOffset} bind:open {placement} {reference}>
+    <Callout {variant} {crossAxisOffset} {mainAxisOffset} bind:open {placement} {reference}>
       <div class="callout-text">{calloutText}</div>
     </Callout>
   </div>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Label text="crossAxisOffset: {crossAxisOffset}">
       <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
     </Label>
@@ -43,6 +42,9 @@
           <ListItem value={placementItem}>{placementItem}</ListItem>
         {/each}
       </Select>
+    </Label>
+    <Label text="variant" forwardClick>
+      <Input bind:value={variant} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">

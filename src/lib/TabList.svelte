@@ -8,9 +8,6 @@
 
   // ----- Props ----- //
 
-  /** When true, applies colorful theme styles. */
-  export let colorful = false;
-
   /** When true, the tab list and its tabs are disabled. */
   export let disabled = false;
 
@@ -20,17 +17,19 @@
   /** The value of the currently selected tab. */
   export let selectedValue: string | undefined = undefined;
 
+  export let variant = '';
+
   // ----- State ----- //
 
   let tabListRef: HTMLDivElement;
   let lastSelectedTabRef: HTMLElement;
 
-  const colorfulStore = writable<boolean>(colorful);
+  const variantStore = writable<string>(variant);
   const disabledStore = writable<boolean>(disabled);
   const selectedValueStore = writable<string | undefined>(selectedValue);
   const verticalStore = writable<boolean>(vertical);
 
-  $: colorfulStore.set(colorful);
+  $: variantStore.set(variant);
   $: disabledStore.set(disabled);
 
   $: selectedValueStore.set(selectedValue);
@@ -229,7 +228,7 @@
   // ----- Set Context ----- //
 
   setContext<TabListContext>(TAB_LIST_CONTEXT_KEY, {
-    colorful: colorfulStore,
+    variant: variantStore,
     disabled: disabledStore,
     selectedValue: selectedValueStore,
     vertical: verticalStore
@@ -239,8 +238,7 @@
 <div
   aria-orientation={vertical ? 'vertical' : 'horizontal'}
   bind:this={tabListRef}
-  class="sterling-tab-list"
-  class:colorful
+  class={`sterling-tab-list ${variant}`}
   class:disabled
   class:vertical
   role="tablist"
@@ -275,42 +273,5 @@
   on:paste
   {...$$restProps}
 >
-  <slot {disabled} {selectedValue} {vertical} />
+  <slot {disabled} {selectedValue} {variant} {vertical} />
 </div>
-
-<style>
-  .sterling-tab-list {
-    box-sizing: border-box;
-    display: grid;
-    margin: 0;
-    padding: calc(2 * var(--stsv-common__outline-width));
-  }
-
-  .sterling-tab-list:not(.vertical) {
-    column-gap: 0.5em;
-    grid-auto-flow: column;
-    grid-template-columns: repeat(auto-fill, auto);
-    grid-template-rows: 1fr;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-
-  .sterling-tab-list.vertical {
-    grid-auto-flow: row;
-    grid-template-rows: auto;
-    grid-template-columns: 1fr;
-    overflow-x: hidden;
-    overflow-y: auto;
-    row-gap: 0.5em;
-  }
-
-  .sterling-tab-list:hover {
-    color: var(--stsv-common__color--hover);
-  }
-
-  @media (prefers-reduced-motion) {
-    .sterling-tab-list {
-      transition: none;
-    }
-  }
-</style>

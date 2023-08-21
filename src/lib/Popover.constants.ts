@@ -13,4 +13,4 @@ export const POPOVER_PLACEMENTS = [
   'left-start'
 ];
 
-export const POPOVER_PORTAL_ID = 'SterlingPopoverPortal';
+export const STERLING_PORTAL_HOST_ID = 'SterlingPortalHost';

@@ -10,7 +10,7 @@
   } from '@floating-ui/dom';
   import { portal } from './actions/portal';
   import type { PopoverPlacement } from './Popover.types';
-  import { POPOVER_PORTAL_ID } from './Popover.constants';
+  import { STERLING_PORTAL_HOST_ID } from './Popover.constants';
 
   // ----- Props ----- //
 
@@ -50,10 +50,10 @@
         return portalHost;
       }
 
-      let host = document.querySelector(`#${POPOVER_PORTAL_ID}`) as HTMLElement;
+      let host = document.querySelector(`#${STERLING_PORTAL_HOST_ID}`) as HTMLElement;
       if (!host) {
         host = document.createElement('div');
-        host.id = POPOVER_PORTAL_ID;
+        host.id = STERLING_PORTAL_HOST_ID;
         host.style.overflow = 'visible';
         document.body.append(host);
       }
@@ -159,27 +159,3 @@
     </div>
   </div>
 {/if}
-
-<style>
-  .sterling-popover-portal {
-    position: relative;
-    overflow: visible;
-  }
-
-  .sterling-popover {
-    box-sizing: border-box;
-    display: none;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    height: fit-content;
-    left: 0;
-    overflow: visible;
-    position: absolute;
-    top: 0;
-    width: max-content;
-  }
-
-  .sterling-popover.open {
-    display: grid;
-  }
-</style>

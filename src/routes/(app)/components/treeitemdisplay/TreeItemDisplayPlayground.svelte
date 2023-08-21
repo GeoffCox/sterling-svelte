@@ -15,11 +15,20 @@
   let hasChildren = true;
   let selected = false;
   let depth = 0;
+  let variant: string = '';
 </script>
 
 <Playground bind:this={exampleRef}>
   <div class="component" slot="component">
-    <TreeItemDisplay value="sterling" {depth} {disabled} {expanded} {hasChildren} {selected}>
+    <TreeItemDisplay
+      value="sterling"
+      {depth}
+      {disabled}
+      {expanded}
+      {hasChildren}
+      {selected}
+      {variant}
+    >
       {label}
     </TreeItemDisplay>
   </div>
@@ -35,6 +44,9 @@
     </Label>
     <Label text="default slot">
       <Input bind:value={label} />
+    </Label>
+    <Label text="variant" forwardClick>
+      <Input bind:value={variant} />
     </Label>
   </svelte:fragment>
 </Playground>

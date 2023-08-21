@@ -1,6 +1,28 @@
-# Architecture
+# Component Architecture
 
-## Components forward HTML element props
+## Styleless by default
+
+Svelte allows for encapsulating style within a component and preventing component style from leaking outside the components scope. This is a great feature when building Svelte applications. However, a good component library must support deep style customization.
+
+Component library styles need to be globally overridable and support per-instance customization. For example, you might want to make most buttons be a relaxing blue, but have a delete button glow red and have a shimmering border.
+
+For these reasons, sterling-svelte components do not apply any style by default.
+
+A separate set of `sterling` CSS styles is provided. See the Design topic for details.
+
+## Support variant styles
+
+Each component exports a `variant` string property. This string is appended to the component class name at the root of the component. You can specify additional CSS classes for style components.
+
+The `sterling` theme provides different preset variants per component. The component documentation describes the different presets.
+
+Some examples:
+
+- setting the variant to `colorful` will apply vivid colors rather than neutral colors to most components.
+- setting the Button's variant to `capsule secondary` will both round the ends of the button and deemphasize the button by showing only the border outline in the default state.
+- setting the Input's variant to `composed` will remove borders and background and turn off focus, outline, and disabled indicators. This is useful when the Input is within a container that will handle focus and disabled state itself.
+
+## Forward HTML element props
 
 Components will forward props to the intrinsic HTML element it renders.
 
@@ -10,7 +32,7 @@ The Button component forwards HTMLButtonElement props to the button element.
 This means you can pass any HTMLButton prop to Button such as `type`.
 If you specified `type=submit` this would override the Button components default `type=button` prop.
 
-## Components bubble HTML events
+## Raise HTML events
 
 Components will bubble the intrinsic events for the HTML element it renders.
 
@@ -58,7 +80,7 @@ Here's a list of events you can expect will be bubbled for types of elements.
 | selection      | input type='text', textarea               |
 | touch          | (all)                                     |
 
-## Components prefer to render intrinsic HTML elements
+## Prefer to render intrinsic HTML elements
 
 Whenever a component is providing a thin wrapper around an HTML element,
 it will typically render that element at the root element.
@@ -73,25 +95,14 @@ and in its own dropdown.
 
 Components also apply the appropriate ARIA role or leverage the default ARIA role of their intrinsic element.
 
-## Components encapsulate style and customize using theme
-
-Svelte encapsulated style by default. This means that unless a global style is defined, styles applied
-by a parent don't affect the child component.
-
-Sterling-svelte components provide a consistent style.
-You can change the style across components by changing the theme (CSS variables).
-
-For example, `Button` uses the theme variable `--stsv-button__background-color` to set its background color at rest.
-If you change this variable to another color, then `Button`'s background will change.
-
-## Components portal to float UI above the page
+## Portal to float UI above the page
 
 Components that have dropdowns like `Dropdown`, `Menu`, and `Select` need to ensure that the dropdown UI is not
 hidden due to a container's overflow setting. To achieve this, components will portal a part of their UI to
 render it as a direct child of the `body`. The element will be inserted at the end of the list of children so that
 it renders above other non-floating components.
 
-## Components provide composability with slots
+## Provide composability with slots
 
 Components declare a default `<slot />` element to allow callers to insert or replace content.
 The default slot is typically used to fill in the children of the component element.
@@ -145,7 +156,7 @@ The `TreeItemDisplay` has a default slot for the content appearing after the exp
 </slot>
 ```
 
-## Components communicate across hierarchy with context
+## Communicate across hierarchy with context
 
 When a component has a slot containing descendants, it cannot set properties, subscribe to events, or get a reference to
 a descendant. This creates a difficult boundary to communication between components.
@@ -157,7 +168,7 @@ For example, `Tree` sets a `TreeContext` context that tells `TreeItem` if the tr
 and the selected value. `TreeItem` sets a `TreeItemContext` that tells `TreeItem` children, if the item is disabled and
 the depth of the children.
 
-## Components locate elements using role and data-props
+## Locate elements using role and data-props
 
 Slots don't allow components to know what type of elements are filling the slot.
 Other times there may be sibling or parent elements a component doesn't know about because they are not within

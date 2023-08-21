@@ -1,0 +1,94 @@
+.sterling-rgb-color-sliders {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 4em;
+  column-gap: 0.5em;
+  row-gap: 0.25em;
+}
+
+.sterling-rgb-color-sliders .slider :global(.fill),
+.sterling-rgb-color-sliders .slider :global(.sterling-slider.colorful .fill) {
+  background-color: transparent;
+}
+
+.sterling-rgb-color-sliders .slider :global(.track),
+.sterling-rgb-color-sliders .slider :global(.sterling-slider.colorful .track) {
+  background-color: transparent;
+  background-image: linear-gradient(to right, #ffffff, #ffffff 1px, #000000 1px, #000000);
+  background-size: 2px 100%;
+  opacity: 0.1;
+}
+
+.sterling-rgb-color-sliders .red-slider {
+  background: linear-gradient(to right, black 0%, rgb(255, 0, 0) 100%);
+}
+
+.sterling-rgb-color-sliders .green-slider {
+  background: linear-gradient(to right, black 0%, rgb(0, 255, 0) 100%);
+}
+
+.sterling-rgb-color-sliders .blue-slider {
+  background: linear-gradient(to right, black 0%, rgb(0, 0, 255) 100%);
+}
+
+.sterling-rgb-color-sliders .alpha {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  place-content: stretch;
+  place-items: stretch;
+}
+
+.sterling-rgb-color-sliders .alpha-gradient,
+.sterling-rgb-color-sliders .alpha-hatch,
+.sterling-rgb-color-sliders .alpha-slider {
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 1;
+}
+
+.sterling-rgb-color-sliders .alpha-hatch {
+  background-color: #eee;
+  opacity: 0.1;
+  background-image: repeating-linear-gradient(
+      var(--stsv-common--disabled__stripe-angle),
+      #444 25%,
+      transparent 25%,
+      transparent 75%,
+      #444 75%,
+      #444
+    ),
+    repeating-linear-gradient(
+      var(--stsv-common--disabled__stripe-angle),
+      #444 25%,
+      #eee 25%,
+      #eee 75%,
+      #444 75%,
+      #444
+    ),
+    repeating-linear-gradient(
+      -var(--stsv-common--disabled__stripe-angle),
+      #444 25%,
+      transparent 25%,
+      transparent 75%,
+      #444 75%,
+      #444
+    ),
+    repeating-linear-gradient(
+      -var(--stsv-common--disabled__stripe-angle),
+      #444 25%,
+      #eee 25%,
+      #eee 75%,
+      #444 75%,
+      #444
+    );
+  background-position: 0 0, 4px 4px;
+  background-size: 8px 8px;
+}
+
+.sterling-rgb-color-sliders .alpha-gradient {
+  background: linear-gradient(
+    to right,
+    rgba(var(--red), var(--green), var(--blue), 0) 0%,
+    rgba(var(--red), var(--green), var(--blue), 100) 100%
+  );
+}

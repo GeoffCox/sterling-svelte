@@ -12,12 +12,12 @@
 
   let exampleRef: any;
 
-  let colorful = false;
   let composed = false;
   let disabled = false;
   let expandedValues: string[] = [];
   let expandedValuesText: string;
   let selectedValue: string | undefined = undefined;
+  let variant = '';
 
   const getExpandedValues = () => {
     expandedValuesText = expandedValues.join(',');
@@ -32,10 +32,10 @@
   <div class="component" slot="component">
     <Tree
       bind:selectedValue
-      {colorful}
       {composed}
       {disabled}
       bind:expandedValues
+      {variant}
       on:select={() => exampleRef.recordEvent('select')}
       on:expandCollapse={() => exampleRef.recordEvent('expandCollapse')}
     >
@@ -45,7 +45,6 @@
     </Tree>
   </div>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="expandedValues (comma separated)">
@@ -57,6 +56,9 @@
     </div>
     <Label text="selectedValue">
       <Input bind:value={selectedValue} />
+    </Label>
+    <Label text="variant" forwardClick>
+      <Input bind:value={variant} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">

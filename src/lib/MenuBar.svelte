@@ -184,15 +184,3 @@
 >
   <slot />
 </div>
-
-<style>
-  .sterling-menu-bar {
-    background-color: transparent;
-    align-items: center;
-    align-content: stretch;
-    display: flex;
-    gap: 1em;
-    justify-content: flex-start;
-    justify-items: flex-start;
-  }
-</style>

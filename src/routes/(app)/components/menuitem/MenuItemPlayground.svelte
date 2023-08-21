@@ -2,6 +2,8 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
 
+  import Label from '$lib/Label.svelte';
+  import Input from '$lib/Input.svelte';
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
   import { setContext } from 'svelte';
@@ -9,7 +11,7 @@
   import { writable } from 'svelte/store';
 
   let exampleRef: any;
-  let colorful = false;
+  let variant = '';
   let disabled = false;
 
   let renderChoice: 'performance' | 'quality' = 'performance';
@@ -41,7 +43,7 @@
       <MenuItem value="file-new" text="New" />
       <MenuItem value="open-file" text="Open..." />
       <MenuItem value="open-folder" text="Open Folder..." />
-      <MenuItem {colorful} value="open-recent" text="Open Recent">
+      <MenuItem {variant} value="open-recent" text="Open Recent">
         <MenuItem value="recent-1" text="Recent File 1" />
         <MenuItem value="recent-2" text="Recent File 2" />
         <MenuItem value="recent-3" text="Recent File 3" />
@@ -90,7 +92,9 @@
     </MenuItem>
   </svelte:fragment>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={colorful}>colorful (Recent Items)</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Label text="variant (Recent Items)" forwardClick>
+      <Input bind:value={variant} />
+    </Label>
   </svelte:fragment>
 </Playground>

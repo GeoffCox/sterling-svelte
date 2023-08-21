@@ -1,0 +1,18 @@
+.sterling-radio.colorful .indicator {
+  background-color: var(--stsv-input--colorful__background-color);
+  border-color: var(--stsv-input--colorful__border-color);
+}
+
+.sterling-radio.colorful input:checked + .indicator {
+  background-color: var(--stsv-input--colorful__background-color);
+  border-color: var(--stsv-input--colorful__border-color);
+}
+
+.sterling-radio.colorful:not(.disabled):hover .indicator {
+  background-color: var(--stsv-input--colorful__background-color--hover);
+  border-color: var(--stsv-input--colorful__border-color--hover);
+}
+
+.sterling-radio.colorful input:checked + .indicator::after {
+  background-color: var(--stsv-input--colorful__color);
+}

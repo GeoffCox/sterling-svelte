@@ -1,0 +1,22 @@
+.sterling-input.colorful input {
+  background-color: var(--stsv-input--colorful__background-color);
+  border-bottom-color: var(--stsv-input--colorful__border-color);
+  color: var(--stsv-input--colorful__color);
+}
+
+.sterling-input.colorful:hover input:not(:disabled) {
+  background-color: var(--stsv-input--colorful__background-color--hover);
+  border-bottom-color: var(--stsv-input--colorful__border-color--hover);
+  color: var(--stsv-input--colorful__color--hover);
+}
+
+.sterling-input.colorful input:focus,
+.sterling-input.colorful:hover input:focus {
+  background-color: var(--stsv-input--colorful__background-color--focus);
+  border-bottom-color: var(--stsv-input--colorful__border-color--focus);
+  color: var(--stsv-input--colorful__color--focus);
+}
+
+.sterling-input.colorful input::placeholder {
+  color: var(--stsv-common--colorful__color--subtle);
+}

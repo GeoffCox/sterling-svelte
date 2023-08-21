@@ -1,0 +1,15 @@
+.sterling-button.secondary.colorful {
+  border-color: var(--stsv-button--colorful__border-color);
+  color: var(--stsv-button--colorful__border-color);
+}
+.sterling-button.secondary.colorful:hover {
+  background-color: var(--stsv-button--colorful__background-color--hover);
+  border-color: var(--stsv-button--colorful__border-color--hover);
+  color: var(--stsv-button--colorful__color--hover);
+}
+
+.sterling-button.secondary.colorful:active {
+  background-color: var(--stsv-button--colorful__background-color--active);
+  border-color: var(--stsv-button--colorful__border-color--active);
+  color: var(--stsv-button--colorful__color--active);
+}

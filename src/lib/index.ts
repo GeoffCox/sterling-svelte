@@ -1,27 +1,17 @@
 // ----- actions ----- //
+export { applyLightDarkMode } from './actions/applyLightDarkMode';
 export { clickOutside } from './actions/clickOutside';
 export { forwardEvents } from './actions/forwardEvents';
 export { portal } from './actions/portal';
 export { trapKeyboardFocus } from './actions/trapKeyboardFocus';
 
+// ----- media queries ----- //
+export { prefersColorSchemeDark } from './mediaQueries/prefersColorSchemeDark';
+export { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
+export { usingKeyboard } from './mediaQueries/usingKeyboard';
+
 // ----- functions ----- //
 export { idGenerator } from './idGenerator';
-
-// ----- theme ----- //
-export { type Theme, type ThemeActionParams } from './theme/types';
-
-export { applyDarkTheme } from './theme/applyDarkTheme';
-export { applyLightTheme } from './theme/applyLightTheme';
-export { applyTheme } from './theme/applyTheme';
-export { darkTheme } from './theme/darkTheme';
-export { lightTheme } from './theme/lightTheme';
-export {
-  neutralColors,
-  lightStatusColors,
-  darkStatusColors,
-  blueColors as blueAccentColors
-} from './theme/colors';
-export { toggleDarkTheme } from './theme/toggleDarkTheme';
 
 // ----- Component types ----- //
 export type { ButtonVariant, ButtonShape } from './Button.types';

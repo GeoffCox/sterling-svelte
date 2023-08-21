@@ -4,9 +4,6 @@ import type { Readable, Writable } from 'svelte/store';
  * The context for a Tree and its descendants.
  */
 export type TreeContext = {
-  /** When true, applies colorful theme styles. */
-  colorful: Readable<boolean>;
-
   /** When true, the tree and its descendants are disabled */
   disabled: Readable<boolean>;
 
@@ -15,4 +12,6 @@ export type TreeContext = {
 
   /** The value of the currently selected item. */
   selectedValue: Writable<string | undefined>;
+
+  variant: Readable<string>;
 };

@@ -11,8 +11,7 @@
   export let blue: number = 0;
   export let alpha: number = 1;
 
-  /** When true, applies colorful theme styles. */
-  export let colorful = false;
+  export let variant: string = '';
 
   // ----- State ----- //
   let redText = red.toString();
@@ -100,122 +99,25 @@
   };
 </script>
 
-<div class="sterling-rgb-color-sliders">
+<div class={`sterling-rgb-color-sliders ${variant}`}>
   <div class="slider red-slider">
-    <Slider {colorful} min={0} max={255} precision={0} bind:value={red} />
+    <Slider min={0} max={255} precision={0} bind:value={red} {variant} />
   </div>
-  <Input {colorful} bind:value={redText} on:change={(e) => onRedInputChange(e)} />
+  <Input bind:value={redText} {variant} on:change={(e) => onRedInputChange(e)} />
   <div class="slider green-slider">
-    <Slider {colorful} min={0} max={255} precision={0} bind:value={green} />
+    <Slider min={0} max={255} precision={0} bind:value={green} {variant} />
   </div>
-  <Input {colorful} bind:value={greenText} on:change={(e) => onGreenInputChange(e)} />
+  <Input bind:value={greenText} {variant} on:change={(e) => onGreenInputChange(e)} />
   <div class="slider blue-slider">
-    <Slider {colorful} min={0} max={255} precision={0} bind:value={blue} />
+    <Slider min={0} max={255} precision={0} bind:value={blue} {variant} />
   </div>
-  <Input {colorful} bind:value={blueText} on:change={(e) => onBlueInputChange(e)} />
+  <Input bind:value={blueText} {variant} on:change={(e) => onBlueInputChange(e)} />
   <div class="alpha" style={`--red:${red};--green:${green};--blue:${blue}`}>
     <div class="alpha-hatch" />
     <div class="alpha-gradient" />
     <div class="slider alpha-slider">
-      <Slider {colorful} min={0} max={1} precision={2} bind:value={alpha} />
+      <Slider min={0} max={1} precision={2} bind:value={alpha} {variant} />
     </div>
   </div>
-  <Input {colorful} bind:value={alphaText} on:change={(e) => onAlphaInputchange(e)} />
+  <Input bind:value={alphaText} {variant} on:change={(e) => onAlphaInputchange(e)} />
 </div>
-
-<style>
-  .sterling-rgb-color-sliders {
-    align-items: center;
-    display: grid;
-    grid-template-columns: 1fr 4em;
-    column-gap: 0.5em;
-    row-gap: 0.25em;
-  }
-
-  .slider :global(.fill),
-  .slider :global(.sterling-slider.colorful .fill) {
-    background-color: transparent;
-  }
-
-  .slider :global(.track),
-  .slider :global(.sterling-slider.colorful .track) {
-    background-color: transparent;
-    background-image: linear-gradient(to right, #ffffff, #ffffff 1px, #000000 1px, #000000);
-    background-size: 2px 100%;
-    opacity: 0.1;
-  }
-
-  .red-slider {
-    background: linear-gradient(to right, black 0%, rgb(255, 0, 0) 100%);
-  }
-
-  .green-slider {
-    background: linear-gradient(to right, black 0%, rgb(0, 255, 0) 100%);
-  }
-
-  .blue-slider {
-    background: linear-gradient(to right, black 0%, rgb(0, 0, 255) 100%);
-  }
-
-  .alpha {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    place-content: stretch;
-    place-items: stretch;
-  }
-
-  .alpha-gradient,
-  .alpha-hatch,
-  .alpha-slider {
-    grid-row: 1 / span 1;
-    grid-column: 1 / span 1;
-  }
-
-  .alpha-hatch {
-    background-color: #eee;
-    opacity: 0.1;
-    background-image: repeating-linear-gradient(
-        var(--stsv-common--disabled__stripe-angle),
-        #444 25%,
-        transparent 25%,
-        transparent 75%,
-        #444 75%,
-        #444
-      ),
-      repeating-linear-gradient(
-        var(--stsv-common--disabled__stripe-angle),
-        #444 25%,
-        #eee 25%,
-        #eee 75%,
-        #444 75%,
-        #444
-      ),
-      repeating-linear-gradient(
-        -var(--stsv-common--disabled__stripe-angle),
-        #444 25%,
-        transparent 25%,
-        transparent 75%,
-        #444 75%,
-        #444
-      ),
-      repeating-linear-gradient(
-        -var(--stsv-common--disabled__stripe-angle),
-        #444 25%,
-        #eee 25%,
-        #eee 75%,
-        #444 75%,
-        #444
-      );
-    background-position: 0 0, 4px 4px;
-    background-size: 8px 8px;
-  }
-
-  .alpha-gradient {
-    background: linear-gradient(
-      to right,
-      rgba(var(--red), var(--green), var(--blue), 0) 0%,
-      rgba(var(--red), var(--green), var(--blue), 100) 100%
-    );
-  }
-</style>

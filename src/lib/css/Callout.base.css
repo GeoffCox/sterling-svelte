@@ -1,0 +1,43 @@
+.sterling-callout-portal {
+  position: relative;
+  overflow: visible;
+}
+
+.sterling-callout {
+  background-color: var(--stsv-common__background-color);
+  border-color: var(--stsv-common__border-color);
+  border-radius: 0;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: var(--stsv-common__box-shadow);
+  box-sizing: border-box;
+  color: var(--stsv-common__color);
+  display: none;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  height: fit-content;
+  left: 0;
+  overflow: visible;
+  position: absolute;
+  top: 0;
+  width: max-content;
+  z-index: 0;
+}
+
+.sterling-callout.open {
+  display: grid;
+}
+
+.sterling-callout .arrow {
+  position: absolute;
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  background-color: inherit;
+  border-color: inherit;
+  border-style: inherit;
+  border-width: inherit;
+  /* This clip path clips 1/2 the square to create a triangle */
+  /* The -100% and 200% allow for the drop-shadow to not be clipped */
+  clip-path: polygon(-100% -100%, 200% -100%, 200% 200%, -100% -100%);
+}

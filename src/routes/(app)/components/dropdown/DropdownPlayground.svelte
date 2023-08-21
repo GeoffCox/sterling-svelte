@@ -5,17 +5,18 @@
 
   import Dropdown from '$lib/Dropdown.svelte';
   import Switch from '$lib/Switch.svelte';
+  import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import Slider from '$lib/Slider.svelte';
   import AnimatedProgress from './AnimatedProgress.svelte';
 
   let exampleRef: any;
 
-  let colorful = false;
   let composed = false;
   let disabled = false;
   let open = false;
   let stayOpenOnClickAway = false;
+  let variant = '';
 
   let progress = 50;
   let animate = false;
@@ -27,10 +28,10 @@
   <svelte:fragment slot="component">
     <Dropdown
       bind:open
-      {colorful}
       {composed}
       {disabled}
       {stayOpenOnClickAway}
+      {variant}
       on:open={(ev) => exampleRef.recordEvent(`open: ${ev.detail.open}`)}
     >
       <div class="value" slot="value">
@@ -48,11 +49,13 @@
     >
   </svelte:fragment>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Checkbox bind:checked={stayOpenOnClickAway}>stayOpenOnClickAway</Checkbox>
+    <Label text="variant" forwardClick>
+      <Input bind:value={variant} />
+    </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>open: {open}</div>
@@ -61,10 +64,12 @@
 
 <style>
   .value {
+    box-sizing: border-box;
     width: 250px;
     height: 2em;
     padding: 0.5em;
     display: grid;
+    grid-template-columns: 1fr;
     justify-items: stretch;
     align-items: center;
   }

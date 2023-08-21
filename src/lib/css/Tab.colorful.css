@@ -1,0 +1,13 @@
+/* ----- indicator -----*/
+
+.sterling-tab.colorful:not(.selected):not(:active):hover .indicator {
+  background-color: var(--stsv-input--colorful__border-color--hover);
+}
+
+.sterling-tab.colorful:active .indicator {
+  background-color: var(--stsv-input--colorful__border-color--selected);
+}
+
+.sterling-tab.colorful.selected .indicator {
+  background-color: var(--stsv-input--colorful__border-color--selected);
+}

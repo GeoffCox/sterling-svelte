@@ -1,0 +1,5 @@
+.sterling-callout.colorful {
+  background-color: var(--stsv-button--colorful__background-color);
+  border-color: var(--stsv-button--colorful__border-color);
+  color: var(--stsv-button--colorful__color);
+}

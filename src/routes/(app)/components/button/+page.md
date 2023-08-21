@@ -9,25 +9,13 @@ A styled HTML `button` element.
 - Choose different button shapes and variants.
 - The default type is `'button'` rather than `'submit'`.
 
-## Types
-
-```ts
-type ButtonShape = 'circular' | 'rounded' | 'square';
-
-type ButtonVariant = 'regular' | 'outline' | 'ghost';
-```
-
 ## Props
 
 HTMLButtonElement props are included.
 
 ```ts
-/** When true, applies colorful theme styles. */
-export let colorful = false;
-
-export let shape: ButtonShape = 'rounded';
-
-export let variant: ButtonVariant = 'regular';
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
@@ -47,6 +35,17 @@ Use the default slot to place content within the button.
   <slot {disabled} {colorful} {shape} {variant} />
 </button>
 ```
+
+## Sterling Theme Variants
+
+The default sterling theme supports:
+
+- secondary - For less important buttons
+- tool - For buttons appearing on a toolbar
+- colorful - displays a colorful style
+- capsule - rounds the ends of the button
+- circular - a circle with a 1:1 aspect ratio
+- square - squares the edges of the button
 
 ## Playground
 

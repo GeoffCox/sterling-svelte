@@ -1,0 +1,15 @@
+.sterling-tree.colorful {
+  background-color: var(--stsv-common--colorful__background-color);
+  border-color: var(--stsv-common--colorful__border-color);
+  color: var(--stsv-common--colorful__color);
+}
+
+.sterling-tree.colorful:hover {
+  border-color: var(--stsv-input--colorful__border-color--hover);
+  color: var(--stsv-input--colorful__color--hover);
+}
+
+.sterling-tree.colorful.using-keyboard:focus-within {
+  border-color: var(--stsv-button--colorful__border-color--focus);
+  color: var(--stsv-input--colorful__color--focus);
+}

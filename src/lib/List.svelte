@@ -5,12 +5,9 @@
   import { writable } from 'svelte/store';
 
   import { LIST_CONTEXT_KEY } from './List.constants';
-  import { usingKeyboard } from './stores/usingKeyboard';
+  import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   // ----- Props ----- //
-
-  /** When true, applies colorful theme styles. */
-  export let colorful = false;
 
   /** When true, allows the container to handle borders and focus borders.  */
   export let composed = false;
@@ -24,18 +21,20 @@
   /** The value of the currently selected item. */
   export let selectedValue: string | undefined = undefined;
 
+  export let variant = '';
+
   // ----- State ----- //
 
   let listRef: HTMLDivElement;
   let lastSelectedItemRef: HTMLElement;
 
-  const colorfulStore = writable<boolean>(colorful);
   const disabledStore = writable<boolean>(disabled);
   const horizontalStore = writable<boolean>(horizontal);
   const selectedValueStore = writable<string | undefined>(selectedValue);
+  const variantStore = writable<string>(variant);
 
   $: {
-    colorfulStore.set(colorful);
+    variantStore.set(variant);
   }
 
   $: {
@@ -243,10 +242,10 @@
   // ----- Set Context ----- //
 
   setContext<ListContext>(LIST_CONTEXT_KEY, {
-    colorful: colorfulStore,
     disabled: disabledStore,
     selectedValue: selectedValueStore,
-    horizontal: horizontalStore
+    horizontal: horizontalStore,
+    variant: variantStore
   });
 </script>
 
@@ -260,7 +259,7 @@ A list of items where a single item can be selected.
   aria-disabled={disabled}
   aria-orientation={horizontal ? 'horizontal' : 'vertical'}
   bind:this={listRef}
-  class="sterling-list"
+  class={`sterling-list ${variant}`}
   class:composed
   class:disabled
   class:horizontal
@@ -299,107 +298,6 @@ A list of items where a single item can be selected.
   {...$$restProps}
 >
   <div class="container">
-    <slot {composed} {disabled} {horizontal} {selectedValue} />
+    <slot {composed} {disabled} {horizontal} {selectedValue} {variant} />
   </div>
 </div>
-
-<style>
-  .sterling-list {
-    background-color: var(--stsv-common__background-color);
-    border-color: var(--stsv-input__border-color);
-    border-radius: var(--stsv-input__border-radius);
-    border-style: var(--stsv-input__border-style);
-    border-width: var(--stsv-input__border-width);
-    box-sizing: border-box;
-    color: var(--stsv-input__color);
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    margin: 0;
-    outline: none;
-    padding: 0;
-    position: relative;
-    transition: background-color 250ms, color 250ms, border-color 250ms;
-  }
-
-  .sterling-list.horizontal {
-    height: unset;
-    overflow-x: auto;
-    overflow-y: hidden;
-    width: 100%;
-  }
-
-  .sterling-list:hover {
-    border-color: var(--stsv-input__border-color--hover);
-    color: var(--stsv-input__color--hover);
-  }
-
-  .sterling-list.using-keyboard:focus-within {
-    border-color: var(--stsv-input__border-color--focus);
-    color: var(--stsv-input__color--focus);
-    outline-color: var(--stsv-common__outline-color);
-    outline-offset: var(--stsv-common__outline-offset);
-    outline-style: var(--stsv-common__outline-style);
-    outline-width: var(--stsv-common__outline-width);
-  }
-
-  .sterling-list.composed,
-  .sterling-list.composed:hover,
-  .sterling-list.composed.using-keyboard:focus-within,
-  .sterling-list.composed.disabled {
-    background: none;
-    border: none;
-    outline: none;
-  }
-
-  .sterling-list.disabled * {
-    cursor: not-allowed;
-  }
-
-  /* ----- container - a layout panel that grows with the items ----- */
-
-  .container {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    flex-wrap: nowrap;
-  }
-
-  .sterling-list.horizontal .container {
-    flex-direction: row;
-  }
-
-  .container::after {
-    background: repeating-linear-gradient(
-      var(--stsv-common--disabled__stripe-angle),
-      var(--stsv-common--disabled__stripe-color),
-      var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
-      var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
-      var(--stsv-common--disabled__stripe-color--alt)
-        calc(2 * var(--stsv-common--disabled__stripe-width))
-    );
-    content: '';
-    bottom: 0;
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    pointer-events: none;
-    transition: opacity 250ms;
-  }
-
-  .sterling-list.disabled .container::after {
-    opacity: 1;
-  }
-
-  /* ----- media queries ----- */
-
-  @media (prefers-reduced-motion) {
-    .sterling-list,
-    .container::after {
-      transition: none;
-    }
-  }
-</style>

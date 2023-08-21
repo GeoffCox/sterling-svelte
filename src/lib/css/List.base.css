@@ -1,0 +1,98 @@
+.sterling-list {
+  background-color: var(--stsv-common__background-color);
+  border-color: var(--stsv-input__border-color);
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 2px;
+  box-sizing: border-box;
+  color: var(--stsv-input__color);
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  position: relative;
+  transition: background-color 250ms, color 250ms, border-color 250ms;
+}
+
+.sterling-list.horizontal {
+  height: unset;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+.sterling-list:hover {
+  border-color: var(--stsv-input__border-color--hover);
+  color: var(--stsv-input__color--hover);
+}
+
+.sterling-list.using-keyboard:focus-within {
+  border-color: var(--stsv-input__border-color--focus);
+  color: var(--stsv-input__color--focus);
+  outline-color: var(--stsv-common__outline-color);
+  outline-offset: 0;
+  outline-style: solid;
+  outline-width: 2px;
+}
+
+.sterling-list.composed,
+.sterling-list.composed:hover,
+.sterling-list.composed.using-keyboard:focus-within,
+.sterling-list.composed.disabled {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.sterling-list.disabled * {
+  cursor: not-allowed;
+}
+
+/* ----- container - a layout panel that grows with the items ----- */
+
+.sterling-list .container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.sterling-list.horizontal .container {
+  flex-direction: row;
+}
+
+.sterling-list .container::after {
+  background: repeating-linear-gradient(
+    var(--stsv-common--disabled__stripe-angle),
+    var(--stsv-common--disabled__stripe-color),
+    var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
+    var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
+    var(--stsv-common--disabled__stripe-color--alt)
+      calc(2 * var(--stsv-common--disabled__stripe-width))
+  );
+  content: '';
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 250ms;
+}
+
+.sterling-list.disabled .container::after {
+  opacity: 1;
+}
+
+/* ----- media queries ----- */
+
+@media (prefers-reduced-motion) {
+  .sterling-list,
+  .sterling-list .container::after {
+    transition: none;
+  }
+}

@@ -1,0 +1,11 @@
+.sterling-button.secondary {
+  background-color: transparent;
+}
+
+.sterling-button.secondary:hover {
+  background-color: var(--stsv-button__background-color--hover);
+}
+
+.sterling-button.secondary:active {
+  background-color: var(--stsv-button__background-color--active);
+}

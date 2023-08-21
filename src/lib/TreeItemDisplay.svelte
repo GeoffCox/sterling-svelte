@@ -7,9 +7,6 @@
 
   // ----- Props ----- //
 
-  /** When true, applies colorful theme styles. */
-  export let colorful = false;
-
   /** The depth of the item in the tree for displaying indentation. */
   export let depth = 0;
 
@@ -27,6 +24,8 @@
 
   /** The value uniquely identifying this item within the tree. */
   export let value: string;
+
+  export let variant: string = '';
 
   // ----- Get Context ----- //
 
@@ -55,8 +54,7 @@
 
 <div
   bind:this={divRef}
-  class="sterling-tree-item-display"
-  class:colorful
+  class={`sterling-tree-item-display ${variant}`}
   class:disabled={disabled && !$treeDisabled}
   class:item-disabled={disabled}
   class:expanded
@@ -95,93 +93,6 @@
   on:wheel|passive
   {...$$restProps}
 >
-  <TreeChevron {expanded} {hasChildren} />
-  <slot {colorful} {depth} {disabled} {expanded} {hasChildren} {selected} {value} />
+  <TreeChevron {expanded} {hasChildren} {variant} />
+  <slot {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant} />
 </div>
-
-<style>
-  .sterling-tree-item-display {
-    align-content: center;
-    align-items: center;
-    background-color: transparent;
-    box-sizing: border-box;
-    color: var(--stsv-input__color);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 0.25em;
-    margin: 0;
-    outline: none;
-    padding: 0.5em;
-    position: relative;
-    padding-left: calc(0.2em + (0.5em * var(--sterling-tree-item-depth)));
-    text-overflow: ellipsis;
-    transition: background-color 250ms, color 250ms, border-color 250ms;
-    white-space: nowrap;
-  }
-
-  .sterling-tree-item-display:not(.item-disabled):not(.selected):hover {
-    background-color: var(--stsv-button__background-color--hover);
-    color: var(--stsv-button__color--hover);
-  }
-
-  .sterling-tree-item-display.selected {
-    background-color: var(--stsv-button__background-color--active);
-    color: var(--stsv-button__color--active);
-  }
-
-  .sterling-tree-item-display.colorful:not(.item-disabled):not(.selected):hover {
-    background-color: var(--stsv-button--colorful__background-color--hover);
-    color: var(--stsv-button--colorful__color--hover);
-  }
-
-  .sterling-tree-item-display.colorful.selected {
-    background-color: var(--stsv-button--colorful__background-color--active);
-    color: var(--stsv-button--colorful__color--active);
-  }
-
-  .sterling-tree-item-display.disabled {
-    cursor: not-allowed;
-    outline: none;
-  }
-
-  .sterling-tree-item-display::after {
-    background: repeating-linear-gradient(
-      var(--stsv-common--disabled__stripe-angle),
-      var(--stsv-common--disabled__stripe-color),
-      var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
-      var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
-      var(--stsv-common--disabled__stripe-color--alt)
-        calc(2 * var(--stsv-common--disabled__stripe-width))
-    );
-    bottom: 0;
-    content: '';
-    left: 0;
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: opacity 250ms;
-  }
-
-  .sterling-tree-item-display.disabled::after {
-    opacity: 1;
-  }
-
-  .sterling-tree-item-display.leaf {
-    border: none;
-    background: currentColor;
-    border-radius: 50%;
-    height: 0.5em;
-    width: 0.5em;
-    margin: 0.5;
-    transform-origin: 50% 50%;
-  }
-
-  @media (prefers-reduced-motion) {
-    .sterling-tree-item-display,
-    .sterling-tree-item-display::after {
-      transition: none;
-    }
-  }
-</style>

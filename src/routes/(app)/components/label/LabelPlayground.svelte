@@ -7,9 +7,7 @@
   import Select from '$lib/Select.svelte';
   import type { LabelStatus, LabelVariant } from '$lib/Label.types';
   import { LABEL_STATUSES } from '$lib';
-  import { LABEL_VARIANTS } from '$lib/Label.constants';
 
-  let colorful = false;
   let disabled = false;
   let forwardClick = false;
   let text = 'sterling-svelte';
@@ -17,14 +15,14 @@
   let required = false;
   let status: LabelStatus | 'none' = 'none';
   let useFor = true;
-  let variant: LabelVariant = 'regular';
+  let variant = '';
+  let vertical = true;
 </script>
 
 <Playground noEvents>
   <svelte:fragment slot="component">
     <Label
       for={useFor ? 'target' : undefined}
-      {colorful}
       {disabled}
       {forwardClick}
       {message}
@@ -32,12 +30,12 @@
       {status}
       {text}
       {variant}
+      {vertical}
     >
-      <Input id="target" {disabled} {colorful} composed={variant === 'container'} />
+      <Input id="target" {disabled} composed={variant === 'container'} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={forwardClick}>forwardClick</Checkbox>
     <Label text="text">
       <Input bind:value={text} />
@@ -54,12 +52,9 @@
       </Select>
     </Label>
     <Label text="variant" forwardClick>
-      <Select bind:selectedValue={variant}>
-        {#each LABEL_VARIANTS as variantItem}
-          <ListItem value={variantItem}>{variantItem}</ListItem>
-        {/each}
-      </Select>
+      <Input bind:value={variant} />
     </Label>
+    <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Checkbox bind:checked={disabled}>Input child disabled</Checkbox>

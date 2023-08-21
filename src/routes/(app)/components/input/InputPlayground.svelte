@@ -12,20 +12,18 @@
 
   let exampleRef: any;
 
-  let colorful = false;
   let composed = false;
   let disabled = false;
   let label = 'sterling-svelte';
   let placeholder = '';
   let value = '';
-  let variant: InputVariant = 'regular';
+  let variant = '';
 </script>
 
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
     {#if label.length > 0}
       <Input
-        {colorful}
         {composed}
         {disabled}
         {placeholder}
@@ -36,10 +34,10 @@
       >
     {:else}
       <Input
-        {colorful}
         {composed}
         {disabled}
         {placeholder}
+        {variant}
         bind:value
         on:input={() => exampleRef.recordEvent('input')}
         on:change={() => exampleRef.recordEvent('change')}
@@ -47,7 +45,6 @@
     {/if}
   </svelte:fragment>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <LabelBox text="placeholder">
@@ -57,11 +54,7 @@
       <Input bind:value={label} />
     </Label>
     <Label text="variant" forwardClick>
-      <Select bind:selectedValue={variant}>
-        {#each INPUT_VARIANTS as variantItem}
-          <ListItem value={variantItem}>{variantItem}</ListItem>
-        {/each}
-      </Select>
+      <Input bind:value={variant} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">

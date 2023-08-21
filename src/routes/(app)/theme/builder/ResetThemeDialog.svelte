@@ -60,8 +60,8 @@
     color: var(--stsv-status--warning__color);
     background-color: var(--stsv-status--warning__background-color);
     border-color: var(--stsv-status--warning__border-color);
-    border-width: var(--stsv-common__border-width);
-    border-style: var(--stsv-common__border-style);
+    border-width: 2px;
+    border-style: solid;
     padding: 0.5em;
   }
 </style>

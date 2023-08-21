@@ -7,21 +7,23 @@
   let exampleRef: any;
   let disabled = false;
   let checked = false;
-  let colorful = false;
   let label = 'sterling-svelte';
+  let variant = '';
 </script>
 
 <Playground bind:this={exampleRef}>
   <div slot="component" class="component">
-    <Checkbox {colorful} {disabled} bind:checked on:change={() => exampleRef.recordEvent('change')}
+    <Checkbox {disabled} bind:checked {variant} on:change={() => exampleRef.recordEvent('change')}
       >{label}</Checkbox
     >
   </div>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="default slot (text)">
       <Input bind:value={label} />
+    </Label>
+    <Label text="variant" forwardClick>
+      <Input bind:value={variant} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">

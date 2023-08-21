@@ -1,4 +1,7 @@
 <script lang="ts">
+  import type { FormEventHandler } from 'svelte/elements';
+  import '$lib/css/sterling.css';
+
   import { onMount, tick } from 'svelte';
 
   import Button from './Button.svelte';
@@ -87,7 +90,7 @@
     return false;
   };
 
-  const onSubmit: svelte.JSX.EventHandler<Event, HTMLFormElement> = (event) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     // Submitting a form instantly hides the dialog.
     // The dialog.close event is not cancellable, but form.submit is.
     // To allow animation with closeDialog, this event is canceled.
@@ -139,7 +142,7 @@ A styled &lt;dialog&gt; element
 -->
 <dialog
   bind:this={dialogRef}
-  class="dialog"
+  class="sterling-dialog light-mode"
   class:open
   class:closing
   on:close
@@ -155,7 +158,7 @@ A styled &lt;dialog&gt; element
               <slot name="title" />
             </div>
             <div class="close">
-              <Button variant="ghost" shape="circular" on:click={() => closeDialog()}>
+              <Button variant="circular tool" on:click={() => closeDialog()}>
                 <div class="close-x" />
               </Button>
             </div>
@@ -174,128 +177,4 @@ A styled &lt;dialog&gt; element
 </dialog>
 
 <style>
-  .dialog {
-    padding: 0;
-    border: none;
-    background: none;
-  }
-
-  .dialog::backdrop {
-    backdrop-filter: blur(2px);
-    background: rgba(0, 0, 0, 0.3);
-    transition: opacity 250ms;
-    opacity: 0;
-  }
-
-  .dialog.open::backdrop {
-    opacity: 1;
-  }
-
-  .dialog.closing::backdrop {
-    opacity: 0;
-  }
-
-  .header {
-    background-color: var(--stsv-common__background-color--secondary);
-  }
-
-  .content {
-    background-color: var(--stsv-common__background-color);
-    border-color: var(--stsv-common__border-color);
-    border-radius: var(--stsv-common__border-radius);
-    border-style: var(--stsv-common__border-style);
-    border-width: var(--stsv-common__border-width);
-    box-sizing: border-box;
-    color: var(--stsv-common__color);
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto auto;
-    justify-content: stretch;
-    justify-items: stretch;
-    align-items: stretch;
-    transition: opacity 250ms;
-    opacity: 0;
-  }
-
-  .dialog.open .content {
-    opacity: 1;
-  }
-
-  .dialog.closing .content {
-    opacity: 0;
-  }
-
-  .header {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: 1fr;
-    justify-items: stretch;
-    align-items: center;
-    padding: 0.25em 0.5em;
-  }
-
-  .title {
-    font-size: 1.4em;
-  }
-
-  .close {
-    justify-self: flex-end;
-  }
-
-  .close :global(button) {
-    width: 1.75em;
-    height: 1.75em;
-    padding: 0;
-  }
-
-  .close-x {
-    width: 1em;
-    height: 1em;
-    position: relative;
-  }
-
-  .close-x:before,
-  .close-x:after {
-    content: '';
-    position: absolute;
-    width: 0.75em;
-    height: 0.125em;
-    background-color: currentColor;
-    top: 0.45em;
-  }
-
-  .close-x:before {
-    transform: rotate(45deg);
-    left: 0.125em;
-  }
-
-  .close-x:after {
-    transform: rotate(-45deg);
-    right: 0.125em;
-  }
-
-  .body {
-    padding: 1em;
-  }
-
-  .separator {
-    background-color: var(--stsv-common__background-color--secondary);
-    height: var(--stsv-common__border-width);
-    margin: 0 0.25em;
-  }
-
-  .footer {
-    display: flex;
-    justify-content: flex-end;
-    justify-items: flex-end;
-    padding: 0.5em 1em;
-    gap: 5px;
-  }
-
-  @media (prefers-reduced-motion) {
-    .dialog::backdrop,
-    .content {
-      transition: none;
-    }
-  }
 </style>

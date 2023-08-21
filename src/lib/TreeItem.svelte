@@ -8,7 +8,7 @@
   import { TREE_CONTEXT_KEY, TREE_ITEM_CONTEXT_KEY } from './Tree.constants';
   import TreeItemDisplay from './TreeItemDisplay.svelte';
   import { readable, writable } from 'svelte/store';
-  import { prefersReducedMotion } from './stores/prefersReducedMotion';
+  import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
 
   // ----- Props ----
 
@@ -21,6 +21,8 @@
   /** The value uniquely identifying this item within the tree. */
   export let value: string;
 
+  export let variant: string = '';
+
   // ----- Animation ----- //
 
   const slidNoOp = (node: Element, params?: SlideParams): TransitionConfig => {
@@ -32,16 +34,17 @@
   // ----- Get Context ----- //
 
   const {
-    colorful,
     disabled: treeDisabled,
     expandedValues,
-    selectedValue
+    selectedValue,
+    variant: treeVariant
   } = getContext<TreeContext>(TREE_CONTEXT_KEY);
-  const { depth = 0 } = getContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY) || {
-    colorful: readable(false),
-    disabled: readable(false),
-    expandedValues: readable([]),
-    selectedValue: readable(undefined)
+
+  const { depth, disabled: parentDisabled } = getContext<TreeItemContext>(
+    TREE_ITEM_CONTEXT_KEY
+  ) || {
+    depth: readable(0),
+    disabled: readable(false)
   };
 
   // ----- State ----- //
@@ -51,12 +54,18 @@
   $: hasChildren = $$slots.default;
   $: expanded = $expandedValues.includes(value);
   $: selected = $selectedValue === value;
-  $: _disabled = disabled || $treeDisabled;
+  $: _disabled = disabled || $parentDisabled || $treeDisabled;
+  $: _variant = `${$treeVariant} ${variant}`;
 
-  const disabledStore = writable<boolean>(disabled);
+  const depthStore = writable<number>($depth);
+  const disabledStore = writable<boolean>(_disabled);
 
   $: {
-    disabledStore.set(disabled);
+    depthStore.set($depth + 1);
+  }
+
+  $: {
+    disabledStore.set(_disabled);
   }
 
   // ----- Expand/Collapse ----- //
@@ -327,7 +336,10 @@
 
   // ----- Set Context ----- //
 
-  setContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY, { depth: depth + 1, disabled: disabledStore });
+  setContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY, {
+    depth: depthStore,
+    disabled: disabledStore
+  });
 </script>
 
 <!--
@@ -338,8 +350,7 @@ A item in a Tree displaying the item and children.
   aria-selected={selected ? true : undefined}
   aria-expanded={expanded}
   bind:this={treeItemRef}
-  class="sterling-tree-item"
-  class:colorful={$colorful}
+  class={`sterling-tree-item ${_variant}`}
   class:disabled={_disabled}
   data-value={value}
   role="treeitem"
@@ -386,32 +397,32 @@ A item in a Tree displaying the item and children.
   >
     <slot name="item" {depth} disabled={_disabled} {expanded} {hasChildren} {selected} {value}>
       <TreeItemDisplay
-        colorful={$colorful}
-        {depth}
+        depth={$depth}
         disabled={_disabled}
         {expanded}
         {hasChildren}
         {selected}
         {value}
+        variant={_variant}
       >
         <svelte:fragment
-          let:colorful
           let:depth
           let:disabled
           let:expanded
           let:hasChildren
           let:selected
           let:value
+          let:variant
         >
           <slot
             name="label"
-            {colorful}
             {depth}
             {disabled}
             {expanded}
             {hasChildren}
             {selected}
-            {value}>{text || value}</slot
+            {value}
+            {variant}>{text || value}</slot
           >
         </svelte:fragment>
       </TreeItemDisplay>
@@ -419,13 +430,7 @@ A item in a Tree displaying the item and children.
   </div>
   {#if expanded && hasChildren}
     <div class="children" transition:slideMotion|global={{ duration: 200 }} role="group">
-      <slot {depth} {selected} {value} />
+      <slot depth={$depth} disabled={_disabled} {selected} {value} variant={_variant} />
     </div>
   {/if}
 </div>
-
-<style>
-  .item {
-    outline: none;
-  }
-</style>

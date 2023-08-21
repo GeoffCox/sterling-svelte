@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { applyDarkTheme, applyLightTheme, applyTheme, Select, toggleDarkTheme } from '$lib';
+  import '$lib/css/sterling.css';
+  import { applyLightDarkMode } from '$lib';
   import { onMount } from 'svelte';
   import { base } from '$app/paths';
-  import { oceanTheme } from './oceanTheme';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import Link from '$lib/Link.svelte';
@@ -11,10 +11,13 @@
   import HamburgerIcon from './HamburgerIcon.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
   import FilterIcon from './FilterIcon.svelte';
-  import ThemeIcon from './ThemeIcon.svelte';
   import CodeTheme from './CodeTheme.svelte';
   import GitHubIcon from './GitHubIcon.svelte';
-  import { fluentLightTheme } from './fluentLightTheme';
+  import Select from '$lib/Select.svelte';
+  import ListItem from '$lib/ListItem.svelte';
+  import AutoModeIcon from './AutoModeIcon.svelte';
+  import LightModeIcon from './LightModeIcon.svelte';
+  import DarkModeIcon from './DarkModeIcon.svelte';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -61,42 +64,12 @@
   let currentTheme = 'auto';
   let filterText = '';
 
+  let mode = 'auto';
+
   $: filteredComponents =
     filterText && filterText.trim().length > 0
       ? components.filter((x) => x.toLowerCase().includes(filterText.trim().toLowerCase()))
       : components;
-
-  const setTheme = (node: HTMLElement, themeKey: string) => {
-    const themeParams = { atDocumentRoot: true };
-    switch (themeKey) {
-      case 'light':
-        applyLightTheme(node, themeParams);
-        break;
-      case 'dark':
-        applyDarkTheme(node, themeParams);
-        break;
-      case 'ocean':
-        applyTheme(node, { ...themeParams, theme: oceanTheme });
-        break;
-      case 'fluentLight':
-        applyTheme(node, { ...themeParams, theme: fluentLightTheme });
-        break;
-      case 'auto':
-      default:
-        toggleDarkTheme(node, themeParams);
-        break;
-    }
-  };
-
-  const applyCurrentTheme = (node: HTMLElement, params: { themeKey: string }) => {
-    setTheme(node, params.themeKey);
-    return {
-      destroy() {},
-      update(params: { themeKey: string }) {
-        setTheme(node, params.themeKey);
-      }
-    };
-  };
 
   const parseCookie = () => {
     const pairs = document.cookie.split(';');
@@ -155,9 +128,14 @@
   };
 </script>
 
-<div>
+<div
+  use:applyLightDarkMode={{
+    atDocumentRoot: true,
+    mode: mode === 'auto' ? 'auto' : mode === 'dark' ? 'dark' : 'light'
+  }}
+>
   {#if mounted}
-    <div class="layout" use:applyCurrentTheme={{ themeKey: currentTheme }}>
+    <div class="layout">
       <div class="header">
         <div class="hamburger-menu">
           <MenuButton
@@ -171,12 +149,13 @@
               <MenuItem value="{base}/" text="Overview" />
               <MenuItem value="{base}/topics/start" text="Getting Started" />
               <MenuItem value="{base}/topics/roadmap" text="Roadmap" />
+              <MenuItem value="{base}/topics/design" text="Design" />
               <MenuItem value="{base}/topics/architecture" text="Architecture" />
               <MenuItem value="{base}/topics/actions" text="Actions" />
+              <MenuItem value="{base}/topics/gallery" text="Gallery" />
               <MenuSeparator />
               <MenuItem value="{base}/theme" text="Theme" />
               <MenuItem value="{base}/theme/builder" text="Theme Builder" />
-              <MenuItem value="{base}/topics/gallery" text="Gallery" />
               <MenuSeparator />
               {#each filteredComponents as component}
                 <MenuItem value="{base}/components/{component.toLowerCase()}" text={component} />
@@ -192,14 +171,22 @@
           A modern, accessible, lightweight UI component library for Svelte.
         </div>
         <div class="select-theme">
-          <MenuButton value="theme" on:select={onThemeSelect} shape="circular">
-            <ThemeIcon />
-            <svelte:fragment slot="items">
-              {#each Object.keys(themes) as themeKey}
-                <MenuItem value={themeKey} text={themes[themeKey]} />
-              {/each}
+          <Select bind:selectedValue={mode}>
+            <svelte:fragment slot="value">
+              {#if mode === 'auto'}
+                <AutoModeIcon />
+              {:else if mode === 'dark'}
+                <DarkModeIcon />
+              {:else}
+                <LightModeIcon />
+              {/if}
             </svelte:fragment>
-          </MenuButton>
+            <ListItem value="auto"><div class="theme-option"><AutoModeIcon /> auto</div></ListItem>
+            <ListItem value="light"
+              ><div class="theme-option"><LightModeIcon /> light</div></ListItem
+            >
+            <ListItem value="dark"><div class="theme-option"><DarkModeIcon /> dark</div></ListItem>
+          </Select>
         </div>
         <div class="github">
           <Link href="http://github.com/GeoffCox/sterling-svelte" variant="ghost">
@@ -214,20 +201,21 @@
             <Link href="{base}/" variant="ghost">Overview</Link>
             <Link href="{base}/topics/start" variant="ghost">Getting Started</Link>
             <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
+            <Link href="{base}/topics/design" variant="ghost">Design</Link>
             <Link href="{base}/topics/architecture" variant="ghost">Architecture</Link>
             <Link href="{base}/topics/actions" variant="ghost">Actions</Link>
+            <Link href="{base}/topics/gallery" variant="ghost">Gallery</Link>
           </div>
           <div class="nav-header">Theme</div>
           <div class="nav-section">
             <Link href="{base}/theme" variant="ghost">Theme</Link>
             <Link href="{base}/theme/builder" variant="ghost">Theme Builder</Link>
-            <Link href="{base}/topics/gallery" variant="ghost">Gallery</Link>
           </div>
           <div class="nav-header">Components</div>
           <div class="filter">
             <Label for="filter-components">
               <div class="filter-flex">
-                <Input id="filter-components" bind:value={filterText} composed />
+                <Input id="filter-components" bind:value={filterText} />
                 <FilterIcon />
               </div>
             </Label>
@@ -248,6 +236,7 @@
       </div>
     </div>
   {/if}
+  <div id="SterlingPortalHost" />
 </div>
 
 <style>
@@ -334,6 +323,8 @@
 
   .layout {
     padding: 0 3em;
+    color: var(--stsv-common__color);
+    background-color: var(--stsv-common__background-color);
   }
 
   .header {
@@ -377,7 +368,13 @@
     align-items: center;
     grid-row: 1 / span 2;
     grid-column: 3 / span 1;
-    margin-left: 1em;
+  }
+
+  .theme-option {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 1em;
   }
 
   .header .github {

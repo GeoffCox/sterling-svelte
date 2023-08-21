@@ -14,15 +14,15 @@
   // ----- GetContext ----- //
 
   const {
-    colorful,
+    variant,
     disabled: listDisabled,
     selectedValue,
     horizontal
   } = getContext<ListContext>(LIST_CONTEXT_KEY) || {
-    colorful: readable(false),
     disabled: readable(false),
     selectedValue: writable(undefined),
-    horizontal: readable(false)
+    horizontal: readable(false),
+    variant: readable('')
   };
 
   // ----- State ----- //
@@ -47,8 +47,7 @@
 <div
   aria-selected={selected}
   bind:this={itemRef}
-  class="sterling-list-item"
-  class:colorful={$colorful}
+  class={`sterling-list-item ${$variant}`}
   class:disabled={disabled || $listDisabled}
   class:item-disabled={disabled && !$listDisabled}
   class:selected
@@ -87,77 +86,5 @@
   on:wheel|passive
   {...$$restProps}
 >
-  <slot {disabled} {horizontal} {selected} {value}>{value}</slot>
+  <slot {disabled} {horizontal} {selected} {value} variant={$variant}>{value}</slot>
 </div>
-
-<style>
-  .sterling-list-item {
-    background-color: transparent;
-    box-sizing: border-box;
-    color: var(--stsv-common__color);
-    cursor: pointer;
-    margin: 0;
-    padding: 0.5em;
-    position: relative;
-    outline: none;
-    text-overflow: ellipsis;
-    transition: background-color 250ms, color 250ms, border-color 250ms;
-    white-space: nowrap;
-  }
-
-  .sterling-list-item:not(.disabled):not(.selected):hover {
-    background-color: var(--stsv-button__background-color--hover);
-    color: var(--stsv-button__color--hover);
-  }
-
-  .sterling-list-item.selected {
-    background-color: var(--stsv-button__background-color--active);
-    color: var(--stsv-button__color--active);
-  }
-
-  .sterling-list-item.colorful:not(.disabled):not(.selected):hover {
-    background-color: var(--stsv-button--colorful__background-color--hover);
-    color: var(--stsv-button--colorful__color--hover);
-  }
-
-  .sterling-list-item.colorful.selected {
-    background-color: var(--stsv-button--colorful__background-color--active);
-    color: var(--stsv-button--colorful__color--active);
-  }
-
-  .sterling-list-item.disabled {
-    cursor: not-allowed;
-    outline: none;
-  }
-
-  .sterling-list-item::after {
-    background: repeating-linear-gradient(
-      var(--stsv-common--disabled__stripe-angle),
-      var(--stsv-common--disabled__stripe-color),
-      var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
-      var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
-      var(--stsv-common--disabled__stripe-color--alt)
-        calc(2 * var(--stsv-common--disabled__stripe-width))
-    );
-    bottom: 0;
-    content: '';
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    pointer-events: none;
-    transition: opacity 250ms;
-  }
-
-  .sterling-list-item.item-disabled::after {
-    opacity: 1;
-  }
-
-  @media (prefers-reduced-motion) {
-    .sterling-list-item,
-    .sterling-list-item::after {
-      transition: none;
-    }
-  }
-</style>

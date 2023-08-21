@@ -1,0 +1,111 @@
+.sterling-input {
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.sterling-input input {
+  background-color: var(--stsv-input__background-color);
+  border-color: transparent;
+  border-bottom-color: var(--stsv-input__border-color);
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 2px;
+  box-sizing: border-box;
+  color: var(--stsv-input__color);
+  display: block;
+  font: inherit;
+  margin: 0;
+  outline: none;
+  padding: 0.5em;
+  transition: background-color 250ms, color 250ms, border-color 250ms;
+  width: 100%;
+}
+
+.sterling-input:hover input:not(:disabled) {
+  background-color: var(--stsv-input__background-color--hover);
+  border-bottom-color: var(--stsv-input__border-color--hover);
+  color: var(--stsv-input__color--hover);
+}
+
+.sterling-input input:focus,
+.sterling-input:hover input:focus {
+  background-color: var(--stsv-input__background-color--focus);
+  border-bottom-color: var(--stsv-input__border-color--focus);
+  color: var(--stsv-input__color--focus);
+}
+
+input:focus-visible {
+  outline-color: var(--stsv-common__outline-color);
+  outline-offset: 0;
+  outline-style: solid;
+  outline-width: 2px;
+  outline: none;
+}
+
+/* ----- composed ----- */
+
+.sterling-input.composed input,
+.sterling-input.composed:hover input:not(:disabled),
+.sterling-input.composed input:focus,
+.sterling-input.composed:hover input:focus {
+  background-color: transparent;
+  border-color: transparent;
+  outline: none;
+}
+
+/* ----- placeholder ----- */
+
+input::placeholder {
+  color: var(--stsv-common__color--subtle);
+}
+
+/* ----- disabled ----- */
+
+.sterling-input.disabled * {
+  cursor: not-allowed;
+  outline: none;
+}
+
+.sterling-input::after {
+  background: repeating-linear-gradient(
+    var(--stsv-common--disabled__stripe-angle),
+    var(--stsv-common--disabled__stripe-color),
+    var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
+    var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
+    var(--stsv-common--disabled__stripe-color--alt)
+      calc(2 * var(--stsv-common--disabled__stripe-width))
+  );
+  bottom: 0;
+  content: '';
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+  transition: opacity 250ms;
+}
+
+.sterling-input.disabled::after {
+  opacity: 1;
+}
+
+/* ----- label ----- */
+
+label {
+  color: var(--stsv-common__color);
+  transition: color 250ms;
+  font: inherit;
+}
+
+/* ----- prefers-reduce-motion ----- */
+
+@media (prefers-reduced-motion) {
+  .sterling-input::after,
+  input {
+    transition: none;
+  }
+}

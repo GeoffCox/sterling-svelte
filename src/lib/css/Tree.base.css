@@ -1,0 +1,83 @@
+.sterling-tree {
+  background-color: var(--stsv-common__background-color);
+  border-color: var(--stsv-common__border-color);
+  border-radius: 0;
+  border-style: solid;
+  border-width: 2px;
+  box-sizing: border-box;
+  color: var(--stsv-common__color);
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  transition: background-color 250ms, color 250ms, border-color 250ms;
+}
+
+.sterling-tree:hover {
+  border-color: var(--stsv-input__border-color--hover);
+  color: var(--stsv-input__color--hover);
+}
+
+.sterling-tree.using-keyboard:focus-within {
+  border-color: var(--stsv-button__border-color--focus);
+  color: var(--stsv-input__color--focus);
+  outline-color: var(--stsv-common__outline-color);
+  outline-offset: 0;
+  outline-style: solid;
+  outline-width: 2px;
+}
+
+.sterling-tree.composed,
+.sterling-tree.composed:hover,
+.sterling-tree.composed.using-keyboard:focus-visible,
+.sterling-tree.composed.disabled {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.sterling-tree.disabled * {
+  cursor: not-allowed;
+}
+
+/* ----- container - a layout panel that grows with the items ----- */
+
+.sterling-tree .container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  position: relative;
+}
+
+.sterling-tree .container::after {
+  background: repeating-linear-gradient(
+    var(--stsv-common--disabled__stripe-angle),
+    var(--stsv-common--disabled__stripe-color),
+    var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
+    var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
+    var(--stsv-common--disabled__stripe-color--alt)
+      calc(2 * var(--stsv-common--disabled__stripe-width))
+  );
+  bottom: 0;
+  content: '';
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+  right: 0;
+  top: 0;
+  transition: opacity 250ms;
+}
+
+.sterling-tree.disabled .container::after {
+  opacity: 1;
+}
+
+/* ----- media queries ----- */
+
+@media (prefers-reduced-motion) {
+  .sterling-tree,
+  .sterling-tree .container::after {
+    transition: none;
+  }
+}

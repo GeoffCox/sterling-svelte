@@ -251,9 +251,9 @@
     background: white;
     background-color: var(--stsv-common__background-color);
     border-color: var(--stsv-common__border-color);
-    border-radius: var(--stsv-common__border-radius);
-    border-style: var(--stsv-common__border-style);
-    border-width: var(--stsv-common__border-width);
+    border-radius: 0;
+    border-style: solid;
+    border-width: 2px;
     display: grid;
     grid-row-start: 1;
     grid-column-start: 1;

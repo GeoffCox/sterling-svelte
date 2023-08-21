@@ -135,6 +135,7 @@
   aria-owns={menuId}
   data-value={value}
   data-root-value={value}
+  variant="menu-button"
   on:blur
   on:click
   on:click={onClick}
@@ -178,19 +179,3 @@
     </Menu>
   </Popover>
 </Button>
-
-<style>
-  .reference {
-    align-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: center;
-    justify-items: center;
-    column-gap: 0.25em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-</style>

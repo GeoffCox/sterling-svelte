@@ -10,11 +10,10 @@
   /** When true, the text area will resize itself vertically to fit the current text.*/
   export let autoHeight = false;
 
-  /** When true, applies colorful theme styles. */
-  export let colorful = false;
-
   /** Sets the resize handle in the lower corner of the text area. */
   export let resize: TextAreaResize = 'none';
+
+  export let variant: string = '';
 
   // ----- State ----- //
 
@@ -81,7 +80,7 @@
   };
 </script>
 
-<div class="sterling-text-area" class:colorful class:disabled>
+<div class={`sterling-text-area ${variant}`} class:disabled>
   <textarea
     bind:this={textAreaRef}
     bind:value
@@ -125,109 +124,3 @@
     {...$$restProps}
   />
 </div>
-
-<style>
-  .sterling-text-area {
-    position: relative;
-    height: 100%;
-    width: 100%;
-  }
-
-  textarea {
-    background-color: var(--stsv-input__background-color);
-    border-color: var(--stsv-input__border-color);
-    border-radius: var(--stsv-input__border-radius);
-    border-style: var(--stsv-input__border-style);
-    border-width: var(--stsv-input__border-width);
-    box-sizing: border-box;
-    color: var(--stsv-input__color);
-    display: block;
-    font: inherit;
-    line-height: inherit;
-    height: 100%;
-    outline: none;
-    padding: 0.5em;
-    margin: 0;
-    min-height: 3em;
-    overflow: hidden;
-    resize: var(--TextArea__resize, none);
-    transition: background-color 250ms, color 250ms, border-color 250ms;
-    width: 100%;
-  }
-
-  textarea:hover {
-    background-color: var(--stsv-input__background-color--hover);
-    border-color: var(--stsv-input__border-color--hover);
-    color: var(--stsv-input__color--hover);
-  }
-
-  textarea:focus {
-    background-color: var(--stsv-input__background-color--focus);
-    border-color: var(--stsv-input__border-color--focus);
-    color: var(--stsv-input__color--focus);
-    outline-color: var(--stsv-common__outline-color);
-    outline-offset: var(--stsv-common__outline-offset);
-    outline-style: var(--stsv-common__outline-style);
-    outline-width: var(--stsv-common__outline-width);
-  }
-
-  .sterling-text-area.colorful textarea {
-    background-color: var(--stsv-input--colorful__background-color);
-    border-color: var(--stsv-input--colorful__border-color);
-    color: var(--stsv-input--colorful__color);
-  }
-
-  .sterling-text-area.colorful textarea:hover {
-    background-color: var(--stsv-input--colorful__background-color--hover);
-    border-color: var(--stsv-input--colorful__border-color--hover);
-    color: var(--stsv-input--colorful__color--hover);
-  }
-
-  .sterling-text-area.colorful textarea:focus {
-    background-color: var(--stsv-input--colorful__background-color--focus);
-    border-color: var(--stsv-input--colorful__border-color--focus);
-    color: var(--stsv-input--colorful__color--focus);
-  }
-
-  .sterling-text-area:disabled {
-    cursor: not-allowed;
-    outline: none;
-  }
-
-  .sterling-text-area::after {
-    background: repeating-linear-gradient(
-      var(--stsv-common--disabled__stripe-angle),
-      var(--stsv-common--disabled__stripe-color),
-      var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
-      var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
-      var(--stsv-common--disabled__stripe-color--alt)
-        calc(2 * var(--stsv-common--disabled__stripe-width))
-    );
-    bottom: 0;
-    content: '';
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    pointer-events: none;
-    transition: opacity 250ms;
-  }
-
-  .sterling-text-area.disabled::after {
-    opacity: 1;
-  }
-
-  textarea::placeholder {
-    color: var(--stsv-common__color--subtle);
-    transition: background-color 250ms, color 250ms, border-color 250ms;
-  }
-
-  @media (prefers-reduced-motion) {
-    textarea,
-    .sterling-text-area,
-    .sterling-text-area::after {
-      transition: none;
-    }
-  }
-</style>

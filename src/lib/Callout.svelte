@@ -11,14 +11,11 @@
   } from '@floating-ui/dom';
   import { portal } from './actions/portal';
   import type { PopoverPlacement } from './Popover.types';
-  import { POPOVER_PORTAL_ID } from './Popover.constants';
+  import { STERLING_PORTAL_HOST_ID } from './Popover.constants';
   import { type FadeParams, type TransitionConfig, fade } from 'svelte/transition';
-  import { prefersReducedMotion } from './stores/prefersReducedMotion';
+  import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
 
   // ----- Props ----- //
-
-  /** When true, applies colorful theme styles. */
-  export let colorful: boolean = false;
 
   /** Conditionally renders content based on open. */
   export let conditionalRender: boolean = true;
@@ -41,6 +38,8 @@
   /** The reference to the element anchoring the position of the callout. */
   export let reference: HTMLElement | undefined;
 
+  export let variant: string = '';
+
   // ----- State ----- //
 
   let popupRef: HTMLDivElement;
@@ -57,10 +56,10 @@
         return portalHost;
       }
 
-      let host = document.querySelector(`#${POPOVER_PORTAL_ID}`) as HTMLElement;
+      let host = document.querySelector(`#${STERLING_PORTAL_HOST_ID}`) as HTMLElement;
       if (!host) {
         host = document.createElement('div');
-        host.id = POPOVER_PORTAL_ID;
+        host.id = STERLING_PORTAL_HOST_ID;
         host.style.overflow = 'visible';
         document.body.append(host);
       }
@@ -195,9 +194,8 @@
   >
     <div
       bind:this={popupRef}
-      class="sterling-callout"
+      class={`sterling-callout ${variant}`}
       class:open
-      class:colorful
       on:blur
       on:click
       on:copy
@@ -234,55 +232,3 @@
     </div>
   </div>
 {/if}
-
-<style>
-  .sterling-callout-portal {
-    position: relative;
-    overflow: visible;
-  }
-
-  .sterling-callout {
-    background-color: var(--stsv-common__background-color);
-    border-color: var(--stsv-common__border-color);
-    border-radius: var(--stsv-common__border-radius);
-    border-style: var(--stsv-common__border-style);
-    border-width: var(--stsv-common__border-width);
-    box-shadow: var(--stsv-common__box-shadow);
-    box-sizing: border-box;
-    color: var(--stsv-common__color);
-    display: none;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    height: fit-content;
-    left: 0;
-    overflow: visible;
-    position: absolute;
-    top: 0;
-    width: max-content;
-    z-index: 0;
-  }
-
-  .sterling-callout.open {
-    display: grid;
-  }
-
-  .sterling-callout.colorful {
-    background-color: var(--stsv-button--colorful__background-color);
-    border-color: var(--stsv-button--colorful__border-color);
-    color: var(--stsv-button--colorful__color);
-  }
-
-  .arrow {
-    position: absolute;
-    box-sizing: border-box;
-    width: 14px;
-    height: 14px;
-    background-color: inherit;
-    border-color: inherit;
-    border-style: inherit;
-    border-width: inherit;
-    /* This clip path clips 1/2 the square to create a triangle */
-    /* The -100% and 200% allow for the drop-shadow to not be clipped */
-    clip-path: polygon(-100% -100%, 200% -100%, 200% 200%, -100% -100%);
-  }
-</style>

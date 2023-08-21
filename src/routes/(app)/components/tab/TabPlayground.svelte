@@ -12,23 +12,23 @@
 
   // ----- Context ----- //
 
-  const selectedValueStore = writable<string | undefined>();
-  const verticalStore = writable<boolean>(false);
-  const disabledStore = writable<boolean>(false);
-
-  setContext(TAB_LIST_CONTEXT_KEY, {
-    disabled: disabledStore,
-    selectedValue: selectedValueStore,
-    vertical: verticalStore
-  });
-
   let exampleRef: any;
 
   const value = 'example-tab';
   let text = 'sterling-svelte';
   let disabled = false;
   let selected = false;
+  let variant = '';
   let vertical = false;
+
+  const selectedValueStore = writable<string | undefined>();
+  const variantStore = writable<string>(variant);
+  const verticalStore = writable<boolean>(vertical);
+  const disabledStore = writable<boolean>(disabled);
+
+  $: {
+    variantStore.set(variant);
+  }
 
   $: {
     verticalStore.set(vertical);
@@ -41,6 +41,13 @@
   $: {
     selected = $selectedValueStore === value;
   }
+
+  setContext(TAB_LIST_CONTEXT_KEY, {
+    disabled: disabledStore,
+    selectedValue: selectedValueStore,
+    variant: variantStore,
+    vertical: verticalStore
+  });
 </script>
 
 <Playground bind:this={exampleRef}>
@@ -52,6 +59,11 @@
     <Checkbox bind:checked={selected}>selected</Checkbox>
     <Label text="text">
       <Input bind:value={text} />
+    </Label>
+  </svelte:fragment>
+  <svelte:fragment slot="tweaks">
+    <Label text="variant" forwardClick>
+      <Input bind:value={variant} />
     </Label>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>

@@ -1,0 +1,18 @@
+.sterling-button.tool {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.sterling-button.tool:hover {
+  background-color: var(--stsv-button__background-color--hover);
+  border-color: transparent;
+}
+
+.sterling-button.tool:active {
+  background-color: var(--stsv-button__background-color--active);
+  border-color: transparent;
+}
+
+.sterling-button.tool:focus-visible {
+  border-color: var(--stsv-button__border-color--focus);
+}

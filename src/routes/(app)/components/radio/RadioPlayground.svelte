@@ -9,10 +9,10 @@
 
   const seed = [...Array(5).keys()];
 
-  let colorful = false;
   let disabled = false;
   let label = 'sterling-svelte';
   let selectedValue = '';
+  let variant = '';
 
   $: possibleValues = seed.map((x) => `${label}-${x}`);
 </script>
@@ -22,20 +22,22 @@
     {#each possibleValues as possibleValue}
       <Radio
         bind:group={selectedValue}
-        {colorful}
         {disabled}
         name="choices"
         value={possibleValue}
+        {variant}
         on:change={() => exampleRef.recordEvent(`change value:${possibleValue}`)}
         >{possibleValue}</Radio
       >
     {/each}
   </div>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={colorful}>colorful</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="label (prefix)">
       <Input bind:value={label} />
+    </Label>
+    <Label text="variant" forwardClick>
+      <Input bind:value={variant} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="status">

@@ -19,15 +19,12 @@
   import { isElementEnabledMenuItem } from './MenuItem.utils';
   import MenuItemDisplay from './MenuItemDisplay.svelte';
   import Popover from './Popover.svelte';
-  import { usingKeyboard } from './stores/usingKeyboard';
+  import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   // ----- Props ----- //
 
   /** If the menu item is checked. Used when role='menuitemcheckbox' or role='menuitemradio'*/
   export let checked = false;
-
-  /** When true, applies colorful theme styles. */
-  export let colorful = false;
 
   /** When true, allows the container to handle borders and focus borders.  */
   export let composed = false;
@@ -43,6 +40,8 @@
 
   /** The value uniquely identifying this menu item within the menu hierarchy. */
   export let value: string;
+
+  export let variant: string = '';
 
   // ----- Get Context ----- //
 
@@ -374,8 +373,7 @@
   aria-haspopup={hasChildren}
   aria-owns={menuId}
   bind:this={menuItemRef}
-  class="sterling-menu-item"
-  class:colorful
+  class={`sterling-menu-item ${variant}`}
   class:composed
   class:using-keyboard={usingKeyboard}
   data-value={value}
@@ -450,83 +448,3 @@
     </Popover>
   {/if}
 </button>
-
-<style>
-  .sterling-menu-item {
-    background-color: transparent;
-    border-color: transparent;
-    border-radius: var(--stsv-button__border-radius);
-    border-style: none;
-    border-width: 0;
-    box-sizing: border-box;
-    color: var(--stsv-common__color);
-    cursor: pointer;
-    font: inherit;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    outline: none;
-    overflow: hidden;
-    text-decoration: none;
-    text-overflow: ellipsis;
-    transition: background-color 250ms, color 250ms, border-color 250ms;
-    white-space: nowrap;
-    user-select: none;
-  }
-
-  .sterling-menu-item:hover {
-    background-color: var(--stsv-button__background-color--hover);
-    color: var(--stsv-button__color--hover);
-  }
-
-  .sterling-menu-item:focus {
-    outline: none;
-  }
-
-  .sterling-menu-item.using-keyboard:focus {
-    border-color: var(--stsv-button__border-color--focus);
-    outline-color: var(--stsv-common__outline-color);
-    outline-offset: var(--stsv-common__outline-offset);
-    outline-style: var(--stsv-common__outline-style);
-    outline-width: var(--stsv-common__outline-width);
-  }
-
-  .sterling-menu-item:focus {
-    background-color: var(--stsv-input__background-color--selected);
-  }
-
-  /** ----- colorful ----- */
-
-  .sterling-menu-item.colorful {
-    color: var(--stsv-common--colorful__color);
-  }
-
-  .sterling-menu-item.colorful:hover {
-    background-color: var(--stsv-button--colorful__background-color--hover);
-    color: var(--stsv-button--colorful__color--hover);
-  }
-
-  .sterling-menu-item.colorful.using-keyboard:focus {
-    border-color: var(--stsv-button--colorful__border-color--focus);
-  }
-
-  .sterling-menu-item.colorful:focus {
-    background-color: var(--stsv-button--colorful__background-color--focus);
-    color: var(--stsv-button--colorful__color--focus);
-  }
-
-  .sterling-menu-item.composed,
-  .sterling-menu-item.composed:focus,
-  .sterling-menu-item.composed:hover {
-    border-width: 0;
-    border-color: transparent;
-    outline: none;
-    background-color: transparent;
-  }
-
-  @media (prefers-reduced-motion) {
-    .sterling-menu-item {
-      transition: none;
-    }
-  }
-</style>

@@ -6,7 +6,7 @@
 
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
   import { isElementEnabledMenuItem, isElementMenuItem } from './MenuItem.utils';
-  import { prefersReducedMotion } from './stores/prefersReducedMotion';
+  import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
 
   let menuRef: HTMLDivElement;
   let menuItemsRef: HTMLDivElement;
@@ -125,27 +125,3 @@
     <slot />
   </div>
 </div>
-
-<style>
-  .sterling-menu {
-    background-color: var(--stsv-common__background-color);
-    border-color: var(--stsv-common__border-color);
-    border-radius: var(--stsv-common__border-radius);
-    border-style: var(--stsv-common__border-style);
-    border-width: var(--stsv-common__border-width);
-    box-shadow: var(--stsv-common__box-shadow);
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    height: fit-content;
-    padding: 0.25em;
-  }
-
-  .menu-items {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    row-gap: calc(2 * var(--stsv-common__outline-width));
-  }
-</style>
