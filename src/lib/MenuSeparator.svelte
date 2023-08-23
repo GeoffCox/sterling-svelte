@@ -1,40 +1,10 @@
+<script lang="ts">
+  /** Additional class names to apply. */
+  export let variant: string = '';
+</script>
+
 <!--
 @component
-A styled line to visually separate menu items in a menu.
+A styled line to visually separate groups of menu items in a menu.
   -->
-<div
-  class="sterling-menu-item-separator"
-  role="separator"
-  on:blur
-  on:click
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:pointercancel
-  on:pointerdown
-  on:pointerenter
-  on:pointerleave
-  on:pointermove
-  on:pointerover
-  on:pointerout
-  on:pointerup
-  on:wheel|passive
-  {...$$restProps}
-/>
+<div class={`sterling-menu-separator ${variant}`} role="separator" {...$$restProps} />

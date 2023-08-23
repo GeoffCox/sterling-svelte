@@ -11,6 +11,8 @@
   export let saturation: number = 100;
   export let lightness: number = 50;
   export let alpha: number = 1;
+
+  /** Additional class names to apply. */
   export let variant: string = '';
 
   // ----- State ----- //

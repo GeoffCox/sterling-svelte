@@ -21,6 +21,7 @@
   /** When true, the progress bar is disabled. */
   export let disabled = false;
 
+  /** Additional class names to apply. */
   export let variant: string = '';
 
   //----- State ----- //

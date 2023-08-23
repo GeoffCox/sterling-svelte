@@ -13,6 +13,7 @@
   /** Sets the resize handle in the lower corner of the text area. */
   export let resize: TextAreaResize = 'none';
 
+  /** Additional class names to apply. */
   export let variant: string = '';
 
   // ----- State ----- //

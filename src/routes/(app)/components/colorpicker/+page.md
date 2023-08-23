@@ -27,17 +27,8 @@ export let colorText: string = defaultColorText;
 /** The current color format */
 export let colorFormat: ColorFormat = 'hex';
 
-/** When true, applies colorful theme styles. */
-export let colorful = false;
-
-/** If the picker shoud have its container handle borders and focus indicators */
-export let composed = false;
-
-/** If the picker is disabled */
-export let disabled = false;
-
-/** If the picker dropdown is open */
-export let open = false;
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
@@ -46,7 +37,8 @@ Dropdown events are included.
 
 ## Anatomy
 
-There are not currently any slots with ColorPicker because it is a composite control that closely coordinates the input and the slider values.
+As a composite control that coordinates the input and the slider values,
+there are no slots for ColorPicker.
 
 ```svelte
 <Dropdown>
@@ -66,6 +58,15 @@ There are not currently any slots with ColorPicker because it is a composite con
   </div>
 </Dropdown>
 ```
+
+## Sterling Theme Variants
+
+- The variant is passed to the Input, TabList, and sliders.
+- The Input has 'composed' appended to the variant.
+
+| Variant  | Description                   |
+| -------- | ----------------------------- |
+| colorful | applies a more colorful style |
 
 ## Playground
 

@@ -10,9 +10,10 @@
 
   // ----- Props ----- //
 
-  /**
-   * When true, the dialog is open; otherwise the dialog is closed.
-   */
+  /** When true, clicking outside the dialog causes the dialog close. */
+  export let backdropCloses = false;
+
+  /** When true, the dialog is open; otherwise the dialog is closed. */
   export let open = false;
 
   /**
@@ -21,10 +22,8 @@
    */
   export let returnValue = '';
 
-  /**
-   * When true, clicking outside the dialog causes the dialog close.
-   */
-  export let backdropCloses = false;
+  /** Additional class names to apply. */
+  export let variant: string = '';
 
   // ----- State ----- //
 
@@ -142,7 +141,7 @@ A styled &lt;dialog&gt; element
 -->
 <dialog
   bind:this={dialogRef}
-  class="sterling-dialog light-mode"
+  class={`sterling-dialog ${variant}`}
   class:open
   class:closing
   on:close
@@ -158,7 +157,7 @@ A styled &lt;dialog&gt; element
               <slot name="title" />
             </div>
             <div class="close">
-              <Button variant="circular tool" on:click={() => closeDialog()}>
+              <Button variant={`circular tool ${variant}`} on:click={() => closeDialog()}>
                 <div class="close-x" />
               </Button>
             </div>
@@ -175,6 +174,3 @@ A styled &lt;dialog&gt; element
     </div>
   </form>
 </dialog>
-
-<style>
-</style>

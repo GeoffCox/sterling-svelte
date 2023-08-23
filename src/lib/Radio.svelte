@@ -14,7 +14,9 @@
    */
   export let group: any | undefined | null = undefined;
   export let id: string | undefined = undefined;
-  export let variant = '';
+
+  /** Additional class names to apply. */
+  export let variant: string = '';
 
   // ensure initial state is consistent
   if (checked && $$restProps.value !== group) {

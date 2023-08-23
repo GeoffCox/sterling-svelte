@@ -30,6 +30,7 @@
   /** The host container for the callout. */
   export let portalHost: HTMLElement | undefined = undefined;
 
+  /** Additional class names to apply. */
   export let variant: string = '';
 
   // ----- State ----- //

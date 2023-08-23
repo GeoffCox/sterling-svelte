@@ -8,6 +8,9 @@
   import { isElementEnabledMenuItem, isElementMenuItem } from './MenuItem.utils';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
 
+  /** Additional class names to apply. */
+  export let variant: string = '';
+
   let menuRef: HTMLDivElement;
   let menuItemsRef: HTMLDivElement;
 
@@ -86,7 +89,7 @@
 
 <div
   bind:this={menuRef}
-  class="sterling-menu"
+  class={`sterling-menu ${variant}`}
   role="menu"
   class:open
   data-root-value={rootValue}
@@ -122,6 +125,6 @@
   {...$$restProps}
 >
   <div bind:this={menuItemsRef} class="menu-items">
-    <slot />
+    <slot {variant} />
   </div>
 </div>

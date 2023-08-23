@@ -29,8 +29,8 @@
   /** The status of the label */
   export let status: LabelStatus = 'none';
 
-  /** Changes the overall style of the label. */
-  export let variant = '';
+  /** Additional class names to apply. */
+  export let variant: string = '';
 
   /**
    * When true, the label is vertically before the content

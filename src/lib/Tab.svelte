@@ -22,6 +22,9 @@
   /** The value uniquely identifying this item within the tab list. */
   export let value: string;
 
+  /** Additional class names to apply. */
+  export let variant: string;
+
   // ----- State ----- //
   let tabRef: HTMLButtonElement;
 
@@ -29,7 +32,7 @@
     disabled: tabListDisabled,
     selectedValue,
     vertical,
-    variant
+    variant: tabListVariant
   } = getContext<TabListContext>(TAB_LIST_CONTEXT_KEY);
 
   $: _disabled = $tabListDisabled || disabled;
@@ -62,7 +65,7 @@
 <button
   bind:this={tabRef}
   aria-selected={selected}
-  class={`sterling-tab ${$variant}`}
+  class={`sterling-tab ${$tabListVariant} ${variant}`}
   disabled={_disabled}
   class:selected
   class:using-keyboard={$usingKeyboard}

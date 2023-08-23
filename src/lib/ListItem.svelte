@@ -11,10 +11,13 @@
   /** The value uniquely identifying this item within the list. */
   export let value: string;
 
+  /** Additional class names to apply. */
+  export let variant: string = '';
+
   // ----- GetContext ----- //
 
   const {
-    variant,
+    variant: listVariant,
     disabled: listDisabled,
     selectedValue,
     horizontal
@@ -44,10 +47,11 @@
   };
 </script>
 
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <div
   aria-selected={selected}
   bind:this={itemRef}
-  class={`sterling-list-item ${$variant}`}
+  class={`sterling-list-item ${$listVariant} ${variant}`}
   class:disabled={disabled || $listDisabled}
   class:item-disabled={disabled && !$listDisabled}
   class:selected
@@ -86,5 +90,7 @@
   on:wheel|passive
   {...$$restProps}
 >
-  <slot {disabled} {horizontal} {selected} {value} variant={$variant}>{value}</slot>
+  <slot {disabled} {horizontal} {selected} {value} variant={`${listVariant} ${variant}`}
+    >{value}</slot
+  >
 </div>

@@ -8,11 +8,8 @@
   export let id: string | undefined = undefined;
   export let value: string = '';
 
-  /** When true, allows the container to handle borders and focus borders.  */
-  export let composed = false;
-
-  /** Changes the overall style of the input. */
-  export let variant = '';
+  /** Additional class names to apply. */
+  export let variant: string = '';
 
   // ----- State ----- //
 
@@ -66,10 +63,10 @@
 
 {#if $$slots.default}
   <label for={id}>
-    <slot {composed} {disabled} {value} />
+    <slot {disabled} {value} />
   </label>
 {/if}
-<div class={`sterling-input ${variant}`} class:composed class:disabled>
+<div class={`sterling-input ${variant}`} class:disabled>
   <input
     bind:this={inputRef}
     class:using-keyboard={$usingKeyboard}

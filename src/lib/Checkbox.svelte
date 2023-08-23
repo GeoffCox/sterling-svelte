@@ -6,6 +6,8 @@
   export let checked: boolean = false;
   export let disabled: boolean = false;
   export let id: string | undefined = undefined;
+
+  /** Additional class names to apply. */
   export let variant: string = '';
 
   // ----- State ----- //

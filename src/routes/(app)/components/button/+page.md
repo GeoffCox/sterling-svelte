@@ -38,14 +38,17 @@ Use the default slot to place content within the button.
 
 ## Sterling Theme Variants
 
-The default sterling theme supports:
+- The variant is passed to the Input, TabList, and sliders.
+- The Input has 'composed' appended to the variant.
 
-- secondary - For less important buttons
-- tool - For buttons appearing on a toolbar
-- colorful - displays a colorful style
-- capsule - rounds the ends of the button
-- circular - a circle with a 1:1 aspect ratio
-- square - squares the edges of the button
+| Variant   | Description                                                            |
+| --------- | ---------------------------------------------------------------------- |
+| capsule   | shows a border with rounded ends                                       |
+| circular  | shows a circular border with a 1:1 aspect ratio                        |
+| colorful  | applies accent colors                                                  |
+| secondary | hides the background until hovered over                                |
+| square    | shows a square border                                                  |
+| tool      | hides the border entirely and hides the background until hovered over. |
 
 ## Playground
 

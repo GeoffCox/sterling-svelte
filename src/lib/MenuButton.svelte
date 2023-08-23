@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { ButtonShape, ButtonVariant } from './Button.types';
   import type { MenuItemContext } from './MenuItem.types';
 
   import { createEventDispatcher, setContext, tick } from 'svelte';
@@ -19,6 +18,9 @@
 
   /** The value uniquely identifying this menu button as the root of the menu hierarchy. */
   export let value: string;
+
+  /** Additional class names to apply. */
+  export let variant: string = '';
 
   // ----- State ----- //
 
@@ -135,7 +137,7 @@
   aria-owns={menuId}
   data-value={value}
   data-root-value={value}
-  variant="menu-button"
+  variant={`sterling-menu-button ${variant}`}
   on:blur
   on:click
   on:click={onClick}
@@ -171,11 +173,11 @@
   {...$$restProps}
 >
   <div class="reference" bind:this={reference} use:clickOutside on:click_outside={onClickOutside}>
-    <slot shape={$$restProps.shape} variant={$$restProps.variant} />
+    <slot {variant} />
   </div>
   <Popover {reference} {open}>
     <Menu bind:this={menuRef} id={menuId} {reference} {open}>
-      <slot name="items" />
+      <slot name="items" {variant} />
     </Menu>
   </Popover>
 </Button>

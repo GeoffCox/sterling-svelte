@@ -45,17 +45,6 @@ input:focus-visible {
   outline: none;
 }
 
-/* ----- composed ----- */
-
-.sterling-input.composed input,
-.sterling-input.composed:hover input:not(:disabled),
-.sterling-input.composed input:focus,
-.sterling-input.composed:hover input:focus {
-  background-color: transparent;
-  border-color: transparent;
-  outline: none;
-}
-
 /* ----- placeholder ----- */
 
 input::placeholder {

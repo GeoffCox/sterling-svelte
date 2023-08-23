@@ -12,7 +12,8 @@
   /** The text appearing on the on position side when the onLabel slot is not replaced. */
   export let onText: string | undefined = undefined;
 
-  export let variant = '';
+  /** Additional class names to apply. */
+  export let variant: string = '';
 
   /** When true, the switch is displayed vertically. */
   export let vertical = false;

@@ -30,7 +30,8 @@
    */
   export let stayOpenOnClickAway = false;
 
-  export let variant = '';
+  /** Additional class names to apply. */
+  export let variant: string = '';
 
   // ----- State ----- //
 

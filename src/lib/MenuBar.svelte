@@ -11,6 +11,11 @@
   import { idGenerator } from './idGenerator';
   import { clickOutside } from './actions/clickOutside';
 
+  // ----- Props ----- //
+
+  /** Additional class names to apply. */
+  export let variant: string = '';
+
   // ----- State ----- //
   const openValues = writable<string[]>([]);
   const rootValue = idGenerator.nextId('MenuBar');
@@ -149,7 +154,7 @@
 
 <div
   bind:this={menuBarRef}
-  class="sterling-menu-bar"
+  class={`sterling-menu-bar ${variant}`}
   role="menubar"
   on:blur
   on:click
@@ -182,5 +187,5 @@
   use:clickOutside
   on:click_outside={onClickOutside}
 >
-  <slot />
+  <slot {variant} />
 </div>

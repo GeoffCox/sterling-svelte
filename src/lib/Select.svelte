@@ -21,6 +21,7 @@
   /** The value of the selected item.*/
   export let selectedValue: string | undefined = undefined;
 
+  /** Additional class names to apply. */
   export let variant: string = '';
 
   // ----- State ----- //

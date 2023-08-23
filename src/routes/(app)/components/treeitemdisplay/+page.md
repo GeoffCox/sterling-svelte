@@ -4,16 +4,13 @@
 
 # TreeItemDisplay
 
-A chevron and a label for an item in a tree.
+A chevron and label for an item in a tree.
 
 ## Props
 
 HTMLDivElement props are included.
 
 ```ts
-/** When true, applies colorful theme styles. */
-export let colorful = false;
-
 /** The depth of the item in the tree for displaying indentation. */
 export let depth = 0;
 
@@ -31,6 +28,9 @@ export let selected = false;
 
 /** The value uniquely identifying this item within the tree. */
 export let value: string;
+
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
@@ -45,10 +45,18 @@ HTMLDivElement `blur`, `click`, and `focus` methods are included.
 
 ```svelte
 <div>
-  <TreeChevron />
-  <slot {colorful} {depth} {disabled} {expanded} {hasChildren} {selected} {value} />
+  <TreeChevron {expanded} {hasChildren} {variant} />
+  <slot {colorful} {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant} />
 </div>
 ```
+
+## Sterling Theme Variants
+
+- The variant is passed to the TreeChevron and default slot.
+
+| Variant  | Description           |
+| -------- | --------------------- |
+| colorful | applies accent colors |
 
 ## Playground
 

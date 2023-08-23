@@ -6,15 +6,13 @@
 
 A styled HTML `input` element with `type=checkbox`.
 
-> The `input type=checkbox` element is difficult to restyle with CSS. The input is hidden and the styled indicator rendered independently.
-
 ## Props
 
 HTMLInputElement props are included.
 
 ```ts
-/** When true, applies colorful theme styles. */
-export let colorful = false;
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
@@ -37,10 +35,16 @@ Use the default slot to provide content for the optional label.
   <div />
   <!-- label (optional) -->
   <label>
-    <slot {checked} {colorful} {disabled} inputId={id} {value} />
+    <slot {checked} {colorful} {disabled} inputId={id} {value} {variant} />
   </label>
 </div>
 ```
+
+## Sterling Theme Variants
+
+| Variant  | Description           |
+| -------- | --------------------- |
+| colorful | applies accent colors |
 
 ## Playground
 

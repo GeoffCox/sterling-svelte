@@ -19,9 +19,10 @@ A styled HTML `dialog` element.
 HTMLDialogElement props are included.
 
 ```ts
-/**
- * When true, the dialog is open; otherwise the dialog is closed.
- */
+/** When true, clicking outside the dialog causes the dialog close. */
+export let backdropCloses = false;
+
+/** When true, the dialog is open; otherwise the dialog is closed. */
 export let open = false;
 
 /**
@@ -30,10 +31,8 @@ export let open = false;
  */
 export let returnValue = '';
 
-/**
- * When true, clicking outside the dialog causes the dialog close.
- */
-export let backdropCloses = false;
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events

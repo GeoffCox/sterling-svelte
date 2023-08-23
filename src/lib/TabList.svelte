@@ -17,7 +17,8 @@
   /** The value of the currently selected tab. */
   export let selectedValue: string | undefined = undefined;
 
-  export let variant = '';
+  /** Additional class names to apply. */
+  export let variant: string = '';
 
   // ----- State ----- //
 

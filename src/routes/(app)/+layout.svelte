@@ -18,6 +18,7 @@
   import AutoModeIcon from './AutoModeIcon.svelte';
   import LightModeIcon from './LightModeIcon.svelte';
   import DarkModeIcon from './DarkModeIcon.svelte';
+  import ModeSlider from './_shared/ModeSlider.svelte';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -171,22 +172,7 @@
           A modern, accessible, lightweight UI component library for Svelte.
         </div>
         <div class="select-theme">
-          <Select bind:selectedValue={mode}>
-            <svelte:fragment slot="value">
-              {#if mode === 'auto'}
-                <AutoModeIcon />
-              {:else if mode === 'dark'}
-                <DarkModeIcon />
-              {:else}
-                <LightModeIcon />
-              {/if}
-            </svelte:fragment>
-            <ListItem value="auto"><div class="theme-option"><AutoModeIcon /> auto</div></ListItem>
-            <ListItem value="light"
-              ><div class="theme-option"><LightModeIcon /> light</div></ListItem
-            >
-            <ListItem value="dark"><div class="theme-option"><DarkModeIcon /> dark</div></ListItem>
-          </Select>
+          <ModeSlider bind:mode />
         </div>
         <div class="github">
           <Link href="http://github.com/GeoffCox/sterling-svelte" variant="ghost">

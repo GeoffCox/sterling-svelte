@@ -41,6 +41,7 @@
   /** The value uniquely identifying this menu item within the menu hierarchy. */
   export let value: string;
 
+  /** Additional class names to apply. */
   export let variant: string = '';
 
   // ----- Get Context ----- //

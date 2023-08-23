@@ -26,15 +26,13 @@
   /** The current color format */
   export let colorFormat: ColorFormat = 'hex';
 
-  /** When true, allows the container to handle borders and focus borders.  */
-  export let composed: boolean = false;
-
   /** If the picker is disabled */
   export let disabled: boolean = false;
 
   /** If the picker dropdown is open */
   export let open: boolean = false;
 
+  /** Additional class names to apply. */
   export let variant: string = '';
 
   // ----- State ----- //
@@ -224,9 +222,8 @@
 
 <div class={`sterling-color-picker ${variant}`}>
   <Dropdown
-    bind:open
-    {composed}
     {disabled}
+    bind:open
     {variant}
     on:blur
     on:click
@@ -261,12 +258,11 @@
       <Input
         bind:value={colorText}
         {disabled}
-        composed
         on:blur={onInputBlur}
         on:click={onInputClick}
         on:keydown={onInputKeydown}
         spellcheck="false"
-        {variant}
+        variant={`composed ${variant}`}
       />
     </div>
     <div class="sterling-color-picker-popup" use:trapKeyboardFocus>

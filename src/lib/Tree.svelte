@@ -21,7 +21,8 @@
   /** The values of items that are expanded. */
   export let expandedValues: string[] = [];
 
-  export let variant = '';
+  /** Additional class names to apply. */
+  export let variant: string = '';
 
   // ----- State ----- //
 

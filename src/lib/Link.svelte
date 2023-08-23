@@ -1,10 +1,9 @@
 <script lang="ts">
-  import type { LinkVariant } from './Link.types';
-
   export let href: string;
   export let disabled: boolean = false;
 
-  export let variant: LinkVariant = 'regular';
+  /** Additional class names to apply. */
+  export let variant: string = '';
 
   let linkRef: HTMLAnchorElement;
 

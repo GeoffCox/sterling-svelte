@@ -25,6 +25,7 @@
   /** The value uniquely identifying this item within the tree. */
   export let value: string;
 
+  /** Additional class names to apply. */
   export let variant: string = '';
 
   // ----- Get Context ----- //

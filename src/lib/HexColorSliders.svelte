@@ -9,6 +9,8 @@
   export let green: number = 0;
   export let blue: number = 0;
   export let alpha: number = 255;
+
+  /** Additional class names to apply. */
   export let variant: string = '';
 
   // ----- State ----- //

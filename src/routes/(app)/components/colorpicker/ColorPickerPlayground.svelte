@@ -13,7 +13,6 @@
   let colorText = 'hsla(222, 50%, 70%, 0.5)';
   let colorFormat: ColorFormat = 'hsl';
 
-  let composed = false;
   let disabled = false;
   let open = false;
   let variant: string = '';
@@ -21,10 +20,9 @@
 
 <Playground bind:this={exampleRef} noEvents>
   <svelte:fragment slot="component">
-    <ColorPicker bind:colorText bind:colorFormat bind:open {composed} {disabled} {variant} />
+    <ColorPicker bind:colorText bind:colorFormat bind:open {disabled} {variant} />
   </svelte:fragment>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Label text="variant" forwardClick>

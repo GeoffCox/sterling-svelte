@@ -28,7 +28,8 @@
   /** The value of the slider */
   export let value: number = 0;
 
-  export let variant = '';
+  /** Additional class names to apply. */
+  export let variant: string = '';
 
   /** When true, the slider is displayed vertically */
   export let vertical: boolean = false;

@@ -12,15 +12,6 @@
   let variant: string = '';
   let withIcon = true;
   let withText = true;
-
-  const addVariantPreset = (preset: string) => {
-    if (!variant.includes(preset)) {
-      const newVariant = `${variant} ${preset}`;
-      variant = newVariant.trim();
-    } else {
-      variant = variant.replace(preset, '');
-    }
-  };
 </script>
 
 <Playground bind:this={exampleRef}>
@@ -43,20 +34,6 @@
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="variant" forwardClick>
       <Input bind:value={variant} />
-      <div class="variant-presets">
-        <Button variant="capsule tool" on:click={() => addVariantPreset('colorful')}
-          >colorful</Button
-        >
-        <Button variant="capsule tool" on:click={() => addVariantPreset('secondary')}
-          >secondary</Button
-        >
-        <Button variant="capsule tool" on:click={() => addVariantPreset('tool')}>tool</Button>
-        <Button variant="capsule tool" on:click={() => addVariantPreset('capsule')}>capsule</Button>
-        <Button variant="capsule tool" on:click={() => addVariantPreset('circular')}
-          >circular</Button
-        >
-        <Button variant="capsule tool" on:click={() => addVariantPreset('square')}>square</Button>
-      </div>
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
@@ -72,11 +49,5 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     padding: 0;
-  }
-
-  .variant-presets {
-    display: flex;
-    justify-items: start;
-    font-size: 0.7em;
   }
 </style>

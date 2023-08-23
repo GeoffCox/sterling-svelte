@@ -35,6 +35,9 @@
   /** The reference to the element anchoring the position of the popover. */
   export let reference: HTMLElement | undefined;
 
+  /** Additional class names to apply. */
+  export let variant: string = '';
+
   // ----- State ----- //
 
   let popupRef: HTMLDivElement;
@@ -122,7 +125,7 @@
   <div use:portal={{ target: portalHost ?? document.body }} class="sterling-popover-portal">
     <div
       bind:this={popupRef}
-      class="sterling-popover"
+      class={`sterling-popover ${variant}`}
       class:open
       on:blur
       on:click
@@ -155,7 +158,7 @@
       {...$$restProps}
       style="left:{popupPosition.x}px; top:{popupPosition.y}px"
     >
-      <slot />
+      <slot {open} {variant} />
     </div>
   </div>
 {/if}

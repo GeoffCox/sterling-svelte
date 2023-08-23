@@ -38,6 +38,7 @@
   /** The reference to the element anchoring the position of the callout. */
   export let reference: HTMLElement | undefined;
 
+  /** Additional class names to apply. */
   export let variant: string = '';
 
   // ----- State ----- //
@@ -192,10 +193,12 @@
     class="sterling-callout-portal"
     transition:fadeMotion|global={{ duration: 250 }}
   >
+    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
     <div
       bind:this={popupRef}
       class={`sterling-callout ${variant}`}
       class:open
+      role="tooltip"
       on:blur
       on:click
       on:copy

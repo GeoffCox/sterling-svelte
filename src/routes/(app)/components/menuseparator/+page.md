@@ -4,7 +4,7 @@
 
 # MenuSeparator
 
-A visual line separating groups of menu items.
+A styled line to visually separate groups of menu items in a menu.
 
 ## Props
 
@@ -12,12 +12,12 @@ HTMLDivElement props are included.
 
 ## Events
 
-HTMLDivElement events are included.
+This is a display element so no events are provided.
 
 ## Anatomy
 
 ```svelte
-<div />
+<!-- separator --><div />
 ```
 
 ## Playground
