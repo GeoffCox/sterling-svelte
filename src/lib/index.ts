@@ -15,7 +15,6 @@ export { idGenerator } from './idGenerator';
 
 // ----- Component types ----- //
 export type { ButtonVariant, ButtonShape } from './Button.types';
-export type { InputVariant } from './Input.types';
 export type { LabelStatus, LabelVariant } from './Label.types';
 export type { ListContext } from './List.types';
 export type { MenuBarContext } from './MenuBar.types';
@@ -29,7 +28,6 @@ export type { TreeItemContext } from './TreeItem.types';
 
 // ----- Component constants ----- //
 export { BUTTON_SHAPES, BUTTON_VARIANTS } from './Button.constants';
-export { INPUT_VARIANTS } from './Input.constants';
 export { LABEL_STATUSES, LABEL_VARIANTS } from './Label.constants';
 export { LIST_CONTEXT_KEY } from './List.constants';
 export { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
@@ -38,7 +36,8 @@ export { POPOVER_PLACEMENTS } from './Popover.constants';
 export { PROGRESS_STATUSES } from './Progress.constants';
 export { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
 export { TEXT_AREA_RESIZES } from './TextArea.constants';
-export { TREE_CONTEXT_KEY, TREE_ITEM_CONTEXT_KEY } from './Tree.constants';
+export { TREE_CONTEXT_KEY } from './Tree.constants';
+export { TREE_ITEM_CONTEXT_KEY } from './TreeItem.constants';
 
 // ----- Components ----- //
 import Button from './Button.svelte';

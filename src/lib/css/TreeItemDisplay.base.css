@@ -17,7 +17,7 @@
   white-space: nowrap;
 }
 
-.sterling-tree-item-display:not(.item-disabled):not(.selected):hover {
+.sterling-tree-item-display:not(.disabled):not(.selected):hover {
   background-color: var(--stsv-button__background-color--hover);
   color: var(--stsv-button__color--hover);
 }

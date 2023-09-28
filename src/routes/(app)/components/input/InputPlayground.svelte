@@ -1,18 +1,13 @@
 <script lang="ts">
-  import { INPUT_VARIANTS, type InputVariant } from '$lib';
-
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import LabelBox from '$lib/Label.svelte';
-  import ListItem from '$lib/ListItem.svelte';
-  import Select from '$lib/Select.svelte';
 
   import Playground from '../Playground.svelte';
 
   let exampleRef: any;
 
-  let composed = false;
   let disabled = false;
   let label = 'sterling-svelte';
   let placeholder = '';
@@ -24,7 +19,6 @@
   <svelte:fragment slot="component">
     {#if label.length > 0}
       <Input
-        {composed}
         {disabled}
         {placeholder}
         {variant}
@@ -34,7 +28,6 @@
       >
     {:else}
       <Input
-        {composed}
         {disabled}
         {placeholder}
         {variant}
@@ -45,7 +38,6 @@
     {/if}
   </svelte:fragment>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <LabelBox text="placeholder">
       <Input bind:value={placeholder} />

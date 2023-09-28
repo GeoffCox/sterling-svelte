@@ -14,7 +14,7 @@
 
   // ----- Props ----- //
 
-  /** Conditionally renders content when open. */
+  /** When true, content is rendered only when the popover is open. */
   export let conditionalRender: boolean = true;
 
   /** The offset along the side of the reference element. */
@@ -123,6 +123,7 @@
 
 {#if open || !conditionalRender}
   <div use:portal={{ target: portalHost ?? document.body }} class="sterling-popover-portal">
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div
       bind:this={popupRef}
       class={`sterling-popover ${variant}`}

@@ -35,7 +35,7 @@ type PopoverPlacement =
 HTMLDivElement props are included.
 
 ```ts
-/** Conditionally renders content when open. */
+/** When true, content is rendered only when the popover is open. */
 export let conditionalRender: boolean = true;
 
 /** The offset along the side of the reference element. */
@@ -50,11 +50,14 @@ export let open: boolean = false;
 /** How the popover should be positioned relative to the reference element. */
 export let placement: PopoverPlacement = 'bottom-start';
 
-/** The host container for the popover. '*/
+/** The host container for the callout. */
 export let portalHost: HTMLElement | undefined = undefined;
 
 /** The reference to the element anchoring the position of the popover. */
 export let reference: HTMLElement | undefined;
+
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
@@ -67,7 +70,7 @@ Use the default slot to set the popover content.
 
 ```svelte
 <div>
-  <slot />
+  <slot {open} {variant} />
 </div>
 ```
 

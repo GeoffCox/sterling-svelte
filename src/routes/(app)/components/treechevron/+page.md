@@ -16,6 +16,9 @@ export let expanded = false;
 
 /** When true, the chevron is displayed, otherwise a dot is displayed. */
 export let hasChildren = false;
+
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events

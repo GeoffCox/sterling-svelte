@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
+  // ----- Props ----- //
+
   /** When true, the chevron rotates to indicate children are visible. */
   export let expanded = false;
 
@@ -10,14 +12,20 @@
   /** Additional class names to apply. */
   export let variant: string = '';
 
+  // ----- State ----- //
+
   let previousExpanded = expanded;
   let mounted = false;
+
+  // ----- Event Handlers ----- //
 
   onMount(() => {
     setTimeout(() => {
       mounted = true;
     }, 0);
   });
+
+  // ----- Animation ----- //
 
   let animate = false;
   $: {
@@ -28,6 +36,7 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
   class={`sterling-tree-chevron ${variant}`}
   class:leaf={!hasChildren}

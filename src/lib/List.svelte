@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
   import type { ListContext } from './List.types';
 
   import { createEventDispatcher, setContext } from 'svelte';
@@ -8,9 +9,6 @@
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   // ----- Props ----- //
-
-  /** When true, allows the container to handle borders and focus borders.  */
-  export let composed = false;
 
   /** If the list and all its items are disabled. */
   export let disabled: boolean = false;
@@ -32,11 +30,6 @@
   const disabledStore = writable<boolean>(disabled);
   const horizontalStore = writable<boolean>(horizontal);
   const selectedValueStore = writable<string | undefined>(selectedValue);
-  const variantStore = writable<string>(variant);
-
-  $: {
-    variantStore.set(variant);
-  }
 
   $: {
     disabledStore.set(disabled);
@@ -180,7 +173,7 @@
 
   // ----- Event Handlers ----- //
 
-  const onClick: svelte.JSX.MouseEventHandler<HTMLDivElement> = (event) => {
+  const onClick: MouseEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
       let candidate: HTMLElement | null | undefined = event.target as HTMLElement;
       let candidateValue: string | null | undefined = candidate?.getAttribute('data-value');
@@ -195,7 +188,7 @@
     }
   };
 
-  const onKeydown: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
+  const onKeydown: KeyboardEventHandler<HTMLDivElement> = (event) => {
     if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
       switch (event.key) {
         case 'Home':
@@ -245,8 +238,7 @@
   setContext<ListContext>(LIST_CONTEXT_KEY, {
     disabled: disabledStore,
     selectedValue: selectedValueStore,
-    horizontal: horizontalStore,
-    variant: variantStore
+    horizontal: horizontalStore
   });
 </script>
 
@@ -255,13 +247,14 @@
 A list of items where a single item can be selected.
   -->
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+<!-- svelte-ignore a11y-role-supports-aria-props -->
 <div
   aria-activedescendant={selectedValue}
   aria-disabled={disabled}
   aria-orientation={horizontal ? 'horizontal' : 'vertical'}
   bind:this={listRef}
   class={`sterling-list ${variant}`}
-  class:composed
   class:disabled
   class:horizontal
   class:using-keyboard={$usingKeyboard}
@@ -299,6 +292,6 @@ A list of items where a single item can be selected.
   {...$$restProps}
 >
   <div class="container">
-    <slot {composed} {disabled} {horizontal} {selectedValue} {variant} />
+    <slot {disabled} {horizontal} {selectedValue} {variant} />
   </div>
 </div>

@@ -12,7 +12,6 @@
 
   let exampleRef: any;
 
-  let composed = false;
   let disabled = false;
   let expandedValues: string[] = [];
   let expandedValuesText: string;
@@ -32,7 +31,6 @@
   <div class="component" slot="component">
     <Tree
       bind:selectedValue
-      {composed}
       {disabled}
       bind:expandedValues
       {variant}
@@ -40,12 +38,11 @@
       on:expandCollapse={() => exampleRef.recordEvent('expandCollapse')}
     >
       {#each coffeeTree as coffeeItem}
-        <CoffeeTreeItem {coffeeItem} />
+        <CoffeeTreeItem {coffeeItem} {variant} />
       {/each}
     </Tree>
   </div>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="expandedValues (comma separated)">
       <Input bind:value={expandedValuesText} />

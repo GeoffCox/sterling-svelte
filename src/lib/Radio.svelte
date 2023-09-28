@@ -7,11 +7,9 @@
 
   export let checked: boolean = false;
   export let disabled: boolean = false;
-  /*
-   * bind:group doesn't seem to work properly (yet) in a nested radio.
-   * The workaround is to export `checked` and `group` properties
-   * and implement the same behavior.
-   */
+  // bind:group doesn't seem to work properly (yet) in a nested radio.
+  // The workaround is to export `checked` and `group` properties
+  // and implement the same behavior.
   export let group: any | undefined | null = undefined;
   export let id: string | undefined = undefined;
 

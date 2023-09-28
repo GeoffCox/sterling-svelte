@@ -23,19 +23,19 @@
 
   // ----- Props ----- //
 
-  /** If the menu item is checked. Used when role='menuitemcheckbox' or role='menuitemradio'*/
+  /**
+   * When true, the menu item is checked.
+   * Use with role='menuitemcheckbox' or role='menuitemradio'.
+   */
   export let checked = false;
 
-  /** When true, allows the container to handle borders and focus borders.  */
-  export let composed = false;
-
-  /** If the menu item is disabled. */
+  /** When true, the menu item is disabled. */
   export let disabled = false;
 
   /** The role of the menu item */
   export let role: MenuItemRole = 'menuitem';
 
-  /** The text of the menu item when the item slot is not filled.*/
+  /** The text of the menu item. Not used when the item slot is filled.*/
   export let text: string | undefined = undefined;
 
   /** The value uniquely identifying this menu item within the menu hierarchy. */
@@ -375,7 +375,6 @@
   aria-owns={menuId}
   bind:this={menuItemRef}
   class={`sterling-menu-item ${variant}`}
-  class:composed
   class:using-keyboard={usingKeyboard}
   data-value={value}
   data-root-value={rootValue}
@@ -431,9 +430,15 @@
       {role}
       {text}
       {value}
+      {variant}
     >
-      <MenuItemDisplay {checked} {disabled} {hasChildren} {isMenuBarItem} menuItemRole={role}
-        >{text}</MenuItemDisplay
+      <MenuItemDisplay
+        {checked}
+        {disabled}
+        {hasChildren}
+        {isMenuBarItem}
+        menuItemRole={role}
+        {variant}>{text}</MenuItemDisplay
       >
     </slot>
   </div>

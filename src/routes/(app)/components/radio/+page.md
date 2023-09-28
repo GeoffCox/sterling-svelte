@@ -13,8 +13,8 @@ A styled HTML `input` element with `type=radio`.
 HTMLInputElement props are included.
 
 ```ts
-/** When true, applies colorful theme styles. */
-export let colorful = false;
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
@@ -37,7 +37,7 @@ Use the default slot to provide content for the optional label.
   <div />
   <!-- label (optional) -->
   <label>
-    <slot {checked} {colorful} {disabled} {group} inputId={id} {value} />
+    <slot {checked} {disabled} {group} inputId={id} {value} {variant} />
   </label>
 </div>
 ```

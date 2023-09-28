@@ -7,31 +7,28 @@
 
   // ----- Props ----- //
 
-  /** When true, allows the container to handle borders and focus borders  */
-  export let composed = false;
-
   /** When true, the slider is disabled. */
   export let disabled: boolean = false;
 
   /** The minimum value of the slider. */
   export let min: number = 0;
 
-  /** The maximum value of the slider */
+  /** The maximum value of the slider. */
   export let max: number = 100;
 
-  /** The number of decimal places for rounding the value */
+  /** The number of decimal places for rounding the value. */
   export let precision: number | undefined = undefined;
 
-  /** The amount the value changes when moving by arrow keys */
+  /** The amount the value changes by pressing arrow keys. */
   export let step: number = 1;
 
-  /** The value of the slider */
+  /** The value of the slider. */
   export let value: number = 0;
 
   /** Additional class names to apply. */
   export let variant: string = '';
 
-  /** When true, the slider is displayed vertically */
+  /** When true, the slider is displayed vertically. */
   export let vertical: boolean = false;
 
   // ----- State ----- //
@@ -174,7 +171,6 @@ Slider lets the user chose a value within a min/max range by dragging a thumb bu
   aria-valuenow={value}
   aria-valuemax={max}
   class={`sterling-slider ${variant}`}
-  class:composed
   class:disabled
   class:horizontal={!vertical}
   class:vertical

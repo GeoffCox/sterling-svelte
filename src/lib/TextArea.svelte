@@ -7,10 +7,10 @@
   export let disabled = false;
   export let value: string = '';
 
-  /** When true, the text area will resize itself vertically to fit the current text.*/
+  /** When true, the text area will resize itself vertically to fit text.*/
   export let autoHeight = false;
 
-  /** Sets the resize handle in the lower corner of the text area. */
+  /** Sets the resize handle direction. */
   export let resize: TextAreaResize = 'none';
 
   /** Additional class names to apply. */

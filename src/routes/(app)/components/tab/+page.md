@@ -13,18 +13,21 @@ HTMLDivElement props are included.
 ```ts
 /**
  * When true, the tab is disabled.
- * The tab is also disabled if the tab list is disabled.
+ * The tab is also disabled when its parent tab list is disabled.
  */
 export let disabled = false;
 
 /** When true, the tab is selected. */
 export let selected = false;
 
-/** The text of the tab when the default slot is not replaced. */
+/** The text of the tab. Not used when the default slot is filled. */
 export let text: string | undefined = undefined;
 
-/** The value uniquely identifying this item within the tab list. */
+/** The value uniquely identifying this tab within the tab list. */
 export let value: string;
+
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events

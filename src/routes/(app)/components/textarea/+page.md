@@ -11,14 +11,14 @@ A styled HTML `textarea` element.
 HTMLTextArea props are included.
 
 ```ts
-/** When true, the text area will resize itself vertically to fit the current text.*/
+/** When true, the text area will resize itself vertically to fit text.*/
 export let autoHeight = false;
 
-/** When true, applies colorful theme styles. */
-export let colorful = false;
-
-/** Sets the resize handle in the lower corner of the text area. */
+/** Sets the resize handle direction. */
 export let resize: TextAreaResize = 'none';
+
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events

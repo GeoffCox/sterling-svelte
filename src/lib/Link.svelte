@@ -2,8 +2,12 @@
   export let href: string;
   export let disabled: boolean = false;
 
+  // ----- Props ----- //
+
   /** Additional class names to apply. */
   export let variant: string = '';
+
+  // ----- State ----- //
 
   let linkRef: HTMLAnchorElement;
 

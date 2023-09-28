@@ -9,33 +9,30 @@
   export { htmlFor as for };
 
   /**
-   * If true, then clicking the label invokes a click on the input.
-   * Only necessary when the label is not associated with the input through containment or the for/id relationship.
+   * If true, clicking the label invokes a click on the content.
+   * Only necessary when the label is not associated with the content through containment or the for/id relationship.
    */
   export let forwardClick = false;
 
-  /** The text to display in the label if the text slot is not filled */
+  /** The text to display in the label. Not used if the text slot is filled. */
   export let text: string | undefined = undefined;
 
   /** The status message to display */
   export let message: string | undefined = undefined;
 
-  /** When true, a required indicator is displayed */
+  /** When true, indicates a value is required. */
   export let required = false;
 
-  /** The reason the value is required */
+  /** The reason the value is required. */
   export let requiredReason = 'required';
 
-  /** The status of the label */
+  /** The status of the label. */
   export let status: LabelStatus = 'none';
 
   /** Additional class names to apply. */
   export let variant: string = '';
 
-  /**
-   * When true, the label is vertically before the content
-   * @default true
-   */
+  /** When true, the label appears above the content. */
   export let vertical = true;
 
   // ----- State ----- //
@@ -148,6 +145,7 @@
   };
 </script>
 
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <label
   bind:this={labelRef}
   aria-disabled={targetDisabled}
@@ -187,7 +185,15 @@
   {...$$restProps}
 >
   {#if text || $$slots.text}
-    <slot name="text" disabled={targetDisabled} for={htmlFor} {forwardClick} {text} {required}>
+    <slot
+      name="text"
+      disabled={targetDisabled}
+      for={htmlFor}
+      {forwardClick}
+      {required}
+      {text}
+      {variant}
+    >
       <div class="text">
         {text}
       </div>
@@ -199,7 +205,7 @@
     </div>
   {/if}
   {#if message}
-    <slot name="message" disabled={targetDisabled} {message} {required} {status}>
+    <slot name="message" disabled={targetDisabled} {message} {required} {status} {variant}>
       <div
         class="message"
         class:info={status === 'info'}
@@ -212,7 +218,7 @@
     </slot>
   {/if}
   {#if required}
-    <slot name="required" {requiredReason}>
+    <slot name="required" {requiredReason} {variant}>
       <Tooltip showOn="hover">
         <span class="required-reason" slot="tip">{requiredReason}</span>
         <div class="required">*</div>

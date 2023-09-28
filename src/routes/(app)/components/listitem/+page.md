@@ -11,11 +11,14 @@ An item within a `List`.
 HTMLDivElement props are included.
 
 ```ts
-/** When true the item is disabled.  The item may also be disabled if the parent List is disabled. */
+/** When true the item is disabled.  The item is also disabled if the parent list is disabled. */
 export let disabled = false;
 
 /** The value uniquely identifying this item within the list. */
 export let value: string;
+
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
@@ -32,7 +35,7 @@ If the default slot is not filled, the value will be displayed as text.
 
 ```svelte
 <div>
-  <slot {disabled} {horizontal} {selected} {value}>{value}</slot>
+  <slot {disabled} {horizontal} {selected} {value} {variant}>{value}</slot>
 </div>
 ```
 

@@ -16,25 +16,17 @@ HTMLDivElement props are included.
 
 ```ts
 /** When true, applies colorful theme styles. */
-export let colorful = false;
-
-/** When true, allows the container to handle borders and focus borders.  */
-export let composed = false;
-
-/**
- * Disables the dropdown.
- */
+/** Disables the dropdown. */
 export let disabled = false;
 
-/**
- * Controls if the dropdown is open.
- */
+/** When true, the dropdown is open. */
 export let open = false;
 
-/**
- * Keeps the dropdown open when clicking outside.
- */
+/** When the user clicks away from the dropdown, it remains open. */
 export let stayOpenOnClickAway = false;
+
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
@@ -47,17 +39,17 @@ dispatch('open', { open });
 
 ## Methods
 
-HTMLDivElement blur(), click(), and focus() methods are included.
+HTMLDivElement `blur`, `click`, and `focus` methods are included.
 
 ## Anatomy
 
 ```svelte
 <div>
-  <slot name="value" {colorful} {composed} {disabled} {open} />
-  <slot name="button" {colorful} {composed} {disabled} {open} />
+  <slot name="value" {disabled} {open} {variant} />
+  <slot name="button" {disabled} {open} {variant} />
   <!-- dropdown -->
   <Popover>
-    <slot {colorful} {composed} {disabled} {open} />
+    <slot {disabled} {open} {variant} />
   </Popover>
 </div>
 ```

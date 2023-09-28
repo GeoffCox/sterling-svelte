@@ -5,7 +5,9 @@
   import { LIST_CONTEXT_KEY } from './List.constants';
   import type { ListContext } from './List.types';
 
-  /** When true the item is disabled.  The item may also be disabled if the parent List is disabled. */
+  // ----- Props ----- //
+
+  /** When true the item is disabled.  The item is also disabled if the parent list is disabled. */
   export let disabled = false;
 
   /** The value uniquely identifying this item within the list. */
@@ -17,15 +19,13 @@
   // ----- GetContext ----- //
 
   const {
-    variant: listVariant,
     disabled: listDisabled,
     selectedValue,
     horizontal
   } = getContext<ListContext>(LIST_CONTEXT_KEY) || {
     disabled: readable(false),
     selectedValue: writable(undefined),
-    horizontal: readable(false),
-    variant: readable('')
+    horizontal: readable(false)
   };
 
   // ----- State ----- //
@@ -51,7 +51,7 @@
 <div
   aria-selected={selected}
   bind:this={itemRef}
-  class={`sterling-list-item ${$listVariant} ${variant}`}
+  class={`sterling-list-item ${variant}`}
   class:disabled={disabled || $listDisabled}
   class:item-disabled={disabled && !$listDisabled}
   class:selected
@@ -90,7 +90,5 @@
   on:wheel|passive
   {...$$restProps}
 >
-  <slot {disabled} {horizontal} {selected} {value} variant={`${listVariant} ${variant}`}
-    >{value}</slot
-  >
+  <slot {disabled} {horizontal} {selected} {value} {variant}>{value}</slot>
 </div>

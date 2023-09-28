@@ -7,7 +7,7 @@
 An item within a `Tree` hierarchy.
 
 - Provides selection, expand/collapse, and interaction within a Tree.
-- By default, renders the item with TreeItemDisplay.
+- By default, renders via TreeItemDisplay.
 - Note: A tree item is identified by having `data-value` and `role="treeitem"` properties
 
 ## Types
@@ -38,11 +38,14 @@ HTMLDivElement props are included.
 /** When true, the item is disabled. */
 export let disabled = false;
 
-/** The text for the item when the item and label slots are not filled. */
+/** The text for the item. Not used when either the item or label slots are filled. */
 export let text: string | undefined = undefined;
 
 /** The value uniquely identifying this item within the tree. */
 export let value: string;
+
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
@@ -69,18 +72,25 @@ function toggleExpanded();
 <div>
   <!-- item -->
   <div>
-    <slot name="item" {colorful} {depth} {disabled} {expanded} {hasChildren} {selected} {value}>
-      <TreeItemDisplay>
-        <slot name="label" {colorful} {depth} {disabled} {expanded} {hasChildren} {selected} {value}
+    <slot name="item" {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant}>
+      <TreeItemDisplay {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant}>
+        <!-- label slot (passed to default slot of TreeItemDisplay)  -->
+        <slot name="label" {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant}
           >{text || value}</slot
         >
       </TreeItemDisplay>
     </slot>
   </div>
   <!-- children -->
-  <slot {depth} {disabled} {selected} {value} />
+  <slot {depth} {disabled} {expanded} {selected} {value} {variant} />
 </div>
 ```
+
+## Sterling Theme Variants
+
+| Variant  | Description           |
+| -------- | --------------------- |
+| colorful | applies accent colors |
 
 ## Playground
 

@@ -7,9 +7,16 @@
 
   // ----- Props ----- //
 
+  /** The hue value. */
   export let hue: number = 180;
+
+  /** The saturation value. */
   export let saturation: number = 100;
+
+  /** The lightness value. */
   export let lightness: number = 50;
+
+  /** The alpha value. */
   export let alpha: number = 1;
 
   /** Additional class names to apply. */
@@ -106,7 +113,37 @@
   };
 </script>
 
-<div class={`sterling-hsl-color-sliders ${variant}`}>
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div
+  class={`sterling-hsl-color-sliders ${variant}`}
+  on:blur
+  on:click
+  on:copy
+  on:cut
+  on:dblclick
+  on:dragend
+  on:dragenter
+  on:dragleave
+  on:dragover
+  on:dragstart
+  on:drop
+  on:focus
+  on:focusin
+  on:focusout
+  on:keydown
+  on:keypress
+  on:keyup
+  on:mousedown
+  on:mouseenter
+  on:mouseleave
+  on:mousemove
+  on:mouseover
+  on:mouseout
+  on:mouseup
+  on:wheel
+  on:paste
+  {...$$restProps}
+>
   <div class="slider hue">
     <Slider min={0} max={360} precision={0} bind:value={hue} {variant} />
   </div>

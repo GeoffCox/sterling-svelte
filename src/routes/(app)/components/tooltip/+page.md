@@ -31,7 +31,7 @@ HTMLDivElement events are included.
 The tooltip is anchored to a sibling element that appears directly after the default slot content.
 
 ```svelte
-<slot {disabled} {hoverDelayMilliseconds} {open} />
+<slot {disabled} {hoverDelayMilliseconds} {open} {variant} />
 <!-- anchor point -->
 <div />
 <Callout />

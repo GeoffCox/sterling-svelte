@@ -22,9 +22,6 @@ type TabListContext = {
 HTMLDivElement props are included.
 
 ```ts
-/** When true, applies colorful theme styles. */
-export let colorful = false;
-
 /** When true, the tab list and its tabs are disabled. */
 export let disabled = false;
 
@@ -33,6 +30,9 @@ export let vertical = false;
 
 /** The value of the currently selected tab. */
 export let selectedValue: string | undefined = undefined;
+
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
@@ -58,7 +58,7 @@ function selectLastTab();
 
 ```svelte
 <div>
-  <slot {disabled} {selectedValue} {vertical} />
+  <slot {disabled} {selectedValue} {variant} {vertical} />
 </div>
 ```
 

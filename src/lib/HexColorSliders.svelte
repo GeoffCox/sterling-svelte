@@ -5,9 +5,17 @@
   import Slider from '$lib/Slider.svelte';
 
   // ----- Props ----- //
+
+  /** The red value. */
   export let red: number = 0;
+
+  /** The green value. */
   export let green: number = 0;
+
+  /** The blue value. */
   export let blue: number = 0;
+
+  /** The alpha value. */
   export let alpha: number = 255;
 
   /** Additional class names to apply. */
@@ -80,7 +88,37 @@
   };
 </script>
 
-<div class={`sterling-hex-color-sliders ${variant}`}>
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div
+  class={`sterling-hex-color-sliders ${variant}`}
+  on:blur
+  on:click
+  on:copy
+  on:cut
+  on:dblclick
+  on:dragend
+  on:dragenter
+  on:dragleave
+  on:dragover
+  on:dragstart
+  on:drop
+  on:focus
+  on:focusin
+  on:focusout
+  on:keydown
+  on:keypress
+  on:keyup
+  on:mousedown
+  on:mouseenter
+  on:mouseleave
+  on:mousemove
+  on:mouseover
+  on:mouseout
+  on:mouseup
+  on:wheel
+  on:paste
+  {...$$restProps}
+>
   <div class="slider red-slider">
     <Slider min={0} max={255} precision={0} bind:value={red} {variant} />
   </div>

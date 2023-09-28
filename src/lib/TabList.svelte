@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
   import type { TabListContext } from './TabList.types';
 
   import { createEventDispatcher, setContext } from 'svelte';
@@ -162,7 +163,7 @@
 
   // ----- EventHandlers ----- //
 
-  const onClick: svelte.JSX.MouseEventHandler<HTMLDivElement> = (event) => {
+  const onClick: MouseEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
       let candidate: HTMLElement | null | undefined = event.target as HTMLElement;
       let candidateValue: string | null | undefined = candidate?.getAttribute('data-value');
@@ -178,7 +179,7 @@
     }
   };
 
-  const onKeydown: svelte.JSX.KeyboardEventHandler<HTMLDivElement> = (event) => {
+  const onKeydown: KeyboardEventHandler<HTMLDivElement> = (event) => {
     // if using arrows, only move when there are no modifier keys
     if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
       switch (event.key) {
@@ -243,6 +244,7 @@
   class:disabled
   class:vertical
   role="tablist"
+  tabindex="-1"
   on:blur
   on:click
   on:click={onClick}

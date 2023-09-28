@@ -12,6 +12,4 @@ export type TreeContext = {
 
   /** The value of the currently selected item. */
   selectedValue: Writable<string | undefined>;
-
-  variant: Readable<string>;
 };

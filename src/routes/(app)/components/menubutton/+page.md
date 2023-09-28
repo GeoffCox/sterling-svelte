@@ -4,7 +4,7 @@
 
 # MenuButton
 
-A Button that shows a menu when clicked.
+A `Button` displaying a `Menu` when clicked.
 
 ## Props
 
@@ -16,11 +16,14 @@ export let open = false;
 
 /** The value uniquely identifying this menu button as the root of the menu hierarchy. */
 export let value: string;
+
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
 
-Button events are included.
+`Button` events are included.
 
 ```ts
 dispatch('close', { value });
@@ -30,14 +33,16 @@ dispatch('select', { value });
 
 ## Methods
 
-Button `blur`, `click`, and `focus` methods are included.
+`Button` methods `blur`, `click`, and `focus` are included.
 
 ## Anatomy
 
 ```svelte
 <Button>
+  <!-- The default slot of the Button -->
   <slot {shape} {variant} />
-  <slot name="items" />
+  <!-- The slot for menu items -->
+  <slot name="items" {variant} />
 </Button>
 ```
 

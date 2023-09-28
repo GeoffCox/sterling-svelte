@@ -1,15 +1,16 @@
 <script lang="ts">
+  import type { MenuBarContext } from './MenuBar.types';
   import type { MenuItemContext } from './MenuItem.types';
 
   import { createEventDispatcher, setContext } from 'svelte';
+  import { writable } from 'svelte/store';
+
+  import { clickOutside } from './actions/clickOutside';
+  import { idGenerator } from './idGenerator';
 
   import { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
-  import { writable } from 'svelte/store';
-  import type { MenuBarContext } from './MenuBar.types';
   import { isElementEnabledMenuItem } from './MenuItem.utils';
-  import { idGenerator } from './idGenerator';
-  import { clickOutside } from './actions/clickOutside';
 
   // ----- Props ----- //
 
@@ -156,6 +157,7 @@
   bind:this={menuBarRef}
   class={`sterling-menu-bar ${variant}`}
   role="menubar"
+  tabindex="-1"
   on:blur
   on:click
   on:copy

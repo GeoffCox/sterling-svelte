@@ -12,22 +12,13 @@
 
   // ----- Props ----- //
 
-  /** When true, allows the container to handle borders and focus borders.  */
-  export let composed = false;
-
-  /**
-   * Disables the dropdown.
-   */
+  /** Disables the dropdown. */
   export let disabled = false;
 
-  /**
-   * Controls if the dropdown is open.
-   */
+  /** When true, the dropdown is open. */
   export let open = false;
 
-  /**
-   * Keeps the dropdown open when clicking outside.
-   */
+  /** When the user clicks away from the dropdown, it remains open. */
   export let stayOpenOnClickAway = false;
 
   /** Additional class names to apply. */
@@ -114,7 +105,6 @@
   aria-haspopup={true}
   aria-expanded={open}
   class={`sterling-dropdown ${variant}`}
-  class:composed
   class:disabled
   role="combobox"
   tabindex="0"
@@ -151,9 +141,9 @@
   {...$$restProps}
 >
   <div class="value">
-    <slot name="value" {composed} {disabled} {open} />
+    <slot name="value" {disabled} {open} {variant} />
   </div>
-  <slot name="button" {composed} {disabled} {open}>
+  <slot name="button" {disabled} {open} {variant}>
     <div class="button">
       <div class="chevron" />
     </div>
@@ -165,7 +155,7 @@
       transition:slideMotion|global={{ duration: 200 }}
       bind:this={popupContentRef}
     >
-      <slot {composed} {disabled} {open} />
+      <slot {disabled} {open} {variant} />
     </div>
   </Popover>
 </div>

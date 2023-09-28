@@ -14,8 +14,6 @@ A label container for an interactive element such as an input, select, list, or 
 
 ```ts
 type LabelStatus = 'none' | 'info' | 'success' | 'warning' | 'danger';
-
-type LabelVariant = 'regular' | 'container' | 'inline';
 ```
 
 ## Props
@@ -23,50 +21,32 @@ type LabelVariant = 'regular' | 'container' | 'inline';
 HTMLLabelElement props are included.
 
 ```ts
-/** When true, applies colorful theme styles. */
-export let colorful = false;
-
 /**
- * If true, then clicking the label invokes a click on the input.
- * Only necessary when the label is not associated with the input through
- * containment or the for/id relationship.
+ * If true, clicking the label invokes a click on the content.
+ * Only necessary when the label is not associated with the content through containment or the for/id relationship.
  */
 export let forwardClick = false;
 
-/** The text to display in the label if the text slot is not filled */
+/** The text to display in the label. Not used if the text slot is filled. */
 export let text: string | undefined = undefined;
 
 /** The status message to display */
 export let message: string | undefined = undefined;
 
-/** When true, a required indicator is displayed */
+/** When true, indicates a value is required. */
 export let required = false;
 
-/** The reason the value is required */
+/** The reason the value is required. */
 export let requiredReason = 'required';
 
-/** The status of the label */
-export let status: LabelStatus =
-  'none'; /** If true, then clicking the label invokes a click on the contained field. */
-export let forwardClick = false;
-
-/** The text to display in the label if the text slot is not filled */
-export let text: string | undefined = undefined;
-
-/** The status message to display */
-export let message: string | undefined = undefined;
-
-/** When true, a required indicator is displayed */
-export let required = false;
-
-/** The reason the value is required */
-export let requiredReason = 'required';
-
-/** The status of the label */
+/** The status of the label. */
 export let status: LabelStatus = 'none';
 
-/** Changes the overall style of the label. */
-export let variant: LabelVariant = 'regular';
+/** Additional class names to apply. */
+export let variant: string = '';
+
+/** When true, the label appears above the content. */
+export let vertical = true;
 ```
 
 ## Events
@@ -84,10 +64,10 @@ This is most often a form input control.
 
 ```svelte
 <label>
-  <slot name="text"{disabled} {for} {forwardClick} {text} {required} />
+  <slot name="text"{disabled} {for} {forwardClick} {required} {text} {variant} />
   <slot />
-  <slot name="message" {disabled} {message} {required} {status}>
-  <slot name="required" {requiredReason}>
+  <slot name="message" {disabled} {message} {required} {status} {variant}>
+  <slot name="required" {requiredReason} {variant}>
 </label>
 ```
 

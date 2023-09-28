@@ -13,9 +13,6 @@ A hierarchy of items that can be expanded or collapsed where a single item can b
  * The context for a Tree and its descendants.
  */
 export type TreeContext = {
-  /** When true, applies colorful theme styles. */
-  colorful: Readable<boolean>;
-
   /** When true, the tree and its descendants are disabled */
   disabled: Readable<boolean>;
 
@@ -32,13 +29,7 @@ export type TreeContext = {
 HTMLDivElement props are included.
 
 ```ts
-/** When true, applies colorful theme styles. */
-export let colorful = false;
-
-/** When true, allows the container to handle borders and focus borders.  */
-export let composed = false;
-
-/** When true, the tree and its descendants are disabled */
+/** When true, the tree and its descendants are disabled. */
 export let disabled = false;
 
 /** The value of the currently selected item. */
@@ -46,6 +37,9 @@ export let selectedValue: string | undefined = undefined;
 
 /** The values of items that are expanded. */
 export let expandedValues: string[] = [];
+
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
@@ -65,9 +59,15 @@ HTMLDivElement `blur`, `click`, and `focus` methods are included.
 
 ```svelte
 <div>
-  <slot {colorful} {composed} {disabled} />
+  <slot {disabled} {expandedValues} {selectedValue} {variant} />
 </div>
 ```
+
+## Sterling Theme Variants
+
+| Variant  | Description           |
+| -------- | --------------------- |
+| colorful | applies accent colors |
 
 ## Playground
 

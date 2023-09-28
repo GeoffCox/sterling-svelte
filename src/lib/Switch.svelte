@@ -6,10 +6,10 @@
   export let checked: boolean = false;
   export let disabled = false;
 
-  /** The text appearing on the off position side when the offLabel slot is not replaced. */
+  /** The text appearing by the off position. Not used when the offLabel slot is filled. */
   export let offText: string | undefined = undefined;
 
-  /** The text appearing on the on position side when the onLabel slot is not replaced. */
+  /** The text appearing near the on position. Not used when the onLabel slot is filled. */
   export let onText: string | undefined = undefined;
 
   /** Additional class names to apply. */

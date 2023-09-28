@@ -10,6 +10,11 @@ A styled line to visually separate groups of menu items in a menu.
 
 HTMLDivElement props are included.
 
+```ts
+/** Additional class names to apply. */
+export let variant: string = '';
+```
+
 ## Events
 
 This is a display element so no events are provided.
@@ -17,7 +22,7 @@ This is a display element so no events are provided.
 ## Anatomy
 
 ```svelte
-<!-- separator --><div />
+<div />
 ```
 
 ## Playground

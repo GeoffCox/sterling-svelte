@@ -3,26 +3,26 @@
 
   //----- Props ----- //
 
-  /** The value between 0 and max. */
-  export let value = 0;
+  /** When true, the progress bar is disabled. */
+  export let disabled = false;
 
   /** The maximum value. */
   export let max = 100;
 
-  /** A read-only percentage between 0 and 100 calculated from value and max */
+  /** A read-only percentage between 0 and 100 calculated from value and max. */
   export let percent = 0;
 
-  /** When true, the progress bar is displayed vertically. */
-  export let vertical: boolean = false;
-
-  /** Changes the color of the progress bar. */
+  /** The current status of the progress. */
   export let status: ProgressStatus = 'none';
 
-  /** When true, the progress bar is disabled. */
-  export let disabled = false;
+  /** The current value. */
+  export let value = 0;
 
   /** Additional class names to apply. */
   export let variant: string = '';
+
+  /** When true, the progress bar is displayed vertically. */
+  export let vertical: boolean = false;
 
   //----- State ----- //
 
@@ -49,7 +49,7 @@
 	Does not use the HTML progress element.
 -->
 <!-- svelte-ignore a11y-label-has-associated-control -->
-
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <div
   class={`sterling-progress ${variant}`}
   class:disabled

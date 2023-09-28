@@ -1,11 +1,14 @@
 <script lang="ts">
+  import type { KeyboardEventHandler } from 'svelte/elements';
+  import type { SlideParams, TransitionConfig } from 'svelte/transition';
   import type { TreeContext } from './Tree.types';
   import type { TreeItemContext } from './TreeItem.types';
 
   import { getContext, setContext } from 'svelte';
-  import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
+  import { slide } from 'svelte/transition';
 
-  import { TREE_CONTEXT_KEY, TREE_ITEM_CONTEXT_KEY } from './Tree.constants';
+  import { TREE_CONTEXT_KEY } from './Tree.constants';
+  import { TREE_ITEM_CONTEXT_KEY } from './TreeItem.constants';
   import TreeItemDisplay from './TreeItemDisplay.svelte';
   import { readable, writable } from 'svelte/store';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
@@ -15,7 +18,7 @@
   /** When true, the item is disabled. */
   export let disabled = false;
 
-  /** The text for the item when the item and label slots are not filled. */
+  /** The text for the item. Not used when either the item or label slots are filled. */
   export let text: string | undefined = undefined;
 
   /** The value uniquely identifying this item within the tree. */
@@ -37,8 +40,7 @@
   const {
     disabled: treeDisabled,
     expandedValues,
-    selectedValue,
-    variant: treeVariant
+    selectedValue
   } = getContext<TreeContext>(TREE_CONTEXT_KEY);
 
   const { depth, disabled: parentDisabled } = getContext<TreeItemContext>(
@@ -56,7 +58,6 @@
   $: expanded = $expandedValues.includes(value);
   $: selected = $selectedValue === value;
   $: _disabled = disabled || $parentDisabled || $treeDisabled;
-  $: _variant = `${$treeVariant} ${variant}`;
 
   const depthStore = writable<number>($depth);
   const disabledStore = writable<boolean>(_disabled);
@@ -262,7 +263,7 @@
     }
   };
 
-  const onKeydown: svelte.JSX.KeyboardEventHandler<Element> = (event) => {
+  const onKeydown: KeyboardEventHandler<Element> = (event) => {
     if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
       switch (event.key) {
         case 'Enter':
@@ -347,12 +348,16 @@
 @component
 A item in a Tree displaying the item and children.
   -->
+<!-- svelte-ignore a11y-interactive-supports-focus -->
 <div
   aria-selected={selected ? true : undefined}
   aria-expanded={expanded}
   bind:this={treeItemRef}
-  class={`sterling-tree-item ${_variant}`}
+  class={`sterling-tree-item ${variant}`}
   class:disabled={_disabled}
+  class:item-disabled={disabled}
+  class:parent-disabled={$parentDisabled}
+  class:tree-disabled={$treeDisabled}
   data-value={value}
   role="treeitem"
   on:blur
@@ -388,23 +393,33 @@ A item in a Tree displaying the item and children.
   on:wheel|passive
   {...$$restProps}
 >
-  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <div
+    aria-selected={selected ? true : undefined}
     class="item"
     class:selected
+    role="treeitem"
     tabindex={selected ? 0 : -1}
     on:click={onClick}
     on:keydown={onKeydown}
   >
-    <slot name="item" {depth} disabled={_disabled} {expanded} {hasChildren} {selected} {value}>
+    <slot
+      name="item"
+      {depth}
+      disabled={_disabled}
+      {expanded}
+      {hasChildren}
+      {selected}
+      {value}
+      {variant}
+    >
       <TreeItemDisplay
         depth={$depth}
-        disabled={_disabled}
+        disabled={_disabled && !$treeDisabled}
         {expanded}
         {hasChildren}
         {selected}
         {value}
-        variant={_variant}
+        {variant}
       >
         <svelte:fragment
           let:depth
@@ -431,7 +446,7 @@ A item in a Tree displaying the item and children.
   </div>
   {#if expanded && hasChildren}
     <div class="children" transition:slideMotion|global={{ duration: 200 }} role="group">
-      <slot depth={$depth} disabled={_disabled} {selected} {value} variant={_variant} />
+      <slot depth={$depth} disabled={_disabled} {expanded} {selected} {value} {variant} />
     </div>
   {/if}
 </div>

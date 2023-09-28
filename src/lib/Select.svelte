@@ -12,10 +12,7 @@
 
   export let disabled: boolean = false;
 
-  /** When true, allows the container to handle borders and focus borders.  */
-  export let composed: boolean = false;
-
-  /** When true, the dropdown is open. */
+  /** When true, the select's dropdown is open. */
   export let open = false;
 
   /** The value of the selected item.*/
@@ -195,7 +192,6 @@
   aria-haspopup="listbox"
   aria-expanded={open}
   class={`sterling-select ${variant}`}
-  class:composed
   class:disabled
   role="combobox"
   tabindex="0"
@@ -232,7 +228,7 @@
   {...$$restProps}
 >
   <div class="value">
-    <slot name="value" {disabled} {open} {selectedValue}>
+    <slot name="value" {disabled} {open} {selectedValue} {variant}>
       {#if selectedValue}
         {selectedValue}
       {:else}
@@ -241,7 +237,7 @@
     </slot>
   </div>
   <div class="button">
-    <slot name="button" {disabled} {open} {selectedValue}>
+    <slot name="button" {disabled} {open} {selectedValue} {variant}>
       <div class="chevron" />
     </slot>
   </div>
@@ -249,15 +245,15 @@
     <div class="sterling-select-popup-content">
       <List
         bind:this={listRef}
-        composed
         {disabled}
         selectedValue={pendingSelectedValue}
         on:click={onListClick}
         on:keydown={onListKeydown}
         on:select={onListSelect}
         tabIndex={open ? 0 : -1}
+        variant={`composed ${variant}`}
       >
-        <slot />
+        <slot {variant} />
       </List>
     </div>
   </Popover>

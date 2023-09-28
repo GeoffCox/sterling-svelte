@@ -9,10 +9,7 @@
 
   // ----- Props ----- //
 
-  /** When true, allows the container to handle borders and focus borders.  */
-  export let composed = false;
-
-  /** When true, the tree and its descendants are disabled */
+  /** When true, the tree and its descendants are disabled. */
   export let disabled = false;
 
   /** The value of the currently selected item. */
@@ -28,7 +25,6 @@
 
   let treeRef: HTMLDivElement;
 
-  const variantStore = writable<string>(variant);
   const disabledStore = writable<boolean>(disabled);
   const expandedValuesStore = writable<string[]>(expandedValues);
   const selectedValueStore = writable<string | undefined>(selectedValue);
@@ -76,10 +72,6 @@
   }
 
   $: {
-    variantStore.set(variant);
-  }
-
-  $: {
     disabledStore.set(disabled);
   }
 
@@ -87,20 +79,18 @@
   setContext<TreeContext>(TREE_CONTEXT_KEY, {
     disabled: disabledStore,
     expandedValues: expandedValuesStore,
-    selectedValue: selectedValueStore,
-    variant: variantStore
+    selectedValue: selectedValueStore
   });
 </script>
 
-<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div
   bind:this={treeRef}
   aria-disabled={disabled}
   class={`sterling-tree ${variant}`}
-  class:composed
   class:disabled
   class:using-keyboard={$usingKeyboard}
   role="tree"
+  tabindex="0"
   on:blur
   on:click
   on:dblclick
@@ -135,6 +125,6 @@
   {...$$restProps}
 >
   <div class="container">
-    <slot {composed} {disabled} {variant} />
+    <slot {disabled} {expandedValues} {selectedValue} {variant} />
   </div>
 </div>

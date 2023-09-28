@@ -6,32 +6,20 @@
 
   // ----- Props ----- //
 
-  /** Conditionally renders content based on open. */
+  // Forwarded to Callout
   export let conditionalRender: boolean = true;
-
-  /** The offset along the side of the reference element. */
   export let crossAxisOffset = 0;
-
-  /** The offset towards or away from the side of the reference element. */
   export let mainAxisOffset = 0;
+  export let open = false;
+  export let placement: PopoverPlacement = 'bottom-start';
+  export let portalHost: HTMLElement | undefined = undefined;
+  export let variant: string = '';
 
   /** When true, the tooltip is disabled and will not be shown. */
   export let disabled = false;
 
   /** The duration of mouse hover before showing the tooltip. */
   export let hoverDelayMilliseconds: number = 1000;
-
-  /** When true, the tooltip is open (i.e. visible) */
-  export let open = false;
-
-  /** How the callout should be positioned relative to the reference element. */
-  export let placement: PopoverPlacement = 'bottom-start';
-
-  /** The host container for the callout. */
-  export let portalHost: HTMLElement | undefined = undefined;
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
 
   // ----- State ----- //
   let originRef: HTMLDivElement;
@@ -92,7 +80,7 @@
   });
 </script>
 
-<slot {disabled} {hoverDelayMilliseconds} {open} />
+<slot {disabled} {hoverDelayMilliseconds} {open} {variant} />
 <div class="sterling-tooltip-origin" bind:this={originRef} />
 <Callout
   {conditionalRender}

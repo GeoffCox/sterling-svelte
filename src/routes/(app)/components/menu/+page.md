@@ -18,6 +18,11 @@ A list of menu items.
 
 HTMLDivElement props are included.
 
+```ts
+/** Additional class names to apply. */
+export let variant: string = '';
+```
+
 ## Events
 
 HTMLDivElement events are included.
@@ -37,6 +42,6 @@ export const focusLastMenuItem();
 
 ```svelte
 <div>
-  <slot />
+  <slot {variant} />
 </div>
 ```

@@ -8,8 +8,12 @@
   import { isElementEnabledMenuItem, isElementMenuItem } from './MenuItem.utils';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
 
+  // ----- Props ----- //
+
   /** Additional class names to apply. */
   export let variant: string = '';
+
+  // ----- State ----- //
 
   let menuRef: HTMLDivElement;
   let menuItemsRef: HTMLDivElement;
@@ -93,6 +97,7 @@
   role="menu"
   class:open
   data-root-value={rootValue}
+  tabindex="-1"
   in:slideMotion|global={{ duration: 300 }}
   out:slideMotion|global={{ duration: 100 }}
   on:blur

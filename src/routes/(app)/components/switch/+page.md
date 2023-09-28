@@ -13,14 +13,14 @@ A styled HTML `input` element with `type=checkbox`.
 HTMLInputElement props are included.
 
 ```ts
-/** When true, applies colorful theme styles. */
-export let colorful = false;
-
-/** The text appearing on the off position side when the offLabel slot is not replaced. */
+/** The text appearing by the off position. Not used when the offLabel slot is filled. */
 export let offText: string | undefined = undefined;
 
-/** The text appearing on the on position side when the onLabel slot is not replaced. */
+/** The text appearing near the on position. Not used when the onLabel slot is filled. */
 export let onText: string | undefined = undefined;
+
+/** Additional class names to apply. */
+export let variant: string = '';
 
 /** When true, the switch is displayed vertically. */
 export let vertical = false;
@@ -41,11 +41,11 @@ HTMLInputElement `blur`, `click`, and `focus` methods are included.
    <!-- hidden -->
   <input />
   <!-- optional off label -->
-  <slot name="offLabel" {checked} {disabled} {inputId} {offText} {vertical} />
+  <slot name="offLabel" {checked} {disabled} {inputId} {offText} {variant} {vertical} />
   <!-- toggle -->
   <div />
   <!-- optional on label -->
-  <slot name="onLabel" {checked} {disabled} {inputId} {onText} {vertical}>
+  <slot name="onLabel" {checked} {disabled} {inputId} {onText} {variant} {vertical}>
 </div>
 ```
 

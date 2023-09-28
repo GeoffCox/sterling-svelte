@@ -35,6 +35,8 @@
     'ColorPicker',
     'Dialog',
     'Dropdown',
+    'HexColorSliders',
+    'HslColorSliders',
     'Input',
     'Label',
     'Link',

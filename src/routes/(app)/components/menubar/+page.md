@@ -4,9 +4,13 @@
 
 # MenuBar
 
-A horizontal list of menu items typically at the top of a window.
+A horizontal list of menus often at the top of a window.
 
-- You can mix MenuItem components with non-menu item content such as a search box or buttons.
+## Features
+
+- `MenuItem` components can be mixed with with non-menu items such as a search box or buttons.
+- ARIA compliant left/right arrow navigation
+- Raises events bubbling up the menu item hierarchy.
 
 ## Types
 
@@ -21,11 +25,14 @@ type MenuBarContext = {
 
 HTMLDivElement props are included.
 
+```ts
+/** Additional class names to apply. */
+export let variant: string = '';
+```
+
 ## Events
 
 HTMLDivElement events are included.
-
-MenuItem events are bubbled up the hiearchy of menus.
 
 ```ts
 dispatch('close', { value });
@@ -40,8 +47,10 @@ HTMLDivElement `blur`, and `focus` methods are included.
 ## Anatomy
 
 ```svelte
+<!-- menu bar -->
 <div>
-  <slot />
+  <!-- default slot (e.g. MenuItem components) -->
+  <slot {variant} />
 </div>
 ```
 

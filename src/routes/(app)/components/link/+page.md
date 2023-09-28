@@ -6,21 +6,13 @@
 
 A styled HTML `a` link or anchor element.
 
-## Types
-
-```ts
-type LinkVariant = 'regular' | 'ghost' | 'undecorated';
-```
-
 ## Props
 
 HTMLAnchorElement props are included.
 
 ```ts
-/** When true, applies colorful theme styles. */
-let colorful: boolean = false;
-
-let variant: LinkVariant = 'regular';
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events

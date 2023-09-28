@@ -6,11 +6,20 @@
   import { round } from 'lodash-es';
 
   // ----- Props ----- //
+
+  /** The red value. */
   export let red: number = 0;
+
+  /** The green value. */
   export let green: number = 0;
+
+  /** The blue value. */
   export let blue: number = 0;
+
+  /** The alpha value. */
   export let alpha: number = 1;
 
+  /** Additional class names to apply. */
   export let variant: string = '';
 
   // ----- State ----- //

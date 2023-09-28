@@ -11,11 +11,8 @@ A styled HTML `input`.
 HTMLInputElement props are included.
 
 ```ts
-/** When true, applies colorful theme styles. */
-export let colorful = false;
-
-/** When true, allows the container to handle borders and focus borders.  */
-export let composed = false;
+/** Additional class names to apply. */
+export let variant: string = '';
 ```
 
 ## Events
@@ -37,7 +34,7 @@ The following HTMLInputElement methods are included:
 
 ```svelte
 <label>
-  <slot {composed} {disabled} {value} />
+  <slot {disabled} {value} {variant} />
 </label>
 <input />
 ```

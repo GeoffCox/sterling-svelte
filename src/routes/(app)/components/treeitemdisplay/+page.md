@@ -11,22 +11,22 @@ A chevron and label for an item in a tree.
 HTMLDivElement props are included.
 
 ```ts
-/** The depth of the item in the tree for displaying indentation. */
+/** The depth of the item in the tree. */
 export let depth = 0;
 
-/** When true, the item is disabled. */
+/** When true, display the item as disabled. */
 export let disabled = false;
 
-/** When true, the item is expanded and children are visible. */
+/** When true, displays the item is expanded showing children. */
 export let expanded = false;
 
-/** When true, the item is has children and can be expanded. */
+/** When true, displays the item has children. */
 export let hasChildren = false;
 
-/** When true, the item is selected. */
+/** When true, display selected state. */
 export let selected = false;
 
-/** The value uniquely identifying this item within the tree. */
+/** The value uniquely identifying the tree item within the tree. */
 export let value: string;
 
 /** Additional class names to apply. */
@@ -46,7 +46,7 @@ HTMLDivElement `blur`, `click`, and `focus` methods are included.
 ```svelte
 <div>
   <TreeChevron {expanded} {hasChildren} {variant} />
-  <slot {colorful} {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant} />
+  <slot {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant} />
 </div>
 ```
 

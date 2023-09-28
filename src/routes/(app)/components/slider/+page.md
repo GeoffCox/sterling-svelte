@@ -13,31 +13,28 @@ A draggable button on a line to set a value in a range.
 HTMLDivElement props are included.
 
 ```ts
-/** When true, applies colorful theme styles */
-export let colorful = false;
-
-/** When true, allows the container to handle borders and focus borders  */
-export let composed = false;
-
 /** When true, the slider is disabled. */
 export let disabled: boolean = false;
 
 /** The minimum value of the slider. */
 export let min: number = 0;
 
-/** The maximum value of the slider */
+/** The maximum value of the slider. */
 export let max: number = 100;
 
-/** The number of decimal places for rounding the value */
+/** The number of decimal places for rounding the value. */
 export let precision: number | undefined = undefined;
 
-/** The amount the value changes when moving by arrow keys */
-export let step: number | undefined = undefined;
+/** The amount the value changes by pressing arrow keys. */
+export let step: number = 1;
 
-/** The value of the slider */
+/** The value of the slider. */
 export let value: number = 0;
 
-/** When true, the slider is displayed vertically */
+/** Additional class names to apply. */
+export let variant: string = '';
+
+/** When true, the slider is displayed vertically. */
 export let vertical: boolean = false;
 ```
 
