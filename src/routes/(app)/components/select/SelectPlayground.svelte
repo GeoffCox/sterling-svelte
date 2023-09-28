@@ -11,7 +11,6 @@
 
   let exampleRef: any;
 
-  let composed = false;
   let open = false;
   let items = countries;
 
@@ -22,7 +21,6 @@
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
     <Select
-      {composed}
       {disabled}
       {items}
       bind:open
@@ -40,7 +38,6 @@
     </Select>
   </svelte:fragment>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Button on:click={() => (selectedValue = undefined)}>selectedValue = undefined</Button>
     <Button on:click={() => (selectedValue = items[random(0, items.length - 1)])}

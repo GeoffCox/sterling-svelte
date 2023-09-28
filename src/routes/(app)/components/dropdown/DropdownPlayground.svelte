@@ -12,7 +12,6 @@
 
   let exampleRef: any;
 
-  let composed = false;
   let disabled = false;
   let open = false;
   let stayOpenOnClickAway = false;
@@ -28,7 +27,6 @@
   <svelte:fragment slot="component">
     <Dropdown
       bind:open
-      {composed}
       {disabled}
       {stayOpenOnClickAway}
       {variant}
@@ -49,7 +47,6 @@
     >
   </svelte:fragment>
   <svelte:fragment slot="props">
-    <Checkbox bind:checked={composed}>composed</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Checkbox bind:checked={stayOpenOnClickAway}>stayOpenOnClickAway</Checkbox>

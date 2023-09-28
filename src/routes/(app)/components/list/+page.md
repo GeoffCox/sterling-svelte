@@ -36,7 +36,6 @@ export let selectedValue: string | undefined = undefined;
 
 /** Additional class names to apply. */
 export let variant: string = '';
-Í;
 ```
 
 ## Events

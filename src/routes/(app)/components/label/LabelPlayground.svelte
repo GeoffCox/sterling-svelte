@@ -32,7 +32,7 @@
       {variant}
       {vertical}
     >
-      <Input id="target" {disabled} composed={variant === 'container'} />
+      <Input id="target" {disabled} variant={variant === 'container' ? 'composed' : undefined} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="props">
