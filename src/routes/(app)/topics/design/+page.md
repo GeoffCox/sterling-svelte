@@ -1,6 +1,6 @@
 <script>
-    import DisabledSwatch from '../../theme/DisabledSwatch.svelte';
-    import Swatch from '../../theme/Swatch.svelte';
+    import DisabledSwatch from '../../_shared/DisabledSwatch.svelte';
+    import Swatch from '../../_shared/Swatch.svelte';
 </script>
 
 # Design

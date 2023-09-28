@@ -1,15 +1,12 @@
 # Roadmap
 
-sterling-svelte is in alpha.
-Anything and everything may change at any time.
-There won't be a changelog until the library is 1.0.
+sterling-svelte is at 1.0!
 
-The primary goal is to reach a component set that covers the practical aspects of building an application.
-This will include components that have standards for behavior and accessibility.
+All future changes will properly follow semantic versioning and include a changelog.
 
 ## Components
 
-| Component            | Categories     | HTML Element        | Introduced in Version |
+| Component            | Category       | HTML Element        | Introduced in Version |
 | -------------------- | -------------- | ------------------- | --------------------- |
 | (theme)              | infrastructure |                     | 0.0.1                 |
 | Button               | command        | button              | 0.0.3                 |
@@ -46,11 +43,12 @@ This will include components that have standards for behavior and accessibility.
 | HslColorSliders      | form           |                     | 0.0.27                |
 | RgbColorSliders      | form           |                     | 0.0.27                |
 | Field (retired)      | form           | label               | 0.0.28                |
-| Lable (refactored)   | form           | label               | 0.0.28                |
-| -> Svelte 4!         |                |                     | 0.0.30                |
+| Label (refactored)   | form           | label               | 0.0.28                |
+| -> Svelte 4!         | infrastructure |                     | 0.0.30                |
 | Popover              | display        |                     | 0.0.31                |
 | Callout              | display        |                     | 0.0.31                |
 | Tooltip (refactored) | display        |                     | 0.0.31                |
+| (theming refactored) | infrastructure |                     | 1.0.0                 |
 
 <br/>
 

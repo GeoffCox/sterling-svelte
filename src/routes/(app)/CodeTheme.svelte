@@ -5,8 +5,8 @@
   export let theme: string;
   let autoIsDark = false;
 
-  const getThemeFile = (theme: string, autoIsDark: boolean) => {
-    switch (theme) {
+  const getThemeFile = (mode: string, autoIsDark: boolean) => {
+    switch (mode) {
       case 'auto':
         if (autoIsDark) {
           return 'prism-vsc-dark-plus.css';
@@ -15,16 +15,14 @@
         }
       case 'dark':
         return 'prism-vsc-dark-plus.css';
-      case 'ocean':
-        return 'prism-night-owl.css';
       case 'light':
       default:
         return 'prism-vs.css';
     }
   };
 
-  const updateTheme = async (theme: string, autoIsDark: boolean) => {
-    const themeFile = getThemeFile(theme, autoIsDark);
+  const updateTheme = async (mode: string, autoIsDark: boolean) => {
+    const themeFile = getThemeFile(mode, autoIsDark);
     if (themeFile) {
       let themeLink = document.head.querySelector('link[sterling-code-theme]');
 

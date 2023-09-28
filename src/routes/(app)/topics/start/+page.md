@@ -12,23 +12,34 @@ npm install @geoffcox/sterling-svelte
 yarn add @geoffcox/sterling-svelte
 ```
 
-## 2. Apply a theme
+## 2. Apply the sterling-svelte theme
 
-Use one of the theme actions to apply a theme at the top-level of your application.
+This is optional if you have your own CSS to apply.
 
-You can choose from the built in themes or create your own:
+1. In your top-level application, import the styles
 
-- Use `applyLightTheme` for the default light theme
-- Use `applyDarkTheme` for the default dark theme
-- Use `toggleDarkTheme` to automatically choose the default light or dark theme based on `prefers-color-scheme` .
+```ts
+import '@geoffcox/sterling-svelte/css/sterling.css';
+```
+
+2. Optional - Support light/dark/auto modes
 
 ```svelte
-<script>
-  import { applyLightTheme } from '@geoffcox/sterling-svelte';
+<script lang="ts">
+  import { applyLightDarkMode } from '@geoffcox/sterling-svelte';
+
+  // For example, we use a variable to track which mode the user prefers.
+  // Other UI can allow the use to change the mode.
+  let mode = 'auto';
 </script>
 
-<div use:applyLightTheme>
-  <!-- The rest of the app goes here -->
+<div
+  use:applyLightDarkMode={{
+    atDocumentRoot: true,
+    mode: mode === 'auto' ? 'auto' : mode === 'dark' ? 'dark' : 'light'
+  }}
+>
+  <!-- ... -->
 </div>
 ```
 
@@ -38,15 +49,12 @@ You can import components from svelte files under `*.svelte` (recommended) or fr
 
 ```svelte
 <script>
-  import { toggleDarkTheme } from '@geoffcox/sterling-svelte';
   import Button from '@geoffcox/sterling-svelte/Button.svelte';
   import { Checkbox } from '@geoffcox/sterling-svelte';
 </script>
 
-<div use:toggleDarkTheme>
+<div>
   <Button>Hello sterling-svelte</Button>
   <Checkbox>Ready</Checkbox>
 </div>
 ```
-
-**_Enjoy!_**

@@ -7,7 +7,8 @@
   import Slider from '$lib/Slider.svelte';
   import TreeItem from '$lib/TreeItem.svelte';
   import { writable } from 'svelte/store';
-  import { TREE_CONTEXT_KEY, TREE_ITEM_CONTEXT_KEY } from '$lib/Tree.constants';
+  import { TREE_CONTEXT_KEY } from '$lib/Tree.constants';
+  import { TREE_ITEM_CONTEXT_KEY } from '$lib/TreeItem.constants';
   import { setContext } from 'svelte';
 
   let exampleRef: any;

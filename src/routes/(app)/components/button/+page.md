@@ -32,7 +32,7 @@ Use the default slot to place content within the button.
 
 ```svelte
 <button>
-  <slot {disabled} {colorful} {shape} {variant} />
+  <slot {disabled} {variant} />
 </button>
 ```
 

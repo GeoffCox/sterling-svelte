@@ -3,10 +3,10 @@
   import Button from '$lib/Button.svelte';
   import Tab from '$lib/Tab.svelte';
   import TabList from '$lib/TabList.svelte';
-  import Gallery from '../../_shared/gallery/Gallery.svelte';
-  import ThemeEditView from './ThemeEditView.svelte';
-  import ResetThemeDialog from './ResetThemeDialog.svelte';
-  import ThemeCodeView from './ThemeCodeView.svelte';
+  import Gallery from '../../../../../../../src/routes/(app)/_shared/gallery/Gallery.svelte';
+  import ThemeEditView from '../../../../../../../src/routes/(app)/theme/builder/ThemeEditView.svelte';
+  import ResetThemeDialog from '../../../../../../../src/routes/(app)/theme/builder/ResetThemeDialog.svelte';
+  import ThemeCodeView from '../../../../../../../src/routes/(app)/theme/builder/ThemeCodeView.svelte';
 
   let theme = Object.assign({}, lightTheme) as Record<string, string>;
   let selectedView = 'edit';

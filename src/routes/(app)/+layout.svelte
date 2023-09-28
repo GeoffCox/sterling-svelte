@@ -13,11 +13,6 @@
   import FilterIcon from './FilterIcon.svelte';
   import CodeTheme from './CodeTheme.svelte';
   import GitHubIcon from './GitHubIcon.svelte';
-  import Select from '$lib/Select.svelte';
-  import ListItem from '$lib/ListItem.svelte';
-  import AutoModeIcon from './AutoModeIcon.svelte';
-  import LightModeIcon from './LightModeIcon.svelte';
-  import DarkModeIcon from './DarkModeIcon.svelte';
   import ModeSlider from './_shared/ModeSlider.svelte';
 
   const themes: Record<string, string> = {
@@ -152,13 +147,11 @@
               <MenuItem value="{base}/" text="Overview" />
               <MenuItem value="{base}/topics/start" text="Getting Started" />
               <MenuItem value="{base}/topics/roadmap" text="Roadmap" />
-              <MenuItem value="{base}/topics/design" text="Design" />
               <MenuItem value="{base}/topics/architecture" text="Architecture" />
               <MenuItem value="{base}/topics/actions" text="Actions" />
-              <MenuItem value="{base}/topics/gallery" text="Gallery" />
               <MenuSeparator />
-              <MenuItem value="{base}/theme" text="Theme" />
-              <MenuItem value="{base}/theme/builder" text="Theme Builder" />
+              <MenuItem value="{base}/topics/design" text="Design" />
+              <MenuItem value="{base}/topics/gallery" text="Gallery" />
               <MenuSeparator />
               {#each filteredComponents as component}
                 <MenuItem value="{base}/components/{component.toLowerCase()}" text={component} />
@@ -189,16 +182,12 @@
             <Link href="{base}/" variant="ghost">Overview</Link>
             <Link href="{base}/topics/start" variant="ghost">Getting Started</Link>
             <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
-            <Link href="{base}/topics/design" variant="ghost">Design</Link>
             <Link href="{base}/topics/architecture" variant="ghost">Architecture</Link>
             <Link href="{base}/topics/actions" variant="ghost">Actions</Link>
-            <Link href="{base}/topics/gallery" variant="ghost">Gallery</Link>
           </div>
           <div class="nav-header">Theme</div>
-          <div class="nav-section">
-            <Link href="{base}/theme" variant="ghost">Theme</Link>
-            <Link href="{base}/theme/builder" variant="ghost">Theme Builder</Link>
-          </div>
+          <Link href="{base}/topics/design" variant="ghost">Design</Link>
+          <Link href="{base}/topics/gallery" variant="ghost">Gallery</Link>
           <div class="nav-header">Components</div>
           <div class="filter">
             <Label for="filter-components">
@@ -217,7 +206,7 @@
           </div>
         </div>
         <div class="component">
-          <CodeTheme theme={currentTheme}>
+          <CodeTheme theme={mode}>
             <slot />
           </CodeTheme>
         </div>
@@ -356,13 +345,6 @@
     align-items: center;
     grid-row: 1 / span 2;
     grid-column: 3 / span 1;
-  }
-
-  .theme-option {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    column-gap: 1em;
   }
 
   .header .github {
