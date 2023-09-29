@@ -1,3 +1,5 @@
+import type { ClickOutsideEventDetail } from '$lib/@types/clickOutside';
+
 type Params = {
   /** Other elements should not raise the event if clicked. */
   ignoreOthers?: HTMLElement[];
@@ -19,7 +21,7 @@ export const clickOutside = (node: HTMLElement, params?: Params) => {
       (!ignoreOthers || ignoreOthers.filter(Boolean).every((x) => !x.contains(targetNode)))
     ) {
       node.dispatchEvent(
-        new CustomEvent<svelte.JSX.ClickOutsideEventDetail>('click_outside', {
+        new CustomEvent<ClickOutsideEventDetail>('click_outside', {
           detail: { mouseEvent: event }
         })
       );

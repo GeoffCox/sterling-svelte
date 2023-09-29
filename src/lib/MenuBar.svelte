@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { ClickOutsideEvent } from './@types/clickOutside';
   import type { MenuBarContext } from './MenuBar.types';
   import type { MenuItemContext } from './MenuItem.types';
 
@@ -122,7 +123,7 @@
 
   // ----- Event Handlers ----- //
 
-  const onClickOutside = (event: svelte.JSX.ClickOutsideEvent) => {
+  const onClickOutside = (event: ClickOutsideEvent) => {
     const {
       detail: { mouseEvent }
     } = event;

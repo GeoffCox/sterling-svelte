@@ -1,11 +1,15 @@
-declare namespace svelte.JSX {
-  type ClickOutsideEventDetail = {
-    mouseEvent: MouseEvent;
-  };
+import type { EventHandler } from 'svelte/elements';
 
-  type ClickOutsideEvent = CustomEvent<ClickOutsideEventDetail>;
+export type ClickOutsideEventDetail = {
+  mouseEvent: MouseEvent;
+};
 
-  interface DOMAttributes<T> {
-    onclick_outside?: (e: ClickOutsideEvent) => void;
+export type ClickOutsideEvent = CustomEvent<ClickOutsideEventDetail>;
+
+declare module 'svelte/elements' {
+  export interface DOMAttributes<T extends EventTarget> {
+    'on:click_outside'?: EventHandler<ClickOutsideEvent, T>;
   }
 }
+
+export {}; // ensure this is not an ambient module, else types will be overridden instead of augmented

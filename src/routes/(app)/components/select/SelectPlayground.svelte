@@ -8,6 +8,7 @@
   import { random } from 'lodash-es';
   import Button from '$lib/Button.svelte';
   import ListItem from '$lib/ListItem.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
 
@@ -16,6 +17,7 @@
 
   let selectedValue: string | undefined = items[random(0, items.length - 1)];
   let disabled = false;
+  let variant = '';
 </script>
 
 <Playground bind:this={exampleRef}>
@@ -23,6 +25,7 @@
     <Select
       {disabled}
       {items}
+      {variant}
       bind:open
       bind:selectedValue
       on:select={(event) => {
@@ -43,6 +46,7 @@
     <Button on:click={() => (selectedValue = items[random(0, items.length - 1)])}
       >selectedValue = random()</Button
     >
+    <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>open: {open}</div>

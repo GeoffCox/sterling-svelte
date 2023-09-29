@@ -1,3 +1,6 @@
+// ----- action types----- //
+export type { ClickOutsideEvent, ClickOutsideEventDetail } from './@types/clickOutside';
+
 // ----- actions ----- //
 export { applyLightDarkMode } from './actions/applyLightDarkMode';
 export { clickOutside } from './actions/clickOutside';

@@ -9,6 +9,7 @@
   import Popover from '$lib/Popover.svelte';
   import type { PopoverPlacement } from '$lib/Popover.types';
   import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let crossAxisOffset = 0;
   let mainAxisOffset = 0;
@@ -16,6 +17,7 @@
   let placement: PopoverPlacement = 'top-start';
   let popoverText = 'sterling-svelte';
   let reference: HTMLDivElement;
+  let variant = '';
 </script>
 
 <Playground noEvents>
@@ -23,7 +25,7 @@
     <div class="reference" bind:this={reference}>
       The reference anchor for positioning the popover.
     </div>
-    <Popover bind:open {reference} {mainAxisOffset} {crossAxisOffset} {placement}>
+    <Popover bind:open {reference} {mainAxisOffset} {crossAxisOffset} {placement} {variant}>
       <div class="popover-text">{popoverText}</div>
     </Popover>
   </div>
@@ -42,6 +44,7 @@
         {/each}
       </Select>
     </Label>
+    <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Label text="popover (text)">

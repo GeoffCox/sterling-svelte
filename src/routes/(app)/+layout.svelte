@@ -147,10 +147,12 @@
               <MenuItem value="{base}/" text="Overview" />
               <MenuItem value="{base}/topics/start" text="Getting Started" />
               <MenuItem value="{base}/topics/roadmap" text="Roadmap" />
+              <MenuSeparator />
               <MenuItem value="{base}/topics/architecture" text="Architecture" />
               <MenuItem value="{base}/topics/actions" text="Actions" />
+              <MenuItem value="{base}/topics/mediaqueries" text="MediaQueries" />
               <MenuSeparator />
-              <MenuItem value="{base}/topics/design" text="Design" />
+              <MenuItem value="{base}/topics/theme" text="Sterling Theme" />
               <MenuItem value="{base}/topics/gallery" text="Gallery" />
               <MenuSeparator />
               {#each filteredComponents as component}
@@ -183,10 +185,12 @@
             <Link href="{base}/topics/start" variant="ghost">Getting Started</Link>
             <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
             <Link href="{base}/topics/architecture" variant="ghost">Architecture</Link>
+            <div class="nav-header">Helpers</div>
             <Link href="{base}/topics/actions" variant="ghost">Actions</Link>
+            <Link href="{base}/topics/mediaqueries" variant="ghost">Media Queries</Link>
           </div>
-          <div class="nav-header">Theme</div>
-          <Link href="{base}/topics/design" variant="ghost">Design</Link>
+          <div class="nav-header">Design</div>
+          <Link href="{base}/topics/theme" variant="ghost">Sterling Theme</Link>
           <Link href="{base}/topics/gallery" variant="ghost">Gallery</Link>
           <div class="nav-header">Components</div>
           <div class="filter">

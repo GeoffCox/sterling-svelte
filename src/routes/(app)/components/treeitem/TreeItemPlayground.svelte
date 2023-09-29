@@ -10,6 +10,7 @@
   import { TREE_CONTEXT_KEY } from '$lib/Tree.constants';
   import { TREE_ITEM_CONTEXT_KEY } from '$lib/TreeItem.constants';
   import { setContext } from 'svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
 
@@ -60,9 +61,7 @@
       </div>
     </Label>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
 </Playground>
 

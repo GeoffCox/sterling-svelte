@@ -4,8 +4,10 @@
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuBar from '$lib/MenuBar.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
+  let variant = '';
 </script>
 
 <Playground bind:this={exampleRef}>
@@ -14,6 +16,7 @@
       on:close={(event) => exampleRef.recordEvent(`close '${event.detail.value}'`)}
       on:open={(event) => exampleRef.recordEvent(`open '${event.detail.value}'`)}
       on:select={(event) => exampleRef.recordEvent(`select '${event.detail.value}'`)}
+      {variant}
     >
       <MenuItem value="file" text="File">
         <MenuItem value="new-file" text="New..." />
@@ -68,5 +71,8 @@
         <MenuItem value="extensions" role="menuitemradio" text="Extensions" />
       </MenuItem>
     </MenuBar>
+  </svelte:fragment>
+  <svelte:fragment slot="props">
+    <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
 </Playground>

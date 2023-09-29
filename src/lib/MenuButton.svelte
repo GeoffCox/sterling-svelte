@@ -10,6 +10,7 @@
   import { idGenerator } from './idGenerator';
   import Popover from './Popover.svelte';
   import { clickOutside } from './actions/clickOutside';
+  import type { ClickOutsideEvent } from './@types/clickOutside';
 
   // ----- Props ----- //
 
@@ -96,7 +97,7 @@
     openValues.set([]);
   };
 
-  const onClickOutside = (event: svelte.JSX.ClickOutsideEvent) => {
+  const onClickOutside = (event: ClickOutsideEvent) => {
     const {
       detail: { mouseEvent }
     } = event;

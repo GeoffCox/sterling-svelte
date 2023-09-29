@@ -9,6 +9,7 @@
   import Label from '$lib/Label.svelte';
   import type { PopoverPlacement } from '$lib/Popover.types';
   import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let crossAxisOffset = 0;
   let disabled = false;
@@ -56,9 +57,7 @@
         {/each}
       </Select>
     </Label>
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Label text="tip (text)">

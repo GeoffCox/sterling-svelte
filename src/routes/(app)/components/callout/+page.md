@@ -59,12 +59,6 @@ Use the default slot to set the popover content.
 </div>
 ```
 
-## Sterling Theme Variants
-
-| Variant  | Description           |
-| -------- | --------------------- |
-| colorful | applies accent colors |
-
 ## Playground
 
 <Playground />

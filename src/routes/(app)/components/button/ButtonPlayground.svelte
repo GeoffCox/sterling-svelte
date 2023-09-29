@@ -6,6 +6,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
   let disabled = false;
@@ -32,9 +33,10 @@
   </div>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput
+      bind:variant
+      availableVariants={['capsule', 'circular ', 'colorful', 'secondary', 'square', 'tool']}
+    />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Checkbox bind:checked={withText}>with text</Checkbox>

@@ -1,4 +1,4 @@
-# Getting started with sterling-svelte
+# Getting started
 
 ## 1. Install the package
 

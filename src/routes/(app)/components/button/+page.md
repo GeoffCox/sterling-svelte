@@ -36,20 +36,6 @@ Use the default slot to place content within the button.
 </button>
 ```
 
-## Sterling Theme Variants
-
-- The variant is passed to the Input, TabList, and sliders.
-- The Input has 'composed' appended to the variant.
-
-| Variant   | Description                                                            |
-| --------- | ---------------------------------------------------------------------- |
-| capsule   | shows a border with rounded ends                                       |
-| circular  | shows a circular border with a 1:1 aspect ratio                        |
-| colorful  | applies accent colors                                                  |
-| secondary | hides the background until hovered over                                |
-| square    | shows a square border                                                  |
-| tool      | hides the border entirely and hides the background until hovered over. |
-
 ## Playground
 
 <Playground />

@@ -9,6 +9,7 @@
   import { setContext } from 'svelte';
   import { MENU_ITEM_CONTEXT_KEY, type MenuItemContext } from '$lib';
   import { writable } from 'svelte/store';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
   let variant = '';
@@ -93,8 +94,6 @@
   </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Label text="variant (Recent Items)" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
 </Playground>

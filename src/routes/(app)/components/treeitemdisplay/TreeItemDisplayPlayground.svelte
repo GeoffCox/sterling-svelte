@@ -6,6 +6,7 @@
 
   import TreeItemDisplay from '$lib/TreeItemDisplay.svelte';
   import Label from '$lib/Label.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
 
@@ -45,9 +46,7 @@
     <Label text="default slot">
       <Input bind:value={label} />
     </Label>
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
 </Playground>
 

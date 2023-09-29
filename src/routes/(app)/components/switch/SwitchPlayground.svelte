@@ -6,6 +6,7 @@
   import ChillIcon from './ChillIcon.svelte';
   import HeatIcon from './HeatIcon.svelte';
   import Label from '$lib/Label.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
   let checked = false;
@@ -60,9 +61,7 @@
     <Label text="onText">
       <Input bind:value={onText} />
     </Label>
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={['colorful']} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">

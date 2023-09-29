@@ -7,6 +7,7 @@
   import ListItem from '$lib/ListItem.svelte';
   import { debounce } from 'lodash-es';
   import Label from '$lib/Label.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
 
@@ -52,9 +53,7 @@
     <Label text="selectedValue">
       <Input bind:value={selectedValueText} />
     </Label>
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>

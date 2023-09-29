@@ -6,6 +6,7 @@
   import Input from '$lib/Input.svelte';
   import Playground from '../Playground.svelte';
   import Label from '$lib/Label.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
 
@@ -111,9 +112,7 @@
     <Label text="step">
       <Input value={step?.toString()} on:change={onStepChange} />
     </Label>
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={['colorful']} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="status">

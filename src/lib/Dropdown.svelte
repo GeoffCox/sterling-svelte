@@ -1,4 +1,6 @@
 <script lang="ts">
+  import type { ClickOutsideEvent } from './@types/clickOutside';
+
   import { createEventDispatcher } from 'svelte';
 
   import Popover from './Popover.svelte';
@@ -84,7 +86,7 @@
     }
   };
 
-  const onClickOutside = (event: svelte.JSX.ClickOutsideEvent) => {
+  const onClickOutside = (event: ClickOutsideEvent) => {
     if (!stayOpenOnClickAway) {
       open = false;
     }

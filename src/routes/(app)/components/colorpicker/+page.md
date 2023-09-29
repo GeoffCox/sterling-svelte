@@ -59,15 +59,6 @@ there are no slots for ColorPicker.
 </Dropdown>
 ```
 
-## Sterling Theme Variants
-
-- The variant is passed to the Input, TabList, and sliders.
-- The Input has 'composed' appended to the variant.
-
-| Variant  | Description                   |
-| -------- | ----------------------------- |
-| colorful | applies a more colorful style |
-
 ## Playground
 
 <Playground />

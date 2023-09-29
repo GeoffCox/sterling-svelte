@@ -9,6 +9,7 @@
   import { TAB_LIST_CONTEXT_KEY } from '$lib/TabList.constants';
   import Tab from '$lib/Tab.svelte';
   import Label from '$lib/Label.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   // ----- Context ----- //
 
@@ -60,11 +61,9 @@
     <Label text="text">
       <Input bind:value={text} />
     </Label>
+    <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
 </Playground>

@@ -9,6 +9,7 @@
   import CoffeeTreeItem from './CoffeeTreeItem.svelte';
   import Label from '$lib/Label.svelte';
   import Tree from '$lib/Tree.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
 
@@ -54,9 +55,7 @@
     <Label text="selectedValue">
       <Input bind:value={selectedValue} />
     </Label>
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>

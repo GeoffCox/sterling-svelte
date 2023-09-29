@@ -7,6 +7,7 @@
   import Label from '$lib/Label.svelte';
 
   import Playground from '../Playground.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
 
@@ -25,9 +26,7 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>colorText: {colorText}</div>

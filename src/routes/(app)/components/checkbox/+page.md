@@ -40,12 +40,6 @@ Use the default slot to provide content for the optional label.
 </div>
 ```
 
-## Sterling Theme Variants
-
-| Variant  | Description           |
-| -------- | --------------------- |
-| colorful | applies accent colors |
-
 ## Playground
 
 <Playground />

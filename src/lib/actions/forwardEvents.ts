@@ -1,5 +1,3 @@
-import { custom_event } from 'svelte/internal';
-
 export const forwardEvents = (
   node: HTMLElement,
   params: { target: HTMLElement; events?: string[]; customEvents?: string[] }
@@ -17,9 +15,10 @@ export const forwardEvents = (
     let forwardCustom = (event: any) => {
       const customEvent = event as CustomEvent;
       target.dispatchEvent(
-        custom_event(customEvent.type, customEvent.detail, {
+        new CustomEvent(customEvent.type, {
           bubbles: customEvent.bubbles,
-          cancelable: customEvent.cancelable
+          cancelable: customEvent.cancelable,
+          detail: customEvent.detail
         })
       );
     };

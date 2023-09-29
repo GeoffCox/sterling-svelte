@@ -9,6 +9,7 @@
   import Label from '$lib/Label.svelte';
   import Slider from '$lib/Slider.svelte';
   import AnimatedProgress from './AnimatedProgress.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
 
@@ -50,9 +51,7 @@
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Checkbox bind:checked={stayOpenOnClickAway}>stayOpenOnClickAway</Checkbox>
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>open: {open}</div>

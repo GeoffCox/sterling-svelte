@@ -8,6 +8,7 @@
   import ListItem from '$lib/ListItem.svelte';
   import Label from '$lib/Label.svelte';
   import { TEXT_AREA_RESIZES } from '$lib';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
 
@@ -46,9 +47,7 @@
         {/each}
       </Select>
     </Label>
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div class="value">value: {value}</div>

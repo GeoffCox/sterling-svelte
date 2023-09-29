@@ -4,6 +4,7 @@
   import HexColorSliders from '$lib/HexColorSliders.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let red = 0;
   let green = 0;
@@ -19,9 +20,7 @@
     </div>
   </svelte:fragment>
   <svelte:fragment slot="props">
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>

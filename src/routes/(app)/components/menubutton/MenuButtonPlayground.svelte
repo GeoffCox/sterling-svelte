@@ -5,6 +5,7 @@
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
   import MenuButton from '$lib/MenuButton.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
   let disabled = false;
@@ -12,11 +13,12 @@
 
   let renderChoice: 'performance' | 'quality' = 'performance';
   let autoSave: boolean = false;
+  let variant = '';
 </script>
 
 <Playground bind:this={exampleRef} noEvents>
   <svelte:fragment slot="component">
-    <MenuButton bind:open {disabled} value="file">
+    <MenuButton bind:open {disabled} value="file" {variant}>
       File
       <svelte:fragment slot="items">
         <MenuItem value="file-new" text="New" />
@@ -61,5 +63,9 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
+    <VariantInput
+      bind:variant
+      availableVariants={['capsule', 'circular ', 'colorful', 'secondary', 'square', 'tool']}
+    />
   </svelte:fragment>
 </Playground>

@@ -4,6 +4,7 @@
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let variant = '';
 </script>
@@ -15,9 +16,7 @@
     </div>
   </svelte:fragment>
   <svelte:fragment slot="props">
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
 </Playground>
 

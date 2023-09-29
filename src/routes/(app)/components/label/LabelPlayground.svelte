@@ -7,6 +7,7 @@
   import Select from '$lib/Select.svelte';
   import type { LabelStatus, LabelVariant } from '$lib/Label.types';
   import { LABEL_STATUSES } from '$lib';
+  import VariantInput from '../../_shared/VariantInput.svelte';
 
   let disabled = false;
   let forwardClick = false;
@@ -51,9 +52,7 @@
         {/each}
       </Select>
     </Label>
-    <Label text="variant" forwardClick>
-      <Input bind:value={variant} />
-    </Label>
+    <VariantInput bind:variant availableVariants={[]} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
