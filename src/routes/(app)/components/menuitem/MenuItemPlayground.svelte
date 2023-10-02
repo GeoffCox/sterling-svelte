@@ -37,6 +37,7 @@
       value="file"
       {disabled}
       text="File"
+      {variant}
       on:close={(event) => exampleRef.recordEvent(`close '${event.detail.value}'`)}
       on:open={(event) => exampleRef.recordEvent(`open '${event.detail.value}'`)}
       on:select={(event) => exampleRef.recordEvent(`select '${event.detail.value}'`)}
@@ -44,7 +45,7 @@
       <MenuItem value="file-new" text="New" />
       <MenuItem value="open-file" text="Open..." />
       <MenuItem value="open-folder" text="Open Folder..." />
-      <MenuItem {variant} value="open-recent" text="Open Recent">
+      <MenuItem value="open-recent" text="Open Recent">
         <MenuItem value="recent-1" text="Recent File 1" />
         <MenuItem value="recent-2" text="Recent File 2" />
         <MenuItem value="recent-3" text="Recent File 3" />
@@ -94,6 +95,6 @@
   </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <VariantInput bind:variant availableVariants={['colorful']} />
+    <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
 </Playground>

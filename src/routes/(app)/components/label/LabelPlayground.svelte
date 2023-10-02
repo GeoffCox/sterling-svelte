@@ -8,6 +8,7 @@
   import type { LabelStatus, LabelVariant } from '$lib/Label.types';
   import { LABEL_STATUSES } from '$lib';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import { includes } from 'lodash-es';
 
   let disabled = false;
   let forwardClick = false;
@@ -33,7 +34,7 @@
       {variant}
       {vertical}
     >
-      <Input id="target" {disabled} variant={variant === 'container' ? 'composed' : undefined} />
+      <Input id="target" {disabled} variant={variant.includes('boxed') ? 'composed' : undefined} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="props">
@@ -52,7 +53,7 @@
         {/each}
       </Select>
     </Label>
-    <VariantInput bind:variant availableVariants={[]} />
+    <VariantInput bind:variant availableVariants={['boxed', 'colorful']} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">

@@ -41,15 +41,6 @@
   background-color: var(--stsv-input__background-color--selected);
 }
 
-.sterling-menu-item.composed,
-.sterling-menu-item.composed:focus,
-.sterling-menu-item.composed:hover {
-  border-width: 0;
-  border-color: transparent;
-  outline: none;
-  background-color: transparent;
-}
-
 @media (prefers-reduced-motion) {
   .sterling-menu-item {
     transition: none;

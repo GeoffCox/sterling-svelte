@@ -53,7 +53,7 @@
     <Label text="selectedValue">
       <Input bind:value={selectedValueText} />
     </Label>
-    <VariantInput bind:variant availableVariants={[]} />
+    <VariantInput bind:variant availableVariants={['composed']} />
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>

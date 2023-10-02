@@ -112,7 +112,7 @@
     <Label text="step">
       <Input value={step?.toString()} on:change={onStepChange} />
     </Label>
-    <VariantInput bind:variant availableVariants={['colorful']} />
+    <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="status">

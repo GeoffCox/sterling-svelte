@@ -44,20 +44,20 @@ Multiple variants can be applied.
 
 | Components | variant     | effect                                                                    |
 | ---------- | ----------- | ------------------------------------------------------------------------- |
+| (most \*)  | colorful    | applies colorful accent colors                                            |
+| (some \*)  | composed    | hides focus and disabled styles so a container can compose this component |
 | Button     | capsule     | shows a border with rounded ends                                          |
 | Button     | circular    | shows a circular border with a 1:1 aspect ratio                           |
-| (most \*)  | colorful    | applies accent colors                                                     |
 | Button     | secondary   | hides the background until hovered over                                   |
 | Button     | square      | shows a square border                                                     |
 | Button     | tool        | hides the border entirely and hides the background until hovered over.    |
-| Button     | colorful    | applies accent colors                                                     |
-| Input      | composed    | hides focus and disabled styles so a container can compose this component |
-| Label      | container   | adds a border and focus styles to contain another component               |
+| Label      | boxed       | adds a border and focus styles to contain another component               |
 | Link       | ghost       | removes the underline until hovered over                                  |
 | Link       | undecorated | removes the underline entirely                                            |
 
-\* colorful is supported by Button, Callout, Checkbox, ColorPicker, Dropdown, Input, Link, ListItem, MenuItem, Radio,
-Slider, Switch, Tab, TextArea, Tree, and TreeItemDisplay.
+\* colorful is supported by Button, Callout, Checkbox, Dropdown, Input, Label, Link, Radio, Slider, Switch, Tab, and TextArea.
+
+\* composed is supported by Dropdown, Input, List, Select, Slider, and Tree.
 
 # Custom styles and themes
 
@@ -120,8 +120,6 @@ Components indicate disabled state as an overlay with a diagonal striped pattern
 
 Secondary, subtle, and faint colors are used for less important text, placeholders, visually separate regions, and decorations.
 
-> The background-color and color pairs do not guarantee sufficient accessibility contrast.
-
 <br/>
 <Swatch 
 backgroundColor="--stsv-common__background-color--secondary" 
@@ -179,7 +177,7 @@ color="--stsv-button__color--active"
 
 ## Input
 
-These are used with interactive input controls (e.g. checkbox, text input, radio)
+These are used with interactive form controls (e.g. checkbox, text input, radio)
 
 <Swatch 
 backgroundColor="--stsv-input__background-color" 
@@ -215,7 +213,7 @@ color="--stsv-input__color--selected"
 
 ## Status Colors
 
-Several colors can be used to give meaning to status.
+Several colors are used to create an association with a status.
 
 <Swatch
 backgroundColor="--stsv-status--info__background-color"
@@ -244,11 +242,7 @@ color="--stsv-status--danger__color"
 
 # Sterling Theme Colorful CSS Vars
 
-Many components provde a `colorful` prop to apply accent colors.
-
-Notice that the default neutral styling, hover and focus states get darker.
-With colorful, hover and focus states get lighter.
-This is because the eye perceives darker neutrals as active, and brighter colors as lit up.
+Many components support a `colorful` variant to apply accent colors.
 
 ## Common
 

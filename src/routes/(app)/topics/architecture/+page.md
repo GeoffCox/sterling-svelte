@@ -10,7 +10,7 @@ For these reasons, sterling-svelte components do not apply any style by default.
 
 A separate set of `sterling` CSS styles is provided. See the [Sterling Theme](/topics/theme) topic for details.
 
-## Forward HTML element props
+## Forwards HTML element props
 
 Components will forward props to the intrinsic HTML element it renders.
 
@@ -20,7 +20,7 @@ The Button component forwards HTMLButtonElement props to the button element.
 This means you can pass any HTMLButton prop to Button such as `type`.
 If you specified `type=submit` this would override the Button components default `type=button` prop.
 
-## Raise HTML events
+## Raises HTML events
 
 Components will bubble the intrinsic events for the HTML element it renders.
 
@@ -83,14 +83,14 @@ and in its own dropdown.
 
 Components also apply the appropriate ARIA role or leverage the default ARIA role of their intrinsic element.
 
-## Portal floats UI above the page
+## Floats UI above the page using portals
 
 Components that have dropdowns like `Dropdown`, `Menu`, and `Select` need to ensure that the dropdown UI is not
 hidden due to a container's overflow setting. To achieve this, components will portal a part of their UI to
 render it as a direct child of the `body`. The element will be inserted at the end of the list of children so that
 it renders above other non-floating components.
 
-## Composability with slots
+## Supports composition with slots
 
 Components declare a default `<slot />` element to allow callers to insert or replace content.
 The default slot is typically used to fill in the children of the component element.

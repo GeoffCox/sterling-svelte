@@ -57,12 +57,12 @@
         {/each}
       </Select>
     </Label>
-    <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Label text="tip (text)">
       <Input bind:value={tipText} />
     </Label>
+    <VariantInput labelText="variant (Callout)" bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
 </Playground>
 

@@ -86,12 +86,6 @@ function toggleExpanded();
 </div>
 ```
 
-## Sterling Theme Variants
-
-| Variant  | Description           |
-| -------- | --------------------- |
-| colorful | applies accent colors |
-
 ## Playground
 
 <Playground />

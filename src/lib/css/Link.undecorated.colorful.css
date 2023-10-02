@@ -1,0 +1,6 @@
+.sterling-link.undecorated.colorful,
+.sterling-link.undecorated.colorful:hover,
+.sterling-link.undecorated.colorful:active,
+.sterling-link.undecorated.colorful:visited {
+  border-bottom-color: transparent;
+}

@@ -50,14 +50,6 @@ HTMLDivElement `blur`, `click`, and `focus` methods are included.
 </div>
 ```
 
-## Sterling Theme Variants
-
-- The variant is passed to the TreeChevron and default slot.
-
-| Variant  | Description           |
-| -------- | --------------------- |
-| colorful | applies accent colors |
-
 ## Playground
 
 <Playground />

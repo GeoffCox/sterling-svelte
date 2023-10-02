@@ -46,7 +46,7 @@
     <Label text="default slot (text)">
       <Input bind:value={label} />
     </Label>
-    <VariantInput bind:variant availableVariants={[]} />
+    <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>value: {value}</div>

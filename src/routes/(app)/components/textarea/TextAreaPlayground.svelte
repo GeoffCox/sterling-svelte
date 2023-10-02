@@ -47,7 +47,7 @@
         {/each}
       </Select>
     </Label>
-    <VariantInput bind:variant availableVariants={['colorful']} />
+    <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div class="value">value: {value}</div>

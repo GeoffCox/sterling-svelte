@@ -63,9 +63,12 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
+  </svelte:fragment>
+  <svelte:fragment slot="tweaks">
     <VariantInput
       bind:variant
       availableVariants={['capsule', 'circular ', 'colorful', 'secondary', 'square', 'tool']}
+      labelText="variant (Button)"
     />
   </svelte:fragment>
 </Playground>

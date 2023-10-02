@@ -242,7 +242,7 @@
     </slot>
   </div>
   <Popover reference={selectRef} bind:open id={popupId} conditionalRender={false}>
-    <div class="sterling-select-popup-content">
+    <div class={`sterling-select-popup-content ${variant}`}>
       <List
         bind:this={listRef}
         {disabled}

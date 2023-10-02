@@ -1,0 +1,8 @@
+.sterling-slider.composed,
+.sterling-slider.composed:hover,
+.sterling-slider.composed.focus,
+.sterling-slider.composed.disabled {
+  background: none;
+  border: none;
+  outline: none;
+}

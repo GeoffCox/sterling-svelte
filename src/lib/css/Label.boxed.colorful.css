@@ -1,0 +1,21 @@
+.sterling-label.boxed.colorful {
+  background-color: var(--stsv-input--colorful__background-color);
+  border-color: var(--stsv-input--colorful__border-color);
+}
+
+.sterling-label.boxed.colorful:not(.disabled):hover {
+  background-color: var(--stsv-input--colorful__background-color--hover);
+  border-color: var(--stsv-input--colorful__border-color--hover);
+  color: var(--stsv-input--colorful__color--hover);
+}
+
+.sterling-label.boxed.colorful:focus-within,
+.sterling-label.boxed.colorful:focus-within:hover {
+  background-color: var(--stsv-input--colorful__background-color--focus);
+  border-color: var(--stsv-input--colorful__border-color--focus);
+  color: var(--stsv-input--colorful__color--focus);
+}
+
+.sterling-label.boxed.colorful.using-keyboard:focus-within {
+  outline-color: var(--stsv-common--colorful__outline-color);
+}

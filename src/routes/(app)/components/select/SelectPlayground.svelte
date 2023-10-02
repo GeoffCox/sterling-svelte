@@ -46,7 +46,7 @@
     <Button on:click={() => (selectedValue = items[random(0, items.length - 1)])}
       >selectedValue = random()</Button
     >
-    <VariantInput bind:variant availableVariants={['colorful']} />
+    <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>open: {open}</div>

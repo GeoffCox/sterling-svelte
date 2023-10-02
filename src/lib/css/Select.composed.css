@@ -1,0 +1,12 @@
+.sterling-select.composed,
+.sterling-select.composed:hover,
+.sterling-select.composed.focus,
+.sterling-select.composed.disabled {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.sterling-select.composed.disabled::after {
+  opacity: 0;
+}

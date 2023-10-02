@@ -1,9 +1,0 @@
-.sterling-list-item.colorful:not(.disabled):not(.selected):hover {
-  background-color: var(--stsv-button--colorful__background-color--hover);
-  color: var(--stsv-button--colorful__color--hover);
-}
-
-.sterling-list-item.colorful.selected {
-  background-color: var(--stsv-button--colorful__background-color--active);
-  color: var(--stsv-button--colorful__color--active);
-}

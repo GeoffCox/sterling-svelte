@@ -63,12 +63,6 @@ HTMLDivElement `blur`, `click`, and `focus` methods are included.
 </div>
 ```
 
-## Sterling Theme Variants
-
-| Variant  | Description           |
-| -------- | --------------------- |
-| colorful | applies accent colors |
-
 ## Playground
 
 <Playground />

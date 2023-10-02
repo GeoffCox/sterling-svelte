@@ -1,0 +1,7 @@
+.sterling-link.ghost.colorful:hover {
+  border-bottom-color: var(--stsv-input--colorful__border-color--hover);
+}
+
+.sterling-link.ghost.colorful:active {
+  border-bottom-color: var(--stsv-input--colorful__border-color--selected);
+}

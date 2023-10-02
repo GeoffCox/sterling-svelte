@@ -224,7 +224,6 @@
   <Dropdown
     {disabled}
     bind:open
-    {variant}
     on:blur
     on:click
     on:copy
@@ -267,7 +266,7 @@
     </div>
     <div class="sterling-color-picker-popup" use:trapKeyboardFocus>
       <div class="tabs" bind:this={tabsRef}>
-        <TabList bind:this={tabListRef} bind:selectedValue={colorFormat} {variant}>
+        <TabList bind:this={tabListRef} bind:selectedValue={colorFormat}>
           <Tab value="hex">hex</Tab>
           <Tab value="rgb">rgb</Tab>
           <Tab value="hsl">hsl</Tab>
@@ -275,11 +274,11 @@
       </div>
       <div class="sliders">
         {#if colorFormat === 'rgb'}
-          <RgbColorSliders bind:red bind:green bind:blue bind:alpha {variant} />
+          <RgbColorSliders bind:red bind:green bind:blue bind:alpha />
         {:else if colorFormat === 'hex'}
-          <HexColorSliders bind:red bind:green bind:blue bind:alpha={hexAlpha} {variant} />
+          <HexColorSliders bind:red bind:green bind:blue bind:alpha={hexAlpha} />
         {:else if colorFormat === 'hsl'}
-          <HslColorSliders bind:hue bind:saturation bind:lightness bind:alpha {variant} />
+          <HslColorSliders bind:hue bind:saturation bind:lightness bind:alpha />
         {/if}
       </div>
     </div>
