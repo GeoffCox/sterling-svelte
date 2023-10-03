@@ -13,7 +13,7 @@ A Dropdown containing a color value, an input for editing the color text, and sl
 ## Types
 
 ```ts
-type ColorFormat = 'hex' | 'rgb' | 'hsl';
+export type ColorFormat = 'hex' | 'rgb' | 'hsl';
 ```
 
 ## Props
@@ -41,22 +41,24 @@ As a composite control that coordinates the input and the slider values,
 there are no slots for ColorPicker.
 
 ```svelte
-<Dropdown>
-  <div slot="value">
-    <!-- Color indicator -->
-    <div />
-    <!-- Color text input -->
-    <Input />
-  </div>
-  <div>
-    <!-- Color format tabs -->
-    <TabList />
-    <!-- Color sliders -->
-    <HexColorSliders />
-    <HslColorSliders />
-    <RgbColorSliders />
-  </div>
-</Dropdown>
+<div class="sterling-color-picker">
+  <Dropdown>
+    <div class="value" slot="value">
+      <div class="color-box" />
+      <Input />
+    </div>
+    <div class="sterling-color-picker-popup">
+      <div class="tabs">
+        <TabList />
+      </div>
+      <div class="sliders">
+        <HexColorSliders />
+        <HslColorSliders />
+        <RgbColorSliders />
+      </div>
+    </div>
+  </Dropdown>
+</div>
 ```
 
 ## Playground

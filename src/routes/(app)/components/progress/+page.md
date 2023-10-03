@@ -9,7 +9,7 @@ A visual bar that expands to indicate progress.
 ## Types
 
 ```ts
-type ProgressStatus = 'none' | 'auto' | 'progress' | 'success' | 'warning' | 'danger';
+export type ProgressStatus = 'none' | 'auto' | 'progress' | 'success' | 'warning' | 'danger';
 ```
 
 ## Props

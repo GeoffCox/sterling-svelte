@@ -28,14 +28,14 @@ HTMLInputElement `blur`, `click`, and `focus` methods are included.
 Use the default slot to provide content for the optional label.
 
 ```svelte
-<div>
-  <!-- hidden-->
-  <input />
-  <!-- checkmark -->
-  <div />
-  <!-- label (optional) -->
+<div class="sterling-checkbox">
+  <div class="container">
+    <!-- hidden-->
+    <input />
+    <div class="indicator" />
+  </div>
   <label>
-    <slot {checked} {colorful} {disabled} inputId={id} {value} {variant} />
+    <slot {checked} {colorful} {disabled} {inputId} {value} {variant} />
   </label>
 </div>
 ```

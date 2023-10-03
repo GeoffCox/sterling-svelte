@@ -17,8 +17,9 @@
   export let open = false;
 
   /**
-   * The return value from the dialog.
-   * After the dialog closes: Empty string indicates cancellation and a value indicates form submission.
+   * The return value from the dialog:
+   * - an empty string indicates cancellation
+   * - a value indicates form submission.
    */
   export let returnValue = '';
 

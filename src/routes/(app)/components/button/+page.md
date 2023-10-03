@@ -31,7 +31,7 @@ HTMLButtonElement `blur`, `click`, and `focus` methods are included.
 Use the default slot to place content within the button.
 
 ```svelte
-<button>
+<button class="sterling-button">
   <slot {disabled} {variant} />
 </button>
 ```

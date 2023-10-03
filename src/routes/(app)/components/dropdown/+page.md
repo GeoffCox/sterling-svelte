@@ -6,10 +6,6 @@
 
 Displays a value and button that opens a dropdown for changing the value.
 
-- Use the value slot to display the value.
-- Use the default slot to set content in the dropdown.
-- Use the button slot to replace the default chevron button.
-
 ## Props
 
 HTMLDivElement props are included.
@@ -44,12 +40,19 @@ HTMLDivElement `blur`, `click`, and `focus` methods are included.
 ## Anatomy
 
 ```svelte
-<div>
-  <slot name="value" {disabled} {open} {variant} />
-  <slot name="button" {disabled} {open} {variant} />
-  <!-- dropdown -->
+<div class="sterling-dropdown">
+  <div class="value">
+    <slot name="value" {disabled} {open} {variant} />
+  </div>
+  <slot name="button" {disabled} {open} {variant}>
+    <div class="button">
+      <div class="chevron" />
+    </div>
+  </slot>
   <Popover>
-    <slot {disabled} {open} {variant} />
+    <div class="sterling-dropdown-popup-content">
+      <slot {disabled} {open} {variant} />
+    </div>
   </Popover>
 </div>
 ```

@@ -48,13 +48,10 @@ HTMLDivElement events are included.
 Use the default slot to set the popover content.
 
 ```svelte
-<!-- portal -->
-<div>
-  <!-- callout -->
-  <div>
+<div class="sterling-callout-portal">
+  <div class="sterling-callout">
     <slot />
-    <!-- arrow pointer -->
-    <div />
+    <div class="arrow" />
   </div>
 </div>
 ```

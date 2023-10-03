@@ -7,12 +7,8 @@
 
 A styled HTML `dialog` element.
 
-- Use the title, body, and footer slots to provide typical dialog content.
-- Use the content slot to replace all content.
-- Supports either form submit or manual close.
-
-> The dialog is always modal.
-> The cancel event is only raised by pressing the escape key.
+- The dialog is always modal.
+- The cancel event is only raised when the escape key is pressed.
 
 ## Props
 
@@ -26,8 +22,9 @@ export let backdropCloses = false;
 export let open = false;
 
 /**
- * The return value from the dialog.
- * After the dialog closes: Empty string indicates cancellation and a value indicates form submission.
+ * The return value from the dialog:
+ * - an empty string indicates cancellation
+ * - a value indicates form submission.
  */
 export let returnValue = '';
 
@@ -41,21 +38,32 @@ HTMLDialogElement events are included.
 
 ## Anatomy
 
-- Use the content slot to replace all of the dialog's content.
-- Use the header slot to replace the header title and close button.
-
 ```svelte
-<dialog>
+<dialog class="sterling-dialog">
   <form>
-    <slot name="content">
-      <slot name="header">
-        <slot name="title" />
-        <!-- close button -->
-        <Button />
+    <div class="content">
+      <slot name="content">
+        <div class="header">
+          <slot name="header">
+            <div class="title">
+              <slot name="title" />
+            </div>
+            <div class="close">
+              <Button>
+                <div class="close-x" />
+              </Button>
+            </div>
+          </slot>
+        </div>
+        <div class="body">
+          <slot name="body" />
+        </div>
+        <div class="separator" />
+        <div class="footer">
+          <slot name="footer" />
+        </div>
       </slot>
-      <slot name="body" />
-      <slot name="footer" />
-    </slot>
+    </div>
   </form>
 </dialog>
 ```
@@ -89,4 +97,5 @@ HTMLDialogElement events are included.
 ## Examples
 
 <FormExample />
+
 <ManualExample />

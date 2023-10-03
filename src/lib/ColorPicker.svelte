@@ -26,10 +26,10 @@
   /** The current color format */
   export let colorFormat: ColorFormat = 'hex';
 
-  /** If the picker is disabled */
+  /** When true, the picker is disabled. */
   export let disabled: boolean = false;
 
-  /** If the picker dropdown is open */
+  /** When true, the dropdown is open. */
   export let open: boolean = false;
 
   /** Additional class names to apply. */
