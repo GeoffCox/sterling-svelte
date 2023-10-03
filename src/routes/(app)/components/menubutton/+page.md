@@ -39,10 +39,14 @@ dispatch('select', { value });
 
 ```svelte
 <Button>
-  <!-- The default slot of the Button -->
-  <slot {shape} {variant} />
-  <!-- The slot for menu items -->
-  <slot name="items" {variant} />
+  <div class="reference">
+    <slot {open} {value} {variant} />
+  </div>
+  <Popover>
+    <Menu>
+      <slot name="items" {variant} />
+    </Menu>
+  </Popover>
 </Button>
 ```
 

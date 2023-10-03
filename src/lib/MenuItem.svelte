@@ -20,6 +20,7 @@
   import MenuItemDisplay from './MenuItemDisplay.svelte';
   import Popover from './Popover.svelte';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import type { KeyboardEventHandler } from 'svelte/elements';
 
   // ----- Props ----- //
 
@@ -32,7 +33,7 @@
   /** When true, the menu item is disabled. */
   export let disabled = false;
 
-  /** The role of the menu item */
+  /** The role of the menu item. */
   export let role: MenuItemRole = 'menuitem';
 
   /** The text of the menu item. Not used when the item slot is filled.*/
@@ -185,7 +186,7 @@
     prevOpen = open;
   });
 
-  const onKeyDown: svelte.JSX.KeyboardEventHandler<Element> = async (event) => {
+  const onKeyDown: KeyboardEventHandler<Element> = async (event) => {
     if (!disabled && !event.altKey && !event.ctrlKey && !event.shiftKey) {
       switch (event.key) {
         case 'ArrowDown':

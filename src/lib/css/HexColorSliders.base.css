@@ -2,48 +2,47 @@
   align-items: center;
   display: grid;
   grid-template-columns: 1fr 4em;
+  grid-template-areas: 'rSlider rInput' 'gSlider gInput' 'bSlider bInput' 'aSlider aInput';
+  grid-template-rows: auto auto auto auto;
   column-gap: 0.5em;
   row-gap: 0.25em;
 }
 
-.sterling-hex-color-sliders .slider :global(.fill),
-.sterling-hex-color-sliders .slider :global(.sterling-slider.colorful .fill) {
+.sterling-hex-color-sliders .sterling-slider :global(.fill) {
   background-color: transparent;
 }
 
-.sterling-hex-color-sliders .slider :global(.track),
-.sterling-hex-color-sliders .slider :global(.sterling-slider.colorful .track) {
+.sterling-hex-color-sliders .sterling-slider :global(.track) {
   background-color: transparent;
   background-image: linear-gradient(to right, #ffffff, #ffffff 1px, #000000 1px, #000000);
   background-size: 2px 100%;
   opacity: 0.1;
 }
 
-.sterling-hex-color-sliders .red-slider {
+.sterling-hex-color-sliders .sterling-slider.red {
   background: linear-gradient(to right, black 0%, rgb(255, 0, 0) 100%);
+  grid-area: rSlider;
 }
 
-.sterling-hex-color-sliders .green-slider {
+.sterling-hex-color-sliders .sterling-slider.green {
   background: linear-gradient(to right, black 0%, rgb(0, 255, 0) 100%);
+  grid-area: gSlider;
 }
 
-.sterling-hex-color-sliders .blue-slider {
+.sterling-hex-color-sliders .sterling-slider.blue {
   background: linear-gradient(to right, black 0%, rgb(0, 0, 255) 100%);
+  grid-area: bSlider;
 }
 
-.sterling-hex-color-sliders .alpha {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  place-content: stretch;
-  place-items: stretch;
+.sterling-hex-color-sliders .alpha-gradient,
+.sterling-hex-color-sliders .alpha-hatch {
+  height: 2em;
 }
 
 .sterling-hex-color-sliders .alpha-gradient,
 .sterling-hex-color-sliders .alpha-hatch,
-.sterling-hex-color-sliders .alpha-slider {
-  grid-row: 1 / span 1;
-  grid-column: 1 / span 1;
+.sterling-hex-color-sliders .sterling-slider.alpha {
+  grid-area: aSlider;
 }
 
 .sterling-hex-color-sliders .alpha-hatch {
@@ -91,4 +90,17 @@
     rgba(var(--red), var(--green), var(--blue), 0) 0%,
     rgba(var(--red), var(--green), var(--blue), 100) 100%
   );
+}
+
+.sterling-hex-color-sliders .sterling-input.red {
+  grid-area: rInput;
+}
+.sterling-hex-color-sliders .sterling-input.green {
+  grid-area: gInput;
+}
+.sterling-hex-color-sliders .sterling-input.blue {
+  grid-area: bInput;
+}
+.sterling-hex-color-sliders .sterling-input.alpha {
+  grid-area: aInput;
 }

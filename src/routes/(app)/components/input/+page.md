@@ -4,7 +4,7 @@
 
 # Input
 
-A styled HTML `input`.
+A styled HTML `input` with an optional label.
 
 ## Props
 
@@ -33,10 +33,12 @@ The following HTMLInputElement methods are included:
 ## Anatomy
 
 ```svelte
-<label>
+<label class="sterling-input-label">
   <slot {disabled} {value} {variant} />
 </label>
-<input />
+<div class="sterling-input">
+  <input />
+</div>
 ```
 
 <Playground />

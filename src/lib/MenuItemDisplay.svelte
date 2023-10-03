@@ -13,7 +13,7 @@
   /** When true, displays the menu as a top level menu bar item. */
   export let isMenuBarItem = false;
 
-  /** The role of the menu item */
+  /** The role of the menu item. */
   export let menuItemRole: MenuItemRole = 'menuitem';
 
   /** Additional class names to apply. */
@@ -28,11 +28,11 @@
     class:checked
   />
   <div class="content">
-    <slot />
+    <slot {checked} {disabled} {hasChildren} {isMenuBarItem} {menuItemRole} {variant} />
   </div>
   {#if $$slots.shortcut}
     <div class="shortcut">
-      <slot name="shortcut" />
+      <slot name="shortcut" {checked} {disabled} {isMenuBarItem} {menuItemRole} {variant} />
     </div>
   {:else}
     <div class="chevron" class:has-children={!isMenuBarItem && hasChildren} />

@@ -62,8 +62,8 @@
 </script>
 
 {#if $$slots.default}
-  <label for={id}>
-    <slot {disabled} {value} />
+  <label class={`sterling-input-label ${variant}`} for={id}>
+    <slot {disabled} {value} {variant} />
   </label>
 {/if}
 <div class={`sterling-input ${variant}`} class:disabled>

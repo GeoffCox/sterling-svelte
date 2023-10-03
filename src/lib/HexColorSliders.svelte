@@ -118,25 +118,16 @@
   on:wheel
   on:paste
   {...$$restProps}
+  style={`--red:${red};--green:${green};--blue:${blue}`}
 >
-  <div class="slider red-slider">
-    <Slider min={0} max={255} precision={0} bind:value={red} {variant} />
-  </div>
-  <Input bind:value={redText} {variant} on:change={(e) => onRedInputChange(e)} />
-  <div class="slider green-slider">
-    <Slider min={0} max={255} precision={0} bind:value={green} {variant} />
-  </div>
-  <Input bind:value={greenText} {variant} on:change={(e) => onGreenInputChange(e)} />
-  <div class="slider blue-slider">
-    <Slider min={0} max={255} precision={0} bind:value={blue} {variant} />
-  </div>
-  <Input bind:value={blueText} {variant} on:change={(e) => onBlueInputChange(e)} />
-  <div class="alpha" style={`--red:${red};--green:${green};--blue:${blue}`}>
-    <div class="alpha-hatch" />
-    <div class="alpha-gradient" />
-    <div class="slider alpha-slider">
-      <Slider min={0} max={255} precision={0} bind:value={alpha} {variant} />
-    </div>
-  </div>
-  <Input bind:value={alphaText} {variant} on:change={(e) => onAlphaInputchange(e)} />
+  <Slider min={0} max={255} precision={0} bind:value={red} variant="red" />
+  <Input bind:value={redText} variant="red" on:change={(e) => onRedInputChange(e)} />
+  <Slider min={0} max={255} precision={0} bind:value={green} variant="green" />
+  <Input bind:value={greenText} variant="green" on:change={(e) => onGreenInputChange(e)} />
+  <Slider min={0} max={255} precision={0} bind:value={blue} variant="blue" />
+  <Input bind:value={blueText} variant="blue" on:change={(e) => onBlueInputChange(e)} />
+  <div class="alpha-hatch" />
+  <div class="alpha-gradient" />
+  <Slider min={0} max={255} precision={0} bind:value={alpha} variant="alpha" />
+  <Input bind:value={alphaText} variant="alpha" on:change={(e) => onAlphaInputchange(e)} />
 </div>

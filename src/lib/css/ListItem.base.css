@@ -47,7 +47,7 @@
   transition: opacity 250ms;
 }
 
-.sterling-list-item.item-disabled::after {
+.sterling-list-item.item-disabled:not(.list-disabled)::after {
   opacity: 1;
 }
 

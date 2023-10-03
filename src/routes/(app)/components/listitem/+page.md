@@ -31,10 +31,8 @@ HTMLDivElement `blur`, `click`, and `focus` methods are included.
 
 ## Anatomy
 
-If the default slot is not filled, the value will be displayed as text.
-
 ```svelte
-<div>
+<div class="sterling-list-item">
   <slot {disabled} {horizontal} {selected} {value} {variant}>{value}</slot>
 </div>
 ```

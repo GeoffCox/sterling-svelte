@@ -5,8 +5,8 @@
 
 # Popover
 
-Floats content above other content.
-This is done by portaling where elements are moved to the end of the `body` so they appear above other elements.
+Floats content above the page via use:portal.
+Elements are moved to the end of the `body` element so they appear above them in the z-order.
 
 Popover does not provide any styling (background, border, etc.) around the floating content.
 
@@ -15,7 +15,7 @@ The amazing <Link href="https://floating-ui.com/" target="_blank">Floating UI</L
 ## Types
 
 ```ts
-type PopoverPlacement =
+export type PopoverPlacement =
   | 'top-start'
   | 'top'
   | 'top-end'
@@ -66,11 +66,11 @@ HTMLDivElement events are included.
 
 ## Anatomy
 
-Use the default slot to set the popover content.
-
 ```svelte
-<div>
-  <slot {open} {variant} />
+<div class="sterling-popover-portal" use:portal>
+  <div class="sterling-popover">
+    <slot {open} {variant} />
+  </div>
 </div>
 ```
 

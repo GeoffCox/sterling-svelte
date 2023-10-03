@@ -26,7 +26,7 @@ HTMLAnchorElement `blur`, `click`, and `focus` methods are included.
 ## Anatomy
 
 ```svelte
-<a>
+<a class="sterling-link">
   <slot {disabled} {href} {variant} />
 </a>
 ```

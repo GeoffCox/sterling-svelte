@@ -41,6 +41,7 @@
     'MenuBar',
     'MenuButton',
     'MenuItem',
+    'MenuItemDisplay',
     'MenuSeparator',
     'Popover',
     'Progress',

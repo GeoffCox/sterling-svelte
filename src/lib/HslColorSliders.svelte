@@ -143,28 +143,24 @@
   on:wheel
   on:paste
   {...$$restProps}
+  style={`--hue:${hue};--saturation:${saturation}%;--lightness:${lightness}%`}
 >
-  <div class="slider hue">
-    <Slider min={0} max={360} precision={0} bind:value={hue} {variant} />
-  </div>
-  <Input bind:value={hueText} {variant} on:change={(e) => onHueInputChange(e)} />
-  <div class="slider saturation" style={`--hue:${hue};`}>
-    <Slider min={0} max={100} precision={0} bind:value={saturation} {variant} />
-  </div>
-  <Input bind:value={saturationText} {variant} on:change={(e) => onSaturationInputChange(e)} />
-  <div class="slider lightness" style={`--hue:${hue};--saturation:${saturation}%;`}>
-    <Slider min={0} max={100} precision={0} bind:value={lightness} {variant} />
-  </div>
-  <Input bind:value={lightnessText} {variant} on:change={(e) => onLightnessInputChange(e)} />
-  <div
-    class="slider alpha"
-    style={`--hue:${hue};--saturation:${saturation}%;--lightness:${lightness}%`}
-  >
-    <div class="alpha-hatch" />
-    <div class="alpha-gradient" />
-    <div class="alpha-slider">
-      <Slider min={0} max={1} precision={2} step={0.01} bind:value={alpha} {variant} />
-    </div>
-  </div>
-  <Input bind:value={alphaText} {variant} on:change={(e) => onAlphaInputchange(e)} />
+  <Slider min={0} max={360} precision={0} bind:value={hue} variant="hue" />
+  <Input bind:value={hueText} variant="hue" on:change={(e) => onHueInputChange(e)} />
+  <Slider min={0} max={100} precision={0} bind:value={saturation} variant="saturation" />
+  <Input
+    bind:value={saturationText}
+    variant="saturation"
+    on:change={(e) => onSaturationInputChange(e)}
+  />
+  <Slider min={0} max={100} precision={0} bind:value={lightness} variant="lightness" />
+  <Input
+    bind:value={lightnessText}
+    variant="lightness"
+    on:change={(e) => onLightnessInputChange(e)}
+  />
+  <div class="alpha-hatch" />
+  <div class="alpha-gradient" />
+  <Slider min={0} max={1} precision={2} step={0.01} bind:value={alpha} variant="alpha" />
+  <Input bind:value={alphaText} variant="alpha" on:change={(e) => onAlphaInputchange(e)} />
 </div>

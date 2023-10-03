@@ -6,14 +6,13 @@
 
 A label container for an interactive element such as an input, select, list, or tree.
 
-- Set the status and message of the label to provide more information to the user.
-- Set the required property to indicate the user must fill in a value and requiredReason to explain why.
-- Label watches the contained content to detect and set disabled state.
+- An optional message and status can provide information to the user about their value.
+- The required property and requiredReason indicate the user must fill in a value and why.
 
 ## Types
 
 ```ts
-type LabelStatus = 'none' | 'info' | 'success' | 'warning' | 'danger';
+export type LabelStatus = 'none' | 'info' | 'success' | 'warning' | 'danger';
 ```
 
 ## Props
@@ -23,14 +22,14 @@ HTMLLabelElement props are included.
 ```ts
 /**
  * If true, clicking the label invokes a click on the content.
- * Only necessary when the label is not associated with the content through containment or the for/id relationship.
+ * Needed only when the label is not associated with the content through containment or the `for`/`id` relationship.
  */
 export let forwardClick = false;
 
 /** The text to display in the label. Not used if the text slot is filled. */
 export let text: string | undefined = undefined;
 
-/** The status message to display */
+/** The status message to display. */
 export let message: string | undefined = undefined;
 
 /** When true, indicates a value is required. */
@@ -59,15 +58,23 @@ HTMLLabelElement `blur`, `click`, and `focus` methods are included.
 
 ## Anatomy
 
-Use the default slot for the content that should be labeled.
-This is most often a form input control.
-
 ```svelte
-<label>
-  <slot name="text"{disabled} {for} {forwardClick} {required} {text} {variant} />
-  <slot />
+<label class="sterling-label">
+   <slot name="text" {disabled} {for} {forwardClick} {required} {text} {variant}>
+    <div class="text">{text}</div>
+    </slot>
+  <div class="content">
+    <slot />
+  </div>
   <slot name="message" {disabled} {message} {required} {status} {variant}>
+    <div class="message">{message}</div>
+  </slot>
   <slot name="required" {requiredReason} {variant}>
+    <Tooltip>
+      <span class="required-reason" slot="tip">{requiredReason}</span>
+      <div class="required">*</div>
+    </Tooltip>
+  </slot>
 </label>
 ```
 

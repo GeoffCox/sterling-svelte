@@ -38,7 +38,7 @@
   };
 </script>
 
-<Playground>
+<Playground noEvents>
   <div class="component" slot="component">
     <div class="progress" class:vertical>
       <Progress {status} {disabled} {value} {max} bind:percent {variant} {vertical} />
@@ -47,7 +47,7 @@
   <svelte:fragment slot="props">
     <Label text="value: {value}">
       <div class="slider">
-        <Slider bind:value min={0} {max} />
+        <Slider bind:value min={0} {max} precision={0} />
       </div>
     </Label>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>

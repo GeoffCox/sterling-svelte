@@ -4,9 +4,7 @@
 
 # Select
 
-A single item that can be selected from a dropdown list of items.
-
-> The HTML `select` element does not support adequate custom styling. Select provides a custom solution.
+A value that can be selected from a dropdown list of values.
 
 ## Props
 
@@ -42,19 +40,22 @@ function scrollToSelectedItem();
 
 ## Anatomy
 
-Fill the default slot with ListItem components to display in the dropdown.
-
 ```svelte
-<div>
-  <div>
-    <slot name="value" {disabled} {open} {selectedValue} {variant} />
+<div class="sterling-select">
+  <div class="value">
+    <slot name="value" {disabled} {open} {selectedValue} {variant}>
+      {selectedValue}
+    </slot>
   </div>
-  <div>
-    <slot name="button" {disabled} {open} {selectedValue} {variant} />
+  <div class="button">
+    <slot name="button" {disabled} {open} {selectedValue} {variant}>
+      <div class="chevron" />
+    </slot>
   </div>
   <Popover>
-    <div>
+    <div class="sterling-select-popup-content">
       <List>
+        <!-- Items to display in the dropdown -->
         <slot {variant} />
       </List>
     </div>

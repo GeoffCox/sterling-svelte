@@ -174,7 +174,7 @@
   {...$$restProps}
 >
   <div class="reference" bind:this={reference} use:clickOutside on:click_outside={onClickOutside}>
-    <slot {variant} />
+    <slot {open} {value} {variant} />
   </div>
   <Popover {reference} {open}>
     <Menu bind:this={menuRef} id={menuId} {reference} {open}>

@@ -2,11 +2,24 @@
   align-items: center;
   display: grid;
   grid-template-columns: 1fr 5em;
+  grid-template-areas: 'hSlider hInput' 'sSlider sInput' 'lSlider lInput' 'aSlider aInput';
+  grid-template-rows: auto auto auto auto;
   column-gap: 0.5em;
   row-gap: 0.25em;
 }
 
-.sterling-hsl-color-sliders .hue {
+.sterling-hsl-color-sliders .sterling-slider :global(.fill) {
+  background-color: transparent;
+}
+
+.sterling-hsl-color-sliders .sterling-slider :global(.track) {
+  background-color: transparent;
+  opacity: 0.1;
+  background-image: linear-gradient(to right, #7f3a3a, #ffffff 1px, #000000 1px, #000000);
+  background-size: 2px 100%;
+}
+
+.sterling-hsl-color-sliders .sterling-slider.hue {
   background: linear-gradient(
     to right,
     hsl(0, 100%, 50%) 0%,
@@ -17,53 +30,40 @@
     hsl(300, 100%, 50%) 83%,
     hsl(0, 100%, 50%) 100%
   );
+  grid-area: hSlider;
 }
 
-.sterling-hsl-color-sliders .slider :global(.fill),
-.sterling-hsl-color-sliders .slider :global(.sterling-slider.colorful .fill) {
-  background-color: transparent;
-}
-.sterling-hsl-color-sliders .slider :global(.track),
-.sterling-hsl-color-sliders .slider :global(.sterling-slider.colorful .track) {
-  background-color: transparent;
-  opacity: 0.1;
-  background-image: linear-gradient(to right, #7f3a3a, #ffffff 1px, #000000 1px, #000000);
-  background-size: 2px 100%;
-}
-
-.sterling-hsl-color-sliders .saturation {
+.sterling-hsl-color-sliders .sterling-slider.saturation {
   background: linear-gradient(
     to right,
     hsl(var(--hue), 0%, 50%) 0%,
     hsl(var(--hue), 100%, 50%) 100%
   );
+  grid-area: sSlider;
 }
 
-.lightness {
+.sterling-hsl-color-sliders .sterling-slider.lightness {
   background: linear-gradient(
     to right,
     hsl(var(--hue), var(--saturation), 0%) 0%,
     hsl(var(--hue), var(--saturation), 50%) 50%,
     hsl(var(--hue), var(--saturation), 100%) 100%
   );
+  grid-area: lSlider;
 }
 
-.alpha {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  place-content: stretch;
-  place-items: stretch;
+.sterling-hsl-color-sliders .alpha-gradient,
+.sterling-hsl-color-sliders .alpha-hatch {
+  height: 2em;
 }
 
-.alpha-gradient,
-.alpha-hatch,
-.alpha-slider {
-  grid-row: 1 / span 1;
-  grid-column: 1 / span 1;
+.sterling-hsl-color-sliders .alpha-gradient,
+.sterling-hsl-color-sliders .alpha-hatch,
+.sterling-hsl-color-sliders .sterling-slider.alpha {
+  grid-area: aSlider;
 }
 
-.alpha-hatch {
+.sterling-hsl-color-sliders .alpha-hatch {
   background-color: #eee;
   opacity: 0.1;
   background-image: repeating-linear-gradient(
@@ -102,10 +102,23 @@
   background-size: 8px 8px;
 }
 
-.alpha-gradient {
+.sterling-hsl-color-sliders .alpha-gradient {
   background: linear-gradient(
     to right,
     hsla(var(--hue), var(--saturation), var(--lightness), 0) 0%,
     hsla(var(--hue), var(--saturation), var(--lightness), 1) 100%
   );
+}
+
+.sterling-hsl-color-sliders .sterling-input.hue {
+  grid-area: hInput;
+}
+.sterling-hsl-color-sliders .sterling-input.saturation {
+  grid-area: sInput;
+}
+.sterling-hsl-color-sliders .sterling-input.lightness {
+  grid-area: lInput;
+}
+.sterling-hsl-color-sliders .sterling-input.alpha {
+  grid-area: aInput;
 }

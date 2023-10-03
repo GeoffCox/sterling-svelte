@@ -4,24 +4,23 @@
 
 # MenuItem
 
-A styled HTML `button` providing a clickable item within a menu.
+A styled HTML `button` providing an item within a menu.
 
 ## Types
 
-The context and registration provide a communication channel for menu items across the menu hierarchy.
-This is necessary since menus are Popover components portaled to appear on top of page content.
+The context and registration provide a communication channel across the portaled menu hierarchy.
 
 ```ts
-type MenuItemRole = 'menuitem' | 'menuitemcheckbox' | 'menuitemradio';
+export type MenuItemRole = 'menuitem' | 'menuitemcheckbox' | 'menuitemradio';
 
-type MenuItemRegistration = {
+export type MenuItemRegistration = {
   value: string;
   open: () => void;
   close: () => void;
   focus: () => void;
 };
 
-type MenuItemContext = {
+export type MenuItemContext = {
   isMenuBarItem?: boolean;
   openValues: Writable<string[]>;
   rootValue?: string;
@@ -47,7 +46,7 @@ export let checked = false;
 /** When true, the menu item is disabled. */
 export let disabled = false;
 
-/** The role of the menu item */
+/** The role of the menu item. */
 export let role: MenuItemRole = 'menuitem';
 
 /** The text of the menu item. Not used when the item slot is filled.*/
@@ -76,25 +75,25 @@ HTMLButtonElement `blur`, `click`, and `focus` methods are included.
 
 ## Anatomy
 
-By default, the item slot contains a MenuItemDisplay rendering checkbox and radio indicators, text, and submenu chevron.
-
 ```svelte
-<button>
-  <slot
-    name="item"
-    {checked}
-    {depth}
-    {disabled}
-    {hasChildren}
-    {isMenuBarItem}
-    {open}
-    {role}
-    {text}
-    {value}
-    {variant}
-  >
-    <MenuItemDisplay>{text}</MenuItemDisplay>
-  </slot>
+<button class="sterling-menu-item">
+  <div class="item">
+    <slot
+      name="item"
+      {checked}
+      {depth}
+      {disabled}
+      {hasChildren}
+      {isMenuBarItem}
+      {open}
+      {role}
+      {text}
+      {value}
+      {variant}
+    >
+      <MenuItemDisplay>{text}</MenuItemDisplay>
+    </slot>
+  </div>
   <Popover>
     <Menu>
       <slot {depth} {disabled} />

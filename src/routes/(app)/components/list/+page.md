@@ -6,17 +6,21 @@
 
 A list of items where an item can be selected.
 
-- Choose between a vertical or horizontal list.
-
 ## Types
 
-The ListContext is provided to each item with `setContext('sterlingList')`.
-
 ```ts
-type ListContext = {
-  disabled: Readable<boolean>;
-  selectedValue: Writable<string | undefined>;
-  horizontal: Readable<boolean>;
+/**
+ * The context for a List and its descendants.
+ */
+export type ListContext = {
+  /** When true, the list and its items are disabled. */
+  disabled?: Readable<boolean>;
+
+  /** The value of the currently selected item. */
+  selectedValue?: Writable<string | undefined>;
+
+  /** When true, the list is laid out horizontally. */
+  horizontal?: Readable<boolean>;
 };
 ```
 
@@ -72,7 +76,7 @@ Any content without these properties, will not participate in selection.
 This allows you to mix in other content with list items such as search boxes, group headers, or decorations.
 
 ```svelte
-<div>
+<div class="sterling-list">
   <slot {disabled} {horizontal} {selectedValue} {variant} />
 </div>
 ```

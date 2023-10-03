@@ -15,14 +15,10 @@ HTMLDivElement props are included.
 export let variant: string = '';
 ```
 
-## Events
-
-This is a display element so no events are provided.
-
 ## Anatomy
 
 ```svelte
-<div />
+<div class="sterling-menu-separator" />
 ```
 
 ## Playground

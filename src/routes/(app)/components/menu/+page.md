@@ -41,7 +41,9 @@ export const focusLastMenuItem();
 ## Anatomy
 
 ```svelte
-<div>
-  <slot {variant} />
+<div class="sterling-menu">
+  <div class="menu-items">
+    <slot {variant} />
+  </div>
 </div>
 ```

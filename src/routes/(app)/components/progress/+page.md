@@ -6,8 +6,6 @@
 
 A visual bar that expands to indicate progress.
 
-> Does not render the HTML progress tag since vertical layout and other customizations are not supported.
-
 ## Types
 
 ```ts
@@ -48,9 +46,10 @@ HTMLDivElement events are included.
 ## Anatomy
 
 ```svelte
-<div>
-  <!-- Indicator -->
-  <div />
+<div class="sterling-progress">
+  <div class="container">
+    <div class="indicator" />
+  </div>
 </div>
 ```
 

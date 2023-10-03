@@ -1,6 +1,6 @@
 # sterling-svelte
 
-## Key Features
+## Features
 
 - lightweight
 - no forced style, theme, or design (headless by default)

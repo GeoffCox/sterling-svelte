@@ -54,7 +54,8 @@
   bind:this={itemRef}
   class={`sterling-list-item ${variant}`}
   class:disabled={disabled || $listDisabled}
-  class:item-disabled={disabled && !$listDisabled}
+  class:item-disabled={disabled}
+  class:list-disabled={$listDisabled}
   class:selected
   data-value={value}
   role="listitem"

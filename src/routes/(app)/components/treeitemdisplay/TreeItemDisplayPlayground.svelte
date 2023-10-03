@@ -19,7 +19,7 @@
   let variant: string = '';
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground bind:this={exampleRef} noEvents>
   <div class="component" slot="component">
     <TreeItemDisplay
       value="tree-item-display"

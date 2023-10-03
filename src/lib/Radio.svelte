@@ -96,7 +96,7 @@
       bind:this={inputRef}
       {checked}
       {disabled}
-      {group}
+      name={group}
       {id}
       type="radio"
       on:blur

@@ -34,36 +34,18 @@ HTMLDivElement events are included.
 
 ## Anatomy
 
-Use the default slot to set the popover content.
-
 ```svelte
-<div>
-  <!-- hue slider and input -->
-  <div>
-    <Slider />
-  </div>
-  <Input />
-  <!-- saturation slider and input -->
-  <div>
-    <Slider />
-  </div>
-  <Input />
-  <!-- lightness slider and input -->
-  <div>
-    <Slider />
-  </div>
-  <Input />
-  <!-- alpha slider and input -->
-  <div>
-    <!-- alpha hatch -->
-    <div />
-    <!-- alpha gradient -->
-    <div />
-    <div>
-      <Slider />
-    </div>
-  </div>
-  <Input />
+<div class="sterling-hsl-color-sliders">
+  <Slider variant="hue" />
+  <Input variant="hue" />
+  <Slider variant="saturation" />
+  <Input variant="saturation" />
+  <Slider variant="lightness" />
+  <Input variant="lightness" />
+  <div class="alpha-hatch" />
+  <div class="alpha-gradient" />
+  <Slider variant="alpha" />
+  <Input variant="alpha" />
 </div>
 ```
 

@@ -10,14 +10,14 @@
 
   /**
    * If true, clicking the label invokes a click on the content.
-   * Only necessary when the label is not associated with the content through containment or the for/id relationship.
+   * Needed only when the label is not associated with the content through containment or the `for`/`id` relationship.
    */
   export let forwardClick = false;
 
   /** The text to display in the label. Not used if the text slot is filled. */
   export let text: string | undefined = undefined;
 
-  /** The status message to display */
+  /** The status message to display. */
   export let message: string | undefined = undefined;
 
   /** When true, indicates a value is required. */
