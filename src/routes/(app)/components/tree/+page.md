@@ -4,7 +4,7 @@
 
 # Tree
 
-A hierarchy of items that can be expanded or collapsed where a single item can be selected.
+A hierarchy of items that can be expanded or collapsed. A single item can be selected.
 
 ## Types
 
@@ -13,7 +13,7 @@ A hierarchy of items that can be expanded or collapsed where a single item can b
  * The context for a Tree and its descendants.
  */
 export type TreeContext = {
-  /** When true, the tree and its descendants are disabled */
+  /** When true, the tree and its descendants are disabled. */
   disabled: Readable<boolean>;
 
   /** The values of items that are expanded. */
@@ -58,7 +58,8 @@ HTMLDivElement `blur`, `click`, and `focus` methods are included.
 ## Anatomy
 
 ```svelte
-<div>
+<div class="sterling-tree">
+  <!-- children -->
   <slot {disabled} {expandedValues} {selectedValue} {variant} />
 </div>
 ```

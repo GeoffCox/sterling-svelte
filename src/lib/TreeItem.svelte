@@ -446,7 +446,7 @@ A item in a Tree displaying the item and children.
   </div>
   {#if expanded && hasChildren}
     <div class="children" transition:slideMotion|global={{ duration: 200 }} role="group">
-      <slot depth={$depth} disabled={_disabled} {expanded} {selected} {value} {variant} />
+      <slot depth={$depth} disabled={_disabled} {selected} {value} {variant} />
     </div>
   {/if}
 </div>

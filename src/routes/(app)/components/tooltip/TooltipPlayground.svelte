@@ -37,29 +37,29 @@
     </Tooltip>
   </div>
   <svelte:fragment slot="props">
-    <Label text="crossAxisOffset: {crossAxisOffset}">
-      <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
-    </Label>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <div class="delay-slider">
       <Label text={`hoverDelayMilliseconds: ${hoverDelayMilliseconds}ms`}>
         <Slider bind:value={hoverDelayMilliseconds} min={0} max={3000} precision={0} />
       </Label>
     </div>
-    <Label text="mainAxisOffset: {mainAxisOffset}">
+  </svelte:fragment>
+  <svelte:fragment slot="tweaks">
+    <Label text="crossAxisOffset (Callout): {crossAxisOffset}">
+      <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
+    </Label>
+    <Label text="mainAxisOffset (Callout): {mainAxisOffset}">
       <Slider min={-25} max={25} precision={0} bind:value={mainAxisOffset} />
     </Label>
-    <Checkbox bind:checked={open}>open</Checkbox>
-    <Label text="placement">
+    <Checkbox bind:checked={open}>open (Callout)</Checkbox>
+    <Label text="placement (Callout)">
       <Select bind:selectedValue={placement}>
         {#each POPOVER_PLACEMENTS as placementItem}
           <ListItem value={placementItem}>{placementItem}</ListItem>
         {/each}
       </Select>
     </Label>
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
-    <Label text="tip (text)">
+    <Label text="tip (Callout)">
       <Input bind:value={tipText} />
     </Label>
     <VariantInput labelText="variant (Callout)" bind:variant availableVariants={['colorful']} />

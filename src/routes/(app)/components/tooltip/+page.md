@@ -5,14 +5,13 @@
 
 # Tooltip
 
-A <Link href="callout">Callout</Link> that containing descriptive information.
-A tooltip automatically displays the callout when the mouse hovers over the element.
+A `Callout` that display after the mouse hovers over the reference element.
 
 ## Props
 
 HTMLDivElement props are included.
 
-Callout props are included.
+`Callout` props are included.
 
 ```ts
 /** When true, the tooltip is disabled and will not be shown. */
@@ -32,9 +31,11 @@ The tooltip is anchored to a sibling element that appears directly after the def
 
 ```svelte
 <slot {disabled} {hoverDelayMilliseconds} {open} {variant} />
-<!-- anchor point -->
-<div />
-<Callout />
+<!-- hidden anchor point -->
+<div class="sterling-tooltip-origin" />
+<Callout>
+  <slot name="tip" {placement} {variant} />
+</Callout>
 ```
 
 ## Playground

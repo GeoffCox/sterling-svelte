@@ -7,12 +7,12 @@
 An item within a `Tree` hierarchy.
 
 - Provides selection, expand/collapse, and interaction within a Tree.
-- By default, renders via TreeItemDisplay.
+- By default, renders a `TreeItemDisplay`.
 - Note: A tree item is identified by having `data-value` and `role="treeitem"` properties
 
 ## Types
 
-TreeItem inspects both TreeContext and TreeItemContext to handle colorful, disabled, expand/collapse, and selected state.
+TreeItem inspects both TreeContext and TreeItemContext to handle disabled, expand/collapse, and selected state.
 
 ```ts
 /**
@@ -23,7 +23,7 @@ export type TreeItemContext = {
    * The depth of this tree item within the tree hierarchy.
    * Starts at zero.
    */
-  depth: number;
+  depth: Readable<number>;
 
   /** When true, the three item is disabled. */
   disabled: Readable<boolean>;
@@ -69,20 +69,19 @@ function toggleExpanded();
 ## Anatomy
 
 ```svelte
-<div>
-  <!-- item -->
-  <div>
+<div class="sterling-tree-item">
+  <div class="item">
     <slot name="item" {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant}>
-      <TreeItemDisplay {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant}>
-        <!-- label slot (passed to default slot of TreeItemDisplay)  -->
+      <TreeItemDisplay>
         <slot name="label" {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant}
-          >{text || value}</slot
-        >
+          >{text || value}
+        </slot>
       </TreeItemDisplay>
     </slot>
   </div>
-  <!-- children -->
-  <slot {depth} {disabled} {expanded} {selected} {value} {variant} />
+  <div class="children">
+    <slot {depth} {disabled} {selected} {value} {variant} />
+  </div>
 </div>
 ```
 

@@ -4,7 +4,7 @@
 
 # TreeChevron
 
-A chevron indicating expanded/collapsed of an item in a tree hierarchy.
+A chevron indicating expanded/collapsed state of an item in a tree hierarchy.
 
 ## Props
 
@@ -28,7 +28,7 @@ HTMLDivElement events are included.
 ## Anatomy
 
 ```svelte
-<div />
+<div class="sterling-tree-chevron" />
 ```
 
 ## Playground

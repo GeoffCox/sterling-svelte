@@ -91,7 +91,7 @@
 .sterling-tab .indicator {
   background-color: transparent;
   border-radius: 10000px;
-  transition: background-color 250ms;
+  transition: background-color 500ms;
 }
 
 .sterling-tab:not(.vertical) .indicator {
@@ -105,8 +105,7 @@
 }
 
 .sterling-tab:not(.selected):not(:active):hover .indicator {
-  background-color: var(--stsv-input__border-color--hover);
-  opacity: 0.3;
+  background-color: var(--stsv-common__color--subtle);
 }
 
 .sterling-tab:active .indicator {

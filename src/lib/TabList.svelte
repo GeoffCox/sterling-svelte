@@ -12,11 +12,11 @@
   /** When true, the tab list and its tabs are disabled. */
   export let disabled = false;
 
-  /** When true, the tab list is displayed vertically. */
-  export let vertical = false;
-
   /** The value of the currently selected tab. */
   export let selectedValue: string | undefined = undefined;
+
+  /** When true, the tab list is displayed vertically. */
+  export let vertical = false;
 
   /** Additional class names to apply. */
   export let variant: string = '';
@@ -26,12 +26,10 @@
   let tabListRef: HTMLDivElement;
   let lastSelectedTabRef: HTMLElement;
 
-  const variantStore = writable<string>(variant);
   const disabledStore = writable<boolean>(disabled);
   const selectedValueStore = writable<string | undefined>(selectedValue);
   const verticalStore = writable<boolean>(vertical);
 
-  $: variantStore.set(variant);
   $: disabledStore.set(disabled);
 
   $: selectedValueStore.set(selectedValue);
@@ -230,7 +228,6 @@
   // ----- Set Context ----- //
 
   setContext<TabListContext>(TAB_LIST_CONTEXT_KEY, {
-    variant: variantStore,
     disabled: disabledStore,
     selectedValue: selectedValueStore,
     vertical: verticalStore

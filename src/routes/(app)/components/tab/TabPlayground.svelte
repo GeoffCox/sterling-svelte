@@ -23,17 +23,8 @@
   let vertical = false;
 
   const selectedValueStore = writable<string | undefined>();
-  const variantStore = writable<string>(variant);
   const verticalStore = writable<boolean>(vertical);
   const disabledStore = writable<boolean>(disabled);
-
-  $: {
-    variantStore.set(variant);
-  }
-
-  $: {
-    verticalStore.set(vertical);
-  }
 
   $: {
     selectedValueStore.set(selected ? value : undefined);
@@ -46,14 +37,13 @@
   setContext(TAB_LIST_CONTEXT_KEY, {
     disabled: disabledStore,
     selectedValue: selectedValueStore,
-    variant: variantStore,
     vertical: verticalStore
   });
 </script>
 
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
-    <Tab {value} {disabled} {text} />
+    <Tab {disabled} {text} {value} {variant} />
   </svelte:fragment>>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>

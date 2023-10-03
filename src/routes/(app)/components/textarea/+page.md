@@ -32,7 +32,7 @@ HTMLTextArea `blur`, `click`, `focus`, `select`, `setRangeText` and `setSelectio
 ## Anatomy
 
 ```svelte
-<div>
+<div class="sterling-text-area">
   <textarea />
 </div>
 ```

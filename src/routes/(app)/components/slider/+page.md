@@ -6,8 +6,6 @@
 
 A draggable button on a line to set a value in a range.
 
-> The HTML `input type=range` element does not support adequate custom styling. Slider provides a custom solution.
-
 ## Props
 
 HTMLDivElement props are included.
@@ -53,15 +51,11 @@ HTMLDivElement `blur`, `click`, and `focus` methods are included.
 ## Anatomy
 
 ```svelte
-<div>
-  <!-- container -->
-  <div>
-    <!-- track -->
-    <div />
-    <!-- fill -->
-    <div />
-    <!-- thumb -->
-    <div />
+<div class="sterling-slider">
+  <div class="container">
+    <div class="track" />
+    <div class="fill" />
+    <div class="thumb" />
   <div>
 </div>
 ```

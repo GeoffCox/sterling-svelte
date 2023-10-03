@@ -31,8 +31,7 @@
   const {
     disabled: tabListDisabled,
     selectedValue,
-    vertical,
-    variant: tabListVariant
+    vertical
   } = getContext<TabListContext>(TAB_LIST_CONTEXT_KEY);
 
   $: _disabled = $tabListDisabled || disabled;
@@ -65,7 +64,7 @@
 <button
   bind:this={tabRef}
   aria-selected={selected}
-  class={`sterling-tab ${$tabListVariant} ${variant}`}
+  class={`sterling-tab ${variant}`}
   disabled={_disabled}
   class:selected
   class:using-keyboard={$usingKeyboard}

@@ -41,11 +41,12 @@ HTMLDivElement `blur`, `click`, and `focus` methods are included.
 ## Anatomy
 
 ```svelte
-<button>
+<button class="sterling-tab">
   <!-- content -->
-  <slot {disabled} {selected} {value} {text}/ >
-  <!-- selection indicator -->
-  <div />
+  <slot {disabled} {selected} {text} {value} {variant}>
+    <div class="text">{text || value}</div>
+  </slot>
+  <div class="indicator" />
 </button>
 ```
 

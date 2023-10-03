@@ -6,8 +6,6 @@
 
 A styled HTML `input` element with `type=checkbox`.
 
-> The `input type=checkbox` element is difficult to restyle with CSS.The input is hidden and the styled indicator rendered independently.
-
 ## Props
 
 HTMLInputElement props are included.
@@ -37,15 +35,18 @@ HTMLInputElement `blur`, `click`, and `focus` methods are included.
 ## Anatomy
 
 ```svelte
-<div>
-   <!-- hidden -->
+<div class="sterling-switch">
+   <!-- hidden input -->
   <input />
-  <!-- optional off label -->
-  <slot name="offLabel" {checked} {disabled} {inputId} {offText} {variant} {vertical} />
-  <!-- toggle -->
-  <div />
-  <!-- optional on label -->
-  <slot name="onLabel" {checked} {disabled} {inputId} {onText} {variant} {vertical}>
+  <div class="off-label">
+    <slot name="offLabel" {checked} {disabled} {inputId} {offText} {variant} {vertical} />
+  </div>
+  <div class="switch">
+    <div class="thumb" />
+  </div>
+  <div class="on-label">
+    <slot name="onLabel" {checked} {disabled} {inputId} {onText} {variant} {vertical}>
+  </div>
 </div>
 ```
 

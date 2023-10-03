@@ -4,7 +4,8 @@
 
 # TreeItemDisplay
 
-A chevron and label for an item in a tree.
+The default content for a `TreeItem` in a `Tree`.
+Displays a `TreeChevron` and `Label`.
 
 ## Props
 
@@ -44,7 +45,7 @@ HTMLDivElement `blur`, `click`, and `focus` methods are included.
 ## Anatomy
 
 ```svelte
-<div>
+<div class="sterling-tree-item-display">
   <TreeChevron {expanded} {hasChildren} {variant} />
   <slot {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant} />
 </div>
