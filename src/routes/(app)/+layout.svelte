@@ -148,8 +148,9 @@
               <MenuItem value="{base}/" text="Overview" />
               <MenuItem value="{base}/topics/start" text="Getting Started" />
               <MenuItem value="{base}/topics/roadmap" text="Roadmap" />
-              <MenuSeparator />
+              <MenuItem value="{base}/topics/changelog" text="Change Log" />
               <MenuItem value="{base}/topics/architecture" text="Architecture" />
+              <MenuSeparator />
               <MenuItem value="{base}/topics/actions" text="Actions" />
               <MenuItem value="{base}/topics/mediaqueries" text="MediaQueries" />
               <MenuSeparator />
@@ -185,6 +186,7 @@
             <Link href="{base}/" variant="ghost">Overview</Link>
             <Link href="{base}/topics/start" variant="ghost">Getting Started</Link>
             <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
+            <Link href="{base}/topics/changelog" variant="ghost">Change Log</Link>
             <Link href="{base}/topics/architecture" variant="ghost">Architecture</Link>
             <div class="nav-header">Helpers</div>
             <Link href="{base}/topics/actions" variant="ghost">Actions</Link>
