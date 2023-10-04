@@ -5,10 +5,9 @@
   import Label from '$lib/Label.svelte';
   import ListItem from '$lib/ListItem.svelte';
   import Select from '$lib/Select.svelte';
-  import type { LabelStatus, LabelVariant } from '$lib/Label.types';
+  import type { LabelStatus } from '$lib/Label.types';
   import { LABEL_STATUSES } from '$lib';
   import VariantInput from '../../_shared/VariantInput.svelte';
-  import { includes } from 'lodash-es';
 
   let disabled = false;
   let forwardClick = false;
