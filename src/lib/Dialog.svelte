@@ -1,7 +1,5 @@
 <script lang="ts">
   import type { FormEventHandler } from 'svelte/elements';
-  import '$lib/css/sterling.css';
-
   import { onMount, tick } from 'svelte';
 
   import Button from './Button.svelte';
