@@ -9,12 +9,13 @@
       <Button>Button</Button>
     </div>
     <div class="shapes">
-      <Button shape="circular">Circular</Button>
-      <Button shape="square">Square</Button>
+      <Button variant="capsule">Capsule</Button>
+      <Button variant="circular">Circular</Button>
+      <Button variant="square">Square</Button>
     </div>
     <div class="variants">
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="outline">Outline</Button>
+      <Button variant="tool">Tool</Button>
+      <Button variant="secondary">Seconary</Button>
     </div>
   </div>
 </PictureFrame>
@@ -26,11 +27,9 @@
     grid-template-columns: auto auto auto auto;
     grid-template-rows: auto;
     column-gap: 1em;
+    align-items: center;
   }
 
-  .default {
-    align-self: center;
-  }
   .shapes,
   .variants {
     display: grid;
