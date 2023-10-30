@@ -15,7 +15,7 @@
     </div>
     <div class="variants">
       <Button variant="tool">Tool</Button>
-      <Button variant="secondary">Seconary</Button>
+      <Button variant="secondary">Secondary</Button>
     </div>
   </div>
 </PictureFrame>
