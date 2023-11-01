@@ -1,5 +1,5 @@
 <script lang="ts">
-  import SvelteIcon from '../../SvelteIcon.svelte';
+  import SvelteIcon from '../../_shared/icons/SvelteIcon.svelte';
   import Playground from '../Playground.svelte';
 
   import Button from '$lib/Button.svelte';
@@ -17,12 +17,7 @@
 
 <Playground bind:this={exampleRef}>
   <div class="component" slot="component">
-    <Button
-      variantClass="colorful"
-      {disabled}
-      {variant}
-      on:click={() => exampleRef.recordEvent('click')}
-    >
+    <Button {disabled} {variant} on:click={() => exampleRef.recordEvent('click')}>
       {#if withIcon}
         <SvelteIcon />
       {/if}

@@ -1,8 +1,8 @@
 <script>
   import Slider from '$lib/Slider.svelte';
-  import AutoModeIcon from '../AutoModeIcon.svelte';
-  import DarkModeIcon from '../DarkModeIcon.svelte';
-  import LightModeIcon from '../LightModeIcon.svelte';
+  import AutoModeIcon from './icons/AutoModeIcon.svelte';
+  import DarkModeIcon from './icons/DarkModeIcon.svelte';
+  import LightModeIcon from './icons/LightModeIcon.svelte';
 
   export let mode = 'auto';
 

@@ -4,7 +4,7 @@
 
   import Playground from '../Playground.svelte';
 
-  import { countries } from '../../_sampleData/countries';
+  import { countries } from '../../_shared/sampleData/countries';
   import { random } from 'lodash-es';
   import Button from '$lib/Button.svelte';
   import ListItem from '$lib/ListItem.svelte';

@@ -8,11 +8,11 @@
   import Link from '$lib/Link.svelte';
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuButton from '$lib/MenuButton.svelte';
-  import HamburgerIcon from './HamburgerIcon.svelte';
+  import HamburgerIcon from './_shared/icons/HamburgerIcon.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
-  import FilterIcon from './FilterIcon.svelte';
-  import CodeTheme from './CodeTheme.svelte';
-  import GitHubIcon from './GitHubIcon.svelte';
+  import FilterIcon from './_shared/icons/FilterIcon.svelte';
+  import CodeTheme from './_shared/CodeTheme.svelte';
+  import GitHubIcon from './_shared/icons/GitHubIcon.svelte';
   import ModeSlider from './_shared/ModeSlider.svelte';
 
   const themes: Record<string, string> = {

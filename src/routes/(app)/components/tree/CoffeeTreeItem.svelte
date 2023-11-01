@@ -1,6 +1,6 @@
 <script lang="ts">
   import TreeItem from '$lib/TreeItem.svelte';
-  import type { CoffeeItem } from '../../_sampleData/coffeeTree';
+  import type { CoffeeItem } from '../../_shared/sampleData/coffeeTree';
 
   export let coffeeItem: CoffeeItem;
 

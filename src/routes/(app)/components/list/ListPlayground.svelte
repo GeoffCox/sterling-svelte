@@ -3,7 +3,7 @@
   import Playground from '../Playground.svelte';
   import List from '$lib/List.svelte';
   import Input from '$lib/Input.svelte';
-  import { countries } from '../../_sampleData/countries';
+  import { countries } from '../../_shared/sampleData/countries';
   import ListItem from '$lib/ListItem.svelte';
   import { debounce } from 'lodash-es';
   import Label from '$lib/Label.svelte';

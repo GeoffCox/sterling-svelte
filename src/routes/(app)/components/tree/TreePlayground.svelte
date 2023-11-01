@@ -3,7 +3,7 @@
   import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
 
-  import { coffeeTree } from '../../_sampleData/coffeeTree';
+  import { coffeeTree } from '../../_shared/sampleData/coffeeTree';
 
   import Button from '$lib/Button.svelte';
   import CoffeeTreeItem from './CoffeeTreeItem.svelte';
