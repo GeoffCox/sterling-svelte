@@ -1,0 +1,16 @@
+.sterling-button.icon-only {
+  min-width: 32px;
+  max-width: 32px;
+}
+
+.sterling-button.small.icon-only {
+  min-width: 24px;
+  max-width: 24px;
+  padding: 1px;
+}
+
+.sterling-button.large.icon-only {
+  min-width: 40px;
+  max-width: 40px;
+  padding: 7px;
+}

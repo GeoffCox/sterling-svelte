@@ -1,0 +1,7 @@
+.sterling-button.circular {
+  border-radius: var(--borderRadiusCircular);
+}
+
+.sterling-button.square {
+  border-radius: var(--borderRadiusNone);
+}

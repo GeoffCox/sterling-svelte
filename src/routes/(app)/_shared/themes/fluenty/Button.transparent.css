@@ -1,0 +1,31 @@
+.sterling-button.transparent {
+  background-color: var(--colorTransparentBackground);
+  border-color: transparent;
+  color: var(--colorNeutralForeground2);
+}
+
+.sterling-button.transparent:hover {
+  background-color: var(--colorTransparentBackgroundHover);
+  border-color: transparent;
+  color: var(--colorNeutralForeground2BrandHover);
+}
+
+.sterling-button.transparent:hover:active {
+  background-color: var(--colorTransparentBackgroundPressed);
+  border-color: transparent;
+  color: var(--colorNeutralForeground2BrandPressed);
+}
+
+@media (forced-colors: active) {
+  .sterling-button.transparent:hover {
+    background-color: var(--colorTransparentBackgroundHover);
+    border-color: transparent;
+    color: Highlight;
+  }
+
+  .sterling-button.transparent::hover:active {
+    background-color: var(--colorTransparentBackgroundHover);
+    border-color: transparent;
+    color: Highlight;
+  }
+}
