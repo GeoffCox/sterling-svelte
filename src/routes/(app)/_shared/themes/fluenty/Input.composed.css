@@ -1,13 +1,8 @@
 .sterling-input.composed,
+.sterling-input.composed:focus-within,
 .sterling-input.composed::after,
 .sterling-input.composed:focus-within:after,
-.sterling-input.composed:focus-within:active::after
-  .sterling-input.composed:hover
-  input:not(:disabled),
-.sterling-input.composed input:focus,
-.sterling-input.composed:hover input:focus,
-.sterling-input.composed input:focus-within,
-.sterling-input.composed:hover input:focus-within {
+.sterling-input.composed:focus-within:active::after {
   background-color: transparent;
   border-color: transparent;
   outline: none;
