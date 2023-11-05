@@ -1,0 +1,33 @@
+.sterling-input.disabled {
+  cursor: not-allowed;
+  background-color: var(--colorTransparentBackground);
+  border-color: var(--colorNeutralStrokeDisabled);
+}
+
+.sterling-input.disabled::after {
+  content: unset;
+}
+
+.sterling-input.disabled:focus-within {
+  outline-style: none;
+}
+
+@media (forced-colors: active) {
+  .sterling-input.disabled {
+    border-color: GrayText;
+  }
+}
+
+.sterling-input.disabled input {
+  color: var(--colorNeutralForegroundDisabled);
+  background-color: var(--colorTransparentBackground);
+  cursor: not-allowed;
+}
+
+.sterling-input.disabled input::placeholder {
+  color: var(--colorNeutralForegroundDisabled);
+}
+
+.sterling-input-label.disabled {
+  color: var(--colorNeutralForegroundDisabled);
+}

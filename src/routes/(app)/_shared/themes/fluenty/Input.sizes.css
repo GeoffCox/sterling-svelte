@@ -1,0 +1,25 @@
+.sterling-input.small {
+  min-height: 24px;
+  padding-left: var(--spacingHorizontalSNudge);
+  padding-right: var(--spacingHorizontalSNudge);
+  font-family: var(--fontFamilyBase);
+  font-size: var(--fontSizeBase200);
+  font-weight: var(--fontWeightRegular);
+  line-height: var(--lineHeightBase200);
+}
+
+.sterling-input.large {
+  min-height: 40px;
+  padding-left: var(--spacingHorizontalM);
+  padding-right: var(--spacingHorizontalM);
+  font-family: var(--fontFamilyBase);
+  font-size: var(--fontSizeBase400);
+  font-weight: var(--fontWeightRegular);
+  line-height: var(--lineHeightBase400);
+  gap: 'var(--spacingHorizontalSNudge)';
+}
+
+.sterling-input.large input {
+  padding-left: var(--spacingHorizontalSNudge);
+  padding-right: var(--spacingHorizontalSNudge);
+}

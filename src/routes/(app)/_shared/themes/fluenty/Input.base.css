@@ -1,0 +1,96 @@
+.sterling-input {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: var(--spacingHorizontalXXS);
+  border-radius: var(--borderRadiusMedium);
+  position: relative;
+  box-sizing: border-box;
+
+  min-height: 32px;
+  padding: 0 var(--spacingHorizontalMNudge);
+  font-family: var(--fontFamilyBase);
+  font-size: var(--fontSizeBase300);
+  font-weight: var(--fontWeightRegular);
+  line-height: var(--lineHeightBase300);
+
+  background-color: var(--colorNeutralBackground1);
+  border: 1px solid var(--colorNeutralStroke1);
+  border-bottom-color: var(--colorNeutralStrokeAccessible);
+}
+
+.sterling-input:focus-within {
+  outline: 2px solid transparent;
+}
+
+.sterling-input::after {
+  box-sizing: border-box;
+  content: '';
+  position: absolute;
+  left: -1px;
+  bottom: -1px;
+  right: -1px;
+
+  height: max(2px, var(--borderRadiusMedium));
+  border-bottom-left-radius: var(--borderRadiusMedium);
+  border-bottom-right-radius: var(--borderRadiusMedium);
+
+  border-bottom: 2px solid var(--colorCompoundBrandStroke);
+  clip-path: inset(calc(100% - 2px) 0 0 0);
+
+  transform: scaleX(0);
+  transition-property: transform;
+  transition-duration: var(--durationUltraFast);
+  transition-delay: var(--curveAccelerateMid);
+}
+
+.sterling-input:focus-within:after {
+  transform: scaleX(1);
+  transition-property: transform;
+  transition-duration: var(--durationNormal);
+  transition-delay: var(--curveDecelerateMid);
+}
+
+.sterling-input:focus-within:active::after {
+  border-bottom-color: var(--colorCompoundBrandStrokePressed);
+}
+
+@media (prefers-reduced-motion) {
+  .sterling-input::after,
+  .sterling-input:focus-within:after {
+    transition-duration: 0.01ms;
+    transition-delay: 0.01ms;
+  }
+}
+
+.sterling-input input {
+  box-sizing: border-box;
+  flex-grow: 1;
+  min-width: 0;
+  border-style: none;
+  padding: 0 var(--spacingHorizontalXXS);
+  color: var(--colorNeutralForeground1);
+  background-color: transparent;
+
+  outline-style: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+input::placeholder {
+  color: var(--colorNeutralForeground4);
+  opacity: 1;
+}
+
+/* ----- label ----- */
+
+.sterling-input-label {
+  color: var(--colorNeutralForeground1);
+  font: inherit;
+  font-family: var(--fontFamilyBase);
+  font-size: var(--fontSizeBase300);
+  line-height: var(--lineHeightBase300);
+  transition: color 250ms;
+}

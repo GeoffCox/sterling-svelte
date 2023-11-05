@@ -1,0 +1,25 @@
+.sterling-input.underline {
+  background-color: var(--colorTransparentBackground);
+  border-radius: 0;
+  border-top-style: none;
+  border-right-style: none;
+  border-left-style: none;
+}
+
+.sterling-input.underline::after {
+  left: 0;
+  right: 0;
+}
+
+.sterling-input.underline:not(.disabled):hover {
+  border-bottom-color: var(--colorNeutralStrokeAccessibleHover);
+}
+
+.sterling-input.underline:not(.disabled):active,
+.sterling-input.underline:not(.disabled):focus-within {
+  border-bottom-color: var(--colorNeutralStrokeAccessiblePressed);
+}
+
+.sterling-input.underline:not(.disabled)::after {
+  border-radius: 0;
+}

@@ -1,0 +1,4 @@
+.sterling-input.invalid:not(:focus-within),
+.sterling-input.invalid:hover:not(:focus-within) {
+  border-color: var(--colorPaletteRedBorder2);
+}
