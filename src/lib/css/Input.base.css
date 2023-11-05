@@ -84,7 +84,7 @@ input::placeholder {
 
 /* ----- label ----- */
 
-label {
+.sterling-input-label {
   color: var(--stsv-common__color);
   transition: color 250ms;
   font: inherit;
@@ -94,7 +94,7 @@ label {
 
 @media (prefers-reduced-motion) {
   .sterling-input::after,
-  input {
+  .sterling-input-label {
     transition: none;
   }
 }
