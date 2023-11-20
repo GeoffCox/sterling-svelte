@@ -45,6 +45,9 @@
   /** Additional class names to apply. */
   export let variant: string = '';
 
+  /** Additional class names to apply to the sub Menu*/
+  export let menuVariant: string = '';
+
   // ----- Get Context ----- //
 
   const {
@@ -449,7 +452,7 @@
       placement={isMenuBarItem ? 'bottom-start' : 'right-start'}
       {open}
     >
-      <Menu bind:this={menuRef} id={menuId}>
+      <Menu bind:this={menuRef} id={menuId} variant={menuVariant}>
         <slot {depth} {disabled} />
       </Menu>
     </Popover>

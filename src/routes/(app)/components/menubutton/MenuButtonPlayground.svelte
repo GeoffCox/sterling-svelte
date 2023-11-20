@@ -14,11 +14,12 @@
   let renderChoice: 'performance' | 'quality' = 'performance';
   let autoSave: boolean = false;
   let variant = '';
+  let menuVariant = '';
 </script>
 
 <Playground bind:this={exampleRef} noEvents>
   <svelte:fragment slot="component">
-    <MenuButton bind:open {disabled} value="file" {variant}>
+    <MenuButton bind:open {disabled} value="file" {variant} {menuVariant}>
       File
       <svelte:fragment slot="items">
         <MenuItem value="file-new" text="New" />
@@ -63,8 +64,7 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
+    <VariantInput bind:variant={menuVariant} availableVariants={[]} labelText="menuVariant" />
     <VariantInput
       bind:variant
       availableVariants={['capsule', 'circular ', 'colorful', 'secondary', 'square', 'tool']}

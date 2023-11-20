@@ -23,6 +23,9 @@
   /** Additional class names to apply. */
   export let variant: string = '';
 
+  /** Additional class names to apply to the Menu*/
+  export let menuVariant: string = '';
+
   // ----- State ----- //
 
   const instanceId = idGenerator.nextId('MenuButton');
@@ -177,8 +180,8 @@
     <slot {open} {value} {variant} />
   </div>
   <Popover {reference} {open}>
-    <Menu bind:this={menuRef} id={menuId} {reference} {open}>
-      <slot name="items" {variant} />
+    <Menu bind:this={menuRef} id={menuId} {reference} {open} variant={menuVariant}>
+      <slot name="items" />
     </Menu>
   </Popover>
 </Button>

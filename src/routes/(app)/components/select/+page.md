@@ -19,6 +19,9 @@ export let selectedValue: string | undefined = undefined;
 
 /** Additional class names to apply. */
 export let variant: string = '';
+
+/** Additional class names to apply to the List*/
+export let listVariant: string = '';
 ```
 
 ## Events
@@ -49,14 +52,16 @@ function scrollToSelectedItem();
   </div>
   <div class="button">
     <slot name="button" {disabled} {open} {selectedValue} {variant}>
-      <div class="chevron" />
+      <slot name="icon" {disabled} {open} {selectedValue} {variant}>
+        <div class="chevron" />
+      </slot>
     </slot>
   </div>
   <Popover>
     <div class="sterling-select-popup-content">
-      <List>
+      <List variant={`composed ${listVariant}`}>
         <!-- Items to display in the dropdown -->
-        <slot {variant} />
+        <slot {variant} {listVariant} />
       </List>
     </div>
   </Popover>

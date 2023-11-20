@@ -17,6 +17,7 @@
 
   let selectedValue: string | undefined = items[random(0, items.length - 1)];
   let disabled = false;
+  let listVariant = '';
   let variant = '';
 </script>
 
@@ -25,6 +26,7 @@
     <Select
       {disabled}
       {items}
+      {listVariant}
       {variant}
       bind:open
       bind:selectedValue
@@ -46,6 +48,7 @@
     <Button on:click={() => (selectedValue = items[random(0, items.length - 1)])}
       >selectedValue = random()</Button
     >
+    <VariantInput bind:variant={listVariant} availableVariants={[]} labelText="listVariant" />
     <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
   </svelte:fragment>
   <svelte:fragment slot="status">

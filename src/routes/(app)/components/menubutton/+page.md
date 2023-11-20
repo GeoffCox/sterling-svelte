@@ -19,6 +19,9 @@ export let value: string;
 
 /** Additional class names to apply. */
 export let variant: string = '';
+
+/** Additional class names to apply to the Menu*/
+export let menuVariant: string = '';
 ```
 
 ## Events
@@ -43,8 +46,8 @@ dispatch('select', { value });
     <slot {open} {value} {variant} />
   </div>
   <Popover>
-    <Menu>
-      <slot name="items" {variant} />
+    <Menu variant={menuVariant}>
+      <slot name="items" />
     </Menu>
   </Popover>
 </Button>

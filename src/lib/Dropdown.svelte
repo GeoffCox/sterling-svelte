@@ -142,12 +142,16 @@
   on:click_outside={onClickOutside}
   {...$$restProps}
 >
-  <div class="value">
-    <slot name="value" {disabled} {open} {variant} />
-  </div>
+  {#if $$slots.value}
+    <div class="value">
+      <slot name="value" {disabled} {open} {variant} />
+    </div>
+  {/if}
   <slot name="button" {disabled} {open} {variant}>
     <div class="button">
-      <div class="chevron" />
+      <slot name="icon" {disabled} {open} {variant}>
+        <div class="chevron" />
+      </slot>
     </div>
   </slot>
 

@@ -21,6 +21,9 @@
   /** Additional class names to apply. */
   export let variant: string = '';
 
+  /** Additional class names to apply to the List*/
+  export let listVariant: string = '';
+
   // ----- State ----- //
 
   // Tracks the previous open state
@@ -238,7 +241,9 @@
   </div>
   <div class="button">
     <slot name="button" {disabled} {open} {selectedValue} {variant}>
-      <div class="chevron" />
+      <slot name="icon" {disabled} {open} {selectedValue} {variant}>
+        <div class="chevron" />
+      </slot>
     </slot>
   </div>
   <Popover reference={selectRef} bind:open id={popupId} conditionalRender={false}>
@@ -251,9 +256,9 @@
         on:keydown={onListKeydown}
         on:select={onListSelect}
         tabIndex={open ? 0 : -1}
-        variant={`composed ${variant}`}
+        variant={`composed ${listVariant}`}
       >
-        <slot {variant} />
+        <slot {variant} {listVariant} />
       </List>
     </div>
   </Popover>

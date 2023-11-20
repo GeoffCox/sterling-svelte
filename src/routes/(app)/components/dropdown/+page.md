@@ -46,7 +46,9 @@ HTMLDivElement `blur`, `click`, and `focus` methods are included.
   </div>
   <slot name="button" {disabled} {open} {variant}>
     <div class="button">
-      <div class="chevron" />
+      <slot name="icon" {disabled} {open} {variant}>
+        <div class="chevron" />
+      </slot>
     </div>
   </slot>
   <Popover>

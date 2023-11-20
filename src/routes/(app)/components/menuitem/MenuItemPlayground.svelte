@@ -2,8 +2,6 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
 
-  import Label from '$lib/Label.svelte';
-  import Input from '$lib/Input.svelte';
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
   import { setContext } from 'svelte';
@@ -12,6 +10,7 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
 
   let exampleRef: any;
+  let menuVariant = '';
   let variant = '';
   let disabled = false;
 
@@ -38,6 +37,7 @@
       {disabled}
       text="File"
       {variant}
+      {menuVariant}
       on:close={(event) => exampleRef.recordEvent(`close '${event.detail.value}'`)}
       on:open={(event) => exampleRef.recordEvent(`open '${event.detail.value}'`)}
       on:select={(event) => exampleRef.recordEvent(`select '${event.detail.value}'`)}
@@ -95,6 +95,7 @@
   </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <VariantInput bind:variant={menuVariant} availableVariants={[]} labelText="menuVariant" />
     <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
 </Playground>

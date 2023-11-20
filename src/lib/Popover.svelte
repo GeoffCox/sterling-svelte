@@ -45,6 +45,9 @@
 
   $: floatingUIPlacement = placement as Placement;
 
+  let bodyHeight = 0;
+  let resizeObserver: ResizeObserver | undefined = undefined;
+
   // ----- Portal Host ----- //
 
   const ensurePortalHost = () => {
@@ -63,15 +66,6 @@
       portalHost = host;
     }
   };
-
-  // ----- Body Height Change ----- //
-
-  let bodyHeight = 0;
-
-  // create an Observer instance
-  const resizeObserver = new ResizeObserver((entries) => {
-    bodyHeight = entries[0].target.clientHeight;
-  });
 
   // ----- Position ----- //
 
@@ -104,11 +98,17 @@
   onMount(() => {
     ensurePortalHost();
 
+    resizeObserver = new ResizeObserver((entries) => {
+      bodyHeight = entries[0].target.clientHeight;
+    });
+
     // start observing a DOM node
     resizeObserver.observe(document.body);
 
     return () => {
-      resizeObserver.unobserve(document.body);
+      resizeObserver?.unobserve(document.body);
+      resizeObserver?.disconnect();
+      resizeObserver = undefined;
     };
   });
 
