@@ -11,8 +11,8 @@
   let exampleRef: any;
   let disabled = false;
   let variant: string = '';
+  let buttonText = 'sterling-svelte';
   let withIcon = true;
-  let withText = true;
 </script>
 
 <Playground bind:this={exampleRef}>
@@ -21,9 +21,7 @@
       {#if withIcon}
         <SvelteIcon />
       {/if}
-      {#if withText}
-        sterling-svelte
-      {/if}
+      {buttonText}
     </Button>
   </div>
   <svelte:fragment slot="props">
@@ -34,7 +32,7 @@
     />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
-    <Checkbox bind:checked={withText}>with text</Checkbox>
+    <Input bind:value={buttonText} />
     <Checkbox bind:checked={withIcon}>with icon</Checkbox>
   </svelte:fragment>
 </Playground>
