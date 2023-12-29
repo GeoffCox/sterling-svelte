@@ -51,7 +51,7 @@
   // ----- Portal Host ----- //
 
   const ensurePortalHost = () => {
-    if (document) {
+    if (globalThis?.document) {
       if (portalHost) {
         return portalHost;
       }
@@ -122,7 +122,10 @@
 </script>
 
 {#if open || !conditionalRender}
-  <div use:portal={{ target: portalHost ?? document.body }} class="sterling-popover-portal">
+  <div
+    use:portal={{ target: portalHost ?? globalThis?.document?.body }}
+    class="sterling-popover-portal"
+  >
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div
       bind:this={popupRef}

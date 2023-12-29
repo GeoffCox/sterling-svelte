@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import type { LabelStatus } from './Label.types';
   import Tooltip from './Tooltip.svelte';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
@@ -111,12 +112,18 @@
     }
   };
 
-  let mutationObserver = new MutationObserver(mutationCallback);
+  let mutationObserver: MutationObserver | undefined;
+
+  onMount(() => {
+    mutationObserver = new MutationObserver(mutationCallback);
+
+    return () => mutationObserver?.disconnect();
+  });
 
   $: {
-    mutationObserver.disconnect();
+    mutationObserver?.disconnect();
     if (targetRef) {
-      mutationObserver.observe(targetRef, {
+      mutationObserver?.observe(targetRef, {
         attributes: true
       });
     }

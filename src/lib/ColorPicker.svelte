@@ -56,91 +56,29 @@
   // ----- Update HSL, RGB, Text ----- //
 
   const updateFromRgb = async () => {
-    if (!updating && (colorFormat === 'hex' || colorFormat === 'rgb')) {
-      updating = true;
-
-      const newAlpha = colorFormat === 'hex' ? hexAlpha / 255 : alpha;
-
-      const color = tinycolor({ r: red, g: green, b: blue, a: newAlpha });
-
-      const hsl = color.toHsl();
-      hue = Math.round(hsl.h);
-      saturation = Math.round(hsl.s * 100);
-      lightness = Math.round(hsl.l * 100);
-
-      switch (colorFormat) {
-        case 'rgb':
-          colorText = color.toRgbString();
-          hexAlpha = Math.round(alpha * 255);
-          break;
-        case 'hex':
-          colorText = alpha === 100 ? color.toHexString() : color.toHex8String();
-          alpha = round(hexAlpha / 255, 2);
-          break;
-      }
-
-      await tick();
-      updating = false;
-    }
-  };
-
-  const updateFromHsl = async () => {
-    if (!updating && colorFormat === 'hsl') {
-      updating = true;
-
-      const color = tinycolor({ h: hue, s: saturation / 100, l: lightness / 100, a: alpha });
-
-      const rgb = color.toRgb();
-      red = rgb.r;
-      green = rgb.g;
-      blue = rgb.b;
-
-      colorText = color.toHslString();
-
-      hexAlpha = Math.round(alpha * 255);
-
-      await tick();
-
-      updating = false;
-    }
-  };
-
-  const updateColorsFromText = async () => {
-    const color = tinycolor(colorText);
-
-    if (color.isValid) {
-      if (!updating) {
+    // tinycolor requires window
+    if (globalThis.window) {
+      if (!updating && (colorFormat === 'hex' || colorFormat === 'rgb')) {
         updating = true;
 
-        switch (color.format) {
-          case 'hsl':
-            colorFormat = 'hsl';
-            break;
-          case 'rgb':
-            colorFormat = 'rgb';
-            break;
-          case 'hex':
-          case 'hex4':
-          case 'hex8':
-            colorFormat = 'hex';
-            break;
-          default:
-            break;
-        }
+        const newAlpha = colorFormat === 'hex' ? hexAlpha / 255 : alpha;
+
+        const color = tinycolor({ r: red, g: green, b: blue, a: newAlpha });
 
         const hsl = color.toHsl();
         hue = Math.round(hsl.h);
         saturation = Math.round(hsl.s * 100);
         lightness = Math.round(hsl.l * 100);
 
-        const rgb = color.toRgb();
-        red = rgb.r;
-        green = rgb.g;
-        blue = rgb.b;
-
-        if (rgb.a) {
-          alpha = hsl.a;
-          hexAlpha = Math.round(alpha * 255);
+        switch (colorFormat) {
+          case 'rgb':
+            colorText = color.toRgbString();
+            hexAlpha = Math.round(alpha * 255);
+            break;
+          case 'hex':
+            colorText = alpha === 100 ? color.toHexString() : color.toHex8String();
+            alpha = round(hexAlpha / 255, 2);
+            break;
         }
 
         await tick();
@@ -149,39 +87,133 @@
     }
   };
 
-  $: colorText, updateColorsFromText();
+  const updateFromHsl = async () => {
+    // tinycolor requires window
+    if (globalThis.window) {
+      if (!updating && colorFormat === 'hsl') {
+        updating = true;
 
-  $: colorFormat, hue, saturation, lightness, alpha, updateFromHsl();
+        const color = tinycolor({ h: hue, s: saturation / 100, l: lightness / 100, a: alpha });
 
-  $: colorFormat, red, green, blue, alpha, hexAlpha, updateFromRgb();
+        const rgb = color.toRgb();
+        red = rgb.r;
+        green = rgb.g;
+        blue = rgb.b;
+
+        colorText = color.toHslString();
+
+        hexAlpha = Math.round(alpha * 255);
+
+        await tick();
+
+        updating = false;
+      }
+    }
+  };
+
+  const updateColorsFromText = async () => {
+    // tinycolor requires window
+    if (globalThis.window) {
+      const color = tinycolor(colorText);
+
+      if (color.isValid) {
+        if (!updating) {
+          updating = true;
+
+          switch (color.format) {
+            case 'hsl':
+              colorFormat = 'hsl';
+              break;
+            case 'rgb':
+              colorFormat = 'rgb';
+              break;
+            case 'hex':
+            case 'hex4':
+            case 'hex8':
+              colorFormat = 'hex';
+              break;
+            default:
+              break;
+          }
+
+          const hsl = color.toHsl();
+          hue = Math.round(hsl.h);
+          saturation = Math.round(hsl.s * 100);
+          lightness = Math.round(hsl.l * 100);
+
+          const rgb = color.toRgb();
+          red = rgb.r;
+          green = rgb.g;
+          blue = rgb.b;
+
+          if (rgb.a) {
+            alpha = hsl.a;
+            hexAlpha = Math.round(alpha * 255);
+          }
+
+          await tick();
+          updating = false;
+        }
+      }
+    }
+  };
+
+  $: {
+    globalThis.window;
+    colorText;
+    updateColorsFromText();
+  }
+
+  $: {
+    globalThis.window;
+    colorFormat;
+    hue;
+    saturation;
+    lightness;
+    alpha;
+    updateFromHsl();
+  }
+
+  $: {
+    globalThis.window;
+    colorFormat;
+    red;
+    green;
+    blue;
+    alpha;
+    hexAlpha;
+    updateFromRgb();
+  }
 
   // ----- Event handlers ----- //
 
   const onInputBlur = async () => {
-    if (!updating) {
-      if (colorText.trim().length === 0) {
-        colorText = defaultColorText;
-        return;
-      }
-
-      const color = tinycolor(colorText);
-      if (color.isValid) {
-        updating = true;
-        switch (colorFormat) {
-          case 'hsl':
-            colorText = color.toHslString();
-            break;
-          case 'rgb':
-            colorText = color.toRgbString();
-            break;
-          case 'hex':
-            colorText = alpha === 1 ? color.toHexString() : color.toHex8String();
-            break;
-          default:
-            break;
+    if (globalThis.window && tinycolor) {
+      if (!updating) {
+        if (colorText.trim().length === 0) {
+          colorText = defaultColorText;
+          return;
         }
-        await tick();
-        updating = false;
+
+        const color = tinycolor(colorText);
+        if (color.isValid) {
+          updating = true;
+          switch (colorFormat) {
+            case 'hsl':
+              colorText = color.toHslString();
+              break;
+            case 'rgb':
+              colorText = color.toRgbString();
+              break;
+            case 'hex':
+              colorText = alpha === 1 ? color.toHexString() : color.toHex8String();
+              break;
+            default:
+              break;
+          }
+          await tick();
+          updating = false;
+        }
       }
     }
   };

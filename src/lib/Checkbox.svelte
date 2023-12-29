@@ -39,7 +39,7 @@
 	@component
 	A styled HTML input type=checkbox element.
 -->
-<div class={`sterling-checkbox ${variant}`} class:disabled>
+<div class={`sterling-checkbox ${variant}`} class:checked class:disabled>
   <div class="container">
     <input
       bind:this={inputRef}

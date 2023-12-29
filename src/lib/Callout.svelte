@@ -55,7 +55,7 @@
   // ----- Portal Host ----- //
 
   const ensurePortalHost = () => {
-    if (document) {
+    if (globalThis?.document) {
       if (portalHost) {
         return portalHost;
       }
@@ -191,7 +191,7 @@
 
 {#if open || !conditionalRender}
   <div
-    use:portal={{ target: portalHost ?? document.body }}
+    use:portal={{ target: portalHost ?? globalThis?.document?.body }}
     class="sterling-callout-portal"
     transition:fadeMotion|global={{ duration: 250 }}
   >
