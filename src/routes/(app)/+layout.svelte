@@ -133,93 +133,84 @@
     mode: mode === 'auto' ? 'auto' : mode === 'dark' ? 'dark' : 'light'
   }}
 >
-  {#if mounted}
-    <div class="layout">
-      <div class="header">
-        <div class="hamburger-menu">
-          <MenuButton
-            value="components"
-            shape="circular"
-            variant="ghost"
-            on:select={onNavMenuSelect}
-          >
-            <HamburgerIcon />
-            <svelte:fragment slot="items">
-              <MenuItem value="{base}/" text="Overview" />
-              <MenuItem value="{base}/topics/start" text="Getting Started" />
-              <MenuItem value="{base}/topics/roadmap" text="Roadmap" />
-              <MenuItem value="{base}/topics/changelog" text="Change Log" />
-              <MenuItem value="{base}/topics/architecture" text="Architecture" />
-              <MenuSeparator />
-              <MenuItem value="{base}/topics/actions" text="Actions" />
-              <MenuItem value="{base}/topics/mediaqueries" text="MediaQueries" />
-              <MenuSeparator />
-              <MenuItem value="{base}/topics/theme" text="Sterling Theme" />
-              <MenuItem value="{base}/topics/gallery" text="Gallery" />
-              <MenuSeparator />
-              {#each filteredComponents as component}
-                <MenuItem value="{base}/components/{component.toLowerCase()}" text={component} />
-              {/each}
-            </svelte:fragment>
-          </MenuButton>
-        </div>
-        <div class="title">
-          <span>sterling-svelte</span>
-          <span style="font-size: 0.7em">&nbsp;{import.meta.env.PACKAGE_VERSION}</span>
-        </div>
-        <div class="subtitle">
-          A modern, accessible, lightweight UI component library for Svelte.
-        </div>
-        <div class="select-theme">
-          <ModeSlider bind:mode />
-        </div>
-        <div class="github">
-          <Link href="http://github.com/GeoffCox/sterling-svelte" variant="ghost">
-            <div class="github-icon"><GitHubIcon /></div>
-          </Link>
-        </div>
-      </div>
-
-      <div class="content">
-        <div class="nav">
-          <div class="nav-section">
-            <Link href="{base}/" variant="ghost">Overview</Link>
-            <Link href="{base}/topics/start" variant="ghost">Getting Started</Link>
-            <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
-            <Link href="{base}/topics/changelog" variant="ghost">Change Log</Link>
-            <Link href="{base}/topics/architecture" variant="ghost">Architecture</Link>
-            <div class="nav-header">Helpers</div>
-            <Link href="{base}/topics/actions" variant="ghost">Actions</Link>
-            <Link href="{base}/topics/mediaqueries" variant="ghost">Media Queries</Link>
-          </div>
-          <div class="nav-header">Design</div>
-          <Link href="{base}/topics/theme" variant="ghost">Sterling Theme</Link>
-          <Link href="{base}/topics/gallery" variant="ghost">Gallery</Link>
-          <div class="nav-header">Components</div>
-          <div class="filter">
-            <Label for="filter-components">
-              <div class="filter-flex">
-                <Input id="filter-components" bind:value={filterText} />
-                <FilterIcon />
-              </div>
-            </Label>
-          </div>
-          <div class="nav-section">
+  <div class="layout">
+    <div class="header">
+      <div class="hamburger-menu">
+        <MenuButton value="components" shape="circular" variant="ghost" on:select={onNavMenuSelect}>
+          <HamburgerIcon />
+          <svelte:fragment slot="items">
+            <MenuItem value="{base}/" text="Overview" />
+            <MenuItem value="{base}/topics/start" text="Getting Started" />
+            <MenuItem value="{base}/topics/roadmap" text="Roadmap" />
+            <MenuItem value="{base}/topics/changelog" text="Change Log" />
+            <MenuItem value="{base}/topics/architecture" text="Architecture" />
+            <MenuSeparator />
+            <MenuItem value="{base}/topics/actions" text="Actions" />
+            <MenuItem value="{base}/topics/mediaqueries" text="MediaQueries" />
+            <MenuSeparator />
+            <MenuItem value="{base}/topics/theme" text="Sterling Theme" />
+            <MenuItem value="{base}/topics/gallery" text="Gallery" />
+            <MenuSeparator />
             {#each filteredComponents as component}
-              <Link href="{base}/components/{component.toLowerCase()}" variant="ghost"
-                >{component}</Link
-              >
+              <MenuItem value="{base}/components/{component.toLowerCase()}" text={component} />
             {/each}
-          </div>
-        </div>
-        <div class="component">
-          <CodeTheme theme={mode}>
-            <slot />
-          </CodeTheme>
-        </div>
+          </svelte:fragment>
+        </MenuButton>
+      </div>
+      <div class="title">
+        <span>sterling-svelte</span>
+        <span style="font-size: 0.7em">&nbsp;{import.meta.env.PACKAGE_VERSION}</span>
+      </div>
+      <div class="subtitle">A modern, accessible, lightweight UI component library for Svelte.</div>
+      <div class="select-theme">
+        <ModeSlider bind:mode />
+      </div>
+      <div class="github">
+        <Link href="http://github.com/GeoffCox/sterling-svelte" variant="ghost">
+          <div class="github-icon"><GitHubIcon /></div>
+        </Link>
       </div>
     </div>
-  {/if}
+
+    <div class="content">
+      <div class="nav">
+        <div class="nav-section">
+          <Link href="{base}/" variant="ghost">Overview</Link>
+          <Link href="{base}/topics/start" variant="ghost">Getting Started</Link>
+          <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
+          <Link href="{base}/topics/changelog" variant="ghost">Change Log</Link>
+          <Link href="{base}/topics/architecture" variant="ghost">Architecture</Link>
+          <div class="nav-header">Helpers</div>
+          <Link href="{base}/topics/actions" variant="ghost">Actions</Link>
+          <Link href="{base}/topics/mediaqueries" variant="ghost">Media Queries</Link>
+        </div>
+        <div class="nav-header">Design</div>
+        <Link href="{base}/topics/theme" variant="ghost">Sterling Theme</Link>
+        <Link href="{base}/topics/gallery" variant="ghost">Gallery</Link>
+        <div class="nav-header">Components</div>
+        <div class="filter">
+          <Label for="filter-components">
+            <div class="filter-flex">
+              <Input id="filter-components" bind:value={filterText} />
+              <FilterIcon />
+            </div>
+          </Label>
+        </div>
+        <div class="nav-section">
+          {#each filteredComponents as component}
+            <Link href="{base}/components/{component.toLowerCase()}" variant="ghost"
+              >{component}</Link
+            >
+          {/each}
+        </div>
+      </div>
+      <div class="component">
+        <CodeTheme theme={mode}>
+          <slot />
+        </CodeTheme>
+      </div>
+    </div>
+  </div>
   <div id="SterlingPortalHost" />
 </div>
 
