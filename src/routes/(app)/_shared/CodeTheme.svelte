@@ -21,24 +21,24 @@
     }
   };
 
-  const updateTheme = async (mode: string, autoIsDark: boolean) => {
-    const themeFile = getThemeFile(mode, autoIsDark);
-    if (themeFile) {
-      let themeLink = document.head.querySelector('link[sterling-code-theme]');
+  const updateTheme = (mode: string, autoIsDark: boolean) => {
+    if (globalThis?.document) {
+      const themeFile = getThemeFile(mode, autoIsDark);
+      if (themeFile) {
+        let themeLink = document.querySelector('link[sterling-code-theme]');
 
-      if (themeLink) {
-        themeLink.remove();
+        if (themeLink) {
+          themeLink.remove();
+        }
+
+        themeLink = document.createElement('link');
+        themeLink.setAttribute('sterling-code-theme', 'true');
+        themeLink.setAttribute('href', `${assets}/` + themeFile);
+        themeLink.setAttribute('rel', 'stylesheet');
+        document.head.appendChild(themeLink);
       }
-
-      themeLink = document.createElement('link');
-      themeLink.setAttribute('sterling-code-theme', 'true');
-      themeLink.setAttribute('href', `${assets}/` + themeFile);
-      themeLink.setAttribute('rel', 'stylesheet');
-      document.head.appendChild(themeLink);
     }
   };
-
-  $: updateTheme(theme, autoIsDark);
 
   const mediaChangeHandler = (e: MediaQueryListEvent) => {
     autoIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -54,6 +54,11 @@
       matchMedia.removeEventListener('change', mediaChangeHandler);
     };
   });
+
+  $: {
+    globalThis?.document;
+    updateTheme(theme, autoIsDark);
+  }
 </script>
 
 <slot />
