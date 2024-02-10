@@ -39,6 +39,8 @@
     selectedValue: selectedValueStore,
     vertical: verticalStore
   });
+
+  $: verticalStore.set(vertical);
 </script>
 
 <Playground bind:this={exampleRef}>

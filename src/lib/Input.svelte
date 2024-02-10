@@ -66,7 +66,7 @@
     <slot {disabled} {value} {variant} />
   </label>
 {/if}
-<div class={`sterling-input ${variant}`} class:disabled>
+<div class={`sterling-input ${variant}`} class:disabled class:using-keyboard={$usingKeyboard}>
   <input
     bind:this={inputRef}
     class:using-keyboard={$usingKeyboard}

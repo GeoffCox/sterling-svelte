@@ -2,6 +2,7 @@
   import type { ChangeEventHandler } from 'svelte/elements';
 
   import { idGenerator } from './idGenerator';
+  import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   // ----- Props ----- //
 
@@ -90,7 +91,12 @@
 	@component
 	A styled HTML input type=radio element with optional label.
 -->
-<div class={`sterling-radio ${variant}`} class:disabled>
+<div
+  class={`sterling-radio ${variant}`}
+  class:checked
+  class:disabled
+  class:using-keyboard={$usingKeyboard}
+>
   <div class="container">
     <input
       bind:this={inputRef}

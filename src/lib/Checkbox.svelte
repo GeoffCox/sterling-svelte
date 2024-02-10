@@ -1,5 +1,6 @@
 <script lang="ts">
   import { idGenerator } from './idGenerator';
+  import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   // ----- Props ----- //
 
@@ -39,7 +40,12 @@
 	@component
 	A styled HTML input type=checkbox element.
 -->
-<div class={`sterling-checkbox ${variant}`} class:checked class:disabled>
+<div
+  class={`sterling-checkbox ${variant}`}
+  class:checked
+  class:disabled
+  class:using-keyboard={$usingKeyboard}
+>
   <div class="container">
     <input
       bind:this={inputRef}

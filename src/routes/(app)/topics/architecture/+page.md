@@ -8,7 +8,7 @@ Component library styles need to be globally overridable and support per-instanc
 
 For these reasons, sterling-svelte components do not apply any style by default.
 
-A separate set of `sterling` CSS styles is provided. See the [Sterling Theme](/topics/theme) topic for details.
+A separate set of `sterling` CSS styles is provided. See the Sterling Theme topic for details.
 
 ## Forwards HTML element props
 

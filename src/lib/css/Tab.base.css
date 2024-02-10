@@ -36,6 +36,7 @@
   justify-content: flex-end;
   justify-items: flex-end;
   column-gap: 0.15em;
+  padding: 0.25em 1em;
 }
 
 .sterling-tab.using-keyboard:focus-visible {
@@ -80,10 +81,6 @@
 
 .sterling-tab .content {
   padding: 0 0.2em;
-}
-
-.sterling-tab.vertical .content .text {
-  padding-top: 0.25em;
 }
 
 /* ----- indicator -----*/

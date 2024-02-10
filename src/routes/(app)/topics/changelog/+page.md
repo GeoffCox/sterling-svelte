@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5
+
+- Fix: Radio and Switch top-level dis missing checked class. Prevented styling above the input.
+- Fix: Checkbox, Input,Radio, and Switch top-level divs need using-keyboard class. This allows for focus-within applied like focus-visible when the intrinsic input is focused.
+- Fix: Removed Tab content text aligment in vertical layout. No longer needed.
+
 ## 1.0.4
 
 - Fix: Checkbox top-level div missing checked class. Prevented styling above the input.
