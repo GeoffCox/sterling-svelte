@@ -1,8 +1,16 @@
 # Changelog
 
+## 1.0.6
+
+- Fix: Vertical Tab justification defaulted to flex-end and should be flex-start.
+- Fix: List home/end keys weren't working because of introduction of intermediate container element to properly scroll. Updated query selectors for first and last list items.
+- Fix: List arrow keys weren't working when selectedValue set to empty string. Updated conditionals in key handler.
+- Fix: Dialog footer justified footer content as flex-end in default styles which is too opinionated. Removed flex styling from footer.
+- Fix: Label text had unnecessary padding. Removed the padding.
+
 ## 1.0.5
 
-- Fix: Radio and Switch top-level dis missing checked class. Prevented styling above the input.
+- Fix: Radio and Switch top-level dismissing checked class. Prevented styling above the input.
 - Fix: Checkbox, Input,Radio, and Switch top-level divs need using-keyboard class. This allows for focus-within applied like focus-visible when the intrinsic input is focused.
 - Fix: Removed Tab content text aligment in vertical layout. No longer needed.
 

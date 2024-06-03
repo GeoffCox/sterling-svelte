@@ -54,7 +54,7 @@
           <div class="message">{message}</div>
         {/if}
       </div>
-      <div slot="footer">
+      <div class="footer" slot="footer">
         <Button on:click={() => updateMessage()}>Send it now!</Button>
         <Button autofocus on:click={() => closeDialog()}>Done</Button>
       </div>
@@ -73,5 +73,13 @@
 
   .message {
     margin-top: 1em;
+  }
+
+  .footer {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: flex-end;
+    justify-items: stretch;
+    column-gap: 0.5em;
   }
 </style>

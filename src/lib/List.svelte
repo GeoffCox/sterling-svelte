@@ -110,7 +110,9 @@
   };
 
   export const selectFirstItem = () => {
-    let candidate: Element | undefined | null = listRef?.firstElementChild;
+    let candidate: Element | undefined | null = listRef?.querySelector(
+      '[data-value][role=listitem]'
+    );
     while (candidate && !isElementListItem(candidate)) {
       candidate = candidate.nextElementSibling;
     }
@@ -157,7 +159,10 @@
   };
 
   export const selectLastItem = () => {
-    let candidate: Element | undefined | null = listRef?.lastElementChild;
+    let candidate: Element | undefined | null = listRef?.querySelector(
+      '[data-value][role=listitem]:last-of-type'
+    );
+    console.log('in selectLastItem', candidate);
     while (candidate && !isElementListItem(candidate)) {
       candidate = candidate.previousElementSibling;
     }
@@ -203,28 +208,36 @@
           return false;
         case 'ArrowLeft':
           if (horizontal) {
-            selectedValue !== undefined ? selectPreviousItem() : selectLastItem();
+            selectedValue !== undefined && selectedValue.length > 0
+              ? selectPreviousItem()
+              : selectLastItem();
           }
           event.preventDefault();
           event.stopPropagation();
           return false;
         case 'ArrowRight':
           if (horizontal) {
-            selectedValue !== undefined ? selectNextItem() : selectFirstItem();
+            selectedValue !== undefined && selectedValue.length > 0
+              ? selectNextItem()
+              : selectFirstItem();
           }
           event.preventDefault();
           event.stopPropagation();
           return false;
         case 'ArrowUp':
           if (!horizontal) {
-            selectedValue !== undefined ? selectPreviousItem() : selectLastItem();
+            selectedValue !== undefined && selectedValue.length > 0
+              ? selectPreviousItem()
+              : selectLastItem();
           }
           event.preventDefault();
           event.stopPropagation();
           return false;
         case 'ArrowDown':
           if (!horizontal) {
-            selectedValue !== undefined ? selectNextItem() : selectFirstItem();
+            selectedValue !== undefined && selectedValue.length > 0
+              ? selectNextItem()
+              : selectFirstItem();
           }
           event.preventDefault();
           event.stopPropagation();

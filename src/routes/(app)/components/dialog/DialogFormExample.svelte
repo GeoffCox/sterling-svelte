@@ -5,6 +5,8 @@
 
   import Button from '$lib/Button.svelte';
   import Dialog from '$lib/Dialog.svelte';
+  import Select from '$lib/Select.svelte';
+  import ListItem from '$lib/ListItem.svelte';
 
   let exampleRef: any;
   let formRef: HTMLFormElement;
@@ -38,6 +40,12 @@
           The weather is sunny with no chance of rain. Do you want to go outside and enjoy the fresh
           air?
         </div>
+        <Select>
+          <ListItem value="Today">Today</ListItem>
+          <ListItem value="Tomorrow">Tomorrow</ListItem>
+          <ListItem value="Later">Later</ListItem>
+          <ListItem value="Never">Never</ListItem>
+        </Select>
       </div>
       <div class="footer" slot="footer">
         <Button type="submit" value="yes">Yes</Button>
@@ -55,7 +63,13 @@
 
   .footer {
     display: grid;
-    grid-template-columns: 100px 100px 100px;
+    grid-template-columns: auto auto auto;
+    justify-content: flex-end;
+    justify-items: stretch;
     column-gap: 0.5em;
+  }
+
+  .footer :global(button) {
+    min-width: 100px;
   }
 </style>

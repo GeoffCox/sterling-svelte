@@ -37,7 +37,7 @@
     <Label text="label (prefix)">
       <Input bind:value={label} />
     </Label>
-    <VariantInput bind:variant availableVariants={['colorful']} />
+    <VariantInput bind:variant availableVariants={['button', 'colorful']} />
   </svelte:fragment>
   <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>
@@ -48,7 +48,7 @@
   .component {
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 0;
     row-gap: 5px;
   }

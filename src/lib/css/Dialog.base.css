@@ -101,9 +101,6 @@
 }
 
 .sterling-dialog > form > .content > .footer {
-  display: flex;
-  justify-content: flex-end;
-  justify-items: flex-end;
   padding: 0.5em 1em;
   gap: 5px;
 }

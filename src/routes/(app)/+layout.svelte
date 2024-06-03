@@ -183,10 +183,10 @@
           <div class="nav-header">Helpers</div>
           <Link href="{base}/topics/actions" variant="ghost">Actions</Link>
           <Link href="{base}/topics/mediaqueries" variant="ghost">Media Queries</Link>
+          <div class="nav-header">Design</div>
+          <Link href="{base}/topics/theme" variant="ghost">Sterling Theme</Link>
+          <Link href="{base}/topics/gallery" variant="ghost">Gallery</Link>
         </div>
-        <div class="nav-header">Design</div>
-        <Link href="{base}/topics/theme" variant="ghost">Sterling Theme</Link>
-        <Link href="{base}/topics/gallery" variant="ghost">Gallery</Link>
         <div class="nav-header">Components</div>
         <div class="filter">
           <Label for="filter-components">

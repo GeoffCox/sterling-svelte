@@ -14,7 +14,7 @@
   let disabled = false;
   let horizontal = false;
   let selectedValue: string | undefined = undefined;
-  let selectedValueText: string | undefined = '';
+  let selectedValueText: string | undefined = undefined;
   let variant = '';
 
   const updateSelectedValue = debounce((value?: string) => {
