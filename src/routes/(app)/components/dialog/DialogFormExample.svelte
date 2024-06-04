@@ -40,12 +40,6 @@
           The weather is sunny with no chance of rain. Do you want to go outside and enjoy the fresh
           air?
         </div>
-        <Select>
-          <ListItem value="Today">Today</ListItem>
-          <ListItem value="Tomorrow">Tomorrow</ListItem>
-          <ListItem value="Later">Later</ListItem>
-          <ListItem value="Never">Never</ListItem>
-        </Select>
       </div>
       <div class="footer" slot="footer">
         <Button type="submit" value="yes">Yes</Button>

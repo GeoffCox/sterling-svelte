@@ -2,6 +2,7 @@
 node_modules
 test-results
 /build
+/dist
 /.svelte-kit
 /package
 .env
