@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.7
+
+- Fix: Callout, Popover, and Menu height set to fit-content causes stretch behavior in Safari. Changed to auto.
+- Fix: Dialog did not allow Popover and Callout to appear above. Updated portaling to support dialog as portal host through context.
+
 ## 1.0.6
 
 - Fix: Vertical Tab justification defaulted to flex-end and should be flex-start.
