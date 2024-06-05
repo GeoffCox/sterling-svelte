@@ -1,8 +1,11 @@
 <script lang="ts">
   import type { FormEventHandler } from 'svelte/elements';
-  import { onMount, tick } from 'svelte';
+  import { onMount, setContext, tick } from 'svelte';
 
   import Button from './Button.svelte';
+  import type { PortalContext } from './Portal.types';
+  import { STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
+  import { writable } from 'svelte/store';
 
   const dialogFadeDuration = 250;
 
@@ -30,6 +33,11 @@
   let contentRef: HTMLDivElement;
   let formRef: HTMLFormElement;
   let closing = false;
+
+  const portalHostStore = writable<HTMLElement | undefined>(undefined);
+
+  // ----- Context ----- //
+  setContext<PortalContext>(STERLING_PORTAL_CONTEXT_ID, { portalHost: portalHostStore });
 
   // ----- Event Handlers ----- //
 
@@ -122,12 +130,17 @@
   onMount(() => {
     updateDialog(open);
 
+    // Use the dialog for any element portals
+    portalHostStore.set(dialogRef);
+
     dialogRef.addEventListener('cancel', onCancel);
     dialogRef.addEventListener('close', onClose);
 
     return () => {
       dialogRef?.removeEventListener('cancel', onCancel);
       dialogRef?.removeEventListener('close', onClose);
+
+      portalHostStore.set(undefined);
     };
   });
 </script>

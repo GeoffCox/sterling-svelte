@@ -9,7 +9,6 @@
   import ListItem from '$lib/ListItem.svelte';
 
   let exampleRef: any;
-  let formRef: HTMLFormElement;
 
   let open = false;
   let returnValue = '';
@@ -37,8 +36,12 @@
       <div slot="title">Outside or Inside?</div>
       <div slot="body">
         <div class="content">
-          The weather is sunny with no chance of rain. Do you want to go outside and enjoy the fresh
-          air?
+          <div>The weather is sunny with no chance of rain. What would you like to do?</div>
+          <Select>
+            <ListItem value="1">Go outside</ListItem>
+            <ListItem value="2">Stay inside</ListItem>
+            <ListItem value="3">Take a nap in a hammock</ListItem>
+          </Select>
         </div>
       </div>
       <div class="footer" slot="footer">

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { getContext, onMount, tick } from 'svelte';
   import {
     arrow,
     autoUpdate,
@@ -11,9 +11,10 @@
   } from '@floating-ui/dom';
   import { portal } from './actions/portal';
   import type { PopoverPlacement } from './Popover.types';
-  import { STERLING_PORTAL_HOST_ID } from './Popover.constants';
   import { type FadeParams, type TransitionConfig, fade } from 'svelte/transition';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
+  import type { PortalContext } from './Portal.types';
+  import { STERLING_PORTAL_HOST_ID, STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
 
   // ----- Props ----- //
 
@@ -52,26 +53,35 @@
   let bodyHeight = 0;
   let resizeObserver: ResizeObserver | undefined = undefined;
 
-  // ----- Portal Host ----- //
-
-  const ensurePortalHost = () => {
-    if (globalThis?.document) {
-      if (portalHost) {
-        return portalHost;
-      }
-
-      let host = document.querySelector(`#${STERLING_PORTAL_HOST_ID}`) as HTMLElement;
-      if (!host) {
-        host = document.createElement('div');
-        host.id = STERLING_PORTAL_HOST_ID;
-        host.style.overflow = 'visible';
-        document.body.append(host);
-      }
-      portalHost = host;
-    }
+  const { portalHost: contextPortalHost } = getContext<PortalContext>(
+    STERLING_PORTAL_CONTEXT_ID
+  ) || {
+    portalHost: undefined
   };
 
-  // ----- Body Height Change ----- //
+  // ----- Portal Host ----- //
+
+  const ensurePortalHost = async () => {
+    await tick();
+
+    // use the host set from context, usually set from a Dialog
+    let host = $contextPortalHost;
+
+    // use or create the sterling portal host
+    if (!host && globalThis?.document) {
+      host = globalThis.document.querySelector(`#${STERLING_PORTAL_HOST_ID}`) as HTMLElement;
+
+      // fallback to creating the sterling portal host
+      if (!host) {
+        host = globalThis.document.createElement('div');
+        host.id = STERLING_PORTAL_HOST_ID;
+        host.style.overflow = 'visible';
+        globalThis.document.body.append(host);
+      }
+    }
+
+    portalHost = host;
+  };
 
   // ----- Position ----- //
 
@@ -191,7 +201,7 @@
 
 {#if open || !conditionalRender}
   <div
-    use:portal={{ target: portalHost ?? globalThis?.document?.body }}
+    use:portal={{ target: portalHost }}
     class="sterling-callout-portal"
     transition:fadeMotion|global={{ duration: 250 }}
   >
