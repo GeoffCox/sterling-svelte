@@ -15,7 +15,7 @@
   display: none;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  height: fit-content;
+  height: auto;
   left: 0;
   overflow: visible;
   position: absolute;
