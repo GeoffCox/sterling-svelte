@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.8
+
+- Fix packaging. Updates to svelte versions and tsconfig caused creation of a dist folder starting with 1.0.6. This caused problems including the default CSS. Added outdir to fix the issue.
+
 ## 1.0.7
 
 - Fix: Callout, Popover, and Menu height set to fit-content causes stretch behavior in Safari. Changed to auto.
