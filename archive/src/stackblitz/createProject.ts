@@ -12,3 +12,15 @@ export const createProject = (exampleSvelte: string) => {
     openFile: 'index.js'
   });
 };
+
+export const embedProject = (elementId: string, exampleSvelte: string) => {
+  const project = {
+    ...sterlingSvelteProject
+  };
+
+  project.files['src/Example.svelte'] = exampleSvelte;
+
+  sdk.embedProject(elementId, sterlingSvelteProject, {
+    openFile: 'index.js'
+  });
+};

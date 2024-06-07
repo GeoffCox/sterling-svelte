@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.10
+
+- Fix packaging exports. Svelte file pattern added to exports.
+
+## 1.0.9
+
+- Fix packaging exports. CSS file pattern added to exports.
+
 ## 1.0.8
 
 - Fix packaging. Updates to svelte versions and tsconfig caused creation of a dist folder starting with 1.0.6. This caused problems including the default CSS. Added outdir to fix the issue.

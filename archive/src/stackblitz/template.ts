@@ -1,25 +1,29 @@
 import type { Project } from '@stackblitz/sdk';
 
 const APP_SVELTE = `<script lang="ts">  
-import { applyLightTheme} from '@geoffcox/sterling-svelte';
+import '@geoffcox/sterling-svelte/css/sterling.css';
+import { applyLightDarkMode } from '@geoffcox/sterling-svelte';
 import Example from './Example.svelte';
 </script>
 
 <main>
-  <div use:applyLightTheme>   
+  <div use:applyLightDarkMode={{
+    atDocumentRoot: true,
+    mode: 'auto'
+  }}>   
     <h1>Example</h1>
     <Example />
   </div>
 </main>
 `;
 
-const INDEX_HTML = `<!DOCTYPE html>
+const INDEX_HTML = `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sterling-svelte examples</title>
+    <title>Vite + Svelte + TS</title>
   </head>
   <body>
     <div id="app"></div>
@@ -28,13 +32,13 @@ const INDEX_HTML = `<!DOCTYPE html>
 </html>
 `;
 
-const MAIN_TS = `import App from './App.svelte'
+const MAIN_TS = `import App from './App.svelte';
 
 const app = new App({
-  target: document.getElementById('app'),
+  target: document.getElementById('app')!,
 })
 
-export default app;
+export default app
 `;
 
 const PACKAGE_JSON = `{
@@ -49,16 +53,16 @@ const PACKAGE_JSON = `{
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^2.0.3",
-    "@tsconfig/svelte": "^3.0.0",
-    "svelte": "^3.57.0",
-    "svelte-check": "^2.10.3",
-    "tslib": "^2.5.0",
-    "typescript": "^5.0.2",
-    "vite": "^4.2.1"
+    "@sveltejs/vite-plugin-svelte": "^3.1.1",
+    "@tsconfig/svelte": "^5.0.4",
+    "svelte": "^4.2.17",
+    "svelte-check": "^3.8.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.12"
   },
   "dependencies": {
-    "@geoffcox/sterling-svelte": "0.0.22"
+    "@geoffcox/sterling-svelte": "1.0.9"
   }
 }
 `;
@@ -69,21 +73,21 @@ export default {
   // Consult https://svelte.dev/docs#compile-time-svelte-preprocess
   // for more information about preprocessors
   preprocess: vitePreprocess(),
-}
-`;
+}`;
 
 const TSCONFIG_JSON = `{
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
-    "target": "ESNext",
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
     "useDefineForClassFields": true,
     "module": "ESNext",
     "resolveJsonModule": true,
-    "allowJs": true,
-    "checkJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "target": "ESNext",
   },
-  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
+  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }`;
 
@@ -92,7 +96,8 @@ const TSCONFIG_NODE_JSON = `{
     "composite": true,
     "skipLibCheck": true,
     "module": "ESNext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "strict": true
   },
   "include": ["vite.config.ts"]
 }`;
@@ -103,12 +108,10 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [svelte()],
-})
-`;
+})`;
 
 const VITE_ENV_D_TS = `/// <reference types="svelte" />
-/// <reference types="vite/client" />
-`;
+/// <reference types="vite/client" />`;
 
 export const sterlingSvelteProject: Project = {
   title: 'Dynamically Generated sterling-svelte Project',
@@ -123,6 +126,6 @@ export const sterlingSvelteProject: Project = {
     'vite.config.ts': VITE_CONFIG_TS,
     'src/App.svelte': APP_SVELTE,
     'src/main.ts': MAIN_TS,
-    'src/vite.env.ts': VITE_ENV_D_TS
+    'src/vite-env.d.ts': VITE_ENV_D_TS
   }
 };
