@@ -14,6 +14,9 @@
   import CodeTheme from './_shared/CodeTheme.svelte';
   import GitHubIcon from './_shared/icons/GitHubIcon.svelte';
   import ModeSlider from './_shared/ModeSlider.svelte';
+  import Nav from './_shared/Nav.svelte';
+  import Dropdown from '$lib/Dropdown.svelte';
+  import { navigating } from '$app/stores';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -23,52 +26,17 @@
     fluentLight: 'fluent-ui-esque (light)'
   };
 
-  const components = [
-    'Button',
-    'Callout',
-    'Checkbox',
-    'ColorPicker',
-    'Dialog',
-    'Dropdown',
-    'HexColorSliders',
-    'HslColorSliders',
-    'Input',
-    'Label',
-    'Link',
-    'List',
-    'ListItem',
-    'Menu',
-    'MenuBar',
-    'MenuButton',
-    'MenuItem',
-    'MenuItemDisplay',
-    'MenuSeparator',
-    'Popover',
-    'Progress',
-    'Radio',
-    'Select',
-    'Slider',
-    'Switch',
-    'Tab',
-    'TabList',
-    'TextArea',
-    'Tooltip',
-    'Tree',
-    'TreeChevron',
-    'TreeItem',
-    'TreeItemDisplay'
-  ];
-
   let mounted = false;
   let currentTheme = 'auto';
-  let filterText = '';
 
   let mode = 'auto';
+  let hamburgerOpen = false;
 
-  $: filteredComponents =
-    filterText && filterText.trim().length > 0
-      ? components.filter((x) => x.toLowerCase().includes(filterText.trim().toLowerCase()))
-      : components;
+  $: {
+    if ($navigating !== null) {
+      hamburgerOpen = false;
+    }
+  }
 
   const parseCookie = () => {
     const pairs = document.cookie.split(';');
@@ -128,90 +96,55 @@
 </script>
 
 <div
+  class="root"
   use:applyLightDarkMode={{
     atDocumentRoot: true,
     mode: mode === 'auto' ? 'auto' : mode === 'dark' ? 'dark' : 'light'
   }}
 >
-  <div class="layout">
-    <div class="header">
-      <div class="hamburger-menu">
-        <MenuButton value="components" shape="circular" variant="ghost" on:select={onNavMenuSelect}>
-          <HamburgerIcon />
-          <svelte:fragment slot="items">
-            <MenuItem value="{base}/" text="Overview" />
-            <MenuItem value="{base}/topics/start" text="Getting Started" />
-            <MenuItem value="{base}/topics/roadmap" text="Roadmap" />
-            <MenuItem value="{base}/topics/changelog" text="Change Log" />
-            <MenuItem value="{base}/topics/architecture" text="Architecture" />
-            <MenuSeparator />
-            <MenuItem value="{base}/topics/actions" text="Actions" />
-            <MenuItem value="{base}/topics/mediaqueries" text="MediaQueries" />
-            <MenuSeparator />
-            <MenuItem value="{base}/topics/theme" text="Sterling Theme" />
-            <MenuItem value="{base}/topics/gallery" text="Gallery" />
-            <MenuSeparator />
-            {#each filteredComponents as component}
-              <MenuItem value="{base}/components/{component.toLowerCase()}" text={component} />
-            {/each}
-          </svelte:fragment>
-        </MenuButton>
+  <div class="spa">
+    <div class="layout">
+      <div class="header">
+        <div class="title">
+          <span>sterling-svelte</span>
+          <span style="font-size: 0.7em">&nbsp;{import.meta.env.PACKAGE_VERSION}</span>
+        </div>
+        <div class="subtitle">
+          A modern, accessible, lightweight UI component library for Svelte.
+        </div>
+        <div class="mode">
+          <ModeSlider bind:mode />
+        </div>
+        <div class="github">
+          <Link href="http://github.com/GeoffCox/sterling-svelte" variant="ghost">
+            <div class="github-icon"><GitHubIcon /></div>
+          </Link>
+        </div>
+        <div class="hamburger-menu">
+          <Dropdown bind:open={hamburgerOpen} variant="composed">
+            <svelte:fragment slot="icon">
+              <div class="hamburger-icon">
+                <HamburgerIcon />
+              </div>
+            </svelte:fragment>
+            <div class="hamburger-nav"><Nav /></div>
+          </Dropdown>
+        </div>
       </div>
-      <div class="title">
-        <span>sterling-svelte</span>
-        <span style="font-size: 0.7em">&nbsp;{import.meta.env.PACKAGE_VERSION}</span>
-      </div>
-      <div class="subtitle">A modern, accessible, lightweight UI component library for Svelte.</div>
-      <div class="select-theme">
-        <ModeSlider bind:mode />
-      </div>
-      <div class="github">
-        <Link href="http://github.com/GeoffCox/sterling-svelte" variant="ghost">
-          <div class="github-icon"><GitHubIcon /></div>
-        </Link>
-      </div>
-    </div>
-
-    <div class="content">
       <div class="nav">
-        <div class="nav-section">
-          <Link href="{base}/" variant="ghost">Overview</Link>
-          <Link href="{base}/topics/start" variant="ghost">Getting Started</Link>
-          <Link href="{base}/topics/roadmap" variant="ghost">Roadmap</Link>
-          <Link href="{base}/topics/changelog" variant="ghost">Change Log</Link>
-          <Link href="{base}/topics/architecture" variant="ghost">Architecture</Link>
-          <div class="nav-header">Helpers</div>
-          <Link href="{base}/topics/actions" variant="ghost">Actions</Link>
-          <Link href="{base}/topics/mediaqueries" variant="ghost">Media Queries</Link>
-          <div class="nav-header">Design</div>
-          <Link href="{base}/topics/theme" variant="ghost">Sterling Theme</Link>
-          <Link href="{base}/topics/gallery" variant="ghost">Gallery</Link>
-        </div>
-        <div class="nav-header">Components</div>
-        <div class="filter">
-          <Label for="filter-components">
-            <div class="filter-flex">
-              <Input id="filter-components" bind:value={filterText} />
-              <FilterIcon />
-            </div>
-          </Label>
-        </div>
-        <div class="nav-section">
-          {#each filteredComponents as component}
-            <Link href="{base}/components/{component.toLowerCase()}" variant="ghost"
-              >{component}</Link
-            >
-          {/each}
+        <div class="nav-container">
+          <Nav />
         </div>
       </div>
-      <div class="component">
-        <CodeTheme theme={mode}>
-          <slot />
-        </CodeTheme>
+      <div class="content">
+        <div class="content-container">
+          <CodeTheme theme={mode}>
+            <slot />
+          </CodeTheme>
+        </div>
       </div>
     </div>
   </div>
-  <div id="SterlingPortalHost" />
 </div>
 
 <style>
@@ -232,6 +165,9 @@
   :global(body) {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
+    padding: 1em;
+    min-height: 100vh;
+    overflow: hidden;
   }
 
   :global(h1),
@@ -239,6 +175,21 @@
   :global(h3) {
     margin-block-start: 0.7em;
     margin-block-end: 0.25em;
+  }
+
+  :global(h1) {
+    font-size: 1.5em;
+    font-weight: normal;
+  }
+
+  :global(h2) {
+    font-size: 1.3em;
+    font-weight: normal;
+  }
+
+  :global(h3) {
+    font-size: 1.1em;
+    font-weight: normal;
   }
 
   :global(p) {
@@ -296,62 +247,80 @@
 
   /* ----- Layout ----- */
 
+  .root {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .spa {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    place-content: stretch;
+    place-items: stretch;
+    overflow: hidden;
+    margin: 1em;
+    padding: 0;
+    height: calc(100% - 2em);
+  }
+
   .layout {
-    padding: 0 3em;
+    grid-row: 1;
+    grid-column: 1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 'header header' 'nav content';
+    align-items: stretch;
+    align-content: stretch;
+    padding: 0;
     color: var(--stsv-common__color);
-    background-color: var(--stsv-common__background-color);
+    overflow: hidden;
   }
 
   .header {
+    grid-area: header;
     display: grid;
     grid-template-columns: auto 1fr auto auto;
     grid-template-rows: auto auto;
-    padding: 2em 0 1em 0;
+    grid-template-areas: 'burger title mode github' '. subtitle mode github';
+    align-items: center;
+    padding: 1em;
     border-bottom: 1px solid var(--stsv-common__border-color);
   }
 
-  .header .hamburger-menu {
-    align-self: flex-start;
-    justify-self: flex-end;
-    font-size: 0.8em;
-    grid-row: 1 / span 1;
-    grid-column: 1 / span 1;
-    margin-right: 0.5em;
-  }
-
   .header .title {
+    grid-area: title;
     font-size: 1.6em;
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto;
     align-items: center;
-    grid-row: 1 / span 1;
-    grid-column: 2 / span 1;
     min-width: 250px;
   }
 
   .header .subtitle {
+    grid-area: subtitle;
     font-size: 0.9em;
-    grid-row: 2 / span 1;
-    grid-column: 2 / span 1;
   }
 
-  .header .select-theme {
+  .header .mode {
+    grid-area: mode;
     display: grid;
     justify-items: flex-end;
     justify-self: flex-end;
     align-items: center;
-    grid-row: 1 / span 2;
-    grid-column: 3 / span 1;
   }
 
   .header .github {
+    grid-area: github;
     display: grid;
     justify-items: flex-end;
     justify-self: flex-end;
     align-items: center;
-    grid-row: 1 / span 2;
-    grid-column: 4 / span 1;
     margin-left: 1em;
   }
 
@@ -360,57 +329,54 @@
     height: 50px;
   }
 
-  .content {
+  .hamburger-menu {
+    grid-area: burger;
+    display: none;
+    align-self: center;
+    justify-self: flex-end;
+  }
+
+  .hamburger-icon {
     display: grid;
-    grid-template-columns: auto 1fr;
-    margin-top: 0.25em;
+    place-content: center;
+    place-items: center;
+    padding: 0.25em;
+  }
+
+  .hamburger-nav {
+    height: 400px;
+    overflow-y: scroll;
+    background-color: var(--stsv-common__background-color);
   }
 
   .nav {
-    display: flex;
-    flex-direction: column;
+    grid-area: nav;
+    overflow-y: scroll;
     background-color: var(--stsv-common__background-color);
     border-right: 1px solid var(--stsv-common__border-color);
     padding: 1em;
   }
 
-  .nav-section {
-    padding-left: 0.25em;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    row-gap: 0.25em;
-    justify-content: flex-start;
-    justify-items: flex-start;
-  }
-
-  .nav-header {
-    font-size: 0.8em;
-    font-variant: small-caps;
-    margin: 1em 0 0.5em 0;
-  }
-
-  .filter {
-    margin: 0 0 0.5em 0;
-  }
-
-  .filter-flex {
-    display: flex;
-    align-items: center;
-    padding-right: 0.25em;
-  }
-
-  .component {
-    display: flex;
-    flex-direction: column;
-    place-content: start;
-    place-items: start;
-    padding: 0 1em 25em 1em;
+  .content {
+    grid-area: content;
+    overflow-y: scroll;
+    padding: 1em;
   }
 
   @media (max-width: 1000px) {
     .nav {
       display: none;
+    }
+    .hamburger-menu {
+      display: block;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .header {
+      grid-template-columns: auto 1fr auto auto;
+      grid-template-rows: auto auto auto;
+      grid-template-areas: '. . mode github' 'burger title title title' '. subtitle subtitle subtitle';
     }
   }
 </style>
