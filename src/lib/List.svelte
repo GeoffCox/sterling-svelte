@@ -162,7 +162,6 @@
     let candidate: Element | undefined | null = listRef?.querySelector(
       '[data-value][role=listitem]:last-of-type'
     );
-    console.log('in selectLastItem', candidate);
     while (candidate && !isElementListItem(candidate)) {
       candidate = candidate.previousElementSibling;
     }

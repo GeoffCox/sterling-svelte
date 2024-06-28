@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.11
+
+- Fix input showing disabled state when composed. Updated CSS.
+- Fix default placement for Callout, Popover, and Tooltip is 'bottom-start'. Updated to 'top-start'.
+- Fix ColorPicker did not pass variant to Dropdown. Added variant parameter.
+
 ## 1.0.10
 
 - Fix packaging exports. Svelte file pattern added to exports.

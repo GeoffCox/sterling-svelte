@@ -20,7 +20,10 @@
   margin: 0;
   outline: none;
   padding: 0.5em;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
   width: 100%;
 }
 
@@ -78,7 +81,7 @@ input::placeholder {
   transition: opacity 250ms;
 }
 
-.sterling-input.disabled::after {
+.sterling-input:not(.composed).disabled::after {
   opacity: 1;
 }
 

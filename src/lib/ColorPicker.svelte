@@ -282,6 +282,7 @@
     on:mouseup
     on:wheel
     on:paste
+    {variant}
     {...$$restProps}
   >
     <div class="value" slot="value">

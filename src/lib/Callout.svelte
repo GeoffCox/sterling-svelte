@@ -31,7 +31,7 @@
   export let open: boolean = false;
 
   /** How the callout should be positioned relative to the reference element. */
-  export let placement: PopoverPlacement = 'bottom-start';
+  export let placement: PopoverPlacement = 'top-start';
 
   /** The host container for the callout. */
   export let portalHost: HTMLElement | undefined = undefined;

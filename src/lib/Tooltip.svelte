@@ -11,7 +11,7 @@
   export let crossAxisOffset = 0;
   export let mainAxisOffset = 0;
   export let open = false;
-  export let placement: PopoverPlacement = 'bottom-start';
+  export let placement: PopoverPlacement = 'top-start';
   export let portalHost: HTMLElement | undefined = undefined;
   export let variant: string = '';
 
