@@ -13,7 +13,7 @@
   let variant = '';
 </script>
 
-<Playground noEvents>
+<Playground>
   <svelte:fragment slot="component">
     <div class="sliders">
       <HslColorSliders bind:hue bind:saturation bind:lightness bind:alpha {variant} />
@@ -22,7 +22,7 @@
   <svelte:fragment slot="props">
     <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
-  <svelte:fragment slot="status">
+  <!-- <svelte:fragment slot="status">
     <div>
       color: 0x{hue.toString(16).padStart(2, '0')}{saturation
         .toString(16)
@@ -30,7 +30,7 @@
         .toString(16)
         .padStart(2, '0')}
     </div>
-  </svelte:fragment>
+  </svelte:fragment> -->
 </Playground>
 
 <style>

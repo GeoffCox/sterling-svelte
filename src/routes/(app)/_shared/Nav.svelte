@@ -13,19 +13,17 @@
     items: NavItem[];
   };
 
-  $: console.log($page);
-
   const sections: NavSection[] = [
     {
       name: 'GETTING STARTED',
       items: [
         {
           name: 'Overview',
-          url: '/topics/overview'
+          url: '/'
         },
         {
           name: 'Getting Started',
-          url: '/topics/gettingstarted'
+          url: '/topics/start'
         },
         {
           name: 'Roadmap',
@@ -38,6 +36,10 @@
         {
           name: 'Architecture',
           url: '/topics/architecture'
+        },
+        {
+          name: 'Theme',
+          url: '/topics/theme'
         }
       ]
     },

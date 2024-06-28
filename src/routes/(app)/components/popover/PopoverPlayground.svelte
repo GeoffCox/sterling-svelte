@@ -20,7 +20,7 @@
   let variant = '';
 </script>
 
-<Playground noEvents>
+<Playground>
   <div slot="component">
     <div class="reference" bind:this={reference}>
       The reference anchor for positioning the popover.

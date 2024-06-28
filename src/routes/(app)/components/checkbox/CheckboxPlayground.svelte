@@ -4,29 +4,34 @@
   import Input from '$lib/Input.svelte';
   import Playground from '../Playground.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let exampleRef: any;
   let disabled = false;
   let checked = false;
-  let label = 'sterling-svelte';
+  let text = 'sterling-svelte';
   let variant = '';
+
+  $: code = getPlaygroundCode({ checked, disabled, text, variant });
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <div slot="component" class="component">
-    <Checkbox {disabled} bind:checked {variant} on:change={() => exampleRef.recordEvent('change')}
-      >{label}</Checkbox
+    <Checkbox
+      {disabled}
+      bind:checked
+      {variant}
+      on:change={() => console.log('<Checkbox> on:change')}>{text}</Checkbox
     >
   </div>
   <svelte:fragment slot="props">
+    <Checkbox bind:checked>checked</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Label text="default slot (text)">
-      <Input bind:value={label} />
-    </Label>
     <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
-  <svelte:fragment slot="status">
-    <div>checked: {checked}</div>
+  <svelte:fragment slot="tweaks">
+    <Label text="(checkbox content)">
+      <Input bind:value={text} />
+    </Label>
   </svelte:fragment>
 </Playground>
 

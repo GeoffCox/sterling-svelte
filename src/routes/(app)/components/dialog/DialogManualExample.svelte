@@ -38,11 +38,7 @@
 <Example bind:this={exampleRef}>
   <div class="component" slot="component">
     <Button on:click={() => showDialog()}>Open manual button dialog</Button>
-    <Dialog
-      bind:open
-      on:cancel={() => exampleRef.recordEvent('cancel')}
-      on:close={() => exampleRef.recordEvent('close')}
-    >
+    <Dialog bind:open on:cancel={() => console.log('cancel')} on:close={() => console.log('close')}>
       <div slot="title">How would you like your product delivered?</div>
       <div slot="body">
         <div class="mail-options">

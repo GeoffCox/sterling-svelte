@@ -27,8 +27,7 @@
         name="choices"
         value={possibleValue}
         {variant}
-        on:change={() => exampleRef.recordEvent(`change value:${possibleValue}`)}
-        >{possibleValue}</Radio
+        on:change={() => console.log(`change value:${possibleValue}`)}>{possibleValue}</Radio
       >
     {/each}
   </div>
@@ -39,9 +38,9 @@
     </Label>
     <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
-  <svelte:fragment slot="status">
+  <!-- <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>
-  </svelte:fragment>
+  </svelte:fragment> -->
 </Playground>
 
 <style>

@@ -6,35 +6,24 @@
 
 A styled HTML `button` element.
 
-- Choose different button shapes and variants.
-- The default type is `'button'` rather than `'submit'`.
+## Members
 
-## Props
-
-HTMLButtonElement props are included.
-
-```ts
-/** Additional class names to apply. */
-export let variant: string = '';
-```
-
-## Events
-
-HTMLButtonElement events are included.
-
-## Methods
-
-HTMLButtonElement `blur`, `click`, and `focus` methods are included.
+| Name      | Type   | Default | Description                                    |
+| --------- | ------ | ------- | ---------------------------------------------- |
+| variant   | string | ''      | Additional class names to apply                |
+| (various) |        |         | HTMLButtonElement props, events, and functions |
 
 ## Anatomy
 
-Use the default slot to place content within the button.
-
-```svelte
+```
 <button class="sterling-button">
   <slot {disabled} {variant} />
 </button>
 ```
+
+## Considerations
+
+- The default `type` prop is set to `'button'` rather than `'submit'`.
 
 ## Playground
 

@@ -6,26 +6,16 @@
 
 A styled HTML `a` link or anchor element.
 
-## Props
+## Members
 
-HTMLAnchorElement props are included.
-
-```ts
-/** Additional class names to apply. */
-export let variant: string = '';
-```
-
-## Events
-
-HTMLAnchorElement events are included.
-
-## Methods
-
-HTMLAnchorElement `blur`, `click`, and `focus` methods are included.
+| Name      | Type   | Default | Description                                    |
+| --------- | ------ | ------- | ---------------------------------------------- |
+| variant   | string | ''      | Additional class names to apply                |
+| (various) |        |         | HTMLAnchorElement props, events, and functions |
 
 ## Anatomy
 
-```svelte
+```
 <a class="sterling-link">
   <slot {disabled} {href} {variant} />
 </a>

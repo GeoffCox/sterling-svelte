@@ -8,8 +8,7 @@
 
   import Playground from '../Playground.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
-
-  let exampleRef: any;
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let colorText = 'hsla(222, 50%, 70%, 0.5)';
   let colorFormat: ColorFormat = 'hsl';
@@ -17,19 +16,17 @@
   let disabled = false;
   let open = false;
   let variant: string = '';
+
+  $: code = getPlaygroundCode({ colorFormat, colorText, disabled, open, variant });
 </script>
 
-<Playground bind:this={exampleRef} noEvents>
+<Playground {code}>
   <svelte:fragment slot="component">
     <ColorPicker bind:colorText bind:colorFormat bind:open {disabled} {variant} />
   </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
-    <VariantInput bind:variant availableVariants={[]} />
-  </svelte:fragment>
-  <svelte:fragment slot="status">
-    <div>colorText: {colorText}</div>
-    <div>colorFormat: {colorFormat}</div>
+    <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
 </Playground>

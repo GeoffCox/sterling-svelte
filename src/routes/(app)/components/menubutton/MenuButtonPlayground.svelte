@@ -17,7 +17,7 @@
   let menuVariant = '';
 </script>
 
-<Playground bind:this={exampleRef} noEvents>
+<Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
     <MenuButton bind:open {disabled} value="file" {variant} {menuVariant}>
       File

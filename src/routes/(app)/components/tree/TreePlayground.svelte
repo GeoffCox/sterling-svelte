@@ -35,8 +35,8 @@
       {disabled}
       bind:expandedValues
       {variant}
-      on:select={() => exampleRef.recordEvent('select')}
-      on:expandCollapse={() => exampleRef.recordEvent('expandCollapse')}
+      on:select={() => console.log('select')}
+      on:expandCollapse={() => console.log('expandCollapse')}
     >
       {#each coffeeTree as coffeeItem}
         <CoffeeTreeItem {coffeeItem} {variant} />
@@ -57,12 +57,12 @@
     </Label>
     <VariantInput bind:variant availableVariants={['composed']} />
   </svelte:fragment>
-  <svelte:fragment slot="status">
+  <!-- <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>
     <div class="toggled-status">
       expandedValues: {expandedValues.join(',')}
     </div>
-  </svelte:fragment>
+  </svelte:fragment> -->
 </Playground>
 
 <style>

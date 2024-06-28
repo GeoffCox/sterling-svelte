@@ -1,4 +1,5 @@
 <script>
+  import Button from '$lib/Button.svelte';
   import Slider from '$lib/Slider.svelte';
   import AutoModeIcon from './icons/AutoModeIcon.svelte';
   import DarkModeIcon from './icons/DarkModeIcon.svelte';
@@ -14,9 +15,22 @@
 </script>
 
 <div class="mode-select">
-  <div class="icon light"><LightModeIcon width="1em" height="1em" /></div>
-  <div class="icon auto"><AutoModeIcon width="1em" height="1em" /></div>
-  <div class="icon dark"><DarkModeIcon width="1em" height="1em" /></div>
+  <div class="icon light">
+    <Button variant="square tool" on:click={() => (value = 0)}>
+      <LightModeIcon width="1em" height="1em" fill="hsl(39, 100%, 45%)" />
+    </Button>
+  </div>
+  <div class="icon auto">
+    <Button variant="square tool" on:click={() => (value = 1)}>
+      <AutoModeIcon width="1em" height="1em" />
+    </Button>
+  </div>
+  <div class="icon dark">
+    <Button variant="square tool" on:click={() => (value = 2)}>
+      <DarkModeIcon width="1em" height="1em" fill="hsl(198, 100%, 40%)" />
+    </Button>
+  </div>
+
   <div class="slider">
     <Slider min={0} max={2} step={1} precision={0} bind:value />
   </div>
@@ -34,9 +48,12 @@
 
   .light {
     grid-area: light;
-    padding-right: 3em;
-    color: goldenrod;
   }
+
+  /* .light :global(svg) {
+    grid-area: light;
+    color: hsl(39, 100%, 45%);
+  } */
 
   .auto {
     grid-area: auto;
@@ -44,12 +61,15 @@
 
   .dark {
     grid-area: dark;
-    padding-left: 3em;
-    color: steelblue;
   }
+
+  /* .dark :global(svg) {
+    color: hsl(198, 100%, 40%);
+  } */
 
   .slider {
     grid-area: slider;
     justify-self: stretch;
+    margin: 0 0.85em;
   }
 </style>

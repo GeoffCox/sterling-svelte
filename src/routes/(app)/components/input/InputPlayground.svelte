@@ -6,26 +6,27 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
 
   import Playground from '../Playground.svelte';
-
-  let exampleRef: any;
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled = false;
-  let label = 'sterling-svelte';
   let placeholder = '';
-  let value = '';
+  let text = '';
+  let value = 'sterling-svelte';
   let variant = '';
+
+  $: code = getPlaygroundCode({ disabled, placeholder, text, value, variant });
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <svelte:fragment slot="component">
-    {#if label.length > 0}
+    {#if text}
       <Input
         {disabled}
         {placeholder}
         {variant}
         bind:value
-        on:input={() => exampleRef.recordEvent('input')}
-        on:change={() => exampleRef.recordEvent('change')}>{label}</Input
+        on:input={() => console.log('input')}
+        on:change={() => console.log('change')}>{text}</Input
       >
     {:else}
       <Input
@@ -33,8 +34,8 @@
         {placeholder}
         {variant}
         bind:value
-        on:input={() => exampleRef.recordEvent('input')}
-        on:change={() => exampleRef.recordEvent('change')}
+        on:input={() => console.log('input')}
+        on:change={() => console.log('change')}
       />
     {/if}
   </svelte:fragment>
@@ -43,12 +44,12 @@
     <LabelBox text="placeholder">
       <Input bind:value={placeholder} />
     </LabelBox>
-    <Label text="default slot (text)">
-      <Input bind:value={label} />
+    <Label text="label (text)">
+      <Input bind:value={text} />
+    </Label>
+    <Label text="value">
+      <Input bind:value />
     </Label>
     <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
-  </svelte:fragment>
-  <svelte:fragment slot="status">
-    <div>value: {value}</div>
   </svelte:fragment>
 </Playground>

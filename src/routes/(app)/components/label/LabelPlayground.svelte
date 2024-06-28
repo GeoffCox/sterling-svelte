@@ -8,19 +8,34 @@
   import type { LabelStatus } from '$lib/Label.types';
   import { LABEL_STATUSES } from '$lib';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled = false;
   let forwardClick = false;
   let text = 'sterling-svelte';
   let message = '';
   let required = false;
+  let requiredReason = '';
   let status: LabelStatus | 'none' = 'none';
   let useFor = true;
   let variant = '';
   let vertical = true;
+
+  $: code = getPlaygroundCode({
+    disabled,
+    forwardClick,
+    message,
+    required,
+    requiredReason,
+    status,
+    text,
+    useFor,
+    variant,
+    vertical
+  });
 </script>
 
-<Playground noEvents>
+<Playground {code}>
   <svelte:fragment slot="component">
     <Label
       for={useFor ? 'target' : undefined}
@@ -28,6 +43,7 @@
       {forwardClick}
       {message}
       {required}
+      {requiredReason}
       {status}
       {text}
       {variant}
@@ -45,6 +61,9 @@
       <Input bind:value={message} />
     </Label>
     <Checkbox bind:checked={required}>required</Checkbox>
+    <Label text="requiredReason">
+      <Input bind:value={requiredReason} />
+    </Label>
     <Label text="status" for="status-select" forwardClick>
       <Select id="status-select" bind:selectedValue={status}>
         {#each LABEL_STATUSES as labelStatus}

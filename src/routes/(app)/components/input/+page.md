@@ -6,33 +6,16 @@
 
 A styled HTML `input` with an optional label.
 
-## Props
+## Members
 
-HTMLInputElement props are included.
-
-```ts
-/** Additional class names to apply. */
-export let variant: string = '';
-```
-
-## Events
-
-HTMLInputElement events are included.
-
-## Methods
-
-The following HTMLInputElement methods are included:
-
-- `blur`
-- `click`
-- `focus`
-- `select`
-- `setRangeText`
-- `setSelectionRange`
+| Name      | Type   | Default | Description                                   |
+| --------- | ------ | ------- | --------------------------------------------- |
+| variant   | string | ''      | Additional class names to apply               |
+| (various) |        |         | HTMLInputElement props, events, and functions |
 
 ## Anatomy
 
-```svelte
+```
 <label class="sterling-input-label">
   <slot {disabled} {value} {variant} />
 </label>
@@ -40,5 +23,11 @@ The following HTMLInputElement methods are included:
   <input />
 </div>
 ```
+
+## Considerations
+
+- Prefer using the Label component rather than the label produced by providing default slot content.
+
+## Playground
 
 <Playground />

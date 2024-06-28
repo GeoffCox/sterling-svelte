@@ -11,54 +11,27 @@ A label container for an interactive element such as an input, select, list, or 
 
 ## Types
 
-```ts
-export type LabelStatus = 'none' | 'info' | 'success' | 'warning' | 'danger';
-```
+| Name        | Description                                                            |
+| ----------- | ---------------------------------------------------------------------- |
+| LabelStatus | 'none' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'danger' |
 
-## Props
+## Members
 
-HTMLLabelElement props are included.
-
-```ts
-/**
- * If true, clicking the label invokes a click on the content.
- * Needed only when the label is not associated with the content through containment or the `for`/`id` relationship.
- */
-export let forwardClick = false;
-
-/** The text to display in the label. Not used if the text slot is filled. */
-export let text: string | undefined = undefined;
-
-/** The status message to display. */
-export let message: string | undefined = undefined;
-
-/** When true, indicates a value is required. */
-export let required = false;
-
-/** The reason the value is required. */
-export let requiredReason = 'required';
-
-/** The status of the label. */
-export let status: LabelStatus = 'none';
-
-/** Additional class names to apply. */
-export let variant: string = '';
-
-/** When true, the label appears above the content. */
-export let vertical = true;
-```
-
-## Events
-
-HTMLLabelElement events are included.
-
-## Methods
-
-HTMLLabelElement `blur`, `click`, and `focus` methods are included.
+| Name           | Type        | Default | Description                                                           |
+| -------------- | ----------- | ------- | --------------------------------------------------------------------- |
+| forwardClick   | boolean     | false   | If true, clicking the label invokes a click on the content.           |
+| text           | string      | ''      | The text to display in the label. Not used if the text slot is filled |
+| message        | string      | ''      | The status message to display                                         |
+| required       | boolean     | false   | When true, the label will indicate a value is required                |
+| requiredReason | string      | ''      | The reason a value is required                                        |
+| status         | LabelStatus | ''      | The status of the label message                                       |
+| variant        | string      | ''      | Additional class names to apply                                       |
+| vertical       | boolean     | true    | When true, the label appears above the content                        |
+| (various)      |             |         | HTMLLabelElement props, events, and functions                         |
 
 ## Anatomy
 
-```svelte
+```
 <label class="sterling-label">
    <slot name="text" {disabled} {for} {forwardClick} {required} {text} {variant}>
     <div class="text">{text}</div>
@@ -77,5 +50,11 @@ HTMLLabelElement `blur`, `click`, and `focus` methods are included.
   </slot>
 </label>
 ```
+
+## Considerations
+
+- forwardClick is not used when the label is associated with the content through containment or the `for`/`id` relationship.
+
+## Playground
 
 <Playground />

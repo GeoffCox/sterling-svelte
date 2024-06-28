@@ -6,40 +6,20 @@
 
 Displays a value and button that opens a dropdown for changing the value.
 
-## Props
+## Members
 
-HTMLDivElement props are included.
-
-```ts
-/** When true, applies colorful theme styles. */
-/** Disables the dropdown. */
-export let disabled = false;
-
-/** When true, the dropdown is open. */
-export let open = false;
-
-/** When the user clicks away from the dropdown, it remains open. */
-export let stayOpenOnClickAway = false;
-
-/** Additional class names to apply. */
-export let variant: string = '';
-```
-
-## Events
-
-HTMLDivElement events are included.
-
-```ts
-dispatch('open', { open });
-```
-
-## Methods
-
-HTMLDivElement `blur`, `click`, and `focus` methods are included.
+| Name                | Type    | Default | Description                                                           |
+| ------------------- | ------- | ------- | --------------------------------------------------------------------- |
+| disabled            | boolean | false   | When true, the dropdown is disabled and closed                        |
+| open                | boolean | false   | When true, the dropdown is open                                       |
+| stayOpenOnClickAway | boolean | false   | When true and the user clicks away from the dropdown, it remains open |
+| variant             | string  | ''      | Additional class names to apply                                       |
+| on:open             | event   |         | Raised when the dropdown opens or closes                              |
+| (various)           |         |         | HTMLDivElement props, events, and functions                           |
 
 ## Anatomy
 
-```svelte
+```
 <div class="sterling-dropdown">
   <div class="value">
     <slot name="value" {disabled} {open} {variant} />

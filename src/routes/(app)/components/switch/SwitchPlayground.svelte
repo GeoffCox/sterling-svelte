@@ -19,7 +19,7 @@
 
   const onSwitchChange = (e: Event) => {
     const switchEvent = e as any;
-    exampleRef.recordEvent(`change: ${switchEvent.currentTarget?.checked}`);
+    console.log(`change: ${switchEvent.currentTarget?.checked}`);
   };
 </script>
 
@@ -50,9 +50,9 @@
       />
     {/if}
   </div>
-  <svelte:fragment slot="status">
+  <!-- <svelte:fragment slot="status">
     <div>checked: {checked}</div>
-  </svelte:fragment>
+  </svelte:fragment> -->
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="offText">

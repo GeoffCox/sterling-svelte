@@ -174,11 +174,11 @@
   :global(h2),
   :global(h3) {
     margin-block-start: 0.7em;
-    margin-block-end: 0.25em;
+    margin-block-end: 0.5em;
   }
 
   :global(h1) {
-    font-size: 1.5em;
+    font-size: 1.7em;
     font-weight: normal;
   }
 
@@ -199,16 +199,19 @@
   }
 
   :global(code) {
-    font-size: 1em;
     font-family: 'Source Code Pro', monospace;
-    color: var(--stsv-status--info__color);
+    font-weight: bold;
+    background-color: var(--stsv-common__background-color--faint);
   }
 
-  :global(pre),
-  :global(pre) :global(code) {
-    font-size: 14px;
+  :global(pre) {
     font-family: 'Source Code Pro', monospace;
+    font-weight: bold;
     color: var(--stsv-common__color);
+    background-color: var(--stsv-common__background-color--faint);
+    border: 1px solid var(--stsv-common__background-color--secondary);
+    padding: 1em;
+    text-wrap: wrap;
   }
 
   :global(blockquote) {

@@ -10,23 +10,26 @@
   import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
   import Callout from '$lib/Callout.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let crossAxisOffset = 0;
   let mainAxisOffset = 0;
   let open = true;
   let placement: PopoverPlacement = 'top-start';
-  let reference: HTMLDivElement;
-  let calloutText: string = 'sterling-svelte';
+  let reference: HTMLElement;
+  let text: string = 'sterling-svelte';
   let variant = '';
+
+  $: code = getPlaygroundCode({ crossAxisOffset, mainAxisOffset, placement, text, variant });
 </script>
 
-<Playground noEvents>
+<Playground {code}>
   <div slot="component">
     <div class="reference" bind:this={reference}>
       The reference anchor for positioning the popover.
     </div>
     <Callout {variant} {crossAxisOffset} {mainAxisOffset} bind:open {placement} {reference}>
-      <div class="callout-text">{calloutText}</div>
+      <div class="callout-text">{text}</div>
     </Callout>
   </div>
   <svelte:fragment slot="props">
@@ -48,7 +51,7 @@
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Label text="callout (text)">
-      <Input bind:value={calloutText} />
+      <Input bind:value={text} />
     </Label>
   </svelte:fragment>
 </Playground>
@@ -67,5 +70,6 @@
     place-items: center;
     align-items: center;
     text-align: center;
+    margin: 2em;
   }
 </style>

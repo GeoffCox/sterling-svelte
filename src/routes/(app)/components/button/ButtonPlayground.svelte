@@ -7,21 +7,23 @@
   import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let exampleRef: any;
   let disabled = false;
   let variant: string = '';
-  let buttonText = 'sterling-svelte';
+  let text = 'sterling-svelte';
   let withIcon = true;
+
+  $: code = getPlaygroundCode({ disabled, text, variant, withIcon });
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <div class="component" slot="component">
-    <Button {disabled} {variant} on:click={() => exampleRef.recordEvent('click')}>
+    <Button {disabled} {variant} on:click={() => console.log('Button on:click')}>
       {#if withIcon}
         <SvelteIcon />
       {/if}
-      {buttonText}
+      {text}
     </Button>
   </div>
   <svelte:fragment slot="props">
@@ -32,7 +34,9 @@
     />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
-    <Input bind:value={buttonText} />
+    <Label text="(button content)">
+      <Input bind:value={text} />
+    </Label>
     <Checkbox bind:checked={withIcon}>with icon</Checkbox>
   </svelte:fragment>
 </Playground>

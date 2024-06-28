@@ -30,8 +30,8 @@
     <Dialog
       bind:open
       bind:returnValue
-      on:cancel={() => exampleRef.recordEvent('cancel')}
-      on:close={() => exampleRef.recordEvent('close')}
+      on:cancel={() => console.log('cancel')}
+      on:close={() => console.log('close')}
     >
       <div slot="title">Outside or Inside?</div>
       <div slot="body">

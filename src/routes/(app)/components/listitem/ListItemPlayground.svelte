@@ -30,7 +30,7 @@
   }
 </script>
 
-<Playground bind:this={exampleRef} noEvents>
+<Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
     <ListItem {disabled} value="sterling" {variant}>{text}</ListItem>
   </svelte:fragment>

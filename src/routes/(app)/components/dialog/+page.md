@@ -7,34 +7,15 @@
 
 A styled HTML `dialog` element.
 
-- The dialog is always modal.
-- The cancel event is only raised when the escape key is pressed.
+## Members
 
-## Props
-
-HTMLDialogElement props are included.
-
-```ts
-/** When true, clicking outside the dialog causes the dialog close. */
-export let backdropCloses = false;
-
-/** When true, the dialog is open; otherwise the dialog is closed. */
-export let open = false;
-
-/**
- * The return value from the dialog:
- * - an empty string indicates cancellation
- * - a value indicates form submission.
- */
-export let returnValue = '';
-
-/** Additional class names to apply. */
-export let variant: string = '';
-```
-
-## Events
-
-HTMLDialogElement events are included.
+| Name           | Type    | Default | Description                                                    |
+| -------------- | ------- | ------- | -------------------------------------------------------------- |
+| backdropCloses | boolean | false   | When true, clicking outside the dialog causes the dialog close |
+| open           | boolean | false   | When true, the dialog is open; otherwise the dialog is closed  |
+| variant        | string  | ''      | Additional class names to apply                                |
+| returnValue    | string  | ''      | A value indicates OK, empty indicates cancellation.            |
+| (various)      |         |         | HTMLDialogElement props, events, and functions                 |
 
 ## Anatomy
 
@@ -67,6 +48,11 @@ HTMLDialogElement events are included.
   </form>
 </dialog>
 ```
+
+## Considerations
+
+- The dialog is always modal.
+- The cancel event is only raised when the escape key is pressed.
 
 ## Usage
 

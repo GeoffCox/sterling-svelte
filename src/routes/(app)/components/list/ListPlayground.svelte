@@ -8,14 +8,20 @@
   import { debounce } from 'lodash-es';
   import Label from '$lib/Label.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
-
-  let exampleRef: any;
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled = false;
   let horizontal = false;
   let selectedValue: string | undefined = undefined;
   let selectedValueText: string | undefined = undefined;
   let variant = '';
+
+  $: code = getPlaygroundCode({
+    disabled,
+    horizontal,
+    selectedValue,
+    variant
+  });
 
   const updateSelectedValue = debounce((value?: string) => {
     selectedValue = value;
@@ -30,7 +36,7 @@
   }
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <div class="component" class:horizontal slot="component">
     <List
       bind:selectedValue
@@ -39,7 +45,7 @@
       selectionKeys="tab"
       {variant}
       on:select={(event) => {
-        exampleRef.recordEvent(`select:${event.detail.value}`);
+        console.log(`select:${event.detail.value}`);
       }}
     >
       {#each countries as country}
@@ -54,9 +60,6 @@
       <Input bind:value={selectedValueText} />
     </Label>
     <VariantInput bind:variant availableVariants={['composed']} />
-  </svelte:fragment>
-  <svelte:fragment slot="status">
-    <div>selectedValue: {selectedValue}</div>
   </svelte:fragment>
 </Playground>
 

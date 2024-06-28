@@ -5,11 +5,11 @@
 
   import Dropdown from '$lib/Dropdown.svelte';
   import Switch from '$lib/Switch.svelte';
-  import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import Slider from '$lib/Slider.svelte';
   import AnimatedProgress from './AnimatedProgress.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let exampleRef: any;
 
@@ -22,16 +22,18 @@
   let animate = false;
   let reverse = false;
   let speed = 75;
+
+  $: code = getPlaygroundCode({ disabled, open, stayOpenOnClickAway, variant });
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <svelte:fragment slot="component">
     <Dropdown
       bind:open
       {disabled}
       {stayOpenOnClickAway}
       {variant}
-      on:open={(ev) => exampleRef.recordEvent(`open: ${ev.detail.open}`)}
+      on:open={(ev) => console.log(`open: ${ev.detail.open}`)}
     >
       <div class="value" slot="value">
         <AnimatedProgress value={progress} {animate} {reverse} {speed} />
@@ -52,9 +54,6 @@
     <Checkbox bind:checked={open}>open</Checkbox>
     <Checkbox bind:checked={stayOpenOnClickAway}>stayOpenOnClickAway</Checkbox>
     <VariantInput bind:variant availableVariants={['colorful']} />
-  </svelte:fragment>
-  <svelte:fragment slot="status">
-    <div>open: {open}</div>
   </svelte:fragment>
 </Playground>
 

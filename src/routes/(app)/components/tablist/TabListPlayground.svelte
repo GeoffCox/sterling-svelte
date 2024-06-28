@@ -23,7 +23,7 @@
       {variant}
       {vertical}
       on:select={(event) => {
-        exampleRef.recordEvent(`select: ${event.detail.value}`);
+        console.log(`select: ${event.detail.value}`);
       }}
     >
       <Tab value="First">First</Tab>
@@ -40,7 +40,7 @@
     </Label>
     <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
-  <svelte:fragment slot="status">
+  <!-- <svelte:fragment slot="status">
     <div>selectedValue: {selectedValue}</div>
-  </svelte:fragment>
+  </svelte:fragment> -->
 </Playground>

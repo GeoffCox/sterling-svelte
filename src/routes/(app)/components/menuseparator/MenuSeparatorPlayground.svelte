@@ -9,7 +9,7 @@
   let variant = '';
 </script>
 
-<Playground noEvents>
+<Playground>
   <svelte:fragment slot="component">
     <div class="area">
       <MenuSeparator {variant} />

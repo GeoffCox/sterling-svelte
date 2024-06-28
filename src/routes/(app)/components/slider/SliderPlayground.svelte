@@ -82,7 +82,7 @@
         bind:value
         {variant}
         bind:vertical
-        on:change={(e) => exampleRef.recordEvent(`change value:${e.detail.value}`)}
+        on:change={(e) => console.log(`change value:${e.detail.value}`)}
       />
     {:else}
       <Slider
@@ -94,7 +94,7 @@
         bind:value
         {variant}
         bind:vertical
-        on:change={(e) => exampleRef.recordEvent(`change value:${e.detail.value}`)}
+        on:change={(e) => console.log(`change value:${e.detail.value}`)}
       />
     {/if}
   </div>
@@ -115,9 +115,9 @@
     <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
-  <svelte:fragment slot="status">
+  <!-- <svelte:fragment slot="status">
     <div>value: {value}</div>
-  </svelte:fragment>
+  </svelte:fragment> -->
 </Playground>
 
 <style>

@@ -23,7 +23,7 @@
   let variant: string = '';
 </script>
 
-<Playground bind:this={exampleRef} noEvents>
+<Playground bind:this={exampleRef}>
   <div class="component" slot="component">
     <MenuItemDisplay {checked} {disabled} {hasChildren} {isMenuBarItem} {menuItemRole} {variant}>
       {text}

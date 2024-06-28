@@ -6,41 +6,31 @@
 
 A Dropdown containing a color value, an input for editing the color text, and sliders for choosing the color in RGB(A), HEX(8), or HSL(A) formats.
 
+## Types
+
+| Name        | Description                     |
+| ----------- | ------------------------------- |
+| ColorFormat | 'hex' &#124; 'rgb' &#124; 'hsl' |
+
+## Members
+
+| Name        | Type        | Default   | Description                                |
+| ----------- | ----------- | --------- | ------------------------------------------ |
+| colorText   | string      | '#000000' | The color value in HEX, RGB, or HSL format |
+| colorFormat | ColorFormat | 'hex'     | The current color format                   |
+| variant     | string      | ''        | Additional class names to apply            |
+| (various)   |             |           | Dropdown props, events, and functions      |
+
+## Considerations
+
 - The dropdown displays a set of sliders based on the color format selected.
 - Changing the input to a color value with a different color format, switches the selected color format.
 - Switching from HSL to HEX or RGB rounds values to the nearest color.
-
-## Types
-
-```ts
-export type ColorFormat = 'hex' | 'rgb' | 'hsl';
-```
-
-## Props
-
-Dropdown props are included.
-
-```ts
-/** The color value in HEX, RGB, or HSL format */
-export let colorText: string = defaultColorText;
-
-/** The current color format */
-export let colorFormat: ColorFormat = 'hex';
-
-/** Additional class names to apply. */
-export let variant: string = '';
-```
-
-## Events
-
-Dropdown events are included.
+- There are no slots due to the required coordination between sliders and the dropdown.
 
 ## Anatomy
 
-As a composite control that coordinates the input and the slider values,
-there are no slots for ColorPicker.
-
-```svelte
+```
 <div class="sterling-color-picker">
   <Dropdown>
     <div class="value" slot="value">

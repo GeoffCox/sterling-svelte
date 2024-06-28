@@ -38,7 +38,7 @@
   };
 </script>
 
-<Playground noEvents>
+<Playground>
   <div class="component" slot="component">
     <div class="progress" class:vertical>
       <Progress {status} {disabled} {value} {max} bind:percent {variant} {vertical} />
@@ -64,9 +64,9 @@
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
     <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
-  <svelte:fragment slot="status">
+  <!-- <svelte:fragment slot="status">
     <div>percent: {percent}%</div>
-  </svelte:fragment>
+  </svelte:fragment> -->
 </Playground>
 
 <style>

@@ -13,7 +13,7 @@
   let variant = '';
 </script>
 
-<Playground noEvents>
+<Playground>
   <svelte:fragment slot="component">
     <div class="sliders">
       <HexColorSliders bind:red bind:green bind:blue bind:alpha {variant} />
@@ -22,13 +22,13 @@
   <svelte:fragment slot="props">
     <VariantInput bind:variant availableVariants={[]} />
   </svelte:fragment>
-  <svelte:fragment slot="status">
+  <!-- <svelte:fragment slot="status">
     <div>
       color: 0x{red.toString(16).padStart(2, '0')}{green.toString(16).padStart(2, '0')}{blue
         .toString(16)
         .padStart(2, '0')}{alpha.toString(16).padStart(2, '0')}
     </div>
-  </svelte:fragment>
+  </svelte:fragment> -->
 </Playground>
 
 <style>

@@ -30,8 +30,8 @@
       {placeholder}
       {resize}
       {variant}
-      on:input={() => exampleRef.recordEvent('input')}
-      on:change={() => exampleRef.recordEvent('change')}
+      on:input={() => console.log('input')}
+      on:change={() => console.log('change')}
     />
   </svelte:fragment>
   <svelte:fragment slot="props">
@@ -49,7 +49,7 @@
     </Label>
     <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
   </svelte:fragment>
-  <svelte:fragment slot="status">
+  <!-- <svelte:fragment slot="status">
     <div class="value">value: {value}</div>
-  </svelte:fragment>
+  </svelte:fragment> -->
 </Playground>

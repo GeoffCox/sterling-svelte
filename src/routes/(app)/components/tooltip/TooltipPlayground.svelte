@@ -21,7 +21,7 @@
   let variant = '';
 </script>
 
-<Playground noEvents>
+<Playground>
   <div slot="component">
     <Tooltip
       {crossAxisOffset}

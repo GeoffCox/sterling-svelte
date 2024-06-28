@@ -31,10 +31,10 @@
       bind:open
       bind:selectedValue
       on:select={(event) => {
-        exampleRef.recordEvent(`select:${event.detail.value}`);
+        console.log(`select:${event.detail.value}`);
       }}
       on:pending={(event) => {
-        exampleRef.recordEvent(`pending:${event.detail.value}`);
+        console.log(`pending:${event.detail.value}`);
       }}
     >
       {#each items as item}
@@ -51,8 +51,8 @@
     <VariantInput bind:variant={listVariant} availableVariants={[]} labelText="listVariant" />
     <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
   </svelte:fragment>
-  <svelte:fragment slot="status">
+  <!-- <svelte:fragment slot="status">
     <div>open: {open}</div>
     <div>selectedValue: {selectedValue}</div>
-  </svelte:fragment>
+  </svelte:fragment> -->
 </Playground>

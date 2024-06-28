@@ -13,9 +13,9 @@
 <Playground bind:this={exampleRef}>
   <svelte:fragment slot="component">
     <MenuBar
-      on:close={(event) => exampleRef.recordEvent(`close '${event.detail.value}'`)}
-      on:open={(event) => exampleRef.recordEvent(`open '${event.detail.value}'`)}
-      on:select={(event) => exampleRef.recordEvent(`select '${event.detail.value}'`)}
+      on:close={(event) => console.log(`close '${event.detail.value}'`)}
+      on:open={(event) => console.log(`open '${event.detail.value}'`)}
+      on:select={(event) => console.log(`select '${event.detail.value}'`)}
       {variant}
     >
       <MenuItem value="file" text="File">

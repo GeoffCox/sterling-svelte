@@ -38,9 +38,9 @@
       text="File"
       {variant}
       {menuVariant}
-      on:close={(event) => exampleRef.recordEvent(`close '${event.detail.value}'`)}
-      on:open={(event) => exampleRef.recordEvent(`open '${event.detail.value}'`)}
-      on:select={(event) => exampleRef.recordEvent(`select '${event.detail.value}'`)}
+      on:close={(event) => console.log(`close '${event.detail.value}'`)}
+      on:open={(event) => console.log(`open '${event.detail.value}'`)}
+      on:select={(event) => console.log(`select '${event.detail.value}'`)}
     >
       <MenuItem value="file-new" text="New" />
       <MenuItem value="open-file" text="Open..." />
