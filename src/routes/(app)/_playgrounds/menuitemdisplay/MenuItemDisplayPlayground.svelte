@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { MenuItemRole } from '$lib/MenuItem.types';
 
-  import Playground from '../Playground.svelte';
+  import Playground from '../../components/Playground.svelte';
 
   import Checkbox from '$lib/Checkbox.svelte';
   import Label from '$lib/Label.svelte';
@@ -11,19 +11,30 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { MENU_ITEM_ROLES } from '$lib';
   import ListItem from '$lib/ListItem.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let exampleRef: any;
 
   let checked = false;
   let disabled = false;
-  let hasChildren = true;
+  let hasChildren = false;
   let isMenuBarItem = false;
-  let text = 'sterling-svelte';
   let menuItemRole: MenuItemRole = 'menuitem';
+  let text = 'sterling-svelte';
   let variant: string = '';
+
+  $: code = getPlaygroundCode({
+    checked,
+    disabled,
+    hasChildren,
+    isMenuBarItem,
+    menuItemRole,
+    text,
+    variant
+  });
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <div class="component" slot="component">
     <MenuItemDisplay {checked} {disabled} {hasChildren} {isMenuBarItem} {menuItemRole} {variant}>
       {text}

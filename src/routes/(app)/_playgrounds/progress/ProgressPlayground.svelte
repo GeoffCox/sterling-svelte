@@ -5,7 +5,7 @@
   import Progress from '$lib/Progress.svelte';
   import Slider from '$lib/Slider.svelte';
 
-  import Playground from '../Playground.svelte';
+  import Playground from '../../components/Playground.svelte';
   import Input from '$lib/Input.svelte';
   import Select from '$lib/Select.svelte';
   import type { ProgressStatus } from '$lib/Progress.types';
@@ -13,6 +13,7 @@
   import Label from '$lib/Label.svelte';
   import { PROGRESS_STATUSES } from '$lib';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled = false;
   let max = 100;
@@ -36,21 +37,29 @@
   const onMaxChange = (e: Event): any => {
     _onMaxChange(e as FormEvent<Event, HTMLInputElement>);
   };
+
+  $: code = getPlaygroundCode({
+    disabled,
+    max,
+    percent,
+    status,
+    value,
+    variant,
+    vertical
+  });
 </script>
 
-<Playground>
+<Playground {code}>
   <div class="component" slot="component">
     <div class="progress" class:vertical>
       <Progress {status} {disabled} {value} {max} bind:percent {variant} {vertical} />
     </div>
   </div>
   <svelte:fragment slot="props">
-    <Label text="value: {value}">
-      <div class="slider">
-        <Slider bind:value min={0} {max} precision={0} />
-      </div>
-    </Label>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Label text="max">
+      <Input value={max.toString()} on:change={onMaxChange} />
+    </Label>
     <Label text="status" forwardClick>
       <Select bind:selectedValue={status}>
         {#each PROGRESS_STATUSES as progressStatus}
@@ -58,11 +67,13 @@
         {/each}
       </Select>
     </Label>
-    <Label text="max">
-      <Input value={max.toString()} on:change={onMaxChange} />
+    <Label text="value: {value}">
+      <div class="slider">
+        <Slider bind:value min={0} {max} precision={0} />
+      </div>
     </Label>
-    <Checkbox bind:checked={vertical}>vertical</Checkbox>
     <VariantInput bind:variant availableVariants={[]} />
+    <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <!-- <svelte:fragment slot="status">
     <div>percent: {percent}%</div>

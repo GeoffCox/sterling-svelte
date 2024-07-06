@@ -20,13 +20,13 @@
   let text: string = 'sterling-svelte';
   let variant = '';
 
-  $: code = getPlaygroundCode({ crossAxisOffset, mainAxisOffset, placement, text, variant });
+  $: code = getPlaygroundCode({ crossAxisOffset, mainAxisOffset, open, placement, text, variant });
 </script>
 
 <Playground {code}>
   <div slot="component">
     <div class="reference" bind:this={reference}>
-      The reference anchor for positioning the popover.
+      The reference anchor for positioning the callout.
     </div>
     <Callout {variant} {crossAxisOffset} {mainAxisOffset} bind:open {placement} {reference}>
       <div class="callout-text">{text}</div>

@@ -9,6 +9,7 @@ export const getPlaygroundCode = (props: {
   variant: string;
 }) => {
   const propList: string[] = [];
+
   if (props.crossAxisOffset !== 0) {
     propList.push(`crossAxisOffset="${props.crossAxisOffset}"`);
   }
@@ -28,12 +29,16 @@ export const getPlaygroundCode = (props: {
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';
 
   return `<script lang="ts">
-  import { Callout } from '@geoffcox/sterling-svelte';
-  
+  import { Popover } from '@geoffcox/sterling-svelte';
+
   let reference: HTMLElement;
+
 </script>
 
-<div bind:this={reference}>The reference anchor for positioning the callout.</div>
+<div bind:this={reference}>The reference anchor for positioning the popover.</div>
 
-<Callout${propsText} {reference}>${props.text}</Callout>`;
+<Popover${propsText} {reference}>
+  ${props.text}
+</Popover>
+`;
 };

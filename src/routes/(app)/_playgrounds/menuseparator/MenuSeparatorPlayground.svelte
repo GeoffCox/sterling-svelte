@@ -1,15 +1,20 @@
 <script lang="ts">
-  import Playground from '../Playground.svelte';
+  import Playground from '../../components/Playground.svelte';
 
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let variant = '';
+
+  $: code = getPlaygroundCode({
+    variant
+  });
 </script>
 
-<Playground>
+<Playground {code}>
   <svelte:fragment slot="component">
     <div class="area">
       <MenuSeparator {variant} />

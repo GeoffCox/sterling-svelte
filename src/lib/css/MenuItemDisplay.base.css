@@ -5,6 +5,7 @@
   grid-template-columns: 1em 1fr 1em;
   column-gap: 0.5em;
   padding: 0.25em;
+  position: relative;
 }
 
 .sterling-menu-item-display .check {
@@ -13,7 +14,10 @@
   width: 20px;
   height: 20px;
   position: relative;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
 }
 
 .sterling-menu-item-display .check.checkmark.checked::after {

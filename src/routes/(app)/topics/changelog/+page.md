@@ -5,6 +5,7 @@
 - Fix input showing disabled state when composed. Updated CSS.
 - Fix default placement for Callout, Popover, and Tooltip is 'bottom-start'. Updated to 'top-start'.
 - Fix ColorPicker did not pass variant to Dropdown. Added variant parameter.
+- Fix MenuItemDisplay disabled style covered entire page. Added position:relative to base class.
 
 ## 1.0.10
 

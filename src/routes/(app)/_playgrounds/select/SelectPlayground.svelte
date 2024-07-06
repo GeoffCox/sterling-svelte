@@ -2,15 +2,16 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Select from '$lib/Select.svelte';
 
-  import Playground from '../Playground.svelte';
+  import Playground from '../../components/Playground.svelte';
 
   import { countries } from '../../_shared/sampleData/countries';
   import { random } from 'lodash-es';
   import Button from '$lib/Button.svelte';
   import ListItem from '$lib/ListItem.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
-
-  let exampleRef: any;
+  import { getPlaygroundCode } from './getPlaygroundCode';
+  import Label from '$lib/Label.svelte';
+  import Input from '$lib/Input.svelte';
 
   let open = false;
   let items = countries;
@@ -19,13 +20,14 @@
   let disabled = false;
   let listVariant = '';
   let variant = '';
+
+  $: code = getPlaygroundCode({ disabled, open, listVariant, variant });
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <svelte:fragment slot="component">
     <Select
       {disabled}
-      {items}
       {listVariant}
       {variant}
       bind:open
@@ -44,10 +46,14 @@
   </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Label text="selectedValue">
+      <Input bind:value={selectedValue} />
+    </Label>
     <Button on:click={() => (selectedValue = undefined)}>selectedValue = undefined</Button>
     <Button on:click={() => (selectedValue = items[random(0, items.length - 1)])}
       >selectedValue = random()</Button
     >
+
     <VariantInput bind:variant={listVariant} availableVariants={[]} labelText="listVariant" />
     <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
   </svelte:fragment>

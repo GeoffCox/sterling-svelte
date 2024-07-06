@@ -1,6 +1,6 @@
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
-  import Playground from '../Playground.svelte';
+  import Playground from '../../components/Playground.svelte';
   import ListItem from '$lib/ListItem.svelte';
   import Select from '$lib/Select.svelte';
   import Slider from '$lib/Slider.svelte';
@@ -10,23 +10,33 @@
   import type { PopoverPlacement } from '$lib/Popover.types';
   import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let crossAxisOffset = 0;
   let mainAxisOffset = 0;
   let open = true;
   let placement: PopoverPlacement = 'top-start';
-  let popoverText = 'sterling-svelte';
+  let text = 'sterling-svelte';
   let reference: HTMLDivElement;
   let variant = '';
+
+  $: code = getPlaygroundCode({
+    crossAxisOffset,
+    mainAxisOffset,
+    open,
+    placement,
+    text,
+    variant
+  });
 </script>
 
-<Playground>
+<Playground {code}>
   <div slot="component">
     <div class="reference" bind:this={reference}>
       The reference anchor for positioning the popover.
     </div>
     <Popover bind:open {reference} {mainAxisOffset} {crossAxisOffset} {placement} {variant}>
-      <div class="popover-text">{popoverText}</div>
+      <div class="popover-text">{text}</div>
     </Popover>
   </div>
   <svelte:fragment slot="props">
@@ -48,7 +58,7 @@
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Label text="popover (text)">
-      <Input bind:value={popoverText} />
+      <Input bind:value={text} />
     </Label>
   </svelte:fragment>
 </Playground>
@@ -71,5 +81,6 @@
     display: grid;
     place-items: center;
     align-items: center;
+    margin: 2em;
   }
 </style>

@@ -15,6 +15,12 @@ import ListItemPlayground from '../../_playgrounds/listitem/ListItemPlayground.s
 import MenuBarPlayground from '../../_playgrounds/menubar/MenuBarPlayground.svelte';
 import MenuButtonPlayground from '../../_playgrounds/menubutton/MenuButtonPlayground.svelte';
 import MenuItemPlayground from '../../_playgrounds/menuitem/MenuItemPlayground.svelte';
+import MenuItemDisplayPlayground from '../../_playgrounds/menuitemdisplay/MenuItemDisplayPlayground.svelte';
+import MenuSeparatorPlayground from '../../_playgrounds/menuseparator/MenuSeparatorPlayground.svelte';
+import PopoverPlayground from '../../_playgrounds/popover/PopoverPlayground.svelte';
+import ProgressPlayground from '../../_playgrounds/progress/ProgressPlayground.svelte';
+import RadioPlayground from '../../_playgrounds/radio/RadioPlayground.svelte';
+import SelectPlayground from '../../_playgrounds/select/SelectPlayground.svelte';
 
 const commonProps: Record<string, PropDoc> = {
   variant: {
@@ -780,5 +786,279 @@ export const componentDocs: Record<string, ComponentDoc> = {
   </Popover>
 </button>`,
     usage: MenuItemPlayground
+  },
+  menuitemdisplay: {
+    name: 'MenuItemDisplay',
+    description: 'he default content for a MenuItem in a Menu',
+    comments: [makeExtendsComment('HTMLDivElement')],
+    props: [
+      {
+        name: 'checked',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, displays the menu item as checked.'
+      },
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, displays the menu item as disabled.'
+      },
+      {
+        name: 'hasChildren',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, displays the menu item as a parent of children.'
+      },
+      {
+        name: 'isMenuBarItem',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, displays the menu as a top level menu bar item.'
+      },
+      {
+        name: 'menuItemRole',
+        type: 'MenuItemRole',
+        default: "'menuitem'",
+        comment: 'The role of the menu item.'
+      },
+      commonProps.variant
+    ],
+    anatomy: `<div class="sterling-menu-item-display">
+  <div class="check" />
+  <div class="content">
+    <slot {checked} {disabled} {hasChildren} {isMenuBarItem} {menuItemRole} {variant} />
+  </div>
+  <div class="shortcut">
+    <slot name="shortcut" {checked} {disabled} {isMenuBarItem} {menuItemRole} {variant} />
+  </div>
+  <div class="chevron" />
+</div>`,
+    usage: MenuItemDisplayPlayground
+  },
+  menuseparator: {
+    name: 'MenuSeparator',
+    description: 'A horizontal line separating menu items',
+    comments: [makeExtendsComment('HTMLDivElement')],
+    props: [commonProps.variant],
+    anatomy: `<div class="sterling-menu-separator" />`,
+    usage: MenuSeparatorPlayground
+  },
+  popover: {
+    name: 'Popover',
+    description: 'A floating box of content',
+    comments: [
+      'Floats content above the page via use:portal. Elements are moved to the end of the `body` element so they appear above them in the z-order.',
+      'Popover does not provide any styling (background, border, etc.) around the floating content.'
+    ],
+    props: [
+      {
+        name: 'conditionalRender',
+        type: 'boolean',
+        default: 'true',
+        comment: 'When true, content is rendered only when the popover is open.'
+      },
+      {
+        name: 'crossAxisOffset',
+        type: 'number',
+        default: '0',
+        comment: 'The offset along the side of the reference element.'
+      },
+      {
+        name: 'mainAxisOffset',
+        type: 'number',
+        default: '0',
+        comment: 'The offset towards or away from the side of the reference element.'
+      },
+      {
+        name: 'open',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the popover is open and visible.'
+      },
+      {
+        name: 'placement',
+        type: 'PopoverPlacement',
+        default: "'bottom-start'",
+        comment: 'How the popover should be positioned relative to the reference element.'
+      },
+      {
+        name: 'portalHost',
+        type: 'HTMLElement | undefined',
+        default: 'undefined',
+        comment: 'The host container for the callout.'
+      },
+      {
+        name: 'reference',
+        type: 'HTMLElement | undefined',
+        default: 'undefined',
+        comment: 'The reference to the element anchoring the position of the popover.'
+      }
+    ],
+    types: [
+      {
+        name: 'PopoverPlacement',
+        definition:
+          "'top-start' | 'top' | 'top-end' | 'right-start' | 'right' | 'right-end' | 'bottom-end' | 'bottom' | 'bottom-start' | 'left-end' | 'left' | 'left-start'"
+      }
+    ],
+    anatomy: `<div class="sterling-popover-portal" use:portal>
+  <div class="sterling-popover">
+    <slot {open} {variant} />
+  </div>
+</div>`,
+    usage: PopoverPlayground
+  },
+  progress: {
+    name: 'Progress',
+    description: 'A visual bar that expands to indicate progress.',
+    comments: [makeExtendsComment('HTMLDivElement')],
+    props: [
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the progress bar is disabled.'
+      },
+      {
+        name: 'max',
+        type: 'number',
+        default: '100',
+        comment: 'The maximum value.'
+      },
+      {
+        name: 'percent',
+        type: 'number',
+        default: '0',
+        comment: 'A read-only percentage between 0 and 100 calculated from value and max.'
+      },
+      {
+        name: 'status',
+        type: 'ProgressStatus',
+        default: "'none'",
+        comment: 'The current status of the progress.'
+      },
+      {
+        name: 'value',
+        type: 'number',
+        default: '0',
+        comment: 'The current value.'
+      },
+      commonProps.variant,
+      {
+        name: 'vertical',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the progress bar is displayed vertically.'
+      }
+    ],
+    types: [
+      {
+        name: 'ProgressStatus',
+        definition: "'none' | 'error' | 'warning' | 'info' | 'success'",
+        comment: 'Used for the Progress status property.'
+      }
+    ],
+    anatomy: `<div class="sterling-progress">
+  <div class="container">
+    <div class="indicator" />
+  </div>
+</div>`,
+    usage: ProgressPlayground
+  },
+  radio: {
+    name: 'Radio',
+    description: 'A styled HTML input element with type=radio',
+    comments: [makeExtendsComment('HTMLInputElement')],
+    props: [
+      {
+        name: 'group',
+        type: 'string',
+        default: "''",
+        comment: 'The group to bind to the selected value for a group of radio buttons'
+      },
+      commonProps.variant
+    ],
+    anatomy: `<div class="sterling-radio">
+  <div class="container">
+    <!-- hidden -->
+    <input />
+    <div class="indicator" />
+  </div>
+  <label>
+    <slot {checked} {disabled} {group} {inputId} {value} {variant} />
+  </label>
+</div>`,
+    usage: RadioPlayground
+  },
+  select: {
+    name: 'Select',
+    description: 'A value that can be selected from a dropdown list of values',
+    comments: [
+      'Due to lack of styling capabilities with <select>, the Select component does not use <select>',
+      makeExtendsComment('HTMLDivElement')
+    ],
+    props: [
+      {
+        name: 'open',
+        type: 'boolean',
+        default: 'false',
+        comment: "When true, the select's dropdown is open."
+      },
+      {
+        name: 'selectedValue',
+        type: 'string | undefined',
+        default: 'undefined',
+        comment: 'The value of the selected item.'
+      },
+      commonProps.variant,
+      {
+        name: 'listVariant',
+        type: 'string',
+        default: "''",
+        comment: 'Additional class names to apply to the List'
+      }
+    ],
+    events: [
+      {
+        name: 'pending',
+        data: '{ value: string }',
+        comment: 'Raised when a value is selected but not yet committed'
+      },
+      {
+        name: 'select',
+        data: '{ value: string }',
+        comment: 'Raised when a value is selected'
+      }
+    ],
+    methods: [
+      {
+        name: 'scrollToSelectedItem',
+        comment: 'Scrolls to the selected item'
+      }
+    ],
+    anatomy: `<div class="sterling-select">
+  <div class="value">
+    <slot name="value" {disabled} {open} {selectedValue} {variant}>
+      {selectedValue}
+    </slot>
+  </div>
+  <div class="button">
+    <slot name="button" {disabled} {open} {selectedValue} {variant}>
+      <slot name="icon" {disabled} {open} {selectedValue} {variant}>
+        <div class="chevron" />
+      </slot>
+    </slot>
+  </div>
+  <Popover>
+    <div class="sterling-select-popup-content">
+      <List>
+        <!-- Items to display in the dropdown -->
+        <slot {variant} {listVariant} />
+      </List>
+    </div>
+  </Popover>
+</div>`,
+    usage: SelectPlayground
   }
 };
