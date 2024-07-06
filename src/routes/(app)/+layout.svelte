@@ -201,6 +201,7 @@
   :global(code) {
     font-family: 'Source Code Pro', monospace;
     font-weight: bold;
+    color: var(--stsv-common__color);
     background-color: var(--stsv-common__background-color--faint);
   }
 
@@ -212,6 +213,10 @@
     border: 1px solid var(--stsv-common__background-color--secondary);
     padding: 1em;
     text-wrap: wrap;
+  }
+
+  :global(pre code) {
+    background-color: unset;
   }
 
   :global(blockquote) {

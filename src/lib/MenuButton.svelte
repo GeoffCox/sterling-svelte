@@ -17,14 +17,14 @@
   /** When true, the menu is open. */
   export let open = false;
 
+  /** Additional class names to apply to the Menu*/
+  export let menuVariant: string = '';
+
   /** The value uniquely identifying this menu button as the root of the menu hierarchy. */
   export let value: string;
 
   /** Additional class names to apply. */
   export let variant: string = '';
-
-  /** Additional class names to apply to the Menu*/
-  export let menuVariant: string = '';
 
   // ----- State ----- //
 
@@ -179,7 +179,7 @@
   <div class="reference" bind:this={reference} use:clickOutside on:click_outside={onClickOutside}>
     <slot {open} {value} {variant} />
   </div>
-  <Popover {reference} {open}>
+  <Popover {reference} {open} placement="bottom-start">
     <Menu bind:this={menuRef} id={menuId} {reference} {open} variant={menuVariant}>
       <slot name="items" />
     </Menu>
