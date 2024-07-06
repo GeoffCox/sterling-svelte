@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
 
   import HslColorSliders from '$lib/HslColorSliders.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';

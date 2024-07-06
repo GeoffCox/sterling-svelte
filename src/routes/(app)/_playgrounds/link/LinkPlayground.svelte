@@ -1,6 +1,6 @@
 <script lang="ts">
   import SvelteIcon from '../../_shared/icons/SvelteIcon.svelte';
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
 
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';

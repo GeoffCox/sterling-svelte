@@ -2,11 +2,11 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Switch from '$lib/Switch.svelte';
-  import Playground from '../Playground.svelte';
   import ChillIcon from './ChillIcon.svelte';
   import HeatIcon from './HeatIcon.svelte';
   import Label from '$lib/Label.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import Playground from '../Playground.svelte';
 
   let exampleRef: any;
   let checked = false;

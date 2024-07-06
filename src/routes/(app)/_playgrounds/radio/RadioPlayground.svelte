@@ -1,6 +1,6 @@
 <script lang="ts">
   import Radio from '$lib/Radio.svelte';
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';

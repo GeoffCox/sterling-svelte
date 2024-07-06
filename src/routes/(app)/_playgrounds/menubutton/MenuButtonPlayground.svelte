@@ -1,6 +1,6 @@
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
 
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';

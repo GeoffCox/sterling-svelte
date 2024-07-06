@@ -5,7 +5,7 @@
   import LabelBox from '$lib/Label.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
 
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled = false;

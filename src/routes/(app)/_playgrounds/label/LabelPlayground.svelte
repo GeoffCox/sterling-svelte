@@ -1,6 +1,6 @@
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import ListItem from '$lib/ListItem.svelte';

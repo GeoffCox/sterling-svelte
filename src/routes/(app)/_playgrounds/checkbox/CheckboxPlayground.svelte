@@ -2,7 +2,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 

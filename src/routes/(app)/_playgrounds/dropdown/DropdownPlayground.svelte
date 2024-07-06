@@ -1,7 +1,7 @@
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
 
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
 
   import Dropdown from '$lib/Dropdown.svelte';
   import Switch from '$lib/Switch.svelte';

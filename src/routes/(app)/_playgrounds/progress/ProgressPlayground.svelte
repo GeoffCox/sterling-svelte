@@ -5,7 +5,7 @@
   import Progress from '$lib/Progress.svelte';
   import Slider from '$lib/Slider.svelte';
 
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
   import Select from '$lib/Select.svelte';
   import type { ProgressStatus } from '$lib/Progress.types';

@@ -2,7 +2,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Select from '$lib/Select.svelte';
 
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
 
   import { countries } from '../../_shared/sampleData/countries';
   import { random } from 'lodash-es';
@@ -46,6 +46,7 @@
   </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <Checkbox bind:checked={open}>open</Checkbox>
     <Label text="selectedValue">
       <Input bind:value={selectedValue} />
     </Label>

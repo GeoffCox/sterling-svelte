@@ -1,6 +1,5 @@
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
-  import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
 
   import { coffeeTree } from '../../_shared/sampleData/coffeeTree';
@@ -10,6 +9,7 @@
   import Label from '$lib/Label.svelte';
   import Tree from '$lib/Tree.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import Playground from '../Playground.svelte';
 
   let exampleRef: any;
 

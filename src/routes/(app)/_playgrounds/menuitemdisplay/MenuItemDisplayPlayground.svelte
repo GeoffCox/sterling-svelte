@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { MenuItemRole } from '$lib/MenuItem.types';
 
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
 
   import Checkbox from '$lib/Checkbox.svelte';
   import Label from '$lib/Label.svelte';

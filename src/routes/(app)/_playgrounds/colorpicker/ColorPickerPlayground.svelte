@@ -4,7 +4,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import ColorPicker from '$lib/ColorPicker.svelte';
 
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 

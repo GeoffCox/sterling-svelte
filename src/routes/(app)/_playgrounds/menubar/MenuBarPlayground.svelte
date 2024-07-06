@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Playground from '../../components/Playground.svelte';
+  import Playground from '../Playground.svelte';
 
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuBar from '$lib/MenuBar.svelte';
