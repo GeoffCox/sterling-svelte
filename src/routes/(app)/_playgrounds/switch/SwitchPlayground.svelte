@@ -7,12 +7,12 @@
   import Label from '$lib/Label.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
   import Playground from '../Playground.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let exampleRef: any;
   let checked = false;
   let disabled = false;
-  let offText = 'off';
-  let onText = 'on';
+  let offText: string | undefined = undefined;
+  let onText: string | undefined = undefined;
   let customLabels = false;
   let variant = '';
   let vertical = false;
@@ -21,9 +21,19 @@
     const switchEvent = e as any;
     console.log(`change: ${switchEvent.currentTarget?.checked}`);
   };
+
+  $: code = getPlaygroundCode({
+    checked,
+    disabled,
+    offText,
+    onText,
+    customLabels,
+    variant,
+    vertical
+  });
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <div slot="component">
     {#if customLabels}
       <Switch bind:checked {disabled} {variant} {vertical} on:change={onSwitchChange}>
@@ -50,10 +60,8 @@
       />
     {/if}
   </div>
-  <!-- <svelte:fragment slot="status">
-    <div>checked: {checked}</div>
-  </svelte:fragment> -->
   <svelte:fragment slot="props">
+    <Checkbox bind:checked>checked</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="offText">
       <Input bind:value={offText} />

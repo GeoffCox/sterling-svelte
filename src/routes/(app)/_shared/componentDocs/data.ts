@@ -21,6 +21,16 @@ import PopoverPlayground from '../../_playgrounds/popover/PopoverPlayground.svel
 import ProgressPlayground from '../../_playgrounds/progress/ProgressPlayground.svelte';
 import RadioPlayground from '../../_playgrounds/radio/RadioPlayground.svelte';
 import SelectPlayground from '../../_playgrounds/select/SelectPlayground.svelte';
+import SliderPlayground from '../../_playgrounds/slider/SliderPlayground.svelte';
+import SwitchPlayground from '../../_playgrounds/switch/SwitchPlayground.svelte';
+import TabPlayground from '../../_playgrounds/tab/TabPlayground.svelte';
+import TabListPlayground from '../../_playgrounds/tablist/TabListPlayground.svelte';
+import TextAreaPlayground from '../../_playgrounds/textarea/TextAreaPlayground.svelte';
+import TooltipPlayground from '../../_playgrounds/tooltip/TooltipPlayground.svelte';
+import TreePlayground from '../../_playgrounds/tree/TreePlayground.svelte';
+import TreeChevronPlayground from '../../_playgrounds/treechevron/TreeChevronPlayground.svelte';
+import TreeItemPlayground from '../../_playgrounds/treeitem/TreeItemPlayground.svelte';
+import TreeItemDisplayPlayground from '../../_playgrounds/treeitemdisplay/TreeItemDisplayPlayground.svelte';
 
 const commonProps: Record<string, PropDoc> = {
   variant: {
@@ -1060,5 +1070,454 @@ export const componentDocs: Record<string, ComponentDoc> = {
   </Popover>
 </div>`,
     usage: SelectPlayground
+  },
+  slider: {
+    name: 'Slider',
+    description: 'A draggable button on a line to set a value in a range.',
+    comments: [makeExtendsComment('HTMLDivElement')],
+    props: [
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the slider is disabled'
+      },
+      {
+        name: 'max',
+        type: 'number',
+        default: '100',
+        comment: 'The maximum value of the slider'
+      },
+      {
+        name: 'min',
+        type: 'number',
+        default: '0',
+        comment: 'The minimum value of the slider'
+      },
+      {
+        name: 'step',
+        type: 'number',
+        default: '1',
+        comment: 'The amount the value changes by pressing arrow keys'
+      },
+      {
+        name: 'precision',
+        type: 'number | undefined',
+        default: 'undefined',
+        comment: 'The number of decimal places to round the value'
+      },
+      {
+        name: 'value',
+        type: 'number',
+        default: '0',
+        comment: 'The current value of the slider'
+      },
+      commonProps.variant,
+      {
+        name: 'vertical',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the slider is displayed vertically'
+      }
+    ],
+    events: [
+      {
+        name: 'change',
+        data: '{ value: number }',
+        comment: 'Raised when the value of the slider changes'
+      }
+    ],
+    anatomy: `<div class="sterling-slider">
+  <div class="container">
+    <div class="track" />
+    <div class="fill" />
+    <div class="thumb" />
+  <div>
+</div>`,
+    usage: SliderPlayground
+  },
+  switch: {
+    name: 'Switch',
+    description: 'A styled HTML input element with type=checkbox',
+    comments: [makeExtendsComment('HTMLInputElement')],
+    props: [
+      {
+        name: 'offText',
+        type: 'string | undefined',
+        default: 'undefined',
+        comment:
+          'The text appearing by the off position. Not used when the offLabel slot is filled.'
+      },
+      {
+        name: 'onText',
+        type: 'string | undefined',
+        default: 'undefined',
+        comment:
+          'The text appearing near the on position. Not used when the onLabel slot is filled.'
+      },
+      commonProps.variant,
+      {
+        name: 'vertical',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the switch is displayed vertically.'
+      }
+    ],
+    anatomy: `<div class="sterling-switch">
+   <!-- hidden input -->
+  <input />
+  <div class="off-label">
+    <slot name="offLabel" {checked} {disabled} {inputId} {offText} {variant} {vertical} />
+  </div>
+  <div class="switch">
+    <div class="thumb" />
+  </div>
+  <div class="on-label">
+    <slot name="onLabel" {checked} {disabled} {inputId} {onText} {variant} {vertical}>
+  </div>
+</div>`,
+    usage: SwitchPlayground
+  },
+  tab: {
+    name: 'Tab',
+    description: 'A button that switches the content displayed in a TabList',
+    comments: [
+      'When the parent TabList is disabled, the Tab is also disabled.',
+      makeExtendsComment('HTMLButtonElement')
+    ],
+    props: [
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the tab is disabled'
+      },
+      {
+        name: 'selected',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the tab is selected'
+      },
+      {
+        name: 'text',
+        type: 'string | undefined',
+        default: 'undefined',
+        comment: 'The text of the tab; not used when the default slot is filled'
+      },
+      {
+        name: 'value',
+        type: 'string',
+        comment: 'The value uniquely identifying this tab within the tab list'
+      },
+      commonProps.variant
+    ],
+    anatomy: `<button class="sterling-tab">
+  <slot {disabled} {selected} {text} {value} {variant}>
+    <div class="text">{text || value}</div>
+  </slot>
+  <div class="indicator" />
+</button>`,
+    usage: TabPlayground
+  },
+  tablist: {
+    name: 'TabList',
+    description: 'A list of tabs where selecting a tab can switch the content displayed',
+    comments: [makeExtendsComment('HTMLDivElement')],
+    props: [
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the tab list and its tabs are disabled'
+      },
+      {
+        name: 'selectedValue',
+        type: 'string | undefined',
+        default: 'undefined',
+        comment: 'The value of the currently selected tab'
+      },
+      {
+        name: 'vertical',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the tab list is displayed vertically'
+      },
+      commonProps.variant
+    ],
+    events: [
+      {
+        name: 'select',
+        comment: 'Raised when a tab is selected',
+        data: 'value'
+      }
+    ],
+    methods: [
+      {
+        name: 'selectFirstTab',
+        comment: 'Selects the first tab.'
+      },
+      {
+        name: 'selectPreviousTab',
+        comment: 'Selects the previous tab.'
+      },
+      {
+        name: 'selectNextTab',
+        comment: 'Selects the next tab.'
+      },
+      {
+        name: 'selectLastTab',
+        comment: 'Selects the last tab.'
+      }
+    ],
+    anatomy: `<div class="sterling-tab-list">
+  <!-- children -->
+  <slot {disabled} {selectedValue} {variant} {vertical} />
+</div>`,
+    usage: TabListPlayground
+  },
+  textarea: {
+    name: 'Textarea',
+    description: 'A styled HTML textarea element',
+    comments: [makeExtendsComment('HTMLTextAreaElement')],
+    props: [
+      {
+        name: 'autoHeight',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the text area will resize itself vertically to fit text.'
+      },
+      {
+        name: 'resize',
+        type: 'TextAreaResize',
+        default: "'none'",
+        comment: 'Sets the resize handle direction.'
+      },
+      commonProps.variant
+    ],
+    anatomy: `<div class="sterling-text-area">
+  <textarea />
+</div>`,
+    usage: TextAreaPlayground
+  },
+  tooltip: {
+    name: 'Tooltip',
+    description: 'A Callout that display after the mouse hovers over the reference element',
+    comments: [
+      'The tooltip is anchored to a sibling element that appears directly after the default slot content.',
+      makeExtendsComment('Callout')
+    ],
+    props: [
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the tooltip is disabled and will not be shown.'
+      },
+      {
+        name: 'hoverDelayMilliseconds',
+        type: 'number',
+        default: '1000',
+        comment: 'The duration of mouse hover before showing the tooltip.'
+      }
+    ],
+    anatomy: `<slot {disabled} {hoverDelayMilliseconds} {open} {variant} />
+<!-- hidden anchor point -->
+<div class="sterling-tooltip-origin" />
+<Callout>
+  <slot name="tip" {placement} {variant} />
+</Callout>`,
+    usage: TooltipPlayground
+  },
+  tree: {
+    name: 'Tree',
+    description:
+      'A hierarchy of items that can be expanded or collapsed. A single item can be selected.',
+    comments: [makeExtendsComment('HTMLDivElement')],
+    props: [
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the tree and its descendants are disabled.'
+      },
+      {
+        name: 'selectedValue',
+        type: 'string | undefined',
+        default: 'undefined',
+        comment: 'The value of the currently selected item.'
+      },
+      {
+        name: 'expandedValues',
+        type: 'string[]',
+        default: '[]',
+        comment: 'The values of items that are expanded.'
+      },
+      commonProps.variant
+    ],
+    events: [
+      {
+        name: 'expandCollapse',
+        comment: 'Raised when an item is expanded or collapsed',
+        data: '{ expandedValues: string[] }'
+      },
+      {
+        name: 'select',
+        comment: 'Raised when an item is selected',
+        data: '{ selectedValue: string }'
+      }
+    ],
+    anatomy: `<div class="sterling-tree">
+  <!-- children -->
+  <slot {disabled} {expandedValues} {selectedValue} {variant} />
+</div>`,
+    usage: TreePlayground
+  },
+  treechevron: {
+    name: 'TreeChevron',
+    description: 'A chevron that indicates the expand/collapse state of a TreeItem',
+    comments: [
+      'Provides selection, expand/collapse, and interaction within a Tree',
+      makeExtendsComment('HTMLDivElement')
+    ],
+    props: [
+      {
+        name: 'expanded',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the chevron indicates the item is expanded.'
+      },
+      {
+        name: 'hasChildren',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When false, the chevron indicates the item is a leaf.'
+      },
+      commonProps.variant
+    ],
+    anatomy: `<div class="sterling-tree-chevron"/>`,
+    usage: TreeChevronPlayground
+  },
+  treeitem: {
+    name: 'TreeItem',
+    description: 'An item within a Tree hierarchy',
+    comments: [
+      'By default, renders a TreeItemDisplay',
+      'A tree item is identified by having data-value and role="treeitem" properties',
+      makeExtendsComment('HTMLDivElement')
+    ],
+    props: [
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the item is disabled.'
+      },
+      {
+        name: 'text',
+        type: 'string | undefined',
+        default: 'undefined',
+        comment: 'The text for the item. Not used when either the item or label slots are filled.'
+      },
+      {
+        name: 'value',
+        type: 'string',
+        default: 'undefined', // Since `value` does not have a default in the code, it's technically required. Marking as "undefined" for consistency in structure.
+        comment: 'The value uniquely identifying this item within the tree.'
+      },
+      commonProps.variant
+    ],
+    methods: [
+      {
+        name: 'collapse',
+        comment: 'Collapses the current item.'
+      },
+      {
+        name: 'expand',
+        comment: 'Expands the current item.'
+      },
+      {
+        name: 'select',
+        comment: 'Selects the current item.'
+      },
+      {
+        name: 'selectParent',
+        comment: 'Selects the parent of the current item.'
+      },
+      {
+        name: 'selectPrevious',
+        comment: 'Selects the previous item relative to the current item.'
+      },
+      {
+        name: 'selectNext',
+        comment: 'Selects the next item relative to the current item.'
+      },
+      {
+        name: 'toggleExpanded',
+        comment: 'Toggles the expanded state of the current item.'
+      }
+    ],
+    anatomy: `<div class="sterling-tree-item">
+  <div class="item">
+    <slot name="item" {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant}>
+      <TreeItemDisplay>
+        <slot name="label" {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant}
+          >{text || value}
+        </slot>
+      </TreeItemDisplay>
+    </slot>
+  </div>
+  <div class="children">
+    <slot {depth} {disabled} {selected} {value} {variant} />
+  </div>
+</div>`,
+    usage: TreeItemPlayground
+  },
+  treeitemdisplay: {
+    name: 'TreeItemDisplay',
+    description: 'The default content for a TreeItem in a Tree',
+    comments: [makeExtendsComment('HTMLDivElement')],
+    props: [
+      {
+        name: 'depth',
+        type: 'number',
+        default: '0',
+        comment: 'The depth of the item in the tree.'
+      },
+      {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the item is disabled.'
+      },
+      {
+        name: 'expanded',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the item is expanded.'
+      },
+      {
+        name: 'hasChildren',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the item has children.'
+      },
+      {
+        name: 'selected',
+        type: 'boolean',
+        default: 'false',
+        comment: 'When true, the item is selected.'
+      },
+      {
+        name: 'value',
+        type: 'string',
+        comment: 'The value uniquely identifying this item within the tree.'
+      },
+      commonProps.variant
+    ],
+    anatomy: `<div class="sterling-tree-item-display">
+  <TreeChevron {expanded} {hasChildren} {variant} />
+  <slot {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant} />
+</div>`,
+    usage: TreeItemDisplayPlayground
   }
 };

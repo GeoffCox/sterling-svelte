@@ -9,8 +9,7 @@
   import Label from '$lib/Label.svelte';
   import { TEXT_AREA_RESIZES } from '$lib';
   import VariantInput from '../../_shared/VariantInput.svelte';
-
-  let exampleRef: any;
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled = false;
   let placeholder = '';
@@ -19,9 +18,11 @@
   let variant = '';
 
   let resize: TextAreaResize = 'none';
+
+  $: code = getPlaygroundCode({ autoHeight, disabled, placeholder, resize, variant });
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <svelte:fragment slot="component">
     <TextArea
       bind:value
@@ -49,7 +50,4 @@
     </Label>
     <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
   </svelte:fragment>
-  <!-- <svelte:fragment slot="status">
-    <div class="value">value: {value}</div>
-  </svelte:fragment> -->
 </Playground>

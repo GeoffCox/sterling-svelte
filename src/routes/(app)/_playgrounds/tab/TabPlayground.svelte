@@ -10,12 +10,11 @@
   import Tab from '$lib/Tab.svelte';
   import Label from '$lib/Label.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   // ----- Context ----- //
 
-  let exampleRef: any;
-
-  const value = 'example-tab';
+  let value = 'tab-1';
   let text = 'sterling-svelte';
   let disabled = false;
   let selected = false;
@@ -41,9 +40,18 @@
   });
 
   $: verticalStore.set(vertical);
+
+  $: code = getPlaygroundCode({
+    disabled,
+    selected,
+    text,
+    value,
+    variant,
+    vertical
+  });
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <svelte:fragment slot="component">
     <Tab {disabled} {text} {value} {variant} />
   </svelte:fragment>>
@@ -52,6 +60,9 @@
     <Checkbox bind:checked={selected}>selected</Checkbox>
     <Label text="text">
       <Input bind:value={text} />
+    </Label>
+    <Label text="value">
+      <Input bind:value />
     </Label>
     <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>

@@ -6,16 +6,17 @@
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
-
-  let exampleRef: any;
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled = false;
   let selectedValue: string | undefined;
   let variant = '';
   let vertical = false;
+
+  $: code = getPlaygroundCode({ disabled, variant, vertical });
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <svelte:fragment slot="component">
     <TabList
       bind:selectedValue

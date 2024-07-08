@@ -10,6 +10,7 @@
   import type { PopoverPlacement } from '$lib/Popover.types';
   import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
   import VariantInput from '../../_shared/VariantInput.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let crossAxisOffset = 0;
   let disabled = false;
@@ -17,11 +18,22 @@
   let mainAxisOffset = 0;
   let open = true;
   let placement: PopoverPlacement = 'top-start';
-  let tipText = 'sterling-svelte';
+  let text = 'sterling-svelte';
   let variant = '';
+
+  $: code = getPlaygroundCode({
+    crossAxisOffset,
+    disabled,
+    hoverDelayMilliseconds,
+    mainAxisOffset,
+    open,
+    placement,
+    text,
+    variant
+  });
 </script>
 
-<Playground>
+<Playground {code}>
   <div slot="component">
     <Tooltip
       {crossAxisOffset}
@@ -32,8 +44,8 @@
       {placement}
       {variant}
     >
-      <div class="reference">Hover over me</div>
-      <div class="tip-text" slot="tip">{tipText}</div>
+      <div class="reference">The reference anchor for positioning the Tooltip.</div>
+      <div class="tip-text" slot="tip">{text}</div>
     </Tooltip>
   </div>
   <svelte:fragment slot="props">
@@ -60,7 +72,7 @@
       </Select>
     </Label>
     <Label text="tip (Callout)">
-      <Input bind:value={tipText} />
+      <Input bind:value={text} />
     </Label>
     <VariantInput labelText="variant (Callout)" bind:variant availableVariants={['colorful']} />
   </svelte:fragment>

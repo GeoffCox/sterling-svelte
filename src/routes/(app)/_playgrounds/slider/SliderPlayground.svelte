@@ -7,16 +7,14 @@
   import Playground from '../Playground.svelte';
   import Label from '$lib/Label.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
-
-  let exampleRef: any;
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let value = 0;
   let disabled = false;
-  let label = 'SLIDER';
   let min = 0;
   let max = 100;
-  let step: number | undefined = undefined;
-  let precision: number = 0;
+  let step: number = 1;
+  let precision: number | undefined = undefined;
   let variant = '';
   let vertical = false;
 
@@ -51,7 +49,7 @@
       const parsedValue = Number.parseFloat(target.value);
       step = isNaN(parsedValue) ? 0 : parsedValue;
     } else {
-      step = undefined;
+      step = 1;
     }
   };
 
@@ -68,35 +66,42 @@
   const onPrecisionChange = (e: Event): any => {
     _onPrecisionChange(e as FormEvent<Event, HTMLInputElement>);
   };
+
+  const _onValueChange: FormEventHandler<HTMLInputElement> = (e: Event): any => {
+    const target = e.target as HTMLInputElement;
+    const parsedValue = Number.parseFloat(target.value);
+    value = isNaN(parsedValue) ? 0 : parsedValue;
+  };
+
+  const onValueChange = (e: Event): any => {
+    _onValueChange(e as FormEvent<Event, HTMLInputElement>);
+  };
+
+  $: code = getPlaygroundCode({
+    disabled,
+    min,
+    max,
+    precision,
+    step,
+    value,
+    variant,
+    vertical
+  });
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <div slot="component" class="component" class:vertical>
-    {#if label.length > 0}
-      <Slider
-        {disabled}
-        bind:max
-        bind:min
-        bind:precision
-        bind:step
-        bind:value
-        {variant}
-        bind:vertical
-        on:change={(e) => console.log(`change value:${e.detail.value}`)}
-      />
-    {:else}
-      <Slider
-        {disabled}
-        bind:max
-        bind:min
-        bind:precision
-        bind:step
-        bind:value
-        {variant}
-        bind:vertical
-        on:change={(e) => console.log(`change value:${e.detail.value}`)}
-      />
-    {/if}
+    <Slider
+      {disabled}
+      bind:max
+      bind:min
+      bind:precision
+      bind:step
+      bind:value
+      {variant}
+      bind:vertical
+      on:change={(e) => console.log(`change value:${e.detail.value}`)}
+    />
   </div>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
@@ -107,10 +112,13 @@
       <Input value={max.toString()} on:change={onMaxChange} />
     </Label>
     <Label text="precision">
-      <Input value={precision.toString()} on:change={onPrecisionChange} />
+      <Input value={precision ? precision.toString() : ''} on:change={onPrecisionChange} />
     </Label>
     <Label text="step">
       <Input value={step?.toString()} on:change={onStepChange} />
+    </Label>
+    <Label text="value">
+      <Input value={value.toString()} on:change={onValueChange} />
     </Label>
     <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>

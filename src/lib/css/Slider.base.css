@@ -4,7 +4,10 @@
   padding: 0;
   overflow: visible;
   display: grid;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
 }
 
 .sterling-slider.horizontal {
@@ -44,7 +47,10 @@
 .sterling-slider .track {
   position: absolute;
   background: var(--stsv-common__background-color--secondary);
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
 }
 
 .sterling-slider.horizontal .track {
@@ -75,7 +81,10 @@
 .sterling-slider .fill {
   background: var(--stsv-common__color);
   position: absolute;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
 }
 
 .sterling-slider.horizontal .fill {
@@ -107,9 +116,11 @@
   height: 1.5em;
   overflow: hidden;
   padding: 0;
-  position: relative;
   text-decoration: none;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
   white-space: nowrap;
   position: absolute;
   width: 1.5em;
@@ -141,7 +152,6 @@
 
 .sterling-slider.disabled .thumb {
   cursor: not-allowed;
-  position: relative;
   outline: none;
 }
 

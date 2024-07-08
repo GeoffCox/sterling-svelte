@@ -10,8 +10,7 @@
   import Tree from '$lib/Tree.svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
   import Playground from '../Playground.svelte';
-
-  let exampleRef: any;
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled = false;
   let expandedValues: string[] = [];
@@ -26,9 +25,14 @@
   const setExpandedValues = () => {
     expandedValues = expandedValuesText.split(',').filter(Boolean);
   };
+
+  $: code = getPlaygroundCode({
+    disabled,
+    variant
+  });
 </script>
 
-<Playground bind:this={exampleRef}>
+<Playground {code}>
   <div class="component" slot="component">
     <Tree
       bind:selectedValue
@@ -49,20 +53,14 @@
       <Input bind:value={expandedValuesText} />
     </Label>
     <div class="edit-toggled">
-      <Button shape="circular" on:click={getExpandedValues}>Get</Button>
-      <Button shape="circular" on:click={setExpandedValues}>Set</Button>
+      <Button on:click={getExpandedValues}>Get</Button>
+      <Button on:click={setExpandedValues}>Set</Button>
     </div>
     <Label text="selectedValue">
       <Input bind:value={selectedValue} />
     </Label>
     <VariantInput bind:variant availableVariants={['composed']} />
   </svelte:fragment>
-  <!-- <svelte:fragment slot="status">
-    <div>selectedValue: {selectedValue}</div>
-    <div class="toggled-status">
-      expandedValues: {expandedValues.join(',')}
-    </div>
-  </svelte:fragment> -->
 </Playground>
 
 <style>
