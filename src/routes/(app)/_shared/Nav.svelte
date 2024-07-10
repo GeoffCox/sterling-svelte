@@ -18,28 +18,20 @@
       name: 'GETTING STARTED',
       items: [
         {
-          name: 'Overview',
+          name: 'Introduction',
           url: '/'
-        },
-        {
-          name: 'Getting Started',
-          url: '/topics/start'
-        },
-        {
-          name: 'Roadmap',
-          url: '/topics/roadmap'
-        },
-        {
-          name: 'Change Log',
-          url: '/topics/changelog'
         },
         {
           name: 'Architecture',
           url: '/topics/architecture'
         },
         {
-          name: 'Theme',
+          name: 'Sterling Theme',
           url: '/topics/theme'
+        },
+        {
+          name: 'Change Log',
+          url: '/topics/changelog'
         }
       ]
     },
@@ -82,20 +74,10 @@
       ]
     },
     {
-      name: 'ACTIONS',
+      name: 'INFRASTRUCTURE',
       items: [
-        { name: 'clickOutside', url: '/topics/actions' },
-        { name: 'forwardEvents', url: '/topics/actions' },
-        { name: 'portal', url: '/topics/actions' },
-        { name: 'trapKeyboardFocus', url: '/topics/actions' }
-      ]
-    },
-    {
-      name: 'MEDIA QUERIES',
-      items: [
-        { name: 'prefersColorSchemeDark', url: '/topics/mediaqueries' },
-        { name: 'prefersReducedMotion', url: '/topics/mediaqueries' },
-        { name: 'usingKeyboard', url: '/topics/mediaqueries' }
+        { name: 'Actions', url: '/topics/actions' },
+        { name: 'Media Queries', url: '/topics/mediaqueries' }
       ]
     }
   ];
@@ -132,7 +114,7 @@
     align-items: flex-start;
     padding-left: 0.5em;
     padding-top: 0.5em;
-    font-size: 0.8em;
+    font-size: 0.9em;
   }
 
   .section :global(a) {

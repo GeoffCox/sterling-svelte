@@ -5,47 +5,50 @@
 
 # Sterling Theme (Opt-In)
 
-While sterling-svelte components do not apply any default style, a set of CSS styles is provided for you use if you like.
+While sterling-svelte components do not apply any default style, a set of CSS styles defined is provided for you use if you like.
 
 You can choose to import all the component styles or pick the individual component styles.
 Your Svelte application build will optimize and bundle the CSS.
 
-```ts
+```
 import 'sterling.css' from '@sterling-svelte/css/sterling.css'
 ```
 
-## Component class names
+## Class Properties
 
 Components render HTML structure and class names to support styling and themes.
 They can be considered an API contract for the CSS styles. Any changes are considered breaking changes.
 
 - Each component's root element has a `stering-<component>` class name. For example, `Button` has `sterling-button`.
 - Components use the natural state pseudo-selectors whenever they exist for the HTML element being rendered. For example, `Button` styles use `:hover`, `:active`, and `:disabled` selectors.
-- When components have state that isn't represented by built-in pseudo-selectors, they apply class names (e.g. `'checked`, `.open`, `.disabled`, `.vertical`).
+- When components have state that isn't represented by built-in pseudo-selectors, they apply class names (e.g. `'.checked`, `.open`, `.disabled`, `.vertical`).
 - Components also apply class names to help identify child elements (e.g. `.item`, `.container`, `.fill`, `.thumb`).
 
-## CSS variables for light & dark mode
-
-The sterling theme supports light and dark mode.
+## CSS variables
 
 - The sterling theme uses css variables starting with `--stsv-` to switch modes.
-- There are fewer than 100 CSS variables defined to handle common, button, input, and status colors. This also includes a set of variables defined to handle colorful variants.
-- The `applyLightDarkMode` action applies `.light-mode` or `.dark-mode` and the theme defines a set of CSS variables.
+- Each CSS variable follows the [Block**Element**Modifier (BEM)](https://getbem.com/introduction/) naming convention. For example, `--stsv-button__background-color`, `--stsv-button__border-color`, and `-stsv-button__color`.
+- There are fewer than 100 CSS variables defined to handle common, button, input, and status colors.
 
-For example, `--stsv-button__background-color`, `--stsv-button__border-color`, and `-stsv-button__color` are defined for the `Button` style's default state. When light/dark mode changes, the variables are updated to show the theme without re-rendering the button.
+## Light and Dark Mode
 
-## Variant styles
+The sterling theme supports light and dark mode by changing CSS variable values.
 
-Each component has a `variant` string property. This string is merged after the component's class name on the component's root element.
+- The `applyLightDarkMode` action applies `.light-mode` or `.dark-mode` class name and the theme will apply styles based on selecting these. This action can automatically switch modes based on the browser and user preferences.
+- When light/dark mode changes, the variables are updated to show the theme without re-rendering the button.
 
-This allows callers to vary the style of any component.
-The sterling theme comes with some variants.
-Multiple variants can be applied.
+## Variants
+
+Each component has a `variant` string property. The variant value appended to the component's root element class property. This allows callers to vary the style.
+
+You can apply multiple variants. For example `Button` can have `circular` and `tool` applied. The variants are listed in each component's documentation.
+
+The sterling theme contains variants for many components.
 
 | Components | variant     | effect                                                                    |
 | ---------- | ----------- | ------------------------------------------------------------------------- |
-| (most \*)  | colorful    | applies colorful accent colors                                            |
-| (some \*)  | composed    | hides focus and disabled styles so a container can compose this component |
+| (multiple) | colorful    | applies colorful accent colors                                            |
+| (multiple) | composed    | hides focus and disabled styles so a container can compose this component |
 | Button     | capsule     | shows a border with rounded ends                                          |
 | Button     | circular    | shows a circular border with a 1:1 aspect ratio                           |
 | Button     | secondary   | hides the background until hovered over                                   |
@@ -55,18 +58,11 @@ Multiple variants can be applied.
 | Link       | ghost       | removes the underline until hovered over                                  |
 | Link       | undecorated | removes the underline entirely                                            |
 
-\* colorful is supported by Button, Callout, Checkbox, Dropdown, Input, Label, Link, Radio, Slider, Switch, Tab, and TextArea.
+## Custom Theming
 
-\* composed is supported by Dropdown, Input, List, Select, Slider, and Tree.
+You can define CSS in your application using any CSS framework you like (e.g. LESS, SASS, Tailwind, Bootstrap). Then you can include it after the sterling theme, or replace the sterling theme.
 
-# Custom styles and themes
-
-You can define CSS in your application using any CSS framework you like (e.g. LESS, SASS, Tailwind, Bootstrap).
-
-1. Inspect the CSS files in sterling-svelte to the class names you should use in your selectors.
-2. Inspect the HTML of the component either through the source code or inspecting the component in the browser.
-3. Author your own CSS and include it after the Sterling Theme CSS.
-4. Once it is how you like it, you can remove the Sterling Theme CSS.
+To figure out what selectors to put in your CSS, you can look at the component source, inspect the component's HTML, or use the sterling theme CSS as an example.
 
 For example, the base Button styles [here](https://github.com/GeoffCox/sterling-svelte/blob/main/src/lib/css/Button.base.css) demonstrate setting the default and state styles.
 
@@ -78,9 +74,9 @@ For example, the base Button styles [here](https://github.com/GeoffCox/sterling-
 
 The `.sterling-button:disabled::after` style shows the disabled diagnonal stripe (i.e. no step) pattern over the button.
 
-# Sterling Theme CSS Vars
+## Theme Values
 
-## Common
+### Common
 
 The common variables are used for body text and containers (e.g. lists, trees).
 
@@ -137,7 +133,7 @@ color="--stsv-common__color--faint"
 />
 <br/>
 
-## Button
+### Button
 
 These are used for clickable buttons that take action.
 
@@ -175,7 +171,7 @@ color="--stsv-button__color--active"
 />
 <br/>
 
-## Input
+### Input
 
 These are used with interactive form controls (e.g. checkbox, text input, radio)
 
@@ -211,7 +207,7 @@ borderColor="--stsv-input__border-color--selected"
 color="--stsv-input__color--selected"
 />
 
-## Status Colors
+### Status Colors
 
 Several colors are used to create an association with a status.
 
@@ -240,11 +236,11 @@ color="--stsv-status--danger__color"
 />
 <br/>
 
-# Sterling Theme Colorful CSS Vars
+## Sterling Theme Colorful CSS Vars
 
 Many components support a `colorful` variant to apply accent colors.
 
-## Common
+### Common
 
 <Swatch 
 backgroundColor="--stsv-common--colorful__background-color" 
@@ -270,7 +266,7 @@ backgroundColor="--stsv-common--colorful__background-color--faint"
 color="--stsv-common--colorful__color--faint"
 />
 
-## Button
+### Button
 
 <Swatch 
 backgroundColor="--stsv-button--colorful__background-color" 
@@ -305,7 +301,7 @@ borderColor="--stsv-button--colorful__border-color--active"
 color="--stsv-button--colorful__color--active"
 />
 
-## Input
+### Input
 
 <Swatch 
 backgroundColor="--stsv-input--colorful__background-color" 

@@ -1,12 +1,10 @@
 # Architecture
 
-## Styleless by default
+## Headless by default
 
 Svelte allows for encapsulating style within a component and preventing component style from leaking outside the components scope. This is a great feature when building Svelte applications. However, a good component library must support deep style customization.
 
-Component library styles need to be globally overridable and support per-instance customization. For example, you might want to make most buttons be a relaxing blue, but have a delete button glow red and have a shimmering border.
-
-For these reasons, sterling-svelte components do not apply any style by default.
+Component library styles need to be globally overridable and support per-instance customization. For example, you might want to make most buttons be a relaxing blue, but have a delete button glow red and have a shimmering border. For these reasons, sterling-svelte components do not apply any style by default.
 
 A separate set of `sterling` CSS styles is provided. See the Sterling Theme topic for details.
 
@@ -24,49 +22,7 @@ If you specified `type=submit` this would override the Button components default
 
 Components will bubble the intrinsic events for the HTML element it renders.
 
-Taking Button as an example again, it will bubble events from `<button/>` such as click, focus and blur, keydown and keyup, and others. This means you can subscribe to these HTMLButtonElement events just like you would for `<button />`;
-
-### Event categories
-
-HTML events are loosely grouped into categories here for easier mapping to events.
-
-| Event Category | Events                                                                                                  |
-| -------------- | ------------------------------------------------------------------------------------------------------- |
-| change (text)  | beforeinput, change, input, invalid, reset                                                              |
-| change (value) | change, input                                                                                           |
-| click          | click, dblclick                                                                                         |
-| clipboard      | copy, cut, paste                                                                                        |
-| dialog         | cancel, close                                                                                           |
-| drag           | drag, dragend, dragenter, dragleave, dragover, dragstart, drop                                          |
-| focus          | blur, focus, focusin, focusout                                                                          |
-| forms          | formdata, reset, submit                                                                                 |
-| keystrokes     | keydown, keypress, keyup                                                                                |
-| mouse          | mousedown, mouseenter, mouseleave, mousemove, mouseover, mouseout, mouseup, wheel                       |
-| pointer        | gotpointercapture, lostpointercapture                                                                   |
-| pointer (cont) | pointercancel, pointerdown, pointerenter, pointerleave, pointermove, pointerover, pointerout, pointerup |
-| scroll         | scroll                                                                                                  |
-| selection      | select                                                                                                  |
-| touch          | touchcancel, touchend, touchmove, touchstart                                                            |
-
-### Event Category -> Elements
-
-Here's a list of events you can expect will be bubbled for types of elements.
-
-| Event Category | Elements                                  |
-| -------------- | ----------------------------------------- |
-| change (text)  | input type='text', textarea               |
-| change (value) | input type='checkbox', input type='radio' |
-| click          | (all)                                     |
-| clipboard      | div, input type='text', textarea          |
-| dialog         | dialog                                    |
-| drag           | (all)                                     |
-| focus          | (all)                                     |
-| keystrokes     | (all)                                     |
-| mouse          | (all)                                     |
-| pointer        | (all)                                     |
-| scroll         | (all)                                     |
-| selection      | input type='text', textarea               |
-| touch          | (all)                                     |
+Taking Button as an example again, it will bubble events from `<button/>` such as click, focus and blur, keydown and keyup, and others. This means you can subscribe to these HTMLButtonElement events just like you would for `<button />`; |
 
 ## Prefers intrinsic HTML elements
 

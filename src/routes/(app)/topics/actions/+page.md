@@ -6,7 +6,7 @@ These actions were built to support components and are available to you in your 
 
 Raises an event anytime the user clicks outside the bounds of the element.
 
-```svelte
+```
 <script lang="ts">
   import { clickOutside, type ClickOutsideEvent } from '@geoffcox/sterling-svelte';
 
@@ -25,7 +25,7 @@ Raises an event anytime the user clicks outside the bounds of the element.
 Forwards native and svelte component events from one component to another.
 Useful when you need to make an event appear to bubble up and components are not in the same DOM hierarchy.
 
-```svelte
+```
 <script lang="ts">
   import { forwardEvents } from '@geoffcox/sterling-svelte';
 
@@ -45,7 +45,7 @@ Useful when you need to make an event appear to bubble up and components are not
 Makes the element a child of the target element.
 Useful in scenarios like menus when you want to move an element outside of its parent so it can float above it.
 
-```svelte
+```
 <script lang="ts">
   import { portal } from '@geoffcox/sterling-svelte';
 </script>
@@ -59,7 +59,7 @@ Useful in scenarios like menus when you want to move an element outside of its p
 
 Keeps the keyboard focus within the children of an element by handling 'Tab' keyboard events.
 
-```svelte
+```
 <script lang="ts">
   import { trapKeyboardFocus } from '@geoffcox/sterling-svelte';
 </script>

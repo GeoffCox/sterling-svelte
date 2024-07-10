@@ -1,5 +1,6 @@
-import type { ComponentDoc, MemberDoc, PropDoc } from './types';
-import ButtonPlayground from '../../_playgrounds/button/ButtonPlayground.svelte';
+import type { ComponentDoc } from './types';
+import { makeExtendsComment, commonProps } from './commonDoc';
+
 import CalloutPlayground from '../../_playgrounds/callout/CalloutPlayground.svelte';
 import CheckboxPlayground from '../../_playgrounds/checkbox/CheckboxPlayground.svelte';
 import ColorPickerPlayground from '../../_playgrounds/colorpicker/ColorPickerPlayground.svelte';
@@ -31,34 +32,10 @@ import TreePlayground from '../../_playgrounds/tree/TreePlayground.svelte';
 import TreeChevronPlayground from '../../_playgrounds/treechevron/TreeChevronPlayground.svelte';
 import TreeItemPlayground from '../../_playgrounds/treeitem/TreeItemPlayground.svelte';
 import TreeItemDisplayPlayground from '../../_playgrounds/treeitemdisplay/TreeItemDisplayPlayground.svelte';
-
-const commonProps: Record<string, PropDoc> = {
-  variant: {
-    name: 'variant',
-    type: 'string',
-    default: "''",
-    comment: 'Additional class names to apply'
-  }
-};
-
-const makeExtendsComment = (type: string) => {
-  return `Includes ${type} props, event, and methods`;
-};
+import { buttonDoc } from './buttonDoc';
 
 export const componentDocs: Record<string, ComponentDoc> = {
-  button: {
-    name: 'Button',
-    description: 'A styled HTML button',
-    comments: [
-      "The default type is 'button' rather than 'submit'",
-      makeExtendsComment('HTMLButtonElement')
-    ],
-    props: [commonProps.variant],
-    usage: ButtonPlayground,
-    anatomy: `<button class="sterling-button">
-  <slot {disabled} {variant} />
-</button>`
-  },
+  button: buttonDoc,
   callout: {
     name: 'Callout',
     description: 'A floating box of content with an arrow pointing at the reference element',
