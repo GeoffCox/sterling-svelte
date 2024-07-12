@@ -2,60 +2,61 @@
 
 ## 1.0.11
 
-- Fix input showing disabled state when composed. Updated CSS.
-- Fix default placement for Callout, Popover, and Tooltip is 'bottom-start'. Updated to 'top-start'.
-- Fix ColorPicker did not pass variant to Dropdown. Added variant parameter.
-- Fix MenuItemDisplay disabled style covered entire page. Added position:relative to base class.
+- Bug: Input showed disabled state when composed. Fix: Updated CSS.
+- Bug: Default placement for Callout, Popover, and Tooltip was 'bottom-start'. Fix: Updated to 'top-start'.
+- Bug: MenuButton callers had no control of Popover placement. Fix: Added popoverPlacement to MenuButton to forward to Popover.
+- Bug: ColorPicker did not pass variant to Dropdown. Fix: Added variant parameter.
+- Bug: MenuItemDisplay disabled style covered entire page. Fix: Added position:relative to base class.
 
 ## 1.0.10
 
-- Fix packaging exports. Svelte file pattern added to exports.
+- Bug: Packaging exports missing. Fix: Svelte file pattern added to exports.
 
 ## 1.0.9
 
-- Fix packaging exports. CSS file pattern added to exports.
+- Bug: Packaging exports missing. Fix: CSS file pattern added to exports.
 
 ## 1.0.8
 
-- Fix packaging. Updates to svelte versions and tsconfig caused creation of a dist folder starting with 1.0.6. This caused problems including the default CSS. Added outdir to fix the issue.
+- Bug: Packaging broken with new Svelte updates. Updates to svelte versions and tsconfig caused creation of a dist folder starting with 1.0.6. This caused problems including the default CSS. Fix: Added outdir to fix the issue.
 
 ## 1.0.7
 
-- Fix: Callout, Popover, and Menu height set to fit-content causes stretch behavior in Safari. Changed to auto.
-- Fix: Dialog did not allow Popover and Callout to appear above. Updated portaling to support dialog as portal host through context.
+- Bug: Callout, Popover, and Menu height set to fit-content causes stretch behavior in Safari. Fix: Changed to auto.
+- Bug: Dialog did not allow Popover and Callout to appear above. Fix: Updated portaling to support dialog as portal host through context.
 
 ## 1.0.6
 
-- Fix: Vertical Tab justification defaulted to flex-end and should be flex-start.
-- Fix: List home/end keys weren't working because of introduction of intermediate container element to properly scroll. Updated query selectors for first and last list items.
-- Fix: List arrow keys weren't working when selectedValue set to empty string. Updated conditionals in key handler.
-- Fix: Dialog footer justified footer content as flex-end in default styles which is too opinionated. Removed flex styling from footer.
-- Fix: Label text had unnecessary padding. Removed the padding.
+- Bug: Vertical Tab justification defaulted to flex-end and should be flex-start. Fix: default changed to flex-start.
+- Bug: List home/end keys weren't working because of introduction of intermediate container element to properly scroll. Fix: Updated query selectors for first and last list items.
+- Bug: List arrow keys weren't working when selectedValue set to empty string. Fix: Updated conditionals in key handler.
+- Bug: Dialog footer justified footer content as flex-end in default styles which is too opinionated. Fix: Removed flex styling from footer.
+- Bug: Label text had unnecessary padding. Fix: Removed the padding.
 
 ## 1.0.5
 
-- Fix: Radio and Switch top-level dismissing checked class. Prevented styling above the input.
-- Fix: Checkbox, Input,Radio, and Switch top-level divs need using-keyboard class. This allows for focus-within applied like focus-visible when the intrinsic input is focused.
-- Fix: Removed Tab content text aligment in vertical layout. No longer needed.
+- Bug: Radio and Switch top-level dismissing checked class. Fix: Prevented styling above the input.
+- Bug: Checkbox, Input,Radio, and Switch top-level divs need using-keyboard class. This allows for focus-within applied like focus-visible when the intrinsic input is focused. Fix: Added using-keybord
+- Bug: Tab content text aligment in vertical layout should not be set. Fix: Removed
 
 ## 1.0.4
 
-- Fix: Checkbox top-level div missing checked class. Prevented styling above the input.
-- Fix: Label MutationObserver creation was not in onMount. Caused an error if used before parent component mounted.
-- Fix: Callout referenced document rather than globalThis.document. Caused an error if used before parent component mounted.
-- Fix: Popover referenced document rather than globalThis.document. Caused an error if used before parent component mounted.
-- Fix: prefersColorSchemeDark mediaQuery subscriptions not within onMount. Caused an error if used before parent component was mounted.
-- Fix: prefereReducedMotion mediaQuery subscriptions not within onMount. Caused an error if used before parent component was mounted.
-- Fix: usingKeyboard keyborg subscriptions not within onMount. Caused an error if used before parent component was mounted.
+- Bug: Checkbox top-level div missing checked class. Fix: Prevented styling above the input.
+- Bug: Label MutationObserver creation was not in onMount. Caused an error if used before parent component mounted. Fix: Moved to onMount.
+- Bug: Callout referenced document rather than globalThis.document. Caused an error if used before parent component mounted. Fix: Added globalThis prefix.
+- Bug: Popover referenced document rather than globalThis.document. Caused an error if used before parent component mounted. Fix: Added globalThis prefix.
+- Bug: prefersColorSchemeDark mediaQuery subscriptions not within onMount. Caused an error if used before parent component was mounted. Fix: Moved to onMount
+- Bug: prefereReducedMotion mediaQuery subscriptions not within onMount. Caused an error if used before parent component was mounted. Fix: Moved to onMount
+- Bug: usingKeyboard keyborg subscriptions not within onMount. Caused an error if used before parent component was mounted. Fix: Moved to onMount
 
 ## 1.0.3
 
-- Fix: Dropdown and Select missing an icon slot to allow customization within the button.
-- Fix: Dropdown rendering value div was not conditional on the value slot.
-- Fix: Popover and Callout created ResizeObserver before mount causing a ResizeObserver undefined error.
+- Bug: Dropdown and Select missing an icon slot to allow customization within the button. Fix: Added icon slot
+- Bug: Dropdown rendering value div was not conditional on the value slot. Fix: Made conditional
+- Bug: Popover and Callout created ResizeObserver before mount causing a ResizeObserver undefined error. Fix: Moved to onMount
 - Feature: Added menuVariant to MenuButton to provide style customization.
 - Feature: Added listVariant to Select to provide style customization.
-- Fix: sterling.css Input styles used .label instead of .sterling-input.label .
+- Bug: sterling.css Input styles used .label instead of .sterling-input.label. Fix: Updated CSS
 
 ## 1.0.2
 
@@ -63,4 +64,4 @@
 
 ## 1.0.1
 
-- Fix: Dialog.svelte inadvertly imported sterling.css.
+- Bug: Dialog.svelte inadvertly imported sterling.css. Fix: Removed import

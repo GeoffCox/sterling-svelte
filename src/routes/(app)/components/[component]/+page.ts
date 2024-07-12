@@ -1,4 +1,4 @@
-import { componentDocs } from '../../_shared/componentDocs/data';
+import { componentDocs } from '../../_shared/componentDocs/componentDocs';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = ({ params }) => {

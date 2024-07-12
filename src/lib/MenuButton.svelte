@@ -11,19 +11,18 @@
   import Popover from './Popover.svelte';
   import { clickOutside } from './actions/clickOutside';
   import type { ClickOutsideEvent } from './@types/clickOutside';
+  import type { PopoverPlacement } from './Popover.types';
 
   // ----- Props ----- //
 
-  /** When true, the menu is open. */
   export let open = false;
 
-  /** Additional class names to apply to the Menu*/
   export let menuVariant: string = '';
 
-  /** The value uniquely identifying this menu button as the root of the menu hierarchy. */
+  export let popoverPlacement: PopoverPlacement = 'bottom-start';
+
   export let value: string;
 
-  /** Additional class names to apply. */
   export let variant: string = '';
 
   // ----- State ----- //
@@ -94,8 +93,6 @@
     prevOpen = open;
   }
 
-  // ----- Event Handlers ----- //
-
   const closeAllMenus = () => {
     openValues.set([]);
   };
@@ -114,7 +111,7 @@
     closeAllMenus?.();
   };
 
-  // ----- Set Context ----- //
+  // ----- Context ----- //
 
   setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
     depth: 1,
@@ -129,10 +126,6 @@
   });
 </script>
 
-<!--
-      @component
-      A Button that displays a context menu when clicked.
-  -->
 <Button
   bind:this={buttonRef}
   aria-controls={menuId}
@@ -179,7 +172,7 @@
   <div class="reference" bind:this={reference} use:clickOutside on:click_outside={onClickOutside}>
     <slot {open} {value} {variant} />
   </div>
-  <Popover {reference} {open} placement="bottom-start">
+  <Popover {reference} {open} placement={popoverPlacement}>
     <Menu bind:this={menuRef} id={menuId} {reference} {open} variant={menuVariant}>
       <slot name="items" />
     </Menu>

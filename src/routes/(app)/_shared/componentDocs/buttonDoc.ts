@@ -4,7 +4,7 @@ import ButtonPlayground from '../../_playgrounds/button/ButtonPlayground.svelte'
 
 export const buttonDoc: ComponentDoc = {
   name: 'Button',
-  description: 'A styled <button>',
+  description: 'A <button>: an interactive element activated to perform an action',
   comments: [
     "The type prop default is 'button' rather than 'submit'",
     makeExtendsComment('HTMLButtonElement')
