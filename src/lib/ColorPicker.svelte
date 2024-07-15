@@ -1,6 +1,6 @@
 <script lang="ts">
   import { tick } from 'svelte';
-  import tinycolor from '@ctrl/tinycolor';
+  import { TinyColor } from '@ctrl/tinycolor';
 
   import type { ColorFormat } from './ColorPicker.types';
 
@@ -63,7 +63,7 @@
 
         const newAlpha = colorFormat === 'hex' ? hexAlpha / 255 : alpha;
 
-        const color = tinycolor({ r: red, g: green, b: blue, a: newAlpha });
+        const color = new TinyColor({ r: red, g: green, b: blue, a: newAlpha });
 
         const hsl = color.toHsl();
         hue = Math.round(hsl.h);
@@ -93,7 +93,7 @@
       if (!updating && colorFormat === 'hsl') {
         updating = true;
 
-        const color = tinycolor({ h: hue, s: saturation / 100, l: lightness / 100, a: alpha });
+        const color = new TinyColor({ h: hue, s: saturation / 100, l: lightness / 100, a: alpha });
 
         const rgb = color.toRgb();
         red = rgb.r;
@@ -114,7 +114,7 @@
   const updateColorsFromText = async () => {
     // tinycolor requires window
     if (globalThis.window) {
-      const color = tinycolor(colorText);
+      const color = new TinyColor(colorText);
 
       if (color.isValid) {
         if (!updating) {
@@ -188,14 +188,14 @@
   // ----- Event handlers ----- //
 
   const onInputBlur = async () => {
-    if (globalThis.window && tinycolor) {
+    if (globalThis.window) {
       if (!updating) {
         if (colorText.trim().length === 0) {
           colorText = defaultColorText;
           return;
         }
 
-        const color = tinycolor(colorText);
+        const color = new TinyColor(colorText);
         if (color.isValid) {
           updating = true;
           switch (colorFormat) {

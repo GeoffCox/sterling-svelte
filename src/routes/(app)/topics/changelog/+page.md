@@ -7,6 +7,7 @@
 - Bug: MenuButton callers had no control of Popover placement. Fix: Added popoverPlacement to MenuButton to forward to Popover.
 - Bug: ColorPicker did not pass variant to Dropdown. Fix: Added variant parameter.
 - Bug: MenuItemDisplay disabled style covered entire page. Fix: Added position:relative to base class.
+- Bug: @ctrl/tinycolor export default was used causing issues when using the library from some sandbox sites. Fix: Updated to import { TinyColor } rather than default. Updated to latest version.
 
 ## 1.0.10
 
