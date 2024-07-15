@@ -56,19 +56,20 @@
     if (dialogRef?.open === false) {
       // when open, track clicks outside the dialog (use capture = true)
       document.addEventListener('click', onDocumentClick, true);
+      returnValue = '';
       dialogRef.showModal();
     }
     open = true;
   };
 
-  const closeDialog = (returnValue: string = '') => {
+  const closeDialog = async () => {
     if (dialogRef?.open === true) {
       // when closed, stop tracking clicks outside the dialog
       document.removeEventListener('click', onDocumentClick);
 
       // to allow time for the CSS transition animation, closing the dialog is delayed
       closing = true;
-      tick();
+      await tick();
       setTimeout(() => {
         dialogRef.close(returnValue);
         open = false;
@@ -92,6 +93,7 @@
     // To allow animation with closeDialog, this event is canceled.
     event.preventDefault();
     event.stopPropagation();
+    returnValue = '';
     closeDialog();
     return false;
   };
@@ -104,9 +106,11 @@
     const anyEvent = event as unknown as any;
     if (anyEvent?.submitter.type === 'submit') {
       if (dialogRef.open) {
-        closeDialog(anyEvent?.submitter.value ?? '');
+        const eventSubmitter = anyEvent?.submitter;
+        returnValue = eventSubmitter?.value ?? '';
+        closeDialog();
         setTimeout(() => {
-          formRef.requestSubmit(anyEvent?.submitter);
+          formRef.requestSubmit(eventSubmitter);
         }, dialogFadeDuration);
         event.preventDefault();
         return false;
@@ -115,12 +119,6 @@
       event.preventDefault();
       return false;
     }
-  };
-
-  const onClose = (event: Event) => {
-    // This event is not cancelable.
-    // Update the returnValue whenever the dialog closes.
-    returnValue = dialogRef.returnValue;
   };
 
   $: {
@@ -134,11 +132,9 @@
     portalHostStore.set(dialogRef);
 
     dialogRef.addEventListener('cancel', onCancel);
-    dialogRef.addEventListener('close', onClose);
 
     return () => {
       dialogRef?.removeEventListener('cancel', onCancel);
-      dialogRef?.removeEventListener('close', onClose);
 
       portalHostStore.set(undefined);
     };

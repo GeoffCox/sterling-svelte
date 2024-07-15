@@ -8,6 +8,7 @@
 - Bug: ColorPicker did not pass variant to Dropdown. Fix: Added variant parameter.
 - Bug: MenuItemDisplay disabled style covered entire page. Fix: Added position:relative to base class.
 - Bug: @ctrl/tinycolor export default was used causing issues when using the library from some sandbox sites. Fix: Updated to import { TinyColor } rather than default. Updated to latest version.
+- Bug: Dialog did not correctly update return value for form submission. Fix: Set returnValue before close animation. Awaited tick() for state update.
 
 ## 1.0.10
 
