@@ -178,12 +178,12 @@
   }
 
   :global(h1) {
-    font-size: 1.7em;
+    font-size: 1.8em;
     font-weight: normal;
   }
 
   :global(h2) {
-    font-size: 1.3em;
+    font-size: 1.4em;
     font-weight: normal;
   }
 

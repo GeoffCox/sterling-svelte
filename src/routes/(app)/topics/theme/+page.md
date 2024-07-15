@@ -3,18 +3,26 @@
     import Swatch from '../../_shared/Swatch.svelte';
 </script>
 
-# Sterling Theme (Opt-In)
+# Sterling Theme
 
-While sterling-svelte components do not apply any default style, a set of CSS styles defined is provided for you use if you like.
+While sterling-svelte components do not apply any default style, a set of CSS styles defined is provided for you to use if you like.
 
-You can choose to import all the component styles or pick the individual component styles.
-Your Svelte application build will optimize and bundle the CSS.
+You can choose to import all the component styles:
 
 ```
-import 'sterling.css' from '@sterling-svelte/css/sterling.css'
+import '@geoffcox/sterling-svelte/css/sterling.css'
 ```
 
-## Class Properties
+or pick the individual component styles:
+
+```
+import '@geoffcox/sterling-svelte/css/light-mode.css'
+import '@geoffcox/sterling-svelte/css/dark-mode.css'
+import '@geoffcox/sterling-svelte/css/Button.css'
+import '@geoffcox/sterling-svelte/css/Checkbox.css'
+```
+
+## Component classes
 
 Components render HTML structure and class names to support styling and themes.
 They can be considered an API contract for the CSS styles. Any changes are considered breaking changes.
@@ -30,7 +38,7 @@ They can be considered an API contract for the CSS styles. Any changes are consi
 - Each CSS variable follows the [Block**Element**Modifier (BEM)](https://getbem.com/introduction/) naming convention. For example, `--stsv-button__background-color`, `--stsv-button__border-color`, and `-stsv-button__color`.
 - There are fewer than 100 CSS variables defined to handle common, button, input, and status colors.
 
-## Light and Dark Mode
+## Light and dark modes
 
 The sterling theme supports light and dark mode by changing CSS variable values.
 
@@ -42,21 +50,6 @@ The sterling theme supports light and dark mode by changing CSS variable values.
 Each component has a `variant` string property. The variant value appended to the component's root element class property. This allows callers to vary the style.
 
 You can apply multiple variants. For example `Button` can have `circular` and `tool` applied. The variants are listed in each component's documentation.
-
-The sterling theme contains variants for many components.
-
-| Components | variant     | effect                                                                    |
-| ---------- | ----------- | ------------------------------------------------------------------------- |
-| (multiple) | colorful    | applies colorful accent colors                                            |
-| (multiple) | composed    | hides focus and disabled styles so a container can compose this component |
-| Button     | capsule     | shows a border with rounded ends                                          |
-| Button     | circular    | shows a circular border with a 1:1 aspect ratio                           |
-| Button     | secondary   | hides the background until hovered over                                   |
-| Button     | square      | shows a square border                                                     |
-| Button     | tool        | hides the border entirely and hides the background until hovered over.    |
-| Label      | boxed       | adds a border and focus styles to contain another component               |
-| Link       | ghost       | removes the underline until hovered over                                  |
-| Link       | undecorated | removes the underline entirely                                            |
 
 ## Custom Theming
 

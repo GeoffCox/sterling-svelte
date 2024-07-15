@@ -22,12 +22,12 @@
           url: '/'
         },
         {
-          name: 'Architecture',
-          url: '/topics/architecture'
-        },
-        {
           name: 'Sterling Theme',
           url: '/topics/theme'
+        },
+        {
+          name: 'Architecture',
+          url: '/topics/architecture'
         },
         {
           name: 'Change Log',

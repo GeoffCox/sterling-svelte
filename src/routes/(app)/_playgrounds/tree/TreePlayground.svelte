@@ -75,8 +75,4 @@
     align-items: center;
     column-gap: 1em;
   }
-  .toggled-status {
-    max-width: 300px;
-    overflow: hidden;
-  }
 </style>
