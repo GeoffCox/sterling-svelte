@@ -18,6 +18,12 @@
   color: var(--stsv-input--colorful__color--focus);
 }
 
+.sterling-switch.colorful input:checked ~ .switch,
+.sterling-switch.colorful input:checked:hover ~ .switch,
+.sterling-switch.colorful input:checked:focus-visible ~ .switch {
+  background-color: var(--stsv-input--colorful__border-color--hover);
+}
+
 /* ----- thumb colorful ----- */
 
 .sterling-switch.colorful .thumb {

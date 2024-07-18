@@ -14,6 +14,7 @@
 - Feature: Added valueVariant and sliderVariant props to ColorPicker to pass to variants to children.
 - Bug: TextArea allowed resize to be vertical or both when autoHeight is set. Fix: Correct resize when autoHeight is set.
 - Feature: Added text-underline variant to Link in Sterling Theme to support text-decoration: underline style.
+- Feature: Added switch background fill in Sterling Theme when checked to improve state visibility.
 
 ## 1.0.10
 

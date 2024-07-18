@@ -67,7 +67,10 @@
   font: inherit;
   pointer-events: none;
   position: relative;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
   user-select: none;
 }
 
@@ -85,6 +88,12 @@ input:focus-visible ~ .switch {
   outline-offset: 0;
   outline-style: solid;
   outline-width: 2px;
+}
+
+input:checked ~ .switch,
+input:checked:hover ~ .switch,
+input:checked:focus-visible ~ .switch {
+  background-color: var(--stsv-input__border-color--hover);
 }
 
 /* ----- switch vertical ----- */
@@ -126,7 +135,11 @@ input:focus-visible ~ .switch {
   font: inherit;
   height: 1.25em;
   position: absolute;
-  transition: background-color 250ms, color 250ms, border-color 250ms, transform 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms,
+    transform 250ms;
   width: 1.25em;
 }
 
