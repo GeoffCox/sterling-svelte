@@ -2,5 +2,7 @@
 .sterling-link.undecorated.colorful:hover,
 .sterling-link.undecorated.colorful:active,
 .sterling-link.undecorated.colorful:visited {
+  border-bottom-width: 0;
   border-bottom-color: transparent;
+  text-decoration: none;
 }

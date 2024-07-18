@@ -5,14 +5,17 @@
   border-right: none;
   border-radius: 0;
   border-bottom-style: solid;
-  border-bottom-width: calc(2px);
+  border-bottom-width: 2px;
   border-bottom-color: var(--stsv-common__border-color);
   color: var(--stsv-common__color);
   cursor: pointer;
   font: inherit;
   text-decoration: none;
   text-overflow: ellipsis;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
   white-space: nowrap;
   user-select: none;
 }
@@ -37,10 +40,9 @@
 .sterling-link.disabled:visited,
 .sterling-link.disabled:hover,
 .sterling-link.disabled:active {
-  border-bottom-color: var(--stsv-common__border-color--disabled);
-  color: var(--stsv-common__color--disabled);
-  cursor: not-allowed;
+  border-bottom-color: var(--stsv-common__color--faint);
   pointer-events: none;
+  position: relative;
 }
 
 /* ----- prefers-reduced-motion ----- */

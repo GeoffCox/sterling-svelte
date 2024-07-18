@@ -1,0 +1,8 @@
+.sterling-link.text-underline,
+.sterling-link.text-underline:hover,
+.sterling-link.text-underline:active,
+.sterling-link.text-underline:visited {
+  border-bottom-width: 0;
+  border-bottom-color: transparent;
+  text-decoration: underline;
+}

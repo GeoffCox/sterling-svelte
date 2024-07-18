@@ -39,7 +39,10 @@
       <Input bind:value={href} />
     </Label>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <VariantInput bind:variant availableVariants={['colorful', 'ghost', 'undecorated']} />
+    <VariantInput
+      bind:variant
+      availableVariants={['colorful', 'ghost', 'text-underline', 'undecorated']}
+    />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Label text="(link content)">
