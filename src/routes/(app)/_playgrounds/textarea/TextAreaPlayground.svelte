@@ -29,7 +29,7 @@
       {autoHeight}
       {disabled}
       {placeholder}
-      {resize}
+      bind:resize
       {variant}
       on:input={() => console.log('input')}
       on:change={() => console.log('change')}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import type { TextAreaResize } from './TextArea.types';
 
   // ----- Props ----- //
@@ -20,6 +20,31 @@
 
   let textAreaRef: HTMLTextAreaElement;
 
+  const correctResize = async () => {
+    console.log('correctResize');
+    await tick();
+    setTimeout(() => {
+      if (autoHeight) {
+        if (resize === 'both') {
+          console.warn(
+            'The resize property cannot be set to "both" when autoHeight is true. The resize property will be set to "horizontal".'
+          );
+          resize = 'horizontal';
+        }
+        if (resize === 'vertical') {
+          console.warn(
+            'The resize property cannot be set to "vertical" when autoHeight is true. The resize property will be set to "none".'
+          );
+          resize = 'none';
+        }
+      }
+    }, 0);
+  };
+
+  $: autoHeight, resize, correctResize();
+
+  // ----- autoHeight ----- //
+
   const autoSetHeight = () => {
     if (autoHeight && textAreaRef) {
       // the style must be directly set to avoid re-rendering looping latency
@@ -29,13 +54,13 @@
     }
   };
 
+  $: autoHeight, autoSetHeight();
+
   // ----- Event Handlers ----- //
 
   const onInput = () => {
     autoSetHeight();
   };
-
-  $: autoHeight, autoSetHeight();
 
   onMount(() => {
     autoSetHeight();

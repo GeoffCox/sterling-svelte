@@ -12,6 +12,8 @@
 - Bug: HslColorSliders defaulted to a middle random color. Fix: Updated defaults for HslColorSliders to be zeroed.
 - Bug: Slider thumb disappears when disabled and vertical. Fix: Adjusted CSS positioning.
 - Feature: Added valueVariant and sliderVariant props to ColorPicker to pass to variants to children.
+- Bug: TextArea allowed resize to be vertical or both when autoHeight is set. Fix: Correct resize when autoHeight is set.
+- Feature: Added text-underline variant to Link in Sterling Theme to support text-decoration: underline style.
 
 ## 1.0.10
 

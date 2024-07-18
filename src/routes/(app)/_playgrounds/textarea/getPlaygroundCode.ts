@@ -16,7 +16,7 @@ export const getPlaygroundCode = (props: {
     propList.push(`disabled`);
   }
   if (props.resize) {
-    propList.push(`resize="${props.resize.trim()}"`);
+    propList.push(`resize="${props.resize}"`);
   }
   if (props.variant) {
     propList.push(`variant="${props.variant.trim()}"`);
