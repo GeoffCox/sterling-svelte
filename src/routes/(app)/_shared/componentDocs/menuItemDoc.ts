@@ -4,8 +4,11 @@ import MenuItemPlayground from '../../_playgrounds/menuitem/MenuItemPlayground.s
 
 export const menuItemDoc: ComponentDoc = {
   name: 'MenuItem',
-  description: 'A <button>: an item within a <Menu>',
-  comments: [makeExtendsComment('HTMLButtonElement')],
+  description: 'An actionable item within a <Menu>',
+  comments: [
+    'MenuItem uses MenuItemContext set by the Menu for some properties and events.',
+    makeExtendsComment('HTMLButtonElement')
+  ],
   props: [
     {
       name: 'checked',

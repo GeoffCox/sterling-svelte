@@ -4,7 +4,6 @@ export const getPlaygroundCode = (props: {
   checked: boolean;
   disabled: boolean;
   menuVariant: string;
-  open: boolean;
   role: MenuItemRole;
   text: string;
   value: string;
@@ -21,17 +20,14 @@ export const getPlaygroundCode = (props: {
   if (props.menuVariant) {
     propList.push(`menuVariant="${props.menuVariant.trim()}"`);
   }
-  if (props.open) {
-    propList.push(`open`);
-  }
-  if (props.role) {
+  if (props.role && props.role !== 'menuitem') {
     propList.push(`role="${props.role.trim()}"`);
+  }
+  if (props.text) {
+    propList.push(`text="${props.text.trim()}"`);
   }
   if (props.value) {
     propList.push(`value="${props.value.trim()}"`);
-  }
-  if (props.menuVariant) {
-    propList.push(`menuVariant="${props.menuVariant.trim()}"`);
   }
   if (props.variant) {
     propList.push(`variant="${props.variant.trim()}"`);

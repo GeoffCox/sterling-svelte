@@ -13,7 +13,7 @@ export type MenuItemRegistration = {
 
 export type MenuItemContext = {
   /**
-   * If the menu item is a top-elvel item in a menu bar
+   * If the menu item is a top-level item in a menu bar
    */
   isMenuBarItem?: boolean;
   /**
