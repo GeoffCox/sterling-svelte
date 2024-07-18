@@ -7,8 +7,11 @@
 - Bug: MenuButton callers had no control of Popover placement. Fix: Added popoverPlacement to MenuButton to forward to Popover.
 - Bug: ColorPicker did not pass variant to Dropdown. Fix: Added variant parameter.
 - Bug: MenuItemDisplay disabled style covered entire page. Fix: Added position:relative to base class.
-- Bug: @ctrl/tinycolor export default was used causing issues when using the library from some sandbox sites. Fix: Updated to import { TinyColor } rather than default. Updated to latest version.
+- Bug: @ctrl/tinycolor export default was used causing issues when using the library from some sandbox sites. Fix: Updated to import TinyColor rather than default. Updated to latest version.
 - Bug: Dialog did not correctly update return value for form submission. Fix: Set returnValue before close animation. Awaited tick() for state update.
+- Bug: HslColorSliders defaulted to a middle random color. Fix: Updated defaults for HslColorSliders to be zeroed.
+- Bug: Slider thumb disappears when disabled and vertical. Fix: Adjusted CSS positioning.
+- Feature: Added valueVariant and sliderVariant props to ColorPicker to pass to variants to children.
 
 ## 1.0.10
 

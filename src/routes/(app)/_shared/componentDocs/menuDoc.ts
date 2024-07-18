@@ -1,3 +1,4 @@
+import MenuPlayground from '../../_playgrounds/menu/MenuPlayground.svelte';
 import { makeExtendsComment, commonProps } from './commonDoc';
 import type { ComponentDoc } from './types';
 
@@ -30,8 +31,9 @@ export const menuDoc: ComponentDoc = {
     }
   ],
   anatomy: `<div class="sterling-menu">
-<div class="menu-items">
+  <div class="menu-items">
     <slot {variant} />
   </div>
-</div>`
+</div>`,
+  usage: MenuPlayground
 };
