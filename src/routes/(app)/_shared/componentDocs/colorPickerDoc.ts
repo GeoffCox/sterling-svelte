@@ -31,7 +31,18 @@ export const colorPickerDoc: ComponentDoc = {
       default: "'hex'",
       comment: 'The current color format'
     },
-
+    {
+      name: 'sliderVariant',
+      type: 'string',
+      default: "''",
+      comment: 'Additional classes to apply to the each slider'
+    },
+    {
+      name: 'valueVariant',
+      type: 'string',
+      default: "''",
+      comment: 'Additional classes to apply to the value input'
+    },
     commonProps.variant
   ],
   anatomy: `<div class="sterling-color-picker">

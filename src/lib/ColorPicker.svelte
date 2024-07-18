@@ -35,6 +35,12 @@
   /** Additional class names to apply. */
   export let variant: string = '';
 
+  /** Additional class names to apply to the value input. */
+  export let valueVariant: string = '';
+
+  /** Additional class names to apply to sliders. */
+  export let sliderVariant: string = '';
+
   // ----- State ----- //
 
   let hue: number = 0;
@@ -294,7 +300,7 @@
         on:click={onInputClick}
         on:keydown={onInputKeydown}
         spellcheck="false"
-        variant={`composed ${variant}`}
+        variant={`composed ${valueVariant}`}
       />
     </div>
     <div class="sterling-color-picker-popup" use:trapKeyboardFocus>
@@ -307,11 +313,23 @@
       </div>
       <div class="sliders">
         {#if colorFormat === 'rgb'}
-          <RgbColorSliders bind:red bind:green bind:blue bind:alpha />
+          <RgbColorSliders bind:red bind:green bind:blue bind:alpha variant={sliderVariant} />
         {:else if colorFormat === 'hex'}
-          <HexColorSliders bind:red bind:green bind:blue bind:alpha={hexAlpha} />
+          <HexColorSliders
+            bind:red
+            bind:green
+            bind:blue
+            bind:alpha={hexAlpha}
+            variant={sliderVariant}
+          />
         {:else if colorFormat === 'hsl'}
-          <HslColorSliders bind:hue bind:saturation bind:lightness bind:alpha />
+          <HslColorSliders
+            bind:hue
+            bind:saturation
+            bind:lightness
+            bind:alpha
+            variant={sliderVariant}
+          />
         {/if}
       </div>
     </div>

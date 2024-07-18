@@ -8,13 +8,13 @@
   // ----- Props ----- //
 
   /** The hue value. */
-  export let hue: number = 180;
+  export let hue: number = 0;
 
   /** The saturation value. */
-  export let saturation: number = 100;
+  export let saturation: number = 0;
 
   /** The lightness value. */
-  export let lightness: number = 50;
+  export let lightness: number = 0;
 
   /** The alpha value. */
   export let alpha: number = 1;

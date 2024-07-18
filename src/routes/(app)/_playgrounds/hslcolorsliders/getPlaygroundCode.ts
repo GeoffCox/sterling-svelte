@@ -6,13 +6,13 @@ export const getPlaygroundCode = (props: {
   variant: string;
 }) => {
   const propList: string[] = [];
-  if (props.hue !== 180) {
+  if (props.hue !== 0) {
     propList.push(`hue="${props.hue}"`);
   }
-  if (props.saturation !== 100) {
+  if (props.saturation !== 0) {
     propList.push(`saturation="${props.saturation}"`);
   }
-  if (props.lightness !== 50) {
+  if (props.lightness !== 0) {
     propList.push(`lightness="${props.lightness}"`);
   }
 

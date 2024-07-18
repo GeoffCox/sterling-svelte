@@ -8,7 +8,7 @@
   let hue = 0;
   let saturation = 0;
   let lightness = 0;
-  let alpha = 255;
+  let alpha = 1;
   let variant = '';
 
   $: code = getPlaygroundCode({ hue, saturation, lightness, alpha, variant });
