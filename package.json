@@ -1,8 +1,8 @@
 {
   "name": "@geoffcox/sterling-svelte",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "author": "Geoff Cox",
-  "description": "A modern, accessible, and lightweight component library for Svelte.",
+  "description": "A modern, accessible, and lightweight UI component library for Svelte.",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GeoffCox/sterling-svelte/issues"
