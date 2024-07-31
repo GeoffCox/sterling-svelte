@@ -50,7 +50,10 @@ and there is not a parent CSS selector.
   display: inline-block;
   height: 20px;
   position: relative;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
   width: 20px;
   pointer-events: none;
 }
@@ -87,7 +90,9 @@ The checkmark is a rotated L centered in the box.
   top: 45%;
   transform: translate(-50%, -50%) rotate(45deg);
   transform-origin: center;
-  transition: border-color 250ms, opacity 150ms;
+  transition:
+    border-color 250ms,
+    opacity 150ms;
   width: 7px;
   opacity: 0;
 }
@@ -100,39 +105,10 @@ The checkmark is a rotated L centered in the box.
   border-color: var(--stsv-input__color--hover);
 }
 
-.sterling-checkbox.disabled,
-.sterling-checkbox.disabled input {
-  cursor: not-allowed;
-}
-
-.sterling-checkbox .container::after {
-  background: repeating-linear-gradient(
-    var(--stsv-common--disabled__stripe-angle),
-    var(--stsv-common--disabled__stripe-color),
-    var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
-    var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
-    var(--stsv-common--disabled__stripe-color--alt)
-      calc(2 * var(--stsv-common--disabled__stripe-width))
-  );
-  bottom: 0;
-  content: '';
-  left: 0;
-  opacity: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  pointer-events: none;
-  transition: opacity 250ms;
-}
-
 .sterling-checkbox > label {
   color: var(--stsv-common__color);
   transition: color 250ms;
   font: inherit;
-}
-
-.sterling-checkbox.disabled .container::after {
-  opacity: 1;
 }
 
 @media (prefers-reduced-motion) {
