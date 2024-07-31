@@ -1,0 +1,11 @@
+.sterling-dropdown.composed,
+.sterling-dropdown.composed:hover,
+.sterling-dropdown.composed.focus {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.sterling-dropdown.composed.disabled::after {
+  opacity: 0;
+}

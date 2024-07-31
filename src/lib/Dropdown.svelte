@@ -9,6 +9,7 @@
   import { idGenerator } from './idGenerator';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
   import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
+  import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   const popupId = idGenerator.nextId('Dropdown-popup');
 
@@ -108,6 +109,8 @@
   aria-expanded={open}
   class={`sterling-dropdown ${variant}`}
   class:disabled
+  class:open
+  class:using-keyboard={$usingKeyboard}
   role="combobox"
   tabindex="0"
   use:clickOutside={{ ignoreOthers: [popupContentRef] }}
@@ -155,7 +158,7 @@
     </div>
   </slot>
 
-  <Popover reference={dropdownRef} open={!disabled && open}>
+  <Popover reference={dropdownRef} open={!disabled && open} placement="bottom-start">
     <div
       class={`sterling-dropdown-popup-content ${variant}`}
       transition:slideMotion|global={{ duration: 200 }}
