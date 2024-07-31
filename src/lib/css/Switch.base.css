@@ -8,10 +8,6 @@
   cursor: pointer;
 }
 
-.sterling-switch.disabled input {
-  cursor: not-allowed;
-}
-
 .sterling-switch:not(.vertical) {
   align-content: center;
   align-items: center;
@@ -153,33 +149,6 @@ input:checked:focus-visible ~ .switch {
   background-color: var(--stsv-button__background-color--active);
   border-color: var(--stsv-button__border-color--active);
   color: var(--stsv-button__color--hover);
-}
-
-/* ----- thumb disabled ----- */
-
-.sterling-switch .thumb::after {
-  background: repeating-linear-gradient(
-    var(--stsv-common--disabled__stripe-angle),
-    var(--stsv-common--disabled__stripe-color),
-    var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
-    var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
-    var(--stsv-common--disabled__stripe-color--alt)
-      calc(2 * var(--stsv-common--disabled__stripe-width))
-  );
-  bottom: 0;
-  border-radius: 10000px;
-  content: '';
-  left: 0;
-  opacity: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  pointer-events: none;
-  transition: opacity 250ms;
-}
-
-.sterling-switch.disabled .thumb::after {
-  opacity: 1;
 }
 
 /* ----- thumb vertical ----- */

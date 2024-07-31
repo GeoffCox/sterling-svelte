@@ -16,7 +16,10 @@
   position: relative;
   text-decoration: none;
   text-overflow: ellipsis;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
   white-space: nowrap;
 }
 
@@ -44,37 +47,6 @@
   outline-offset: 0;
   outline-style: solid;
   outline-width: 2px;
-}
-
-/* ----- disabled -----*/
-
-.sterling-tab:disabled {
-  cursor: not-allowed;
-  outline: none;
-}
-
-.sterling-tab::after {
-  background: repeating-linear-gradient(
-    var(--stsv-common--disabled__stripe-angle),
-    var(--stsv-common--disabled__stripe-color),
-    var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
-    var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
-    var(--stsv-common--disabled__stripe-color--alt)
-      calc(2 * var(--stsv-common--disabled__stripe-width))
-  );
-  bottom: 0;
-  content: '';
-  left: 0;
-  opacity: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  pointer-events: none;
-  transition: opacity 250ms;
-}
-
-.sterling-tab:disabled::after {
-  opacity: 1;
 }
 
 /* ----- content -----*/
@@ -111,14 +83,6 @@
 
 .sterling-tab.selected .indicator {
   background-color: var(--stsv-input__border-color--selected);
-}
-
-/* ----- indicator disabled -----*/
-
-.sterling-tab:disabled:not(.selected) .indicator,
-.sterling-tab:disabled:not(.selected):hover .indicator,
-.sterling-tab:disabled:not(.selected):active .indicator {
-  background-color: transparent;
 }
 
 /* ----- reduced motion -----*/

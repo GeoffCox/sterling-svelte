@@ -13,7 +13,10 @@
   position: relative;
   padding-left: calc(0.2em + (0.5em * var(--sterling-tree-item-depth)));
   text-overflow: ellipsis;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
   white-space: nowrap;
 }
 
@@ -25,35 +28,6 @@
 .sterling-tree-item-display.selected {
   background-color: var(--stsv-button__background-color--active);
   color: var(--stsv-button__color--active);
-}
-
-.sterling-tree-item-display.disabled {
-  cursor: not-allowed;
-  outline: none;
-}
-
-.sterling-tree-item-display::after {
-  background: repeating-linear-gradient(
-    var(--stsv-common--disabled__stripe-angle),
-    var(--stsv-common--disabled__stripe-color),
-    var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
-    var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
-    var(--stsv-common--disabled__stripe-color--alt)
-      calc(2 * var(--stsv-common--disabled__stripe-width))
-  );
-  bottom: 0;
-  content: '';
-  left: 0;
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: opacity 250ms;
-}
-
-.sterling-tree-item-display.disabled::after {
-  opacity: 1;
 }
 
 .sterling-tree-item-display.leaf {

@@ -49,7 +49,7 @@
     <Label text="value">
       <Input bind:value />
     </Label>
-    <VariantInput bind:variant availableVariants={[]} />
+    <VariantInput bind:variant availableVariants={['colorful']} />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Label text="text">

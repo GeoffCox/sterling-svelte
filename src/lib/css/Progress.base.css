@@ -11,7 +11,10 @@
   height: 1em;
   padding: 0.25em;
   position: relative;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
 }
 
 .sterling-progress .container {
@@ -26,7 +29,10 @@
   box-sizing: border-box;
   height: 100%;
   min-height: 1px;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
 }
 
 /* ----- vertical ----- */
@@ -67,26 +73,6 @@
 
 .sterling-progress.error .indicator {
   background-color: var(--stsv-status--danger__border-color);
-}
-
-/* ----- disabled ----- */
-
-.sterling-progress.disabled::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(
-    var(--stsv-common--disabled__stripe-angle),
-    var(--stsv-common--disabled__stripe-color),
-    var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
-    var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
-    var(--stsv-common--disabled__stripe-color--alt)
-      calc(2 * var(--stsv-common--disabled__stripe-width))
-  );
-  pointer-events: none;
 }
 
 /* ----- prefers-reduced-motion ----- */

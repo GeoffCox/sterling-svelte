@@ -52,7 +52,10 @@
   height: 21px;
   position: relative;
   pointer-events: none;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
   width: 21px;
 }
 
@@ -90,39 +93,10 @@
   background-color: var(--stsv-input__color);
 }
 
-.sterling-radio.disabled * {
-  cursor: not-allowed;
-}
-
-.sterling-radio .container::after {
-  background: repeating-linear-gradient(
-    var(--stsv-common--disabled__stripe-angle),
-    var(--stsv-common--disabled__stripe-color),
-    var(--stsv-common--disabled__stripe-color) var(--stsv-common--disabled__stripe-width),
-    var(--stsv-common--disabled__stripe-color--alt) var(--stsv-common--disabled__stripe-width),
-    var(--stsv-common--disabled__stripe-color--alt)
-      calc(2 * var(--stsv-common--disabled__stripe-width))
-  );
-  border-radius: 10000px;
-  bottom: 0;
-  content: '';
-  left: 0;
-  opacity: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  pointer-events: none;
-  transition: opacity 250ms;
-}
-
 .sterling-radio label {
   color: var(--stsv-common__color);
   transition: color 250ms;
   font: inherit;
-}
-
-.sterling-radio.disabled .container::after {
-  opacity: 1;
 }
 
 @media (prefers-reduced-motion) {
