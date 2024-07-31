@@ -19,7 +19,7 @@ Considerable care and effort have been taken to make each component modern, acce
 
 ## Installation
 
-1. In your Svelte application, use your favorite package manager to install the sterling-svelte library.
+### 1. In your Svelte application, use your favorite package manager to install the sterling-svelte library.
 
 ```
 npm install @geoffcox/sterling-svelte
@@ -29,13 +29,21 @@ npm install @geoffcox/sterling-svelte
 yarn add @geoffcox/sterling-svelte
 ```
 
-2. In App.svelte, import the default style and theme (or import your own).
+### 2. In App.svelte, import the default style and theme (or import your own).
 
 ```
 import '@geoffcox/sterling-svelte/css/sterling.css';
 ```
 
-3. In App.svelte, support light/dark modes. If you want to use the CSS variables for the entire body, set atDocumentRoot to true.
+If you are working in the svelte.dev REPL or another project where you cannot import CSS directly, you can use this alternative:
+
+```
+<svelte:head>
+	<link href="https://unpkg.com/@geoffcox/sterling-svelte/dist/css/sterling.css" rel="stylesheet">
+</svelte:head>
+```
+
+### 3. In App.svelte, support light/dark modes. If you want to use the CSS variables for the entire body, set atDocumentRoot to true.
 
 ```
 <script lang="ts">
@@ -47,7 +55,7 @@ import '@geoffcox/sterling-svelte/css/sterling.css';
 </div>
 ```
 
-4. Add sterling-svelte components. You can import components from the .svelte file or directly from the library.
+### 4. Add sterling-svelte components. You can import components from the .svelte file or directly from the library.
 
 ```
 <script>
