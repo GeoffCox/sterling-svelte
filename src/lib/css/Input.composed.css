@@ -6,3 +6,7 @@
   border-color: transparent;
   outline: none;
 }
+
+.sterling-input.composed.disabled::after {
+  opacity: 0;
+}
