@@ -11,7 +11,10 @@
   overflow: visible;
   padding: 0;
   position: relative;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
 }
 
 /* ----- horizontal | vertical ----- */
@@ -25,16 +28,6 @@
 .sterling-label.vertical {
   grid-template-rows: auto auto auto;
   grid-template-areas: 'text' 'content' 'message';
-}
-
-/* ----- disabled ----- */
-
-.sterling-label.disabled {
-  cursor: not-allowed;
-}
-
-.sterling-label.disabled * {
-  cursor: not-allowed;
 }
 
 /* ----- text ----- */
@@ -66,7 +59,10 @@
   grid-area: message;
   padding: 0.5em;
   width: 100%;
-  transition: background-color 250ms, color 250ms, border-color 250ms;
+  transition:
+    background-color 250ms,
+    color 250ms,
+    border-color 250ms;
 }
 
 .sterling-label .message.info {

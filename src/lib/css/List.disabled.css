@@ -1,0 +1,7 @@
+.sterling-list.disabled * {
+  cursor: not-allowed;
+}
+
+.sterling-list.disabled .container::after {
+  opacity: 1;
+}

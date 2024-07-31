@@ -1,0 +1,9 @@
+/* ----- disabled ----- */
+
+.sterling-label.disabled {
+  cursor: not-allowed;
+}
+
+.sterling-label.disabled * {
+  cursor: not-allowed;
+}
