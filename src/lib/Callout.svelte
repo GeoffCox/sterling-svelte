@@ -123,9 +123,7 @@
         case 'top-start':
         case 'top-end':
           return (
-            `bottom: -${arrowRef.offsetWidth}px;` +
-            `filter: drop-shadow(-1px -2px 1px rgba(0,0,0,0.2));` +
-            `transform:translate(0, -50%) rotate(135deg);`
+            `bottom: -${arrowRef.offsetWidth}px;` + `transform:translate(0, -50%) rotate(135deg);`
           );
         case 'right':
         case 'right-start':
@@ -141,9 +139,7 @@
         case 'left-start':
         case 'left-end':
           return (
-            `right: -${arrowRef.offsetWidth}px;` +
-            `filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.2));` +
-            `transform:translate(-50%, 0) rotate(45deg);`
+            `right: -${arrowRef.offsetWidth}px;` + `transform:translate(-50%, 0) rotate(45deg);`
           );
       }
     }
@@ -210,6 +206,18 @@
       bind:this={popupRef}
       class={`sterling-callout ${variant}`}
       class:open
+      class:top={popupPosition.placement === 'top'}
+      class:top-start={popupPosition.placement === 'top-start'}
+      class:top-end={popupPosition.placement === 'top-end'}
+      class:right={popupPosition.placement === 'right'}
+      class:right-start={popupPosition.placement === 'right-start'}
+      class:right-end={popupPosition.placement === 'right-end'}
+      class:bottom={popupPosition.placement === 'bottom'}
+      class:bottom-start={popupPosition.placement === 'bottom-start'}
+      class:bottom-end={popupPosition.placement === 'bottom-end'}
+      class:left={popupPosition.placement === 'left'}
+      class:left-start={popupPosition.placement === 'left-start'}
+      class:left-end={popupPosition.placement === 'left-end'}
       role="tooltip"
       on:blur
       on:click
