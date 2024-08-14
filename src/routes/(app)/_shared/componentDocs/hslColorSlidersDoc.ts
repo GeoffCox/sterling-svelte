@@ -4,7 +4,7 @@ import HslColorSlidersPlayground from '../../_playgrounds/hslcolorsliders/HslCol
 
 export const hslColorSlidersDoc: ComponentDoc = {
   name: 'HslColorSliders',
-  description: 'A set of sliders to choose an HSL color value',
+  description: 'A <Slider> and <Input> per channel to choose an HSL color value',
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {

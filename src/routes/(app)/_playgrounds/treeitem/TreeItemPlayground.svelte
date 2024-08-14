@@ -19,6 +19,7 @@
   let text = 'sterling-svelte';
   let value = 'item';
   let variant = '';
+  let selected = false;
 
   const depthStore = writable<number>(depth);
   const disabledStore = writable<boolean>(false);
@@ -49,6 +50,12 @@
     value,
     variant
   });
+
+  selectedValueStore.subscribe((storeValue) => {
+    selected = storeValue === value;
+  });
+
+  $: selectedValueStore.set(selected ? value : undefined);
 </script>
 
 <Playground {code}>
@@ -81,6 +88,7 @@
       </div>
     </Label>
     <Checkbox bind:checked={hasChildren}>Has Children</Checkbox>
+    <Checkbox bind:checked={selected}>Selected</Checkbox>
   </svelte:fragment>
 </Playground>
 

@@ -5,7 +5,8 @@
 - Bug: Callout applied drop-shadow to arrow from the code based on calculate placement. Drop shadow should be done from CSS. Fix: Removed to allow CSS to style drop shadow. Updated Callout to apply calculated placement classes.
 - Bug: Dropdown did not apply using-keyboard or open classes to the root. Fix: Added classes.
 - Feature: Separated disabled styles in Sterling Theme CSS files.
-- Bug: Fixed missing TreeItemDisplay colorful variant in Sterling Theme.
+- Bug: TreeItemDisplay missing colorful variant in Sterling Theme. Fix: Added variant.
+- Bug: Color sliders using disabled hatch angle var causing tight coupling. Fix: Removed var usage.
 
 ## 1.0.11
 

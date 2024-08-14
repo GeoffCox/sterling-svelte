@@ -4,7 +4,7 @@ import TreeChevronPlayground from '../../_playgrounds/treechevron/TreeChevronPla
 
 export const treeChevronDoc: ComponentDoc = {
   name: 'TreeChevron',
-  description: 'An indicator of leaf and expanded/collapsed items within a hierarchy',
+  description: 'An indicator of leaf or expanded/collapsed items within a hierarchy',
   comments: [
     'Provides selection, expand/collapse, and interaction within a Tree',
     makeExtendsComment('HTMLDivElement')

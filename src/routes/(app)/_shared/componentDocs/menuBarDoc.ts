@@ -4,7 +4,7 @@ import MenuBarPlayground from '../../_playgrounds/menubar/MenuBarPlayground.svel
 
 export const menuBarDoc: ComponentDoc = {
   name: 'MenuBar',
-  description: 'A horizontal list of menus, often positioned at the top of a window',
+  description: 'A horizontal list of <MenuItem>s, often positioned at the top of a window',
   comments: [
     'Prefer using the Label component rather than the label produced by providing default slot content.',
     makeExtendsComment('HTMLAnchorElement')

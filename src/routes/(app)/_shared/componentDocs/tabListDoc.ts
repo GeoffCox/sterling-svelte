@@ -4,7 +4,7 @@ import TabListPlayground from '../../_playgrounds/tablist/TabListPlayground.svel
 
 export const tabListDoc: ComponentDoc = {
   name: 'TabList',
-  description: 'A list of interactive tabs to show one of a set of associate content',
+  description: 'A list of <Tabs> where one can be selected',
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {

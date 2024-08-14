@@ -4,7 +4,7 @@ import ColorPickerPlayground from '../../_playgrounds/colorpicker/ColorPickerPla
 
 export const colorPickerDoc: ComponentDoc = {
   name: 'ColorPicker',
-  description: 'A <Dropdown> to choose a color value',
+  description: 'A <Dropdown> containing an <Input> to choose a color value',
   comments: [
     'The dropdown displays a set of sliders based on the color format selected.',
     'Changing the input to a color value with a different color format, switches the selected color format.',

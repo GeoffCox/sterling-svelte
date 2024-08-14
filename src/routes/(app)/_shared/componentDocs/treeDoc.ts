@@ -5,7 +5,7 @@ import TreePlayground from '../../_playgrounds/tree/TreePlayground.svelte';
 export const treeDoc: ComponentDoc = {
   name: 'Tree',
   description:
-    'A hierarchy of items that can be expanded/collapsed and a single item can be selected',
+    'A hierarchy of <TreeItem>s that can be expanded/collapsed where a single item can be selected',
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {

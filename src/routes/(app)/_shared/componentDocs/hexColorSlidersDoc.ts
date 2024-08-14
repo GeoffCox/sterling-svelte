@@ -4,7 +4,7 @@ import HexColorSlidersPlayground from '../../_playgrounds/hexcolorsliders/HexCol
 
 export const hexColorSliderDoc: ComponentDoc = {
   name: 'HexColorSliders',
-  description: 'A set of sliders to choose a HEX color value',
+  description: 'A <Slider> and <Input> per channel to choose a HEX color value',
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {
