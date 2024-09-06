@@ -63,9 +63,9 @@ export const labelDoc: ComponentDoc = {
     }
   ],
   anatomy: `<label class="sterling-label">
-   <slot name="text" {disabled} {for} {forwardClick} {required} {text} {variant}>
+  <slot name="text" {disabled} {for} {forwardClick} {required} {text} {variant}>
     <div class="text">{text}</div>
-    </slot>
+  </slot>
   <div class="content">
     <slot />
   </div>
