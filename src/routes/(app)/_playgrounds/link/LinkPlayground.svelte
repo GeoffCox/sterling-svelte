@@ -10,9 +10,9 @@
   import { getPlaygroundCode } from './getPlaygroundCode';
   import { base } from '$app/paths';
 
-  let disabled = false;
+  let disabled: boolean | undefined | null = false;
   let variant = '';
-  let withIcon = true;
+  let withIcon: boolean | undefined | null = true;
   let href = `${base}/components/link`;
   let text = 'sterling-svelte';
 
@@ -27,7 +27,7 @@
 
 <Playground {code}>
   <svelte:fragment slot="component">
-    <Link {disabled} {href} {variant} on:click={() => console.log('<Link> on:click')}>
+    <Link {disabled} {href} class={variant} on:click={() => console.log('<Link> on:click')}>
       {#if withIcon}
         <SvelteIcon />
       {/if}

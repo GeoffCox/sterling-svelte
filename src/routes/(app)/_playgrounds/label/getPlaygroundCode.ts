@@ -1,15 +1,15 @@
 import type { LabelStatus } from '$lib';
 
 export const getPlaygroundCode = (props: {
-  forwardClick: boolean;
+  forwardClick?: boolean | null;
   message: string;
-  required: boolean;
+  required?: boolean | null;
   requiredReason: string;
   status: LabelStatus;
   text: string;
-  useFor: boolean;
+  useFor?: boolean | null;
   variant: string;
-  vertical: boolean;
+  vertical?: boolean | null;
 }) => {
   const propList: string[] = [];
 

@@ -90,9 +90,9 @@
       <div class="items">
         {#each section.items as item}
           {#if $page.url.pathname === item.url}
-            <Link href={`${base}${item.url}`} text={item.name} />
+            <Link href={`${base}${item.url}`}>{item.name}</Link>
           {:else}
-            <Link variant="ghost" href={`${base}${item.url}`} text={item.name} />
+            <Link class="ghost" href={`${base}${item.url}`}>{item.name}</Link>
           {/if}
         {/each}
       </div>

@@ -3,7 +3,7 @@ import type { PopoverPlacement } from '$lib';
 export const getPlaygroundCode = (props: {
   crossAxisOffset: number;
   mainAxisOffset: number;
-  open: boolean;
+  open: boolean | undefined;
   placement: PopoverPlacement;
   text: string;
   variant: string;
@@ -22,7 +22,7 @@ export const getPlaygroundCode = (props: {
     propList.push(`placement="${props.placement}"`);
   }
   if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
+    propList.push(`class="${props.variant.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Index from './index.md';
+  import Index from './index.svelte';
 </script>
 
 <Index />

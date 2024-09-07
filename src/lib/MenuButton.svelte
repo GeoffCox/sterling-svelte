@@ -134,10 +134,10 @@
   aria-owns={menuId}
   data-value={value}
   data-root-value={value}
-  variant={`sterling-menu-button ${variant}`}
+  class={`sterling-menu-button ${variant}`}
   on:blur
   on:click
-  on:click={onClick}
+  onclick={onClick}
   on:dblclick
   on:dragend
   on:dragenter

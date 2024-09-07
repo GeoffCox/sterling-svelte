@@ -29,11 +29,13 @@
   {#if props}
     <table>
       <thead>
-        <th></th>
-        <th>Property Name</th>
-        <th>Type</th>
-        <th>Default</th>
-        <th>Comment</th>
+        <tr>
+          <th></th>
+          <th>Property Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Comment</th>
+        </tr>
       </thead>
       <tbody>
         {#each props as item}
@@ -52,10 +54,12 @@
   {#if events}
     <table>
       <thead>
-        <th></th>
-        <th>Event Name</th>
-        <th>Data</th>
-        <th>Comment</th>
+        <tr>
+          <th></th>
+          <th>Event Name</th>
+          <th>Data</th>
+          <th>Comment</th>
+        </tr>
       </thead>
       <tbody>
         {#each events as item}
@@ -73,12 +77,13 @@
   {#if methods}
     <table>
       <thead>
-        <th></th>
-
-        <th>Method Name</th>
-        <th>Parameters</th>
-        <th>Return Type</th>
-        <th>Comment</th>
+        <tr>
+          <th></th>
+          <th>Method Name</th>
+          <th>Parameters</th>
+          <th>Return Type</th>
+          <th>Comment</th>
+        </tr>
       </thead>
       <tbody>
         {#each methods as item}
@@ -98,11 +103,12 @@
     <h2>Types</h2>
     <table>
       <thead>
-        <th></th>
-
-        <th>Type Name</th>
-        <th>Definition</th>
-        <th>Comment</th>
+        <tr>
+          <th></th>
+          <th>Type Name</th>
+          <th>Definition</th>
+          <th>Comment</th>
+        </tr>
       </thead>
       <tbody>
         {#each types as item}

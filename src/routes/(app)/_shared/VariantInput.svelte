@@ -5,7 +5,7 @@
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
 
-  export let labelText = 'variant';
+  export let labelText = 'class';
 
   export let variant: string = '';
 

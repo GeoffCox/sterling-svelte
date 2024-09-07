@@ -6,8 +6,8 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled = false;
-  let checked = false;
+  let disabled: boolean | undefined | null = false;
+  let checked: boolean | undefined | null = false;
   let text = 'sterling-svelte';
   let variant = '';
 
@@ -16,12 +16,21 @@
 
 <Playground {code}>
   <div slot="component" class="component">
-    <Checkbox
-      {disabled}
-      bind:checked
-      {variant}
-      on:change={() => console.log('<Checkbox> on:change')}>{text}</Checkbox
-    >
+    {#if text}
+      <Checkbox
+        {disabled}
+        bind:checked
+        class={variant}
+        on:change={() => console.log('<Checkbox> on:change')}>{text}</Checkbox
+      >
+    {:else}
+      <Checkbox
+        {disabled}
+        bind:checked
+        class={variant}
+        on:change={() => console.log('<Checkbox> on:change')}
+      />
+    {/if}
   </div>
   <svelte:fragment slot="props">
     <Checkbox bind:checked>checked</Checkbox>

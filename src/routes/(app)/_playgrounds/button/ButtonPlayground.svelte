@@ -10,16 +10,16 @@
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled = false;
-  let variant: string = '';
+  let _class: string = '';
   let text = 'sterling-svelte';
   let withIcon = true;
 
-  $: code = getPlaygroundCode({ disabled, text, variant, withIcon });
+  $: code = getPlaygroundCode({ disabled, text, _class, withIcon });
 </script>
 
 <Playground {code}>
   <div class="component" slot="component">
-    <Button {disabled} {variant} on:click={() => console.log('Button on:click')}>
+    <Button {disabled} class={_class} onclick={() => console.log('Button on:click')}>
       {#if withIcon}
         <SvelteIcon />
       {/if}
@@ -29,7 +29,7 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <VariantInput
-      bind:variant
+      bind:variant={_class}
       availableVariants={['capsule', 'circular ', 'colorful', 'secondary', 'square', 'tool']}
     />
   </svelte:fragment>

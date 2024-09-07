@@ -14,7 +14,7 @@
 
   let crossAxisOffset = 0;
   let mainAxisOffset = 0;
-  let open = true;
+  let open: boolean | undefined | null = true;
   let placement: PopoverPlacement = 'top-start';
   let text = 'sterling-svelte';
   let reference: HTMLDivElement;
@@ -35,7 +35,7 @@
     <div class="reference" bind:this={reference}>
       The reference anchor for positioning the popover.
     </div>
-    <Popover bind:open {reference} {mainAxisOffset} {crossAxisOffset} {placement} {variant}>
+    <Popover bind:open {reference} {mainAxisOffset} {crossAxisOffset} {placement} class={variant}>
       <div class="popover-text">{text}</div>
     </Popover>
   </div>

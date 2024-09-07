@@ -1,8 +1,8 @@
 export const getPlaygroundCode = (props: {
-  disabled: boolean;
+  disabled: boolean | undefined | null;
   href: string;
   text: string;
-  withIcon: boolean;
+  withIcon: boolean | undefined | null;
   variant: string;
 }) => {
   const propList: string[] = [];

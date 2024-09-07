@@ -8,7 +8,7 @@
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled = false;
+  let disabled: boolean | null = false;
   let placeholder = '';
   let text = '';
   let value = 'sterling-svelte';
@@ -23,7 +23,7 @@
       <Input
         {disabled}
         {placeholder}
-        {variant}
+        class={variant}
         bind:value
         on:input={() => console.log('input')}
         on:change={() => console.log('change')}>{text}</Input
@@ -32,10 +32,10 @@
       <Input
         {disabled}
         {placeholder}
-        {variant}
+        class={variant}
         bind:value
-        on:input={() => console.log('input')}
-        on:change={() => console.log('change')}
+        oninput={() => console.log('input')}
+        onchange={() => console.log('change')}
       />
     {/if}
   </svelte:fragment>

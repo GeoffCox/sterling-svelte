@@ -18,7 +18,6 @@ export { idGenerator } from './idGenerator';
 
 // ----- Component types ----- //
 export type { ButtonVariant, ButtonShape } from './Button.types';
-export type { LabelStatus, LabelVariant } from './Label.types';
 export type { ListContext } from './List.types';
 export type { MenuBarContext } from './MenuBar.types';
 export type { MenuItemContext, MenuItemRegistration, MenuItemRole } from './MenuItem.types';

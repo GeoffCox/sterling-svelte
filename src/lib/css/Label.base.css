@@ -65,25 +65,26 @@
     border-color 250ms;
 }
 
-.sterling-label .message.info {
+.sterling-label.info .message {
   background-color: var(--stsv-status--info__background-color);
   border-color: var(--stsv-status--info__border-color);
   color: var(--stsv-status--info__color);
 }
 
-.sterling-label .message.success {
+.sterling-label.success .message {
   background-color: var(--stsv-status--success__background-color);
   border-color: var(--stsv-status--success__border-color);
   color: var(--stsv-status--success__color);
 }
 
-.sterling-label .message.warning {
+.sterling-label.warning .message {
   background-color: var(--stsv-status--warning__background-color);
   border-color: var(--stsv-status--warning__border-color);
   color: var(--stsv-status--warning__color);
 }
 
-.sterling-label .message.error {
+.sterling-label.danger .message,
+.sterling-label.error .message {
   background-color: var(--stsv-status--danger__background-color);
   border-color: var(--stsv_--danger-color);
   color: var(--stsv-status--danger__color);

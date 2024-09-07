@@ -19,7 +19,7 @@ export const labelDoc: ComponentDoc = {
     },
     {
       name: 'message',
-      type: 'string',
+      type: 'string | Snippet',
       default: "''",
       comment: 'The status message to display.'
     },
@@ -31,35 +31,15 @@ export const labelDoc: ComponentDoc = {
     },
     {
       name: 'requiredReason',
-      type: 'string',
+      type: 'string | Snippet',
       default: "''",
       comment: 'The reason a value is required.'
     },
     {
-      name: 'status',
-      type: 'string',
-      default: "''",
-      comment: 'The status of the label message.'
-    },
-    {
       name: 'text',
-      type: 'string',
+      type: 'string | Snippet',
       default: "''",
       comment: 'The text to display in the label. Not used if the text slot is filled.'
-    },
-    {
-      name: 'vertical',
-      type: 'string',
-      default: 'true',
-      comment: 'When true, the label appears above the content.'
-    },
-    commonProps.variant
-  ],
-  types: [
-    {
-      name: 'LabelStatus',
-      definition: "'none' | 'error' | 'warning' | 'info' | 'success'",
-      comment: 'Used for the Label status property.'
     }
   ],
   anatomy: `<label class="sterling-label">

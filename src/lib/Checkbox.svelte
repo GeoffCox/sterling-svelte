@@ -1,25 +1,28 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
+  import type { HTMLInputAttributes } from 'svelte/elements';
   import { idGenerator } from './idGenerator';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
-  // ----- Props ----- //
+  type Props = HTMLInputAttributes;
 
-  export let checked: boolean = false;
-  export let disabled: boolean = false;
-  export let id: string | undefined = undefined;
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ----- State ----- //
+  let {
+    id,
+    children,
+    checked = $bindable(false),
+    class: _class,
+    disabled = $bindable(false),
+    ...rest
+  }: Props = $props();
 
   let inputRef: HTMLInputElement;
 
-  $: {
-    if ($$slots.default && id === undefined) {
+  $effect(() => {
+    if (children && id === undefined) {
       id = idGenerator.nextId('Checkbox');
     }
-  }
+  });
 
   // ----- Methods ----- //
 
@@ -41,50 +44,18 @@
 	A styled HTML input type=checkbox element.
 -->
 <div
-  class={`sterling-checkbox ${variant}`}
+  class={`sterling-checkbox ${_class}`}
   class:checked
   class:disabled
   class:using-keyboard={$usingKeyboard}
 >
   <div class="container">
-    <input
-      bind:this={inputRef}
-      bind:checked
-      {disabled}
-      {id}
-      type="checkbox"
-      on:blur
-      on:click
-      on:change
-      on:dblclick
-      on:dragend
-      on:dragenter
-      on:dragleave
-      on:dragover
-      on:dragstart
-      on:drop
-      on:focus
-      on:focusin
-      on:focusout
-      on:keydown
-      on:keypress
-      on:keyup
-      on:input
-      on:mousedown
-      on:mouseenter
-      on:mouseleave
-      on:mousemove
-      on:mouseover
-      on:mouseout
-      on:mouseup
-      on:wheel|passive
-      {...$$restProps}
-    />
-    <div class="indicator" />
+    <input bind:this={inputRef} bind:checked {disabled} {id} type="checkbox" {...rest} />
+    <div class="indicator"></div>
   </div>
-  {#if $$slots.default}
+  {#if children}
     <label for={id}>
-      <slot {checked} {disabled} inputId={id} value={$$restProps.value} {variant} />
+      {@render children()}
     </label>
   {/if}
 </div>

@@ -1,5 +1,5 @@
 export const getPlaygroundCode = (props: {
-  disabled: boolean;
+  disabled: boolean | null;
   placeholder: string;
   text: string;
   value: string;
@@ -17,7 +17,7 @@ export const getPlaygroundCode = (props: {
     propList.push(`value="${props.value}"`);
   }
   if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
+    propList.push(`class="${props.variant.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

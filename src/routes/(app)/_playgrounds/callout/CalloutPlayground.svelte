@@ -14,13 +14,20 @@
 
   let crossAxisOffset = 0;
   let mainAxisOffset = 0;
-  let open = true;
+  let open: boolean | undefined | null = true;
   let placement: PopoverPlacement = 'top-start';
   let reference: HTMLElement;
   let text: string = 'sterling-svelte';
   let variant = '';
 
-  $: code = getPlaygroundCode({ crossAxisOffset, mainAxisOffset, open, placement, text, variant });
+  $: code = getPlaygroundCode({
+    crossAxisOffset,
+    mainAxisOffset,
+    open: open || undefined,
+    placement,
+    text,
+    variant
+  });
 </script>
 
 <Playground {code}>
@@ -28,7 +35,7 @@
     <div class="reference" bind:this={reference}>
       The reference anchor for positioning the callout.
     </div>
-    <Callout {variant} {crossAxisOffset} {mainAxisOffset} bind:open {placement} {reference}>
+    <Callout class={variant} {crossAxisOffset} {mainAxisOffset} bind:open {placement} {reference}>
       <div class="callout-text">{text}</div>
     </Callout>
   </div>

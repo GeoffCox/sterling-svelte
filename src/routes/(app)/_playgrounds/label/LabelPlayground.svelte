@@ -10,16 +10,15 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled = false;
-  let forwardClick = false;
+  let disabled: boolean | undefined | null = false;
+  let forwardClick: boolean | undefined | null = false;
   let text = 'sterling-svelte';
   let message = '';
-  let required = false;
+  let required: boolean | undefined | null = false;
   let requiredReason = '';
   let status: LabelStatus | 'none' = 'none';
-  let useFor = true;
-  let variant = '';
-  let vertical = true;
+  let useFor: boolean | undefined | null = true;
+  let variant = 'vertical';
 
   $: code = getPlaygroundCode({
     forwardClick,
@@ -29,8 +28,7 @@
     status,
     text,
     useFor,
-    variant,
-    vertical
+    variant
   });
 </script>
 
@@ -42,12 +40,10 @@
       {message}
       {required}
       {requiredReason}
-      {status}
       {text}
-      {variant}
-      {vertical}
+      class={variant}
     >
-      <Input id="target" {disabled} variant={variant.includes('boxed') ? 'composed' : undefined} />
+      <Input id="target" {disabled} class={variant.includes('boxed') ? 'composed' : undefined} />
     </Label>
   </svelte:fragment>
   <svelte:fragment slot="props">
@@ -62,15 +58,10 @@
     <Label text="requiredReason">
       <Input bind:value={requiredReason} />
     </Label>
-    <Label text="status" for="status-select" forwardClick>
-      <Select id="status-select" bind:selectedValue={status}>
-        {#each LABEL_STATUSES as labelStatus}
-          <ListItem value={labelStatus}>{labelStatus}</ListItem>
-        {/each}
-      </Select>
-    </Label>
-    <VariantInput bind:variant availableVariants={['boxed', 'colorful']} />
-    <Checkbox bind:checked={vertical}>vertical</Checkbox>
+    <VariantInput
+      bind:variant
+      availableVariants={['boxed', 'colorful', 'vertical', 'info', 'warning', 'danger', 'success']}
+    />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Checkbox bind:checked={disabled}>Input child disabled</Checkbox>
