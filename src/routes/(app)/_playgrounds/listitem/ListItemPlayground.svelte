@@ -1,3 +1,6 @@
+<!-- svelte-ignore state_referenced_locally -->
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
@@ -11,43 +14,54 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled = false;
-  let selected = false;
-  let text = 'sterling-svelte';
-  let value = 'item-1';
-  let variant = '';
+  let _class = $state('');
+  let disabled: boolean | undefined | null = $state(false);
+  let horizontal: boolean | undefined | null = $state(false);
+  let selected: boolean | undefined | null = $state(false);
+  let selectedValue: string = $state('');
+  let text = $state('sterling-svelte');
+  let value = $state('item-1');
 
-  const disabledStore = writable<boolean>(false);
-  const selectedValueStore = writable<string | undefined>('');
-
-  setContext<ListContext>(LIST_CONTEXT_KEY, {
-    disabled: disabledStore,
-    selectedValue: selectedValueStore
+  let listContext: ListContext = $state({
+    disabled: false,
+    horizontal: false,
+    selectedValue: ''
   });
 
-  $: {
-    selected ? selectedValueStore.set('sterling') : selectedValueStore.set('');
-  }
+  setContext<ListContext>(LIST_CONTEXT_KEY, listContext);
 
-  $: code = getPlaygroundCode({
-    disabled,
-    selected,
-    text,
-    value,
-    variant
+  $effect(() => {
+    selectedValue = selected ? value : '';
   });
+
+  $effect(() => {
+    listContext.horizontal = horizontal;
+  });
+
+  $effect(() => {
+    listContext.selectedValue = selectedValue;
+  });
+
+  let code = $derived(
+    getPlaygroundCode({
+      disabled,
+      text,
+      value,
+      variant: _class
+    })
+  );
 </script>
 
 <Playground {code}>
   <svelte:fragment slot="component">
-    <ListItem {disabled} value="sterling" {variant}>{text}</ListItem>
+    <ListItem {disabled} {value} class={_class}>{text}</ListItem>
   </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="value">
       <Input bind:value />
     </Label>
-    <VariantInput bind:variant availableVariants={[]} />
+    <VariantInput bind:variant={_class} availableVariants={[]} />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Checkbox bind:checked={selected}>selected</Checkbox>

@@ -1,6 +1,5 @@
 export const getPlaygroundCode = (props: {
   disabled: boolean;
-  selected: boolean;
   text: string;
   value: string;
   variant: string;
@@ -9,9 +8,6 @@ export const getPlaygroundCode = (props: {
 
   if (props.disabled) {
     propList.push(`disabled`);
-  }
-  if (props.selected) {
-    propList.push(`selected`);
   }
   if (props.value) {
     propList.push(`value="${props.value.trim()}"`);

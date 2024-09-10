@@ -10,8 +10,8 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled = false;
-  let horizontal = false;
+  let disabled: boolean | undefined | null = false;
+  let horizontal: boolean | undefined | null = false;
   let selectedValue: string | undefined = undefined;
   let selectedValueText: string | undefined = undefined;
   let variant = '';
@@ -42,10 +42,9 @@
       bind:selectedValue
       {disabled}
       {horizontal}
-      selectionKeys="tab"
-      {variant}
-      on:select={(event) => {
-        console.log(`select:${event.detail.value}`);
+      class={variant}
+      onselect={(value) => {
+        console.log(`select:${value}`);
       }}
     >
       {#each countries as country}
