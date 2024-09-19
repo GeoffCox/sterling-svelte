@@ -4,7 +4,7 @@ import type { ComponentDoc } from './types';
 
 export const menuDoc: ComponentDoc = {
   name: 'Menu',
-  description: 'An interactive list of <MenuItem>s',
+  description: 'An interactive list of <MenuItem>',
   comments: [
     'Menu is a building block for the other menu components: MenuBar, MenuButton, MenuItem, MenuSeparator.',
     'Position is based on the reference element.',

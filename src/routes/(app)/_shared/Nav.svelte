@@ -55,7 +55,6 @@
         { name: 'MenuBar', url: '/components/menubar' },
         { name: 'MenuButton', url: '/components/menubutton' },
         { name: 'MenuItem', url: '/components/menuitem' },
-        { name: 'MenuItemDisplay', url: '/components/menuitemdisplay' },
         { name: 'MenuSeparator', url: '/components/menuseparator' },
         { name: 'Popover', url: '/components/popover' },
         { name: 'Progress', url: '/components/progress' },

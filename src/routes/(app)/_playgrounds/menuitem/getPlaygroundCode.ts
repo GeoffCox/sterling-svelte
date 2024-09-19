@@ -1,8 +1,8 @@
 import type { MenuItemRole } from '$lib';
 
 export const getPlaygroundCode = (props: {
-  checked: boolean;
-  disabled: boolean;
+  checked: boolean | undefined | null;
+  disabled: boolean | undefined | null;
   menuVariant: string;
   role: MenuItemRole;
   text: string;

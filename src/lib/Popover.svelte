@@ -14,7 +14,7 @@
   import type { PopoverPlacement } from './Popover.types';
   import type { PortalContext } from './Portal.types';
   import { STERLING_PORTAL_HOST_ID, STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
-  import type { HTMLAttributes } from 'svelte/elements';
+  import type { HTMLAttributes, KeyboardEventHandler } from 'svelte/elements';
 
   // ----- Props ----- //
 
@@ -135,12 +135,14 @@
     };
   });
 
-  const onKeydown = (event: KeyboardEvent) => {
+  const onKeydown: KeyboardEventHandler<HTMLDivElement> = (event) => {
     if (event.key === 'Escape') {
       open = false;
     }
+    rest.onkeydown?.(event);
   };
 
+  //TODO: Is this necessary?
   ensurePortalHost();
 </script>
 
@@ -163,8 +165,8 @@
       class:left={popupPosition.placement === 'left'}
       class:left-start={popupPosition.placement === 'left-start'}
       class:left-end={popupPosition.placement === 'left-end'}
-      onkeydown={onKeydown}
       {...rest}
+      onkeydown={onKeydown}
       style="left:{popupPosition.x}px; top:{popupPosition.y}px"
     >
       {#if children}

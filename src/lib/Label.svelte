@@ -4,7 +4,7 @@
   import { type Snippet } from 'svelte';
   import Tooltip from './Tooltip.svelte';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
-  import type { HTMLLabelAttributes } from 'svelte/elements';
+  import type { HTMLLabelAttributes, MouseEventHandler } from 'svelte/elements';
 
   type Props = HTMLLabelAttributes & {
     forwardClick?: boolean | null;
@@ -75,10 +75,11 @@
 
   // ----- Event Handlers ----- //
 
-  const onClick = () => {
+  const onClick: MouseEventHandler<HTMLLabelElement> = (event) => {
     if (forwardClick) {
       targetRef?.click();
     }
+    rest.onclick?.(event);
   };
 </script>
 
@@ -98,8 +99,8 @@
   class={`sterling-label ${_class}`}
   class:using-keyboard={$usingKeyboard}
   for={_for}
-  onclick={onClick}
   {...rest}
+  onclick={onClick}
 >
   {@render snippetOrText(text, 'text')}
   {#if children}

@@ -7,7 +7,6 @@
   import Input from '$lib/Input.svelte';
   import ListItem from '$lib/ListItem.svelte';
   import { setContext } from 'svelte';
-  import { readable, writable } from 'svelte/store';
   import type { ListContext } from '$lib';
   import { LIST_CONTEXT_KEY } from '$lib/List.constants';
   import Label from '$lib/Label.svelte';

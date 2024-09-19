@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
@@ -5,7 +7,6 @@
   import MenuItem from '$lib/MenuItem.svelte';
   import { setContext } from 'svelte';
   import { MENU_ITEM_CONTEXT_KEY, type MenuItemContext, type MenuItemRole } from '$lib';
-  import { writable } from 'svelte/store';
   import VariantInput from '../../_shared/VariantInput.svelte';
   import Label from '$lib/Label.svelte';
   import ListItem from '$lib/ListItem.svelte';
@@ -13,37 +14,51 @@
   import Input from '$lib/Input.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let checked = false;
-  let disabled = false;
-  let menuVariant = '';
-  let role: MenuItemRole = 'menuitem';
-  let text = 'sterling-svelte';
-  let value = 'menu-item-1';
-  let variant = '';
+  let checked: boolean | undefined | null = $state(false);
+  let disabled: boolean | undefined | null = $state(false);
+  let menuVariant = $state('');
+  let role: string = $state('menuitem');
+  let text = $state('sterling-svelte');
+  let shortcut: string | undefined = $state(undefined);
+  let value = $state('menu-item-1');
+  let variant = $state('');
 
-  let hasChildren = false;
+  let hasChildren: boolean | undefined | null = $state(false);
 
-  const openValues = writable<string[]>([]);
+  let openValues: string[] = $state([]);
 
   setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
-    openValues,
+    get openValues() {
+      return openValues;
+    },
+    set openValues(value: string[]) {
+      openValues = value;
+    },
     isMenuBarItem: false,
     rootValue: 'root',
     closeContainingMenu: () => {},
-    onOpen: () => {},
-    onClose: () => {},
-    onSelect: () => {}
+    onOpen: () => {
+      console.log('<MenuItem> onOpen');
+    },
+    onClose: () => {
+      console.log('<MenuItem> onClose');
+    },
+    onSelect: () => {
+      console.log('<MenuItem> onSelect');
+    }
   });
 
-  $: code = getPlaygroundCode({
-    checked,
-    disabled,
-    menuVariant,
-    role,
-    text,
-    value,
-    variant
-  });
+  let code = $derived(
+    getPlaygroundCode({
+      checked,
+      disabled,
+      menuVariant,
+      role: role as MenuItemRole,
+      text,
+      value,
+      variant
+    })
+  );
 </script>
 
 <Playground {code}>
@@ -52,14 +67,15 @@
       <MenuItem
         {checked}
         {disabled}
-        {menuVariant}
-        {role}
+        menuClass={menuVariant}
+        role={role as MenuItemRole}
         {text}
+        {shortcut}
         {value}
-        {variant}
-        on:close={(event) => console.log(`close '${event.detail.value}'`)}
-        on:open={(event) => console.log(`open '${event.detail.value}'`)}
-        on:select={(event) => console.log(`select '${event.detail.value}'`)}
+        class={variant}
+        onclose={(value) => console.log(`<MenuItem> onclose value'${value}'`)}
+        onopen={(value) => console.log(`<MenuItem> onopen value:'${value}'`)}
+        onselect={(value) => console.log(`<MenuItem> onselect value:'${value}'`)}
       >
         <MenuItem value="1" text="One" />
         <MenuItem value="2" text="Two" />
@@ -70,26 +86,30 @@
         {checked}
         {value}
         {disabled}
-        {role}
+        role={role as MenuItemRole}
+        {shortcut}
         {text}
-        {variant}
-        {menuVariant}
-        on:close={(event) => console.log(`<MenuItem> on:close value'${event.detail.value}'`)}
-        on:open={(event) => console.log(`<MenuItem> on:open value:'${event.detail.value}'`)}
-        on:select={(event) => console.log(`<MenuItem> on:select value:'${event.detail.value}'`)}
+        class={variant}
+        menuClass={menuVariant}
+        onclose={(value) => console.log(`<MenuItem> onclose value'${value}'`)}
+        onopen={(value) => console.log(`<MenuItem> onopen value:'${value}'`)}
+        onselect={(value) => console.log(`<MenuItem> onselect value:'${value}'`)}
       />
     {/if}
   </svelte:fragment>
   <svelte:fragment slot="props">
     <Checkbox bind:checked>checked</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <VariantInput bind:variant={menuVariant} availableVariants={[]} labelText="menuVariant" />
+    <VariantInput bind:variant={menuVariant} availableVariants={[]} labelText="menuClass" />
     <Label text="role">
       <Select bind:selectedValue={role}>
         <ListItem value="menuitem">menuitem</ListItem>
         <ListItem value="menuitemcheckbox">menuitemcheckbox</ListItem>
         <ListItem value="menuitemradio">menuitemradio</ListItem>
       </Select>
+    </Label>
+    <Label text="shortcut">
+      <Input bind:value={shortcut} />
     </Label>
     <Label text="text">
       <Input bind:value={text} />

@@ -59,7 +59,6 @@ import Menu from './Menu.svelte';
 import MenuBar from './MenuBar.svelte';
 import MenuButton from './MenuButton.svelte';
 import MenuItem from './MenuItem.svelte';
-import MenuItemDisplay from './MenuItemDisplay.svelte';
 import MenuSeparator from './MenuSeparator.svelte';
 import Popover from './Popover.svelte';
 import Progress from './Progress.svelte';
@@ -95,7 +94,6 @@ export {
   MenuBar,
   MenuButton,
   MenuItem,
-  MenuItemDisplay,
   MenuSeparator,
   Popover,
   Progress,

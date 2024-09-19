@@ -103,6 +103,7 @@
   };
 
   const selectItem = (value: string, element: HTMLElement) => {
+    console.log('List.selectItem', value);
     selectedValue = value;
     lastSelectedItemRef = element;
     element.scrollIntoView({ block: 'nearest', inline: 'nearest' });
@@ -191,6 +192,7 @@
         selectItem(candidateValue, candidate);
       }
     }
+    rest.onclick?.(event);
   };
 
   const onKeydown: KeyboardEventHandler<HTMLDivElement> = (event) => {
@@ -244,6 +246,7 @@
           return false;
       }
     }
+    rest.onkeydown?.(event);
   };
 
   //#endregion
@@ -257,15 +260,15 @@
   aria-disabled={disabled}
   aria-orientation={horizontal ? 'horizontal' : 'vertical'}
   bind:this={listRef}
-  class={`sterling-list ${_class}`}
+  class={`sterling-list${_class ? ` ${_class}` : ''}`}
   class:disabled
   class:horizontal
   class:using-keyboard={$usingKeyboard}
   role="list"
   tabindex={0}
+  {...rest}
   onclick={onClick}
   onkeydown={onKeydown}
-  {...rest}
 >
   <div class="container">
     {#if children}

@@ -48,7 +48,7 @@
 <div
   aria-selected={selected}
   bind:this={itemRef}
-  class={`sterling-list-item ${_class}`}
+  class={`sterling-list-item${_class ? ` ${_class}` : ''}`}
   class:disabled={disabled || listContext.disabled}
   class:horizontal={listContext.horizontal}
   class:item-disabled={disabled}
@@ -60,5 +60,7 @@
 >
   {#if children}
     {@render children()}
+  {:else}
+    {value}
   {/if}
 </div>

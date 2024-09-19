@@ -17,7 +17,7 @@
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
   import type { PortalContext } from './Portal.types';
   import { STERLING_PORTAL_HOST_ID, STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
-  import type { HTMLAttributes } from 'svelte/elements';
+  import type { HTMLAttributes, KeyboardEventHandler } from 'svelte/elements';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     conditionalRender?: boolean;
@@ -176,10 +176,11 @@
 
   // ----- EventHandlers ----- //
 
-  const onKeydown = (event: KeyboardEvent) => {
+  const onKeydown: KeyboardEventHandler<HTMLDivElement> = (event) => {
     if (event.key === 'Escape') {
       open = false;
     }
+    rest.onkeydown?.(event);
   };
 
   $effect(() => {
@@ -226,8 +227,8 @@
       class:left-start={popupPosition.placement === 'left-start'}
       class:left-end={popupPosition.placement === 'left-end'}
       role="tooltip"
-      onkeydown={onKeydown}
       {...rest}
+      onkeydown={onKeydown}
       style="left:{popupPosition.x}px; top:{popupPosition.y}px"
     >
       {#if children}

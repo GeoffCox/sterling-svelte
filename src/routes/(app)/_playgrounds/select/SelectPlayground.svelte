@@ -13,11 +13,11 @@
   import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
 
-  let open = false;
+  let open: boolean | undefined | null = false;
   let items = countries;
 
   let selectedValue: string | undefined = items[random(0, items.length - 1)];
-  let disabled = false;
+  let disabled: boolean | undefined | null = false;
   let listVariant = '';
   let variant = '';
 
@@ -28,15 +28,15 @@
   <svelte:fragment slot="component">
     <Select
       {disabled}
-      {listVariant}
-      {variant}
+      listClass={listVariant}
+      class={variant}
       bind:open
       bind:selectedValue
-      on:select={(event) => {
-        console.log(`select:${event.detail.value}`);
+      onselect={(value) => {
+        console.log(`onselect:${value}`);
       }}
-      on:pending={(event) => {
-        console.log(`pending:${event.detail.value}`);
+      onpending={(value) => {
+        console.log(`onpending:${value}`);
       }}
     >
       {#each items as item}

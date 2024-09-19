@@ -3,6 +3,8 @@ import type { ClickOutsideEventDetail } from '$lib/@types/clickOutside';
 type Params = {
   /** Other elements should not raise the event if clicked. */
   ignoreOthers?: HTMLElement[];
+
+  onclickoutside?: (mouseEvent: MouseEvent) => void;
 };
 
 /**
@@ -20,6 +22,7 @@ export const clickOutside = (node: HTMLElement, params?: Params) => {
       !node.contains(targetNode) &&
       (!ignoreOthers || ignoreOthers.filter(Boolean).every((x) => !x.contains(targetNode)))
     ) {
+      params?.onclickoutside?.(event);
       node.dispatchEvent(
         new CustomEvent<ClickOutsideEventDetail>('click_outside', {
           detail: { mouseEvent: event }

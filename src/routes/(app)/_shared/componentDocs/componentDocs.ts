@@ -18,7 +18,6 @@ import { menuDoc } from './menuDoc';
 import { menuBarDoc } from './menuBarDoc';
 import { menuButtonDoc } from './menuButtonDoc';
 import { menuItemDoc } from './menuItemDoc';
-import { menuItemDisplayDoc } from './menuitemDisplayDoc';
 import { menuSeparatorDoc } from './menuSeparatorDoc';
 import { popoverDoc } from './popoverDoc';
 import { progressDoc } from './progressDoc';
@@ -53,7 +52,6 @@ export const componentDocs: Record<string, ComponentDoc> = {
   menubar: menuBarDoc,
   menubutton: menuButtonDoc,
   menuitem: menuItemDoc,
-  menuitemdisplay: menuItemDisplayDoc,
   menuseparator: menuSeparatorDoc,
   popover: popoverDoc,
   progress: progressDoc,

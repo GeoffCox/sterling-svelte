@@ -1,6 +1,6 @@
 export const getPlaygroundCode = (props: {
-  disabled: boolean;
-  open: boolean;
+  disabled: boolean | undefined | null;
+  open: boolean | undefined | null;
   listVariant: string;
   variant: string;
 }) => {

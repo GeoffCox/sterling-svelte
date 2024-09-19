@@ -17,10 +17,10 @@
 <Playground {code}>
   <svelte:fragment slot="component">
     <MenuBar
-      on:close={(event) => console.log(`close '${event.detail.value}'`)}
-      on:open={(event) => console.log(`open '${event.detail.value}'`)}
-      on:select={(event) => console.log(`select '${event.detail.value}'`)}
-      {variant}
+      onclose={(value) => console.log(`close '${value}'`)}
+      onopen={(value) => console.log(`open '${value}'`)}
+      onselect={(value) => console.log(`select '${value}'`)}
+      class={variant}
     >
       <MenuItem value="file" text="File">
         <MenuItem value="new-file" text="New..." />
