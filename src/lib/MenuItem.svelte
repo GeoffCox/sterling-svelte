@@ -22,14 +22,14 @@
   type Props = HTMLButtonAttributes & {
     checked?: boolean | null;
     item?: Snippet;
-    role?: MenuItemRole;
     menuClass?: string;
-    shortcut?: string;
-    text?: string;
-    value: string;
     onclose?: (value: string) => void;
     onopen?: (value: string) => void;
     onselect?: (value: string) => void;
+    role?: MenuItemRole;
+    shortcut?: string;
+    text?: string;
+    value: string;
   };
 
   let {
@@ -38,20 +38,18 @@
     class: _class,
     disabled,
     item,
-    role = 'menuitem',
-    text,
-    value,
     menuClass,
-    shortcut,
     onclose,
     onopen,
     onselect,
+    role = 'menuitem',
+    text,
+    shortcut,
+    value,
     ...rest
   }: Props = $props();
 
   const menuItemContext = getContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY) || {};
-
-  $inspect(menuItemContext);
 
   const menuBarContext = getContext<MenuBarContext>(MENU_BAR_CONTEXT_KEY) || {};
 
@@ -59,16 +57,11 @@
 
   let displayId = $derived(`${value}-display-${instanceId}`);
   let open = $derived(menuItemContext.openValues?.includes(value));
+  let prevOpen = $state(menuItemContext.openValues?.includes(value));
   let menuId = $derived(`${value}-menu-${instanceId}`);
 
-  let menuItemRef: HTMLButtonElement;
-  let menuRef: Menu;
-
-  let prevOpen = open;
-
-  $effect(() => {
-    prevOpen = open;
-  });
+  let menuItemRef: HTMLButtonElement | undefined = $state();
+  let menuRef: Menu | undefined = $state();
 
   //#region methods
 
@@ -98,20 +91,17 @@
     menuItemContext.onOpen?.(value);
   };
 
-  $effect(() => {
-    if (children && open !== prevOpen) {
-      open ? raiseOpen(value) : raiseClose(value);
-    }
-    prevOpen = open;
-  });
-
-  // dispatches the event and bubbles it up the context
-  // so that container components can subscribe to select
-  // events for children.
   const raiseSelect = (value: string) => {
     onselect?.(value);
     menuItemContext.onSelect?.(value);
   };
+
+  $effect(() => {
+    if (open !== prevOpen) {
+      open ? raiseOpen(value) : raiseClose(value);
+    }
+    prevOpen = open;
+  });
 
   //#endregion
 
@@ -151,7 +141,7 @@
 
   // opens the menu for this menu item
   const openMenu = () => {
-    console.log('MenuItem open menu', menuItemContext.openValues, value);
+    console.log('MenuItem open menu', value, menuItemContext.depth);
     if (!menuItemContext.openValues.includes(value)) {
       // slice to depth to close any sibling menus that are open
       menuItemContext.openValues = [
@@ -351,7 +341,7 @@
   //#endregion
 
   //#region set context
-  let menuItemChildContext = $state({
+  let menuItemChildContext: MenuItemContext = {
     isMenuBarItem: false,
     get openValues() {
       return menuItemContext.openValues;
@@ -365,7 +355,7 @@
     onOpen: raiseOpen,
     onClose: raiseClose,
     onSelect: raiseSelect
-  });
+  };
 
   setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, menuItemChildContext);
 

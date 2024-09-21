@@ -22,19 +22,23 @@
 
   let { class: _class, children, onclose, onopen, onselect, ...rest }: Props = $props();
 
-  let openValues: string[] = $state([]);
   const rootValue = idGenerator.nextId('MenuBar');
+  let openValues: string[] = $state([]);
+  let prevOpenValue: string | undefined = $state();
 
   let menuBarRef: HTMLDivElement;
-  let prevOpenValue: string | undefined = $derived(openValues?.[0]);
 
   // Restore focus to the last open menu bar item when it closes
   $effect(() => {
     if (openValues.length === 0 && prevOpenValue !== undefined) {
       const candidate = menuBarRef.querySelector(`[data-value="${prevOpenValue}"]`);
       (candidate as HTMLElement)?.focus();
-      //prevOpenValue = undefined;
+      prevOpenValue = undefined;
     }
+  });
+
+  $effect(() => {
+    prevOpenValue = openValues[0];
   });
 
   export const blur = () => {
@@ -108,14 +112,13 @@
     closeAllMenus?.();
   };
 
-  let menuBarContext: MenuBarContext = $state({ openPreviousMenuBarItem, openNextMenuBarItem });
+  let menuBarContext: MenuBarContext = { openPreviousMenuBarItem, openNextMenuBarItem };
 
   setContext<MenuBarContext>(MENU_BAR_CONTEXT_KEY, menuBarContext);
 
-  $inspect(openValues);
-
-  let menuItemContext: MenuItemContext = $state({
+  let menuItemContext: MenuItemContext = {
     isMenuBarItem: true,
+    depth: 0,
     get openValues() {
       return openValues;
     },
@@ -126,7 +129,7 @@
     onClose: onclose,
     onOpen: onopen,
     onSelect: onselect
-  });
+  };
 
   setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, menuItemContext);
 </script>
