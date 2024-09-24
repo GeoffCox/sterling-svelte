@@ -14,8 +14,8 @@
     listClass?: string;
     open?: boolean | null;
     selectedValue?: string;
-    onselect?: (value?: string) => void;
-    onpending?: (value?: string) => void;
+    onSelect?: (value?: string) => void;
+    onPending?: (value?: string) => void;
     valueSnippet?: Snippet<[string | undefined]>;
     buttonSnippet?: Snippet;
   };
@@ -26,8 +26,8 @@
     class: _class,
     disabled = false,
     open = $bindable(false),
-    onselect,
-    onpending,
+    onSelect,
+    onPending,
     selectedValue = $bindable(),
     listClass,
     valueSnippet,
@@ -52,12 +52,12 @@
   });
 
   $effect(() => {
-    onselect?.(selectedValue);
+    onSelect?.(selectedValue);
   });
 
   $effect(() => {
     if (open) {
-      onpending?.(pendingSelectedValue);
+      onPending?.(pendingSelectedValue);
     }
   });
 
@@ -231,7 +231,7 @@
         selectedValue={pendingSelectedValue}
         onclick={onListClick}
         onkeydown={onListKeydown}
-        select={onListSelect}
+        onSelect={onListSelect}
         tabindex={open ? 0 : -1}
         class={`composed ${listClass}`}
       >

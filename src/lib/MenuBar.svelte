@@ -15,18 +15,22 @@
   import type { HTMLAttributes } from 'svelte/elements';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
-    onclose?: (value: string) => void;
-    onopen?: (value: string) => void;
-    onselect?: (value: string) => void;
+    onClose?: (value: string) => void;
+    onOpen?: (value: string) => void;
+    onSelect?: (value: string) => void;
   };
 
-  let { class: _class, children, onclose, onopen, onselect, ...rest }: Props = $props();
+  let { class: _class, children, onClose, onOpen, onSelect, ...rest }: Props = $props();
 
   const rootValue = idGenerator.nextId('MenuBar');
   let openValues: string[] = $state([]);
   let prevOpenValue: string | undefined = $state();
 
   let menuBarRef: HTMLDivElement;
+
+  $effect(() => {
+    prevOpenValue = openValues[0];
+  });
 
   // Restore focus to the last open menu bar item when it closes
   $effect(() => {
@@ -35,10 +39,6 @@
       (candidate as HTMLElement)?.focus();
       prevOpenValue = undefined;
     }
-  });
-
-  $effect(() => {
-    prevOpenValue = openValues[0];
   });
 
   export const blur = () => {
@@ -101,7 +101,7 @@
     openValues = [];
   };
 
-  const onclickoutside = (event: MouseEvent) => {
+  const onClickOutside = (event: MouseEvent) => {
     let element: HTMLElement | null = event.target as HTMLElement;
     while (element) {
       if (element.getAttribute('data-root-value') === rootValue) {
@@ -126,9 +126,9 @@
       openValues = value;
     },
     rootValue,
-    onClose: onclose,
-    onOpen: onopen,
-    onSelect: onselect
+    onClose,
+    onOpen,
+    onSelect
   };
 
   setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, menuItemContext);
@@ -140,7 +140,7 @@
   role="menubar"
   tabindex="-1"
   {...rest}
-  use:clickOutside={{ onclickoutside }}
+  use:clickOutside={{ onclickoutside: onClickOutside }}
 >
   {#if children}
     {@render children()}

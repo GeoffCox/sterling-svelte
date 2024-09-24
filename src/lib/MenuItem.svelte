@@ -23,9 +23,9 @@
     checked?: boolean | null;
     item?: Snippet;
     menuClass?: string;
-    onclose?: (value: string) => void;
-    onopen?: (value: string) => void;
-    onselect?: (value: string) => void;
+    onClose?: (value: string) => void;
+    onOpen?: (value: string) => void;
+    onSelect?: (value: string) => void;
     role?: MenuItemRole;
     shortcut?: string;
     text?: string;
@@ -39,9 +39,9 @@
     disabled,
     item,
     menuClass,
-    onclose,
-    onopen,
-    onselect,
+    onClose,
+    onOpen,
+    onSelect,
     role = 'menuitem',
     text,
     shortcut,
@@ -82,17 +82,17 @@
   //#region events
 
   const raiseClose = (value: string) => {
-    onclose?.(value);
+    onClose?.(value);
     menuItemContext.onClose?.(value);
   };
 
   const raiseOpen = (value: string) => {
-    onopen?.(value);
+    onOpen?.(value);
     menuItemContext.onOpen?.(value);
   };
 
   const raiseSelect = (value: string) => {
-    onselect?.(value);
+    onSelect?.(value);
     menuItemContext.onSelect?.(value);
   };
 

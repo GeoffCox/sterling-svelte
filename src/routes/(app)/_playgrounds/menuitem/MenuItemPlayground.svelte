@@ -73,9 +73,9 @@
         {shortcut}
         {value}
         class={variant}
-        onclose={(value) => console.log(`<MenuItem> onclose value'${value}'`)}
-        onopen={(value) => console.log(`<MenuItem> onopen value:'${value}'`)}
-        onselect={(value) => console.log(`<MenuItem> onselect value:'${value}'`)}
+        onClose={(value) => console.log(`<MenuItem> onclose value'${value}'`)}
+        onOpen={(value) => console.log(`<MenuItem> onopen value:'${value}'`)}
+        onSelect={(value) => console.log(`<MenuItem> onselect value:'${value}'`)}
       >
         <MenuItem value="1" text="One" />
         <MenuItem value="2" text="Two" />
@@ -91,9 +91,9 @@
         {text}
         class={variant}
         menuClass={menuVariant}
-        onclose={(value) => console.log(`<MenuItem> onclose value'${value}'`)}
-        onopen={(value) => console.log(`<MenuItem> onopen value:'${value}'`)}
-        onselect={(value) => console.log(`<MenuItem> onselect value:'${value}'`)}
+        onClose={(value) => console.log(`<MenuItem> onclose value'${value}'`)}
+        onOpen={(value) => console.log(`<MenuItem> onopen value:'${value}'`)}
+        onSelect={(value) => console.log(`<MenuItem> onselect value:'${value}'`)}
       />
     {/if}
   </svelte:fragment>

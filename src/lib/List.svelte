@@ -12,7 +12,7 @@
     disabled?: boolean | null;
     horizontal?: boolean | null;
     selectedValue?: string;
-    select?: (value?: string) => void;
+    onSelect?: (value?: string) => void;
   };
 
   let {
@@ -21,7 +21,7 @@
     disabled = false,
     horizontal = false,
     selectedValue = $bindable(),
-    select,
+    onSelect,
     ...rest
   }: Props = $props();
 
@@ -76,7 +76,7 @@
   //#endregion
 
   $effect(() => {
-    select?.(selectedValue);
+    onSelect?.(selectedValue);
   });
 
   //#region selection
@@ -103,7 +103,6 @@
   };
 
   const selectItem = (value: string, element: HTMLElement) => {
-    console.log('List.selectItem', value);
     selectedValue = value;
     lastSelectedItemRef = element;
     element.scrollIntoView({ block: 'nearest', inline: 'nearest' });

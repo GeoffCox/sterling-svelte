@@ -43,7 +43,7 @@
       {disabled}
       {horizontal}
       class={variant}
-      onselect={(value) => {
+      onSelect={(value) => {
         console.log(`select:${value}`);
       }}
     >

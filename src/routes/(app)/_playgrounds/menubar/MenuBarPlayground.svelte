@@ -17,9 +17,9 @@
 <Playground {code}>
   <svelte:fragment slot="component">
     <MenuBar
-      onclose={(value) => console.log(`close '${value}'`)}
-      onopen={(value) => console.log(`open '${value}'`)}
-      onselect={(value) => console.log(`select '${value}'`)}
+      onClose={(value) => console.log(`close '${value}'`)}
+      onOpen={(value) => console.log(`open '${value}'`)}
+      onSelect={(value) => console.log(`select '${value}'`)}
       class={variant}
     >
       <MenuItem value="file" text="File">

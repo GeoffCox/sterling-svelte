@@ -173,7 +173,7 @@
     <slot {open} {value} {variant} />
   </div>
   <Popover {reference} {open} placement={popoverPlacement}>
-    <Menu bind:this={menuRef} id={menuId} {reference} {open} variant={menuVariant}>
+    <Menu bind:this={menuRef} id={menuId} class={menuVariant}>
       <slot name="items" />
     </Menu>
   </Popover>

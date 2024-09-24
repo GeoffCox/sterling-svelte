@@ -32,10 +32,10 @@
       class={variant}
       bind:open
       bind:selectedValue
-      onselect={(value) => {
+      onSelect={(value) => {
         console.log(`onselect:${value}`);
       }}
-      onpending={(value) => {
+      onPending={(value) => {
         console.log(`onpending:${value}`);
       }}
     >
