@@ -29,7 +29,7 @@
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <VariantInput
-      bind:variant={_class}
+      bind:class={_class}
       availableVariants={['capsule', 'circular ', 'colorful', 'secondary', 'square', 'tool']}
     />
   </svelte:fragment>

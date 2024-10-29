@@ -24,7 +24,12 @@
   };
 </script>
 
-<a bind:this={linkRef} class={`sterling-link ${_class}`} class:disabled {...rest}>
+<a
+  bind:this={linkRef}
+  class={['sterling-link', _class].filter(Boolean).join(' ')}
+  class:disabled
+  {...rest}
+>
   {#if children}
     {@render children()}
   {/if}

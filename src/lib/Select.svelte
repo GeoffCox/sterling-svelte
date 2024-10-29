@@ -198,7 +198,7 @@
   aria-controls={popupId}
   aria-haspopup="listbox"
   aria-expanded={open}
-  class={`sterling-select ${_class}`}
+  class={['sterling-select', _class].filter(Boolean).join(' ')}
   class:disabled
   role="combobox"
   tabindex="0"
@@ -224,7 +224,7 @@
     {/if}
   </div>
   <Popover reference={selectRef} bind:open id={popupId} conditionalRender={false}>
-    <div class={`sterling-select-popup-content ${_class}`}>
+    <div class={['sterling-select-popup-content', _class].filter(Boolean).join(' ')}>
       <List
         bind:this={listRef}
         {disabled}

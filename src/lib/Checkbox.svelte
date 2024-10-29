@@ -44,7 +44,7 @@
 	A styled HTML input type=checkbox element.
 -->
 <div
-  class={`sterling-checkbox ${_class}`}
+  class={['sterling-checkbox', _class].filter(Boolean).join(' ')}
   class:checked
   class:disabled
   class:using-keyboard={$usingKeyboard}

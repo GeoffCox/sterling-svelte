@@ -90,7 +90,7 @@
 
 <div
   bind:this={menuRef}
-  class={`sterling-menu ${_class}`}
+  class={['sterling-menu', _class].filter(Boolean).join(' ')}
   role="menu"
   class:open
   data-root-value={rootValue}

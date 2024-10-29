@@ -1,68 +1,32 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  import type { ChangeEventHandler } from 'svelte/elements';
+  import type { ChangeEventHandler, HTMLInputAttributes } from 'svelte/elements';
 
   import { idGenerator } from './idGenerator';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
-  // ----- Props ----- //
-
-  export let checked: boolean = false;
-  export let disabled: boolean = false;
-  // bind:group doesn't seem to work properly (yet) in a nested radio.
-  // The workaround is to export `checked` and `group` properties
-  // and implement the same behavior.
-  export let group: any | undefined | null = undefined;
-  export let id: string | undefined = undefined;
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ensure initial state is consistent
-  if (checked && $$restProps.value !== group) {
-    group = $$restProps.value;
-  } else if (!checked && $$restProps.value === group) {
-    checked = true;
-  }
-
-  // ----- State ----- //
-
-  let inputRef: HTMLInputElement;
-  let previousChecked = checked;
-  let previousGroup = group;
-
-  const reconcile = () => {
-    if (checked !== previousChecked) {
-      // when checked, set group to value
-      if (checked && $$restProps.value) {
-        group = $$restProps.value;
-        previousGroup = $$restProps.value;
-      }
-      previousChecked = checked;
-    } else if (group !== previousGroup) {
-      // when group changes, update checked
-      if ($$restProps.value) {
-        checked = $$restProps.value === group;
-        previousChecked = checked;
-      }
-      previousGroup = group;
-    }
+  type Props = HTMLInputAttributes & {
+    group: any | undefined | null;
   };
 
-  $: checked, group, $$restProps.value, reconcile();
+  let {
+    id,
+    children,
+    checked = $bindable(false),
+    class: _class,
+    disabled = false,
+    group = $bindable(),
+    ...rest
+  }: Props = $props();
 
-  $: {
-    if (inputRef && checked && !inputRef.checked) {
-      // setting checked doesn't cause raise on:change,
-      // so we click the radio to cause it to be checked.
-      inputRef.click();
-    }
-  }
+  let inputRef: HTMLInputElement;
 
-  $: {
-    if ($$slots.default && id === undefined) {
+  $effect(() => {
+    if (children && id === undefined) {
       id = idGenerator.nextId('Radio');
     }
-  }
+  });
 
   // ----- Methods ----- //
 
@@ -81,10 +45,15 @@
   // ----- Event Handlers ----- //
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    if (e.currentTarget.checked) {
-      group = $$restProps.value;
-    }
+    console.log('onChange', e);
+    // if ((e.currentTarget && e.currentTarget.checked) || (e.target && e.target.checked)) {
+    //   group = value;
+    // }
   };
+
+  $effect(() => {
+    console.log(id, '-checked', checked);
+  });
 </script>
 
 <!--
@@ -92,52 +61,18 @@
 	A styled HTML input type=radio element with optional label.
 -->
 <div
-  class={`sterling-radio ${variant}`}
+  class={`sterling-radio ${_class}`}
   class:checked
   class:disabled
   class:using-keyboard={$usingKeyboard}
 >
   <div class="container">
-    <input
-      bind:this={inputRef}
-      {checked}
-      {disabled}
-      name={group}
-      {id}
-      type="radio"
-      on:blur
-      on:click
-      on:change
-      on:change={onChange}
-      on:dblclick
-      on:dragend
-      on:dragenter
-      on:dragleave
-      on:dragover
-      on:dragstart
-      on:drop
-      on:focus
-      on:focusin
-      on:focusout
-      on:keydown
-      on:keypress
-      on:keyup
-      on:input
-      on:mousedown
-      on:mouseenter
-      on:mouseleave
-      on:mousemove
-      on:mouseover
-      on:mouseout
-      on:mouseup
-      on:wheel|passive
-      {...$$restProps}
-    />
-    <div class="indicator" />
+    <input bind:this={inputRef} checked {disabled} bind:group {id} type="radio" {...rest} />
+    <div class="indicator"></div>
   </div>
-  {#if $$slots.default}
+  {#if children}
     <label for={id}>
-      <slot {checked} {disabled} {group} inputId={id} value={$$restProps.value} {variant} />
+      {@render children()}
     </label>
   {/if}
 </div>

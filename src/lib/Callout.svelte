@@ -212,7 +212,7 @@
     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
     <div
       bind:this={popupRef}
-      class={`sterling-callout ${_class}`}
+      class={['sterling-callout', _class].filter(Boolean).join(' ')}
       class:open
       class:top={popupPosition.placement === 'top'}
       class:top-start={popupPosition.placement === 'top-start'}

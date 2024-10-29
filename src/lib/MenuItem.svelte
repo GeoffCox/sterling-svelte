@@ -389,7 +389,7 @@
   aria-expanded={open}
   aria-haspopup={!!children}
   aria-owns={menuId}
-  class={`sterling-menu-item ${_class}`}
+  class={['sterling-menu-item', _class].filter(Boolean).join(' ')}
   class:using-keyboard={usingKeyboard}
   data-value={value}
   data-root-value={menuItemContext.rootValue}

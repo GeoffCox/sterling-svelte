@@ -259,7 +259,7 @@
   aria-disabled={disabled}
   aria-orientation={horizontal ? 'horizontal' : 'vertical'}
   bind:this={listRef}
-  class={`sterling-list${_class ? ` ${_class}` : ''}`}
+  class={['sterling-list', _class].filter(Boolean).join(' ')}
   class:disabled
   class:horizontal
   class:using-keyboard={$usingKeyboard}

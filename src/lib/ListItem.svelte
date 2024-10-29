@@ -48,7 +48,7 @@
 <div
   aria-selected={selected}
   bind:this={itemRef}
-  class={`sterling-list-item${_class ? ` ${_class}` : ''}`}
+  class={['sterling-list-item', _class].filter(Boolean).join(' ')}
   class:disabled={disabled || listContext.disabled}
   class:horizontal={listContext.horizontal}
   class:item-disabled={disabled}

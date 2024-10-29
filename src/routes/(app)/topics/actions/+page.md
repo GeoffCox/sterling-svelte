@@ -20,6 +20,25 @@ Raises an event anytime the user clicks outside the bounds of the element.
 </div>
 ```
 
+## extraClass
+
+Appends an extra class value to the class prop.
+Typically used by components to support adding the class prop to an existing class name.
+
+```
+<script lang="ts">
+  import { extraClass } from '@geoffcox/sterling-svelte';
+
+  let {children, class: _class}
+</script>
+
+<button class="sterling-button" use:extraClass={extraClass: _class}>
+  {#if children}
+    {children}
+  {/endif}
+</button>
+```
+
 ## forwardEvents
 
 Forwards native and svelte component events from one component to another.

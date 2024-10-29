@@ -115,6 +115,7 @@
   $effect(() => {
     bodyHeight;
     computePopoverPosition();
+    console.log('compute popover position effect');
   });
 
   // ----- EventHandlers ----- //
@@ -151,7 +152,7 @@
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div
       bind:this={popupRef}
-      class={`sterling-popover ${_class}`}
+      class={['sterling-popover', _class].filter(Boolean).join(' ')}
       class:open
       class:top={popupPosition.placement === 'top'}
       class:top-start={popupPosition.placement === 'top-start'}

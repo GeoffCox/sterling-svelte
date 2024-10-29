@@ -96,7 +96,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <label
   bind:this={labelRef}
-  class={`sterling-label ${_class}`}
+  class={['sterling-label', _class].filter(Boolean).join(' ')}
   class:using-keyboard={$usingKeyboard}
   for={_for}
   {...rest}

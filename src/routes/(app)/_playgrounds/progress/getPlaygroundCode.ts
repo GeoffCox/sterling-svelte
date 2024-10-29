@@ -1,13 +1,11 @@
 import type { ProgressStatus } from '$lib';
 
 export const getPlaygroundCode = (props: {
-  disabled: boolean;
+  disabled: boolean | null | undefined;
   max: number;
-  percent: number;
-  status: ProgressStatus;
   value: number;
   variant: string;
-  vertical: boolean;
+  vertical: boolean | null | undefined;
 }) => {
   const propList: string[] = [];
 
@@ -17,17 +15,11 @@ export const getPlaygroundCode = (props: {
   if (props.max !== 0) {
     propList.push(`max="${props.max}"`);
   }
-  if (props.percent !== 0) {
-    propList.push(`percent="${props.percent}"`);
-  }
-  if (props.status !== 'none') {
-    propList.push(`status="${props.status}"`);
-  }
   if (props.value !== 0) {
     propList.push(`value="${props.value}"`);
   }
   if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
+    propList.push(`class="${props.variant.trim()}"`);
   }
   if (props.vertical) {
     propList.push(`vertical`);

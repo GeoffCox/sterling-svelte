@@ -59,20 +59,28 @@
 
 /* ----- status ----- */
 
-.sterling-progress.info .indicator {
+.sterling-progress.info-status .indicator {
   background-color: var(--stsv-status--info__border-color);
 }
 
-.sterling-progress.success .indicator {
+.sterling-progress.success-status .indicator {
   background-color: var(--stsv-status--success__border-color);
 }
 
-.sterling-progress.warning .indicator {
+.sterling-progress.warning-status .indicator {
   background-color: var(--stsv-status--warning__border-color);
 }
 
-.sterling-progress.error .indicator {
+.sterling-progress.error-status .indicator {
   background-color: var(--stsv-status--danger__border-color);
+}
+
+.sterling-progress.auto-status[data-progress-percent] .indicator {
+  background-color: var(--stsv-status--info__border-color);
+}
+
+.sterling-progress.auto-status[data-progress-percent='100'] .indicator {
+  background-color: var(--stsv-status--success__border-color);
 }
 
 /* ----- prefers-reduced-motion ----- */

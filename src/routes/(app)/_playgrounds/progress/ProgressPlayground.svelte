@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import type { FormEventHandler } from 'svelte/elements';
 
@@ -15,13 +17,12 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled = false;
-  let max = 100;
-  let percent: number;
-  let status: ProgressStatus = 'none';
-  let value = 35;
-  let variant = '';
-  let vertical = false;
+  let disabled: boolean | null | undefined = $state(false);
+  let max = $state(100);
+  let percent: number = $state(0);
+  let value = $state(35);
+  let variant = $state('');
+  let vertical: boolean | null | undefined = $state(false);
 
   // This helps fix the lost typing of forwarded events on Input
   type FormEvent<E extends Event = Event, T extends EventTarget = HTMLElement> = E & {
@@ -38,46 +39,52 @@
     _onMaxChange(e as FormEvent<Event, HTMLInputElement>);
   };
 
-  $: code = getPlaygroundCode({
-    disabled,
-    max,
-    percent,
-    status,
-    value,
-    variant,
-    vertical
-  });
+  let code = $derived(
+    getPlaygroundCode({
+      disabled,
+      max,
+      value,
+      variant,
+      vertical
+    })
+  );
 </script>
 
 <Playground {code}>
   <div class="component" slot="component">
     <div class="progress" class:vertical>
-      <Progress {status} {disabled} {value} {max} bind:percent {variant} {vertical} />
+      <Progress
+        {disabled}
+        {value}
+        {max}
+        bind:percent
+        class={variant}
+        orientation={vertical ? 'vertical' : 'horizontal'}
+      />
     </div>
   </div>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="max">
-      <Input value={max.toString()} on:change={onMaxChange} />
+      <Input bind:value={max} on:change={onMaxChange} />
     </Label>
-    <Label text="status" forwardClick>
-      <Select bind:selectedValue={status}>
-        {#each PROGRESS_STATUSES as progressStatus}
-          <ListItem value={progressStatus}>{progressStatus}</ListItem>
-        {/each}
-      </Select>
-    </Label>
-    <Label text="value: {value}">
+    <Label text="value">
       <div class="slider">
         <Slider bind:value min={0} {max} precision={0} />
       </div>
     </Label>
-    <VariantInput bind:variant availableVariants={[]} />
+    <VariantInput
+      bind:variant
+      availableVariants={[
+        'auto-status',
+        'info-status',
+        'success-status',
+        'warning-status',
+        'error-status'
+      ]}
+    />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
-  <!-- <svelte:fragment slot="status">
-    <div>percent: {percent}%</div>
-  </svelte:fragment> -->
 </Playground>
 
 <style>

@@ -1,7 +1,7 @@
 export const getPlaygroundCode = (props: {
-  disabled: boolean;
+  disabled: boolean | null | undefined;
   menuVariant: string;
-  open: boolean;
+  open: boolean | null | undefined;
   variant: string;
 }) => {
   const propList: string[] = [];
@@ -10,13 +10,13 @@ export const getPlaygroundCode = (props: {
     propList.push(`disabled`);
   }
   if (props.menuVariant) {
-    propList.push(`menuVariant="${props.menuVariant.trim()}"`);
+    propList.push(`menuClass="${props.menuVariant.trim()}"`);
   }
   if (props.open) {
     propList.push(`open`);
   }
   if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
+    propList.push(`class="${props.variant.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

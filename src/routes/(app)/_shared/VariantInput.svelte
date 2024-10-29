@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
@@ -5,37 +7,42 @@
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
 
-  export let labelText = 'class';
+  type Props = {
+    labelText?: string;
+    availableVariants: string[];
+    class?: string;
+  };
 
-  export let variant: string = '';
-
-  export let availableVariants: string[];
+  let { class: _class = $bindable(''), labelText = 'class', availableVariants }: Props = $props();
 
   const addVariant = (value: string) => {
-    variant += ` ${value}`;
+    console.log('addVariant', value);
+    _class += ` ${value}`;
   };
 
   const clear = () => {
-    variant = '';
+    _class = '';
   };
 </script>
 
+{#snippet menuItems()}
+  {#each availableVariants as option}
+    <MenuItem value={option} text={option} onSelect={() => addVariant(option)} />
+  {/each}
+  <MenuSeparator />
+  <MenuItem value="clear" text="clear" onSelect={() => clear()} />
+{/snippet}
+
 <Label text={labelText} for="variant-input">
   <div class="variant-input">
-    <Input id="variant-input" bind:value={variant} />
+    <Input id="variant-input" bind:value={_class} />
     <MenuButton
-      value="variants"
-      title="+Sterling Theme Variant"
+      value="classes"
+      title="+Sterling Theme"
       disabled={availableVariants.length === 0}
+      items={menuItems}
     >
       +
-      <svelte:fragment slot="items">
-        {#each availableVariants as option}
-          <MenuItem value={option} text={option} on:select={() => addVariant(option)} />
-        {/each}
-        <MenuSeparator />
-        <MenuItem value="clear" text="clear" on:select={() => clear()} />
-      </svelte:fragment>
     </MenuButton>
   </div>
 </Label>

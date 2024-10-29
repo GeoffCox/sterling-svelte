@@ -22,7 +22,12 @@
   };
 </script>
 
-<button bind:this={buttonRef} class={`sterling-button ${_class}`} type="button" {...rest}>
+<button
+  bind:this={buttonRef}
+  class={['sterling-button', _class].filter(Boolean).join(' ')}
+  type="button"
+  {...rest}
+>
   {#if children}
     {@render children()}
   {/if}

@@ -136,7 +136,7 @@
 
 <div
   bind:this={menuBarRef}
-  class={`sterling-menu-bar ${_class}`}
+  class={['sterling-menu-bar', _class].filter(Boolean).join(' ')}
   role="menubar"
   tabindex="-1"
   {...rest}

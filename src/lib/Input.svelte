@@ -63,11 +63,15 @@
 </script>
 
 {#if children}
-  <label class={`sterling-input-label ${_class}`} class:disabled for={id}>
+  <label class={['sterling-input-label', _class].filter(Boolean).join(' ')} class:disabled for={id}>
     {@render children()}
   </label>
 {/if}
-<div class={`sterling-input ${_class}`} class:disabled class:using-keyboard={$usingKeyboard}>
+<div
+  class={['sterling-input', _class].filter(Boolean).join(' ')}
+  class:disabled
+  class:using-keyboard={$usingKeyboard}
+>
   <input
     bind:this={inputRef}
     class:using-keyboard={$usingKeyboard}

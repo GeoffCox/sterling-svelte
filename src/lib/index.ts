@@ -4,6 +4,7 @@ export type { ClickOutsideEvent, ClickOutsideEventDetail } from './@types/clickO
 // ----- actions ----- //
 export { applyLightDarkMode } from './actions/applyLightDarkMode';
 export { clickOutside } from './actions/clickOutside';
+export { extraClass } from './actions/extraClass';
 export { forwardEvents } from './actions/forwardEvents';
 export { portal } from './actions/portal';
 export { trapKeyboardFocus } from './actions/trapKeyboardFocus';

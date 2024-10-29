@@ -1,10 +1,15 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  /** Additional class names to apply. */
-  export let variant: string = '';
+  import type { HTMLAttributes } from 'svelte/elements';
+
+  type Props = HTMLAttributes<HTMLDivElement>;
+
+  let { class: _class, ...rest }: Props = $props();
 </script>
 
-<!--
-@component
-A styled line to visually separate groups of menu items in a menu.
-  -->
-<div class={`sterling-menu-separator ${variant}`} role="separator" {...$$restProps} />
+<div
+  class={['sterling-menu-separator', _class].filter(Boolean).join(' ')}
+  role="separator"
+  {...rest}
+></div>
