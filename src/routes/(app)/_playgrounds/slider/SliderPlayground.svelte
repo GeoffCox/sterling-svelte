@@ -92,35 +92,35 @@
 <Playground {code}>
   <div slot="component" class="component" class:vertical>
     <Slider
+      class={variant}
       {disabled}
-      bind:max
-      bind:min
-      bind:precision
-      bind:step
+      {max}
+      {min}
+      {precision}
+      {step}
       bind:value
-      {variant}
-      bind:vertical
-      on:change={(e) => console.log(`change value:${e.detail.value}`)}
+      {vertical}
+      onChange={(value) => console.log(`change value:${value}`)}
     />
   </div>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="min">
-      <Input value={min.toString()} on:change={onMinChange} />
+      <Input value={min.toString()} onchange={onMinChange} />
     </Label>
     <Label text="max">
-      <Input value={max.toString()} on:change={onMaxChange} />
+      <Input value={max.toString()} onchange={onMaxChange} />
     </Label>
     <Label text="precision">
-      <Input value={precision ? precision.toString() : ''} on:change={onPrecisionChange} />
+      <Input value={precision ? precision.toString() : ''} onchange={onPrecisionChange} />
     </Label>
     <Label text="step">
-      <Input value={step?.toString()} on:change={onStepChange} />
+      <Input value={step?.toString()} onchange={onStepChange} />
     </Label>
     <Label text="value">
-      <Input value={value.toString()} on:change={onValueChange} />
+      <Input value={value.toString()} onchange={onValueChange} />
     </Label>
-    <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
+    <VariantInput bind:class={variant} availableVariants={['colorful', 'composed']} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <!-- <svelte:fragment slot="status">
