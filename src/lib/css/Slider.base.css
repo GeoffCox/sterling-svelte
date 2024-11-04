@@ -75,9 +75,7 @@
   transition:
     background-color 250ms,
     color 250ms,
-    border-color 250ms,
-    width 50ms,
-    height 50ms;
+    border-color 250ms;
 }
 
 .sterling-slider.horizontal .fill {
@@ -113,9 +111,7 @@
   transition:
     background-color 250ms,
     color 250ms,
-    border-color 250ms,
-    bottom 50ms,
-    left 50ms;
+    border-color 250ms;
   white-space: nowrap;
   position: absolute;
   width: 1.5em;

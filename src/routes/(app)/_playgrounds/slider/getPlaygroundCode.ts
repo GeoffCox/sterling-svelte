@@ -4,7 +4,6 @@ export const getPlaygroundCode = (props: {
   min: number;
   precision: number | undefined;
   step: number;
-  value: number;
   variant: string;
   vertical: boolean;
 }) => {
@@ -23,9 +22,6 @@ export const getPlaygroundCode = (props: {
   }
   if (props.precision) {
     propList.push(`precision="${props.precision}"`);
-  }
-  if (props.value !== 0) {
-    propList.push(`value="${props.value}"`);
   }
   if (props.variant) {
     propList.push(`variant="${props.variant.trim()}"`);
