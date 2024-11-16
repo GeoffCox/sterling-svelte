@@ -4,11 +4,8 @@ import { makeExtendsComment, commonProps } from './commonDoc';
 import { buttonDoc } from './buttonDoc';
 import { calloutDoc } from './calloutDoc';
 import { checkboxDoc } from './checkboxDoc';
-import { colorPickerDoc } from './colorPickerDoc';
 import { dialogDoc } from './dialogDoc';
 import { dropdownDoc } from './dropdownDoc';
-import { hexColorSliderDoc } from './hexColorSlidersDoc';
-import { hslColorSlidersDoc } from './hslColorSlidersDoc';
 import { inputDoc } from './inputDoc';
 import { labelDoc } from './labelDoc';
 import { linkDoc } from './linkDoc';
@@ -38,11 +35,8 @@ export const componentDocs: Record<string, ComponentDoc> = {
   button: buttonDoc,
   callout: calloutDoc,
   checkbox: checkboxDoc,
-  colorpicker: colorPickerDoc,
   dialog: dialogDoc,
   dropdown: dropdownDoc,
-  hexcolorsliders: hexColorSliderDoc,
-  hslcolorsliders: hslColorSlidersDoc,
   input: inputDoc,
   label: labelDoc,
   link: linkDoc,

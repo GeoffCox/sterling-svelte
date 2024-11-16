@@ -4,11 +4,8 @@
 @import url('./Button.css');
 @import url('./Callout.css');
 @import url('./Checkbox.css');
-@import url('./ColorPicker.css');
 @import url('./Dialog.css');
 @import url('./Dropdown.css');
-@import url('./HexColorSliders.css');
-@import url('./HslColorSliders.css');
 @import url('./Input.css');
 @import url('./Label.css');
 @import url('./Link.css');
@@ -23,7 +20,6 @@
 @import url('./Popover.css');
 @import url('./Progress.css');
 @import url('./Radio.css');
-@import url('./RgbColorSliders.css');
 @import url('./Select.css');
 @import url('./Slider.css');
 @import url('./Switch.css');

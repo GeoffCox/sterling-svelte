@@ -1,8 +1,8 @@
 export const getPlaygroundCode = (props: {
-  disabled: boolean;
-  open: boolean;
-  stayOpenOnClickAway: boolean;
-  variant: string;
+  disabled?: boolean | null | undefined;
+  open?: boolean | null | undefined;
+  stayOpenOnClickAway?: boolean | null | undefined;
+  variant?: string;
 }) => {
   const propList: string[] = [];
 

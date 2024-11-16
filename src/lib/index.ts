@@ -46,12 +46,9 @@ export { TREE_ITEM_CONTEXT_KEY } from './TreeItem.constants';
 import Button from './Button.svelte';
 import Callout from './Callout.svelte';
 import Checkbox from './Checkbox.svelte';
-import ColorPicker from './ColorPicker.svelte';
 import Dialog from './Dialog.svelte';
 import Dropdown from './Dropdown.svelte';
 import Label from './Label.svelte';
-import HexColorSliders from './HexColorSliders.svelte';
-import HslColorSliders from './HslColorSliders.svelte';
 import Input from './Input.svelte';
 import Link from './Link.svelte';
 import List from './List.svelte';
@@ -64,7 +61,6 @@ import MenuSeparator from './MenuSeparator.svelte';
 import Popover from './Popover.svelte';
 import Progress from './Progress.svelte';
 import Radio from './Radio.svelte';
-import RgbColorSliders from './RgbColorSliders.svelte';
 import Select from './Select.svelte';
 import Slider from './Slider.svelte';
 import Switch from './Switch.svelte';
@@ -81,11 +77,8 @@ export {
   Button,
   Callout,
   Checkbox,
-  ColorPicker,
   Dialog,
   Dropdown,
-  HexColorSliders,
-  HslColorSliders,
   Input,
   Label,
   Link,
@@ -99,7 +92,6 @@ export {
   Popover,
   Progress,
   Radio,
-  RgbColorSliders,
   Select,
   Slider,
   Switch,
