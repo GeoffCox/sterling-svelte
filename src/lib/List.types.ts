@@ -1,5 +1,5 @@
 export type ListContext = {
-  disabled?: boolean | null;
+  disabled?: boolean | null | undefined;
   selectedValue?: string;
-  horizontal?: boolean | null;
+  horizontal?: boolean | null | undefined;
 };
