@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
 
@@ -11,17 +13,17 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled = false;
-  let open = false;
-  let stayOpenOnClickAway = false;
-  let variant = '';
+  let disabled: boolean | null | undefined = $state(false);
+  let open: boolean | null | undefined = $state(false);
+  let stayOpenOnClickAway: boolean | null | undefined = $state(false);
+  let variant = $state('');
 
-  let progress = 50;
-  let animate = false;
-  let reverse = false;
-  let speed = 75;
+  let progress = $state(50);
+  let animate = $state(false);
+  let reverse = $state(false);
+  let speed = $state(75);
 
-  $: code = getPlaygroundCode({ disabled, open, stayOpenOnClickAway, variant });
+  let code = $derived(getPlaygroundCode({ disabled, open, stayOpenOnClickAway, variant }));
 </script>
 
 <Playground {code}>
@@ -30,16 +32,18 @@
       bind:open
       {disabled}
       {stayOpenOnClickAway}
-      {variant}
-      on:open={(ev) => console.log(`open: ${ev.detail.open}`)}
+      class={variant}
+      onOpen={(value) => console.log(`open: ${value}`)}
     >
-      <div class="value" slot="value">
-        <AnimatedProgress value={progress} {animate} {reverse} {speed} />
-      </div>
+      {#snippet valueSnippet()}
+        <div class="value">
+          <AnimatedProgress value={progress} {animate} {reverse} {speed} />
+        </div>
+      {/snippet}
       <div class="popup">
         <div class="settings">
-          <Switch bind:checked={animate} onText="Animate" />
-          <Switch bind:checked={reverse} onText="Reverse" />
+          <Switch bind:checked={animate} onLabel="Animate" />
+          <Switch bind:checked={reverse} onLabel="Reverse" />
           <Label text={`Speed: ${speed}`}>
             <Slider bind:value={speed} precision={0} />
           </Label>
@@ -51,7 +55,7 @@
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Checkbox bind:checked={stayOpenOnClickAway}>stayOpenOnClickAway</Checkbox>
-    <VariantInput bind:variant availableVariants={['colorful']} />
+    <VariantInput bind:class={variant} availableVariants={['colorful']} />
   </svelte:fragment>
 </Playground>
 

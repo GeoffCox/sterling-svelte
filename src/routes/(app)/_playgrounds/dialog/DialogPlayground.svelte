@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Playground from '../Playground.svelte';
 
@@ -18,14 +20,14 @@
     { value: 'garden', text: 'Do some gardening' }
   ];
 
-  let backdropCloses = false;
-  let open = false;
-  let returnValue = '';
-  let variant = '';
+  let backdropCloses: boolean | null | undefined = $state(false);
+  let open: boolean | null | undefined = $state(false);
+  let returnValue = $state('');
+  let variant = $state('');
 
-  let formSubmit = false;
+  let formSubmit: boolean | null | undefined = $state(false);
 
-  let selectedValue = options[0].value;
+  let selectedValue = $state(options[0].value);
 
   const showDialog = () => {
     open = true;
@@ -46,49 +48,53 @@
     console.log(`<Dialog> onClose returnValue:${returnValue} selectedValue:${selectedValue}`);
   };
 
-  $: code = getPlaygroundCode({ backdropCloses, formSubmit, variant });
+  let code = $derived(getPlaygroundCode({ backdropCloses, formSubmit, variant }));
 </script>
 
 <Playground {code}>
   <div class="component" slot="component">
-    <Button on:click={() => showDialog()}>Open</Button>
+    <Button onclick={() => showDialog()}>Open</Button>
     <Dialog
       {backdropCloses}
       bind:open
       bind:returnValue
-      on:submit
-      on:cancel={() => console.log('<Dialog> on:cancel')}
-      on:close={onClose}
+      oncancel={() => console.log('<Dialog> on:cancel')}
+      onclose={onClose}
     >
-      <div slot="title">What to do today?</div>
-      <div slot="body">
+      {#snippet headerTitle()}
+        <div>What to do today?</div>
+      {/snippet}
+
+      {#snippet body()}
         <div class="content">
           <p>The weather is sunny with no chance of rain.</p>
           <p>What would you like to do?</p>
           <Select bind:selectedValue>
-            <svelte:fragment slot="value" let:selectedValue
-              >{options.find((x) => x.value === selectedValue)?.text}</svelte:fragment
-            >
+            {#snippet valueSnippet()}
+              <span>{options.find((x) => x.value === selectedValue)?.text}</span>
+            {/snippet}
             {#each options as option}
               <ListItem value={option.value}>{option.text}</ListItem>
             {/each}
           </Select>
         </div>
-      </div>
-      <div class="footer" slot="footer">
-        {#if formSubmit}
-          <Button type="submit" value="OK">OK</Button>
-          <Button type="submit" value="">Cancel</Button>
-        {:else}
-          <Button on:click={() => onOK()}>OK</Button>
-          <Button on:click={() => onCancel()}>Cancel</Button>
-        {/if}
-      </div>
+      {/snippet}
+      {#snippet footer()}
+        <div class="footer">
+          {#if formSubmit}
+            <Button type="submit" value="OK">OK</Button>
+            <Button type="submit" value="">Cancel</Button>
+          {:else}
+            <Button onclick={() => onOK()}>OK</Button>
+            <Button onclick={() => onCancel()}>Cancel</Button>
+          {/if}
+        </div>
+      {/snippet}
     </Dialog>
   </div>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={backdropCloses}>backdropCloses</Checkbox>
-    <VariantInput bind:variant availableVariants={[]} />
+    <VariantInput bind:class={variant} availableVariants={[]} />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Checkbox bind:checked={formSubmit}>Use form submit</Checkbox>

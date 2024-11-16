@@ -21,10 +21,10 @@
     <TabList
       bind:selectedValue
       {disabled}
-      {variant}
+      class={variant}
       {vertical}
-      on:select={(event) => {
-        console.log(`select: ${event.detail.value}`);
+      onSelect={(value) => {
+        console.log(`onSelect: ${value}`);
       }}
     >
       <Tab value="First">First</Tab>
@@ -39,9 +39,6 @@
     <Label text="selectedValue">
       <Input bind:value={selectedValue} />
     </Label>
-    <VariantInput bind:variant availableVariants={[]} />
+    <VariantInput bind:class={variant} availableVariants={[]} />
   </svelte:fragment>
-  <!-- <svelte:fragment slot="status">
-    <div>selectedValue: {selectedValue}</div>
-  </svelte:fragment> -->
 </Playground>

@@ -18,7 +18,7 @@
     max = 100,
     orientation = 'horizontal',
     percent = $bindable(0), //readonly
-    value = 0,
+    value = $bindable(0),
     ...rest
   }: Props = $props();
 

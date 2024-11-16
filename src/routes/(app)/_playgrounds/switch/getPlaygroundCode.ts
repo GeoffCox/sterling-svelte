@@ -1,11 +1,11 @@
 export const getPlaygroundCode = (props: {
-  checked: boolean;
-  disabled: boolean;
+  checked: boolean | null | undefined;
+  disabled: boolean | null | undefined;
   offText?: string;
   onText?: string;
-  customLabels: boolean;
+  customLabels: boolean | null | undefined;
   variant: string;
-  vertical: boolean;
+  vertical: boolean | null | undefined;
 }) => {
   const propList: string[] = [];
   if (props.checked) {

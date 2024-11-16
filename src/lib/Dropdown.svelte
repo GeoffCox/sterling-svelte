@@ -1,7 +1,8 @@
-<script lang="ts">
-  import type { ClickOutsideEvent } from './@types/clickOutside';
+<svelte:options runes={true} />
 
-  import { createEventDispatcher } from 'svelte';
+<script lang="ts">
+  import { type Snippet } from 'svelte';
+  import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
 
   import Popover from './Popover.svelte';
 
@@ -13,38 +14,40 @@
 
   const popupId = idGenerator.nextId('Dropdown-popup');
 
-  // ----- Props ----- //
-
-  /** Disables the dropdown. */
-  export let disabled = false;
-
-  /** When true, the dropdown is open. */
-  export let open = false;
-
-  /** When the user clicks away from the dropdown, it remains open. */
-  export let stayOpenOnClickAway = false;
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ----- State ----- //
-
-  let dropdownRef: HTMLDivElement;
-  let popupContentRef: HTMLDivElement;
-
-  // ----- Events ----- //
-
-  const dispatch = createEventDispatcher();
-
-  const raiseOpen = (open?: boolean) => {
-    dispatch('open', { open });
+  type Props = HTMLAttributes<HTMLDivElement> & {
+    disabled?: boolean | null | undefined;
+    open?: boolean | null | undefined;
+    stayOpenOnClickAway?: boolean | null | undefined;
+    onOpen?: (open: boolean | null | undefined) => void;
+    buttonSnippet?: Snippet;
+    buttonIconSnippet?: Snippet;
+    valueSnippet?: Snippet;
   };
+
+  let {
+    class: _class,
+    children,
+    disabled = false,
+    open = $bindable(false),
+    onOpen,
+    stayOpenOnClickAway = false,
+    buttonSnippet,
+    buttonIconSnippet: iconSnippet,
+    valueSnippet,
+    ...rest
+  }: Props = $props();
+
+  // svelte-ignore non_reactive_update
+  let dropdownRef: HTMLDivElement | undefined = $state(undefined);
+
+  // svelte-ignore non_reactive_update
+  let popupContentRef: HTMLDivElement | undefined = $state(undefined);
 
   // ----- Reactions ----- //
 
-  $: {
-    raiseOpen(open);
-  }
+  $effect(() => {
+    onOpen?.(open);
+  });
 
   // ----- Methods ----- //
 
@@ -60,34 +63,34 @@
     dropdownRef?.focus(options);
   };
 
-  // ----- Event Handlers ----- //
-
-  const onClick = (event: MouseEvent) => {
+  const onClick: MouseEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
       open = !open;
       event.preventDefault();
       event.stopPropagation();
     }
+
+    rest.onclick?.(event);
   };
 
-  const onKeydown = (event: KeyboardEvent) => {
+  const onKeydown: KeyboardEventHandler<HTMLDivElement> = (event) => {
     if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
       switch (event.key) {
         case ' ':
           open = !open;
           event.preventDefault();
           event.stopPropagation();
-          return false;
         case 'Escape':
           open = false;
           event.preventDefault();
           event.stopPropagation();
-          return false;
       }
     }
+
+    rest.onkeydown?.(event);
   };
 
-  const onClickOutside = (event: ClickOutsideEvent) => {
+  const onClickOutside = (event: MouseEvent) => {
     if (!stayOpenOnClickAway) {
       open = false;
     }
@@ -99,7 +102,7 @@
     return { delay: 0, duration: 0 };
   };
 
-  $: slideMotion = !$prefersReducedMotion ? slide : slideNoOp;
+  let slideMotion = $derived(!$prefersReducedMotion ? slide : slideNoOp);
 </script>
 
 <div
@@ -107,64 +110,41 @@
   aria-controls={popupId}
   aria-haspopup={true}
   aria-expanded={open}
-  class={`sterling-dropdown ${variant}`}
+  class={`sterling-dropdown ${_class}`}
   class:disabled
   class:open
   class:using-keyboard={$usingKeyboard}
   role="combobox"
   tabindex="0"
-  use:clickOutside={{ ignoreOthers: [popupContentRef] }}
-  on:blur
-  on:click
-  on:click={onClick}
-  on:copy
-  on:cut
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keydown={onKeydown}
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:wheel|passive
-  on:paste
-  on:click_outside={onClickOutside}
-  {...$$restProps}
+  use:clickOutside={{ ignoreOthers: [popupContentRef!], onclickoutside: onClickOutside }}
+  {...rest}
+  onclick={onClick}
+  onkeydown={onKeydown}
 >
-  {#if $$slots.value}
+  {#if valueSnippet}
     <div class="value">
-      <slot name="value" {disabled} {open} {variant} />
+      {@render valueSnippet()}
     </div>
   {/if}
-  <slot name="button" {disabled} {open} {variant}>
+  {#if buttonSnippet}
+    {@render buttonSnippet()}
+  {:else}
     <div class="button">
-      <slot name="icon" {disabled} {open} {variant}>
-        <div class="chevron" />
-      </slot>
+      {#if iconSnippet}
+        {@render iconSnippet()}
+      {:else}
+        <div class="chevron"></div>
+      {/if}
     </div>
-  </slot>
+  {/if}
 
   <Popover reference={dropdownRef} open={!disabled && open} placement="bottom-start">
     <div
-      class={`sterling-dropdown-popup-content ${variant}`}
+      class={`sterling-dropdown-popup-content ${_class}`}
       transition:slideMotion|global={{ duration: 200 }}
       bind:this={popupContentRef}
     >
-      <slot {disabled} {open} {variant} />
+      {@render children?.()}
     </div>
   </Popover>
 </div>

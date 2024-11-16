@@ -1,43 +1,45 @@
 <script lang="ts">
+  import type { HTMLInputAttributes } from 'svelte/elements';
+
   import { idGenerator } from './idGenerator';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import type { Snippet } from 'svelte';
 
-  // ----- Props ----- //
+  type LabelSnippet = Snippet<
+    [{ checked: boolean | null | undefined; disabled: boolean | null | undefined; inputId: string }]
+  >;
 
-  export let checked: boolean = false;
-  export let disabled = false;
+  type Props = HTMLInputAttributes & {
+    // todo: pass input ID to snippets?
+    offLabel?: string | LabelSnippet;
+    onLabel?: string | LabelSnippet;
+    vertical?: boolean | null | undefined;
+  };
 
-  /** The text appearing by the off position. Not used when the offLabel slot is filled. */
-  export let offText: string | undefined = undefined;
+  let {
+    checked = $bindable(false),
+    class: _class,
+    disabled,
+    id,
+    offLabel: offLabel,
+    onLabel: onLabel,
+    vertical,
+    ...rest
+  }: Props = $props();
 
-  /** The text appearing near the on position. Not used when the onLabel slot is filled. */
-  export let onText: string | undefined = undefined;
+  const inputId = id || idGenerator.nextId('Switch');
 
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  /** When true, the switch is displayed vertically. */
-  export let vertical = false;
-
-  // ----- State ----- //
-
-  const inputId = idGenerator.nextId('Switch');
   let inputRef: HTMLInputElement;
 
-  let switchWidth: number = 0;
-  let switchHeight: number = 0;
-  let thumbWidth: number = 0;
-  let thumbHeight: number = 0;
+  let switchWidth: number = $state(0);
+  let switchHeight: number = $state(0);
+  let thumbWidth: number = $state(0);
+  let thumbHeight: number = $state(0);
 
-  $: switchSize = vertical ? switchHeight : switchWidth;
-  $: thumbSize = vertical ? thumbHeight : thumbWidth;
-  $: ratio = vertical ? (checked ? 0 : 1) : checked ? 1 : 0;
-  $: valueOffset = (switchSize - thumbSize) * ratio;
-
-  $: hasOffLabel = $$slots.offLabel || (offText !== undefined && offText.length > 0);
-  $: hasOnLabel = $$slots.onLabel || (onText !== undefined && onText.length > 0);
-
-  // ----- Methods ----- //
+  let switchSize = $derived(vertical ? switchHeight : switchWidth);
+  let thumbSize = $derived(vertical ? thumbHeight : thumbWidth);
+  let ratio = $derived(vertical ? (checked ? 0 : 1) : checked ? 1 : 0);
+  let valueOffset = $derived((switchSize - thumbSize) * ratio);
 
   export const blur = () => {
     inputRef?.blur();
@@ -52,75 +54,34 @@
   };
 </script>
 
-<!--
-	@component
-	A styled HTML input type=checkbox element.
--->
+{#snippet renderLabel(item: string | LabelSnippet | null | undefined, _class: string)}
+  {#if item}
+    <div class={_class}>
+      {#if typeof item === 'string'}
+        <label for={inputId}>{item}</label>
+      {:else}
+        {@render item({ checked, disabled, inputId })}
+      {/if}
+    </div>
+  {/if}
+{/snippet}
+
 <div
-  class={`sterling-switch ${variant}`}
+  class={`sterling-switch ${_class}`}
   class:checked
   class:disabled
   class:vertical
   class:using-keyboard={$usingKeyboard}
 >
-  <input
-    bind:this={inputRef}
-    bind:checked
-    {disabled}
-    id={inputId}
-    type="checkbox"
-    on:blur
-    on:click
-    on:change
-    on:dblclick
-    on:dragend
-    on:dragenter
-    on:dragleave
-    on:dragover
-    on:dragstart
-    on:drop
-    on:focus
-    on:focusin
-    on:focusout
-    on:keydown
-    on:keypress
-    on:keyup
-    on:input
-    on:mousedown
-    on:mouseenter
-    on:mouseleave
-    on:mousemove
-    on:mouseover
-    on:mouseout
-    on:mouseup
-    on:wheel|passive
-    {...$$restProps}
-  />
-  {#if hasOffLabel}
-    <div class="off-label">
-      <slot name="offLabel" {checked} {disabled} {inputId} {offText} {variant} {vertical}>
-        {#if offText}
-          <label for={inputId}>{offText}</label>
-        {/if}
-      </slot>
-    </div>
-  {/if}
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <input bind:this={inputRef} bind:checked {disabled} id={inputId} type="checkbox" {...rest} />
+  {@render renderLabel(offLabel, 'off-label')}
   <div class="switch" bind:offsetWidth={switchWidth} bind:offsetHeight={switchHeight}>
     <div
       class="thumb"
       bind:offsetWidth={thumbWidth}
       bind:offsetHeight={thumbHeight}
       style={`--thumb-offset: ${valueOffset}px`}
-    />
+    ></div>
   </div>
-  {#if hasOnLabel}
-    <div class="on-label">
-      <slot name="onLabel" {checked} {disabled} {inputId} {onText} {variant} {vertical}>
-        {#if onText}
-          <label for={inputId}>{onText}</label>
-        {/if}
-      </slot>
-    </div>
-  {/if}
+  {@render renderLabel(onLabel, 'on-label')}
 </div>

@@ -9,13 +9,13 @@
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let checked = false;
-  let disabled = false;
-  let offText: string | undefined = undefined;
-  let onText: string | undefined = undefined;
-  let customLabels = false;
+  let checked: boolean | null | undefined = false;
+  let disabled: boolean | null | undefined = false;
+  let offText: string | undefined = 'Off';
+  let onText: string | undefined = 'On';
+  let customLabels: boolean | null | undefined = false;
   let variant = '';
-  let vertical = false;
+  let vertical: boolean | null | undefined = false;
 
   const onSwitchChange = (e: Event) => {
     const switchEvent = e as any;
@@ -33,32 +33,45 @@
   });
 </script>
 
+{#snippet ColdLabel({
+  checked,
+  disabled,
+  inputId
+}: {
+  checked: boolean | null | undefined;
+  disabled: boolean | null | undefined;
+  inputId: string;
+})}
+  <label for={inputId}>
+    <ChillIcon checked={!checked} disabled={!!disabled} width="1.5em" height="1.5em" />
+  </label>
+{/snippet}
+
+{#snippet HotLabel({
+  checked,
+  disabled,
+  inputId
+}: {
+  checked: boolean | null | undefined;
+  disabled: boolean | null | undefined;
+  inputId: string;
+})}
+  <label for={inputId}>
+    <HeatIcon checked={!!checked} disabled={!!disabled} width="1.5em" height="1.5em" />
+  </label>
+{/snippet}
+
 <Playground {code}>
   <div slot="component">
-    {#if customLabels}
-      <Switch bind:checked {disabled} {variant} {vertical} on:change={onSwitchChange}>
-        <div class="chill" slot="offLabel" let:checked let:disabled let:inputId>
-          <label for={inputId}>
-            <ChillIcon checked={!checked} {disabled} />
-          </label>
-        </div>
-        <div class="heat" slot="onLabel" let:checked let:disabled let:inputId>
-          <label for={inputId}>
-            <HeatIcon {checked} {disabled} />
-          </label>
-        </div>
-      </Switch>
-    {:else}
-      <Switch
-        bind:checked
-        {disabled}
-        {offText}
-        {onText}
-        {variant}
-        {vertical}
-        on:change={onSwitchChange}
-      />
-    {/if}
+    <Switch
+      bind:checked
+      class={variant}
+      {disabled}
+      offLabel={customLabels ? ColdLabel : offText}
+      onLabel={customLabels ? HotLabel : onText}
+      {vertical}
+      onchange={onSwitchChange}
+    />
   </div>
   <svelte:fragment slot="props">
     <Checkbox bind:checked>checked</Checkbox>
@@ -69,18 +82,10 @@
     <Label text="onText">
       <Input bind:value={onText} />
     </Label>
-    <VariantInput bind:variant availableVariants={['colorful']} />
+    <VariantInput bind:class={variant} availableVariants={['colorful']} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Checkbox bind:checked={customLabels}>custom labels</Checkbox>
   </svelte:fragment>
 </Playground>
-
-<style>
-  .chill,
-  .heat {
-    width: 2em;
-    height: 2em;
-  }
-</style>

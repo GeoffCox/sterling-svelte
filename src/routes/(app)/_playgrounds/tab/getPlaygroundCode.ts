@@ -1,10 +1,10 @@
 export const getPlaygroundCode = (props: {
-  disabled: boolean;
-  selected: boolean;
+  disabled?: boolean | null | undefined;
+  selected?: boolean | null | undefined;
   text?: string;
   value: string;
   variant: string;
-  vertical: boolean;
+  vertical?: boolean | null | undefined;
 }) => {
   const propList: string[] = [];
   if (props.disabled) {
