@@ -1,27 +1,30 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  import { onMount, tick } from 'svelte';
+  import { tick } from 'svelte';
   import type { TextAreaResize } from './TextArea.types';
+  import type { FormEventHandler, HTMLTextareaAttributes } from 'svelte/elements';
 
-  // ----- Props ----- //
+  type Props = HTMLTextareaAttributes & {
+    disabled?: boolean | null | undefined;
+    value?: string;
+    autoHeight?: boolean | null | undefined;
+    resize?: TextAreaResize;
+  };
 
-  export let disabled = false;
-  export let value: string = '';
-
-  /** When true, the text area will resize itself vertically to fit text.*/
-  export let autoHeight = false;
-
-  /** Sets the resize handle direction. */
-  export let resize: TextAreaResize = 'none';
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ----- State ----- //
+  let {
+    class: _class,
+    disabled = false,
+    value = $bindable(''),
+    autoHeight = false,
+    resize = $bindable('none'),
+    style,
+    ...rest
+  }: Props = $props();
 
   let textAreaRef: HTMLTextAreaElement;
 
   const correctResize = async () => {
-    console.log('correctResize');
     await tick();
     setTimeout(() => {
       if (autoHeight) {
@@ -41,10 +44,6 @@
     }, 0);
   };
 
-  $: autoHeight, resize, correctResize();
-
-  // ----- autoHeight ----- //
-
   const autoSetHeight = () => {
     if (autoHeight && textAreaRef) {
       // the style must be directly set to avoid re-rendering looping latency
@@ -54,19 +53,17 @@
     }
   };
 
-  $: autoHeight, autoSetHeight();
-
-  // ----- Event Handlers ----- //
-
-  const onInput = () => {
-    autoSetHeight();
-  };
-
-  onMount(() => {
+  $effect(() => {
+    autoHeight;
+    resize;
+    correctResize();
     autoSetHeight();
   });
 
-  // ----- Methods ----- //
+  const onInput: FormEventHandler<HTMLTextAreaElement> = (event) => {
+    autoSetHeight();
+    rest.oninput?.(event);
+  };
 
   export const blur = () => {
     textAreaRef?.blur();
@@ -106,47 +103,14 @@
   };
 </script>
 
-<div class={`sterling-text-area ${variant}`} class:disabled>
+<div class={`sterling-text-area ${_class}`} class:disabled>
   <textarea
     bind:this={textAreaRef}
     bind:value
     {disabled}
     rows="1"
-    style={`--TextArea__resize: ${resize};`}
-    on:beforeinput
-    on:blur
-    on:click
-    on:change
-    on:copy
-    on:cut
-    on:paste
-    on:dblclick
-    on:dragend
-    on:dragenter
-    on:dragleave
-    on:dragover
-    on:dragstart
-    on:drop
-    on:focus
-    on:focusin
-    on:focusout
-    on:input
-    on:invalid
-    on:keydown
-    on:keypress
-    on:keyup
-    on:mousedown
-    on:mouseenter
-    on:mouseleave
-    on:mousemove
-    on:mouseover
-    on:mouseout
-    on:mouseup
-    on:select
-    on:submit
-    on:reset
-    on:wheel|passive
-    on:input={onInput}
-    {...$$restProps}
-  />
+    {...rest}
+    oninput={onInput}
+    style={`--TextArea__resize: ${resize};${style}`}
+  ></textarea>
 </div>

@@ -30,9 +30,9 @@
       {disabled}
       {placeholder}
       bind:resize
-      {variant}
-      on:input={() => console.log('input')}
-      on:change={() => console.log('change')}
+      class={variant}
+      oninput={() => console.log('input')}
+      onchange={() => console.log('change')}
     />
   </svelte:fragment>
   <svelte:fragment slot="props">
@@ -48,6 +48,6 @@
         {/each}
       </Select>
     </Label>
-    <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
+    <VariantInput bind:class={variant} availableVariants={['colorful', 'composed']} />
   </svelte:fragment>
 </Playground>
