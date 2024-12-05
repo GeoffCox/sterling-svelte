@@ -1,9 +1,9 @@
-.sterling-tree-item-display.disabled {
+.sterling-tree-item.disabled > .item {
   cursor: not-allowed;
   outline: none;
 }
 
-.sterling-tree-item-display::after {
+.sterling-tree-item > .item::after {
   background: repeating-linear-gradient(
     var(--stsv-common--disabled__stripe-angle),
     var(--stsv-common--disabled__stripe-color),
@@ -23,6 +23,12 @@
   transition: opacity 250ms;
 }
 
-.sterling-tree-item-display.disabled::after {
+.sterling-tree-item.disabled > .item::after {
   opacity: 1;
+}
+
+@media (prefers-reduced-motion) {
+  .sterling-tree-item > .item::after {
+    transition: none;
+  }
 }

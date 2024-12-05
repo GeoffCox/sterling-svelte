@@ -1,9 +1,9 @@
-.sterling-tree-item-display.colorful:not(.item-disabled):not(.selected):hover {
+.sterling-tree-item.colorful:not(.disabled):not(.selected) > .item:hover {
   background-color: var(--stsv-button--colorful__background-color--hover);
   color: var(--stsv-button--colorful__color--hover);
 }
 
-.sterling-tree-item-display.colorful.selected {
+.sterling-tree-item.colorful:not(.disabled).selected > .item {
   background-color: var(--stsv-button--colorful__background-color--active);
   color: var(--stsv-button--colorful__color--active);
 }

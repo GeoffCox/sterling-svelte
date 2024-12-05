@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
@@ -6,80 +8,89 @@
   import Input from '$lib/Input.svelte';
   import Slider from '$lib/Slider.svelte';
   import TreeItem from '$lib/TreeItem.svelte';
-  import { writable } from 'svelte/store';
   import { TREE_CONTEXT_KEY } from '$lib/Tree.constants';
   import { TREE_ITEM_CONTEXT_KEY } from '$lib/TreeItem.constants';
   import { setContext } from 'svelte';
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
+  import type { TreeContext, TreeItemContext } from '$lib';
 
-  let depth = 0;
-  let disabled = false;
-  let hasChildren = true;
-  let text = 'sterling-svelte';
-  let value = 'item';
-  let variant = '';
-  let selected = false;
+  let _class = $state('');
+  let depth = $state(0);
+  let disabled: boolean | null | undefined = $state(false);
+  let hasChildren: boolean | null | undefined = $state(false);
+  let expandedValues: string[] = $state([]);
+  let _label: string = $state('sterling-svelte');
+  let selectedValue: string | undefined = $state(undefined);
+  const value = 'item';
 
-  const depthStore = writable<number>(depth);
-  const disabledStore = writable<boolean>(false);
-  const expandedValuesStore = writable<string[]>([]);
-  const selectedValueStore = writable<string | undefined>();
-  const variantStore = writable<string>('');
+  let treeContext = {
+    get disabled() {
+      return disabled;
+    },
+    get expandedValues() {
+      return expandedValues;
+    },
+    set expandedValues(value: string[]) {
+      expandedValues = value;
+    },
+    get selectedValue() {
+      return selectedValue;
+    },
+    set selectedValue(value: string | undefined) {
+      selectedValue = value;
+    }
+  };
 
-  $: {
-    depthStore.set(depth);
-  }
+  setContext<TreeContext>(TREE_CONTEXT_KEY, treeContext);
 
-  setContext(TREE_CONTEXT_KEY, {
-    disabled: disabledStore,
-    expandedValues: expandedValuesStore,
-    selectedValue: selectedValueStore,
-    variant: variantStore
-  });
+  let treeItemContext: TreeItemContext = {
+    get disabled() {
+      return disabled;
+    },
+    get depth() {
+      return depth;
+    }
+  };
 
-  setContext(TREE_ITEM_CONTEXT_KEY, {
-    depth: depthStore,
-    disabled: disabledStore
-  });
+  setContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY, treeItemContext);
 
-  $: code = getPlaygroundCode({
-    disabled,
-    hasChildren,
-    text,
-    value,
-    variant
-  });
-
-  selectedValueStore.subscribe((storeValue) => {
-    selected = storeValue === value;
-  });
-
-  $: selectedValueStore.set(selected ? value : undefined);
+  let code = $derived(
+    getPlaygroundCode({
+      disabled,
+      hasChildren,
+      label: _label,
+      value,
+      class: _class
+    })
+  );
 </script>
 
 <Playground {code}>
-  <div class="component" slot="component">
+  <div class="component" slot="component" role="tree">
     {#if hasChildren}
-      <TreeItem {disabled} {text} {value} {variant}>
-        <TreeItem value="child1" text="Child 1" />
-        <TreeItem value="child2" text="Child 2" />
-        <TreeItem value="child3" text="Child 3" />
-        <TreeItem value="child4" text="Child 4" />
+      <TreeItem {disabled} label={_label} {value} class={_class}>
+        <TreeItem value="child1" label="Child 1" />
+        <TreeItem value="child2" label="Child 2" />
+        <TreeItem value="child3" label="Child 3" />
+        <TreeItem value="child4" label="Child 4" />
+      </TreeItem>
+    {:else if _label}
+      <TreeItem {disabled} {value} class={_class}>
+        {#snippet label()}
+          {_label}
+        {/snippet}
       </TreeItem>
     {:else}
-      <TreeItem {disabled} {text} {value} {variant} />
+      <TreeItem {disabled} {value} class={_class}></TreeItem>
     {/if}
   </div>
   <svelte:fragment slot="props">
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Label text="text">
-      <Input bind:value={text} />
+    <Label text="label">
+      <Input bind:value={_label} />
     </Label>
-    <Label text="value">
-      <Input bind:value />
-    </Label>
-    <VariantInput bind:variant availableVariants={[]} />
+    <VariantInput bind:class={_class} availableVariants={['colorful']} />
   </svelte:fragment>
   <svelte:fragment slot="tweaks">
     <Label text="depth: {depth}">
@@ -88,7 +99,6 @@
       </div>
     </Label>
     <Checkbox bind:checked={hasChildren}>Has Children</Checkbox>
-    <Checkbox bind:checked={selected}>Selected</Checkbox>
   </svelte:fragment>
 </Playground>
 
@@ -98,7 +108,7 @@
   }
 
   .slider {
-    width: 350px;
+    width: 300px;
     padding: 0.5em;
   }
 </style>

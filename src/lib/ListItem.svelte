@@ -20,7 +20,6 @@
 
   // Using $derived would be preferred, but this helps avoid
   // updates to every list item when selectedValue changes.
-  // let selected = $derived(listContext.selectedValue === value);
   $effect(() => {
     if (listContext.selectedValue === value && !selected) {
       selected = true;

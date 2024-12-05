@@ -1,35 +1,52 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
+  import { setContext } from 'svelte';
+  import type { HTMLAttributes } from 'svelte/elements';
+
   import type { TreeContext } from './Tree.types';
 
-  import { createEventDispatcher, setContext } from 'svelte';
-  import { writable } from 'svelte/store';
-
-  import { TREE_CONTEXT_KEY } from './Tree.constants';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import { TREE_CONTEXT_KEY } from './Tree.constants';
 
-  // ----- Props ----- //
+  type Props = HTMLAttributes<HTMLDivElement> & {
+    disabled?: boolean | null;
+    expandedValues?: string[];
+    selectedValue?: string;
+    onExpandCollapse?: (expandedValues: string[]) => void;
+    onSelect?: (selectedValue: string | undefined) => void;
+  };
 
-  /** When true, the tree and its descendants are disabled. */
-  export let disabled = false;
-
-  /** The value of the currently selected item. */
-  export let selectedValue: string | undefined = undefined;
-
-  /** The values of items that are expanded. */
-  export let expandedValues: string[] = [];
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ----- State ----- //
+  let {
+    children,
+    class: _class,
+    disabled = false,
+    expandedValues = $bindable([]),
+    selectedValue = $bindable(undefined),
+    ...rest
+  }: Props = $props();
 
   let treeRef: HTMLDivElement;
 
-  const disabledStore = writable<boolean>(disabled);
-  const expandedValuesStore = writable<string[]>(expandedValues);
-  const selectedValueStore = writable<string | undefined>(selectedValue);
+  let treeContext = {
+    get disabled() {
+      return disabled;
+    },
+    get expandedValues() {
+      return expandedValues;
+    },
+    set expandedValues(value: string[]) {
+      expandedValues = value;
+    },
+    get selectedValue() {
+      return selectedValue;
+    },
+    set selectedValue(value: string | undefined) {
+      selectedValue = value;
+    }
+  };
 
-  // ----- Methods ----- //
+  setContext<TreeContext>(TREE_CONTEXT_KEY, treeContext);
 
   export const blur = () => {
     treeRef?.blur();
@@ -38,93 +55,19 @@
   export const focus = (options?: FocusOptions) => {
     treeRef?.focus(options);
   };
-
-  // ----- Events ----- //
-
-  const dispatch = createEventDispatcher();
-
-  const raiseExpandCollapse = (expandedValues: string[]) => {
-    dispatch('expandCollapse', { expandedValues });
-  };
-
-  const raiseSelect = (selectedValue: string | undefined) => {
-    dispatch('select', { selectedValue });
-  };
-
-  // ----- Reactions ----- //
-
-  $: {
-    selectedValueStore.set(selectedValue);
-  }
-
-  $: {
-    selectedValue = $selectedValueStore;
-    raiseSelect($selectedValueStore);
-  }
-
-  $: {
-    expandedValuesStore.set(expandedValues);
-  }
-
-  $: {
-    expandedValues = $expandedValuesStore;
-    raiseExpandCollapse($expandedValuesStore);
-  }
-
-  $: {
-    disabledStore.set(disabled);
-  }
-
-  // ----- Set Context ----- //
-  setContext<TreeContext>(TREE_CONTEXT_KEY, {
-    disabled: disabledStore,
-    expandedValues: expandedValuesStore,
-    selectedValue: selectedValueStore
-  });
 </script>
 
 <div
   bind:this={treeRef}
   aria-disabled={disabled}
-  class={`sterling-tree ${variant}`}
+  class={`sterling-tree ${_class}`}
   class:disabled
   class:using-keyboard={$usingKeyboard}
   role="tree"
   tabindex="0"
-  on:blur
-  on:click
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:pointercancel
-  on:pointerdown
-  on:pointerenter
-  on:pointerleave
-  on:pointermove
-  on:pointerover
-  on:pointerout
-  on:pointerup
-  on:wheel|passive
-  {...$$restProps}
+  {...rest}
 >
   <div class="container">
-    <slot {disabled} {expandedValues} {selectedValue} {variant} />
+    {@render children?.()}
   </div>
 </div>
