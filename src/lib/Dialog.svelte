@@ -18,7 +18,7 @@
     footer?: Snippet;
     header?: Snippet;
     returnValue?: string;
-    headerTitle?: Snippet;
+    headerTitle?: string | Snippet;
   };
 
   let {
@@ -165,7 +165,13 @@
             {@render header()}
           {:else}
             <div class="title">
-              {@render headerTitle?.()}
+              {#if headerTitle}
+                {#if typeof headerTitle === 'string'}
+                  {headerTitle}
+                {:else}
+                  {@render headerTitle()}
+                {/if}
+              {/if}
             </div>
             <div class="close">
               <Button class={`circular tool`} onclick={() => closeDialog()}>

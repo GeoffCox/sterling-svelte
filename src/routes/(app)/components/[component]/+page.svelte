@@ -25,80 +25,82 @@
   {/if}
 
   <br />
-  <h2>Members</h2>
-  {#if props}
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Property Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Comment</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each props as item}
+  {#if props || events || methods}
+    <h2>Members</h2>
+    {#if props}
+      <table>
+        <thead>
           <tr>
-            <td class="icon"><CodePropertyIcon /></td>
-            <td class="name">{item.name}</td>
-            <td class="type">{item.type || ''}</td>
-            <td class="default">{item.default || ''}</td>
-            <td class="comments">{item.comment || ''}</td>
+            <th></th>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Comment</th>
           </tr>
-        {/each}
-      </tbody>
-    </table>
-    <br />
-  {/if}
-  {#if events}
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Event Name</th>
-          <th>Data</th>
-          <th>Comment</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each events as item}
+        </thead>
+        <tbody>
+          {#each props as item}
+            <tr>
+              <td class="icon"><CodePropertyIcon /></td>
+              <td class="name">{item.name}</td>
+              <td class="type">{item.type || ''}</td>
+              <td class="default">{item.default || ''}</td>
+              <td class="comments">{item.comment || ''}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+      <br />
+    {/if}
+    {#if events}
+      <table>
+        <thead>
           <tr>
-            <td class="icon"><CodeEventIcon /></td>
-            <td class="name">{item.name}</td>
-            <td class="data">{item.data || ''}</td>
-            <td class="comments">{item.comment || ''}</td>
+            <th></th>
+            <th>Event Name</th>
+            <th>Data</th>
+            <th>Comment</th>
           </tr>
-        {/each}
-      </tbody>
-    </table>
-    <br />
-  {/if}
-  {#if methods}
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Method Name</th>
-          <th>Parameters</th>
-          <th>Return Type</th>
-          <th>Comment</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each methods as item}
+        </thead>
+        <tbody>
+          {#each events as item}
+            <tr>
+              <td class="icon"><CodeEventIcon /></td>
+              <td class="name">{item.name}</td>
+              <td class="data">{item.data || ''}</td>
+              <td class="comments">{item.comment || ''}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+      <br />
+    {/if}
+    {#if methods}
+      <table>
+        <thead>
           <tr>
-            <td class="icon"><CodeMethodIcon /></td>
-            <td class="name">{item.name}</td>
-            <td class="params">{item.params || ''}</td>
-            <td class="return">{item.returnType || ''}</td>
-            <td class="comments">{item.comment || ''}</td>
+            <th></th>
+            <th>Method Name</th>
+            <th>Parameters</th>
+            <th>Return Type</th>
+            <th>Comment</th>
           </tr>
-        {/each}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {#each methods as item}
+            <tr>
+              <td class="icon"><CodeMethodIcon /></td>
+              <td class="name">{item.name}</td>
+              <td class="params">{item.params || ''}</td>
+              <td class="return">{item.returnType || ''}</td>
+              <td class="comments">{item.comment || ''}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+      <br />
+    {/if}
   {/if}
-
   {#if types}
     <h2>Types</h2>
     <table>

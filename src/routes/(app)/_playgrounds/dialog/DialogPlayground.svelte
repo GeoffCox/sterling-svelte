@@ -23,7 +23,7 @@
   let backdropCloses: boolean | null | undefined = $state(false);
   let open: boolean | null | undefined = $state(false);
   let returnValue = $state('');
-  let variant = $state('');
+  let _close = $state('');
 
   let formSubmit: boolean | null | undefined = $state(false);
 
@@ -43,28 +43,30 @@
     returnValue = '';
   };
 
-  const onClose = async () => {
+  const onDialogCancel = async () => {
     await tick();
-    console.log(`<Dialog> onClose returnValue:${returnValue} selectedValue:${selectedValue}`);
+    console.log(`Dialog oncancel returnValue:${returnValue} selectedValue:${selectedValue}`);
   };
 
-  let code = $derived(getPlaygroundCode({ backdropCloses, formSubmit, variant }));
+  const onDialogClose = async () => {
+    await tick();
+    console.log(`Dialog onclose returnValue:${returnValue} selectedValue:${selectedValue}`);
+  };
+
+  let code = $derived(getPlaygroundCode({ backdropCloses, formSubmit, _class: _close }));
 </script>
 
 <Playground {code}>
-  <div class="component" slot="component">
+  {#snippet component()}
     <Button onclick={() => showDialog()}>Open</Button>
     <Dialog
       {backdropCloses}
       bind:open
       bind:returnValue
-      oncancel={() => console.log('<Dialog> on:cancel')}
-      onclose={onClose}
+      headerTitle="What to do today?"
+      oncancel={onDialogCancel}
+      onclose={onDialogClose}
     >
-      {#snippet headerTitle()}
-        <div>What to do today?</div>
-      {/snippet}
-
       {#snippet body()}
         <div class="content">
           <p>The weather is sunny with no chance of rain.</p>
@@ -91,25 +93,17 @@
         </div>
       {/snippet}
     </Dialog>
-  </div>
-  <svelte:fragment slot="props">
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={backdropCloses}>backdropCloses</Checkbox>
-    <VariantInput bind:class={variant} availableVariants={[]} />
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
+    <VariantInput bind:class={_close} availableVariants={[]} />
+  {/snippet}
+  {#snippet tweaks()}
     <Checkbox bind:checked={formSubmit}>Use form submit</Checkbox>
-  </svelte:fragment>
+  {/snippet}
 </Playground>
 
 <style>
-  .component {
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    padding: 0;
-  }
-
   .footer {
     display: flex;
     justify-content: flex-end;

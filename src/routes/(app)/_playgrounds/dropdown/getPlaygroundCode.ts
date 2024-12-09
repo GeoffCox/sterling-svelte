@@ -1,22 +1,21 @@
 export const getPlaygroundCode = (props: {
   disabled?: boolean | null | undefined;
-  open?: boolean | null | undefined;
   stayOpenOnClickAway?: boolean | null | undefined;
-  variant?: string;
+  _class?: string;
 }) => {
   const propList: string[] = [];
 
   if (props.disabled) {
     propList.push(`disabled`);
   }
-  if (props.open) {
-    propList.push(`open`);
-  }
+
+  propList.push('bind:open');
+
   if (props.stayOpenOnClickAway) {
     propList.push(`stayOpenOnClickAway`);
   }
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';
@@ -26,11 +25,11 @@ export const getPlaygroundCode = (props: {
 </script>
 
 <Dropdown${propsText}>
-  <svelte:fragment slot="value">
-    // dropdown value
-  </svelte:fragment>
-  <div>
-    // dropdown content
-  </div>
+  {#snippet value()}
+    <!-- TODO: value display -->
+  {/snippet}
+  {#snippet content()}
+    <!-- TODO: dropdown content -->
+  {/snippet}
 </Dropdown>`;
 };

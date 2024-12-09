@@ -115,7 +115,6 @@
   $effect(() => {
     bodyHeight;
     computePopoverPosition();
-    console.log('compute popover position effect');
   });
 
   // ----- EventHandlers ----- //

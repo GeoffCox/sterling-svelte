@@ -16,26 +16,26 @@
   let disabled: boolean | null | undefined = $state(false);
   let open: boolean | null | undefined = $state(false);
   let stayOpenOnClickAway: boolean | null | undefined = $state(false);
-  let variant = $state('');
+  let _class = $state('');
 
   let progress = $state(50);
   let animate = $state(false);
   let reverse = $state(false);
   let speed = $state(75);
 
-  let code = $derived(getPlaygroundCode({ disabled, open, stayOpenOnClickAway, variant }));
+  let code = $derived(getPlaygroundCode({ disabled, stayOpenOnClickAway, _class: _class }));
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     <Dropdown
       bind:open
       {disabled}
       {stayOpenOnClickAway}
-      class={variant}
+      class={_class}
       onOpen={(value) => console.log(`open: ${value}`)}
     >
-      {#snippet valueSnippet()}
+      {#snippet value()}
         <div class="value">
           <AnimatedProgress value={progress} {animate} {reverse} {speed} />
         </div>
@@ -50,13 +50,12 @@
         </div>
       </div></Dropdown
     >
-  </svelte:fragment>
-  <svelte:fragment slot="props">
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Checkbox bind:checked={open}>open</Checkbox>
     <Checkbox bind:checked={stayOpenOnClickAway}>stayOpenOnClickAway</Checkbox>
-    <VariantInput bind:class={variant} availableVariants={['colorful']} />
-  </svelte:fragment>
+    <VariantInput bind:class={_class} availableVariants={['colorful']} />
+  {/snippet}
 </Playground>
 
 <style>

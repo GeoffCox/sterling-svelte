@@ -141,7 +141,6 @@
 
   // opens the menu for this menu item
   const openMenu = () => {
-    console.log('MenuItem open menu', value, menuItemContext.depth);
     if (!menuItemContext.openValues.includes(value)) {
       // slice to depth to close any sibling menus that are open
       menuItemContext.openValues = [

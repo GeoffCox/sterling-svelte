@@ -1,7 +1,7 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { getContext, onMount, tick } from 'svelte';
+  import { getContext, tick } from 'svelte';
   import {
     arrow,
     autoUpdate,
@@ -20,7 +20,7 @@
   import type { HTMLAttributes, KeyboardEventHandler } from 'svelte/elements';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
-    conditionalRender?: boolean;
+    conditionalRender?: boolean | null;
     crossAxisOffset?: number;
     mainAxisOffset?: number;
     open?: boolean | null;

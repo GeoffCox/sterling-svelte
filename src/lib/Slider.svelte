@@ -58,7 +58,6 @@
   });
 
   $effect(() => {
-    console.log('effect set value', { value, min, max });
     const clamped = Math.max(min, Math.min(max, value));
     const newValue = precision !== undefined ? round(clamped, precision) : clamped;
     if (value !== newValue) {

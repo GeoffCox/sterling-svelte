@@ -177,7 +177,6 @@
   };
 
   const onListClick = (event: MouseEvent) => {
-    console.log('onListClick', pendingSelectedValue, selectedValue);
     open = false;
     event.preventDefault();
     event.stopPropagation();
@@ -185,7 +184,6 @@
   };
 
   const onListSelect = (value?: string) => {
-    console.log('onListSelect', value);
     pendingSelectedValue = value;
     if (!open) {
       selectedValue = pendingSelectedValue;

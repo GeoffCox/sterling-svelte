@@ -19,9 +19,9 @@
     open?: boolean | null | undefined;
     stayOpenOnClickAway?: boolean | null | undefined;
     onOpen?: (open: boolean | null | undefined) => void;
-    buttonSnippet?: Snippet;
-    buttonIconSnippet?: Snippet;
-    valueSnippet?: Snippet;
+    button?: Snippet;
+    buttonIcon?: Snippet;
+    value?: string | Snippet;
   };
 
   let {
@@ -31,9 +31,9 @@
     open = $bindable(false),
     onOpen,
     stayOpenOnClickAway = false,
-    buttonSnippet,
-    buttonIconSnippet: iconSnippet,
-    valueSnippet,
+    button,
+    buttonIcon,
+    value,
     ...rest
   }: Props = $props();
 
@@ -121,17 +121,21 @@
   onclick={onClick}
   onkeydown={onKeydown}
 >
-  {#if valueSnippet}
+  {#if value}
     <div class="value">
-      {@render valueSnippet()}
+      {#if typeof value === 'string'}
+        {value}
+      {:else}
+        {@render value()}
+      {/if}
     </div>
   {/if}
-  {#if buttonSnippet}
-    {@render buttonSnippet()}
+  {#if button}
+    {@render button()}
   {:else}
     <div class="button">
-      {#if iconSnippet}
-        {@render iconSnippet()}
+      {#if buttonIcon}
+        {@render buttonIcon()}
       {:else}
         <div class="chevron"></div>
       {/if}

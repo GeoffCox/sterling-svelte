@@ -6,7 +6,7 @@ export const getPlaygroundCode = (props: {
   open: boolean | undefined;
   placement: PopoverPlacement;
   text: string;
-  variant: string;
+  _class: string;
 }) => {
   const propList: string[] = [];
   if (props.crossAxisOffset !== 0) {
@@ -21,8 +21,8 @@ export const getPlaygroundCode = (props: {
   if (props.placement !== 'top-start') {
     propList.push(`placement="${props.placement}"`);
   }
-  if (props.variant) {
-    propList.push(`class="${props.variant.trim()}"`);
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

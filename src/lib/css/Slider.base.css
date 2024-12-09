@@ -8,6 +8,7 @@
     background-color 250ms,
     color 250ms,
     border-color 250ms;
+  min-width: 200px;
 }
 
 .sterling-slider.horizontal {

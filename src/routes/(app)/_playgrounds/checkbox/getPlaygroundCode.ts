@@ -1,18 +1,17 @@
 export const getPlaygroundCode = (props: {
-  checked: boolean | undefined | null;
   disabled: boolean | undefined | null;
   text: string;
-  variant: string;
+  _class: string;
 }) => {
   const propList: string[] = [];
-  if (props.checked) {
-    propList.push(`checked`);
-  }
+
+  propList.push('bind:checked');
+
   if (props.disabled) {
     propList.push(`disabled`);
   }
-  if (props.variant) {
-    propList.push(`class="${props.variant.trim()}"`);
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';
