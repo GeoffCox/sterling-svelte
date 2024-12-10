@@ -7,11 +7,12 @@ export const getPlaygroundCode = (props: {
 
   propList.push('bind:checked');
 
-  if (props.disabled) {
-    propList.push(`disabled`);
-  }
   if (props._class) {
     propList.push(`class="${props._class.trim()}"`);
+  }
+
+  if (props.disabled) {
+    propList.push(`disabled`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

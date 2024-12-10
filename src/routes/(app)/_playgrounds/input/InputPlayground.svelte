@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
@@ -8,38 +10,38 @@
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled: boolean | null = false;
-  let placeholder = '';
-  let text = '';
-  let value = 'sterling-svelte';
-  let variant = '';
+  let disabled: boolean | null = $state(false);
+  let placeholder = $state('');
+  let text = $state('');
+  let value = $state('sterling-svelte');
+  let _class = $state('');
 
-  $: code = getPlaygroundCode({ disabled, placeholder, text, value, variant });
+  let code = $derived(getPlaygroundCode({ disabled, placeholder, text, _class: _class }));
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     {#if text}
       <Input
         {disabled}
         {placeholder}
-        class={variant}
+        class={_class}
         bind:value
-        on:input={() => console.log('input')}
-        on:change={() => console.log('change')}>{text}</Input
+        oninput={() => console.log('input')}
+        onchange={() => console.log('change')}>{text}</Input
       >
     {:else}
       <Input
         {disabled}
         {placeholder}
-        class={variant}
+        class={_class}
         bind:value
         oninput={() => console.log('input')}
         onchange={() => console.log('change')}
       />
     {/if}
-  </svelte:fragment>
-  <svelte:fragment slot="props">
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <LabelBox text="placeholder">
       <Input bind:value={placeholder} />
@@ -47,9 +49,6 @@
     <Label text="label (text)">
       <Input bind:value={text} />
     </Label>
-    <Label text="value">
-      <Input bind:value />
-    </Label>
-    <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
-  </svelte:fragment>
+    <VariantInput bind:class={_class} availableVariants={['colorful', 'composed']} />
+  {/snippet}
 </Playground>

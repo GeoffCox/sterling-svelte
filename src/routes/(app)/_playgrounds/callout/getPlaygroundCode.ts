@@ -9,6 +9,10 @@ export const getPlaygroundCode = (props: {
   _class: string;
 }) => {
   const propList: string[] = [];
+
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
   if (props.crossAxisOffset !== 0) {
     propList.push(`crossAxisOffset="${props.crossAxisOffset}"`);
   }
@@ -20,9 +24,6 @@ export const getPlaygroundCode = (props: {
   }
   if (props.placement !== 'top-start') {
     propList.push(`placement="${props.placement}"`);
-  }
-  if (props._class) {
-    propList.push(`class="${props._class.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

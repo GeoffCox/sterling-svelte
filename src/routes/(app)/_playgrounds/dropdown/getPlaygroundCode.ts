@@ -5,6 +5,10 @@ export const getPlaygroundCode = (props: {
 }) => {
   const propList: string[] = [];
 
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
+
   if (props.disabled) {
     propList.push(`disabled`);
   }
@@ -13,9 +17,6 @@ export const getPlaygroundCode = (props: {
 
   if (props.stayOpenOnClickAway) {
     propList.push(`stayOpenOnClickAway`);
-  }
-  if (props._class) {
-    propList.push(`class="${props._class.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';
