@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
@@ -12,70 +14,77 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let crossAxisOffset = 0;
-  let disabled = false;
-  let hoverDelayMilliseconds = 1000;
-  let mainAxisOffset = 0;
-  let open = true;
-  let placement: PopoverPlacement = 'top-start';
-  let text = 'sterling-svelte';
-  let variant = '';
+  let crossAxisOffset = $state(0);
+  let disabled = $state(false);
+  let hoverDelayMilliseconds = $state(1000);
+  let mainAxisOffset = $state(0);
+  let open = $state(true);
+  let placement: PopoverPlacement = $state('top-start');
+  let text = $state('sterling-svelte');
+  let _class = $state('');
 
-  $: code = getPlaygroundCode({
-    crossAxisOffset,
-    disabled,
-    hoverDelayMilliseconds,
-    mainAxisOffset,
-    open,
-    placement,
-    text,
-    variant
-  });
+  let code = $derived(
+    getPlaygroundCode({
+      crossAxisOffset,
+      disabled,
+      hoverDelayMilliseconds,
+      mainAxisOffset,
+      open,
+      placement,
+      text,
+      _class: _class
+    })
+  );
 </script>
 
 <Playground {code}>
-  <div slot="component">
-    <Tooltip
-      {crossAxisOffset}
-      {disabled}
-      {hoverDelayMilliseconds}
-      {mainAxisOffset}
-      bind:open
-      {placement}
-      {variant}
-    >
-      <div class="reference">The reference anchor for positioning the Tooltip.</div>
-      <div class="tip-text" slot="tip">{text}</div>
-    </Tooltip>
-  </div>
-  <svelte:fragment slot="props">
+  {#snippet component()}
+    <div>
+      <Tooltip
+        class={_class}
+        {crossAxisOffset}
+        {disabled}
+        {hoverDelayMilliseconds}
+        {mainAxisOffset}
+        bind:open
+        {placement}
+      >
+        <div class="reference">The reference anchor for positioning the Tooltip.</div>
+        {#snippet tip()}
+          <div class="tip-text">{text}</div>
+        {/snippet}
+      </Tooltip>
+    </div>
+  {/snippet}
+  {#snippet props()}
+    <Label text="crossAxisOffset: {crossAxisOffset}">
+      <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
+    </Label>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <div class="delay-slider">
       <Label text={`hoverDelayMilliseconds: ${hoverDelayMilliseconds}ms`}>
         <Slider bind:value={hoverDelayMilliseconds} min={0} max={3000} precision={0} />
       </Label>
     </div>
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
-    <Label text="crossAxisOffset (Callout): {crossAxisOffset}">
-      <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
-    </Label>
-    <Label text="mainAxisOffset (Callout): {mainAxisOffset}">
+    <Label text="mainAxisOffset: {mainAxisOffset}">
       <Slider min={-25} max={25} precision={0} bind:value={mainAxisOffset} />
     </Label>
-    <Checkbox bind:checked={open}>open (Callout)</Checkbox>
-    <Label text="placement (Callout)">
+    <Checkbox bind:checked={open}>open</Checkbox>
+    <Label text="placement">
       <Select bind:selectedValue={placement}>
         {#each POPOVER_PLACEMENTS as placementItem}
           <ListItem value={placementItem}>{placementItem}</ListItem>
         {/each}
       </Select>
     </Label>
-    <Label text="tip (Callout)">
+
+    <VariantInput labelText="class" bind:class={_class} availableVariants={['colorful']} />
+  {/snippet}
+  {#snippet snippets()}
+    <Label text="children">
       <Input bind:value={text} />
     </Label>
-    <VariantInput labelText="variant (Callout)" bind:variant availableVariants={['colorful']} />
-  </svelte:fragment>
+  {/snippet}
 </Playground>
 
 <style>
@@ -85,5 +94,17 @@
 
   .tip-text {
     padding: 0.75em 1.5em;
+  }
+
+  .reference {
+    padding: 1em;
+    background-color: var(--stsv-common__background-color--secondary);
+    width: 300px;
+    height: 150px;
+    display: grid;
+    place-items: center;
+    align-items: center;
+    text-align: center;
+    margin: 2em;
   }
 </style>

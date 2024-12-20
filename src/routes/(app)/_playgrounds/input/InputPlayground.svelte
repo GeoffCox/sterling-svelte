@@ -46,9 +46,11 @@
     <LabelBox text="placeholder">
       <Input bind:value={placeholder} />
     </LabelBox>
-    <Label text="label (text)">
+    <VariantInput bind:class={_class} availableVariants={['colorful', 'composed']} />
+  {/snippet}
+  {#snippet snippets()}
+    <Label text="children">
       <Input bind:value={text} />
     </Label>
-    <VariantInput bind:class={_class} availableVariants={['colorful', 'composed']} />
   {/snippet}
 </Playground>

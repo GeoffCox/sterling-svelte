@@ -34,7 +34,11 @@ export const getPlaygroundCode = (props: {
   let reference: HTMLElement;
 </script>
 
-<div bind:this={reference}>The reference anchor for positioning the callout.</div>
+<div bind:this={reference}>
+  <!-- TODO: the reference element content -->
+</div>
 
-<Callout${propsText} {reference}>${props.text}</Callout>`;
+<Callout${propsText} {reference}>
+  <!-- TODO: the callout content -->
+</Callout>`;
 };

@@ -26,7 +26,7 @@
     open?: boolean | null;
     placement?: PopoverPlacement;
     portalHost?: HTMLElement;
-    reference?: HTMLElement;
+    reference?: HTMLElement | null;
   };
 
   let {
@@ -89,6 +89,7 @@
         placement: floatingUIPlacement,
         middleware
       });
+      console.log('popupPosition', popupPosition);
     } else {
       popupPosition = { x: 0, y: 0 };
     }
@@ -115,6 +116,7 @@
 
   $effect(() => {
     bodyHeight;
+    reference;
     computeCalloutPosition();
   });
 
@@ -232,7 +234,11 @@
       style="left:{popupPosition.x}px; top:{popupPosition.y}px"
     >
       {#if children}
-        {@render children()}
+        {#if typeof children === 'string'}
+          <div class="callout-text">{children}</div>
+        {:else}
+          {@render children()}
+        {/if}
       {/if}
       <div class="arrow" bind:this={arrowRef} style={arrowStyle}></div>
     </div>

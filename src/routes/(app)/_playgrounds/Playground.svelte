@@ -5,10 +5,11 @@
     code?: string;
     component: Snippet;
     props?: Snippet;
+    snippets?: Snippet;
     tweaks?: Snippet;
   };
 
-  let { code, component, props, tweaks }: Props = $props();
+  let { code, component, props, snippets, tweaks }: Props = $props();
 
   let mounted = $state(false);
 
@@ -28,6 +29,12 @@
         <div class="section-name">Props</div>
         <div class="props">
           {@render props()}
+        </div>
+      {/if}
+      {#if snippets}
+        <div class="section-name">Snippets</div>
+        <div class="snippets">
+          {@render snippets()}
         </div>
       {/if}
       {#if tweaks}
@@ -84,6 +91,7 @@
   }
 
   .props,
+  .snippets,
   .tweaks {
     margin: 0.5em 0.5em 1em 0.5em;
     display: grid;

@@ -4,55 +4,60 @@ import MenuButtonPlayground from '../../_playgrounds/menubutton/MenuButtonPlaygr
 
 export const menuButtonDoc: ComponentDoc = {
   name: 'MenuButton',
-  description: 'A <Button> that opens/closes a <Menu>',
+  description: 'A button that opens and closes a menu.',
   comments: [makeExtendsComment('Button'), makeExtendsComment('HTMLButtonElement')],
   props: [
     {
-      name: 'open',
-      type: 'string',
-      default: 'false',
-      comment: 'When true, the menu is open'
+      name: 'items',
+      type: 'Snippet | undefined',
+      default: 'undefined',
+      comment: 'The items to display in the menu.'
     },
     {
-      name: 'menuVariant',
+      name: 'menuClass',
       type: 'string',
       default: "''",
-      comment: 'Additional class names to apply to the Menu'
+      comment: 'Additional class names to apply to the menu.'
+    },
+    {
+      name: 'open',
+      type: 'boolean',
+      default: 'false',
+      comment: 'When true, the menu is open.'
+    },
+    {
+      name: 'onClose',
+      type: '(value: string) => void',
+      comment: 'Called when the menu or a descendant menu is closed.'
+    },
+    {
+      name: 'onOpen',
+      type: '(value: string) => void',
+      comment: 'Called when the menu or a descendant menu is opened.'
+    },
+    {
+      name: 'onSelect',
+      type: '(value: string) => void',
+      comment: 'Called when a descendant a menu item is selected.'
+    },
+    {
+      name: 'popoverPlacement',
+      type: 'PopoverPlacement',
+      default: 'bottom-start',
+      comment: 'The placement of the menu relative to the button.'
     },
     {
       name: 'value',
       type: 'string',
-      default: "''",
-      comment: 'The value uniquely identifying this menu button as the root of the menu hierarchy'
-    },
-    commonProps.variant
-  ],
-  events: [
-    {
-      name: 'close',
-      comment: 'Raised when the menu or a descendant menu is closed',
-      data: '{ value: string }'
-    },
-    {
-      name: 'open',
-      comment: 'Raised when the menu or a descendant menu is opened',
-      data: '{ value: string }'
-    },
-    {
-      name: 'selected',
-      comment: 'Raised when a descendant a menu item is selected',
-      data: '{ value: string }'
+      default: 'undefined',
+      comment: 'The value uniquely identifying this menu button as the root of the menu hierarchy.'
     }
   ],
-  anatomy: `<Button>
-  <div class="reference">
-    <slot {open} {value} {variant} />
-  </div>
-  <Popover>
-    <Menu variant={menuVariant}>
-      <slot name="items" />
-    </Menu>
-  </Popover>
-</Button>`,
+  anatomy: `button (<Button>)
+  reference (<div>)
+    children (Snippet)
+  popover (<Popover>)
+    menu (<Menu>)
+      items (Snippet)`,
   usage: MenuButtonPlayground
 };

@@ -1,15 +1,15 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { HTMLAttributes } from 'svelte/elements';
-  import { extraClass } from './actions/extraClass';
+  import type { AriaAttributes, HTMLAttributes } from 'svelte/elements';
+  import type { ProgressOrientation } from './Progress.types';
+
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null;
     max?: number;
     percent?: number;
     value?: number;
-    variant?: string;
-    orientation?: 'horizontal' | 'vertical';
+    orientation?: ProgressOrientation | null;
   };
 
   let {
@@ -45,7 +45,7 @@
 
 <!-- svelte-ignore a11y_role_supports_aria_props -->
 <div
-  aria-orientation={orientation}
+  aria-orientation={orientation as AriaAttributes['aria-orientation']}
   class={['sterling-progress', _class].filter(Boolean).join(' ')}
   class:disabled
   class:horizontal={orientation === 'horizontal'}

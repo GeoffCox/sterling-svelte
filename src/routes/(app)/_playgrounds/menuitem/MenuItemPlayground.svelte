@@ -15,17 +15,15 @@
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let checked: boolean | undefined | null = $state(false);
+  let _class = $state('');
   let disabled: boolean | undefined | null = $state(false);
-  let menuVariant = $state('');
+  let hasChildren: boolean | undefined | null = $state(false);
+  let menuClass = $state('');
+  let openValues: string[] = $state([]);
   let role: string = $state('menuitem');
   let text = $state('sterling-svelte');
   let shortcut: string | undefined = $state(undefined);
-  let value = $state('menu-item-1');
-  let variant = $state('');
-
-  let hasChildren: boolean | undefined | null = $state(false);
-
-  let openValues: string[] = $state([]);
+  let value = 'menu-item-1';
 
   setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
     get openValues() {
@@ -37,14 +35,14 @@
     isMenuBarItem: false,
     rootValue: 'root',
     closeContainingMenu: () => {},
-    onOpen: () => {
-      console.log('<MenuItem> onOpen');
+    onOpen: (value) => {
+      console.log(`MenuItem.onOpen value:${value}`);
     },
-    onClose: () => {
-      console.log('<MenuItem> onClose');
+    onClose: (value) => {
+      console.log(`MenuItem.onClose value:${value}`);
     },
-    onSelect: () => {
-      console.log('<MenuItem> onSelect');
+    onSelect: (value) => {
+      console.log(`MenuItem.onSelect value:${value}`);
     }
   });
 
@@ -52,27 +50,28 @@
     getPlaygroundCode({
       checked,
       disabled,
-      menuVariant,
+      menuClass: menuClass,
       role: role as MenuItemRole,
       text,
       value,
-      variant
+      variant: _class
     })
   );
+  _class;
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     {#if hasChildren}
       <MenuItem
         {checked}
         {disabled}
-        menuClass={menuVariant}
+        {menuClass}
         role={role as MenuItemRole}
         {text}
         {shortcut}
         {value}
-        class={variant}
+        class={_class}
         onClose={(value) => console.log(`<MenuItem> onclose value'${value}'`)}
         onOpen={(value) => console.log(`<MenuItem> onopen value:'${value}'`)}
         onSelect={(value) => console.log(`<MenuItem> onselect value:'${value}'`)}
@@ -89,18 +88,19 @@
         role={role as MenuItemRole}
         {shortcut}
         {text}
-        class={variant}
-        menuClass={menuVariant}
+        class={_class}
+        {menuClass}
         onClose={(value) => console.log(`<MenuItem> onclose value'${value}'`)}
         onOpen={(value) => console.log(`<MenuItem> onopen value:'${value}'`)}
         onSelect={(value) => console.log(`<MenuItem> onselect value:'${value}'`)}
       />
     {/if}
-  </svelte:fragment>
-  <svelte:fragment slot="props">
-    <Checkbox bind:checked>checked</Checkbox>
+  {/snippet}
+  {#snippet props()}
+    <Checkbox bind:checked>checked (based on role)</Checkbox>
+    <VariantInput bind:class={_class} availableVariants={[]} />
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <VariantInput bind:variant={menuVariant} availableVariants={[]} labelText="menuClass" />
+    <VariantInput bind:class={menuClass} availableVariants={[]} labelText="menuClass" />
     <Label text="role">
       <Select bind:selectedValue={role}>
         <ListItem value="menuitem">menuitem</ListItem>
@@ -114,12 +114,8 @@
     <Label text="text">
       <Input bind:value={text} />
     </Label>
-    <Label text="value">
-      <Input bind:value />
-    </Label>
-    <VariantInput bind:variant availableVariants={[]} />
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
+  {/snippet}
+  {#snippet tweaks()}
     <Checkbox bind:checked={hasChildren}>Add children</Checkbox>
-  </svelte:fragment>
+  {/snippet}
 </Playground>

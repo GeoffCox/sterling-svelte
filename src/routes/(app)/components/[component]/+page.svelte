@@ -143,4 +143,10 @@
   table {
     width: 100%;
   }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    text-align: center;
+  }
 </style>

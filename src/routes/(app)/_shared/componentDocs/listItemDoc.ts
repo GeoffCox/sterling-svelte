@@ -4,25 +4,23 @@ import ListItemPlayground from '../../_playgrounds/listitem/ListItemPlayground.s
 
 export const listItemDoc: ComponentDoc = {
   name: 'ListItem',
-  description: 'An item within a <List>',
+  description: 'An item within a <List>.',
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {
       name: 'disabled',
-      type: 'string',
+      type: 'boolean | null | undefined',
       default: 'false',
-      comment: 'When true, the item is disabled'
+      comment: 'When true, the item is disabled.'
     },
     {
       name: 'value',
-      type: 'string',
-      default: "''",
-      comment: 'The value uniquely identifying this item within the list'
-    },
-    commonProps.variant
+      type: 'string | undefined',
+      default: 'undefined',
+      comment: 'The value uniquely identifying this item within the list.'
+    }
   ],
-  anatomy: `<div class="sterling-list-item">
-  <slot {disabled} {horizontal} {selected} {value} {variant}>{value}</slot>
-</div>`,
+  anatomy: `list item (<div)
+  children (Snippet)`,
   usage: ListItemPlayground
 };

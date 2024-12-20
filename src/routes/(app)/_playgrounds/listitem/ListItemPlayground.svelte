@@ -1,4 +1,3 @@
-<!-- svelte-ignore state_referenced_locally -->
 <svelte:options runes={true} />
 
 <script lang="ts">
@@ -19,7 +18,7 @@
   let selected: boolean | undefined | null = $state(false);
   let selectedValue: string = $state('');
   let text = $state('sterling-svelte');
-  let value = $state('item-1');
+  let value = $state('item1');
 
   let listContext: ListContext = $state({
     disabled: false,
@@ -46,26 +45,23 @@
       disabled,
       text,
       value,
-      variant: _class
+      _class: _class
     })
   );
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     <ListItem {disabled} {value} class={_class}>{text}</ListItem>
-  </svelte:fragment>
-  <svelte:fragment slot="props">
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Label text="value">
-      <Input bind:value />
-    </Label>
-    <VariantInput bind:variant={_class} availableVariants={[]} />
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
+    <VariantInput bind:class={_class} availableVariants={[]} />
+  {/snippet}
+  {#snippet tweaks()}
     <Checkbox bind:checked={selected}>selected</Checkbox>
     <Label text="text">
       <Input bind:value={text} />
     </Label>
-  </svelte:fragment>
+  {/snippet}
 </Playground>

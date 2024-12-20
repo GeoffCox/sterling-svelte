@@ -1,14 +1,17 @@
-import type { ProgressStatus } from '$lib';
+import type { ProgressOrientation } from '$lib';
 
 export const getPlaygroundCode = (props: {
   disabled: boolean | null | undefined;
   max: number;
   value: number;
-  variant: string;
-  vertical: boolean | null | undefined;
+  _class: string;
+  orientation: ProgressOrientation;
 }) => {
   const propList: string[] = [];
 
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
   if (props.disabled) {
     propList.push(`disabled`);
   }
@@ -18,11 +21,8 @@ export const getPlaygroundCode = (props: {
   if (props.value !== 0) {
     propList.push(`value="${props.value}"`);
   }
-  if (props.variant) {
-    propList.push(`class="${props.variant.trim()}"`);
-  }
-  if (props.vertical) {
-    propList.push(`vertical`);
+  if (props.orientation) {
+    propList.push(`orientation="${props.orientation}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

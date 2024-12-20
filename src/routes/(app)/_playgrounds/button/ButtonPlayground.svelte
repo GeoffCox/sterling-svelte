@@ -37,11 +37,11 @@
       availableVariants={['capsule', 'circular ', 'colorful', 'secondary', 'square', 'tool']}
     />
   {/snippet}
-  {#snippet tweaks()}
-    <Label text="(children)">
+  {#snippet snippets()}
+    <Label text="children">
       <Input bind:value={text} />
     </Label>
-    <Checkbox bind:checked={withIcon}>include icon</Checkbox>
+    <Checkbox bind:checked={withIcon}>children with icon</Checkbox>
   {/snippet}
 </Playground>
 

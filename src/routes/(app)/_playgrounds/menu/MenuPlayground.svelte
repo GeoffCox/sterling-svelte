@@ -4,12 +4,11 @@
   import MenuItem from '$lib/MenuItem.svelte';
   import { setContext } from 'svelte';
   import { MENU_ITEM_CONTEXT_KEY, type MenuItemContext } from '$lib';
-  import { writable } from 'svelte/store';
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
   import Menu from '$lib/Menu.svelte';
 
-  let variant = '';
+  let _class = $state('');
 
   const openValues: string[] = [];
 
@@ -23,20 +22,18 @@
     onSelect: () => {}
   });
 
-  $: code = getPlaygroundCode({
-    variant
-  });
+  let code = $derived(getPlaygroundCode({ _class }));
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
-    <Menu class={variant}>
+  {#snippet component()}
+    <Menu class={_class}>
       <MenuItem value="1" text="One" />
       <MenuItem value="2" text="Two" />
       <MenuItem value="3" text="Three" />
     </Menu>
-  </svelte:fragment>
-  <svelte:fragment slot="props">
-    <VariantInput bind:variant availableVariants={[]} />
-  </svelte:fragment>
+  {/snippet}
+  {#snippet props()}
+    <VariantInput bind:class={_class} availableVariants={[]} />
+  {/snippet}
 </Playground>

@@ -121,26 +121,24 @@
   onclick={onClick}
   onkeydown={onKeydown}
 >
-  {#if value}
-    <div class="value">
+  <div class="value">
+    {#if value}
       {#if typeof value === 'string'}
         {value}
       {:else}
         {@render value()}
       {/if}
-    </div>
-  {/if}
-  {#if button}
-    {@render button()}
-  {:else}
-    <div class="button">
-      {#if buttonIcon}
-        {@render buttonIcon()}
-      {:else}
-        <div class="chevron"></div>
-      {/if}
-    </div>
-  {/if}
+    {/if}
+  </div>
+  <div class="button">
+    {#if button}
+      {@render button()}
+    {:else if buttonIcon}
+      {@render buttonIcon()}
+    {:else}
+      <div class="chevron"></div>
+    {/if}
+  </div>
 
   <Popover reference={dropdownRef} open={!disabled && open} placement="bottom-start">
     <div

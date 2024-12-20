@@ -11,7 +11,6 @@
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled: boolean | null | undefined = $state(false);
-  let open: boolean | null | undefined = $state(false);
   let menuVariant = $state('');
   let variant = $state('');
 
@@ -21,9 +20,9 @@
   let code = $derived(
     getPlaygroundCode({
       disabled,
-      menuVariant,
-      open,
-      variant
+      menuClass: menuVariant,
+      open: false,
+      _class: variant
     })
   );
 </script>
@@ -39,7 +38,7 @@
     role="menuitemcheckbox"
     text="Auto Save"
     checked={autoSave}
-    on:select={() => (autoSave = !autoSave)}
+    onSelect={() => (autoSave = !autoSave)}
   />
   <MenuSeparator />
   <MenuItem
@@ -47,14 +46,14 @@
     role="menuitemradio"
     text="Performance Mode"
     checked={renderChoice === 'performance'}
-    on:select={() => (renderChoice = 'performance')}
+    onSelect={() => (renderChoice = 'performance')}
   />
   <MenuItem
     value="prefer-quality"
     role="menuitemradio"
     text="Quality Mode"
     checked={renderChoice === 'quality'}
-    on:select={() => (renderChoice = 'quality')}
+    onSelect={() => (renderChoice = 'quality')}
   />
   <MenuSeparator />
   <MenuItem value="file-share" text="Share">
@@ -68,29 +67,26 @@
 {/snippet}
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     <MenuButton
-      bind:open
       {disabled}
       value="file"
       class={variant}
       menuClass={menuVariant}
-      onClose={(value) => console.log(`<MenuButton> on:close '${value}'`)}
-      onOpen={(value) => console.log(`<MenuButton> on:open '${value}'`)}
-      onSelect={(value) => console.log(`<MenuButton> on:select '${value}'`)}
+      onClose={(value) => console.log(`MenuButton.onClose value:${value}`)}
+      onOpen={(value) => console.log(`MenuButton.onOpen value:${value}`)}
+      onSelect={(value) => console.log(`MenuButton.onSelect value:${value}`)}
       items={menuItems}
     >
       File
     </MenuButton>
-  </svelte:fragment>
-  <svelte:fragment slot="props">
-    <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Checkbox bind:checked={open}>open</Checkbox>
-    <VariantInput bind:class={menuVariant} availableVariants={[]} labelText="menuVariant" />
+  {/snippet}
+  {#snippet props()}
     <VariantInput
       bind:class={variant}
       availableVariants={['capsule', 'circular ', 'colorful', 'secondary', 'square', 'tool']}
-      labelText="variant (Button)"
     />
-  </svelte:fragment>
+    <Checkbox bind:checked={disabled}>disabled</Checkbox>
+    <VariantInput bind:class={menuVariant} availableVariants={[]} labelText="menuClass" />
+  {/snippet}
 </Playground>

@@ -10,5 +10,5 @@ export const commonProps: Record<string, PropDoc> = {
 };
 
 export const makeExtendsComment = (type: string) => {
-  return `Includes ${type} props, event, and methods`;
+  return `Includes ${type} props, events, and methods.`;
 };

@@ -15,7 +15,8 @@ export const labelDoc: ComponentDoc = {
       name: 'forwardClick',
       type: 'string',
       default: 'false',
-      comment: 'If true, clicking the label invokes a click on the content.'
+      comment:
+        'If true, clicking the label invokes a click on the content. Typically used when for/id pairs are not present.'
     },
     {
       name: 'message',
@@ -30,6 +31,12 @@ export const labelDoc: ComponentDoc = {
       comment: 'When true, the label will indicate a value is required.'
     },
     {
+      name: 'requiredIndicator',
+      type: 'string | Snippet',
+      default: "''",
+      comment: `The indicator to display when required. Defaults to '*'`
+    },
+    {
       name: 'requiredReason',
       type: 'string | Snippet',
       default: "''",
@@ -42,22 +49,16 @@ export const labelDoc: ComponentDoc = {
       comment: 'The text to display in the label. Not used if the text slot is filled.'
     }
   ],
-  anatomy: `<label class="sterling-label">
-  <slot name="text" {disabled} {for} {forwardClick} {required} {text} {variant}>
-    <div class="text">{text}</div>
-  </slot>
-  <div class="content">
-    <slot />
-  </div>
-  <slot name="message" {disabled} {message} {required} {status} {variant}>
-    <div class="message">{message}</div>
-  </slot>
-  <slot name="required" {requiredReason} {variant}>
-    <Tooltip>
-      <span class="required-reason" slot="tip">{requiredReason}</span>
-      <div class="required">*</div>
-    </Tooltip>
-  </slot>
-</label>`,
+  anatomy: `label (<label>)
+  text (string | Snippet)
+  content (<div>)
+    children (Snippet)
+  message (string | Snippet)
+  tooltip (<Tooltip>)
+    required (<div>)
+      requiredIndicator (string | Snippet)
+    tip (ToolTip.tip)
+      requiredReason (string | Snippet)
+`,
   usage: LabelPlayground
 };

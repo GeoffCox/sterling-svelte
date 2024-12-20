@@ -4,7 +4,7 @@ import PopoverPlayground from '../../_playgrounds/popover/PopoverPlayground.svel
 
 export const popoverDoc: ComponentDoc = {
   name: 'Popover',
-  description: 'Content that floats abover other content',
+  description: 'An element that floats abover other content.',
   comments: [
     'Floats content above the page via use:portal. Elements are moved to the end of the `body` element so they appear above them in the z-order.',
     'Popover does not provide any styling (background, border, etc.) around the floating content.'
@@ -12,7 +12,7 @@ export const popoverDoc: ComponentDoc = {
   props: [
     {
       name: 'conditionalRender',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'true',
       comment: 'When true, content is rendered only when the popover is open.'
     },
@@ -30,14 +30,14 @@ export const popoverDoc: ComponentDoc = {
     },
     {
       name: 'open',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
       comment: 'When true, the popover is open and visible.'
     },
     {
       name: 'placement',
-      type: 'PopoverPlacement',
-      default: "'bottom-start'",
+      type: 'PopoverPlacement | undefined',
+      default: "'top-start'",
       comment: 'How the popover should be positioned relative to the reference element.'
     },
     {
@@ -60,10 +60,8 @@ export const popoverDoc: ComponentDoc = {
         "'top-start' | 'top' | 'top-end' | 'right-start' | 'right' | 'right-end' | 'bottom-end' | 'bottom' | 'bottom-start' | 'left-end' | 'left' | 'left-start'"
     }
   ],
-  anatomy: `<div class="sterling-popover-portal" use:portal>
-  <div class="sterling-popover">
-    <slot {open} {variant} />
-  </div>
-</div>`,
+  anatomy: `portal (<div>)
+  popover (<div>)
+    children (Snippet)`,
   usage: PopoverPlayground
 };

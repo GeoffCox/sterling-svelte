@@ -7,29 +7,33 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let checked: boolean | null | undefined = $state(false);
+  let _class = $state('');
   let disabled: boolean | null | undefined = $state(false);
-  let name = $state('choices');
+  let name = 'choices';
   let text = $state('Item 2');
-  let selectedValue = $state('');
+  let selectedValue = $state('item-1');
   let value = $state('item-2');
-  let variant = $state('');
 
-  let code = $derived(getPlaygroundCode({ disabled, name, text, value, variant }));
+  let code = $derived(getPlaygroundCode({ name, _class }));
 </script>
 
 <Playground {code}>
-  <div class="component" slot="component">
-    <Radio class={variant} bind:group={selectedValue} {name} value="item-1">Item 1</Radio>
-    <Radio class={variant} {disabled} bind:group={selectedValue} {name} value="item-2">Item 2</Radio
-    >
-    <Radio class={variant} bind:group={selectedValue} {name} value="item-3">Item 3</Radio>
-    <Radio class={variant} bind:group={selectedValue} {name} value="item-4">Item 4</Radio>
-  </div>
-  <svelte:fragment slot="props">
-    <Checkbox bind:checked={disabled}>disabled (Item 2)</Checkbox>
-    <VariantInput bind:class={variant} availableVariants={['colorful']} />
-  </svelte:fragment>
+  {#snippet component()}
+    <div class="component">
+      <Radio class={_class} bind:group={selectedValue} {name} value="item-1">Item 1</Radio>
+      <Radio class={_class} {disabled} bind:group={selectedValue} {name} value="item-2"
+        >Item 2</Radio
+      >
+      <Radio class={_class} bind:group={selectedValue} {name} value="item-3">Item 3</Radio>
+      <Radio class={_class} bind:group={selectedValue} {name} value="item-4">Item 4</Radio>
+    </div>
+  {/snippet}
+  {#snippet props()}
+    <VariantInput bind:class={_class} availableVariants={['colorful']} />
+  {/snippet}
+  {#snippet tweaks()}
+    <Checkbox bind:checked={disabled}>disable 2nd item</Checkbox>
+  {/snippet}
 </Playground>
 
 <style>

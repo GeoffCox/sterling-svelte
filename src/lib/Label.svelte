@@ -88,7 +88,9 @@
     {#if typeof item === 'string'}
       <div class={_class}>{item}</div>
     {:else}
-      {@render item()}
+      <div class={_class}>
+        {@render item()}
+      </div>
     {/if}
   {/if}
 {/snippet}
@@ -109,14 +111,16 @@
     </div>
   {/if}
   {@render snippetOrText(message, 'message')}
-  {#if required}
-    {#if requiredReason}
-      <Tooltip showOn="hover" reference={requiredRef}>
-        {@render snippetOrText(requiredReason, 'required-reason')}
+  <div class="required" bind:this={requiredRef}>
+    {#if required && requiredReason}
+      <Tooltip>
+        {@render snippetOrText(requiredIndicator, 'required')}
+        {#snippet tip()}
+          {@render snippetOrText(requiredReason, 'required-reason')}
+        {/snippet}
       </Tooltip>
-    {/if}
-    <div bind:this={requiredRef}>
+    {:else if required}
       {@render snippetOrText(requiredIndicator, 'required')}
-    </div>
-  {/if}
+    {/if}
+  </div>
 </label>

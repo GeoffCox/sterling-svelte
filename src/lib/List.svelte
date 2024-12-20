@@ -25,12 +25,8 @@
     ...rest
   }: Props = $props();
 
-  // ----- State ----- //
-
   let listRef: HTMLDivElement;
   let lastSelectedItemRef: HTMLElement;
-
-  //#region context
 
   let listContext = $state({
     disabled,
@@ -52,10 +48,6 @@
 
   setContext<ListContext>(LIST_CONTEXT_KEY, listContext);
 
-  //#endregion
-
-  //#region methods
-
   export const blur = () => {
     listRef?.blur();
   };
@@ -73,13 +65,9 @@
     element?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   };
 
-  //#endregion
-
   $effect(() => {
     onSelect?.(selectedValue);
   });
-
-  //#region selection
 
   const isElementListItem = (candidate: Element) => {
     return (
@@ -174,10 +162,6 @@
     return false;
   };
 
-  //#endregion
-
-  //#region event handlers
-
   const onClick: MouseEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
       let candidate: HTMLElement | null | undefined = event.target as HTMLElement;
@@ -247,8 +231,6 @@
     }
     rest.onkeydown?.(event);
   };
-
-  //#endregion
 </script>
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->

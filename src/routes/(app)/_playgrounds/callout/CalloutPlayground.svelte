@@ -62,8 +62,8 @@
     </Label>
     <VariantInput bind:class={_class} availableVariants={['colorful']} />
   {/snippet}
-  {#snippet tweaks()}
-    <Label text="callout (text)">
+  {#snippet snippets()}
+    <Label text="children">
       <Input bind:value={text} />
     </Label>
   {/snippet}

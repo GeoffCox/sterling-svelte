@@ -37,8 +37,8 @@
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <VariantInput bind:class={_class} availableVariants={['colorful']} />
   {/snippet}
-  {#snippet tweaks()}
-    <Label text="(children)">
+  {#snippet snippets()}
+    <Label text="children">
       <Input bind:value={text} />
     </Label>
   {/snippet}

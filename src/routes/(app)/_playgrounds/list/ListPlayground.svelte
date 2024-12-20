@@ -1,4 +1,8 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
   import List from '$lib/List.svelte';
@@ -10,56 +14,60 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled: boolean | undefined | null = false;
-  let horizontal: boolean | undefined | null = false;
-  let selectedValue: string | undefined = undefined;
-  let selectedValueText: string | undefined = undefined;
-  let variant = '';
+  let disabled: boolean | undefined | null = $state(false);
+  let horizontal: boolean | undefined | null = $state(false);
+  let selectedValue: string | undefined = $state(undefined);
+  let selectedValueText: string | undefined = $state(undefined);
+  let variant = $state('');
 
-  $: code = getPlaygroundCode({
-    disabled,
-    horizontal,
-    selectedValue,
-    variant
-  });
+  let code = $derived(
+    getPlaygroundCode({
+      disabled,
+      horizontal,
+      selectedValue,
+      variant
+    })
+  );
 
   const updateSelectedValue = debounce((value?: string) => {
     selectedValue = value;
   }, 500);
 
-  $: {
+  run(() => {
     updateSelectedValue(selectedValueText);
-  }
+  });
 
-  $: {
+  run(() => {
     selectedValueText = selectedValue;
-  }
+  });
 </script>
 
 <Playground {code}>
-  <div class="component" class:horizontal slot="component">
-    <List
-      bind:selectedValue
-      {disabled}
-      {horizontal}
-      class={variant}
-      onSelect={(value) => {
-        console.log(`select:${value}`);
-      }}
-    >
-      {#each countries as country}
-        <ListItem value={country}>{country}</ListItem>
-      {/each}
-    </List>
-  </div>
-  <svelte:fragment slot="props">
+  {#snippet component()}
+    <div class="component" class:horizontal>
+      <List
+        bind:selectedValue
+        {disabled}
+        {horizontal}
+        class={variant}
+        onSelect={(value) => {
+          console.log(`select:${value}`);
+        }}
+      >
+        {#each countries as country}
+          <ListItem value={country}>{country}</ListItem>
+        {/each}
+      </List>
+    </div>
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={horizontal}>horizontal</Checkbox>
     <Label text="selectedValue">
       <Input bind:value={selectedValueText} />
     </Label>
-    <VariantInput bind:variant availableVariants={['composed']} />
-  </svelte:fragment>
+    <VariantInput bind:class={variant} availableVariants={['composed']} />
+  {/snippet}
 </Playground>
 
 <style>

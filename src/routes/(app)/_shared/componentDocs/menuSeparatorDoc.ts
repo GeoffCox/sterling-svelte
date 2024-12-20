@@ -4,9 +4,8 @@ import MenuSeparatorPlayground from '../../_playgrounds/menuseparator/MenuSepara
 
 export const menuSeparatorDoc: ComponentDoc = {
   name: 'MenuSeparator',
-  description: 'A visual separator of items in a <Menu>',
+  description: 'A visual separator between items in a menu',
   comments: [makeExtendsComment('HTMLDivElement')],
-  props: [commonProps.variant],
-  anatomy: `<div class="sterling-menu-separator" />`,
+  anatomy: `separator (<div>)`,
   usage: MenuSeparatorPlayground
 };

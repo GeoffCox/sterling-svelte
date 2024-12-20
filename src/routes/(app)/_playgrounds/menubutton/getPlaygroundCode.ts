@@ -1,22 +1,22 @@
 export const getPlaygroundCode = (props: {
+  _class: string;
   disabled: boolean | null | undefined;
-  menuVariant: string;
+  menuClass: string;
   open: boolean | null | undefined;
-  variant: string;
 }) => {
   const propList: string[] = [];
 
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
   if (props.disabled) {
     propList.push(`disabled`);
   }
-  if (props.menuVariant) {
-    propList.push(`menuClass="${props.menuVariant.trim()}"`);
+  if (props.menuClass) {
+    propList.push(`menuClass="${props.menuClass.trim()}"`);
   }
   if (props.open) {
     propList.push(`open`);
-  }
-  if (props.variant) {
-    propList.push(`class="${props.variant.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';
@@ -26,7 +26,10 @@ export const getPlaygroundCode = (props: {
 </script>
 
 <MenuButton${propsText}>
-  <!-- <MenuItem> ... -->
+  <!-- button content -->
+  {#snippet items()}
+    <!-- <MenuItem> ... -->
+  {/snippet}
 </MenuButton>
 `;
 };

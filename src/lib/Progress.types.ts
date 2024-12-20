@@ -1,4 +1,4 @@
-import type { PROGRESS_STATUSES } from './Progress.constants';
+import type { PROGRESS_ORIENTATIONS } from './Progress.constants';
 
-type ProgressStatusTuple = typeof PROGRESS_STATUSES;
-export type ProgressStatus = ProgressStatusTuple[number];
+type ProgressOrientationTuple = typeof PROGRESS_ORIENTATIONS;
+export type ProgressOrientation = ProgressOrientationTuple[number];

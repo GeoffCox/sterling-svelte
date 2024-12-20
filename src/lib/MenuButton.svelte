@@ -148,15 +148,11 @@
     bind:this={reference}
     use:clickOutside={{ onclickoutside: onClickOutside }}
   >
-    {#if children}
-      {@render children()}
-    {/if}
+    {@render children?.()}
   </div>
   <Popover {reference} {open} placement={popoverPlacement}>
     <Menu bind:this={menuRef} id={menuId} class={menuClass}>
-      {#if items}
-        {@render items()}
-      {/if}
+      {@render items?.()}
     </Menu>
   </Popover>
 </Button>

@@ -4,91 +4,87 @@ import MenuItemPlayground from '../../_playgrounds/menuitem/MenuItemPlayground.s
 
 export const menuItemDoc: ComponentDoc = {
   name: 'MenuItem',
-  description: 'An actionable item within a <Menu>',
-  comments: [
-    'MenuItem uses MenuItemContext set by the Menu for some properties and events.',
-    makeExtendsComment('HTMLButtonElement')
-  ],
+  description: 'An item within a menu.',
+  comments: [makeExtendsComment('HTMLButtonElement')],
   props: [
     {
       name: 'checked',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
-      comment: 'When true, the menu item is checked'
+      comment:
+        'When true, the menu item is checked. Displayed only when role is set to menuitemcheckbox or menuitemradio.'
     },
     {
-      name: 'disabled',
-      type: 'boolean',
-      default: 'false',
-      comment: 'When true, the menu item is disabled'
+      name: 'item',
+      type: 'Snippet | undefined',
+      default: 'undefined',
+      comment:
+        'When undefined, a default item is rendered with a chevron, checkmark, text, and shortcut.'
+    },
+    {
+      name: 'menuClass',
+      type: 'string | undefined',
+      default: 'undefined',
+      comment: 'A class applied to any child menu.'
+    },
+    {
+      name: 'onClose',
+      type: '(value: string) => void',
+      default: 'undefined',
+      comment: 'Called when the menu item is closed.'
+    },
+    {
+      name: 'onOpen',
+      type: '(value: string) => void',
+      default: 'undefined',
+      comment: 'Called when the menu item is opened.'
+    },
+    {
+      name: 'onSelect',
+      type: '(value: string) => void',
+      default: 'undefined',
+      comment: 'Called when the menu item is selected.'
     },
     {
       name: 'role',
-      type: 'MenuItemRole',
-      default: "''",
-      comment: 'The role of the menu item'
+      type: 'MenuItemRole | undefined',
+      default: "'menuitem'",
+      comment: 'The role of the menu item. Allows regular, checkbox, or radio menu items.'
+    },
+    {
+      name: 'shortcut',
+      type: 'string | undefined',
+      default: 'undefined',
+      comment: 'The shortcut key sequence associated with the menu item. Not used if item is set.'
     },
     {
       name: 'text',
       type: 'string | undefined',
       default: 'undefined',
-      comment: 'The text of the menu item'
+      comment: 'The text of the menu item. Not used if item is set.'
     },
     {
       name: 'value',
       type: 'string',
-      default: "''",
-      comment: 'The value uniquely identifying this menu item within the menu hierarchy'
-    },
-    commonProps.variant
-  ],
-  events: [
-    {
-      name: 'close',
-      comment: 'Raised when the menu item is closed',
-      data: '{ value: string }'
-    },
-    {
-      name: 'open',
-      comment: 'Raised when the menu item is opened',
-      data: '{ value: string }'
-    },
-    {
-      name: 'select',
-      comment: 'Raised when the menu item is selected',
-      data: '{ value: string }'
+      comment: 'Uniquely identifies the menu item within the menu hierarchy.'
     }
   ],
   types: [
     {
       name: 'MenuItemRole',
-      definition: "'menuitem' | 'menuitemcheckbox' | 'menuitemradio'",
-      comment: 'Used for the MenuItem role property.'
+      definition: "'menuitem' | 'menuitemcheckbox' | 'menuitemradio'"
     }
   ],
-  anatomy: `<button class="sterling-menu-item">
-  <div class="item">
-    <slot
-      name="item"
-      {checked}
-      {depth}
-      {disabled}
-      {hasChildren}
-      {isMenuBarItem}
-      {open}
-      {role}
-      {text}
-      {value}
-      {variant}
-    >
-      <MenuItemDisplay>{text}</MenuItemDisplay>
-    </slot>
-  </div>
-  <Popover>
-    <Menu>
-      <slot {depth} {disabled} />
-    </Menu>
-  </Popover>
-</button>`,
+  anatomy: `menu item (<button>)
+  item (<div>)
+    item (Snippet)
+      container (<div>)
+        checkmark (<div>)
+        content (<div>)
+        shortcut (<div>)
+        chevron (<div>)
+  popover (<Popover>)
+    menu (<Menu>)
+      children (Snippet)`,
   usage: MenuItemPlayground
 };

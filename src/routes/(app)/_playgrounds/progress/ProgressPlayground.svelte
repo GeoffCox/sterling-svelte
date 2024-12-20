@@ -10,19 +10,18 @@
   import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
   import Select from '$lib/Select.svelte';
-  import type { ProgressStatus } from '$lib/Progress.types';
+  import type { ProgressOrientation } from '$lib/Progress.types';
   import ListItem from '$lib/ListItem.svelte';
   import Label from '$lib/Label.svelte';
-  import { PROGRESS_STATUSES } from '$lib';
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
+  let _class = $state('');
   let disabled: boolean | null | undefined = $state(false);
   let max = $state(100);
   let percent: number = $state(0);
   let value = $state(35);
-  let variant = $state('');
-  let vertical: boolean | null | undefined = $state(false);
+  let orientation: ProgressOrientation = $state('horizontal');
 
   // This helps fix the lost typing of forwarded events on Input
   type FormEvent<E extends Event = Event, T extends EventTarget = HTMLElement> = E & {
@@ -44,29 +43,24 @@
       disabled,
       max,
       value,
-      variant,
-      vertical
+      _class: _class,
+      orientation
     })
   );
 </script>
 
 <Playground {code}>
-  <div class="component" slot="component">
-    <div class="progress" class:vertical>
-      <Progress
-        {disabled}
-        {value}
-        {max}
-        bind:percent
-        class={variant}
-        orientation={vertical ? 'vertical' : 'horizontal'}
-      />
+  {#snippet component()}
+    <div class="component">
+      <div class="progress" class:vertical={orientation === 'vertical'}>
+        <Progress {disabled} {value} {max} bind:percent class={_class} {orientation} />
+      </div>
     </div>
-  </div>
-  <svelte:fragment slot="props">
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="max">
-      <Input bind:value={max} on:change={onMaxChange} />
+      <Input bind:value={max} onchange={onMaxChange} />
     </Label>
     <Label text="value">
       <div class="slider">
@@ -74,7 +68,7 @@
       </div>
     </Label>
     <VariantInput
-      bind:variant
+      bind:class={_class}
       availableVariants={[
         'auto-status',
         'info-status',
@@ -83,8 +77,13 @@
         'error-status'
       ]}
     />
-    <Checkbox bind:checked={vertical}>vertical</Checkbox>
-  </svelte:fragment>
+    <Label text="orientation">
+      <Select bind:selectedValue={orientation}>
+        <ListItem value="horizontal">horizontal</ListItem>
+        <ListItem value="vertical">vertical</ListItem>
+      </Select>
+    </Label>
+  {/snippet}
 </Playground>
 
 <style>
