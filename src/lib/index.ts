@@ -71,7 +71,6 @@ import Tooltip from './Tooltip.svelte';
 import Tree from './Tree.svelte';
 import TreeChevron from './TreeChevron.svelte';
 import TreeItem from './TreeItem.svelte';
-import TreeItemDisplay from './TreeItemDisplay.svelte';
 
 export {
   Button,
@@ -101,6 +100,5 @@ export {
   Tooltip,
   Tree,
   TreeChevron,
-  TreeItem,
-  TreeItemDisplay
+  TreeItem
 };

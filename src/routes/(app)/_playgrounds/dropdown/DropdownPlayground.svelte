@@ -42,8 +42,8 @@
       {/snippet}
       <div class="popup">
         <div class="settings">
-          <Switch bind:checked={animate} onLabel="Animate" />
-          <Switch bind:checked={reverse} onLabel="Reverse" />
+          <Switch bind:checked={animate} onLabelText="Animate" />
+          <Switch bind:checked={reverse} onLabelText="Reverse" />
           <Label text={`Speed: ${speed}`}>
             <Slider bind:value={speed} precision={0} />
           </Label>

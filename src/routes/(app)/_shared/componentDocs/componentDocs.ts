@@ -29,7 +29,6 @@ import { tooltipDoc } from './tooltipDoc';
 import { treeDoc } from './treeDoc';
 import { treeChevronDoc } from './treeChevronDoc';
 import { treeItemDoc } from './treeItemDoc';
-import { treeItemDisplayDoc } from './treeItemDisplayDoc';
 
 export const componentDocs: Record<string, ComponentDoc> = {
   button: buttonDoc,
@@ -59,6 +58,5 @@ export const componentDocs: Record<string, ComponentDoc> = {
   tooltip: tooltipDoc,
   tree: treeDoc,
   treechevron: treeChevronDoc,
-  treeitem: treeItemDoc,
-  treeitemdisplay: treeItemDisplayDoc
+  treeitem: treeItemDoc
 };

@@ -25,10 +25,10 @@
   $: code = getPlaygroundCode({
     checked,
     disabled,
-    offText,
-    onText,
+    offLabelText: offText,
+    onLabelText: onText,
     customLabels,
-    variant,
+    _class: variant,
     vertical
   });
 </script>
@@ -62,30 +62,32 @@
 {/snippet}
 
 <Playground {code}>
-  <div slot="component">
-    <Switch
-      bind:checked
-      class={variant}
-      {disabled}
-      offLabel={customLabels ? ColdLabel : offText}
-      onLabel={customLabels ? HotLabel : onText}
-      {vertical}
-      onchange={onSwitchChange}
-    />
-  </div>
-  <svelte:fragment slot="props">
+  {#snippet component()}
+    <div slot="component">
+      <Switch
+        bind:checked
+        class={variant}
+        {disabled}
+        offLabel={customLabels ? ColdLabel : offText}
+        onLabel={customLabels ? HotLabel : onText}
+        {vertical}
+        onchange={onSwitchChange}
+      />
+    </div>
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked>checked</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Label text="offText">
+    <Label text="offLabelText">
       <Input bind:value={offText} />
     </Label>
-    <Label text="onText">
+    <Label text="onLabelText">
       <Input bind:value={onText} />
     </Label>
     <VariantInput bind:class={variant} availableVariants={['colorful']} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
-    <Checkbox bind:checked={customLabels}>custom labels</Checkbox>
-  </svelte:fragment>
+  {/snippet}
+  {#snippet tweaks()}
+    <Checkbox bind:checked={customLabels}>off&off label snippets</Checkbox>
+  {/snippet}
 </Playground>

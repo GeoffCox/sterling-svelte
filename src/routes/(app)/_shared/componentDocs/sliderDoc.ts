@@ -4,32 +4,38 @@ import SliderPlayground from '../../_playgrounds/slider/SliderPlayground.svelte'
 
 export const sliderDoc: ComponentDoc = {
   name: 'Slider',
-  description: 'A draggable <button> to choose a value between a minimum and maximum',
+  description: 'A draggable thumb to choose a value between a minimum and maximum.',
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {
       name: 'disabled',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
-      comment: 'When true, the slider is disabled'
+      comment: 'When true, the slider is disabled.'
     },
     {
       name: 'max',
-      type: 'number',
+      type: 'number | undefined',
       default: '100',
-      comment: 'The maximum value of the slider'
+      comment: 'The maximum value of the slider.'
     },
     {
       name: 'min',
-      type: 'number',
+      type: 'number | undefined',
       default: '0',
-      comment: 'The minimum value of the slider'
+      comment: 'The minimum value of the slider.'
     },
     {
       name: 'step',
-      type: 'number',
+      type: 'number | undefined',
       default: '1',
-      comment: 'The amount the value changes by pressing arrow keys'
+      comment: 'The amount the value changes by pressing arrow keys.'
+    },
+    {
+      name: 'onChange',
+      type: '(value: number) => void',
+      default: 'undefined',
+      comment: 'Called when the value of the slider changes.'
     },
     {
       name: 'precision',
@@ -39,31 +45,21 @@ export const sliderDoc: ComponentDoc = {
     },
     {
       name: 'value',
-      type: 'number',
+      type: 'number | undefined',
       default: '0',
-      comment: 'The current value of the slider'
+      comment: 'The current value of the slider.'
     },
-    commonProps.variant,
     {
       name: 'vertical',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
-      comment: 'When true, the slider is displayed vertically'
+      comment: 'When true, the slider is displayed vertically.'
     }
   ],
-  events: [
-    {
-      name: 'change',
-      data: '{ value: number }',
-      comment: 'Raised when the value of the slider changes'
-    }
-  ],
-  anatomy: `<div class="sterling-slider">
-  <div class="container">
-    <div class="track" />
-    <div class="fill" />
-    <div class="thumb" />
-  <div>
-</div>`,
+  anatomy: `slider (<div>)
+  container (<div>)
+    track (<div>)
+    fill (<div>)
+    thumb (<div>)`,
   usage: SliderPlayground
 };

@@ -149,4 +149,8 @@
     height: 24px;
     text-align: center;
   }
+
+  .definition {
+    white-space: pre;
+  }
 </style>

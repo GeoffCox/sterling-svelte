@@ -50,9 +50,9 @@
   opacity: 0;
 }
 
-/* ----- switch ----- */
+/* ----- toggle ----- */
 
-.sterling-switch .switch {
+.sterling-switch .toggle {
   background-color: var(--stsv-input__background-color);
   border-color: var(--stsv-input__border-color);
   border-radius: 10000px;
@@ -70,13 +70,13 @@
   user-select: none;
 }
 
-.sterling-switch:hover .switch {
+.sterling-switch:hover .toggle {
   background-color: var(--stsv-input__background-color--hover);
   border-color: var(--stsv-input__border-color--hover);
   color: var(--stsv-input__color--hover);
 }
 
-input:focus-visible ~ .switch {
+input:focus-visible ~ .toggle {
   background-color: var(--stsv-input__background-color--focus);
   border-color: var(--stsv-input__border-color--focus);
   color: var(--stsv-common__color--focux);
@@ -86,20 +86,20 @@ input:focus-visible ~ .switch {
   outline-width: 2px;
 }
 
-input:checked ~ .switch,
-input:checked:hover ~ .switch,
-input:checked:focus-visible ~ .switch {
+input:checked ~ .toggle,
+input:checked:hover ~ .toggle,
+input:checked:focus-visible ~ .toggle {
   background-color: var(--stsv-input__border-color--hover);
 }
 
 /* ----- switch vertical ----- */
 
-.sterling-switch:not(.vertical) .switch {
+.sterling-switch:not(.vertical) .toggle {
   width: 2em;
   height: 1.25em;
 }
 
-.sterling-switch.vertical .switch {
+.sterling-switch.vertical .toggle {
   width: 1.25em;
   height: 2em;
 }
@@ -166,7 +166,7 @@ input:checked:focus-visible ~ .switch {
 /* ----- reduced motion ----- */
 
 @media (prefers-reduced-motion) {
-  .sterling-switch .switch,
+  .sterling-switch .toggle,
   .sterling-switch .thumb,
   .sterling-switch .thumb::after,
   .sterling-switch label {

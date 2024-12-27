@@ -1,6 +1,7 @@
 import type { PopoverPlacement } from '$lib';
 
 export const getPlaygroundCode = (props: {
+  _class: string;
   crossAxisOffset: number;
   disabled: boolean;
   hoverDelayMilliseconds: number;
@@ -8,7 +9,6 @@ export const getPlaygroundCode = (props: {
   open: boolean;
   placement: PopoverPlacement;
   text: string;
-  _class: string;
 }) => {
   const propList: string[] = [];
 

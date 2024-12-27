@@ -10,14 +10,14 @@
   import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
+    buttonSnippet?: Snippet;
     disabled?: boolean | null;
     listClass?: string;
+    onPending?: (value?: string) => void;
+    onSelect?: (value?: string) => void;
     open?: boolean | null;
     selectedValue?: string;
-    onSelect?: (value?: string) => void;
-    onPending?: (value?: string) => void;
     valueSnippet?: Snippet<[string | undefined]>;
-    buttonSnippet?: Snippet;
   };
 
   let {

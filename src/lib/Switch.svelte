@@ -12,7 +12,6 @@
   >;
 
   type Props = HTMLInputAttributes & {
-    // todo: pass input ID to snippets?
     offLabel?: string | LabelSnippet;
     onLabel?: string | LabelSnippet;
     vertical?: boolean | null | undefined;
@@ -23,8 +22,8 @@
     class: _class,
     disabled,
     id,
-    offLabel: offLabel,
-    onLabel: onLabel,
+    offLabel,
+    onLabel,
     vertical,
     ...rest
   }: Props = $props();
@@ -56,18 +55,6 @@
   };
 </script>
 
-{#snippet renderLabel(item: string | LabelSnippet | null | undefined, _class: string)}
-  {#if item}
-    <div class={_class}>
-      {#if typeof item === 'string'}
-        <label for={inputId}>{item}</label>
-      {:else}
-        {@render item({ checked, disabled, inputId })}
-      {/if}
-    </div>
-  {/if}
-{/snippet}
-
 <div
   class={`sterling-switch ${_class}`}
   class:checked
@@ -76,8 +63,16 @@
   class:using-keyboard={$usingKeyboard}
 >
   <input bind:this={inputRef} bind:checked {disabled} id={inputId} type="checkbox" {...rest} />
-  {@render renderLabel(offLabel, 'off-label')}
-  <div class="switch" bind:offsetWidth={switchWidth} bind:offsetHeight={switchHeight}>
+  {#if offLabel}
+    <div class="off-label">
+      {#if typeof offLabel === 'string'}
+        {offLabel}
+      {:else}
+        {@render offLabel({ checked, disabled, inputId })}
+      {/if}
+    </div>
+  {/if}
+  <div class="toggle" bind:offsetWidth={switchWidth} bind:offsetHeight={switchHeight}>
     <div
       class="thumb"
       bind:offsetWidth={thumbWidth}
@@ -85,5 +80,13 @@
       style={`--thumb-offset: ${valueOffset}px`}
     ></div>
   </div>
-  {@render renderLabel(onLabel, 'on-label')}
+  {#if onLabel}
+    <div class="on-label">
+      {#if typeof onLabel === 'string'}
+        {onLabel}
+      {:else}
+        {@render onLabel({ checked, disabled, inputId })}
+      {/if}
+    </div>
+  {/if}
 </div>

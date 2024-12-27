@@ -6,9 +6,9 @@
   import type { FormEventHandler, HTMLTextareaAttributes } from 'svelte/elements';
 
   type Props = HTMLTextareaAttributes & {
+    autoHeight?: boolean | null | undefined;
     disabled?: boolean | null | undefined;
     value?: string;
-    autoHeight?: boolean | null | undefined;
     resize?: TextAreaResize;
   };
 

@@ -4,26 +4,23 @@ import TreeChevronPlayground from '../../_playgrounds/treechevron/TreeChevronPla
 
 export const treeChevronDoc: ComponentDoc = {
   name: 'TreeChevron',
-  description: 'An indicator of leaf or expanded/collapsed items within a hierarchy',
-  comments: [
-    'Provides selection, expand/collapse, and interaction within a Tree',
-    makeExtendsComment('HTMLDivElement')
-  ],
+  description: 'An indicator of leaf or expanded/collapsed items within a hierarchy.',
+  comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {
       name: 'expanded',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
-      comment: 'When true, the chevron indicates the item is expanded.'
+      comment: 'When true and hasChildren is true, indicates the item is expanded.'
     },
     {
       name: 'hasChildren',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
-      comment: 'When false, the chevron indicates the item is a leaf.'
-    },
-    commonProps.variant
+      comment:
+        'When true, indicates the item can be expanded. Otherwise, indicates the item is a leaf.'
+    }
   ],
-  anatomy: `<div class="sterling-tree-chevron"/>`,
+  anatomy: `chevron (<div>)`,
   usage: TreeChevronPlayground
 };

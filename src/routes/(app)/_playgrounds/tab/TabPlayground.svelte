@@ -19,10 +19,11 @@
   let text = $state('sterling-svelte');
   let disabled: boolean | null | undefined = $state(false);
   let selected: boolean | null | undefined = $state(false);
-  let variant: string = $state('');
+  let _class: string = $state('');
 
   let selectedValue = $state('');
   let tabListDisabled = $state(false);
+  const value = 'tab';
   let vertical: boolean | null | undefined = $state(false);
 
   let tabListContext: TabListContext = {
@@ -65,27 +66,27 @@
       disabled,
       selected,
       text,
-      value: 'tab',
-      variant,
+      value,
+      _class,
       vertical
     })
   );
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
-    <Tab {disabled} value="tab" class="variant">{text}</Tab>
-  </svelte:fragment>>
-  <svelte:fragment slot="props">
+  {#snippet component()}
+    <Tab {disabled} {value} class={_class}>{text}</Tab>
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="text">
       <Input bind:value={text} />
     </Label>
-    <VariantInput bind:class={variant} availableVariants={['colorful']} />
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
+    <VariantInput bind:class={_class} availableVariants={['colorful']} />
+  {/snippet}
+  {#snippet tweaks()}
     <Checkbox bind:checked={tabListDisabled}>disabled (TabList)</Checkbox>
-    <Checkbox bind:checked={selected}>selected</Checkbox>
-    <Checkbox bind:checked={vertical}>vertical</Checkbox>
-  </svelte:fragment>
+    <Checkbox bind:checked={selected}>selected (TabList)</Checkbox>
+    <Checkbox bind:checked={vertical}>vertical (TabList)</Checkbox>
+  {/snippet}
 </Playground>

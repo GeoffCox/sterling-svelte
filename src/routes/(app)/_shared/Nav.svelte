@@ -65,8 +65,7 @@
         { name: 'Tooltip', url: '/components/tooltip' },
         { name: 'Tree', url: '/components/tree' },
         { name: 'TreeChevron', url: '/components/treechevron' },
-        { name: 'TreeItem', url: '/components/treeitem' },
-        { name: 'TreeItemDisplay', url: '/components/treeitemdisplay' }
+        { name: 'TreeItem', url: '/components/treeitem' }
       ]
     },
     {

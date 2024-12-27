@@ -1,13 +1,16 @@
 export const getPlaygroundCode = (props: {
+  _class: string;
   disabled?: boolean | null | undefined;
   selected?: boolean | null | undefined;
   text?: string;
   value: string;
-  variant: string;
   vertical?: boolean | null | undefined;
 }) => {
   const propList: string[] = [];
   if (props.disabled) {
+    if (props._class) {
+      propList.push(`class="${props._class.trim()}"`);
+    }
     propList.push(`disabled`);
   }
   if (props.selected) {
@@ -18,9 +21,6 @@ export const getPlaygroundCode = (props: {
   }
   if (props.value) {
     propList.push(`value="${props.value.trim()}"`);
-  }
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
   }
   if (props.vertical) {
     propList.push(`vertical`);

@@ -18,6 +18,7 @@
     children,
     class: _class,
     disabled = false,
+    onSelect,
     selectedValue = $bindable(),
     vertical = false,
     ...rest
@@ -60,6 +61,10 @@
   });
 
   setContext<TabListContext>(TAB_LIST_CONTEXT_KEY, tabListContext);
+
+  $effect(() => {
+    onSelect?.(selectedValue);
+  });
 
   export const blur = () => {
     tabListRef?.blur();

@@ -4,7 +4,8 @@ import TooltipPlayground from '../../_playgrounds/tooltip/TooltipPlayground.svel
 
 export const tooltipDoc: ComponentDoc = {
   name: 'Tooltip',
-  description: 'A <Callout> shown when the mouse hovers over an element.',
+  description:
+    'A Callout that is automatically shown when the mouse hovers over a reference element.',
   comments: [makeExtendsComment('<Callout>')],
   props: [
     {

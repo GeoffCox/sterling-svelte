@@ -5,12 +5,12 @@ import TreePlayground from '../../_playgrounds/tree/TreePlayground.svelte';
 export const treeDoc: ComponentDoc = {
   name: 'Tree',
   description:
-    'A hierarchy of <TreeItem>s that can be expanded/collapsed where a single item can be selected',
+    'A hierarchy of items that can be expanded/collapsed and where a single item can be selected.',
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {
       name: 'disabled',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
       comment: 'When true, the tree and its descendants are disabled.'
     },
@@ -22,27 +22,24 @@ export const treeDoc: ComponentDoc = {
     },
     {
       name: 'expandedValues',
-      type: 'string[]',
-      default: '[]',
+      type: 'string[] | undefined',
+      default: '[ ]',
       comment: 'The values of items that are expanded.'
     },
-    commonProps.variant
-  ],
-  events: [
     {
-      name: 'expandCollapse',
-      comment: 'Raised when an item is expanded or collapsed',
-      data: '{ expandedValues: string[] }'
+      name: 'onExpandCollapse',
+      type: '(expandedValues: string) => null',
+      default: 'undefined',
+      comment: 'Called when any item in the hierarchy is expanded or collapsed.'
     },
     {
-      name: 'select',
-      comment: 'Raised when an item is selected',
-      data: '{ selectedValue: string }'
+      name: 'onSelect',
+      type: '(selectedValue: string) => null',
+      default: 'undefined',
+      comment: 'Called when any item in the hierarchy is selected.'
     }
   ],
-  anatomy: `<div class="sterling-tree">
-  <!-- children -->
-  <slot {disabled} {expandedValues} {selectedValue} {variant} />
-</div>`,
+  anatomy: `tree (<div>)
+  children (Snippet)`,
   usage: TreePlayground
 };

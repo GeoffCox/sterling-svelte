@@ -4,15 +4,15 @@ import TreeItemPlayground from '../../_playgrounds/treeitem/TreeItemPlayground.s
 
 export const treeItemDoc: ComponentDoc = {
   name: 'TreeItem',
-  description: 'An item within a <Tree>',
+  description: 'An item within a Tree.',
   comments: [
-    'A tree item is identified by having data-value and role="treeitem" properties',
+    'A tree item is identified by having data-value and role="treeitem" properties.',
     makeExtendsComment('HTMLDivElement')
   ],
   props: [
     {
       name: 'disabled',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
       comment: 'When true, the item and its children are disabled.'
     },
@@ -20,7 +20,7 @@ export const treeItemDoc: ComponentDoc = {
       name: 'icon',
       type: 'Snippet | undefined',
       default: 'undefined',
-      comment: 'The leaf or expand/collapse icon. When undefined renders <TreeChevron>.'
+      comment: 'The leaf or expand/collapse icon. When undefined renders TreeChevron.'
     },
     {
       name: 'label',
@@ -67,7 +67,7 @@ export const treeItemDoc: ComponentDoc = {
   anatomy: `tree-item (div)
   item (div)
     icon (Snippet)
-    label (string or Snippet)
+    label (string | Snippet)
   children (Snippet)`,
   usage: TreeItemPlayground
 };

@@ -1,13 +1,16 @@
 export const getPlaygroundCode = (props: {
+  _class: string;
   disabled: boolean;
   max: number;
   min: number;
   precision: number | undefined;
   step: number;
-  variant: string;
   vertical: boolean;
 }) => {
   const propList: string[] = [];
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
   if (props.disabled) {
     propList.push(`disabled`);
   }
@@ -23,9 +26,6 @@ export const getPlaygroundCode = (props: {
   if (props.precision) {
     propList.push(`precision="${props.precision}"`);
   }
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
-  }
   if (props.vertical) {
     propList.push(`vertical`);
   }
@@ -35,8 +35,9 @@ export const getPlaygroundCode = (props: {
   return `<script lang="ts">
   import { Slider } from '@geoffcox/sterling-svelte';
 
+  let value = $state(0);
 </script>
 
-<Slider${propsText} />
+<Slider${propsText} bind:value />
 `;
 };

@@ -4,43 +4,29 @@ import TabPlayground from '../../_playgrounds/tab/TabPlayground.svelte';
 
 export const tabDoc: ComponentDoc = {
   name: 'Tab',
-  description:
-    'A <button>: an interactive element in a tab list activated to show associated content',
-  comments: [
-    'When the parent TabList is disabled, the Tab is also disabled.',
-    makeExtendsComment('HTMLButtonElement')
-  ],
+  description: 'An item in a tab list when selected typically shows associated content.',
+  comments: [makeExtendsComment('HTMLButtonElement')],
   props: [
     {
       name: 'disabled',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
-      comment: 'When true, the tab is disabled'
+      comment: 'When true, the tab is disabled.'
     },
     {
       name: 'selected',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
-      comment: 'When true, the tab is selected'
-    },
-    {
-      name: 'text',
-      type: 'string | undefined',
-      default: 'undefined',
-      comment: 'The text of the tab; not used when the default slot is filled'
+      comment: 'When true, the tab is selected.'
     },
     {
       name: 'value',
       type: 'string',
-      comment: 'The value uniquely identifying this tab within the tab list'
-    },
-    commonProps.variant
+      comment: 'The value uniquely identifying this tab within the tab list.'
+    }
   ],
-  anatomy: `<button class="sterling-tab">
-  <slot {disabled} {selected} {text} {value} {variant}>
-    <div class="text">{text || value}</div>
-  </slot>
-  <div class="indicator" />
-</button>`,
+  anatomy: `tab (<button>)
+  children (Snippet)
+  indicator (<div>)`,
   usage: TabPlayground
 };

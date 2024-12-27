@@ -14,6 +14,7 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
+  let _class = $state('');
   let crossAxisOffset = $state(0);
   let disabled = $state(false);
   let hoverDelayMilliseconds = $state(1000);
@@ -21,18 +22,17 @@
   let open = $state(true);
   let placement: PopoverPlacement = $state('top-start');
   let text = $state('sterling-svelte');
-  let _class = $state('');
 
   let code = $derived(
     getPlaygroundCode({
+      _class,
       crossAxisOffset,
       disabled,
       hoverDelayMilliseconds,
       mainAxisOffset,
       open,
       placement,
-      text,
-      _class: _class
+      text
     })
   );
 </script>

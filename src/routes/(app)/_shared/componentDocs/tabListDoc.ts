@@ -4,34 +4,32 @@ import TabListPlayground from '../../_playgrounds/tablist/TabListPlayground.svel
 
 export const tabListDoc: ComponentDoc = {
   name: 'TabList',
-  description: 'A list of <Tabs> where one can be selected',
+  description: 'A list of tabs where a single tab can be selected.',
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {
       name: 'disabled',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
-      comment: 'When true, the tab list and its tabs are disabled'
+      comment: 'When true, the tab list and its tabs are disabled.'
     },
     {
       name: 'selectedValue',
       type: 'string | undefined',
       default: 'undefined',
-      comment: 'The value of the currently selected tab'
+      comment: 'The value of the currently selected tab.'
     },
     {
       name: 'vertical',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
-      comment: 'When true, the tab list is displayed vertically'
+      comment: 'When true, the tab list is displayed vertically.'
     },
-    commonProps.variant
-  ],
-  events: [
     {
-      name: 'select',
-      comment: 'Raised when a tab is selected',
-      data: 'value'
+      name: 'onSelect',
+      type: '(value: string) => void',
+      default: 'undefined',
+      comment: 'Called when the selectedValue changes.'
     }
   ],
   methods: [
@@ -52,9 +50,7 @@ export const tabListDoc: ComponentDoc = {
       comment: 'Selects the last tab.'
     }
   ],
-  anatomy: `<div class="sterling-tab-list">
-  <!-- children -->
-  <slot {disabled} {selectedValue} {variant} {vertical} />
-</div>`,
+  anatomy: `tab list (<div>)
+  children (Snippet)`,
   usage: TabListPlayground
 };

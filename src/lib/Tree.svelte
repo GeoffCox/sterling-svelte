@@ -22,6 +22,8 @@
     class: _class,
     disabled = false,
     expandedValues = $bindable([]),
+    onExpandCollapse,
+    onSelect,
     selectedValue = $bindable(undefined),
     ...rest
   }: Props = $props();
@@ -47,6 +49,14 @@
   };
 
   setContext<TreeContext>(TREE_CONTEXT_KEY, treeContext);
+
+  $effect(() => {
+    onSelect?.(selectedValue);
+  });
+
+  $effect(() => {
+    onExpandCollapse?.(expandedValues);
+  });
 
   export const blur = () => {
     treeRef?.blur();

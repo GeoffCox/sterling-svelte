@@ -4,41 +4,45 @@ import SwitchPlayground from '../../_playgrounds/switch/SwitchPlayground.svelte'
 
 export const switchDoc: ComponentDoc = {
   name: 'Switch',
-  description: "An <input type='checkbox'>: toggles between two states",
+  description: 'A toggle button between two states.',
   comments: [makeExtendsComment('HTMLInputElement')],
   props: [
     {
-      name: 'offText',
-      type: 'string | undefined',
+      name: 'offLabel',
+      type: 'string | LabelSnippet | undefined',
       default: 'undefined',
-      comment: 'The text appearing by the off position. Not used when the offLabel slot is filled.'
+      comment: 'The text or snippet to display for the off position.'
     },
     {
-      name: 'onText',
-      type: 'string | undefined',
+      name: 'onLabel',
+      type: 'string | LabelSnippet | undefined',
       default: 'undefined',
-      comment: 'The text appearing near the on position. Not used when the onLabel slot is filled.'
+      comment: 'The text or snippet to display for the on position..'
     },
-    commonProps.variant,
     {
       name: 'vertical',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
       comment: 'When true, the switch is displayed vertically.'
     }
   ],
-  anatomy: `<div class="sterling-switch">
-   <!-- hidden input -->
-  <input />
-  <div class="off-label">
-    <slot name="offLabel" {checked} {disabled} {inputId} {offText} {variant} {vertical} />
-  </div>
-  <div class="switch">
-    <div class="thumb" />
-  </div>
-  <div class="on-label">
-    <slot name="onLabel" {checked} {disabled} {inputId} {onText} {variant} {vertical}>
-  </div>
-</div>`,
+  types: [
+    {
+      name: 'LabelSnippet',
+      definition: `Snippet<[{ 
+  checked: boolean | null | undefined; 
+  disabled: boolean | null | undefined; 
+  inputId: string;
+}]>`
+    }
+  ],
+  anatomy: `switch (<div>)
+  hidden (<input>)
+  off container (<div>)
+    offLabel (string | Snippet)
+  toggle (<div>)
+    thumb (<div>)
+  on container (<div>)
+    onLabel (string | Snippet)`,
   usage: SwitchPlayground
 };

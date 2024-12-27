@@ -67,39 +67,41 @@
 </script>
 
 <Playground {code}>
-  <div class="component" slot="component" role="tree">
-    {#if hasChildren}
-      <TreeItem {disabled} label={_label} {value} class={_class}>
-        <TreeItem value="child1" label="Child 1" />
-        <TreeItem value="child2" label="Child 2" />
-        <TreeItem value="child3" label="Child 3" />
-        <TreeItem value="child4" label="Child 4" />
-      </TreeItem>
-    {:else if _label}
-      <TreeItem {disabled} {value} class={_class}>
-        {#snippet label()}
-          {_label}
-        {/snippet}
-      </TreeItem>
-    {:else}
-      <TreeItem {disabled} {value} class={_class}></TreeItem>
-    {/if}
-  </div>
-  <svelte:fragment slot="props">
+  {#snippet component()}
+    <div class="component" role="tree">
+      {#if hasChildren}
+        <TreeItem {disabled} label={_label} {value} class={_class}>
+          <TreeItem value="child1" label="Child 1" />
+          <TreeItem value="child2" label="Child 2" />
+          <TreeItem value="child3" label="Child 3" />
+          <TreeItem value="child4" label="Child 4" />
+        </TreeItem>
+      {:else if _label}
+        <TreeItem {disabled} {value} class={_class}>
+          {#snippet label()}
+            {_label}
+          {/snippet}
+        </TreeItem>
+      {:else}
+        <TreeItem {disabled} {value} class={_class}></TreeItem>
+      {/if}
+    </div>
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="label">
       <Input bind:value={_label} />
     </Label>
     <VariantInput bind:class={_class} availableVariants={['colorful']} />
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
+  {/snippet}
+  {#snippet tweaks()}
     <Label text="depth: {depth}">
       <div class="slider">
         <Slider max={20} step={1} precision={0} bind:value={depth} />
       </div>
     </Label>
     <Checkbox bind:checked={hasChildren}>Has Children</Checkbox>
-  </svelte:fragment>
+  {/snippet}
 </Playground>
 
 <style>

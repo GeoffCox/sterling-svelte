@@ -8,23 +8,23 @@
   import VariantInput from '../../_shared/VariantInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
+  let _class = '';
   let disabled = false;
   let selectedValue: string | undefined;
-  let variant = '';
   let vertical = false;
 
-  $: code = getPlaygroundCode({ disabled, variant, vertical });
+  $: code = getPlaygroundCode({ disabled, _class: _class, vertical });
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     <TabList
       bind:selectedValue
       {disabled}
-      class={variant}
+      class={_class}
       {vertical}
       onSelect={(value) => {
-        console.log(`onSelect: ${value}`);
+        console.log(`TabList.onSelect value:${value}`);
       }}
     >
       <Tab value="First">First</Tab>
@@ -32,13 +32,13 @@
       <Tab value="Third">Third</Tab>
       <Tab value="Fourth">Fourth</Tab>
     </TabList>
-  </svelte:fragment>
-  <svelte:fragment slot="props">
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
     <Label text="selectedValue">
       <Input bind:value={selectedValue} />
     </Label>
-    <VariantInput bind:class={variant} availableVariants={[]} />
-  </svelte:fragment>
+    <VariantInput bind:class={_class} availableVariants={[]} />
+  {/snippet}
 </Playground>
