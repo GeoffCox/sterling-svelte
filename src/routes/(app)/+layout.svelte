@@ -183,8 +183,8 @@
   }
 
   :global(p) {
-    margin-block-start: 0.25em;
-    margin-block-end: 0.25em;
+    margin-block-start: 0em;
+    margin-block-end: 1em;
     line-height: 1.6em;
   }
 

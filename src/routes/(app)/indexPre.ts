@@ -1,3 +1,5 @@
+// Svelte has a bug where it will think some Svelte code within string literals is code
+// when placed within a .svelte file.  They are placed here as a workaround.
 export const preBlocks = {
   install1: `npm install @geoffcox/sterling-svelte`,
   install2: `yarn add @geoffcox/sterling-svelte`,

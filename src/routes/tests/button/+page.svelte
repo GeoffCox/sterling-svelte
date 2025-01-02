@@ -1,15 +1,13 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { type ButtonShape, type ButtonVariant } from '$lib';
   import Button from '$lib/Button.svelte';
 
-  const shape = ($page.url.searchParams.get('shape') as ButtonShape) || undefined;
-  const variant = ($page.url.searchParams.get('variant') as ButtonVariant) || undefined;
+  const _class = ($page.url.searchParams.get('class') as string) || undefined;
 </script>
 
 <div class="container" data-testid="container">
   <div>
-    <Button data-testid="target" {shape} {variant}>sterling-svelte</Button>
+    <Button data-testid="target" class={_class}>sterling-svelte</Button>
   </div>
 </div>
 

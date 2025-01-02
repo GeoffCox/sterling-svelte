@@ -1,6 +1,6 @@
 <script>
   import Gallery from './Gallery.svelte';
-  import { preBlocks } from './topics/preBlocks';
+  import { preBlocks } from './indexPre';
 </script>
 
 <div>
