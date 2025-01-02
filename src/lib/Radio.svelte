@@ -7,7 +7,7 @@
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   type Props = HTMLInputAttributes & {
-    group: any | undefined | null;
+    group?: any | null;
   };
 
   let {
