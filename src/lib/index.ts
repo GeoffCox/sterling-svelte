@@ -18,7 +18,6 @@ export { usingKeyboard } from './mediaQueries/usingKeyboard';
 export { idGenerator } from './idGenerator';
 
 // ----- Component types ----- //
-export type { ButtonVariant, ButtonShape } from './Button.types';
 export type { ListContext } from './List.types';
 export type { MenuBarContext } from './MenuBar.types';
 export type { MenuItemContext, MenuItemRegistration, MenuItemRole } from './MenuItem.types';
@@ -30,7 +29,6 @@ export type { TreeContext } from './Tree.types';
 export type { TreeItemContext } from './TreeItem.types';
 
 // ----- Component constants ----- //
-export { BUTTON_SHAPES, BUTTON_VARIANTS } from './Button.constants';
 export { LABEL_STATUSES, LABEL_VARIANTS } from './Label.constants';
 export { LIST_CONTEXT_KEY } from './List.constants';
 export { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
