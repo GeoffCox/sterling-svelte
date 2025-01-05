@@ -9,16 +9,16 @@
     max?: number;
     percent?: number;
     value?: number;
-    orientation?: ProgressOrientation | null;
+    vertical?: boolean | null;
   };
 
   let {
     class: _class,
     disabled = false,
     max = 100,
-    orientation = 'horizontal',
     percent = $bindable(0), //readonly
     value = $bindable(0),
+    vertical,
     ...rest
   }: Props = $props();
 
@@ -39,17 +39,17 @@
   let percentWidth = $derived(clientWidth * ratio);
 
   let indicatorStyle = $derived(
-    orientation === 'vertical' ? `height: ${percentHeight}px` : `width: ${percentWidth}px`
+    vertical ? `height: ${percentHeight}px` : `width: ${percentWidth}px`
   );
 </script>
 
 <!-- svelte-ignore a11y_role_supports_aria_props -->
 <div
-  aria-orientation={orientation as AriaAttributes['aria-orientation']}
+  aria-orientation={vertical ? 'vertical' : 'horizontal'}
   class={['sterling-progress', _class].filter(Boolean).join(' ')}
   class:disabled
-  class:horizontal={orientation === 'horizontal'}
-  class:vertical={orientation === 'vertical'}
+  class:horizontal={!vertical}
+  class:vertical
   data-progress-percent={percent}
   data-progress-max={max}
   data-progress-value={value}

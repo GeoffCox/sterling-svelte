@@ -5,7 +5,7 @@ export const getPlaygroundCode = (props: {
   max: number;
   value: number;
   _class: string;
-  orientation: ProgressOrientation;
+  vertical: boolean | null | undefined;
 }) => {
   const propList: string[] = [];
 
@@ -21,8 +21,8 @@ export const getPlaygroundCode = (props: {
   if (props.value !== 0) {
     propList.push(`value="${props.value}"`);
   }
-  if (props.orientation) {
-    propList.push(`orientation="${props.orientation}"`);
+  if (props.vertical) {
+    propList.push(`vertical`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

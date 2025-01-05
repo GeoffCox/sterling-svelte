@@ -1,23 +1,6 @@
 <h1>Architecture</h1>
 
-<p>
-  <b>Important!</b> There are many changes to sterling-svelte as part of moving to Svelte 5. See the
-  <a href="/topics/changelog">changelog</a> for the specifics.
-</p>
-
-<h2>Fully headless library (no default styling)</h2>
-<p>
-  sterling-svelte is a fully headless component library. You can use the Sterling theme through the
-  @geoffcox/sterling-svelte-theme package or write your own.
-</p>
-<p>
-  While Svelte allows for encapsulating style within a component and preventing component styles
-  from leaking outside the components scope, it can hinder style customization in component
-  libraries. Each sterling-svelte component is written to output HTML structure, CSS classes, and
-  data attributes to let you easily style any component.
-</p>
-
-<h2>HTML props are forwarded</h2>
+<h2>Prop forwarding</h2>
 <p>
   Components will forward props to either the associated intrinsic HTML element or the root element
   rendered.
@@ -32,7 +15,7 @@
   this would override the Button components default <code>type=button</code> prop.
 </p>
 
-<h2>HTML events are distinguished from custom callbacks</h2>
+<h2>Custom callbacks vs. HTML events</h2>
 <p>
   Svelte provide on<i>event</i>. callbacks for HTML element events. These callbacks do not change
   the casing of the HTML event name. For example, the button <code>click</code> event is handled via
@@ -44,7 +27,7 @@
   <code>onSelect?: (selectedValue: string | undefined) => void;</code>
 </p>
 
-<h2>Visual layers are created through portaling</h2>
+<h2>Floating UI</h2>
 <p>
   Components with floating UI like <code>Dropdown</code>, <code>Menu</code>, and <code>Select</code>
   need to ensure that the dropdown UI is not hidden due to a container's overflow setting. Components
@@ -52,7 +35,7 @@
   <code>body</code>.
 </p>
 
-<h2>Composition is done with snippets</h2>
+<h2>Composition</h2>
 <p>
   Components support named snippets to fill in or replace content and the <code>children</code> snippet
   for default content..
@@ -67,15 +50,15 @@
   example, TreeItem will render the expand/collapse chevron when the <code>icon</code> snippet is specified.
 </p>
 
-<h2>Context communicates across hierarchy</h2>
+<h2>Hierarchy communication</h2>
 <p>
-  When a component has a slot containing descendants, it cannot set properties, subscribe to events,
-  or get a reference to a descendant. This creates a difficult boundary to communication between
-  components.
+  In a components like List or Tree, it would be a burden to require callers to pass properties down
+  the hierarchy of components. For example, passing Tree's <code>expandedValues</code> property to every
+  TreeItem would be tedious. Svelte's context is used to pass contextual data down the hierarchy.
 </p>
 <p>
-  In these cases, components will use Svelte context to pass data and callbacks to descendants. This
-  provides the bonus that different kinds of descendants can be substituted given they use context.
+  Some component use context. To support context values bound to props or <code>$state</code>, the
+  context objects are implemented using getters and setters.
 </p>
 <p>
   For example, <code>Tree</code> sets a <code>TreeContext</code> context that tells
@@ -85,20 +68,14 @@
   and the depth of the children.
 </p>
 
-<h2>Locates elements using role and data-props</h2>
+<h2>Finding dynamically rendered elements</h2>
 <p>
-  Slots don't allow components to know what type of elements are filling the slot. Other times there
-  may be sibling or parent elements a component doesn't know about because they are not within the
-  component's HTML. Components sometimes need to locate elements in order to implement proper
-  behavior. They do this with <code>ParentNode.querySelector</code> and find elements by role and data
-  properties.
+  Components sometimes need to locate elements they didn't render. They do this with <code
+    >ParentNode.querySelector</code
+  > and find elements by role and data properties.
 </p>
 <p>
   For example, <code>TreeItem</code> finds previous and next siblings to implement up/down arrow key
   handling. It uses calls like <code>querySelector('[role="treeitem"][data-value]')</code> to locate
   the next sibling.
-</p>
-<p>
-  This means that some components will have specific roles and data properties in order to
-  participate in the behavior of their parent component.
 </p>

@@ -32,10 +32,10 @@ export const progressDoc: ComponentDoc = {
       comment: 'The current value.'
     },
     {
-      name: 'orientation',
-      type: "'ProgressOrientation | undefined'",
-      default: 'horizontal',
-      comment: 'Whether the progress bar is displayed horizontally or vertically.'
+      name: 'vertical',
+      type: 'boolean | null | undefined',
+      default: 'undefined',
+      comment: 'When true, the progress bar is displayed vertically.'
     }
   ],
   types: [

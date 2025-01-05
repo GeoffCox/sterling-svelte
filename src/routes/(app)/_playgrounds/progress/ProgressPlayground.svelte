@@ -21,7 +21,7 @@
   let max = $state(100);
   let percent: number = $state(0);
   let value = $state(35);
-  let orientation: ProgressOrientation = $state('horizontal');
+  let vertical: boolean | null | undefined = $state(false);
 
   // This helps fix the lost typing of forwarded events on Input
   type FormEvent<E extends Event = Event, T extends EventTarget = HTMLElement> = E & {
@@ -44,7 +44,7 @@
       max,
       value,
       _class: _class,
-      orientation
+      vertical
     })
   );
 </script>
@@ -52,8 +52,8 @@
 <Playground {code}>
   {#snippet component()}
     <div class="component">
-      <div class="progress" class:vertical={orientation === 'vertical'}>
-        <Progress {disabled} {value} {max} bind:percent class={_class} {orientation} />
+      <div class="progress" class:vertical>
+        <Progress {disabled} {value} {max} bind:percent class={_class} {vertical} />
       </div>
     </div>
   {/snippet}
@@ -77,12 +77,7 @@
         'error-status'
       ]}
     />
-    <Label text="orientation">
-      <Select bind:selectedValue={orientation}>
-        <ListItem value="horizontal">horizontal</ListItem>
-        <ListItem value="vertical">vertical</ListItem>
-      </Select>
-    </Label>
+    <Checkbox bind:checked={vertical}>vertical</Checkbox>
   {/snippet}
 </Playground>
 

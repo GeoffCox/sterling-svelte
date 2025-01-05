@@ -18,16 +18,20 @@
       name: 'GETTING STARTED',
       items: [
         {
-          name: 'Introduction',
+          name: 'Overview',
           url: '/'
         },
         {
-          name: 'Sterling Theme',
-          url: '/topics/theme'
+          name: 'Installation',
+          url: '/topics/install'
         },
         {
           name: 'Architecture',
           url: '/topics/architecture'
+        },
+        {
+          name: 'Migration from v1',
+          url: '/topics/migration-from-v1'
         },
         {
           name: 'Change Log',

@@ -3,7 +3,7 @@
 export const preBlocks = {
   install1: `npm install @geoffcox/sterling-svelte`,
   install2: `yarn add @geoffcox/sterling-svelte`,
-  importCss1: `import '@geoffcox/sterling-svelte/css/sterling.css';`,
+  importCss1: `import '@geoffcox/sterling-svelte-themes/sterling.css';`,
   importCss2: `<svelte:head>
   <link href="https://unpkg.com/@geoffcox/sterling-svelte/dist/css/sterling.css" rel="stylesheet">
 </svelte:head>`,

@@ -13,16 +13,16 @@
 <p>You can choose to import all the component styles:</p>
 
 <pre>{`
-import '@geoffcox/sterling-svelte/css/sterling.css'
+import '@geoffcox/sterling-svelte-themes/sterling.css'
 `}</pre>
 
 <p>or pick the individual component styles:</p>
 
 <pre>{`
-import '@geoffcox/sterling-svelte/css/light-mode.css'
-import '@geoffcox/sterling-svelte/css/dark-mode.css'
-import '@geoffcox/sterling-svelte/css/Button.css'
-import '@geoffcox/sterling-svelte/css/Checkbox.css'
+import '@geoffcox/sterling-svelte-themes/sterling/light-mode.css'
+import '@geoffcox/sterling-svelte-themes/sterling/dark-mode.css'
+import '@geoffcox/sterling-svelte-themes/sterling/Button.css'
+import '@geoffcox/sterling-svelte-themes/sterling/Checkbox.css'
 `}</pre>
 
 <h2>Component classes</h2>

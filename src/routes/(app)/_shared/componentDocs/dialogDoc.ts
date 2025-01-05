@@ -4,7 +4,7 @@ import DialogPlayground from '../../_playgrounds/dialog/DialogPlayground.svelte'
 
 export const dialogDoc: ComponentDoc = {
   name: 'Dialog',
-  description: 'A modal, interactive content box that can be submitted or dismissed',
+  description: 'A modal, interactive content box that can be submitted or dismissed.',
   comments: [
     'The dialog is always modal.',
     'The cancel event is only raised when the escape key is pressed.',
@@ -19,19 +19,19 @@ export const dialogDoc: ComponentDoc = {
     },
     {
       name: 'body',
-      type: 'Snippet| undefined',
+      type: 'Snippet | undefined',
       default: 'undefined',
       comment: 'The body within the dialog content.'
     },
     {
       name: 'content',
-      type: 'Snippet| undefined',
+      type: 'Snippet | undefined',
       default: 'undefined',
       comment: 'The entire content of the dialog. Defaults to header, body, and footer snippets.'
     },
     {
       name: 'footer',
-      type: 'Snippet| undefined',
+      type: 'Snippet | undefined',
       default: 'undefined',
       comment: 'The footer within the dialog content.'
     },
@@ -43,7 +43,7 @@ export const dialogDoc: ComponentDoc = {
     },
     {
       name: 'headerTitle',
-      type: 'string | Snippet| undefined',
+      type: 'string | Snippet | undefined',
       default: 'undefined',
       comment: 'The title within the header.'
     },
