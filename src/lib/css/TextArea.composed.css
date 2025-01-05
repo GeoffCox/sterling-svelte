@@ -1,8 +1,0 @@
-.sterling-text-area.composed textarea,
-.sterling-text-area.composed:hover textarea,
-.sterling-text-area.composed textarea:focus,
-.sterling-text-area.composed:hover textarea:focus {
-  background-color: transparent;
-  border-color: transparent;
-  outline: none;
-}

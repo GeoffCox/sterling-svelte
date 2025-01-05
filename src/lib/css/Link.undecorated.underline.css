@@ -1,8 +1,0 @@
-.sterling-link.undecorated.underline,
-.sterling-link.undecorated.underline:hover,
-.sterling-link.undecorated.underline:active,
-.sterling-link.undecorated.underline:visited {
-  border-bottom-width: 0;
-  border-bottom-color: transparent;
-  text-decoration: none;
-}

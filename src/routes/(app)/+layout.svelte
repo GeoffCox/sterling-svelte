@@ -1,5 +1,4 @@
 <script lang="ts">
-  import '$lib/css/sterling.css';
   import { applyLightDarkMode } from '$lib';
   import { onMount } from 'svelte';
   import Link from '$lib/Link.svelte';
@@ -9,6 +8,7 @@
   import Nav from './_shared/Nav.svelte';
   import Dropdown from '$lib/Dropdown.svelte';
   import { navigating } from '$app/stores';
+  import '@geoffcox/sterling-svelte-themes/sterling.css';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -139,6 +139,7 @@
 
 <style>
   /* ----- Global ----- */
+  @import '@fontsource/atkinson-hyperlegible';
   @import '@fontsource/open-sans';
   @import '@fontsource/source-code-pro';
 
@@ -153,7 +154,8 @@
   }
 
   :global(body) {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    /* font-family: 'Open Sans', sans-serif;  */
     margin: 0;
     padding: 1em;
     min-height: 100vh;
@@ -192,7 +194,7 @@
     font-family: 'Source Code Pro', monospace;
     font-weight: bold;
     color: var(--stsv-common__color);
-    background-color: var(--stsv-common__background-color--faint);
+    background-color: var(--stsv-common__background-color--secondary);
   }
 
   :global(pre) {
