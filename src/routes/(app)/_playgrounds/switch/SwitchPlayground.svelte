@@ -5,7 +5,7 @@
   import ChillIcon from './ChillIcon.svelte';
   import HeatIcon from './HeatIcon.svelte';
   import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
@@ -84,7 +84,7 @@
     <Label text="onLabelText">
       <Input bind:value={onText} />
     </Label>
-    <VariantInput bind:class={variant} availableVariants={['colorful']} />
+    <VariantInput bind:class={variant} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   {/snippet}
   {#snippet tweaks()}

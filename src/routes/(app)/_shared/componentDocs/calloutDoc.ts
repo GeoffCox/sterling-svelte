@@ -4,7 +4,7 @@ import CalloutPlayground from '../../_playgrounds/callout/CalloutPlayground.svel
 
 export const calloutDoc: ComponentDoc = {
   name: 'Callout',
-  description: 'A floating box of content with an arrow pointing at the reference element',
+  description: 'A floating box of content with an arrow pointing at the reference element.',
   comments: [
     'Use Popover for floating content without the Callout style.',
     makeExtendsComment('HTMLDivElement')

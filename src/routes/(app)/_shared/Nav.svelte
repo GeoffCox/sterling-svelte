@@ -36,6 +36,10 @@
         {
           name: 'Change Log',
           url: '/topics/changelog'
+        },
+        {
+          name: 'Sterling Theme',
+          url: '/topics/theme'
         }
       ]
     },

@@ -11,7 +11,7 @@
   import Popover from '$lib/Popover.svelte';
   import type { PopoverPlacement } from '$lib/Popover.types';
   import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let crossAxisOffset = $state(0);
@@ -45,11 +45,17 @@
     </div>
   {/snippet}
   {#snippet props()}
-    <Label text="crossAxisOffset: {crossAxisOffset}">
-      <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
+    <Label text="crossAxisOffset">
+      <div class="slider">
+        <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
+        <div>{crossAxisOffset}</div>
+      </div>
     </Label>
-    <Label text="mainAxisOffset: {mainAxisOffset}">
-      <Slider min={-25} max={25} precision={0} bind:value={mainAxisOffset} />
+    <Label text="mainAxisOffset">
+      <div class="slider">
+        <Slider min={-25} max={25} precision={0} bind:value={mainAxisOffset} />
+        <div>{mainAxisOffset}</div>
+      </div>
     </Label>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Label text="placement">
@@ -59,7 +65,7 @@
         {/each}
       </Select>
     </Label>
-    <VariantInput bind:class={_class} availableVariants={[]} />
+    <VariantInput bind:class={_class} sterlingClasses={[]} />
   {/snippet}
   {#snippet tweaks()}
     <Label text="popover (text)">
@@ -76,6 +82,13 @@
     border-width: 2px;
     color: var(--stsv-common__color);
     padding: 1em;
+  }
+
+  .slider {
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    font-size: 0.8em;
   }
 
   .reference {

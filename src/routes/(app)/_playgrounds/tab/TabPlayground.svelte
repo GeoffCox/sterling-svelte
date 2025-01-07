@@ -10,7 +10,7 @@
   import { TAB_LIST_CONTEXT_KEY } from '$lib/TabList.constants';
   import Tab from '$lib/Tab.svelte';
   import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
   import type { TabListContext } from '$lib';
 
@@ -82,7 +82,7 @@
     <Label text="text">
       <Input bind:value={text} />
     </Label>
-    <VariantInput bind:class={_class} availableVariants={['colorful']} />
+    <VariantInput bind:class={_class} />
   {/snippet}
   {#snippet tweaks()}
     <Checkbox bind:checked={tabListDisabled}>disabled (TabList)</Checkbox>

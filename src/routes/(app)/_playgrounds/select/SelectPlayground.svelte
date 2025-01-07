@@ -12,7 +12,7 @@
 
   import Playground from '../Playground.svelte';
   import { countries } from '../../_shared/sampleData/countries';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let open: boolean | undefined | null = $state(false);
@@ -58,7 +58,7 @@
       >selectedValue = random()</Button
     >
 
-    <VariantInput bind:class={listClass} availableVariants={[]} labelText="listVariant" />
-    <VariantInput bind:class={_class} availableVariants={['colorful', 'composed']} />
+    <VariantInput bind:class={listClass} sterlingClasses={[]} labelText="listVariant" />
+    <VariantInput bind:class={_class} sterlingClasses={['composed']} />
   {/snippet}
 </Playground>

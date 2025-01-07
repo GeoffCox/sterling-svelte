@@ -79,3 +79,29 @@
   handling. It uses calls like <code>querySelector('[role="treeitem"][data-value]')</code> to locate
   the next sibling.
 </p>
+
+<h2 id="ArchitectureThemeReady">Theme Ready</h2>
+
+<p>
+  Each sterling-svelte component renders HTML elements to allow a theme to effectively apply styles.
+</p>
+
+<ul>
+  <li>
+    A <code>sterling-<i>component</i></code> class is added to each root element. For example,
+    Button renders <code>&lt;button class="sterling-button"&gt;</code>.
+  </li>
+  <li>
+    Marker classes are added to child HTML elements. For example, Switch add <code>off-label</code>,
+    <code>toggle</code>, <code>thumb</code>, and
+    <code>on-label</code> classes to the different child elements.
+  </li>
+  <li>
+    Classes are added based on state. For example, Tab add the <code>selected</code> class whenever it
+    is selected.
+  </li>
+  <li>
+    Data attributes are added based on state. For example, ListItem add <code>data-value=</code> to the
+    value.
+  </li>
+</ul>

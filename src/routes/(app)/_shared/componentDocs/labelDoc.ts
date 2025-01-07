@@ -4,7 +4,7 @@ import LabelPlayground from '../../_playgrounds/label/LabelPlayground.svelte';
 
 export const labelDoc: ComponentDoc = {
   name: 'Label',
-  description: 'A <label>: a caption for another element',
+  description: 'A caption naming or describing a form element.',
   comments: [
     'An optional message and status can provide information to the user about their value.',
     'The required property and requiredReason indicate the user must fill in a value and why.',

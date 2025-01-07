@@ -4,7 +4,7 @@ import DropdownPlayground from '../../_playgrounds/dropdown/DropdownPlayground.s
 
 export const dropdownDoc: ComponentDoc = {
   name: 'Dropdown',
-  description: 'A value and button to open/close a floating content box.',
+  description: 'A value and associated button to open/close a floating content box.',
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {

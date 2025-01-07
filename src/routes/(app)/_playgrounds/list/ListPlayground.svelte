@@ -11,7 +11,7 @@
   import ListItem from '$lib/ListItem.svelte';
   import { debounce } from 'lodash-es';
   import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled: boolean | undefined | null = $state(false);
@@ -66,7 +66,7 @@
     <Label text="selectedValue">
       <Input bind:value={selectedValueText} />
     </Label>
-    <VariantInput bind:class={variant} availableVariants={['composed']} />
+    <VariantInput bind:class={variant} sterlingClasses={['composed']} />
   {/snippet}
 </Playground>
 

@@ -8,7 +8,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled: boolean | null | undefined = $state(false);
@@ -34,7 +34,17 @@
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <VariantInput
       bind:class={_class}
-      availableVariants={['capsule', 'circular ', 'colorful', 'secondary', 'square', 'tool']}
+      sterlingClasses={[
+        'capsule',
+        'circular ',
+        'secondary',
+        'square',
+        'blue',
+        'tool',
+        'green',
+        'orange',
+        'red'
+      ]}
     />
   {/snippet}
   {#snippet snippets()}

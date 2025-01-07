@@ -4,7 +4,7 @@ import ListPlayground from '../../_playgrounds/list/ListPlayground.svelte';
 
 export const listDoc: ComponentDoc = {
   name: 'List',
-  description: 'An interactive, scrollable set of items where a single item can be selected.',
+  description: 'An scrollable set of items where a single item can be selected.',
   comments: [
     'Use the children to provide list items.',
     'A list item is identified by having data-value and role="listitem" properties. Any content without these properties, will not participate in selection. This allows you to mix in other content with list items such as search boxes, group headers, or decorations.',

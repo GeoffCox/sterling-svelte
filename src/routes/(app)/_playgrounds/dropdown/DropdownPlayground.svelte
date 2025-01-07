@@ -10,7 +10,7 @@
   import Label from '$lib/Label.svelte';
   import Slider from '$lib/Slider.svelte';
   import AnimatedProgress from './AnimatedProgress.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled: boolean | null | undefined = $state(false);
@@ -54,7 +54,7 @@
   {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={stayOpenOnClickAway}>stayOpenOnClickAway</Checkbox>
-    <VariantInput bind:class={_class} availableVariants={['colorful']} />
+    <VariantInput bind:class={_class} />
   {/snippet}
 </Playground>
 

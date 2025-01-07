@@ -4,7 +4,7 @@
   import MenuItem from '$lib/MenuItem.svelte';
   import { setContext } from 'svelte';
   import { MENU_ITEM_CONTEXT_KEY, type MenuItemContext } from '$lib';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
   import Menu from '$lib/Menu.svelte';
 
@@ -34,6 +34,6 @@
     </Menu>
   {/snippet}
   {#snippet props()}
-    <VariantInput bind:class={_class} availableVariants={[]} />
+    <VariantInput bind:class={_class} sterlingClasses={[]} />
   {/snippet}
 </Playground>

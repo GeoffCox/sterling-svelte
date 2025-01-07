@@ -11,7 +11,7 @@
   import { TREE_CONTEXT_KEY } from '$lib/Tree.constants';
   import { TREE_ITEM_CONTEXT_KEY } from '$lib/TreeItem.constants';
   import { setContext } from 'svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
   import type { TreeContext, TreeItemContext } from '$lib';
 
@@ -92,7 +92,7 @@
     <Label text="label">
       <Input bind:value={_label} />
     </Label>
-    <VariantInput bind:class={_class} availableVariants={['colorful']} />
+    <VariantInput bind:class={_class} />
   {/snippet}
   {#snippet tweaks()}
     <Label text="depth: {depth}">

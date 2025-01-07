@@ -5,7 +5,7 @@
   import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
   import Playground from '../Playground.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled: boolean | undefined | null = $state(false);
@@ -35,7 +35,7 @@
   {/snippet}
   {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <VariantInput bind:class={_class} availableVariants={['colorful']} />
+    <VariantInput bind:class={_class} />
   {/snippet}
   {#snippet snippets()}
     <Label text="children">

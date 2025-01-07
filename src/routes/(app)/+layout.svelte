@@ -8,7 +8,8 @@
   import Nav from './_shared/Nav.svelte';
   import Dropdown from '$lib/Dropdown.svelte';
   import { navigating } from '$app/stores';
-  import '@geoffcox/sterling-svelte-themes/sterling.css';
+  // import '@geoffcox/sterling-svelte-themes/sterling.css';
+  import '../../../../sterling-svelte-themes/css/sterling.css';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -108,12 +109,12 @@
           <ModeSlider bind:mode />
         </div>
         <div class="github">
-          <Link href="http://github.com/GeoffCox/sterling-svelte" variant="ghost">
+          <Link href="http://github.com/GeoffCox/sterling-svelte" class="ghost">
             <div class="github-icon"><GitHubIcon /></div>
           </Link>
         </div>
         <div class="hamburger-menu">
-          <Dropdown bind:open={hamburgerOpen} variant="composed">
+          <Dropdown bind:open={hamburgerOpen} class="composed">
             <svelte:fragment slot="icon">
               <div class="hamburger-icon">
                 <HamburgerIcon />
@@ -363,7 +364,7 @@
     padding: 1em;
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 800px) {
     .nav {
       display: none;
     }

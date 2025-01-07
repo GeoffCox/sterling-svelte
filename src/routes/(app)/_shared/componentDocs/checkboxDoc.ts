@@ -4,7 +4,7 @@ import CheckboxPlayground from '../../_playgrounds/checkbox/CheckboxPlayground.s
 
 export const checkboxDoc: ComponentDoc = {
   name: 'Checkbox',
-  description: 'An interactive element to set a boolean value',
+  description: 'An interactive element to set a true/false value.',
   comments: [makeExtendsComment('HTMLInputElement')],
   anatomy: `checkbox (<div>)
   container (<div>)

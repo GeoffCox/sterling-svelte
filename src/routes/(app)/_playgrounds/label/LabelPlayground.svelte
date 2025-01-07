@@ -5,7 +5,7 @@
   import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');
@@ -49,7 +49,7 @@
   {#snippet props()}
     <VariantInput
       bind:class={_class}
-      availableVariants={['boxed', 'colorful', 'vertical', 'info', 'warning', 'danger', 'success']}
+      sterlingClasses={['boxed', 'vertical', 'info', 'success', 'warning', 'error']}
     />
     <Checkbox bind:checked={forwardClick}>forwardClick</Checkbox>
     <Checkbox bind:checked={required}>required</Checkbox>

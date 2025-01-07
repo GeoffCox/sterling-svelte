@@ -4,7 +4,7 @@ import TextAreaPlayground from '../../_playgrounds/textarea/TextAreaPlayground.s
 
 export const textAreaDoc: ComponentDoc = {
   name: 'Textarea',
-  description: 'An multi-line text input.',
+  description: 'A multi-line text input.',
   comments: [makeExtendsComment('HTMLTextAreaElement')],
   props: [
     {

@@ -5,7 +5,7 @@
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import LabelBox from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
 
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
@@ -46,7 +46,7 @@
     <LabelBox text="placeholder">
       <Input bind:value={placeholder} />
     </LabelBox>
-    <VariantInput bind:class={_class} availableVariants={['colorful', 'composed']} />
+    <VariantInput bind:class={_class} sterlingClasses={['composed']} />
   {/snippet}
   {#snippet snippets()}
     <Label text="children">

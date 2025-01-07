@@ -7,7 +7,7 @@
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
   import MenuButton from '$lib/MenuButton.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled: boolean | null | undefined = $state(false);
@@ -84,9 +84,19 @@
   {#snippet props()}
     <VariantInput
       bind:class={variant}
-      availableVariants={['capsule', 'circular ', 'colorful', 'secondary', 'square', 'tool']}
+      sterlingClasses={[
+        'capsule',
+        'circular ',
+        'secondary',
+        'square',
+        'blue',
+        'tool',
+        'green',
+        'orange',
+        'red'
+      ]}
     />
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <VariantInput bind:class={menuVariant} availableVariants={[]} labelText="menuClass" />
+    <VariantInput bind:class={menuVariant} sterlingClasses={[]} labelText="menuClass" />
   {/snippet}
 </Playground>

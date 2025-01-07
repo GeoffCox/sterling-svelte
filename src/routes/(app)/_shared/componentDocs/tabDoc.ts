@@ -4,7 +4,7 @@ import TabPlayground from '../../_playgrounds/tab/TabPlayground.svelte';
 
 export const tabDoc: ComponentDoc = {
   name: 'Tab',
-  description: 'An item in a tab list when selected typically shows associated content.',
+  description: 'An item in a tab list that, when selected, typically shows associated content.',
   comments: [makeExtendsComment('HTMLButtonElement')],
   props: [
     {

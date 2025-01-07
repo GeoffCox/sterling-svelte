@@ -7,7 +7,7 @@
   import MenuItem from '$lib/MenuItem.svelte';
   import { setContext } from 'svelte';
   import { MENU_ITEM_CONTEXT_KEY, type MenuItemContext, type MenuItemRole } from '$lib';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import Label from '$lib/Label.svelte';
   import ListItem from '$lib/ListItem.svelte';
   import Select from '$lib/Select.svelte';
@@ -98,9 +98,9 @@
   {/snippet}
   {#snippet props()}
     <Checkbox bind:checked>checked (based on role)</Checkbox>
-    <VariantInput bind:class={_class} availableVariants={[]} />
+    <VariantInput bind:class={_class} sterlingClasses={[]} />
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <VariantInput bind:class={menuClass} availableVariants={[]} labelText="menuClass" />
+    <VariantInput bind:class={menuClass} sterlingClasses={[]} labelText="menuClass" />
     <Label text="role">
       <Select bind:selectedValue={role}>
         <ListItem value="menuitem">menuitem</ListItem>

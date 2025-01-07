@@ -13,7 +13,7 @@
   import type { ProgressOrientation } from '$lib/Progress.types';
   import ListItem from '$lib/ListItem.svelte';
   import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');
@@ -65,17 +65,12 @@
     <Label text="value">
       <div class="slider">
         <Slider bind:value min={0} {max} precision={0} />
+        <div>{value}</div>
       </div>
     </Label>
     <VariantInput
       bind:class={_class}
-      availableVariants={[
-        'auto-status',
-        'info-status',
-        'success-status',
-        'warning-status',
-        'error-status'
-      ]}
+      sterlingClasses={['auto-success', 'info', 'success', 'warning', 'error']}
     />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   {/snippet}
@@ -103,6 +98,9 @@
   }
 
   .slider {
-    width: 250px;
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    font-size: 0.8em;
   }
 </style>

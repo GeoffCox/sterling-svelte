@@ -6,7 +6,7 @@
   import Input from '$lib/Input.svelte';
   import Playground from '../Playground.svelte';
   import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let value = $state(0);
@@ -64,7 +64,7 @@
     <Label text="value">
       <Input type="number" bind:value />
     </Label>
-    <VariantInput bind:class={_class} availableVariants={['colorful', 'composed']} />
+    <VariantInput bind:class={_class} sterlingClasses={['composed']} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   {/snippet}
 </Playground>

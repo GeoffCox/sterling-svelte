@@ -8,7 +8,7 @@
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import Link from '$lib/Link.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
   import { base } from '$app/paths';
 
@@ -45,7 +45,7 @@
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <VariantInput
       bind:class={_class}
-      availableVariants={['colorful', 'ghost', 'text-underline', 'undecorated']}
+      sterlingClasses={['ghost', 'text-underline', 'undecorated']}
     />
   {/snippet}
   {#snippet tweaks()}

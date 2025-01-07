@@ -4,7 +4,7 @@ import ListItemPlayground from '../../_playgrounds/listitem/ListItemPlayground.s
 
 export const listItemDoc: ComponentDoc = {
   name: 'ListItem',
-  description: 'An item within a <List>.',
+  description: 'An item within a list.',
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {

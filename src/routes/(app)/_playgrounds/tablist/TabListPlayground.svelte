@@ -5,7 +5,7 @@
   import Tab from '$lib/Tab.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = '';
@@ -39,6 +39,6 @@
     <Label text="selectedValue">
       <Input bind:value={selectedValue} />
     </Label>
-    <VariantInput bind:class={_class} availableVariants={[]} />
+    <VariantInput bind:class={_class} sterlingClasses={[]} />
   {/snippet}
 </Playground>

@@ -3,7 +3,7 @@
   import Playground from '../Playground.svelte';
 
   import TreeChevron from '$lib/TreeChevron.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let expanded = $state(false);
@@ -24,7 +24,7 @@
     <TreeChevron {expanded} {hasChildren} class={_class} />
   {/snippet}
   {#snippet props()}
-    <VariantInput bind:class={_class} availableVariants={[]} />
+    <VariantInput bind:class={_class} sterlingClasses={[]} />
     <Checkbox bind:checked={expanded}>expanded</Checkbox>
     <Checkbox bind:checked={hasChildren}>hasChildren</Checkbox>
   {/snippet}

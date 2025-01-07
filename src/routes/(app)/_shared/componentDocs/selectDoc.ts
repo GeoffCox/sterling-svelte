@@ -4,7 +4,7 @@ import SelectPlayground from '../../_playgrounds/select/SelectPlayground.svelte'
 
 export const selectDoc: ComponentDoc = {
   name: 'Select',
-  description: 'A value and a button to open/close a list of choices and select a single value.',
+  description: 'A value and a button to open/close a list of choices.',
   comments: [
     'Due to lack of styling capabilities with <select>, the Select component does not use <select>',
     makeExtendsComment('HTMLDivElement')

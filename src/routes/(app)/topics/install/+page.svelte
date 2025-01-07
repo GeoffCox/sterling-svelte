@@ -14,8 +14,8 @@
   <pre>{`yarn add @geoffcox/sterling-svelte`}</pre>
 
   <li>
-    Add sterling-svelte components. You can import components from the .svelte file or directly from
-    the library.
+    Add sterling-svelte components. You can import each component from their .svelte file or
+    multiple from the library.
   </li>
 
   <pre>{`<script>
@@ -29,7 +29,10 @@
 </div>`}</pre>
 </ol>
 
-<h2>Apply the Sterling theme (optional)</h2>
+<h2>Apply the Sterling theme (optional & recommended)</h2>
+<p>
+  If you don't have your own theme for sterling-svelte, it is recommended to use the Sterling theme.
+</p>
 <ol>
   <li>Add the sterling-svelte-themes package</li>
   <pre>{`npm install @geoffcox/sterling-svelte-themes`}</pre>
@@ -39,6 +42,10 @@
   <li>In the root of your applications (+layout.svelte), import the Sterling theme.</li>
 
   <pre>{`import '@geoffcox/sterling-svelte-themes/sterling.css';`}</pre>
+
+  <li>Set either light-mode or dark-mode on the root of your application.</li>
+
+  <pre>{`<html class="light-mode"></html>`}</pre>
 </ol>
 <h2>Support light and dark modes (optional)</h2>
 <ol>

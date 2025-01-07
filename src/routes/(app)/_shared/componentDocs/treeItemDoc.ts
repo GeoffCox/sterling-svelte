@@ -4,7 +4,7 @@ import TreeItemPlayground from '../../_playgrounds/treeitem/TreeItemPlayground.s
 
 export const treeItemDoc: ComponentDoc = {
   name: 'TreeItem',
-  description: 'An item within a Tree.',
+  description: 'An item within a tree hierarchy that can contain other items.',
   comments: [
     'A tree item is identified by having data-value and role="treeitem" properties.',
     makeExtendsComment('HTMLDivElement')

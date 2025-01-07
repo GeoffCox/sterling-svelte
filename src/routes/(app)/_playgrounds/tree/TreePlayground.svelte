@@ -8,7 +8,7 @@
   import CoffeeTreeItem from './CoffeeTreeItem.svelte';
   import Label from '$lib/Label.svelte';
   import Tree from '$lib/Tree.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
@@ -62,7 +62,7 @@
     <Label text="selectedValue">
       <Input bind:value={selectedValue} />
     </Label>
-    <VariantInput bind:class={_class} availableVariants={['composed']} />
+    <VariantInput bind:class={_class} sterlingClasses={['composed']} />
   {/snippet}
 </Playground>
 

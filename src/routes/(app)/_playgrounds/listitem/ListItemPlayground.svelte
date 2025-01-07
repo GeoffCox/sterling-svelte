@@ -9,7 +9,7 @@
   import type { ListContext } from '$lib';
   import { LIST_CONTEXT_KEY } from '$lib/List.constants';
   import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');
@@ -56,7 +56,7 @@
   {/snippet}
   {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <VariantInput bind:class={_class} availableVariants={[]} />
+    <VariantInput bind:class={_class} sterlingClasses={[]} />
   {/snippet}
   {#snippet tweaks()}
     <Checkbox bind:checked={selected}>selected</Checkbox>

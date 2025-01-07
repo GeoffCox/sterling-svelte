@@ -10,7 +10,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import { tick } from 'svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
 
   const options = [
     { value: 'outside', text: 'Go outside and play' },
@@ -96,7 +96,7 @@
   {/snippet}
   {#snippet props()}
     <Checkbox bind:checked={backdropCloses}>backdropCloses</Checkbox>
-    <VariantInput bind:class={_close} availableVariants={[]} />
+    <VariantInput bind:class={_close} sterlingClasses={[]} />
   {/snippet}
   {#snippet tweaks()}
     <Checkbox bind:checked={formSubmit}>Use form submit</Checkbox>

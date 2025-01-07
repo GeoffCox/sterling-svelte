@@ -1,17 +1,25 @@
 <script>
   import Link from '$lib/Link.svelte';
   import Gallery from './Gallery.svelte';
+  import { base } from '$app/paths';
 </script>
 
 <div>
   <h1>Overview</h1>
 
-  <p>Welcome! sterling-svelte is a UI component library built on Svelte.</p>
+  <p>Welcome to sterling-svelte, a UI component library built for Svelte!</p>
 
   <p>
     Every component is modern, accessible, and fast. The code targets evergreen browsers and meets
     ARIA accessibility standards. The library quality is meant for real world, production
     applications and sites.
+  </p>
+
+  <h2>What's New</h2>
+  <p>
+    Version 2 of sterling-svelte is built on Svelte 5. You can keep using sterling-svelte 1, but
+    this is the version getting improvements and bug fixes. Svelte 5 does have breaking changes. See
+    the <a href={`${base}/topics/migration-from-v1`}>Migration from v1</a> guide.
   </p>
 
   <h2>Styling</h2>

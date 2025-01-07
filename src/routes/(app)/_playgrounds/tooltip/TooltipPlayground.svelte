@@ -11,7 +11,7 @@
   import Label from '$lib/Label.svelte';
   import type { PopoverPlacement } from '$lib/Popover.types';
   import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');
@@ -57,17 +57,24 @@
     </div>
   {/snippet}
   {#snippet props()}
-    <Label text="crossAxisOffset: {crossAxisOffset}">
-      <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
+    <Label text="crossAxisOffset">
+      <div class="slider">
+        <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
+        <div>{crossAxisOffset}</div>
+      </div>
     </Label>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <div class="delay-slider">
-      <Label text={`hoverDelayMilliseconds: ${hoverDelayMilliseconds}ms`}>
+    <Label text={`hoverDelayMilliseconds`}>
+      <div class="slider">
         <Slider bind:value={hoverDelayMilliseconds} min={0} max={3000} precision={0} />
-      </Label>
-    </div>
-    <Label text="mainAxisOffset: {mainAxisOffset}">
-      <Slider min={-25} max={25} precision={0} bind:value={mainAxisOffset} />
+        <div>{hoverDelayMilliseconds}</div>
+      </div>
+    </Label>
+    <Label text="mainAxisOffset">
+      <div class="slider">
+        <Slider min={-25} max={25} precision={0} bind:value={mainAxisOffset} />
+        <div>{mainAxisOffset}</div>
+      </div>
     </Label>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Label text="placement">
@@ -78,7 +85,7 @@
       </Select>
     </Label>
 
-    <VariantInput labelText="class" bind:class={_class} availableVariants={['colorful']} />
+    <VariantInput labelText="class" bind:class={_class} />
   {/snippet}
   {#snippet snippets()}
     <Label text="children">
@@ -88,12 +95,15 @@
 </Playground>
 
 <style>
-  .delay-slider {
-    width: 300px;
-  }
-
   .tip-text {
     padding: 0.75em 1.5em;
+  }
+
+  .slider {
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    font-size: 0.8em;
   }
 
   .reference {

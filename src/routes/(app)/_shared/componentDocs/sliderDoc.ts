@@ -4,7 +4,7 @@ import SliderPlayground from '../../_playgrounds/slider/SliderPlayground.svelte'
 
 export const sliderDoc: ComponentDoc = {
   name: 'Slider',
-  description: 'A draggable thumb to choose a value between a minimum and maximum.',
+  description: 'A value set by dragging a thumb between a minimum and maximum.',
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {

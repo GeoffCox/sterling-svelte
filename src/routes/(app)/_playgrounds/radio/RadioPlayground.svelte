@@ -4,7 +4,7 @@
   import Radio from '$lib/Radio.svelte';
   import Playground from '../Playground.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');
@@ -29,7 +29,7 @@
     </div>
   {/snippet}
   {#snippet props()}
-    <VariantInput bind:class={_class} availableVariants={['colorful']} />
+    <VariantInput bind:class={_class} />
   {/snippet}
   {#snippet tweaks()}
     <Checkbox bind:checked={disabled}>disable 2nd item</Checkbox>
