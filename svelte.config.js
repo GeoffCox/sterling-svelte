@@ -17,7 +17,7 @@ const config = {
     adapter: publishing ? staticAdapter() : autoAdapter(),
     paths: {
       base: pathsBase,
-      relative: !publishing
+      relative: false
     },
     files: {
       routes
