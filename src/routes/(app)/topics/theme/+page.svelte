@@ -34,7 +34,7 @@ variations.
     convention. For example, Button CSS uses these variables:
     <pre>--stsv-button__background-color
 --stsv-button__border-color--hover
---stsv-common__outlinecolor</pre>
+--stsv-common__outline-color</pre>
   </li>
   <li>
     The variables are grouped:
@@ -158,7 +158,106 @@ variations.
   borderColor="--stsv-button__border-color--active"
   color="--stsv-button__color--active"
 />
+
+<h3>Button - Colors</h3>
+<Swatch
+  backgroundColor="--stsv-button__background-color--blue"
+  borderColor="--stsv-button__border-color--blue"
+  color="--stsv-button__color--blue"
+/>
 <br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--blue-hover"
+  borderColor="--stsv-button__border-color--blue-hover"
+  color="--stsv-button__color--blue-hover"
+/>
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--blue-focus"
+  borderColor="--stsv-button__border-color--blue-focus"
+  color="--stsv-button__color--blue-focus"
+/>
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--blue-active"
+  borderColor="--stsv-button__border-color--blue-active"
+  color="--stsv-button__color--blue-active"
+/>
+<br />
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--green"
+  borderColor="--stsv-button__border-color--green"
+  color="--stsv-button__color--green"
+/>
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--green-hover"
+  borderColor="--stsv-button__border-color--green-hover"
+  color="--stsv-button__color--green-hover"
+/>
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--green-focus"
+  borderColor="--stsv-button__border-color--green-focus"
+  color="--stsv-button__color--green-focus"
+/>
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--green-active"
+  borderColor="--stsv-button__border-color--green-active"
+  color="--stsv-button__color--green-active"
+/>
+<br />
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--orange"
+  borderColor="--stsv-button__border-color--orange"
+  color="--stsv-button__color--orange"
+/>
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--orange-hover"
+  borderColor="--stsv-button__border-color--orange-hover"
+  color="--stsv-button__color--orange-hover"
+/>
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--orange-focus"
+  borderColor="--stsv-button__border-color--orange-focus"
+  color="--stsv-button__color--orange-focus"
+/>
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--orange-active"
+  borderColor="--stsv-button__border-color--orange-active"
+  color="--stsv-button__color--orange-active"
+/>
+<br />
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--red"
+  borderColor="--stsv-button__border-color--red"
+  color="--stsv-button__color--red"
+/>
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--red-hover"
+  borderColor="--stsv-button__border-color--red-hover"
+  color="--stsv-button__color--red-hover"
+/>
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--red-focus"
+  borderColor="--stsv-button__border-color--red-focus"
+  color="--stsv-button__color--red-focus"
+/>
+<br />
+<Swatch
+  backgroundColor="--stsv-button__background-color--red-active"
+  borderColor="--stsv-button__border-color--red-active"
+  color="--stsv-button__color--red-active"
+/>
 <h3>Input</h3>
 <Swatch
   backgroundColor="--stsv-input__background-color"
