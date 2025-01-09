@@ -103,6 +103,12 @@
         </div>
         <div class="subtitle">
           A modern, accessible, lightweight UI component library for Svelte.
+          <div class="breaking-news">
+            Exciting News! sterling-svelte 2.0 is out and built on Svelte 5! Read all about it
+            <Link variant="text-underline" href="https://geoffcox.github.io/docs/sterling-svelte"
+              >here</Link
+            >!
+          </div>
         </div>
         <div class="mode">
           <ModeSlider bind:mode />
@@ -303,6 +309,15 @@
   .header .subtitle {
     grid-area: subtitle;
     font-size: 0.9em;
+  }
+
+  .breaking-news {
+    background-color: var(--stsv-status--warning__background-color);
+    border-color: var(--stsv-status--warning__border-color);
+    border-width: 2px;
+    color: var(--stsv-status--warning__color);
+    padding: 1em;
+    margin-top: 0.5em;
   }
 
   .header .mode {
