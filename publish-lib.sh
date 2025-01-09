@@ -2,7 +2,6 @@
 run() {
     export STERLING_SVELTE_PUBLISH=true
     npm run build
-    npm run package
     cp package.json dist/package.json
     cd dist
     # !dist/**/*.test.* => !**/*.test.*
