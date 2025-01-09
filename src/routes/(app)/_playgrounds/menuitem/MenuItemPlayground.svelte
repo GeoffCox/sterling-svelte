@@ -54,10 +54,9 @@
       role: role as MenuItemRole,
       text,
       value,
-      variant: _class
+      _class
     })
   );
-  _class;
 </script>
 
 <Playground {code}>

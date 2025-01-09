@@ -8,8 +8,8 @@
   import Nav from './_shared/Nav.svelte';
   import Dropdown from '$lib/Dropdown.svelte';
   import { navigating } from '$app/stores';
-  // import '@geoffcox/sterling-svelte-themes/sterling.css';
-  import '../../../../sterling-svelte-themes/css/sterling.css';
+  import '@geoffcox/sterling-svelte-themes/sterling.css';
+  // import '../../../../sterling-svelte-themes/css/sterling.css';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',

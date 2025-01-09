@@ -72,7 +72,7 @@
     "@fontsource/atkinson-hyperlegible": "^5.1.1",
     "@fontsource/open-sans": "^4.5.14",
     "@fontsource/source-code-pro": "^4.5.14",
-    "@geoffcox/sterling-svelte-themes": "^1.0.1",
+    "@geoffcox/sterling-svelte-themes": "^1.0.2",
     "@playwright/test": "^1.45.3",
     "@sveltejs/adapter-auto": "^3.0.0",
     "@sveltejs/adapter-static": "^3.0.0",

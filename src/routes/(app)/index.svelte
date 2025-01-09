@@ -19,7 +19,7 @@
   <p>
     Version 2 of sterling-svelte is built on Svelte 5. You can keep using sterling-svelte 1, but
     this is the version getting improvements and bug fixes. Svelte 5 does have breaking changes. See
-    the <a href={`${base}/topics/migration-from-v1`}>Migration from v1</a> guide.
+    the <Link href={`${base}/topics/migration-from-v1`}>Migration from v1</Link> guide.
   </p>
 
   <h2>Styling</h2>

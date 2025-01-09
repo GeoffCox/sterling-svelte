@@ -174,7 +174,7 @@
 
 <div bind:this={swatchRef} bind:clientWidth bind:clientHeight class="swatch" {style}>
   <div class="color-area">
-    <div class="color-background" />
+    <div class="color-background"></div>
     <div bind:this={colorBlockRef} class="color-block"><span>T</span></div>
   </div>
   <div class="color-vars">
@@ -314,7 +314,9 @@
         var(--stsv-common__color) 75%,
         var(--stsv-common__color)
       );
-    background-position: 0 0, 4px 4px;
+    background-position:
+      0 0,
+      4px 4px;
     background-size: 8px 8px;
     opacity: 0.2;
   }
@@ -339,7 +341,6 @@
     margin: 1em;
     place-self: center;
     width: 50px;
-    z-index: 1;
   }
 
   .color-vars {
@@ -364,7 +365,6 @@
     top: 0;
     right: 0;
     bottom: 0;
-    z-index: 2;
   }
 
   svg {

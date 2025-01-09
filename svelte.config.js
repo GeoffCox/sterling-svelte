@@ -5,7 +5,7 @@ import preprocess from 'svelte-preprocess';
 const dev = process.env.NODE_ENV === 'development';
 const publishing = process.env.STERLING_SVELTE_PUBLISH === 'true';
 
-const pathsBase = publishing ? '/demos/sterling-svelte' : '';
+const pathsBase = publishing ? '/docs/sterling-svelte' : '';
 const routes = publishing ? 'src/routes/(app)' : 'src/routes';
 
 /** @type {import('@sveltejs/kit').Config} */
