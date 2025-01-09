@@ -4,7 +4,7 @@ import DialogPlayground from '../../_playgrounds/dialog/DialogPlayground.svelte'
 
 export const dialogDoc: ComponentDoc = {
   name: 'Dialog',
-  description: 'A <dialog>: A modal, interactive content box that can be submitted or dismissed',
+  description: 'A modal, interactive content box that can be submitted or dismissed.',
   comments: [
     'The dialog is always modal.',
     'The cancel event is only raised when the escape key is pressed.',
@@ -13,50 +13,68 @@ export const dialogDoc: ComponentDoc = {
   props: [
     {
       name: 'backdropCloses',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
-      comment: 'When true, clicking outside the dialog causes the dialog close'
+      comment: 'When true, clicking outside the dialog causes the dialog to close.'
+    },
+    {
+      name: 'body',
+      type: 'Snippet | undefined',
+      default: 'undefined',
+      comment: 'The body within the dialog content.'
+    },
+    {
+      name: 'content',
+      type: 'Snippet | undefined',
+      default: 'undefined',
+      comment: 'The entire content of the dialog. Defaults to header, body, and footer snippets.'
+    },
+    {
+      name: 'footer',
+      type: 'Snippet | undefined',
+      default: 'undefined',
+      comment: 'The footer within the dialog content.'
+    },
+    {
+      name: 'header',
+      type: 'Snippet| undefined',
+      default: 'undefined',
+      comment: 'The header within the dialog content. Defaults to headerTitle and close button.'
+    },
+    {
+      name: 'headerTitle',
+      type: 'string | Snippet | undefined',
+      default: 'undefined',
+      comment: 'The title within the header.'
     },
     {
       name: 'open',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
       comment: 'When true, the dialog is open; otherwise the dialog is closed'
     },
     {
       name: 'returnValue',
-      type: 'string',
+      type: 'string | undefined',
       default: "''",
       comment: 'A value indicates OK, empty indicates cancellation.'
     },
     commonProps.variant
   ],
-  anatomy: `<dialog class="sterling-dialog">
-  <form>
-    <div class="content">
-      <slot name="content">
-        <div class="header">
-          <slot name="header">
-            <div class="title">
-              <slot name="title" />
-            </div>
-            <div class="close">
-              <Button>
-                <div class="close-x" />
-              </Button>
-            </div>
-          </slot>
-        </div>
-        <div class="body">
-          <slot name="body" />
-        </div>
-        <div class="separator" />
-        <div class="footer">
-          <slot name="footer" />
-        </div>
-      </slot>
-    </div>
-  </form>
-</dialog>`,
+  anatomy: `dialog (<dialog>)
+  form (<form>)
+    content (<div>)
+      content (Snippet)
+        header (<div>)
+          header (Snippet)
+            title (<div>)
+              headerTitle (string | Snippet)
+            close (Button)
+              close-x (<div>)
+        body (<div>)
+          body (Snippet)
+        separator (<div>)
+        footer (<div>)
+          footer (Snippet)`,
   usage: DialogPlayground
 };

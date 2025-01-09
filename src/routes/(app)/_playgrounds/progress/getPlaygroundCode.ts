@@ -1,33 +1,25 @@
-import type { ProgressStatus } from '$lib';
+import type { ProgressOrientation } from '$lib';
 
 export const getPlaygroundCode = (props: {
-  disabled: boolean;
+  disabled: boolean | null | undefined;
   max: number;
-  percent: number;
-  status: ProgressStatus;
   value: number;
-  variant: string;
-  vertical: boolean;
+  _class: string;
+  vertical: boolean | null | undefined;
 }) => {
   const propList: string[] = [];
 
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
   if (props.disabled) {
     propList.push(`disabled`);
   }
   if (props.max !== 0) {
     propList.push(`max="${props.max}"`);
   }
-  if (props.percent !== 0) {
-    propList.push(`percent="${props.percent}"`);
-  }
-  if (props.status !== 'none') {
-    propList.push(`status="${props.status}"`);
-  }
   if (props.value !== 0) {
     propList.push(`value="${props.value}"`);
-  }
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
   }
   if (props.vertical) {
     propList.push(`vertical`);

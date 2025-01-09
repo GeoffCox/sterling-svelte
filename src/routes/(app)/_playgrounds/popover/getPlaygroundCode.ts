@@ -1,29 +1,25 @@
 import type { PopoverPlacement } from '$lib';
 
 export const getPlaygroundCode = (props: {
+  _class: string;
   crossAxisOffset: number;
   mainAxisOffset: number;
-  open: boolean;
   placement: PopoverPlacement;
   text: string;
-  variant: string;
 }) => {
   const propList: string[] = [];
 
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
   if (props.crossAxisOffset !== 0) {
     propList.push(`crossAxisOffset="${props.crossAxisOffset}"`);
   }
   if (props.mainAxisOffset !== 0) {
     propList.push(`mainAxisOffset="${props.mainAxisOffset}"`);
   }
-  if (props.open) {
-    propList.push(`open`);
-  }
   if (props.placement !== 'top-start') {
     propList.push(`placement="${props.placement}"`);
-  }
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';
@@ -35,9 +31,9 @@ export const getPlaygroundCode = (props: {
 
 </script>
 
-<div bind:this={reference}>The reference anchor for positioning the popover.</div>
+<div bind:this={reference}>Anchor for the popover position.</div>
 
-<Popover${propsText} {reference}>
+<Popover${propsText} bind:open {reference}>
   ${props.text}
 </Popover>
 `;

@@ -4,23 +4,21 @@
   import MenuItem from '$lib/MenuItem.svelte';
   import MenuBar from '$lib/MenuBar.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let variant = '';
+  let _class = $state('');
 
-  $: code = getPlaygroundCode({
-    variant
-  });
+  let code = $derived(getPlaygroundCode({ _class }));
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     <MenuBar
-      on:close={(event) => console.log(`close '${event.detail.value}'`)}
-      on:open={(event) => console.log(`open '${event.detail.value}'`)}
-      on:select={(event) => console.log(`select '${event.detail.value}'`)}
-      {variant}
+      onClose={(value) => console.log(`MenuBar.onClose value:${value}`)}
+      onOpen={(value) => console.log(`MenuBar.onOpen value:${value}`)}
+      onSelect={(value) => console.log(`MenuBar.onSelect value:${value}`)}
+      class={_class}
     >
       <MenuItem value="file" text="File">
         <MenuItem value="new-file" text="New..." />
@@ -75,8 +73,8 @@
         <MenuItem value="extensions" role="menuitemradio" text="Extensions" />
       </MenuItem>
     </MenuBar>
-  </svelte:fragment>
-  <svelte:fragment slot="props">
-    <VariantInput bind:variant availableVariants={[]} />
-  </svelte:fragment>
+  {/snippet}
+  {#snippet props()}
+    <VariantInput bind:class={_class} sterlingClasses={[]} />
+  {/snippet}
 </Playground>

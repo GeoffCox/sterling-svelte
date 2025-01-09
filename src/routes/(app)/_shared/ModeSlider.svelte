@@ -16,17 +16,17 @@
 
 <div class="mode-select">
   <div class="icon light">
-    <Button variant="square tool" on:click={() => (value = 0)}>
+    <Button class="square tool" onclick={() => (value = 0)}>
       <LightModeIcon width="1em" height="1em" fill="hsl(39, 100%, 45%)" />
     </Button>
   </div>
   <div class="icon auto">
-    <Button variant="square tool" on:click={() => (value = 1)}>
+    <Button class="square tool" onclick={() => (value = 1)}>
       <AutoModeIcon width="1em" height="1em" />
     </Button>
   </div>
   <div class="icon dark">
-    <Button variant="square tool" on:click={() => (value = 2)}>
+    <Button class="square tool" onclick={() => (value = 2)}>
       <DarkModeIcon width="1em" height="1em" fill="hsl(198, 100%, 40%)" />
     </Button>
   </div>

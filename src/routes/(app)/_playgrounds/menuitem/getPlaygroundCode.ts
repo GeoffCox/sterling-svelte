@@ -1,24 +1,27 @@
 import type { MenuItemRole } from '$lib';
 
 export const getPlaygroundCode = (props: {
-  checked: boolean;
-  disabled: boolean;
-  menuVariant: string;
+  checked: boolean | undefined | null;
+  _class: string;
+  disabled: boolean | undefined | null;
+  menuClass: string;
   role: MenuItemRole;
   text: string;
   value: string;
-  variant: string;
 }) => {
   const propList: string[] = [];
 
   if (props.checked) {
     propList.push(`checked`);
   }
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
   if (props.disabled) {
     propList.push(`disabled`);
   }
-  if (props.menuVariant) {
-    propList.push(`menuVariant="${props.menuVariant.trim()}"`);
+  if (props.menuClass) {
+    propList.push(`menuClass="${props.menuClass.trim()}"`);
   }
   if (props.role && props.role !== 'menuitem') {
     propList.push(`role="${props.role.trim()}"`);
@@ -28,9 +31,6 @@ export const getPlaygroundCode = (props: {
   }
   if (props.value) {
     propList.push(`value="${props.value.trim()}"`);
-  }
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

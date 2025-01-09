@@ -8,34 +8,34 @@
   import ListItem from '$lib/ListItem.svelte';
   import Label from '$lib/Label.svelte';
   import { TEXT_AREA_RESIZES } from '$lib';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
+  let _class = '';
   let disabled = false;
   let placeholder = '';
   let autoHeight = false;
   let value = '';
-  let variant = '';
 
   let resize: TextAreaResize = 'none';
 
-  $: code = getPlaygroundCode({ autoHeight, disabled, placeholder, resize, variant });
+  $: code = getPlaygroundCode({ autoHeight, disabled, placeholder, resize, _class });
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     <TextArea
       bind:value
       {autoHeight}
       {disabled}
       {placeholder}
       bind:resize
-      {variant}
-      on:input={() => console.log('input')}
-      on:change={() => console.log('change')}
+      class={_class}
+      oninput={(e) => console.log('TextArea.oninput event:', e)}
+      onchange={(e) => console.log('TextArea.onchange event:', e)}
     />
-  </svelte:fragment>
-  <svelte:fragment slot="props">
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={autoHeight}>autoHeight</Checkbox>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="placeholder">
@@ -48,6 +48,6 @@
         {/each}
       </Select>
     </Label>
-    <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
-  </svelte:fragment>
+    <VariantInput bind:class={_class} sterlingClasses={['composed']} />
+  {/snippet}
 </Playground>

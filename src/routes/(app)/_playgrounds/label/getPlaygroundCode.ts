@@ -1,18 +1,20 @@
 import type { LabelStatus } from '$lib';
 
 export const getPlaygroundCode = (props: {
-  forwardClick: boolean;
+  forwardClick?: boolean | null;
   message: string;
-  required: boolean;
+  required?: boolean | null;
   requiredReason: string;
-  status: LabelStatus;
   text: string;
-  useFor: boolean;
+  useFor?: boolean | null;
   variant: string;
-  vertical: boolean;
+  _class?: boolean | null;
 }) => {
   const propList: string[] = [];
 
+  if (!props._class) {
+    propList.push(`vertical="${props._class}"`);
+  }
   if (props.forwardClick) {
     propList.push(`forwardClick`);
   }
@@ -25,14 +27,8 @@ export const getPlaygroundCode = (props: {
   if (props.requiredReason) {
     propList.push(`requiredReason="${props.requiredReason}"`);
   }
-  if (props.status !== 'none') {
-    propList.push(`status="${props.status}"`);
-  }
   if (props.variant) {
     propList.push(`variant="${props.variant.trim()}"`);
-  }
-  if (!props.vertical) {
-    propList.push(`vertical="${props.vertical}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

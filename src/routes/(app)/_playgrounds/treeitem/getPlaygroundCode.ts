@@ -1,23 +1,23 @@
 export const getPlaygroundCode = (props: {
+  class: string;
   disabled: boolean;
   hasChildren: boolean;
-  text: string;
+  label: string;
   value: string;
-  variant: string;
 }) => {
   const propList: string[] = [];
 
   if (props.disabled) {
     propList.push(`disabled`);
   }
-  if (props.text) {
-    propList.push(`text="${props.text.trim()}"`);
+  if (props.label) {
+    propList.push(`label="${props.label.trim()}"`);
   }
   if (props.value) {
     propList.push(`value="${props.value.trim()}"`);
   }
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
+  if (props.class) {
+    propList.push(`class="${props.class.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';
@@ -29,7 +29,7 @@ export const getPlaygroundCode = (props: {
   
   <TreeItem${propsText}>
     <TreeItem value="child1" text="Child 1"/>
-    <!-- TODO: Add more TreeItem children here -->
+    <!-- ... -->
   </TreeItem>
   `;
   }

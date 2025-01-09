@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
@@ -9,42 +11,51 @@
   import Popover from '$lib/Popover.svelte';
   import type { PopoverPlacement } from '$lib/Popover.types';
   import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let crossAxisOffset = 0;
-  let mainAxisOffset = 0;
-  let open = true;
-  let placement: PopoverPlacement = 'top-start';
-  let text = 'sterling-svelte';
-  let reference: HTMLDivElement;
-  let variant = '';
+  let crossAxisOffset = $state(0);
+  let mainAxisOffset = $state(0);
+  let open: boolean | undefined | null = $state(true);
+  let placement: PopoverPlacement = $state('top-start');
+  let text = $state('sterling-svelte');
+  let reference: HTMLDivElement | undefined = $state();
+  let _class = $state('');
 
-  $: code = getPlaygroundCode({
-    crossAxisOffset,
-    mainAxisOffset,
-    open,
-    placement,
-    text,
-    variant
-  });
+  let code = $derived(
+    getPlaygroundCode({
+      _class,
+      crossAxisOffset,
+      mainAxisOffset,
+      placement,
+      text
+    })
+  );
 </script>
 
 <Playground {code}>
-  <div slot="component">
-    <div class="reference" bind:this={reference}>
-      The reference anchor for positioning the popover.
+  {#snippet component()}
+    <div>
+      <div class="reference" bind:this={reference}>
+        The reference anchor for positioning the popover.
+      </div>
+      <Popover bind:open {reference} {mainAxisOffset} {crossAxisOffset} {placement} class={_class}>
+        <div class="popover-text">{text}</div>
+      </Popover>
     </div>
-    <Popover bind:open {reference} {mainAxisOffset} {crossAxisOffset} {placement} {variant}>
-      <div class="popover-text">{text}</div>
-    </Popover>
-  </div>
-  <svelte:fragment slot="props">
-    <Label text="crossAxisOffset: {crossAxisOffset}">
-      <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
+  {/snippet}
+  {#snippet props()}
+    <Label text="crossAxisOffset">
+      <div class="slider">
+        <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
+        <div>{crossAxisOffset}</div>
+      </div>
     </Label>
-    <Label text="mainAxisOffset: {mainAxisOffset}">
-      <Slider min={-25} max={25} precision={0} bind:value={mainAxisOffset} />
+    <Label text="mainAxisOffset">
+      <div class="slider">
+        <Slider min={-25} max={25} precision={0} bind:value={mainAxisOffset} />
+        <div>{mainAxisOffset}</div>
+      </div>
     </Label>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Label text="placement">
@@ -54,13 +65,13 @@
         {/each}
       </Select>
     </Label>
-    <VariantInput bind:variant availableVariants={[]} />
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
+    <VariantInput bind:class={_class} sterlingClasses={[]} />
+  {/snippet}
+  {#snippet tweaks()}
     <Label text="popover (text)">
       <Input bind:value={text} />
     </Label>
-  </svelte:fragment>
+  {/snippet}
 </Playground>
 
 <style>
@@ -71,6 +82,13 @@
     border-width: 2px;
     color: var(--stsv-common__color);
     padding: 1em;
+  }
+
+  .slider {
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    font-size: 0.8em;
   }
 
   .reference {

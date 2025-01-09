@@ -1,16 +1,13 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  // ----- Props ----- //
+  import type { HTMLButtonAttributes } from 'svelte/elements';
 
-  export let disabled: boolean = false;
+  type Props = HTMLButtonAttributes;
 
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ----- State ----- //
+  let { children, class: _class, ...rest }: Props = $props();
 
   let buttonRef: HTMLButtonElement;
-
-  // ----- Methods ----- //
 
   export const click = () => {
     buttonRef?.click();
@@ -25,48 +22,13 @@
   };
 </script>
 
-<!--
-	@component
-	A styled HTML button element.
--->
 <button
   bind:this={buttonRef}
-  class={`sterling-button ${variant}`}
-  {disabled}
+  class={['sterling-button', _class].filter(Boolean).join(' ')}
   type="button"
-  on:blur
-  on:click
-  on:drag
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:dblclick
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:pointercancel
-  on:pointerdown
-  on:pointerenter
-  on:pointerleave
-  on:pointermove
-  on:pointerover
-  on:pointerout
-  on:pointerup
-  on:wheel|passive
-  {...$$restProps}
+  {...rest}
 >
-  <slot {disabled} {variant} />
+  {#if children}
+    {@render children()}
+  {/if}
 </button>

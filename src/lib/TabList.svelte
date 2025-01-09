@@ -1,58 +1,70 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  import type { KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
+  import { setContext } from 'svelte';
+  import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
+
   import type { TabListContext } from './TabList.types';
-
-  import { createEventDispatcher, setContext } from 'svelte';
-  import { writable } from 'svelte/store';
-
   import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
 
-  // ----- Props ----- //
+  type Props = HTMLAttributes<HTMLDivElement> & {
+    disabled?: boolean | null;
+    selectedValue?: string;
+    vertical?: boolean | null;
+    onSelect?: (value?: string) => void;
+  };
 
-  /** When true, the tab list and its tabs are disabled. */
-  export let disabled = false;
-
-  /** The value of the currently selected tab. */
-  export let selectedValue: string | undefined = undefined;
-
-  /** When true, the tab list is displayed vertically. */
-  export let vertical = false;
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ----- State ----- //
+  let {
+    children,
+    class: _class,
+    disabled = false,
+    onSelect,
+    selectedValue = $bindable(),
+    vertical = false,
+    ...rest
+  }: Props = $props();
 
   let tabListRef: HTMLDivElement;
   let lastSelectedTabRef: HTMLElement;
 
-  const disabledStore = writable<boolean>(disabled);
-  const selectedValueStore = writable<string | undefined>(selectedValue);
-  const verticalStore = writable<boolean>(vertical);
-
-  $: disabledStore.set(disabled);
-
-  $: selectedValueStore.set(selectedValue);
-
-  $: {
-    selectedValue = $selectedValueStore;
-  }
-
-  $: verticalStore.set(vertical);
-
-  // ----- Events ----- //
-
-  const dispatch = createEventDispatcher();
-
-  const raiseSelect = (value?: string) => {
-    dispatch('select', { value });
+  let tabListContext: TabListContext = {
+    get disabled() {
+      return disabled;
+    },
+    set disabled(value) {
+      disabled = value;
+    },
+    get selectedValue() {
+      return selectedValue;
+    },
+    set selectedValue(value) {
+      selectedValue = value;
+    },
+    get vertical() {
+      return vertical;
+    },
+    set vertical(value) {
+      vertical = value;
+    }
   };
 
-  $: {
-    raiseSelect(selectedValue);
-  }
+  $effect(() => {
+    tabListContext.disabled = disabled;
+  });
 
-  // ----- Methods ----- //
+  $effect(() => {
+    tabListContext.selectedValue = selectedValue;
+  });
+
+  $effect(() => {
+    tabListContext.vertical = vertical;
+  });
+
+  setContext<TabListContext>(TAB_LIST_CONTEXT_KEY, tabListContext);
+
+  $effect(() => {
+    onSelect?.(selectedValue);
+  });
 
   export const blur = () => {
     tabListRef?.blur();
@@ -66,8 +78,6 @@
       selectFirstTab();
     }
   };
-
-  // ----- Selection ----- //
 
   const isElementTab = (candidate: Element) => {
     return (
@@ -91,7 +101,7 @@
   };
 
   const selectTab = (value: string, element: HTMLElement) => {
-    selectedValueStore.set(value);
+    selectedValue = value;
     lastSelectedTabRef = element;
     element.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     element.focus();
@@ -159,8 +169,6 @@
     return false;
   };
 
-  // ----- EventHandlers ----- //
-
   const onClick: MouseEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
       let candidate: HTMLElement | null | undefined = event.target as HTMLElement;
@@ -175,6 +183,8 @@
         selectTab(candidateValue, candidate);
       }
     }
+
+    rest.onclick?.(event);
   };
 
   const onKeydown: KeyboardEventHandler<HTMLDivElement> = (event) => {
@@ -185,93 +195,60 @@
           selectFirstTab();
           event.preventDefault();
           event.stopPropagation();
-          return false;
+          break;
         case 'End':
           selectLastTab();
           event.preventDefault();
           event.stopPropagation();
-          return false;
+          break;
         case 'ArrowLeft':
           if (!vertical) {
             selectPreviousTab();
           }
           event.preventDefault();
           event.stopPropagation();
-          return false;
+          break;
         case 'ArrowRight':
           if (!vertical) {
             selectNextTab();
           }
           event.preventDefault();
           event.stopPropagation();
-          return false;
+          break;
         case 'ArrowUp':
           if (vertical) {
             selectPreviousTab();
           }
           event.preventDefault();
           event.stopPropagation();
-          return false;
+          break;
         case 'ArrowDown':
           if (vertical) {
             selectNextTab();
           }
           event.preventDefault();
           event.stopPropagation();
-          return false;
+          break;
         default:
           break;
       }
     }
+
+    rest.onkeydown?.(event);
   };
-
-  // ----- Set Context ----- //
-
-  setContext<TabListContext>(TAB_LIST_CONTEXT_KEY, {
-    disabled: disabledStore,
-    selectedValue: selectedValueStore,
-    vertical: verticalStore
-  });
 </script>
 
 <div
   aria-orientation={vertical ? 'vertical' : 'horizontal'}
   bind:this={tabListRef}
-  class={`sterling-tab-list ${variant}`}
+  class={`sterling-tab-list ${_class}`}
   class:disabled
   class:vertical
   role="tablist"
   tabindex="-1"
-  on:blur
-  on:click
-  on:click={onClick}
-  on:copy
-  on:cut
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keydown={onKeydown}
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:scroll
-  on:wheel|passive
-  on:paste
-  {...$$restProps}
+  onclick={onClick}
+  onkeydown={onKeydown}
+  {...rest}
 >
-  <slot {disabled} {selectedValue} {variant} {vertical} />
+  {@render children?.()}
 </div>

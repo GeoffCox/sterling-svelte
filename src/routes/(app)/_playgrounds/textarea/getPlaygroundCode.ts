@@ -2,24 +2,24 @@ import type { TextAreaResize } from '$lib';
 
 export const getPlaygroundCode = (props: {
   autoHeight: boolean;
+  _class: string;
   disabled: boolean;
   placeholder: string;
   resize: TextAreaResize;
-  variant: string;
 }) => {
   const propList: string[] = [];
   propList.push('bind:value');
   if (props.autoHeight) {
     propList.push(`autoHeight`);
   }
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
   if (props.disabled) {
     propList.push(`disabled`);
   }
   if (props.resize) {
     propList.push(`resize="${props.resize}"`);
-  }
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

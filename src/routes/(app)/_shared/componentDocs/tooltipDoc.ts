@@ -5,30 +5,30 @@ import TooltipPlayground from '../../_playgrounds/tooltip/TooltipPlayground.svel
 export const tooltipDoc: ComponentDoc = {
   name: 'Tooltip',
   description:
-    'A <Callout> shown when the mouse hovers over a reference element for a specific duration',
-  comments: [
-    'The tooltip is anchored to a sibling element that appears directly after the default slot content.',
-    makeExtendsComment('Callout')
-  ],
+    'A floating box of content that is automatically shown when the mouse hovers over a reference element.',
+  comments: [makeExtendsComment('<Callout>')],
   props: [
     {
       name: 'disabled',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
       comment: 'When true, the tooltip is disabled and will not be shown.'
     },
     {
       name: 'hoverDelayMilliseconds',
-      type: 'number',
-      default: '1000',
+      type: 'number | undefined',
+      default: '1000 (1 second)',
       comment: 'The duration of mouse hover before showing the tooltip.'
+    },
+    {
+      name: 'tip',
+      type: 'string | Snippet | undefined',
+      default: 'undefined',
+      comment: 'The content passed to <Callout> children.'
     }
   ],
-  anatomy: `<slot {disabled} {hoverDelayMilliseconds} {open} {variant} />
-<!-- hidden anchor point -->
-<div class="sterling-tooltip-origin" />
-<Callout>
-  <slot name="tip" {placement} {variant} />
-</Callout>`,
+  anatomy: `children (Snippet>)
+  reference (<div>)
+  callout (<Callout>)`,
   usage: TooltipPlayground
 };

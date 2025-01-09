@@ -1,6 +1,7 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import { setContext } from 'svelte';
-  import { writable } from 'svelte/store';
 
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
@@ -9,64 +10,83 @@
   import { TAB_LIST_CONTEXT_KEY } from '$lib/TabList.constants';
   import Tab from '$lib/Tab.svelte';
   import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
+  import type { TabListContext } from '$lib';
 
   // ----- Context ----- //
 
-  let value = 'tab-1';
-  let text = 'sterling-svelte';
-  let disabled = false;
-  let selected = false;
-  let variant = '';
-  let vertical = false;
+  let text = $state('sterling-svelte');
+  let disabled: boolean | null | undefined = $state(false);
+  let selected: boolean | null | undefined = $state(false);
+  let _class: string = $state('');
 
-  const selectedValueStore = writable<string | undefined>();
-  const verticalStore = writable<boolean>(vertical);
-  const disabledStore = writable<boolean>(disabled);
+  let selectedValue = $state('');
+  let tabListDisabled = $state(false);
+  const value = 'tab';
+  let vertical: boolean | null | undefined = $state(false);
 
-  $: {
-    selectedValueStore.set(selected ? value : undefined);
-  }
+  let tabListContext: TabListContext = {
+    get disabled() {
+      return tabListDisabled;
+    },
+    set disabled(value) {
+      tabListDisabled = value;
+    },
+    get selectedValue() {
+      return selectedValue;
+    },
+    set selectedValue(value) {
+      selectedValue = value;
+    },
+    get vertical() {
+      return vertical;
+    },
+    set vertical(value) {
+      vertical = value;
+    }
+  };
 
-  $: {
-    selected = $selectedValueStore === value;
-  }
-
-  setContext(TAB_LIST_CONTEXT_KEY, {
-    disabled: disabledStore,
-    selectedValue: selectedValueStore,
-    vertical: verticalStore
+  $effect(() => {
+    tabListContext.disabled = tabListDisabled;
   });
 
-  $: verticalStore.set(vertical);
-
-  $: code = getPlaygroundCode({
-    disabled,
-    selected,
-    text,
-    value,
-    variant,
-    vertical
+  $effect(() => {
+    tabListContext.selectedValue = selected ? 'tab' : '';
   });
+
+  $effect(() => {
+    tabListContext.vertical = vertical;
+  });
+
+  setContext<TabListContext>(TAB_LIST_CONTEXT_KEY, tabListContext);
+
+  let code = $derived(
+    getPlaygroundCode({
+      disabled,
+      selected,
+      text,
+      value,
+      _class,
+      vertical
+    })
+  );
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
-    <Tab {disabled} {text} {value} {variant} />
-  </svelte:fragment>>
-  <svelte:fragment slot="props">
+  {#snippet component()}
+    <Tab {disabled} {value} class={_class}>{text}</Tab>
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Checkbox bind:checked={selected}>selected</Checkbox>
     <Label text="text">
       <Input bind:value={text} />
     </Label>
-    <Label text="value">
-      <Input bind:value />
-    </Label>
-    <VariantInput bind:variant availableVariants={['colorful']} />
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
-    <Checkbox bind:checked={vertical}>vertical</Checkbox>
-  </svelte:fragment>
+    <VariantInput bind:class={_class} />
+  {/snippet}
+  {#snippet tweaks()}
+    <Checkbox bind:checked={tabListDisabled}>disabled (TabList)</Checkbox>
+    <Checkbox bind:checked={selected}>selected (TabList)</Checkbox>
+    <Checkbox bind:checked={vertical}>vertical (TabList)</Checkbox>
+  {/snippet}
 </Playground>

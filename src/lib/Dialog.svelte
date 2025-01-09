@@ -1,6 +1,8 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  import type { FormEventHandler } from 'svelte/elements';
-  import { onMount, setContext, tick } from 'svelte';
+  import type { FormEventHandler, HTMLDialogAttributes } from 'svelte/elements';
+  import { onMount, setContext, tick, type Snippet } from 'svelte';
 
   import Button from './Button.svelte';
   import type { PortalContext } from './Portal.types';
@@ -9,29 +11,34 @@
 
   const dialogFadeDuration = 250;
 
-  // ----- Props ----- //
+  type Props = HTMLDialogAttributes & {
+    backdropCloses?: boolean | null | undefined;
+    body?: Snippet;
+    content?: Snippet;
+    footer?: Snippet;
+    header?: Snippet;
+    returnValue?: string;
+    headerTitle?: string | Snippet;
+  };
 
-  /** When true, clicking outside the dialog causes the dialog close. */
-  export let backdropCloses = false;
-
-  /** When true, the dialog is open; otherwise the dialog is closed. */
-  export let open = false;
-
-  /**
-   * The return value from the dialog:
-   * - an empty string indicates cancellation
-   * - a value indicates form submission.
-   */
-  export let returnValue = '';
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ----- State ----- //
+  let {
+    backdropCloses = false,
+    open = $bindable(false),
+    body,
+    class: _class,
+    content,
+    footer,
+    header,
+    returnValue = $bindable(''),
+    headerTitle,
+    ...rest
+  }: Props = $props();
 
   let dialogRef: HTMLDialogElement;
   let contentRef: HTMLDivElement;
   let formRef: HTMLFormElement;
+
+  // svelte-ignore non_reactive_update
   let closing = false;
 
   const portalHostStore = writable<HTMLElement | undefined>(undefined);
@@ -80,7 +87,7 @@
     }
   };
 
-  const updateDialog = (open: boolean) => {
+  const updateDialog = (open: boolean | null | undefined) => {
     if (open) {
       showDialog();
     } else {
@@ -121,9 +128,9 @@
     }
   };
 
-  $: {
+  $effect(() => {
     updateDialog(open);
-  }
+  });
 
   onMount(() => {
     updateDialog(open);
@@ -141,44 +148,46 @@
   });
 </script>
 
-<!-- @component
-A styled &lt;dialog&gt; element
-
-- Slots for typical dialog content.
-- Props and events to make using &lt;dialog&gt; easier
--->
 <dialog
   bind:this={dialogRef}
-  class={`sterling-dialog ${variant}`}
+  class={`sterling-dialog ${_class}`}
   class:open
   class:closing
-  on:close
-  on:cancel
-  {...$$restProps}
+  {...rest}
 >
-  <form method="dialog" bind:this={formRef} on:submit={onSubmit}>
+  <form method="dialog" bind:this={formRef} onsubmit={onSubmit}>
     <div class="content" bind:this={contentRef}>
-      <slot name="content">
+      {#if content}
+        {@render content()}
+      {:else}
         <div class="header">
-          <slot name="header">
+          {#if header}
+            {@render header()}
+          {:else}
             <div class="title">
-              <slot name="title" />
+              {#if headerTitle}
+                {#if typeof headerTitle === 'string'}
+                  {headerTitle}
+                {:else}
+                  {@render headerTitle()}
+                {/if}
+              {/if}
             </div>
             <div class="close">
-              <Button variant={`circular tool ${variant}`} on:click={() => closeDialog()}>
-                <div class="close-x" />
+              <Button class={`circular tool`} onclick={() => closeDialog()}>
+                <div class="close-x"></div>
               </Button>
             </div>
-          </slot>
+          {/if}
         </div>
         <div class="body">
-          <slot name="body" />
+          {@render body?.()}
         </div>
-        <div class="separator" />
+        <div class="separator"></div>
         <div class="footer">
-          <slot name="footer" />
+          {@render footer?.()}
         </div>
-      </slot>
+      {/if}
     </div>
   </form>
 </dialog>

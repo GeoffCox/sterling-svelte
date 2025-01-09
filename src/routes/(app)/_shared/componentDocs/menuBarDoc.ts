@@ -4,31 +4,26 @@ import MenuBarPlayground from '../../_playgrounds/menubar/MenuBarPlayground.svel
 
 export const menuBarDoc: ComponentDoc = {
   name: 'MenuBar',
-  description: 'A horizontal list of <MenuItem>s, often positioned at the top of a window',
-  comments: [
-    'Prefer using the Label component rather than the label produced by providing default slot content.',
-    makeExtendsComment('HTMLAnchorElement')
-  ],
-  props: [commonProps.variant],
-  events: [
+  description: 'A horizontal list of menu items, often positioned at the top of a window.',
+  comments: [makeExtendsComment('HTMLDivElement')],
+  props: [
     {
-      name: 'close',
-      comment: 'Raised when a descendant menu is closed',
-      data: 'value'
+      name: 'onClose',
+      type: '(value: string) => void',
+      comment: 'Raised when a descendant menu is closed.'
     },
     {
-      name: 'open',
-      comment: 'Raised when a descendant menu is opened',
-      data: 'value'
+      name: 'onOpen',
+      type: '(value: string) => void',
+      comment: 'Raised when a descendant menu is opened.'
     },
     {
-      name: 'selected',
-      comment: 'Raised when descendant menu item is selected',
-      data: 'value'
+      name: 'onSelect',
+      type: '(value: string) => void',
+      comment: 'Raised when descendant menu item is selected.'
     }
   ],
-  anatomy: `<div class="sterling-menu-bar">
-  <slot {variant} />
-</div>`,
+  anatomy: `menu bar (<div>)
+  children (Snippet)`,
   usage: MenuBarPlayground
 };

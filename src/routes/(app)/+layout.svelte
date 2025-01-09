@@ -1,5 +1,4 @@
 <script lang="ts">
-  import '$lib/css/sterling.css';
   import { applyLightDarkMode } from '$lib';
   import { onMount } from 'svelte';
   import Link from '$lib/Link.svelte';
@@ -9,6 +8,8 @@
   import Nav from './_shared/Nav.svelte';
   import Dropdown from '$lib/Dropdown.svelte';
   import { navigating } from '$app/stores';
+  import '@geoffcox/sterling-svelte-themes/sterling.css';
+  // import '../../../../sterling-svelte-themes/css/sterling.css';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -114,12 +115,12 @@
           <ModeSlider bind:mode />
         </div>
         <div class="github">
-          <Link href="http://github.com/GeoffCox/sterling-svelte" variant="ghost">
+          <Link href="http://github.com/GeoffCox/sterling-svelte" class="ghost">
             <div class="github-icon"><GitHubIcon /></div>
           </Link>
         </div>
         <div class="hamburger-menu">
-          <Dropdown bind:open={hamburgerOpen} variant="composed">
+          <Dropdown bind:open={hamburgerOpen} class="composed">
             <svelte:fragment slot="icon">
               <div class="hamburger-icon">
                 <HamburgerIcon />
@@ -145,6 +146,7 @@
 
 <style>
   /* ----- Global ----- */
+  @import '@fontsource/atkinson-hyperlegible';
   @import '@fontsource/open-sans';
   @import '@fontsource/source-code-pro';
 
@@ -159,7 +161,8 @@
   }
 
   :global(body) {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    /* font-family: 'Open Sans', sans-serif;  */
     margin: 0;
     padding: 1em;
     min-height: 100vh;
@@ -189,8 +192,8 @@
   }
 
   :global(p) {
-    margin-block-start: 0.25em;
-    margin-block-end: 0.25em;
+    margin-block-start: 0em;
+    margin-block-end: 1em;
     line-height: 1.6em;
   }
 
@@ -198,7 +201,7 @@
     font-family: 'Source Code Pro', monospace;
     font-weight: bold;
     color: var(--stsv-common__color);
-    background-color: var(--stsv-common__background-color--faint);
+    background-color: var(--stsv-common__background-color--secondary);
   }
 
   :global(pre) {
@@ -376,7 +379,7 @@
     padding: 1em;
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 800px) {
     .nav {
       display: none;
     }

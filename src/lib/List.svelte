@@ -1,65 +1,52 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  import type { KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
+  import { setContext } from 'svelte';
+  import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
+
   import type { ListContext } from './List.types';
-
-  import { createEventDispatcher, setContext } from 'svelte';
-  import { writable } from 'svelte/store';
-
   import { LIST_CONTEXT_KEY } from './List.constants';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
-  // ----- Props ----- //
+  type Props = HTMLAttributes<HTMLDivElement> & {
+    disabled?: boolean | null;
+    horizontal?: boolean | null;
+    selectedValue?: string;
+    onSelect?: (value?: string) => void;
+  };
 
-  /** If the list and all its items are disabled. */
-  export let disabled: boolean = false;
-
-  /** When true, items are arranged horizontally. */
-  export let horizontal = false;
-
-  /** The value of the currently selected item. */
-  export let selectedValue: string | undefined = undefined;
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ----- State ----- //
+  let {
+    children,
+    class: _class,
+    disabled = false,
+    horizontal = false,
+    selectedValue = $bindable(),
+    onSelect,
+    ...rest
+  }: Props = $props();
 
   let listRef: HTMLDivElement;
   let lastSelectedItemRef: HTMLElement;
 
-  const disabledStore = writable<boolean>(disabled);
-  const horizontalStore = writable<boolean>(horizontal);
-  const selectedValueStore = writable<string | undefined>(selectedValue);
+  let listContext = $state({
+    disabled,
+    selectedValue,
+    horizontal
+  });
 
-  $: {
-    disabledStore.set(disabled);
-  }
+  $effect(() => {
+    listContext.disabled = disabled;
+  });
 
-  $: {
-    horizontalStore.set(horizontal);
-  }
+  $effect(() => {
+    listContext.horizontal = horizontal;
+  });
 
-  $: {
-    selectedValueStore.set(selectedValue);
-  }
+  $effect(() => {
+    listContext.selectedValue = selectedValue;
+  });
 
-  $: {
-    selectedValue = $selectedValueStore;
-  }
-
-  // ----- Events ----- //
-
-  const dispatch = createEventDispatcher();
-
-  const raiseSelect = (value?: string) => {
-    dispatch('select', { value });
-  };
-
-  $: {
-    raiseSelect(selectedValue);
-  }
-
-  // ----- Methods ----- //
+  setContext<ListContext>(LIST_CONTEXT_KEY, listContext);
 
   export const blur = () => {
     listRef?.blur();
@@ -78,9 +65,9 @@
     element?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   };
 
-  // ----- Focus ----- //
-
-  // ----- Selection ----- //
+  $effect(() => {
+    onSelect?.(selectedValue);
+  });
 
   const isElementListItem = (candidate: Element) => {
     return (
@@ -104,7 +91,7 @@
   };
 
   const selectItem = (value: string, element: HTMLElement) => {
-    selectedValueStore.set(value);
+    selectedValue = value;
     lastSelectedItemRef = element;
     element.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   };
@@ -175,8 +162,6 @@
     return false;
   };
 
-  // ----- Event Handlers ----- //
-
   const onClick: MouseEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
       let candidate: HTMLElement | null | undefined = event.target as HTMLElement;
@@ -190,6 +175,7 @@
         selectItem(candidateValue, candidate);
       }
     }
+    rest.onclick?.(event);
   };
 
   const onKeydown: KeyboardEventHandler<HTMLDivElement> = (event) => {
@@ -243,67 +229,31 @@
           return false;
       }
     }
+    rest.onkeydown?.(event);
   };
-
-  // ----- Set Context ----- //
-
-  setContext<ListContext>(LIST_CONTEXT_KEY, {
-    disabled: disabledStore,
-    selectedValue: selectedValueStore,
-    horizontal: horizontalStore
-  });
 </script>
 
-<!--
-@component
-A list of items where a single item can be selected.
-  -->
-<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-<!-- svelte-ignore a11y-role-supports-aria-props -->
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+<!-- svelte-ignore a11y_role_supports_aria_props -->
 <div
   aria-activedescendant={selectedValue}
   aria-disabled={disabled}
   aria-orientation={horizontal ? 'horizontal' : 'vertical'}
   bind:this={listRef}
-  class={`sterling-list ${variant}`}
+  class={['sterling-list', _class].filter(Boolean).join(' ')}
   class:disabled
   class:horizontal
   class:using-keyboard={$usingKeyboard}
   role="list"
   tabindex={0}
-  on:blur
-  on:click
-  on:click={onClick}
-  on:copy
-  on:cut
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keydown={onKeydown}
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:scroll
-  on:wheel|passive
-  on:paste
-  {...$$restProps}
+  {...rest}
+  onclick={onClick}
+  onkeydown={onKeydown}
 >
   <div class="container">
-    <slot {disabled} {horizontal} {selectedValue} {variant} />
+    {#if children}
+      {@render children()}
+    {/if}
   </div>
 </div>

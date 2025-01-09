@@ -1,46 +1,39 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Radio from '$lib/Radio.svelte';
   import Playground from '../Playground.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
-  import Input from '$lib/Input.svelte';
-  import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let checked = false;
-  let disabled = false;
+  let _class = $state('');
+  let disabled: boolean | null | undefined = $state(false);
   let name = 'choices';
-  let text = 'Item 2';
-  let selectedValue = 'item-1';
-  let value = 'item-2';
-  let variant = '';
+  let text = $state('Item 2');
+  let selectedValue = $state('item-1');
+  let value = $state('item-2');
 
-  $: code = getPlaygroundCode({ disabled, name, text, value, variant });
+  let code = $derived(getPlaygroundCode({ name, _class }));
 </script>
 
 <Playground {code}>
-  <div class="component" slot="component">
-    <Radio bind:group={selectedValue} {name} value="item-1">Item 1</Radio>
-    <Radio bind:group={selectedValue} bind:checked {disabled} {name} {value} {variant}>{text}</Radio
-    >
-    <Radio bind:group={selectedValue} {name} value="item-3">Item 3</Radio>
-  </div>
-  <svelte:fragment slot="props">
-    <Checkbox bind:checked>checked</Checkbox>
-    <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Label text="name">
-      <Input bind:value={name} />
-    </Label>
-    <Label text="value">
-      <Input bind:value />
-    </Label>
-    <VariantInput bind:variant availableVariants={['colorful']} />
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
-    <Label text="text">
-      <Input bind:value={text} />
-    </Label>
-  </svelte:fragment>
+  {#snippet component()}
+    <div class="component">
+      <Radio class={_class} bind:group={selectedValue} {name} value="item-1">Item 1</Radio>
+      <Radio class={_class} {disabled} bind:group={selectedValue} {name} value="item-2"
+        >Item 2</Radio
+      >
+      <Radio class={_class} bind:group={selectedValue} {name} value="item-3">Item 3</Radio>
+      <Radio class={_class} bind:group={selectedValue} {name} value="item-4">Item 4</Radio>
+    </div>
+  {/snippet}
+  {#snippet props()}
+    <VariantInput bind:class={_class} />
+  {/snippet}
+  {#snippet tweaks()}
+    <Checkbox bind:checked={disabled}>disable 2nd item</Checkbox>
+  {/snippet}
 </Playground>
 
 <style>

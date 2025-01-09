@@ -5,26 +5,26 @@
   import Tab from '$lib/Tab.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
+  let _class = '';
   let disabled = false;
   let selectedValue: string | undefined;
-  let variant = '';
   let vertical = false;
 
-  $: code = getPlaygroundCode({ disabled, variant, vertical });
+  $: code = getPlaygroundCode({ disabled, _class: _class, vertical });
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     <TabList
       bind:selectedValue
       {disabled}
-      {variant}
+      class={_class}
       {vertical}
-      on:select={(event) => {
-        console.log(`select: ${event.detail.value}`);
+      onSelect={(value) => {
+        console.log(`TabList.onSelect value:${value}`);
       }}
     >
       <Tab value="First">First</Tab>
@@ -32,16 +32,13 @@
       <Tab value="Third">Third</Tab>
       <Tab value="Fourth">Fourth</Tab>
     </TabList>
-  </svelte:fragment>
-  <svelte:fragment slot="props">
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
     <Label text="selectedValue">
       <Input bind:value={selectedValue} />
     </Label>
-    <VariantInput bind:variant availableVariants={[]} />
-  </svelte:fragment>
-  <!-- <svelte:fragment slot="status">
-    <div>selectedValue: {selectedValue}</div>
-  </svelte:fragment> -->
+    <VariantInput bind:class={_class} sterlingClasses={[]} />
+  {/snippet}
 </Playground>

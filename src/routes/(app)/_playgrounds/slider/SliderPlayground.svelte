@@ -1,131 +1,72 @@
-<script lang="ts">
-  import type { FormEventHandler } from 'svelte/elements';
+<svelte:options runes={true} />
 
+<script lang="ts">
   import Slider from '$lib/Slider.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Playground from '../Playground.svelte';
   import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let value = 0;
-  let disabled = false;
-  let min = 0;
-  let max = 100;
-  let step: number = 1;
-  let precision: number | undefined = undefined;
-  let variant = '';
-  let vertical = false;
+  let value = $state(0);
+  let disabled = $state(false);
+  let min = $state(0);
+  let max = $state(100);
+  let precision: number = $state(0);
+  let step: number = $state(1);
+  let _class = $state('');
+  let vertical = $state(false);
 
-  // This helps fix the lost typing of forwarded events on Input
-  type FormEvent<E extends Event = Event, T extends EventTarget = HTMLElement> = E & {
-    currentTarget: EventTarget & T;
-  };
-
-  const _onMinChange: FormEventHandler<HTMLInputElement> = (e) => {
-    const target = e.target as HTMLInputElement;
-    const parsedValue = Number.parseFloat(target.value);
-    min = isNaN(parsedValue) ? 0 : parsedValue;
-  };
-
-  const onMinChange = (e: Event): any => {
-    _onMinChange(e as FormEvent<Event, HTMLInputElement>);
-  };
-
-  const _onMaxChange: FormEventHandler<HTMLInputElement> = (e) => {
-    const target = e.target as HTMLInputElement;
-    const parsedValue = Number.parseFloat(target.value);
-    max = isNaN(parsedValue) ? 0 : parsedValue;
-  };
-
-  const onMaxChange = (e: Event): any => {
-    _onMaxChange(e as FormEvent<Event, HTMLInputElement>);
-  };
-
-  const _onStepChange: FormEventHandler<HTMLInputElement> = (e) => {
-    const target = e.target as HTMLInputElement;
-    if (target.value) {
-      const parsedValue = Number.parseFloat(target.value);
-      step = isNaN(parsedValue) ? 0 : parsedValue;
-    } else {
-      step = 1;
-    }
-  };
-
-  const onStepChange = (e: Event): any => {
-    _onStepChange(e as FormEvent<Event, HTMLInputElement>);
-  };
-
-  const _onPrecisionChange: FormEventHandler<HTMLInputElement> = (e) => {
-    const target = e.target as HTMLInputElement;
-    const parsedValue = Number.parseFloat(target.value);
-    precision = isNaN(parsedValue) ? 0 : parsedValue;
-  };
-
-  const onPrecisionChange = (e: Event): any => {
-    _onPrecisionChange(e as FormEvent<Event, HTMLInputElement>);
-  };
-
-  const _onValueChange: FormEventHandler<HTMLInputElement> = (e: Event): any => {
-    const target = e.target as HTMLInputElement;
-    const parsedValue = Number.parseFloat(target.value);
-    value = isNaN(parsedValue) ? 0 : parsedValue;
-  };
-
-  const onValueChange = (e: Event): any => {
-    _onValueChange(e as FormEvent<Event, HTMLInputElement>);
-  };
-
-  $: code = getPlaygroundCode({
-    disabled,
-    min,
-    max,
-    precision,
-    step,
-    value,
-    variant,
-    vertical
-  });
+  let code = $derived(
+    getPlaygroundCode({
+      disabled,
+      min,
+      max,
+      precision,
+      step,
+      _class,
+      vertical
+    })
+  );
 </script>
 
 <Playground {code}>
-  <div slot="component" class="component" class:vertical>
-    <Slider
-      {disabled}
-      bind:max
-      bind:min
-      bind:precision
-      bind:step
-      bind:value
-      {variant}
-      bind:vertical
-      on:change={(e) => console.log(`change value:${e.detail.value}`)}
-    />
-  </div>
-  <svelte:fragment slot="props">
+  {#snippet component()}
+    <div class="component" class:vertical>
+      <Slider
+        class={_class}
+        {disabled}
+        {max}
+        {min}
+        {precision}
+        {step}
+        bind:value
+        {vertical}
+        onChange={(value) => console.log(`change value:${value}`)}
+      />
+    </div>
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label text="min">
-      <Input value={min.toString()} on:change={onMinChange} />
+      <Input type="number" bind:value={min} />
     </Label>
     <Label text="max">
-      <Input value={max.toString()} on:change={onMaxChange} />
+      <Input type="number" bind:value={max} />
     </Label>
     <Label text="precision">
-      <Input value={precision ? precision.toString() : ''} on:change={onPrecisionChange} />
+      <Input type="number" bind:value={precision} />
     </Label>
     <Label text="step">
-      <Input value={step?.toString()} on:change={onStepChange} />
+      <Input type="number" bind:value={step} />
     </Label>
     <Label text="value">
-      <Input value={value.toString()} on:change={onValueChange} />
+      <Input type="number" bind:value />
     </Label>
-    <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
+    <VariantInput bind:class={_class} sterlingClasses={['composed']} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
-  </svelte:fragment>
-  <!-- <svelte:fragment slot="status">
-    <div>value: {value}</div>
-  </svelte:fragment> -->
+  {/snippet}
 </Playground>
 
 <style>

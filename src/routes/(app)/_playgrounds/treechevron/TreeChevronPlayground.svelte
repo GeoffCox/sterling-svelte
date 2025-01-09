@@ -3,27 +3,29 @@
   import Playground from '../Playground.svelte';
 
   import TreeChevron from '$lib/TreeChevron.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let expanded = false;
-  let hasChildren = true;
-  let variant = '';
+  let expanded = $state(false);
+  let hasChildren = $state(false);
+  let _class = $state('');
 
-  $: code = getPlaygroundCode({
-    expanded,
-    hasChildren,
-    variant
-  });
+  let code = $derived(
+    getPlaygroundCode({
+      _class,
+      hasChildren,
+      expanded
+    })
+  );
 </script>
 
 <Playground {code}>
-  <div slot="component">
-    <TreeChevron {expanded} {hasChildren} {variant} />
-  </div>
-  <svelte:fragment slot="props">
+  {#snippet component()}
+    <TreeChevron {expanded} {hasChildren} class={_class} />
+  {/snippet}
+  {#snippet props()}
+    <VariantInput bind:class={_class} sterlingClasses={[]} />
     <Checkbox bind:checked={expanded}>expanded</Checkbox>
     <Checkbox bind:checked={hasChildren}>hasChildren</Checkbox>
-    <VariantInput bind:variant availableVariants={[]} />
-  </svelte:fragment>
+  {/snippet}
 </Playground>

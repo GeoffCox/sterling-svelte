@@ -200,32 +200,32 @@ borderColor="--stsv-input__border-color--selected"
 color="--stsv-input__color--selected"
 />
 
-### Status Colors
+### Common - Status
 
 Several colors are used to create an association with a status.
 
 <Swatch
-backgroundColor="--stsv-status--info__background-color"
-borderColor="--stsv-status--info__border-color"
-color="--stsv-status--info__color"
+backgroundColor="--stsv-common__background-color--info"
+borderColor="--stsv-common__border-color--info"
+color="--stsv-common__color--info"
 />
 <br/>
 <Swatch
-backgroundColor="--stsv-status--success__background-color"
-borderColor="--stsv-status--success__border-color"
-color="--stsv-status--success__color"
+backgroundColor="--stsv-common__background-color--success"
+borderColor="--stsv-common__border-color--success"
+color="--stsv-common__color--success"
 />
 <br/>
 <Swatch
-backgroundColor="--stsv-status--warning__background-color"
-borderColor="--stsv-status--warning__border-color"
-color="--stsv-status--warning__color"
+backgroundColor="--stsv-common__background-color--warning"
+borderColor="--stsv-common__border-color--warning"
+color="--stsv-common__color--warning"
 />
 <br/>
 <Swatch
-backgroundColor="--stsv-status--danger__background-color"
-borderColor="--stsv-status--danger__border-color"
-color="--stsv-status--danger__color"
+backgroundColor="--stsv-common__background-color--error"
+borderColor="--stsv-common__border-color--error"
+color="--stsv-common__color--error"
 />
 <br/>
 

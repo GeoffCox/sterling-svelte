@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
 
@@ -8,51 +10,52 @@
   import Label from '$lib/Label.svelte';
   import Slider from '$lib/Slider.svelte';
   import AnimatedProgress from './AnimatedProgress.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled = false;
-  let open = false;
-  let stayOpenOnClickAway = false;
-  let variant = '';
+  let disabled: boolean | null | undefined = $state(false);
+  let open: boolean | null | undefined = $state(false);
+  let stayOpenOnClickAway: boolean | null | undefined = $state(false);
+  let _class = $state('');
 
-  let progress = 50;
-  let animate = false;
-  let reverse = false;
-  let speed = 75;
+  let progress = $state(50);
+  let animate = $state(false);
+  let reverse = $state(false);
+  let speed = $state(75);
 
-  $: code = getPlaygroundCode({ disabled, open, stayOpenOnClickAway, variant });
+  let code = $derived(getPlaygroundCode({ disabled, stayOpenOnClickAway, _class: _class }));
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     <Dropdown
       bind:open
       {disabled}
       {stayOpenOnClickAway}
-      {variant}
-      on:open={(ev) => console.log(`open: ${ev.detail.open}`)}
+      class={_class}
+      onOpen={(value) => console.log(`open: ${value}`)}
     >
-      <div class="value" slot="value">
-        <AnimatedProgress value={progress} {animate} {reverse} {speed} />
-      </div>
+      {#snippet value()}
+        <div class="value">
+          <AnimatedProgress value={progress} {animate} {reverse} {speed} />
+        </div>
+      {/snippet}
       <div class="popup">
         <div class="settings">
-          <Switch bind:checked={animate} onText="Animate" />
-          <Switch bind:checked={reverse} onText="Reverse" />
+          <Switch bind:checked={animate} onLabelText="Animate" />
+          <Switch bind:checked={reverse} onLabelText="Reverse" />
           <Label text={`Speed: ${speed}`}>
             <Slider bind:value={speed} precision={0} />
           </Label>
         </div>
       </div></Dropdown
     >
-  </svelte:fragment>
-  <svelte:fragment slot="props">
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Checkbox bind:checked={open}>open</Checkbox>
     <Checkbox bind:checked={stayOpenOnClickAway}>stayOpenOnClickAway</Checkbox>
-    <VariantInput bind:variant availableVariants={['colorful']} />
-  </svelte:fragment>
+    <VariantInput bind:class={_class} />
+  {/snippet}
 </Playground>
 
 <style>

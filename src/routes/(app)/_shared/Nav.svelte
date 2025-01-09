@@ -18,20 +18,28 @@
       name: 'GETTING STARTED',
       items: [
         {
-          name: 'Introduction',
+          name: 'Overview',
           url: '/'
         },
         {
-          name: 'Sterling Theme',
-          url: '/topics/theme'
+          name: 'Installation',
+          url: '/topics/install'
         },
         {
           name: 'Architecture',
           url: '/topics/architecture'
         },
         {
+          name: 'Migration from v1',
+          url: '/topics/migration-from-v1'
+        },
+        {
           name: 'Change Log',
           url: '/topics/changelog'
+        },
+        {
+          name: 'Sterling Theme',
+          url: '/topics/theme'
         }
       ]
     },
@@ -41,11 +49,8 @@
         { name: 'Button', url: '/components/button' },
         { name: 'Callout', url: '/components/callout' },
         { name: 'Checkbox', url: '/components/checkbox' },
-        { name: 'ColorPicker', url: '/components/colorpicker' },
         { name: 'Dialog', url: '/components/dialog' },
         { name: 'Dropdown', url: '/components/dropdown' },
-        { name: 'HexColorSliders', url: '/components/hexcolorsliders' },
-        { name: 'HslColorSliders', url: '/components/hslcolorsliders' },
         { name: 'Input', url: '/components/input' },
         { name: 'Label', url: '/components/label' },
         { name: 'Link', url: '/components/link' },
@@ -55,7 +60,6 @@
         { name: 'MenuBar', url: '/components/menubar' },
         { name: 'MenuButton', url: '/components/menubutton' },
         { name: 'MenuItem', url: '/components/menuitem' },
-        { name: 'MenuItemDisplay', url: '/components/menuitemdisplay' },
         { name: 'MenuSeparator', url: '/components/menuseparator' },
         { name: 'Popover', url: '/components/popover' },
         { name: 'Progress', url: '/components/progress' },
@@ -69,8 +73,7 @@
         { name: 'Tooltip', url: '/components/tooltip' },
         { name: 'Tree', url: '/components/tree' },
         { name: 'TreeChevron', url: '/components/treechevron' },
-        { name: 'TreeItem', url: '/components/treeitem' },
-        { name: 'TreeItemDisplay', url: '/components/treeitemdisplay' }
+        { name: 'TreeItem', url: '/components/treeitem' }
       ]
     },
     {
@@ -90,9 +93,9 @@
       <div class="items">
         {#each section.items as item}
           {#if $page.url.pathname === item.url}
-            <Link href={`${base}${item.url}`} text={item.name} />
+            <Link href={`${base}${item.url}`}>{item.name}</Link>
           {:else}
-            <Link variant="ghost" href={`${base}${item.url}`} text={item.name} />
+            <Link class="ghost" href={`${base}${item.url}`}>{item.name}</Link>
           {/if}
         {/each}
       </div>

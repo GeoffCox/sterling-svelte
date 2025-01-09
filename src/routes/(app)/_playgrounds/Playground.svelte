@@ -1,37 +1,51 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
 
-  export let code: string | undefined = undefined;
+  type Props = {
+    code?: string;
+    component: Snippet;
+    props?: Snippet;
+    snippets?: Snippet;
+    tweaks?: Snippet;
+  };
 
-  let mounted = false;
+  let { code, component, props, snippets, tweaks }: Props = $props();
+
+  let mounted = $state(false);
 
   onMount(() => {
     mounted = true;
-  });
 
-  onDestroy(() => {
-    mounted = false;
+    return () => {
+      mounted = false;
+    };
   });
 </script>
 
 <div class="example">
   {#if mounted}
     <div class="configuration">
-      {#if $$slots.props}
+      {#if props}
         <div class="section-name">Props</div>
         <div class="props">
-          <slot name="props">(none)</slot>
+          {@render props()}
         </div>
       {/if}
-      {#if $$slots.tweaks}
+      {#if snippets}
+        <div class="section-name">Snippets</div>
+        <div class="snippets">
+          {@render snippets()}
+        </div>
+      {/if}
+      {#if tweaks}
         <div class="section-name">Tweaks</div>
         <div class="tweaks">
-          <slot name="tweaks">(none)</slot>
+          {@render tweaks()}
         </div>
       {/if}
     </div>
     <div class="component">
-      <slot name="component" />
+      {@render component()}
     </div>
   {/if}
   {#if code}
@@ -77,6 +91,7 @@
   }
 
   .props,
+  .snippets,
   .tweaks {
     margin: 0.5em 0.5em 1em 0.5em;
     display: grid;

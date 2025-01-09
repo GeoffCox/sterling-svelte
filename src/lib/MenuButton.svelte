@@ -1,8 +1,11 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
+  import type { HTMLButtonAttributes } from 'svelte/elements';
+
   import type { MenuItemContext } from './MenuItem.types';
 
-  import { createEventDispatcher, setContext, tick } from 'svelte';
-  import { writable } from 'svelte/store';
+  import { setContext, tick, type Snippet } from 'svelte';
 
   import Button from './Button.svelte';
   import Menu from './Menu.svelte';
@@ -10,56 +13,41 @@
   import { idGenerator } from './idGenerator';
   import Popover from './Popover.svelte';
   import { clickOutside } from './actions/clickOutside';
-  import type { ClickOutsideEvent } from './@types/clickOutside';
   import type { PopoverPlacement } from './Popover.types';
 
-  // ----- Props ----- //
+  type Props = HTMLButtonAttributes & {
+    items: Snippet;
+    menuClass?: string;
+    onOpen?: (value: string) => void;
+    onClose?: (value: string) => void;
+    onSelect?: (value: string) => void;
+    open?: boolean | null | undefined;
+    popoverPlacement?: PopoverPlacement;
+    value?: string;
+  };
 
-  export let open = false;
-
-  export let menuVariant: string = '';
-
-  export let popoverPlacement: PopoverPlacement = 'bottom-start';
-
-  export let value: string;
-
-  export let variant: string = '';
-
-  // ----- State ----- //
+  let {
+    children,
+    class: _class,
+    items,
+    menuClass,
+    open = $bindable(false),
+    onClose,
+    onOpen,
+    onSelect,
+    popoverPlacement = 'bottom-start',
+    value,
+    ...rest
+  }: Props = $props();
 
   const instanceId = idGenerator.nextId('MenuButton');
 
   let buttonRef: Button;
-  let reference: HTMLDivElement;
+  let openValues: string[] = $state([]);
   let menuRef: Menu;
-  let prevOpen = open;
-
-  $: menuId = `${value}-menu-${instanceId}`;
-  $: hasChildren = $$slots.items;
-
-  const openValues = writable<string[]>([]);
-
-  $: {
-    open = $openValues.length > 0;
-  }
-
-  // ----- Events ----- //
-
-  const dispatch = createEventDispatcher();
-
-  const raiseClose = (value: string) => {
-    dispatch('close', { value });
-  };
-
-  const raiseOpen = (value: string) => {
-    dispatch('open', { value });
-  };
-
-  const raiseSelect = (value: string) => {
-    dispatch('select', { value });
-  };
-
-  // ----- Methods ----- //
+  let menuId = $derived(`${value}-menu-${instanceId}`);
+  let prevOpen = $state(open);
+  let reference: HTMLDivElement | undefined = $state();
 
   export const click = () => {
     buttonRef?.click();
@@ -73,35 +61,47 @@
     buttonRef?.focus(options);
   };
 
-  // ----- Event Handlers ----- //
+  // update open based on openValues
+  $effect(() => {
+    open = openValues.length > 0;
+  });
 
-  const onClick = async () => {
-    if (!open) {
-      openValues.set(['menu-button']);
-      await tick();
-      menuRef?.focusFirstMenuItem();
+  // update openValues based on open
+  $effect(() => {
+    if (open) {
+      openValues = openValues.length > 0 ? openValues : ['menu-button'];
     } else {
-      open = false;
-      openValues.set([]);
+      openValues = openValues.length === 0 ? openValues : [];
     }
-  };
+  });
 
-  $: {
+  // focus when closing
+  $effect(() => {
     if (!open && open !== prevOpen) {
       focus();
     }
     prevOpen = open;
-  }
+  });
 
-  const closeAllMenus = () => {
-    openValues.set([]);
+  const onClick = async () => {
+    if (!open) {
+      openValues = ['menu-button'];
+      open = true;
+      await tick();
+      menuRef?.focusFirstMenuItem();
+    } else {
+      open = false;
+      openValues = [];
+    }
   };
 
-  const onClickOutside = (event: ClickOutsideEvent) => {
-    const {
-      detail: { mouseEvent }
-    } = event;
-    let element: HTMLElement | null = mouseEvent.target as HTMLElement;
+  const closeAllMenus = () => {
+    openValues = [];
+    open = false;
+  };
+
+  const onClickOutside = (event: MouseEvent) => {
+    let element: HTMLElement | null = event.target as HTMLElement;
     while (element) {
       if (element.getAttribute('data-root-value') === value) {
         return;
@@ -115,66 +115,44 @@
 
   setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
     depth: 1,
-    openValues,
+    get openValues() {
+      return openValues;
+    },
+    set openValues(value: string[]) {
+      openValues = value;
+    },
     rootValue: value,
     closeContainingMenu: () => {
       open = false;
     },
-    onOpen: raiseOpen,
-    onClose: raiseClose,
-    onSelect: raiseSelect
+    onOpen,
+    onClose,
+    onSelect
   });
 </script>
 
 <Button
   bind:this={buttonRef}
   aria-controls={menuId}
-  aria-expanded={open}
-  aria-haspopup={hasChildren}
+  aria-expanded={!!open}
+  aria-haspopup={!!children}
   aria-owns={menuId}
+  class={['sterling-menu-button', _class].filter(Boolean).join(' ')}
   data-value={value}
   data-root-value={value}
-  variant={`sterling-menu-button ${variant}`}
-  on:blur
-  on:click
-  on:click={onClick}
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:pointercancel
-  on:pointerdown
-  on:pointerenter
-  on:pointerleave
-  on:pointermove
-  on:pointerover
-  on:pointerout
-  on:pointerup
-  on:wheel
-  {...$$restProps}
+  {...rest}
+  onclick={onClick}
 >
-  <div class="reference" bind:this={reference} use:clickOutside on:click_outside={onClickOutside}>
-    <slot {open} {value} {variant} />
+  <div
+    class="reference"
+    bind:this={reference}
+    use:clickOutside={{ onclickoutside: onClickOutside }}
+  >
+    {@render children?.()}
   </div>
   <Popover {reference} {open} placement={popoverPlacement}>
-    <Menu bind:this={menuRef} id={menuId} {reference} {open} variant={menuVariant}>
-      <slot name="items" />
+    <Menu bind:this={menuRef} id={menuId} class={menuClass}>
+      {@render items?.()}
     </Menu>
   </Popover>
 </Button>

@@ -4,18 +4,13 @@ import CheckboxPlayground from '../../_playgrounds/checkbox/CheckboxPlayground.s
 
 export const checkboxDoc: ComponentDoc = {
   name: 'Checkbox',
-  description: "An <input type='checkbox'>: an interactive element to select/deselect a value",
+  description: 'An interactive element to set a true/false value.',
   comments: [makeExtendsComment('HTMLInputElement')],
-  props: [commonProps.variant],
-  anatomy: `<div class="sterling-checkbox">
-  <div class="container">
-    <!-- hidden-->
-    <input />
-    <div class="indicator" />
-  </div>
-  <label>
-    <slot {checked} {disabled} {inputId} {value} {variant} />
-  </label>
-</div>`,
+  anatomy: `checkbox (<div>)
+  container (<div>)
+    input (<input>) 
+    indicator (<div>)
+  label (<label>)
+    children (Snippet)`,
   usage: CheckboxPlayground
 };

@@ -1,20 +1,20 @@
 export const getPlaygroundCode = (props: {
-  disabled: boolean;
+  _class: string;
+  disabled: boolean | undefined | null;
   href: string;
   text: string;
-  withIcon: boolean;
-  variant: string;
+  withIcon: boolean | undefined | null;
 }) => {
   const propList: string[] = [];
 
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
   if (props.disabled) {
     propList.push(`disabled`);
   }
   if (props.href) {
     propList.push(`href="${props.href}"`);
-  }
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

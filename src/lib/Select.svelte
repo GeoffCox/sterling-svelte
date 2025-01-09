@@ -1,82 +1,82 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  import { createEventDispatcher, tick } from 'svelte';
+  import { tick, type Snippet } from 'svelte';
 
   import { clickOutside } from './actions/clickOutside';
   import { idGenerator } from './idGenerator';
   import List from './List.svelte';
   import Popover from './Popover.svelte';
+  import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
+
+  type Props = HTMLAttributes<HTMLDivElement> & {
+    buttonSnippet?: Snippet;
+    disabled?: boolean | null;
+    listClass?: string;
+    onPending?: (value?: string) => void;
+    onSelect?: (value?: string) => void;
+    open?: boolean | null;
+    selectedValue?: string;
+    valueSnippet?: Snippet<[string | undefined]>;
+  };
+
+  let {
+    buttonSnippet,
+    children,
+    class: _class,
+    disabled = false,
+    open = $bindable(false),
+    onSelect,
+    onPending,
+    selectedValue = $bindable(),
+    listClass,
+    valueSnippet,
+    ...rest
+  }: Props = $props();
 
   const popupId = idGenerator.nextId('Select-popup');
 
-  // ----- Props ----- //
-
-  export let disabled: boolean = false;
-
-  /** When true, the select's dropdown is open. */
-  export let open = false;
-
-  /** The value of the selected item.*/
-  export let selectedValue: string | undefined = undefined;
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  /** Additional class names to apply to the List*/
-  export let listVariant: string = '';
-
   // ----- State ----- //
 
-  // Tracks the previous open state
-  let prevOpen = false;
-
   // Tracks the pending selected index
-  let pendingSelectedValue = selectedValue;
+  let pendingSelectedValue: string | undefined = $state(selectedValue);
 
-  let selectRef: HTMLDivElement;
+  // svelte-ignore non_reactive_update
+  let selectRef: HTMLElement | undefined = $state(undefined);
   let listRef: List;
-
-  // ----- Events ----- //
-
-  const dispatch = createEventDispatcher();
-
-  const raiseSelect = (value?: string) => {
-    dispatch('select', { value });
-  };
-
-  const raisePending = (value?: string) => {
-    dispatch('pending', { value });
-  };
 
   // ----- Reactions ----- //
 
-  $: {
+  $effect(() => {
     pendingSelectedValue = selectedValue;
-  }
+  });
 
-  $: {
-    raiseSelect(selectedValue);
-  }
+  $effect(() => {
+    onSelect?.(selectedValue);
+  });
 
-  $: {
+  $effect(() => {
     if (open) {
-      raisePending(pendingSelectedValue);
+      onPending?.(pendingSelectedValue);
     }
-  }
+  });
 
-  $: {
-    if (open && !prevOpen) {
-      prevOpen = true;
+  $effect(() => {
+    if (open) {
       tick().then(() => {
         setTimeout(() => {
           listRef?.focus();
           listRef?.scrollToSelectedItem();
         }, 10);
       });
-    } else if (prevOpen) {
-      prevOpen = false;
+    }
+  });
+
+  $effect(() => {
+    if (!open) {
       tick().then(() => selectRef?.focus());
     }
-  }
+  });
 
   // ----- Methods ----- //
 
@@ -100,15 +100,16 @@
 
   // ----- Event Handlers ----- //
 
-  const onSelectClick = (event: MouseEvent) => {
+  const onSelectClick: MouseEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
       open = !open;
       event.preventDefault();
       event.stopPropagation();
     }
+    rest.onclick?.(event);
   };
 
-  const onSelectKeydown = (event: KeyboardEvent) => {
+  const onSelectKeydown: KeyboardEventHandler<HTMLDivElement> = (event) => {
     if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
       switch (event.key) {
         case ' ':
@@ -124,9 +125,9 @@
         case 'ArrowUp':
           {
             if (selectedValue) {
-              listRef.selectPreviousItem();
+              listRef?.selectPreviousItem();
             } else {
-              listRef.selectLastItem();
+              listRef?.selectLastItem();
             }
             event.preventDefault();
             event.stopPropagation();
@@ -136,9 +137,9 @@
         case 'ArrowDown':
           {
             if (selectedValue) {
-              listRef.selectNextItem();
+              listRef?.selectNextItem();
             } else {
-              listRef.selectFirstItem();
+              listRef?.selectFirstItem();
             }
             event.preventDefault();
             event.stopPropagation();
@@ -147,6 +148,7 @@
           break;
       }
     }
+    rest.onkeydown?.(event);
   };
 
   const onListKeydown = (event: KeyboardEvent) => {
@@ -181,8 +183,8 @@
     return false;
   };
 
-  const onListSelect = (event: CustomEvent<{ value: string }>) => {
-    pendingSelectedValue = event.detail.value;
+  const onListSelect = (value?: string) => {
+    pendingSelectedValue = value;
     if (!open) {
       selectedValue = pendingSelectedValue;
     }
@@ -194,71 +196,46 @@
   aria-controls={popupId}
   aria-haspopup="listbox"
   aria-expanded={open}
-  class={`sterling-select ${variant}`}
+  class={['sterling-select', _class].filter(Boolean).join(' ')}
   class:disabled
   role="combobox"
   tabindex="0"
-  use:clickOutside
-  on:blur
-  on:click
-  on:copy
-  on:cut
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:wheel|passive
-  on:paste
-  on:click={onSelectClick}
-  on:click_outside={() => (open = false)}
-  on:keydown={onSelectKeydown}
-  {...$$restProps}
+  use:clickOutside={{ onclickoutside: () => (open = false) }}
+  {...rest}
+  onclick={onSelectClick}
+  onkeydown={onSelectKeydown}
 >
   <div class="value">
-    <slot name="value" {disabled} {open} {selectedValue} {variant}>
-      {#if selectedValue}
-        {selectedValue}
-      {:else}
-        <span>&nbsp;</span>
-      {/if}
-    </slot>
+    {#if valueSnippet}
+      {@render valueSnippet(selectedValue)}
+    {:else if selectedValue}
+      {selectedValue}
+    {:else}
+      <span>&nbsp;</span>
+    {/if}
   </div>
   <div class="button">
-    <slot name="button" {disabled} {open} {selectedValue} {variant}>
-      <slot name="icon" {disabled} {open} {selectedValue} {variant}>
-        <div class="chevron" />
-      </slot>
-    </slot>
+    {#if buttonSnippet}
+      {@render buttonSnippet()}
+    {:else}
+      <div class="chevron"></div>
+    {/if}
   </div>
   <Popover reference={selectRef} bind:open id={popupId} conditionalRender={false}>
-    <div class={`sterling-select-popup-content ${variant}`}>
+    <div class={['sterling-select-popup-content', _class].filter(Boolean).join(' ')}>
       <List
         bind:this={listRef}
         {disabled}
         selectedValue={pendingSelectedValue}
-        on:click={onListClick}
-        on:keydown={onListKeydown}
-        on:select={onListSelect}
-        tabIndex={open ? 0 : -1}
-        variant={`composed ${listVariant}`}
+        onclick={onListClick}
+        onkeydown={onListKeydown}
+        onSelect={onListSelect}
+        tabindex={open ? 0 : -1}
+        class={`composed ${listClass}`}
       >
-        <slot {variant} {listVariant} />
+        {#if children}
+          {@render children()}
+        {/if}
       </List>
     </div>
   </Popover>

@@ -8,15 +8,15 @@
   import CoffeeTreeItem from './CoffeeTreeItem.svelte';
   import Label from '$lib/Label.svelte';
   import Tree from '$lib/Tree.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
+  let _class = '';
   let disabled = false;
   let expandedValues: string[] = [];
   let expandedValuesText: string;
   let selectedValue: string | undefined = undefined;
-  let variant = '';
 
   const getExpandedValues = () => {
     expandedValuesText = expandedValues.join(',');
@@ -27,40 +27,43 @@
   };
 
   $: code = getPlaygroundCode({
-    disabled,
-    variant
+    _class,
+    disabled
   });
 </script>
 
 <Playground {code}>
-  <div class="component" slot="component">
-    <Tree
-      bind:selectedValue
-      {disabled}
-      bind:expandedValues
-      {variant}
-      on:select={() => console.log('select')}
-      on:expandCollapse={() => console.log('expandCollapse')}
-    >
-      {#each coffeeTree as coffeeItem}
-        <CoffeeTreeItem {coffeeItem} {variant} />
-      {/each}
-    </Tree>
-  </div>
-  <svelte:fragment slot="props">
+  {#snippet component()}
+    <div class="component">
+      <Tree
+        bind:selectedValue
+        {disabled}
+        bind:expandedValues
+        class={_class}
+        onExpandCollapse={(expandedValues) =>
+          console.log('Tree.onExpandCollapse expandedValue:', expandedValues)}
+        onSelect={() => console.log('Tree.onSelect selectedValue:', selectedValue)}
+      >
+        {#each coffeeTree as coffeeItem}
+          <CoffeeTreeItem {coffeeItem} variant={_class} />
+        {/each}
+      </Tree>
+    </div>
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Label text="expandedValues (comma separated)">
+    <Label text="expandedValues">
       <Input bind:value={expandedValuesText} />
     </Label>
     <div class="edit-toggled">
-      <Button on:click={getExpandedValues}>Get</Button>
-      <Button on:click={setExpandedValues}>Set</Button>
+      <Button onclick={getExpandedValues}>Get</Button>
+      <Button onclick={setExpandedValues}>Set</Button>
     </div>
     <Label text="selectedValue">
       <Input bind:value={selectedValue} />
     </Label>
-    <VariantInput bind:variant availableVariants={['composed']} />
-  </svelte:fragment>
+    <VariantInput bind:class={_class} sterlingClasses={['composed']} />
+  {/snippet}
 </Playground>
 
 <style>

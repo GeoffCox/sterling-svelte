@@ -1,15 +1,9 @@
-<script lang="ts">
-  import type { MenuItemRegistration, MenuItemContext, MenuItemRole } from './MenuItem.types';
+<svelte:options runes={true} />
 
-  import {
-    getContext,
-    afterUpdate,
-    createEventDispatcher,
-    onMount,
-    setContext,
-    tick
-  } from 'svelte';
-  import { writable } from 'svelte/store';
+<script lang="ts">
+  import type { MenuItemContext, MenuItemRole } from './MenuItem.types';
+
+  import { getContext, setContext, tick, type Snippet } from 'svelte';
 
   import { idGenerator } from './idGenerator';
   import Menu from './Menu.svelte';
@@ -17,72 +11,59 @@
   import type { MenuBarContext } from './MenuBar.types';
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
   import { isElementEnabledMenuItem } from './MenuItem.utils';
-  import MenuItemDisplay from './MenuItemDisplay.svelte';
   import Popover from './Popover.svelte';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
-  import type { KeyboardEventHandler } from 'svelte/elements';
+  import type {
+    HTMLButtonAttributes,
+    KeyboardEventHandler,
+    MouseEventHandler
+  } from 'svelte/elements';
 
-  // ----- Props ----- //
+  type Props = HTMLButtonAttributes & {
+    checked?: boolean | null;
+    item?: Snippet;
+    menuClass?: string;
+    onClose?: (value: string) => void;
+    onOpen?: (value: string) => void;
+    onSelect?: (value: string) => void;
+    role?: MenuItemRole;
+    shortcut?: string;
+    text?: string;
+    value: string;
+  };
 
-  /**
-   * When true, the menu item is checked.
-   * Use with role='menuitemcheckbox' or role='menuitemradio'.
-   */
-  export let checked = false;
+  let {
+    checked,
+    children,
+    class: _class,
+    disabled,
+    item,
+    menuClass,
+    onClose,
+    onOpen,
+    onSelect,
+    role = 'menuitem',
+    text,
+    shortcut,
+    value,
+    ...rest
+  }: Props = $props();
 
-  /** When true, the menu item is disabled. */
-  export let disabled = false;
+  const menuItemContext = getContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY) || {};
 
-  /** The role of the menu item. */
-  export let role: MenuItemRole = 'menuitem';
-
-  /** The text of the menu item. Not used when the item slot is filled.*/
-  export let text: string | undefined = undefined;
-
-  /** The value uniquely identifying this menu item within the menu hierarchy. */
-  export let value: string;
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  /** Additional class names to apply to the sub Menu*/
-  export let menuVariant: string = '';
-
-  // ----- Get Context ----- //
-
-  const {
-    isMenuBarItem,
-    openValues = writable([]),
-    rootValue = value,
-    depth = 0,
-    closeContainingMenu = undefined,
-    onOpen = undefined,
-    onClose = undefined,
-    onSelect = undefined
-  } = getContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY) || {};
-
-  const { openPreviousMenuBarItem = undefined, openNextMenuBarItem = undefined } =
-    getContext<MenuBarContext>(MENU_BAR_CONTEXT_KEY) || {};
-
-  // ----- State ----- //
+  const menuBarContext = getContext<MenuBarContext>(MENU_BAR_CONTEXT_KEY) || {};
 
   const instanceId = idGenerator.nextId('MenuItem');
 
-  $: displayId = `${value}-display-${instanceId}`;
-  $: open = $openValues.includes(value);
-  $: menuId = `${value}-menu-${instanceId}`;
+  let displayId = $derived(`${value}-display-${instanceId}`);
+  let open = $derived(menuItemContext.openValues?.includes(value));
+  let prevOpen = $state(menuItemContext.openValues?.includes(value));
+  let menuId = $derived(`${value}-menu-${instanceId}`);
 
-  let menuItemRef: HTMLButtonElement;
-  let menuRef: Menu;
+  let menuItemRef: HTMLButtonElement | undefined = $state();
+  let menuRef: Menu | undefined = $state();
 
-  const children = writable<MenuItemRegistration[]>([]);
-
-  let mounted = false;
-  let prevOpen = open;
-
-  $: hasChildren = $$slots.default;
-
-  // ----- Methods ----- //
+  //#region methods
 
   export const blur = () => {
     menuItemRef?.blur();
@@ -96,36 +77,35 @@
     menuItemRef?.focus(options);
   };
 
-  // ----- Events ----- //
+  //#endregion
 
-  const dispatch = createEventDispatcher();
+  //#region events
 
   const raiseClose = (value: string) => {
-    dispatch('close', { value });
     onClose?.(value);
+    menuItemContext.onClose?.(value);
   };
 
   const raiseOpen = (value: string) => {
-    dispatch('open', { value });
     onOpen?.(value);
+    menuItemContext.onOpen?.(value);
   };
 
-  $: {
-    if (hasChildren && open !== prevOpen) {
+  const raiseSelect = (value: string) => {
+    onSelect?.(value);
+    menuItemContext.onSelect?.(value);
+  };
+
+  $effect(() => {
+    if (open !== prevOpen) {
       open ? raiseOpen(value) : raiseClose(value);
     }
     prevOpen = open;
-  }
+  });
 
-  // dispatches the event and bubbles it up the context
-  // so that container components can subscribe to select
-  // events for children.
-  const raiseSelect = (value: string) => {
-    dispatch('select', { value });
-    onSelect?.(value);
-  };
+  //#endregion
 
-  // ----- Focus ----- //
+  //#region focus
 
   const focusPreviousMenuItem = () => {
     let candidate =
@@ -155,48 +135,47 @@
     return !!candidate;
   };
 
-  // ----- Open/Close ----- //
+  //#endregion
+
+  //#region open/close
 
   // opens the menu for this menu item
   const openMenu = () => {
-    if (!$openValues.includes(value)) {
+    if (!menuItemContext.openValues.includes(value)) {
       // slice to depth to close any sibling menus that are open
-      openValues.set([...$openValues.slice(0, depth), value]);
+      menuItemContext.openValues = [
+        ...menuItemContext.openValues.slice(0, menuItemContext.depth),
+        value
+      ];
     }
   };
 
   // closes the menu for this menu item
   const closeMenu = async () => {
-    const index = $openValues.indexOf(value);
+    const index = menuItemContext.openValues.indexOf(value);
     if (index !== -1) {
-      openValues.set([...$openValues.slice(0, index)]);
+      menuItemContext.openValues = [...menuItemContext.openValues.slice(0, index)];
       await tick();
       menuItemRef?.focus();
     }
   };
 
   const closeAllMenus = () => {
-    openValues.set([]);
+    menuItemContext.openValues = [];
   };
 
-  // ----- Event Handlers ----- //
+  //#endregion
 
-  onMount(() => {
-    mounted = true;
-  });
+  //#region event handlers
 
-  afterUpdate(() => {
-    prevOpen = open;
-  });
-
-  const onKeyDown: KeyboardEventHandler<Element> = async (event) => {
+  const onKeyDown: KeyboardEventHandler<HTMLButtonElement> = async (event) => {
     if (!disabled && !event.altKey && !event.ctrlKey && !event.shiftKey) {
       switch (event.key) {
         case 'ArrowDown':
           // ARIA menubar/menuitem:
           // If the currently focused menuitem has a submenu,
           // opens the submenu and places focus on the first item in the submenu.
-          if (isMenuBarItem && hasChildren) {
+          if (menuItemContext.isMenuBarItem && children) {
             openMenu();
             setTimeout(async () => {
               await tick();
@@ -207,7 +186,7 @@
             return false;
           }
 
-          if (!isMenuBarItem) {
+          if (!menuItemContext.isMenuBarItem) {
             // ARIA menuitem:
             // Moves focus to the next item, optionally wrapping from the last to the first.
             focusNextMenuItem();
@@ -219,7 +198,7 @@
         case 'ArrowLeft':
           // ARIA menubar/menuitem:
           // Moves focus to the previous item, optionally wrapping from the first to the last.
-          if (isMenuBarItem) {
+          if (menuItemContext.isMenuBarItem) {
             focusPreviousMenuItem();
             event.preventDefault();
             event.stopPropagation();
@@ -229,8 +208,8 @@
           // ARIA menuitem:
           // When focus is in a submenu of an item in a menu,
           // closes the submenu and returns focus to the parent menuitem.
-          if (depth > 1) {
-            closeContainingMenu?.();
+          if (menuItemContext.depth && menuItemContext.depth > 1) {
+            menuItemContext.closeContainingMenu?.();
             event.preventDefault();
             event.stopPropagation();
             return false;
@@ -244,14 +223,14 @@
           // if focus is now on a menuitem with a submenu,
           // either opens the submenu of that menuitem without moving focus into the submenu,
           // or opens the submenu of that menuitem and places focus on the first item in the submenu.
-          openPreviousMenuBarItem?.();
+          menuBarContext.openPreviousMenuBarItem?.();
           event.preventDefault();
           event.stopPropagation();
           return false;
         case 'ArrowRight':
           // ARIA menubar:
           // Moves focus to the next item, optionally wrapping from the last to the first.
-          if (isMenuBarItem) {
+          if (menuItemContext.isMenuBarItem) {
             focusNextMenuItem();
             event.preventDefault();
             event.stopPropagation();
@@ -261,7 +240,7 @@
           // ARIA menuitem:
           // When focus is in a menu and on a menuitem that has a submenu,
           // opens the submenu and places focus on its first item
-          if (hasChildren) {
+          if (children) {
             openMenu();
             setTimeout(async () => {
               await tick();
@@ -280,8 +259,8 @@
           // if focus is now on a menuitem with a submenu,
           // either opens the submenu of that menuitem without moving focus into the submenu,
           // or opens the submenu of that menuitem and places focus on the first item in the submenu.
-          if (openNextMenuBarItem) {
-            openNextMenuBarItem();
+          if (menuBarContext.openNextMenuBarItem) {
+            menuBarContext.openNextMenuBarItem();
             event.preventDefault();
             event.stopPropagation();
             return false;
@@ -291,7 +270,7 @@
           // ARIA menubar/menuitem:
           // If the currently focused menuitem has a submenu,
           // opens the submenu and places focus on the last item in the submenu.
-          if (isMenuBarItem && hasChildren) {
+          if (menuItemContext.isMenuBarItem && children) {
             openMenu();
             setTimeout(async () => {
               await tick();
@@ -304,7 +283,7 @@
 
           // ARIA menuitem:
           // Moves focus to the previous item, optionally wrapping from the first to the last.
-          if (!isMenuBarItem) {
+          if (!menuItemContext.isMenuBarItem) {
             focusPreviousMenuItem();
             event.preventDefault();
             event.stopPropagation();
@@ -315,23 +294,25 @@
           // ARIA menuitem:
           // Close the menu that contains focus and return focus to the element or context,
           // e.g., menu button or parent menuitem, from which the menu was opened.
-          open = false;
+          // open = false;
           closeAllMenus();
           event.preventDefault();
           event.stopPropagation();
           return false;
       }
     }
+    rest.onkeydown?.(event);
   };
 
-  const onMouseEnter = (event: MouseEvent) => {
+  const onMouseEnter: MouseEventHandler<HTMLButtonElement> = (event) => {
     menuItemRef?.focus();
+    rest.onmouseenter?.(event);
   };
 
-  const onClick = (event: MouseEvent) => {
+  const onClick: MouseEventHandler<HTMLButtonElement> = (event) => {
     if (!disabled) {
-      if (hasChildren) {
-        if (!$openValues.includes(value)) {
+      if (children) {
+        if (!menuItemContext.openValues.includes(value)) {
           openMenu();
           if ($usingKeyboard) {
             setTimeout(async () => {
@@ -353,107 +334,88 @@
         return false;
       }
     }
+    rest.onclick?.(event);
   };
 
-  // ----- Set Context ----- //
+  //#endregion
 
-  setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
+  //#region set context
+  let menuItemChildContext: MenuItemContext = {
     isMenuBarItem: false,
-    openValues,
-    rootValue,
-    depth: depth + 1,
-    closeContainingMenu: () => {
-      closeMenu();
+    get openValues() {
+      return menuItemContext.openValues;
     },
+    set openValues(value: string[]) {
+      menuItemContext.openValues = value;
+    },
+    rootValue: menuItemContext.rootValue || value,
+    depth: menuItemContext.depth ? menuItemContext.depth + 1 : 1,
+    closeContainingMenu: closeMenu,
     onOpen: raiseOpen,
     onClose: raiseClose,
     onSelect: raiseSelect
-  });
+  };
+
+  setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, menuItemChildContext);
+
+  //#endregion
 </script>
 
+{#snippet renderDefaultItem()}
+  <div class="sterling-menu-item-display" class:disabled>
+    <div
+      class="check"
+      class:checkmark={role === 'menuitemcheckbox'}
+      class:bullet={role === 'menuitemradio'}
+      class:checked
+    ></div>
+    <div class="content">
+      {text}
+    </div>
+    {#if shortcut}
+      <div class="shortcut">
+        {shortcut}
+      </div>
+    {/if}
+    <div class="chevron" class:has-children={!menuItemContext.isMenuBarItem && !!children}></div>
+  </div>
+{/snippet}
+
 <button
+  bind:this={menuItemRef}
   aria-controls={menuId}
   aria-disabled={disabled}
   aria-expanded={open}
-  aria-haspopup={hasChildren}
+  aria-haspopup={!!children}
   aria-owns={menuId}
-  bind:this={menuItemRef}
-  class={`sterling-menu-item ${variant}`}
+  class={['sterling-menu-item', _class].filter(Boolean).join(' ')}
   class:using-keyboard={usingKeyboard}
   data-value={value}
-  data-root-value={rootValue}
+  data-root-value={menuItemContext.rootValue}
   {disabled}
   {role}
   tabindex={0}
   type="button"
-  on:blur
-  on:click
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:pointercancel
-  on:pointerdown
-  on:pointerenter
-  on:pointerleave
-  on:pointermove
-  on:pointerover
-  on:pointerout
-  on:pointerup
-  on:wheel|passive
-  on:click={onClick}
-  on:keydown={onKeyDown}
-  on:mouseenter={onMouseEnter}
-  {...$$restProps}
+  {...rest}
+  onclick={onClick}
+  onkeydown={onKeyDown}
+  onmouseenter={onMouseEnter}
 >
   <div class="item" id={displayId}>
-    <slot
-      name="item"
-      {checked}
-      {depth}
-      {disabled}
-      {hasChildren}
-      {isMenuBarItem}
-      {open}
-      {role}
-      {text}
-      {value}
-      {variant}
-    >
-      <MenuItemDisplay
-        {checked}
-        {disabled}
-        {hasChildren}
-        {isMenuBarItem}
-        menuItemRole={role}
-        {variant}>{text}</MenuItemDisplay
-      >
-    </slot>
+    {#if item}
+      {@render item()}
+    {:else}
+      {@render renderDefaultItem()}
+    {/if}
   </div>
-  {#if menuItemRef && open && hasChildren}
+  {#if menuItemRef && open && children}
     <Popover
       reference={menuItemRef}
-      placement={isMenuBarItem ? 'bottom-start' : 'right-start'}
+      placement={menuItemContext.isMenuBarItem ? 'bottom-start' : 'right-start'}
       {open}
     >
-      <Menu bind:this={menuRef} id={menuId} variant={menuVariant}>
-        <slot {depth} {disabled} />
+      <Menu bind:this={menuRef} id={menuId} class={menuClass}>
+        {@render children()}
       </Menu>
     </Popover>
   {/if}

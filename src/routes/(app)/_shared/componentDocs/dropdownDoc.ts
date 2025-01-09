@@ -4,57 +4,61 @@ import DropdownPlayground from '../../_playgrounds/dropdown/DropdownPlayground.s
 
 export const dropdownDoc: ComponentDoc = {
   name: 'Dropdown',
-  description: 'A value and a <button> to open/close a floating content box',
+  description: 'A value and associated button to open/close a floating content box.',
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {
+      name: 'button',
+      type: 'string | Snippet | undefined',
+      default: 'undefined',
+      comment: 'The button to open/close the dropdown.'
+    },
+    {
+      name: 'buttonIcon',
+      type: 'string | Snippet | undefined',
+      default: 'undefined',
+      comment: 'The icon within the button. When undefined, displays a chevron.'
+    },
+    {
       name: 'disabled',
-      type: 'string',
+      type: 'boolean | null | undefined',
       default: 'false',
       comment: 'When true, the dropdown is disabled and closed'
     },
     {
+      name: 'onOpen',
+      type: '(open: boolean | null | undefined) => void',
+      default: 'undefined',
+      comment: 'Called when the dropdown opens or closes'
+    },
+    {
       name: 'open',
-      type: 'string',
+      type: 'boolean | null | undefined',
       default: 'false',
       comment: 'When true, the dropdown is open'
     },
     {
       name: 'stayOpenOnClickAway',
-      type: 'string',
+      type: 'boolean | null | undefined',
       default: 'false',
       comment: 'When true and the user clicks away from the dropdown, it remains open'
     },
     {
-      name: 'variant',
-      type: 'string',
-      default: "''",
-      comment: 'Additional class names to apply'
+      name: 'value',
+      type: 'string | Snippet | undefined',
+      default: 'undefined',
+      comment: 'The value to display.'
     }
   ],
-  events: [
-    {
-      name: 'open',
-      data: '{open: boolean}',
-      comment: 'Raised when the dropdown opens or closes'
-    }
-  ],
-  anatomy: `<div class="sterling-dropdown">
-  <div class="value">
-    <slot name="value" {disabled} {open} {variant} />
-  </div>
-  <slot name="button" {disabled} {open} {variant}>
-    <div class="button">
-      <slot name="icon" {disabled} {open} {variant}>
-        <div class="chevron" />
-      </slot>
-    </div>
-  </slot>
-  <Popover>
-    <div class="sterling-dropdown-popup-content">
-      <slot {disabled} {open} {variant} />
-    </div>
-  </Popover>
-</div>`,
+  anatomy: `dropdown (<div>)
+  value container (<div>)
+    value (<string | Snippet>)
+  button (<Snippet>)
+    button container <div>
+      buttonIcon <Snippet>
+        chevron (<div>)
+  dropdown content (<Popover>)
+    content (<div>)
+      children (<Snippet>)`,
   usage: DropdownPlayground
 };

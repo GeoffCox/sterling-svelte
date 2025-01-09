@@ -1,46 +1,45 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
   import Playground from '../Playground.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled = false;
-  let checked = false;
-  let text = 'sterling-svelte';
-  let variant = '';
+  let disabled: boolean | undefined | null = $state(false);
+  let text = $state('sterling-svelte');
+  let _class = $state('');
 
-  $: code = getPlaygroundCode({ checked, disabled, text, variant });
+  let code = $derived(getPlaygroundCode({ disabled, text, _class: _class }));
 </script>
 
 <Playground {code}>
-  <div slot="component" class="component">
-    <Checkbox
-      {disabled}
-      bind:checked
-      {variant}
-      on:change={() => console.log('<Checkbox> on:change')}>{text}</Checkbox
-    >
-  </div>
-  <svelte:fragment slot="props">
-    <Checkbox bind:checked>checked</Checkbox>
+  {#snippet component()}
+    {#if text}
+      <Checkbox
+        {disabled}
+        class={_class}
+        onchange={(event) =>
+          console.log(`Checkbox onchange checked:${event.currentTarget.checked}`)}>{text}</Checkbox
+      >
+    {:else}
+      <Checkbox
+        {disabled}
+        class={_class}
+        onchange={(event) =>
+          console.log(`Checkbox onchange checked:${event.currentTarget.checked}`)}
+      />
+    {/if}
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <VariantInput bind:variant availableVariants={['colorful']} />
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
-    <Label text="(checkbox content)">
+    <VariantInput bind:class={_class} />
+  {/snippet}
+  {#snippet snippets()}
+    <Label text="children">
       <Input bind:value={text} />
     </Label>
-  </svelte:fragment>
+  {/snippet}
 </Playground>
-
-<style>
-  .component {
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    padding: 0;
-  }
-</style>

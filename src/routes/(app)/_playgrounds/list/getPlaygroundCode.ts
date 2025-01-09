@@ -1,6 +1,6 @@
 export const getPlaygroundCode = (props: {
-  disabled: boolean;
-  horizontal: boolean;
+  disabled: boolean | undefined | null;
+  horizontal: boolean | undefined | null;
   selectedValue?: string;
   variant: string;
 }) => {
@@ -16,7 +16,7 @@ export const getPlaygroundCode = (props: {
     propList.push(`selectedValue="${props.selectedValue}"`);
   }
   if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
+    propList.push(`class="${props.variant.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

@@ -3,12 +3,16 @@ import type { PopoverPlacement } from '$lib';
 export const getPlaygroundCode = (props: {
   crossAxisOffset: number;
   mainAxisOffset: number;
-  open: boolean;
+  open: boolean | undefined;
   placement: PopoverPlacement;
   text: string;
-  variant: string;
+  _class: string;
 }) => {
   const propList: string[] = [];
+
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
   if (props.crossAxisOffset !== 0) {
     propList.push(`crossAxisOffset="${props.crossAxisOffset}"`);
   }
@@ -21,9 +25,6 @@ export const getPlaygroundCode = (props: {
   if (props.placement !== 'top-start') {
     propList.push(`placement="${props.placement}"`);
   }
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
-  }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';
 
@@ -33,7 +34,11 @@ export const getPlaygroundCode = (props: {
   let reference: HTMLElement;
 </script>
 
-<div bind:this={reference}>The reference anchor for positioning the callout.</div>
+<div bind:this={reference}>
+  <!-- TODO: the reference element content -->
+</div>
 
-<Callout${propsText} {reference}>${props.text}</Callout>`;
+<Callout${propsText} {reference}>
+  <!-- TODO: the callout content -->
+</Callout>`;
 };

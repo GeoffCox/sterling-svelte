@@ -4,32 +4,35 @@ import TreeItemPlayground from '../../_playgrounds/treeitem/TreeItemPlayground.s
 
 export const treeItemDoc: ComponentDoc = {
   name: 'TreeItem',
-  description: 'An item within a <Tree>',
+  description: 'An item within a tree hierarchy that can contain other items.',
   comments: [
-    'By default, renders a TreeItemDisplay',
-    'A tree item is identified by having data-value and role="treeitem" properties',
+    'A tree item is identified by having data-value and role="treeitem" properties.',
     makeExtendsComment('HTMLDivElement')
   ],
   props: [
     {
       name: 'disabled',
-      type: 'boolean',
+      type: 'boolean | null | undefined',
       default: 'false',
-      comment: 'When true, the item is disabled.'
+      comment: 'When true, the item and its children are disabled.'
     },
     {
-      name: 'text',
-      type: 'string | undefined',
+      name: 'icon',
+      type: 'Snippet | undefined',
       default: 'undefined',
-      comment: 'The text for the item. Not used when either the item or label slots are filled.'
+      comment: 'The leaf or expand/collapse icon. When undefined renders TreeChevron.'
+    },
+    {
+      name: 'label',
+      type: 'string | Snippet | undefined',
+      default: 'undefined',
+      comment: 'The label for the item. When undefined renders the value.'
     },
     {
       name: 'value',
       type: 'string',
-      default: 'undefined', // Since `value` does not have a default in the code, it's technically required. Marking as "undefined" for consistency in structure.
       comment: 'The value uniquely identifying this item within the tree.'
-    },
-    commonProps.variant
+    }
   ],
   methods: [
     {
@@ -61,19 +64,10 @@ export const treeItemDoc: ComponentDoc = {
       comment: 'Toggles the expanded state of the current item.'
     }
   ],
-  anatomy: `<div class="sterling-tree-item">
-  <div class="item">
-    <slot name="item" {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant}>
-      <TreeItemDisplay>
-        <slot name="label" {depth} {disabled} {expanded} {hasChildren} {selected} {value} {variant}
-          >{text || value}
-        </slot>
-      </TreeItemDisplay>
-    </slot>
-  </div>
-  <div class="children">
-    <slot {depth} {disabled} {selected} {value} {variant} />
-  </div>
-</div>`,
+  anatomy: `tree-item (div)
+  item (div)
+    icon (Snippet)
+    label (string | Snippet)
+  children (Snippet)`,
   usage: TreeItemPlayground
 };

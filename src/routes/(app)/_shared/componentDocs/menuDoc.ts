@@ -4,14 +4,13 @@ import type { ComponentDoc } from './types';
 
 export const menuDoc: ComponentDoc = {
   name: 'Menu',
-  description: 'An interactive list of <MenuItem>s',
+  description: 'An interactive list of menu items.',
   comments: [
-    'Menu is a building block for the other menu components: MenuBar, MenuButton, MenuItem, MenuSeparator.',
+    'Menu is a building block for a hierarchy of others components such as MenuBar, MenuButton, MenuItem, and MenuSeparator.',
     'Position is based on the reference element.',
     'The menu floats above other elements on the page via portal.',
     makeExtendsComment('HTMLDivElement')
   ],
-  props: [commonProps.variant],
   methods: [
     {
       name: 'focusFirstMenuItem',
@@ -30,10 +29,8 @@ export const menuDoc: ComponentDoc = {
       comment: 'Focuses the last menu item.'
     }
   ],
-  anatomy: `<div class="sterling-menu">
-  <div class="menu-items">
-    <slot {variant} />
-  </div>
-</div>`,
+  anatomy: `menu (<div>)
+  menu items (<div>)
+    children (Snippet)`,
   usage: MenuPlayground
 };

@@ -1,52 +1,37 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import { getContext } from 'svelte';
 
   import type { TabListContext } from './TabList.types';
   import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import type { HTMLButtonAttributes } from 'svelte/elements';
 
-  // ----- Props ----- //
+  type Props = HTMLButtonAttributes & {
+    value: string;
+  };
 
-  /**
-   * When true, the tab is disabled.
-   * The tab is also disabled when its parent tab list is disabled.
-   */
-  export let disabled = false;
+  let { children, class: _class, disabled = false, value, ...rest }: Props = $props();
 
-  /** When true, the tab is selected. */
-  export let selected = false;
-
-  /** The text of the tab. Not used when the default slot is filled. */
-  export let text: string | undefined = undefined;
-
-  /** The value uniquely identifying this tab within the tab list. */
-  export let value: string;
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ----- State ----- //
   let tabRef: HTMLButtonElement;
 
-  const {
-    disabled: tabListDisabled,
-    selectedValue,
-    vertical
-  } = getContext<TabListContext>(TAB_LIST_CONTEXT_KEY);
+  const tabListContext = getContext<TabListContext>(TAB_LIST_CONTEXT_KEY);
 
-  $: _disabled = $tabListDisabled || disabled;
+  let selected = $state(tabListContext.selectedValue === value);
 
-  $: {
-    selected = $selectedValue === value;
-  }
+  let _disabled = $derived(tabListContext.disabled || disabled);
 
-  $: {
-    if (selected) {
-      selectedValue.set(value);
+  // Using $derived would be preferred, but this helps avoid
+  // updates to every tab when selectedValue changes.
+  // let selected = $derived(tabContext.selectedValue === value);
+  $effect(() => {
+    if (tabListContext.selectedValue === value && !selected) {
+      selected = true;
+    } else if (tabListContext.selectedValue !== value && selected) {
+      selected = false;
     }
-  }
-
-  // ----- Methods ----- //
+  });
 
   export const click = () => {
     tabRef?.click();
@@ -64,53 +49,19 @@
 <button
   bind:this={tabRef}
   aria-selected={selected}
-  class={`sterling-tab ${variant}`}
-  disabled={_disabled}
+  class={`sterling-tab ${_class}`}
   class:selected
   class:using-keyboard={$usingKeyboard}
-  class:vertical={$vertical}
+  class:vertical={tabListContext.vertical}
   data-value={value}
+  disabled={_disabled}
   role="tab"
   type="button"
   tabIndex={selected ? 0 : -1}
-  on:blur
-  on:click
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:pointercancel
-  on:pointerdown
-  on:pointerenter
-  on:pointerleave
-  on:pointermove
-  on:pointerover
-  on:pointerout
-  on:pointerup
-  on:wheel|passive
+  {...rest}
 >
   <div class="content">
-    <slot disabled={_disabled} {selected} {text} {value} {variant}>
-      <div class="text">
-        {text || value}
-      </div>
-    </slot>
+    {@render children?.()}
   </div>
-  <div class="indicator" />
+  <div class="indicator"></div>
 </button>

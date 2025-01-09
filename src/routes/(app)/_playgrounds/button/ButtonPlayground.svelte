@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import SvelteIcon from '../../_shared/icons/SvelteIcon.svelte';
   import Playground from '../Playground.svelte';
@@ -6,39 +8,51 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled = false;
-  let variant: string = '';
-  let text = 'sterling-svelte';
-  let withIcon = true;
+  let disabled: boolean | null | undefined = $state(false);
+  let _class: string = $state('');
+  let text = $state('sterling-svelte');
+  let withIcon: boolean | null | undefined = $state(true);
 
-  $: code = getPlaygroundCode({ disabled, text, variant, withIcon });
+  let code = $derived(getPlaygroundCode({ disabled, text, _class, withIcon }));
 </script>
 
 <Playground {code}>
-  <div class="component" slot="component">
-    <Button {disabled} {variant} on:click={() => console.log('Button on:click')}>
-      {#if withIcon}
-        <SvelteIcon />
-      {/if}
-      {text}
-    </Button>
-  </div>
-  <svelte:fragment slot="props">
+  {#snippet component()}
+    <div class="component">
+      <Button {disabled} class={_class} onclick={() => console.log('Button onclick')}>
+        {#if withIcon}
+          <SvelteIcon />
+        {/if}
+        {text}
+      </Button>
+    </div>
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <VariantInput
-      bind:variant
-      availableVariants={['capsule', 'circular ', 'colorful', 'secondary', 'square', 'tool']}
+      bind:class={_class}
+      sterlingClasses={[
+        'capsule',
+        'circular ',
+        'secondary',
+        'square',
+        'blue',
+        'tool',
+        'green',
+        'orange',
+        'red'
+      ]}
     />
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
-    <Label text="(button content)">
+  {/snippet}
+  {#snippet snippets()}
+    <Label text="children">
       <Input bind:value={text} />
     </Label>
-    <Checkbox bind:checked={withIcon}>with icon</Checkbox>
-  </svelte:fragment>
+    <Checkbox bind:checked={withIcon}>children with icon</Checkbox>
+  {/snippet}
 </Playground>
 
 <style>

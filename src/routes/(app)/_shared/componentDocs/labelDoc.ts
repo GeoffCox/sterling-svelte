@@ -4,7 +4,7 @@ import LabelPlayground from '../../_playgrounds/label/LabelPlayground.svelte';
 
 export const labelDoc: ComponentDoc = {
   name: 'Label',
-  description: 'A <label>: a caption for another element',
+  description: 'A caption naming or describing a form element.',
   comments: [
     'An optional message and status can provide information to the user about their value.',
     'The required property and requiredReason indicate the user must fill in a value and why.',
@@ -15,11 +15,12 @@ export const labelDoc: ComponentDoc = {
       name: 'forwardClick',
       type: 'string',
       default: 'false',
-      comment: 'If true, clicking the label invokes a click on the content.'
+      comment:
+        'If true, clicking the label invokes a click on the content. Typically used when for/id pairs are not present.'
     },
     {
       name: 'message',
-      type: 'string',
+      type: 'string | Snippet',
       default: "''",
       comment: 'The status message to display.'
     },
@@ -30,54 +31,34 @@ export const labelDoc: ComponentDoc = {
       comment: 'When true, the label will indicate a value is required.'
     },
     {
+      name: 'requiredIndicator',
+      type: 'string | Snippet',
+      default: "''",
+      comment: `The indicator to display when required. Defaults to '*'`
+    },
+    {
       name: 'requiredReason',
-      type: 'string',
+      type: 'string | Snippet',
       default: "''",
       comment: 'The reason a value is required.'
     },
     {
-      name: 'status',
-      type: 'string',
-      default: "''",
-      comment: 'The status of the label message.'
-    },
-    {
       name: 'text',
-      type: 'string',
+      type: 'string | Snippet',
       default: "''",
       comment: 'The text to display in the label. Not used if the text slot is filled.'
-    },
-    {
-      name: 'vertical',
-      type: 'string',
-      default: 'true',
-      comment: 'When true, the label appears above the content.'
-    },
-    commonProps.variant
-  ],
-  types: [
-    {
-      name: 'LabelStatus',
-      definition: "'none' | 'error' | 'warning' | 'info' | 'success'",
-      comment: 'Used for the Label status property.'
     }
   ],
-  anatomy: `<label class="sterling-label">
-  <slot name="text" {disabled} {for} {forwardClick} {required} {text} {variant}>
-    <div class="text">{text}</div>
-  </slot>
-  <div class="content">
-    <slot />
-  </div>
-  <slot name="message" {disabled} {message} {required} {status} {variant}>
-    <div class="message">{message}</div>
-  </slot>
-  <slot name="required" {requiredReason} {variant}>
-    <Tooltip>
-      <span class="required-reason" slot="tip">{requiredReason}</span>
-      <div class="required">*</div>
-    </Tooltip>
-  </slot>
-</label>`,
+  anatomy: `label (<label>)
+  text (string | Snippet)
+  content (<div>)
+    children (Snippet)
+  message (string | Snippet)
+  tooltip (<Tooltip>)
+    required (<div>)
+      requiredIndicator (string | Snippet)
+    tip (ToolTip.tip)
+      requiredReason (string | Snippet)
+`,
   usage: LabelPlayground
 };

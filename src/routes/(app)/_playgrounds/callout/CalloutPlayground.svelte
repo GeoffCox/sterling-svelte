@@ -1,43 +1,62 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
-  import Playground from '../Playground.svelte';
-  import ListItem from '$lib/ListItem.svelte';
-  import Select from '$lib/Select.svelte';
-  import Slider from '$lib/Slider.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
+  import ListItem from '$lib/ListItem.svelte';
+  import Playground from '../Playground.svelte';
+  import Select from '$lib/Select.svelte';
+  import Slider from '$lib/Slider.svelte';
   import type { PopoverPlacement } from '$lib/Popover.types';
   import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
   import Callout from '$lib/Callout.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let crossAxisOffset = 0;
-  let mainAxisOffset = 0;
-  let open = true;
-  let placement: PopoverPlacement = 'top-start';
-  let reference: HTMLElement;
-  let text: string = 'sterling-svelte';
-  let variant = '';
+  let crossAxisOffset = $state(0);
+  let mainAxisOffset = $state(0);
+  let open: boolean | undefined | null = $state(true);
+  let placement: PopoverPlacement = $state('top-start');
+  let reference: HTMLElement | undefined = $state();
+  let text: string = $state('sterling-svelte');
+  let _class = $state('');
 
-  $: code = getPlaygroundCode({ crossAxisOffset, mainAxisOffset, open, placement, text, variant });
+  let code = $derived(
+    getPlaygroundCode({
+      crossAxisOffset,
+      mainAxisOffset,
+      open: open || undefined,
+      placement,
+      text,
+      _class
+    })
+  );
 </script>
 
 <Playground {code}>
-  <div slot="component">
-    <div class="reference" bind:this={reference}>
-      The reference anchor for positioning the callout.
+  {#snippet component()}
+    <div>
+      <div class="reference" bind:this={reference}>
+        The reference anchor for positioning the callout.
+      </div>
+      <Callout class={_class} {crossAxisOffset} {mainAxisOffset} bind:open {placement} {reference}>
+        <div class="callout-text">{text}</div>
+      </Callout>
     </div>
-    <Callout {variant} {crossAxisOffset} {mainAxisOffset} bind:open {placement} {reference}>
-      <div class="callout-text">{text}</div>
-    </Callout>
-  </div>
-  <svelte:fragment slot="props">
-    <Label text="crossAxisOffset: {crossAxisOffset}">
-      <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
+  {/snippet}
+  {#snippet props()}
+    <Label text="crossAxisOffset">
+      <div class="slider">
+        <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
+        <div>{crossAxisOffset}</div>
+      </div>
     </Label>
-    <Label text="mainAxisOffset: {mainAxisOffset}">
-      <Slider min={-25} max={25} precision={0} bind:value={mainAxisOffset} />
+    <Label text="mainAxisOffset">
+      <div class="slider">
+        <Slider min={-25} max={25} precision={0} bind:value={mainAxisOffset} />
+        <div>{mainAxisOffset}</div>
+      </div>
     </Label>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Label text="placement">
@@ -47,18 +66,25 @@
         {/each}
       </Select>
     </Label>
-    <VariantInput bind:variant availableVariants={['colorful']} />
-  </svelte:fragment>
-  <svelte:fragment slot="tweaks">
-    <Label text="callout (text)">
+    <VariantInput bind:class={_class} />
+  {/snippet}
+  {#snippet snippets()}
+    <Label text="children">
       <Input bind:value={text} />
     </Label>
-  </svelte:fragment>
+  {/snippet}
 </Playground>
 
 <style>
   .callout-text {
     padding: 1em;
+  }
+
+  .slider {
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    font-size: 0.8em;
   }
 
   .reference {

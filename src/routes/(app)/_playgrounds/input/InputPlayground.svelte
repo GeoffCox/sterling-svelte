@@ -1,55 +1,56 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import LabelBox from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
 
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled = false;
-  let placeholder = '';
-  let text = '';
-  let value = 'sterling-svelte';
-  let variant = '';
+  let disabled: boolean | null = $state(false);
+  let placeholder = $state('');
+  let text = $state('');
+  let value = $state('sterling-svelte');
+  let _class = $state('');
 
-  $: code = getPlaygroundCode({ disabled, placeholder, text, value, variant });
+  let code = $derived(getPlaygroundCode({ disabled, placeholder, text, _class: _class }));
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     {#if text}
       <Input
         {disabled}
         {placeholder}
-        {variant}
+        class={_class}
         bind:value
-        on:input={() => console.log('input')}
-        on:change={() => console.log('change')}>{text}</Input
+        oninput={() => console.log('input')}
+        onchange={() => console.log('change')}>{text}</Input
       >
     {:else}
       <Input
         {disabled}
         {placeholder}
-        {variant}
+        class={_class}
         bind:value
-        on:input={() => console.log('input')}
-        on:change={() => console.log('change')}
+        oninput={() => console.log('input')}
+        onchange={() => console.log('change')}
       />
     {/if}
-  </svelte:fragment>
-  <svelte:fragment slot="props">
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <LabelBox text="placeholder">
       <Input bind:value={placeholder} />
     </LabelBox>
-    <Label text="label (text)">
+    <VariantInput bind:class={_class} sterlingClasses={['composed']} />
+  {/snippet}
+  {#snippet snippets()}
+    <Label text="children">
       <Input bind:value={text} />
     </Label>
-    <Label text="value">
-      <Input bind:value />
-    </Label>
-    <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
-  </svelte:fragment>
+  {/snippet}
 </Playground>

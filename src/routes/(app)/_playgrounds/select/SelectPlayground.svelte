@@ -1,65 +1,64 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
+  import { random } from 'lodash-es';
+
+  import Button from '$lib/Button.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
+  import Label from '$lib/Label.svelte';
+  import ListItem from '$lib/ListItem.svelte';
+  import Input from '$lib/Input.svelte';
   import Select from '$lib/Select.svelte';
 
   import Playground from '../Playground.svelte';
-
   import { countries } from '../../_shared/sampleData/countries';
-  import { random } from 'lodash-es';
-  import Button from '$lib/Button.svelte';
-  import ListItem from '$lib/ListItem.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
-  import Label from '$lib/Label.svelte';
-  import Input from '$lib/Input.svelte';
 
-  let open = false;
+  let open: boolean | undefined | null = $state(false);
   let items = countries;
+  let selectedValue: string | undefined = $state(items[random(0, items.length - 1)]);
+  let disabled: boolean | undefined | null = $state(false);
+  let listClass = $state('');
+  let _class = $state('');
 
-  let selectedValue: string | undefined = items[random(0, items.length - 1)];
-  let disabled = false;
-  let listVariant = '';
-  let variant = '';
-
-  $: code = getPlaygroundCode({ disabled, open, listVariant, variant });
+  let code = $derived(
+    getPlaygroundCode({ disabled, open, listVariant: listClass, variant: _class })
+  );
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     <Select
       {disabled}
-      {listVariant}
-      {variant}
+      {listClass}
+      class={_class}
       bind:open
       bind:selectedValue
-      on:select={(event) => {
-        console.log(`select:${event.detail.value}`);
+      onSelect={(value) => {
+        console.log(`Select.onSelect value:${value}`);
       }}
-      on:pending={(event) => {
-        console.log(`pending:${event.detail.value}`);
+      onPending={(value) => {
+        console.log(`Select.onPending value:${value}`);
       }}
     >
       {#each items as item}
         <ListItem value={item} />
       {/each}
     </Select>
-  </svelte:fragment>
-  <svelte:fragment slot="props">
+  {/snippet}
+  {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={open}>open</Checkbox>
     <Label text="selectedValue">
       <Input bind:value={selectedValue} />
     </Label>
-    <Button on:click={() => (selectedValue = undefined)}>selectedValue = undefined</Button>
-    <Button on:click={() => (selectedValue = items[random(0, items.length - 1)])}
+    <Button onclick={() => (selectedValue = undefined)}>selectedValue = undefined</Button>
+    <Button onclick={() => (selectedValue = items[random(0, items.length - 1)])}
       >selectedValue = random()</Button
     >
 
-    <VariantInput bind:variant={listVariant} availableVariants={[]} labelText="listVariant" />
-    <VariantInput bind:variant availableVariants={['colorful', 'composed']} />
-  </svelte:fragment>
-  <!-- <svelte:fragment slot="status">
-    <div>open: {open}</div>
-    <div>selectedValue: {selectedValue}</div>
-  </svelte:fragment> -->
+    <VariantInput bind:class={listClass} sterlingClasses={[]} labelText="listVariant" />
+    <VariantInput bind:class={_class} sterlingClasses={['composed']} />
+  {/snippet}
 </Playground>

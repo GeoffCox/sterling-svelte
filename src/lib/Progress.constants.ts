@@ -1,1 +1,1 @@
-export const PROGRESS_STATUSES = ['none', 'auto', 'info', 'success', 'warning', 'danger'];
+export const PROGRESS_ORIENTATIONS = ['horizontal', 'vertical'];

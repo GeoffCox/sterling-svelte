@@ -1,15 +1,15 @@
 export const getPlaygroundCode = (props: {
+  _class: string;
   disabled: boolean;
-  variant: string;
   vertical: boolean;
 }) => {
   const propList: string[] = [];
   propList.push('bind:selectedValue');
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
   if (props.disabled) {
     propList.push(`disabled`);
-  }
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
   }
   if (props.vertical) {
     propList.push(`vertical`);
@@ -26,9 +26,7 @@ export const getPlaygroundCode = (props: {
 
 <TabList${propsText}>
   <Tab value="First">First</Tab>
-  <Tab value="Second">Second</Tab>
-  <Tab value="Third">Third</Tab>
-  <Tab value="Fourth">Fourth</Tab>
+  <!-- ... --->
 </TabList>
 `;
 };

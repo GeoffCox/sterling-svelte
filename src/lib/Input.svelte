@@ -1,27 +1,28 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
+  import type { HTMLInputAttributes } from 'svelte/elements';
   import { idGenerator } from './idGenerator';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
-  // ----- Props ----- //
+  type Props = HTMLInputAttributes;
 
-  export let disabled = false;
-  export let id: string | undefined = undefined;
-  export let value: string = '';
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ----- State ----- //
+  let {
+    id,
+    children,
+    class: _class,
+    disabled = false,
+    value = $bindable(undefined),
+    ...rest
+  }: Props = $props();
 
   let inputRef: HTMLInputElement;
 
-  $: {
-    if ($$slots.default && id === undefined) {
+  $effect(() => {
+    if (children && id === undefined) {
       id = idGenerator.nextId('Input');
     }
-  }
-
-  // ----- Methods ----- //
+  });
 
   export const blur = () => {
     inputRef?.blur();
@@ -61,51 +62,22 @@
   };
 </script>
 
-{#if $$slots.default}
-  <label class={`sterling-input-label ${variant}`} class:disabled for={id}>
-    <slot {disabled} {value} {variant} />
+{#if children}
+  <label class={['sterling-input-label', _class].filter(Boolean).join(' ')} class:disabled for={id}>
+    {@render children()}
   </label>
 {/if}
-<div class={`sterling-input ${variant}`} class:disabled class:using-keyboard={$usingKeyboard}>
+<div
+  class={['sterling-input', _class].filter(Boolean).join(' ')}
+  class:disabled
+  class:using-keyboard={$usingKeyboard}
+>
   <input
     bind:this={inputRef}
     class:using-keyboard={$usingKeyboard}
     {disabled}
     {id}
     bind:value
-    on:beforeinput
-    on:blur
-    on:click
-    on:change
-    on:copy
-    on:cut
-    on:paste
-    on:dblclick
-    on:dragend
-    on:dragenter
-    on:dragleave
-    on:dragover
-    on:dragstart
-    on:drop
-    on:focus
-    on:focusin
-    on:focusout
-    on:input
-    on:invalid
-    on:keydown
-    on:keypress
-    on:keyup
-    on:mousedown
-    on:mouseenter
-    on:mouseleave
-    on:mousemove
-    on:mouseover
-    on:mouseout
-    on:mouseup
-    on:select
-    on:submit
-    on:reset
-    on:wheel|passive
-    {...$$restProps}
+    {...rest}
   />
 </div>

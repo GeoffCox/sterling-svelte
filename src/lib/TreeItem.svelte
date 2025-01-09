@@ -1,85 +1,99 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  import type { KeyboardEventHandler } from 'svelte/elements';
+  import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
   import type { SlideParams, TransitionConfig } from 'svelte/transition';
   import type { TreeContext } from './Tree.types';
   import type { TreeItemContext } from './TreeItem.types';
 
-  import { getContext, setContext } from 'svelte';
+  import { getContext, setContext, type Snippet } from 'svelte';
   import { slide } from 'svelte/transition';
-
-  import { TREE_CONTEXT_KEY } from './Tree.constants';
-  import { TREE_ITEM_CONTEXT_KEY } from './TreeItem.constants';
-  import TreeItemDisplay from './TreeItemDisplay.svelte';
-  import { readable, writable } from 'svelte/store';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
+  import { TREE_CONTEXT_KEY } from './Tree.constants';
+  import TreeChevron from './TreeChevron.svelte';
+  import { TREE_ITEM_CONTEXT_KEY } from './TreeItem.constants';
 
-  // ----- Props ----
+  type Props = HTMLAttributes<HTMLDivElement> & {
+    disabled?: boolean | null | undefined;
+    icon?: Snippet;
+    label?: string | Snippet;
+    value: string;
+  };
 
-  /** When true, the item is disabled. */
-  export let disabled = false;
+  let {
+    children,
+    class: _class,
+    disabled = false,
+    icon,
+    label,
+    style,
+    value,
+    ...rest
+  }: Props = $props();
 
-  /** The text for the item. Not used when either the item or label slots are filled. */
-  export let text: string | undefined = undefined;
-
-  /** The value uniquely identifying this item within the tree. */
-  export let value: string;
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ----- Animation ----- //
-
-  const slidNoOp = (node: Element, params?: SlideParams): TransitionConfig => {
+  const slideNoOp = (node: Element, params?: SlideParams): TransitionConfig => {
     return { delay: 0, duration: 0 };
   };
 
-  $: slideMotion = !$prefersReducedMotion ? slide : slidNoOp;
+  let slideMotion = $derived(!$prefersReducedMotion ? slide : slideNoOp);
 
-  // ----- Get Context ----- //
-
-  const {
-    disabled: treeDisabled,
-    expandedValues,
-    selectedValue
-  } = getContext<TreeContext>(TREE_CONTEXT_KEY);
-
-  const { depth, disabled: parentDisabled } = getContext<TreeItemContext>(
-    TREE_ITEM_CONTEXT_KEY
-  ) || {
-    depth: readable(0),
-    disabled: readable(false)
+  const treeContext = getContext<TreeContext>(TREE_CONTEXT_KEY) || {
+    disabled: false,
+    expandedValues: [],
+    selectedValue: null
   };
 
-  // ----- State ----- //
+  const treeItemContext = getContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY) || {
+    depth: 0,
+    disabled: false
+  };
+
+  let _disabled = $derived(disabled || treeItemContext.disabled || treeContext.disabled);
+
+  // Using $derived would be preferred, but this helps avoid
+  // updates to every tree item when expandedValues changes.
+  let expanded = $state(treeContext.expandedValues?.includes(value));
+  $effect(() => {
+    let expandedCandidate = treeContext.expandedValues?.includes(value);
+    if (expandedCandidate !== expanded) {
+      expanded = expandedCandidate;
+    }
+  });
+
+  // Using $derived would be preferred, but this helps avoid
+  // updates to every list item when selectedValue changes.
+  let selected = $state(treeContext.selectedValue === value);
+  $effect(() => {
+    if (treeContext.selectedValue === value && !selected) {
+      selected = true;
+    } else if (treeContext.selectedValue !== value && selected) {
+      selected = false;
+    }
+  });
 
   let treeItemRef: HTMLDivElement;
+  let itemRef: HTMLDivElement;
 
-  $: hasChildren = $$slots.default;
-  $: expanded = $expandedValues.includes(value);
-  $: selected = $selectedValue === value;
-  $: _disabled = disabled || $parentDisabled || $treeDisabled;
+  let treeItemChildContext: TreeItemContext = {
+    get disabled() {
+      return _disabled;
+    },
+    get depth() {
+      return treeItemContext.depth ? treeItemContext.depth + 1 : 1;
+    }
+  };
 
-  const depthStore = writable<number>($depth);
-  const disabledStore = writable<boolean>(_disabled);
-
-  $: {
-    depthStore.set($depth + 1);
-  }
-
-  $: {
-    disabledStore.set(_disabled);
-  }
-
-  // ----- Expand/Collapse ----- //
+  setContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY, treeItemChildContext);
 
   const collapseItem = (index?: number) => {
     if (!_disabled) {
-      index = index ?? $expandedValues.findIndex((expandedValue) => expandedValue === value);
+      index =
+        index ?? treeContext.expandedValues.findIndex((expandedValue) => expandedValue === value);
       if (index !== -1) {
-        expandedValues.set([
-          ...$expandedValues.slice(0, index),
-          ...$expandedValues.slice(index + 1)
-        ]);
+        treeContext.expandedValues = [
+          ...treeContext.expandedValues.slice(0, index),
+          ...treeContext.expandedValues.slice(index + 1)
+        ];
         return true;
       }
     }
@@ -91,9 +105,10 @@
 
   const expandItem = (index?: number) => {
     if (!_disabled) {
-      index = index ?? $expandedValues.findIndex((expandedValue) => expandedValue === value);
+      index =
+        index ?? treeContext.expandedValues.findIndex((expandedValue) => expandedValue === value);
       if (index === -1) {
-        expandedValues.set([...$expandedValues, value]);
+        treeContext.expandedValues = [...treeContext.expandedValues, value];
         return true;
       }
     }
@@ -104,15 +119,15 @@
   export const expand = () => expandItem();
 
   export const toggleExpanded = () => {
-    if (!_disabled) {
-      const index = $expandedValues.findIndex((expandedValue) => expandedValue === value);
+    if (!_disabled && children) {
+      const index = treeContext.expandedValues.findIndex(
+        (expandedValue) => expandedValue === value
+      );
       return index !== -1 ? collapseItem(index) : expandItem(index);
     }
 
     return false;
   };
-
-  // ----- Focus ----- //
 
   const blurItem = (treeItemElement: Element) => {
     if (!_disabled) {
@@ -127,7 +142,7 @@
 
   const focusItem = (treeItemElement: Element, options?: FocusOptions) => {
     if (!_disabled) {
-      const item = treeItemElement?.querySelector<HTMLElement>('.item');
+      const item = treeItemElement as HTMLElement;
       item?.focus(options);
     }
   };
@@ -137,11 +152,9 @@
     treeItemRef?.focus(options);
   };
 
-  // ----- Click ----- //
-
   const clickItem = (treeItemElement: Element) => {
     if (!_disabled) {
-      const item = treeItemElement?.querySelector<HTMLElement>('.item');
+      const item = treeItemElement as HTMLElement;
       item?.click();
     }
   };
@@ -150,11 +163,9 @@
     clickItem(treeItemRef);
   };
 
-  // ----- Selection ----- //
-
   const selectItemByValue = (value: string) => {
     if (!_disabled) {
-      selectedValue.set(value);
+      treeContext.selectedValue = value;
     }
   };
 
@@ -254,16 +265,18 @@
     return false;
   };
 
-  // ----- Event Handlers ----- //
-
-  const onClick = () => {
-    if (!_disabled) {
+  const onClick: MouseEventHandler<HTMLDivElement> = (event) => {
+    const eventTarget = event.target as Node;
+    if (!_disabled && itemRef.contains(eventTarget)) {
       toggleExpanded();
       select();
+      return;
     }
+
+    rest.onclick?.(event);
   };
 
-  const onKeydown: KeyboardEventHandler<Element> = (event) => {
+  const onKeydown: KeyboardEventHandler<HTMLDivElement> = (event) => {
     if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
       switch (event.key) {
         case 'Enter':
@@ -271,7 +284,7 @@
           if (toggleExpanded()) {
             event.preventDefault();
             event.stopPropagation();
-            return false;
+            return;
           }
           break;
         case 'ArrowRight':
@@ -280,17 +293,17 @@
           When focus is on an open item, moves focus to the first child item.
           When focus is on an end item (a tree item with no children), does nothing.
           */
-          if (hasChildren) {
+          if (children) {
             if (expanded) {
               if (selectNext()) {
                 event.preventDefault();
                 event.stopPropagation();
-                return false;
+                return;
               }
             } else if (expandItem()) {
               event.preventDefault();
               event.stopPropagation();
-              return false;
+              return;
             }
           }
           break;
@@ -300,16 +313,16 @@
           When focus is on a child item that is also either an end item or a closed item, moves focus to its parent item.
           When focus is on a closed `tree`, does nothing.
           */
-          if (hasChildren && expanded) {
+          if (expanded && children) {
             if (collapseItem()) {
               event.preventDefault();
               event.stopPropagation();
-              return false;
+              return;
             }
           } else if (selectParent()) {
             event.preventDefault();
             event.stopPropagation();
-            return false;
+            return;
           }
           break;
         case 'ArrowUp':
@@ -319,7 +332,7 @@
           if (selectPrevious()) {
             event.preventDefault();
             event.stopPropagation();
-            return false;
+            return;
           }
           break;
         case 'ArrowDown':
@@ -329,124 +342,56 @@
           if (selectNext()) {
             event.preventDefault();
             event.stopPropagation();
-            return false;
+            return;
           }
           break;
       }
     }
+
+    rest.onkeydown?.(event);
   };
-
-  // ----- Set Context ----- //
-
-  setContext<TreeItemContext>(TREE_ITEM_CONTEXT_KEY, {
-    depth: depthStore,
-    disabled: disabledStore
-  });
 </script>
 
-<!--
-@component
-A item in a Tree displaying the item and children.
-  -->
-<!-- svelte-ignore a11y-interactive-supports-focus -->
 <div
+  bind:this={treeItemRef}
   aria-selected={selected ? true : undefined}
   aria-expanded={expanded}
-  bind:this={treeItemRef}
-  class={`sterling-tree-item ${variant}`}
+  class={`sterling-tree-item ${_class}`}
   class:disabled={_disabled}
+  class:expanded
   class:item-disabled={disabled}
-  class:parent-disabled={$parentDisabled}
-  class:tree-disabled={$treeDisabled}
+  class:leaf={!children}
+  class:parent-disabled={treeItemContext.disabled}
+  class:selected
+  class:tree-disabled={treeContext.disabled}
   data-value={value}
   role="treeitem"
-  on:blur
-  on:click
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:pointercancel
-  on:pointerdown
-  on:pointerenter
-  on:pointerleave
-  on:pointermove
-  on:pointerover
-  on:pointerout
-  on:pointerup
-  on:wheel|passive
-  {...$$restProps}
+  tabindex={selected ? 0 : -1}
+  {...rest}
+  onclick={onClick}
+  onkeydown={onKeydown}
+  style={`--sterling-tree-item-depth: ${treeItemContext.depth}; ${style}`}
 >
-  <div
-    aria-selected={selected ? true : undefined}
-    class="item"
-    class:selected
-    role="treeitem"
-    tabindex={selected ? 0 : -1}
-    on:click={onClick}
-    on:keydown={onKeydown}
-  >
-    <slot
-      name="item"
-      {depth}
-      disabled={_disabled}
-      {expanded}
-      {hasChildren}
-      {selected}
+  <!-- TODO: In RTL consider position of icon and label get reversed -->
+  <div bind:this={itemRef} class="item" class:selected>
+    {#if icon}
+      {@render icon()}
+    {:else}
+      <TreeChevron {expanded} hasChildren={!!children} />
+    {/if}
+    {#if label}
+      {#if typeof label === 'string'}
+        {label}
+      {:else}
+        {@render label()}
+      {/if}
+    {:else}
       {value}
-      {variant}
-    >
-      <TreeItemDisplay
-        depth={$depth}
-        disabled={_disabled && !$treeDisabled}
-        {expanded}
-        {hasChildren}
-        {selected}
-        {value}
-        {variant}
-      >
-        <svelte:fragment
-          let:depth
-          let:disabled
-          let:expanded
-          let:hasChildren
-          let:selected
-          let:value
-          let:variant
-        >
-          <slot
-            name="label"
-            {depth}
-            {disabled}
-            {expanded}
-            {hasChildren}
-            {selected}
-            {value}
-            {variant}>{text || value}</slot
-          >
-        </svelte:fragment>
-      </TreeItemDisplay>
-    </slot>
+    {/if}
   </div>
-  {#if expanded && hasChildren}
+  {#if expanded && children}
     <div class="children" transition:slideMotion|global={{ duration: 200 }} role="group">
-      <slot depth={$depth} disabled={_disabled} {selected} {value} {variant} />
+      {@render children?.()}
     </div>
   {/if}
 </div>

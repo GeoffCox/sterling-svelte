@@ -1,98 +1,62 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  import type { ProgressStatus } from './Progress.types';
+  import type { AriaAttributes, HTMLAttributes } from 'svelte/elements';
+  import type { ProgressOrientation } from './Progress.types';
 
-  //----- Props ----- //
+  type Props = HTMLAttributes<HTMLDivElement> & {
+    disabled?: boolean | null;
+    max?: number;
+    percent?: number;
+    value?: number;
+    vertical?: boolean | null;
+  };
 
-  /** When true, the progress bar is disabled. */
-  export let disabled = false;
-
-  /** The maximum value. */
-  export let max = 100;
-
-  /** A read-only percentage between 0 and 100 calculated from value and max. */
-  export let percent = 0;
-
-  /** The current status of the progress. */
-  export let status: ProgressStatus = 'none';
-
-  /** The current value. */
-  export let value = 0;
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  /** When true, the progress bar is displayed vertically. */
-  export let vertical: boolean = false;
+  let {
+    class: _class,
+    disabled = false,
+    max = 100,
+    percent = $bindable(0), //readonly
+    value = $bindable(0),
+    vertical,
+    ...rest
+  }: Props = $props();
 
   //----- State ----- //
 
-  let clientHeight: number;
-  let clientWidth: number;
+  let clientHeight: number = $state(0);
+  let clientWidth: number = $state(0);
 
-  $: clampMax = Math.max(1, max);
-  $: clampValue = Math.max(0, Math.min(value, clampMax));
-  $: ratio = clampValue / clampMax;
-  $: {
+  let clampMax = $derived(Math.max(1, max));
+  let clampValue = $derived(Math.max(0, Math.min(value, clampMax)));
+  let ratio = $derived(clampValue / clampMax);
+
+  $effect(() => {
     percent = Math.round(ratio * 100);
-  }
+  });
 
-  $: percentHeight = clientHeight * ratio;
-  $: percentWidth = clientWidth * ratio;
+  let percentHeight = $derived(clientHeight * ratio);
+  let percentWidth = $derived(clientWidth * ratio);
 
-  $: indicatorStyle = vertical ? `height: ${percentHeight}px` : `width: ${percentWidth}px`;
-  $: indicatorColor = status === 'auto' ? (percent === 100 ? 'success' : 'info') : status;
+  let indicatorStyle = $derived(
+    vertical ? `height: ${percentHeight}px` : `width: ${percentWidth}px`
+  );
 </script>
 
-<!--
-	@component
-	An indicator of a value between 0 and a maximum value.ß
-	Does not use the HTML progress element.
--->
-<!-- svelte-ignore a11y-label-has-associated-control -->
-<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+<!-- svelte-ignore a11y_role_supports_aria_props -->
 <div
-  class={`sterling-progress ${variant}`}
+  aria-orientation={vertical ? 'vertical' : 'horizontal'}
+  class={['sterling-progress', _class].filter(Boolean).join(' ')}
   class:disabled
+  class:horizontal={!vertical}
   class:vertical
-  class:info={indicatorColor === 'info'}
-  class:success={indicatorColor === 'success'}
-  class:warning={indicatorColor === 'warning'}
-  class:error={indicatorColor === 'danger'}
+  data-progress-percent={percent}
+  data-progress-max={max}
+  data-progress-value={value}
   role="progressbar"
-  on:blur
-  on:click
-  on:dblclick
-  on:dragend
-  on:dragenter
-  on:dragleave
-  on:dragover
-  on:dragstart
-  on:drop
-  on:focus
-  on:focusin
-  on:focusout
-  on:keydown
-  on:keypress
-  on:keyup
-  on:mousedown
-  on:mouseenter
-  on:mouseleave
-  on:mousemove
-  on:mouseover
-  on:mouseout
-  on:mouseup
-  on:pointercancel
-  on:pointerdown
-  on:pointerenter
-  on:pointerleave
-  on:pointermove
-  on:pointerover
-  on:pointerout
-  on:pointerup
-  on:wheel|passive
-  {...$$restProps}
+  {...rest}
 >
   <div class="container" bind:clientWidth bind:clientHeight>
-    <div class="indicator" style={indicatorStyle} />
+    <div class="indicator" style={indicatorStyle}></div>
   </div>
 </div>

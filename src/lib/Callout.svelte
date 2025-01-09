@@ -1,5 +1,7 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  import { getContext, onMount, tick } from 'svelte';
+  import { getContext, tick } from 'svelte';
   import {
     arrow,
     autoUpdate,
@@ -15,42 +17,36 @@
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
   import type { PortalContext } from './Portal.types';
   import { STERLING_PORTAL_HOST_ID, STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
+  import type { HTMLAttributes, KeyboardEventHandler } from 'svelte/elements';
 
-  // ----- Props ----- //
+  type Props = HTMLAttributes<HTMLDivElement> & {
+    conditionalRender?: boolean | null;
+    crossAxisOffset?: number;
+    mainAxisOffset?: number;
+    open?: boolean | null;
+    placement?: PopoverPlacement;
+    portalHost?: HTMLElement;
+    reference?: HTMLElement | null;
+  };
 
-  /** Conditionally renders content based on open. */
-  export let conditionalRender: boolean = true;
+  let {
+    children,
+    conditionalRender = $bindable(true),
+    crossAxisOffset = $bindable(0),
+    mainAxisOffset = $bindable(0),
+    open = $bindable(false),
+    placement = $bindable('top-start'),
+    portalHost,
+    reference,
+    class: _class,
+    ...rest
+  }: Props = $props();
 
-  /** The offset along the side of the reference element. */
-  export let crossAxisOffset = 0;
-
-  /** The offset towards or away from the side of the reference element. */
-  export let mainAxisOffset = 0;
-
-  /** When true, the callout is open and visible. */
-  export let open: boolean = false;
-
-  /** How the callout should be positioned relative to the reference element. */
-  export let placement: PopoverPlacement = 'top-start';
-
-  /** The host container for the callout. */
-  export let portalHost: HTMLElement | undefined = undefined;
-
-  /** The reference to the element anchoring the position of the callout. */
-  export let reference: HTMLElement | undefined;
-
-  /** Additional class names to apply. */
-  export let variant: string = '';
-
-  // ----- State ----- //
-
-  let popupRef: HTMLDivElement;
-  let arrowRef: HTMLDivElement;
-  let popupPosition: Partial<ComputePositionReturn> = { x: 0, y: 0 };
-
-  $: floatingUIPlacement = placement as Placement;
-
-  let bodyHeight = 0;
+  let popupRef: HTMLDivElement | undefined = $state(undefined);
+  let arrowRef: HTMLDivElement | undefined = $state(undefined);
+  let popupPosition: Partial<ComputePositionReturn> = $state({ x: 0, y: 0 });
+  let floatingUIPlacement = $derived(placement as Placement);
+  let bodyHeight = $state(0);
   let resizeObserver: ResizeObserver | undefined = undefined;
 
   const { portalHost: contextPortalHost } = getContext<PortalContext>(
@@ -58,8 +54,6 @@
   ) || {
     portalHost: undefined
   };
-
-  // ----- Portal Host ----- //
 
   const ensurePortalHost = async () => {
     await tick();
@@ -83,13 +77,11 @@
     portalHost = host;
   };
 
-  // ----- Position ----- //
-
-  $: middleware = [
+  let middleware = $derived([
     offset({ mainAxis: mainAxisOffset, crossAxis: crossAxisOffset }),
     flip(),
-    arrow({ element: arrowRef, padding: 8 })
-  ];
+    arrowRef && arrow({ element: arrowRef, padding: 8 })
+  ]);
 
   const computeCalloutPosition = async () => {
     if (reference && popupRef) {
@@ -97,6 +89,7 @@
         placement: floatingUIPlacement,
         middleware
       });
+      console.log('popupPosition', popupPosition);
     } else {
       popupPosition = { x: 0, y: 0 };
     }
@@ -104,15 +97,28 @@
 
   // whenever a positioned element is portaled it needs resubscription to auto-update
   let cleanupAutoUpdate = () => {};
+
   const autoUpdateCalloutPosition = () => {
     cleanupAutoUpdate();
+    cleanupAutoUpdate = () => {};
     if (reference && popupRef) {
       cleanupAutoUpdate = autoUpdate(reference, popupRef, computeCalloutPosition);
     }
   };
 
-  $: popupRef, reference, autoUpdateCalloutPosition();
-  $: open, bodyHeight, middleware, placement, computeCalloutPosition();
+  $effect(() => {
+    autoUpdateCalloutPosition();
+    return () => {
+      cleanupAutoUpdate();
+      cleanupAutoUpdate = () => {};
+    };
+  });
+
+  $effect(() => {
+    bodyHeight;
+    reference;
+    computeCalloutPosition();
+  });
 
   // ----- Arrow ----- //
 
@@ -158,7 +164,9 @@
     return '';
   };
 
-  $: arrowStyle = getArrowPlacementStyle(popupPosition) + getArrowOffsetStyle(popupPosition);
+  let arrowStyle = $derived(
+    getArrowPlacementStyle(popupPosition) + getArrowOffsetStyle(popupPosition)
+  );
 
   // ----- Animation ----- //
 
@@ -166,10 +174,18 @@
     return { delay: 0, duration: 0 };
   };
 
-  $: fadeMotion = !$prefersReducedMotion ? fade : fadeNoOp;
+  let fadeMotion = $derived(!$prefersReducedMotion ? fade : fadeNoOp);
 
   // ----- EventHandlers ----- //
-  onMount(() => {
+
+  const onKeydown: KeyboardEventHandler<HTMLDivElement> = (event) => {
+    if (event.key === 'Escape') {
+      open = false;
+    }
+    rest.onkeydown?.(event);
+  };
+
+  $effect(() => {
     ensurePortalHost();
 
     resizeObserver = new ResizeObserver((entries) => {
@@ -186,12 +202,6 @@
     };
   });
 
-  const onKeydown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      open = false;
-    }
-  };
-
   ensurePortalHost();
 </script>
 
@@ -201,10 +211,10 @@
     class="sterling-callout-portal"
     transition:fadeMotion|global={{ duration: 250 }}
   >
-    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
     <div
       bind:this={popupRef}
-      class={`sterling-callout ${variant}`}
+      class={['sterling-callout', _class].filter(Boolean).join(' ')}
       class:open
       class:top={popupPosition.placement === 'top'}
       class:top-start={popupPosition.placement === 'top-start'}
@@ -219,39 +229,18 @@
       class:left-start={popupPosition.placement === 'left-start'}
       class:left-end={popupPosition.placement === 'left-end'}
       role="tooltip"
-      on:blur
-      on:click
-      on:copy
-      on:cut
-      on:dblclick
-      on:dragend
-      on:dragenter
-      on:dragleave
-      on:dragover
-      on:dragstart
-      on:drop
-      on:focus
-      on:focusin
-      on:focusout
-      on:keydown
-      on:keypress
-      on:keyup
-      on:mousedown
-      on:mouseenter
-      on:mouseleave
-      on:mousemove
-      on:mouseover
-      on:mouseout
-      on:mouseup
-      on:scroll
-      on:wheel|passive
-      on:paste
-      on:keydown={onKeydown}
-      {...$$restProps}
+      {...rest}
+      onkeydown={onKeydown}
       style="left:{popupPosition.x}px; top:{popupPosition.y}px"
     >
-      <slot />
-      <div class="arrow" bind:this={arrowRef} style={arrowStyle} />
+      {#if children}
+        {#if typeof children === 'string'}
+          <div class="callout-text">{children}</div>
+        {:else}
+          {@render children()}
+        {/if}
+      {/if}
+      <div class="arrow" bind:this={arrowRef} style={arrowStyle}></div>
     </div>
   </div>
 {/if}

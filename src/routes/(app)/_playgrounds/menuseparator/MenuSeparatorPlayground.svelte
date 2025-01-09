@@ -1,28 +1,25 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Playground from '../Playground.svelte';
-
-  import Input from '$lib/Input.svelte';
-  import Label from '$lib/Label.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
-  import VariantInput from '../../_shared/VariantInput.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let variant = '';
+  let _class = $state('');
 
-  $: code = getPlaygroundCode({
-    variant
-  });
+  let code = $derived(getPlaygroundCode({ _class }));
 </script>
 
 <Playground {code}>
-  <svelte:fragment slot="component">
+  {#snippet component()}
     <div class="area">
-      <MenuSeparator {variant} />
+      <MenuSeparator class={_class} />
     </div>
-  </svelte:fragment>
-  <svelte:fragment slot="props">
-    <VariantInput bind:variant availableVariants={[]} />
-  </svelte:fragment>
+  {/snippet}
+  {#snippet props()}
+    <VariantInput bind:class={_class} sterlingClasses={[]} />
+  {/snippet}
 </Playground>
 
 <style>

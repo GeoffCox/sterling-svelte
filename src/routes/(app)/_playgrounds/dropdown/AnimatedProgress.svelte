@@ -1,10 +1,16 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Progress from '$lib/Progress.svelte';
 
-  export let value = 50;
-  export let animate = false;
-  export let reverse = false;
-  export let speed = 75;
+  type Props = {
+    value?: number;
+    animate?: boolean;
+    reverse?: boolean;
+    speed?: number;
+  };
+
+  let { value = $bindable(50), animate = false, reverse = false, speed = 75 }: Props = $props();
 
   let cleanupAnimation = () => {};
 
@@ -31,13 +37,13 @@
     cleanupAnimation = () => clearInterval(interval);
   };
 
-  $: {
+  $effect(() => {
     if (animate) {
       startAnimation(speed);
     } else {
       stopAnimation();
     }
-  }
+  });
 </script>
 
 <Progress bind:value />

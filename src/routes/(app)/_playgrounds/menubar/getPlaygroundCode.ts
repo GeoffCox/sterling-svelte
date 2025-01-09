@@ -1,8 +1,8 @@
-export const getPlaygroundCode = (props: { variant: string }) => {
+export const getPlaygroundCode = (props: { _class: string }) => {
   const propList: string[] = [];
 
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
   }
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';

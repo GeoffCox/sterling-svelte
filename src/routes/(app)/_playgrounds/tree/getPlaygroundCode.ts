@@ -1,14 +1,14 @@
-export const getPlaygroundCode = (props: { disabled: boolean; variant: string }) => {
+export const getPlaygroundCode = (props: { _class: string; disabled: boolean }) => {
   const propList: string[] = [];
 
-  propList.push('bind:expandedValues');
-  propList.push('bind:selectedValue');
+  if (props._class) {
+    propList.push(`class="${props._class.trim()}"`);
+  }
   if (props.disabled) {
     propList.push(`disabled`);
   }
-  if (props.variant) {
-    propList.push(`variant="${props.variant.trim()}"`);
-  }
+  propList.push('bind:expandedValues');
+  propList.push('bind:selectedValue');
 
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';
 
