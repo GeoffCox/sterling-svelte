@@ -53,9 +53,11 @@ export const calloutDoc: ComponentDoc = {
       comment: 'The reference to the element anchoring the position of the callout'
     }
   ],
-  anatomy: `portal (<div>)
-callout (<div>)
-  children (Snippet)
-  arrow (<div>)`,
+  anatomy: `<div class="sterling-callout-portal">
+  <div class="sterling-callout">
+    {@render children()}
+  </div>
+  <div class="arrow"></div>
+</div>`,
   usage: CalloutPlayground
 };

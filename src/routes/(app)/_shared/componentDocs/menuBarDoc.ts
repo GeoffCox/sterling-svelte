@@ -23,7 +23,8 @@ export const menuBarDoc: ComponentDoc = {
       comment: 'Raised when descendant menu item is selected.'
     }
   ],
-  anatomy: `menu bar (<div>)
-  children (Snippet)`,
+  anatomy: `<div class="sterling-menu-bar">
+  {@render children()}
+</div>`,
   usage: MenuBarPlayground
 };

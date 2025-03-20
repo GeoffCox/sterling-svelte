@@ -1,5 +1,81 @@
 <h1>Changelog</h1>
 
+<h2>2.0.1</h2>
+<p>No breaking changes: where props and classes were added, existing ones were not removed.</p>
+
+<h3>Dropdown</h3>
+<ul>
+  <li>
+    Fixed snippets to account for the value being clickable.
+    <ul>
+      <li>button -&gt; icon</li>
+      <li>buttonIcon -&gt; icon</li>
+    </ul>
+  </li>
+  <li>Added class="icon" to the icon.</li>
+  <li>
+    Improved classes for content.
+    <ul>
+      <li>sterling-dropdown-popup-content -&gt; sterling-dropdown-content</li>
+    </ul>
+  </li>
+</ul>
+<h3>Slider</h3>
+<ul>
+  <li>Fixed thumb from starting a drag operation when dragged perpendicular to the slider.</li>
+</ul>
+<h3>Select</h3>
+<ul>
+  <li>
+    Fixed snippets to account for the value being clickable.
+    <ul>
+      <li>buttonSnippet -&gt; icon</li>
+      <li>valueSnippet -&gt; value</li>
+    </ul>
+  </li>
+  <li>
+    Added string support to the value prop.
+    <ul>
+      <li>value: string | Snippet</li>
+    </ul>
+  </li>
+  <li>
+    Improved classes for content.
+    <ul>
+      <li>sterling-select-popup-content -&gt; sterling-select-content</li>
+    </ul>
+  </li>
+</ul>
+<h3>Tooltip</h3>
+<ul>
+  <li>Added sterling-tooltip-callout class to allow styling of the callout.</li>
+</ul>
+<h3>MenuItem</h3>
+<ul>
+  <li>
+    Added snippet support to text and shortcut props.
+    <ul>
+      <li>text: string | Snippet</li>
+      <li>shortcut: string | Snippet</li>
+    </ul>
+  </li>
+  <li>Ensured each child div is present in MenuItem's default item.</li>
+  <li>
+    Added class="default-item" to MenuItem's default item.
+    <ul>
+      <li>sterling-menu-item-display -&gt; default-item</li>
+    </ul>
+  </li>
+</ul>
+<h3>Pagination *NEW*</h3>
+<ul>
+  <li>Added Pagination component</li>
+</ul>
+<h3>Documentation</h3>
+<ul>
+  <li>Better described the HTML structure with classes in anatomy section for each component.</li>
+</ul>
+
 <h2>2.0.0</h2>
 <h3>Breaking changes due to converting to Svelte 5</h3>
 <ul>

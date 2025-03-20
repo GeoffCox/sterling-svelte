@@ -56,10 +56,12 @@ export const sliderDoc: ComponentDoc = {
       comment: 'When true, the slider is displayed vertically.'
     }
   ],
-  anatomy: `slider (<div>)
-  container (<div>)
-    track (<div>)
-    fill (<div>)
-    thumb (<div>)`,
+  anatomy: `<div class="sterling-slider>
+  <div class="container">
+    <div class="track"></div>
+    <div class="fill"></div>
+    <div class="thumb"></div>
+  </div>
+</div>`,
   usage: SliderPlayground
 };

@@ -64,10 +64,14 @@ export const treeItemDoc: ComponentDoc = {
       comment: 'Toggles the expanded state of the current item.'
     }
   ],
-  anatomy: `tree-item (div)
-  item (div)
-    icon (Snippet)
-    label (string | Snippet)
-  children (Snippet)`,
+  anatomy: `<div class="sterling-tree-item">
+  <div class="item">
+    {@render icon()}
+    {@render label()}
+  </div>
+  <div class="children">
+    {@render children()}
+  </div>
+</div>`,
   usage: TreeItemPlayground
 };

@@ -8,6 +8,7 @@
 
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import { TREE_CONTEXT_KEY } from './Tree.constants';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null;
@@ -70,7 +71,7 @@
 <div
   bind:this={treeRef}
   aria-disabled={disabled}
-  class={`sterling-tree ${_class}`}
+  class={mergeClasses('sterling-tree', _class)}
   class:disabled
   class:using-keyboard={$usingKeyboard}
   role="tree"

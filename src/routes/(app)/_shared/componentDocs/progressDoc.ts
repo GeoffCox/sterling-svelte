@@ -45,8 +45,10 @@ export const progressDoc: ComponentDoc = {
       comment: 'Used for the orientation property.'
     }
   ],
-  anatomy: `progress (<div>)
-  container (<div>)
-    indicator (<div>)`,
+  anatomy: `<div class="sterling-progress">
+  <div class="container">
+    <div class="indicator"></div>
+  </div>
+</div>`,
   usage: ProgressPlayground
 };

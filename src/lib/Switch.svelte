@@ -6,6 +6,7 @@
   import { idGenerator } from './idGenerator';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import type { Snippet } from 'svelte';
+  import { mergeClasses } from './mergeClasses';
 
   type LabelSnippet = Snippet<
     [{ checked: boolean | null | undefined; disabled: boolean | null | undefined; inputId: string }]
@@ -56,7 +57,7 @@
 </script>
 
 <div
-  class={`sterling-switch ${_class}`}
+  class={mergeClasses('sterling-switch', _class)}
   class:checked
   class:disabled
   class:vertical

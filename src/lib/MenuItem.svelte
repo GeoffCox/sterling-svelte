@@ -18,6 +18,7 @@
     KeyboardEventHandler,
     MouseEventHandler
   } from 'svelte/elements';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLButtonAttributes & {
     checked?: boolean | null;
@@ -27,8 +28,8 @@
     onOpen?: (value: string) => void;
     onSelect?: (value: string) => void;
     role?: MenuItemRole;
-    shortcut?: string;
-    text?: string;
+    shortcut?: string | Snippet;
+    text?: string | Snippet;
     value: string;
   };
 
@@ -362,7 +363,7 @@
 </script>
 
 {#snippet renderDefaultItem()}
-  <div class="sterling-menu-item-display" class:disabled>
+  <div class="default-item sterling-menu-item-display" class:disabled>
     <div
       class="check"
       class:checkmark={role === 'menuitemcheckbox'}
@@ -370,13 +371,23 @@
       class:checked
     ></div>
     <div class="content">
-      {text}
+      {#if text}
+        {#if typeof text === 'string'}
+          {text}
+        {:else}
+          {@render text()}
+        {/if}
+      {/if}
     </div>
-    {#if shortcut}
-      <div class="shortcut">
-        {shortcut}
-      </div>
-    {/if}
+    <div class="shortcut">
+      {#if shortcut}
+        {#if typeof shortcut === 'string'}
+          {shortcut}
+        {:else}
+          {@render shortcut()}
+        {/if}
+      {/if}
+    </div>
     <div class="chevron" class:has-children={!menuItemContext.isMenuBarItem && !!children}></div>
   </div>
 {/snippet}
@@ -388,7 +399,7 @@
   aria-expanded={open}
   aria-haspopup={!!children}
   aria-owns={menuId}
-  class={['sterling-menu-item', _class].filter(Boolean).join(' ')}
+  class={mergeClasses('sterling-menu-item', _class)}
   class:using-keyboard={usingKeyboard}
   data-value={value}
   data-root-value={menuItemContext.rootValue}

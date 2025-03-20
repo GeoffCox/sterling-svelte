@@ -26,7 +26,8 @@ export const textAreaDoc: ComponentDoc = {
       definition: "'none' | 'horizontal' | 'vertical' | 'both'"
     }
   ],
-  anatomy: `text area container (<div>)
-  text area (<textarea>)`,
+  anatomy: `<div class="sterling-text-area>
+  <textarea></textarea>
+</div>`,
   usage: TextAreaPlayground
 };

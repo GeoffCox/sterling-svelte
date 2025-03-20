@@ -36,13 +36,17 @@ export const switchDoc: ComponentDoc = {
 }]>`
     }
   ],
-  anatomy: `switch (<div>)
-  hidden (<input>)
-  off container (<div>)
-    offLabel (string | Snippet)
-  toggle (<div>)
-    thumb (<div>)
-  on container (<div>)
-    onLabel (string | Snippet)`,
+  anatomy: `<div class="sterling-switch">
+  <input type="checkbox" />
+  <div class="off-label">
+    {@render offLabel()}
+  </div>
+  <div class="toggle">
+    <div class="thumb"></div>
+  </div>
+  <div class="on-label">
+    {@render onLabel()}
+  </div>
+</div>`,
   usage: SwitchPlayground
 };

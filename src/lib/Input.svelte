@@ -4,6 +4,7 @@
   import type { HTMLInputAttributes } from 'svelte/elements';
   import { idGenerator } from './idGenerator';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLInputAttributes;
 
@@ -63,12 +64,12 @@
 </script>
 
 {#if children}
-  <label class={['sterling-input-label', _class].filter(Boolean).join(' ')} class:disabled for={id}>
+  <label class={mergeClasses('sterling-input-label', _class)} class:disabled for={id}>
     {@render children()}
   </label>
 {/if}
 <div
-  class={['sterling-input', _class].filter(Boolean).join(' ')}
+  class={mergeClasses('sterling-input', _class)}
   class:disabled
   class:using-keyboard={$usingKeyboard}
 >

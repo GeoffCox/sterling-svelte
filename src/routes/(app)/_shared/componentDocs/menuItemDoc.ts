@@ -75,16 +75,24 @@ export const menuItemDoc: ComponentDoc = {
       definition: "'menuitem' | 'menuitemcheckbox' | 'menuitemradio'"
     }
   ],
-  anatomy: `menu item (<button>)
-  item (<div>)
-    item (Snippet)
-      container (<div>)
-        checkmark (<div>)
-        content (<div>)
-        shortcut (<div>)
-        chevron (<div>)
-  popover (<Popover>)
-    menu (<Menu>)
-      children (Snippet)`,
+  anatomy: `<button class="sterling-menu-item">
+  <div class="item">
+    {#if item}
+      {@render item()}
+    {:else}
+      <div class="sterling-menu-item-display">
+        <div class="check"></div>
+        <div class="content"></div>
+        <div class="shortcut"></div>
+        <div class="chevron"></div>
+      </div>
+    {/if}
+  </div>
+  <Popover>
+    <Menu>
+      {@render menu()}
+    </Menu>
+  </Popover>
+</button>`,
   usage: MenuItemPlayground
 };

@@ -60,8 +60,10 @@ export const popoverDoc: ComponentDoc = {
         "'top-start' | 'top' | 'top-end' | 'right-start' | 'right' | 'right-end' | 'bottom-end' | 'bottom' | 'bottom-start' | 'left-end' | 'left' | 'left-start'"
     }
   ],
-  anatomy: `portal (<div>)
-  popover (<div>)
-    children (Snippet)`,
+  anatomy: `<div class="sterling-popover-portal">
+  <div class="sterling-popover">
+    {@render children()}
+  </div>
+</div>`,
   usage: PopoverPlayground
 };

@@ -10,6 +10,7 @@
   import { isElementEnabledMenuItem, isElementMenuItem } from './MenuItem.utils';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
   import type { HTMLAttributes } from 'svelte/elements';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLAttributes<HTMLDivElement>;
 
@@ -90,7 +91,7 @@
 
 <div
   bind:this={menuRef}
-  class={['sterling-menu', _class].filter(Boolean).join(' ')}
+  class={mergeClasses('sterling-menu', _class)}
   role="menu"
   class:open
   data-root-value={rootValue}

@@ -8,22 +8,16 @@ export const dropdownDoc: ComponentDoc = {
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {
-      name: 'button',
-      type: 'string | Snippet | undefined',
-      default: 'undefined',
-      comment: 'The button to open/close the dropdown.'
-    },
-    {
-      name: 'buttonIcon',
-      type: 'string | Snippet | undefined',
-      default: 'undefined',
-      comment: 'The icon within the button. When undefined, displays a chevron.'
-    },
-    {
       name: 'disabled',
       type: 'boolean | null | undefined',
       default: 'false',
       comment: 'When true, the dropdown is disabled and closed'
+    },
+    {
+      name: 'icon',
+      type: 'Snippet | undefined',
+      default: 'undefined',
+      comment: 'The icon after the value. When undefined, displays a chevron.'
     },
     {
       name: 'onOpen',
@@ -48,17 +42,32 @@ export const dropdownDoc: ComponentDoc = {
       type: 'string | Snippet | undefined',
       default: 'undefined',
       comment: 'The value to display.'
+    },
+    {
+      name: 'button',
+      type: 'string | Snippet | undefined',
+      default: 'undefined',
+      comment: 'Deprecated. Use icon instead.'
+    },
+    {
+      name: 'buttonIcon',
+      type: 'string | Snippet | undefined',
+      default: 'undefined',
+      comment: 'Deprecated. Use icon instead.'
     }
   ],
-  anatomy: `dropdown (<div>)
-  value container (<div>)
-    value (<string | Snippet>)
-  button (<Snippet>)
-    button container <div>
-      buttonIcon <Snippet>
-        chevron (<div>)
-  dropdown content (<Popover>)
-    content (<div>)
-      children (<Snippet>)`,
+  anatomy: `<div class="sterling-dropdown">
+  <div class="value">
+    {@render value()}>
+  </div>
+  <div class="icon">
+    {@render icon()}
+  </div>
+  <Popover>
+    <div class="sterling-dropdown-content">
+      {@render children()}
+    </div>
+  </Popover>
+</div>`,
   usage: DropdownPlayground
 };

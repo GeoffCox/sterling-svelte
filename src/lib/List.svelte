@@ -7,6 +7,7 @@
   import type { ListContext } from './List.types';
   import { LIST_CONTEXT_KEY } from './List.constants';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null;
@@ -241,7 +242,7 @@
   aria-disabled={disabled}
   aria-orientation={horizontal ? 'horizontal' : 'vertical'}
   bind:this={listRef}
-  class={['sterling-list', _class].filter(Boolean).join(' ')}
+  class={mergeClasses('sterling-list', _class)}
   class:disabled
   class:horizontal
   class:using-keyboard={$usingKeyboard}

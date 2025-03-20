@@ -5,14 +5,15 @@
   import Tooltip from './Tooltip.svelte';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import type { HTMLLabelAttributes, MouseEventHandler } from 'svelte/elements';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLLabelAttributes & {
     forwardClick?: boolean | null;
-    message?: string | Snippet;
+    message?: Snippet | string;
     required?: boolean | null;
-    requiredIndicator?: string | Snippet;
-    requiredReason?: string | Snippet;
-    text?: string | Snippet;
+    requiredIndicator?: Snippet | string;
+    requiredReason?: Snippet | string;
+    text?: Snippet | string;
   };
 
   let {
@@ -32,7 +33,6 @@
 
   let labelRef: HTMLLabelElement | null = $state(null);
   let targetRef: HTMLElement | null = $state(null);
-  let requiredRef: HTMLElement | null = $state(null);
 
   const findTarget = () => {
     let candidate: HTMLElement | null = null;
@@ -83,14 +83,12 @@
   };
 </script>
 
-{#snippet snippetOrText(item?: string | Snippet, _class?: string)}
+{#snippet stringOrSnippet(item?: string | Snippet)}
   {#if item}
     {#if typeof item === 'string'}
-      <div class={_class}>{item}</div>
+      {item}
     {:else}
-      <div class={_class}>
-        {@render item()}
-      </div>
+      {@render item()}
     {/if}
   {/if}
 {/snippet}
@@ -98,29 +96,41 @@
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <label
   bind:this={labelRef}
-  class={['sterling-label', _class].filter(Boolean).join(' ')}
+  class={mergeClasses('sterling-label', _class)}
   class:using-keyboard={$usingKeyboard}
   for={_for}
   {...rest}
   onclick={onClick}
 >
-  {@render snippetOrText(text, 'text')}
+  {#if text}
+    <div class="text">
+      {@render stringOrSnippet(text)}
+    </div>
+  {/if}
   {#if children}
     <div class="content">
       {@render children()}
     </div>
   {/if}
-  {@render snippetOrText(message, 'message')}
-  <div class="required" bind:this={requiredRef}>
-    {#if required && requiredReason}
-      <Tooltip>
-        {@render snippetOrText(requiredIndicator, 'required')}
-        {#snippet tip()}
-          {@render snippetOrText(requiredReason, 'required-reason')}
-        {/snippet}
-      </Tooltip>
-    {:else if required}
-      {@render snippetOrText(requiredIndicator, 'required')}
-    {/if}
-  </div>
+  {#if message}
+    <div class="message">
+      {@render stringOrSnippet(message)}
+    </div>
+  {/if}
+  {#if required && requiredIndicator && requiredReason}
+    <Tooltip>
+      <div class="required">
+        {@render stringOrSnippet(requiredIndicator)}
+      </div>
+      {#snippet tip()}
+        <div class="required-reason">
+          {@render stringOrSnippet(requiredReason)}
+        </div>
+      {/snippet}
+    </Tooltip>
+  {:else if required && requiredIndicator}
+    <div class="required">
+      {@render stringOrSnippet(requiredIndicator)}
+    </div>
+  {/if}
 </label>

@@ -11,31 +11,43 @@
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
   import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import { mergeClasses } from './mergeClasses';
+  import { merge } from 'lodash-es';
 
   const popupId = idGenerator.nextId('Dropdown-popup');
 
-  type Props = HTMLAttributes<HTMLDivElement> & {
-    disabled?: boolean | null | undefined;
-    open?: boolean | null | undefined;
-    stayOpenOnClickAway?: boolean | null | undefined;
-    onOpen?: (open: boolean | null | undefined) => void;
+  type DeprecatedProps = {
+    /** @deprecated Use icon instead. */
     button?: Snippet;
+    /** @deprecated Use icon instead. */
     buttonIcon?: Snippet;
-    value?: string | Snippet;
   };
 
+  type Props = HTMLAttributes<HTMLDivElement> &
+    DeprecatedProps & {
+      disabled?: boolean | null | undefined;
+      open?: boolean | null | undefined;
+      stayOpenOnClickAway?: boolean | null | undefined;
+      onOpen?: (open: boolean | null | undefined) => void;
+      icon?: Snippet;
+      value?: string | Snippet;
+    };
+
   let {
+    button,
+    buttonIcon,
     class: _class,
     children,
     disabled = false,
+    icon,
     open = $bindable(false),
     onOpen,
     stayOpenOnClickAway = false,
-    button,
-    buttonIcon,
     value,
     ...rest
   }: Props = $props();
+
+  icon = icon || buttonIcon || button;
 
   // svelte-ignore non_reactive_update
   let dropdownRef: HTMLDivElement | undefined = $state(undefined);
@@ -110,7 +122,7 @@
   aria-controls={popupId}
   aria-haspopup={true}
   aria-expanded={open}
-  class={`sterling-dropdown ${_class}`}
+  class={mergeClasses('sterling-dropdown', _class)}
   class:disabled
   class:open
   class:using-keyboard={$usingKeyboard}
@@ -130,10 +142,8 @@
       {/if}
     {/if}
   </div>
-  <div class="button">
-    {#if button}
-      {@render button()}
-    {:else if buttonIcon}
+  <div class="button icon">
+    {#if buttonIcon}
       {@render buttonIcon()}
     {:else}
       <div class="chevron"></div>
@@ -142,7 +152,7 @@
 
   <Popover reference={dropdownRef} open={!disabled && open} placement="bottom-start">
     <div
-      class={`sterling-dropdown-popup-content ${_class}`}
+      class={mergeClasses('sterling-dropdown-popup-content', 'sterling-dropdown-content', _class)}
       transition:slideMotion|global={{ duration: 200 }}
       bind:this={popupContentRef}
     >

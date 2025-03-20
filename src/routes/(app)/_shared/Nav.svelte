@@ -61,6 +61,7 @@
         { name: 'MenuButton', url: '/components/menubutton' },
         { name: 'MenuItem', url: '/components/menuitem' },
         { name: 'MenuSeparator', url: '/components/menuseparator' },
+        { name: 'Pagination', url: '/components/pagination' },
         { name: 'Popover', url: '/components/popover' },
         { name: 'Progress', url: '/components/progress' },
         { name: 'Radio', url: '/components/radio' },

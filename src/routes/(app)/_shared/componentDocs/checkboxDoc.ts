@@ -6,11 +6,14 @@ export const checkboxDoc: ComponentDoc = {
   name: 'Checkbox',
   description: 'An interactive element to set a true/false value.',
   comments: [makeExtendsComment('HTMLInputElement')],
-  anatomy: `checkbox (<div>)
-  container (<div>)
-    input (<input>) 
-    indicator (<div>)
-  label (<label>)
-    children (Snippet)`,
+  anatomy: `<div class="sterling-checkbox">
+  <div class="container">
+    <input type="checkbox" />
+    <div class="indicator"></div>
+  </div>
+  <label>
+    {@render children()}
+  </label>
+</div>`,
   usage: CheckboxPlayground
 };

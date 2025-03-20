@@ -39,7 +39,10 @@ export const treeDoc: ComponentDoc = {
       comment: 'Called when any item in the hierarchy is selected.'
     }
   ],
-  anatomy: `tree (<div>)
-  children (Snippet)`,
+  anatomy: `<div class="sterling-tree">
+  <div class="container">
+    {@render children()}
+  </div>
+</div>`,
   usage: TreePlayground
 };

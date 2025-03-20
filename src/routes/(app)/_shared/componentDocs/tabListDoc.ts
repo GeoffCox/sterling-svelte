@@ -50,7 +50,8 @@ export const tabListDoc: ComponentDoc = {
       comment: 'Selects the last tab.'
     }
   ],
-  anatomy: `tab list (<div>)
-  children (Snippet)`,
+  anatomy: `<div class="sterling-tab-list">
+  {@render children()}
+</div>`,
   usage: TabListPlayground
 };

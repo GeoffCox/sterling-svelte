@@ -8,6 +8,7 @@
   import type { PortalContext } from './Portal.types';
   import { STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
   import { writable } from 'svelte/store';
+  import { mergeClasses } from './mergeClasses';
 
   const dialogFadeDuration = 250;
 
@@ -150,7 +151,7 @@
 
 <dialog
   bind:this={dialogRef}
-  class={`sterling-dialog ${_class}`}
+  class={mergeClasses('sterling-dialog', _class)}
   class:open
   class:closing
   {...rest}
@@ -174,7 +175,7 @@
               {/if}
             </div>
             <div class="close">
-              <Button class={`circular tool`} onclick={() => closeDialog()}>
+              <Button class="circular tool" onclick={() => closeDialog()}>
                 <div class="close-x"></div>
               </Button>
             </div>

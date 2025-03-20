@@ -25,8 +25,11 @@ export const tabDoc: ComponentDoc = {
       comment: 'The value uniquely identifying this tab within the tab list.'
     }
   ],
-  anatomy: `tab (<button>)
-  children (Snippet)
-  indicator (<div>)`,
+  anatomy: `<button class="sterling-tab">
+  <div class="content">
+    {@render children()}
+  </div>
+  <div class="indicator"></div>
+</button>`,
   usage: TabPlayground
 };

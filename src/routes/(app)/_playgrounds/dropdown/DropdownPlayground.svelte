@@ -42,8 +42,8 @@
       {/snippet}
       <div class="popup">
         <div class="settings">
-          <Switch bind:checked={animate} onLabelText="Animate" />
-          <Switch bind:checked={reverse} onLabelText="Reverse" />
+          <Switch bind:checked={animate} onLabel="Animate" />
+          <Switch bind:checked={reverse} onLabel="Reverse" />
           <Label text={`Speed: ${speed}`}>
             <Slider bind:value={speed} precision={0} />
           </Label>
@@ -74,7 +74,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    min-width: 250px;
+    min-width: 300px;
     padding: 1em;
     row-gap: 1em;
   }

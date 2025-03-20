@@ -8,31 +8,47 @@
   import List from './List.svelte';
   import Popover from './Popover.svelte';
   import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
+  import { mergeClasses } from './mergeClasses';
 
-  type Props = HTMLAttributes<HTMLDivElement> & {
+  type DeprecatedProps = {
+    /** @deprecated Use icon instead */
     buttonSnippet?: Snippet;
-    disabled?: boolean | null;
-    listClass?: string;
-    onPending?: (value?: string) => void;
-    onSelect?: (value?: string) => void;
-    open?: boolean | null;
-    selectedValue?: string;
+
+    /** @deprecated Use value instead */
     valueSnippet?: Snippet<[string | undefined]>;
   };
 
+  type Props = HTMLAttributes<HTMLDivElement> &
+    DeprecatedProps & {
+      disabled?: boolean | null;
+      icon?: Snippet;
+      listClass?: string;
+      onPending?: (value?: string) => void;
+      onSelect?: (value?: string) => void;
+      open?: boolean | null;
+      selectedValue?: string;
+      value?: string | Snippet<[string | undefined]>;
+    };
+
   let {
-    buttonSnippet,
     children,
     class: _class,
     disabled = false,
+    icon,
+    listClass,
     open = $bindable(false),
     onSelect,
     onPending,
     selectedValue = $bindable(),
-    listClass,
+    value,
+    buttonSnippet,
     valueSnippet,
     ...rest
   }: Props = $props();
+
+  // backwards compatibility
+  icon = icon || buttonSnippet;
+  value = value || valueSnippet;
 
   const popupId = idGenerator.nextId('Select-popup');
 
@@ -196,7 +212,7 @@
   aria-controls={popupId}
   aria-haspopup="listbox"
   aria-expanded={open}
-  class={['sterling-select', _class].filter(Boolean).join(' ')}
+  class={mergeClasses('sterling-select', _class)}
   class:disabled
   role="combobox"
   tabindex="0"
@@ -206,23 +222,28 @@
   onkeydown={onSelectKeydown}
 >
   <div class="value">
-    {#if valueSnippet}
-      {@render valueSnippet(selectedValue)}
+    {#if value}
+      {#if typeof value === 'string'}
+        {value}
+      {:else}
+        {@render value(selectedValue)}
+      {/if}
     {:else if selectedValue}
       {selectedValue}
     {:else}
       <span>&nbsp;</span>
     {/if}
   </div>
-  <div class="button">
-    {#if buttonSnippet}
-      {@render buttonSnippet()}
+  <!-- button class was initially incorrect, so leaving it here for now -->
+  <div class="button icon">
+    {#if icon}
+      {@render icon()}
     {:else}
       <div class="chevron"></div>
     {/if}
   </div>
   <Popover reference={selectRef} bind:open id={popupId} conditionalRender={false}>
-    <div class={['sterling-select-popup-content', _class].filter(Boolean).join(' ')}>
+    <div class={mergeClasses('sterling-select-popup-content', 'sterling-select-content', _class)}>
       <List
         bind:this={listRef}
         {disabled}
@@ -231,7 +252,7 @@
         onkeydown={onListKeydown}
         onSelect={onListSelect}
         tabindex={open ? 0 : -1}
-        class={`composed ${listClass}`}
+        class={mergeClasses('composed', listClass)}
       >
         {#if children}
           {@render children()}

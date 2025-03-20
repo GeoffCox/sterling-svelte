@@ -27,8 +27,10 @@ export const tooltipDoc: ComponentDoc = {
       comment: 'The content passed to <Callout> children.'
     }
   ],
-  anatomy: `children (Snippet>)
-  reference (<div>)
-  callout (<Callout>)`,
+  anatomy: `{@render children()}
+<div class="sterling-tooltip-origin"></div>
+<Callout class="sterling-tooltip-callout">
+  {@render tip()}
+</Callout>`,
   usage: TooltipPlayground
 };

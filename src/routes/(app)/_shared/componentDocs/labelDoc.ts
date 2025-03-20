@@ -46,19 +46,27 @@ export const labelDoc: ComponentDoc = {
       name: 'text',
       type: 'string | Snippet',
       default: "''",
-      comment: 'The text to display in the label. Not used if the text slot is filled.'
+      comment: 'The text to display in the label.'
     }
   ],
-  anatomy: `label (<label>)
-  text (string | Snippet)
-  content (<div>)
-    children (Snippet)
-  message (string | Snippet)
-  tooltip (<Tooltip>)
-    required (<div>)
-      requiredIndicator (string | Snippet)
-    tip (ToolTip.tip)
-      requiredReason (string | Snippet)
-`,
+  anatomy: `<label class="sterling-label">
+  <div class="text">
+    {@render text()}
+  </div>
+  <div class="content">
+    {@render children()}
+  </div>
+  <div class="message">
+    {@render message()}
+  </div>
+  <Tooltip>
+    <div class="required">
+      {@render requiredIndicator()}
+    </div>
+    {#snippet tip()}
+      {@render requiredReason()}
+    {/snippet}
+  </ToolTip>
+</label>`,
   usage: LabelPlayground
 };

@@ -9,9 +9,12 @@ export const inputDoc: ComponentDoc = {
     'Prefer using the Label component rather than the label produced by providing default slot content.',
     makeExtendsComment('HTMLInputElement')
   ],
-  anatomy: `label (<label>)
-  children (Snippet)
-input container (<div>)
-  input (<input>)`,
+  anatomy: `<label class="sterling-input-label">
+  {@render children()}
+</label>
+<div class="sterling-input">
+  <input />
+</div>
+`,
   usage: InputPlayground
 };

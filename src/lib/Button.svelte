@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import type { HTMLButtonAttributes } from 'svelte/elements';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLButtonAttributes;
 
@@ -24,7 +25,7 @@
 
 <button
   bind:this={buttonRef}
-  class={['sterling-button', _class].filter(Boolean).join(' ')}
+  class={mergeClasses('sterling-button', _class)}
   type="button"
   {...rest}
 >

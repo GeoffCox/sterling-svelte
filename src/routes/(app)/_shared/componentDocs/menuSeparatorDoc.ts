@@ -6,6 +6,6 @@ export const menuSeparatorDoc: ComponentDoc = {
   name: 'MenuSeparator',
   description: 'A visual separator between items in a menu',
   comments: [makeExtendsComment('HTMLDivElement')],
-  anatomy: `separator (<div>)`,
+  anatomy: `<div class="sterling-menu-separator"></div>`,
   usage: MenuSeparatorPlayground
 };

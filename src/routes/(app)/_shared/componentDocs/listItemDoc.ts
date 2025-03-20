@@ -20,7 +20,8 @@ export const listItemDoc: ComponentDoc = {
       comment: 'The value uniquely identifying this item within the list.'
     }
   ],
-  anatomy: `list item (<div)
-  children (Snippet)`,
+  anatomy: `<div class="sterling-list-item">
+  {@render children()}
+</div>`,
   usage: ListItemPlayground
 };

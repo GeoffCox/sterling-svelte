@@ -14,11 +14,14 @@ export const radioDoc: ComponentDoc = {
       comment: 'The group to bind to the selected value for a group of radio buttons.'
     }
   ],
-  anatomy: `radio (<div>)
-  container (<div>)
-    hidden (<input type="radio">)
-    indicator (<div>)
-  label (<label>)
-    children`,
+  anatomy: `<div class="sterling-radio">
+  <div class="container">
+    <input type="radio" />
+    <div class="indicator"></div>
+  </div>
+  <label>
+    {@render children()}
+  </label>
+</div>`,
   usage: RadioPlayground
 };

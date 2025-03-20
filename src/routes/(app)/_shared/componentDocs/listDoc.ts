@@ -63,8 +63,10 @@ export const listDoc: ComponentDoc = {
       comment: 'Selects the last item in the list.'
     }
   ],
-  anatomy: `list (<div>)
-  container (<div>)
-    children (Snippet)`,
+  anatomy: `<div class="sterling-list">
+  <div class="container">
+    {@render children()}
+  </div>
+</div>`,
   usage: ListPlayground
 };

@@ -21,6 +21,6 @@ export const treeChevronDoc: ComponentDoc = {
         'When true, indicates the item can be expanded. Otherwise, indicates the item is a leaf.'
     }
   ],
-  anatomy: `chevron (<div>)`,
+  anatomy: `<div class="sterling-tree-chevron"></div>`,
   usage: TreeChevronPlayground
 };

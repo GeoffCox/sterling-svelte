@@ -10,6 +10,7 @@ export const buttonDoc: ComponentDoc = {
     makeExtendsComment('HTMLButtonElement')
   ],
   usage: ButtonPlayground,
-  anatomy: `button (<button>)
-  children (Snippet)`
+  anatomy: `<button class="sterling-button">
+  {@render children()}
+</button>`
 };

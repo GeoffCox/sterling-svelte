@@ -6,6 +6,7 @@
   import Callout from './Callout.svelte';
   import type { PopoverPlacement } from './Popover.types';
   import type { CalloutProps } from './Callout.types';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = Omit<CalloutProps, 'reference'> & {
     disabled?: boolean;
@@ -87,8 +88,8 @@
 </script>
 
 {@render children?.()}
-<div class="sterling-tooltip-origin" bind:this={originRef}></div>
-<Callout class={_class} {open} {reference} {...rest}>
+<div class={mergeClasses('sterling-tooltip-origin', _class)} bind:this={originRef}></div>
+<Callout class={mergeClasses('sterling-tooltip-callout', _class)} {open} {reference} {...rest}>
   {#if tip}
     {#if typeof tip === 'string'}
       {tip}

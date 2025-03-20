@@ -14,6 +14,7 @@
   import Popover from './Popover.svelte';
   import { clickOutside } from './actions/clickOutside';
   import type { PopoverPlacement } from './Popover.types';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLButtonAttributes & {
     items: Snippet;
@@ -137,7 +138,7 @@
   aria-expanded={!!open}
   aria-haspopup={!!children}
   aria-owns={menuId}
-  class={['sterling-menu-button', _class].filter(Boolean).join(' ')}
+  class={mergeClasses('sterling-menu-button', _class)}
   data-value={value}
   data-root-value={value}
   {...rest}

@@ -72,7 +72,7 @@
           <p>The weather is sunny with no chance of rain.</p>
           <p>What would you like to do?</p>
           <Select bind:selectedValue>
-            {#snippet valueSnippet()}
+            {#snippet value()}
               <span>{options.find((x) => x.value === selectedValue)?.text}</span>
             {/snippet}
             {#each options as option}

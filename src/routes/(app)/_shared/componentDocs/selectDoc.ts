@@ -11,16 +11,16 @@ export const selectDoc: ComponentDoc = {
   ],
   props: [
     {
-      name: 'buttonSnippet',
-      type: 'Snippet | undefined',
-      default: 'undefined',
-      comment: 'The snippet to render the button. Defaults to a chevron.'
-    },
-    {
       name: 'disabled',
       type: 'boolean | null | undefined',
       default: 'false',
       comment: "When true, the select's button is disabled and list is closed."
+    },
+    {
+      name: 'icon',
+      type: 'Snippet | undefined',
+      default: 'undefined',
+      comment: 'The snippet to render the icon. Defaults to a chevron.'
     },
     {
       name: 'listClass',
@@ -53,11 +53,23 @@ export const selectDoc: ComponentDoc = {
       comment: 'The value of the selected item.'
     },
     {
+      name: 'value',
+      type: 'Snippet<[string | undefined]> | string | undefined',
+      default: 'undefined',
+      comment:
+        'The string or snippet to display the value. The snippet is passed the selected value. If undefined, the selectedValue is displayed.'
+    },
+    {
+      name: 'buttonSnippet',
+      type: 'Snippet | undefined',
+      default: 'undefined',
+      comment: 'Deprecated. Use icon instead.'
+    },
+    {
       name: 'valueSnippet',
       type: 'Snippet<[string | undefined]> | undefined',
       default: 'undefined',
-      comment:
-        'The snippet to render the value. Passed the selected value. Defaults to the selected value (string).'
+      comment: 'Deprecated. Use value instead.'
     }
   ],
   methods: [
@@ -66,14 +78,20 @@ export const selectDoc: ComponentDoc = {
       comment: 'Scrolls to the selected item.'
     }
   ],
-  anatomy: `select (<div>)
-  value (<div>)
-    value (Snippet) | selectedValue (string) | &nbsp;
-  button (<div>)
-    button (Snippet) | chevron (<div>)
-  popover (<Popover>)
-    content <div>)
-      list (<List>)
-        children (Snippet)`,
+  anatomy: `<div class="sterling-select">
+  <div class="value">
+    {@render value()}
+  </div>
+  <div class="icon">
+    {@render icon()}
+  </div>
+  <Popover>
+    <div class="sterling-select-popup-content">
+      <List>
+        {@render children()}
+      </List>
+    </div>
+  </Popover>
+</div>`,
   usage: SelectPlayground
 };

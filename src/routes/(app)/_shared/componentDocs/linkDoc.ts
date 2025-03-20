@@ -6,7 +6,8 @@ export const linkDoc: ComponentDoc = {
   name: 'Link',
   description: 'An interactive anchor element to navigate to a URL.',
   comments: [makeExtendsComment('HTMLAnchorElement')],
-  anatomy: `link (<a>)
-  children (Snippet)`,
+  anatomy: `<a class="sterling-link">
+  {@render children()}
+</a>`,
   usage: LinkPlayground
 };

@@ -5,6 +5,7 @@
 
   import { idGenerator } from './idGenerator';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLInputAttributes & {
     group?: any | null;
@@ -61,7 +62,7 @@
 	A styled HTML input type=radio element with optional label.
 -->
 <div
-  class={`sterling-radio ${_class}`}
+  class={mergeClasses('sterling-radio', _class)}
   class:checked
   class:disabled
   class:using-keyboard={$usingKeyboard}

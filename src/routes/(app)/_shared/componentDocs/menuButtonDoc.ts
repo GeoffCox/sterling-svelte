@@ -53,11 +53,15 @@ export const menuButtonDoc: ComponentDoc = {
       comment: 'The value uniquely identifying this menu button as the root of the menu hierarchy.'
     }
   ],
-  anatomy: `button (<Button>)
-  reference (<div>)
-    children (Snippet)
-  popover (<Popover>)
-    menu (<Menu>)
-      items (Snippet)`,
+  anatomy: `<Button class="sterling-menu-button">
+  <div class="reference">
+    {@render children()}
+  </div>
+  <Popover>
+    <Menu class={menuClass}>
+      {@render items()}
+    </Menu>
+  </Popover>
+</Button>`,
   usage: MenuButtonPlayground
 };

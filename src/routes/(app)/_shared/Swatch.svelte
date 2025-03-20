@@ -319,6 +319,8 @@
       4px 4px;
     background-size: 8px 8px;
     opacity: 0.2;
+    /* opacity affects the stacking order, so z-index corrects */
+    z-index: -1;
   }
 
   .color-block {

@@ -61,20 +61,34 @@ export const dialogDoc: ComponentDoc = {
     },
     commonProps.variant
   ],
-  anatomy: `dialog (<dialog>)
-  form (<form>)
-    content (<div>)
-      content (Snippet)
-        header (<div>)
-          header (Snippet)
-            title (<div>)
-              headerTitle (string | Snippet)
-            close (Button)
-              close-x (<div>)
-        body (<div>)
-          body (Snippet)
-        separator (<div>)
-        footer (<div>)
-          footer (Snippet)`,
+  anatomy: `<dialog class="sterling-dialog">
+  <form>
+    <div class="content">
+      {#if content}
+        {@render content()}
+      {:else}
+        <div class="header">
+          {@render header()}
+          <div class="title">
+            {@render headerTitle()}
+          </div>
+          <div class="close">
+            <Button>
+              <div class="close-x">
+              </div>
+            </Button>
+          </div>
+        </div>
+        <div class="body">
+          {@render body()}
+        </div>
+        <div class="separator"></div>
+        <div class="footer">
+          {@render footer()}
+        </div>
+      {/if}
+    </div>
+  </form>
+</dialog>`,
   usage: DialogPlayground
 };

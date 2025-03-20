@@ -1,4 +1,4 @@
-import type { ComponentType, SvelteComponent } from 'svelte';
+import type { Component, ComponentType, SvelteComponent } from 'svelte';
 
 export type MemberDoc = {
   name: string;
@@ -31,6 +31,6 @@ export type ComponentDoc = {
   props?: PropDoc[];
   events?: EventDoc[];
   methods?: MethodDoc[];
-  usage?: ComponentType<SvelteComponent>;
+  usage?: Component;
   anatomy?: string;
 };

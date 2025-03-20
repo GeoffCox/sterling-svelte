@@ -29,8 +29,10 @@ export const menuDoc: ComponentDoc = {
       comment: 'Focuses the last menu item.'
     }
   ],
-  anatomy: `menu (<div>)
-  menu items (<div>)
-    children (Snippet)`,
+  anatomy: `<div class="sterling-menu">
+  <div class="menu-items">
+    {@render children()}
+  </div>
+</div>`,
   usage: MenuPlayground
 };

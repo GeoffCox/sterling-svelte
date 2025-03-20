@@ -13,6 +13,7 @@
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
   import { isElementEnabledMenuItem } from './MenuItem.utils';
   import type { HTMLAttributes } from 'svelte/elements';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     onClose?: (value: string) => void;
@@ -136,13 +137,11 @@
 
 <div
   bind:this={menuBarRef}
-  class={['sterling-menu-bar', _class].filter(Boolean).join(' ')}
+  class={mergeClasses('sterling-menu-bar', _class)}
   role="menubar"
   tabindex="-1"
   {...rest}
   use:clickOutside={{ onclickoutside: onClickOutside }}
 >
-  {#if children}
-    {@render children()}
-  {/if}
+  {@render children?.()}
 </div>

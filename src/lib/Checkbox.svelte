@@ -4,6 +4,7 @@
   import type { HTMLInputAttributes } from 'svelte/elements';
   import { idGenerator } from './idGenerator';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLInputAttributes;
 
@@ -44,7 +45,7 @@
 	A styled HTML input type=checkbox element.
 -->
 <div
-  class={['sterling-checkbox', _class].filter(Boolean).join(' ')}
+  class={mergeClasses('sterling-checkbox', _class)}
   class:checked
   class:disabled
   class:using-keyboard={$usingKeyboard}

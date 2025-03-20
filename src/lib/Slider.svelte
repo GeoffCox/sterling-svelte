@@ -4,6 +4,7 @@
   import type { HTMLAttributes, KeyboardEventHandler, PointerEventHandler } from 'svelte/elements';
 
   import { round } from 'lodash-es';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null;
@@ -40,7 +41,7 @@
   };
 
   export const focus = (options?: FocusOptions) => {
-    sliderRef?.focus();
+    sliderRef?.parentElement?.focus(options);
   };
 
   let ratio = $derived((value - min) / (max - min));
@@ -97,6 +98,8 @@
       } else {
         setValueByOffset(event.x - sliderRef.getBoundingClientRect().left);
       }
+      event.preventDefault();
+      focus();
     }
 
     rest?.onpointerdown?.(event);
@@ -109,6 +112,7 @@
       } else {
         setValueByOffset(event.x - sliderRef.getBoundingClientRect().left);
       }
+      event.preventDefault();
     }
 
     rest?.onpointermove?.(event);
@@ -117,6 +121,8 @@
   const onPointerUp: PointerEventHandler<HTMLDivElement> = (event) => {
     if (!disabled) {
       event.currentTarget.releasePointerCapture(event.pointerId);
+      event.preventDefault();
+      focus();
     }
     rest?.onpointerup?.(event);
   };
@@ -147,7 +153,7 @@
   aria-valuemin={min}
   aria-valuenow={value}
   aria-valuemax={max}
-  class={`sterling-slider ${_class}`}
+  class={mergeClasses('sterling-slider', _class)}
   class:disabled
   class:horizontal={!vertical}
   class:vertical

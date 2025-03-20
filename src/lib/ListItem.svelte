@@ -6,6 +6,7 @@
 
   import { LIST_CONTEXT_KEY } from './List.constants';
   import type { ListContext } from './List.types';
+  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null;
@@ -47,7 +48,7 @@
 <div
   aria-selected={selected}
   bind:this={itemRef}
-  class={['sterling-list-item', _class].filter(Boolean).join(' ')}
+  class={mergeClasses('sterling-list-item', _class)}
   class:disabled={disabled || listContext.disabled}
   class:horizontal={listContext.horizontal}
   class:item-disabled={disabled}
