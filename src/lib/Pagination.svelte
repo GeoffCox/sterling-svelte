@@ -5,9 +5,9 @@
   let {
     class: _class,
     itemCount,
-    itemRange = $bindable(),
-    page = $bindable(0),
-    pageCount = $bindable(0),
+    itemRange = $bindable(), //readonly
+    page = $bindable(),
+    pageCount = $bindable(), //readonly
     pageSize = 1,
     pageStep = 10,
     onChange,
@@ -20,78 +20,90 @@
     lastNumber
   }: PaginationProps = $props();
 
-  const setValue = (newValue: number) => {
-    page = pageCount > 0 ? Math.max(1, Math.min(newValue, pageCount)) : 0;
-  };
+  let _pageCount = $derived(
+    itemCount > 0 && pageSize > 0 ? Math.ceil(itemCount / pageSize) : undefined
+  );
 
-  let _pageCount = $derived(itemCount > 0 ? Math.ceil(itemCount / pageSize) : 0);
+  // 1 time update of pageCount when loaded because effect runs too late
+  // svelte-ignore state_referenced_locally
+  pageCount = _pageCount;
 
-  let _itemRange = $derived({
-    index: Math.max(0, (page - 1) * pageSize),
-    count: Math.max(0, Math.min(pageSize, itemCount - (page - 1) * pageSize))
-  });
-
-  // readonly props cannot be assigned $derived values yet
-  // svelte 5.9.0 supports some get/set $bindable syntax that may help
+  // readonly props cannot be assigned $derived values
   $effect(() => {
     pageCount = _pageCount;
   });
 
+  // clamp the page internally
+  let _page = $derived(_pageCount && page ? Math.max(1, Math.min(page, _pageCount)) : undefined);
+
+  let _itemRange = $derived(
+    _pageCount && _page
+      ? {
+          index: _page ? Math.max(0, (_page - 1) * pageSize) : 0,
+          count: _page ? Math.max(0, Math.min(pageSize, itemCount - (_page - 1) * pageSize)) : 0
+        }
+      : undefined
+  );
+
+  // 1 time update of itemRange when loaded because effect runs too late
+  // svelte-ignore state_referenced_locally
+  itemRange = _itemRange;
+
   // readonly props cannot be assigned $derived values yet
-  // svelte 5.9.0 supports some get/set $bindable syntax that may help
   $effect(() => {
     itemRange = _itemRange;
   });
 
   $effect(() => {
-    onChange?.(page, _itemRange);
+    onChange?.(_page, _itemRange);
   });
 
-  // clamp the page
-  $effect(() => {
-    page = pageCount > 0 ? Math.max(1, Math.min(page, pageCount)) : 0;
-  });
+  let firstValue = $derived(_pageCount && _page && _page >= 3 ? 1 : undefined);
+  let stepPreviousValue = $derived(_pageCount && _page ? Math.max(1, _page - pageStep) : undefined);
+  let previousValue = $derived(_pageCount && _page && _page >= 2 ? _page - 1 : undefined);
+  // _page acts as the currentValue;
+  let nextValue = $derived(_pageCount && _page && _page <= _pageCount - 1 ? _page + 1 : undefined);
+  let stepNextValue = $derived(
+    _pageCount && _page ? Math.min(_pageCount, _page + pageStep) : undefined
+  );
+  let lastValue = $derived(_pageCount && _page && _page <= _pageCount - 2 ? _pageCount : undefined);
 
-  let firstValue = $derived(pageCount > 0 && page >= 3 ? 1 : undefined);
-  let stepPreviousValue = $derived(pageCount > 0 ? Math.max(1, page - pageStep) : undefined);
-  let previousValue = $derived(pageCount > 0 && page >= 2 ? page - 1 : undefined);
-  let nextValue = $derived(pageCount > 0 && page <= pageCount - 1 ? page + 1 : undefined);
-  let stepNextValue = $derived(pageCount > 0 ? Math.min(pageCount, page + pageStep) : undefined);
-  let lastValue = $derived(pageCount > 0 && page <= pageCount - 2 ? pageCount : undefined);
+  let numberOfDigits = $derived(_pageCount ? _pageCount.toString().length : 1);
 
-  let numberOfDigits = $derived(pageCount.toString().length);
+  // clamp page when the value changes
+  const setPage = (newPage?: number) => {
+    page = _pageCount && newPage ? Math.max(1, Math.min(newPage, _pageCount)) : undefined;
+  };
 
   const onFirst = () => {
-    setValue(1);
+    setPage(1);
   };
 
   const onStepPrevious = () => {
-    setValue(page - Math.abs(pageStep));
+    _page && setPage(_page - Math.abs(pageStep));
   };
 
   const onPrevious = () => {
-    setValue(page - 1);
+    _page && setPage(_page - 1);
   };
 
   const onNext = () => {
-    setValue(page + 1);
+    _page && setPage(_page + 1);
   };
 
   const onStepNext = () => {
-    setValue(page + Math.abs(pageStep));
+    _page && setPage(_page + Math.abs(pageStep));
   };
 
   const onLast = () => {
-    setValue(pageCount);
+    _pageCount && setPage(_pageCount);
   };
 
   const onInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const inputValue = event.currentTarget.value;
     if (inputValue.length > 0) {
-      const page = parseInt(inputValue, 10);
-      setValue(page);
-    } else {
-      setValue(0);
+      const value = parseInt(inputValue, 10);
+      value && setPage(value);
     }
   };
 
@@ -130,135 +142,127 @@
   };
 </script>
 
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div class="sterling-pagination" style={`--page-number-width: ${numberOfDigits}ch`}>
   <div class="page-number first">
-    {#if firstValue}
-      <button
-        type="button"
-        onclick={onFirst}
-        onkeydown={(event) => onKeydown(event, onFirst)}
-        data-value={firstValue}
-      >
-        {#if firstNumber}
-          {@render firstNumber(firstValue)}
-        {:else}
-          {firstValue}
-        {/if}</button
-      >
-    {:else}
-      <div class="empty"></div>
-    {/if}
+    <button
+      disabled={firstValue === undefined}
+      type="button"
+      onclick={onFirst}
+      onkeydown={(event) => onKeydown(event, onFirst)}
+      data-value={firstValue}
+    >
+      {#if firstNumber}
+        {@render firstNumber(firstValue)}
+      {:else if firstValue}
+        {firstValue}
+      {:else}
+        -
+      {/if}</button
+    >
   </div>
   <div class="page-number step-previous">
-    {#if stepPreviousValue}
-      <button
-        type="button"
-        onmousedown={(event) => startHoldButton(event, onStepPrevious)}
-        onmouseup={stopHoldButton}
-        onmouseleave={stopHoldButton}
-        onkeydown={(event) => onKeydown(event, onStepPrevious)}
-        data-value={stepPreviousValue}
-      >
-        {#if stepPreviousNumber}
-          {@render stepPreviousNumber(stepPreviousValue)}
-        {:else}
-          &lt;&lt;
-        {/if}
-      </button>
-    {:else}
-      <div class="empty"></div>
-    {/if}
+    <button
+      disabled={stepPreviousValue === undefined}
+      type="button"
+      onmousedown={(event) => startHoldButton(event, onStepPrevious)}
+      onmouseup={stopHoldButton}
+      onmouseleave={stopHoldButton}
+      onkeydown={(event) => onKeydown(event, onStepPrevious)}
+      data-value={stepPreviousValue}
+    >
+      {#if stepPreviousNumber}
+        {@render stepPreviousNumber(stepPreviousValue)}
+      {:else if stepPreviousValue}
+        &lt;&lt;
+      {:else}
+        -
+      {/if}
+    </button>
   </div>
   <div class="page-number previous">
-    {#if previousValue}
-      <button
-        type="button"
-        onmousedown={(event) => startHoldButton(event, onPrevious)}
-        onmouseup={stopHoldButton}
-        onmouseleave={stopHoldButton}
-        onkeydown={(event) => onKeydown(event, onPrevious)}
-        data-value={previousValue}
-      >
-        {#if previousNumber}
-          {@render previousNumber(previousValue)}
-        {:else}
-          {previousValue}
-        {/if}
-      </button>
-    {:else}
-      <div class="empty"></div>
-    {/if}
+    <button
+      disabled={previousValue === undefined}
+      type="button"
+      onmousedown={(event) => startHoldButton(event, onPrevious)}
+      onmouseup={stopHoldButton}
+      onmouseleave={stopHoldButton}
+      onkeydown={(event) => onKeydown(event, onPrevious)}
+      data-value={previousValue}
+    >
+      {#if previousNumber}
+        {@render previousNumber(previousValue)}
+      {:else if previousValue}
+        {previousValue}
+      {:else}
+        -
+      {/if}
+    </button>
   </div>
   <div class="page-number current">
-    {#if page}
+    {#if _page}
       {#if currentNumber}
-        {@render currentNumber(page)}
+        {@render currentNumber(_page)}
       {:else}
-        <input value={page} onchange={onInputChange} />
+        <input disabled={_page === undefined} value={_page} onchange={onInputChange} />
       {/if}
     {:else}
-      <div class="empty"></div>
+      -
     {/if}
   </div>
   <div class="page-number next">
-    {#if nextValue}
-      <button
-        type="button"
-        onmousedown={(event) => startHoldButton(event, onNext)}
-        onmouseup={stopHoldButton}
-        onmouseleave={stopHoldButton}
-        onkeydown={(event) => onKeydown(event, onNext)}
-        data-value={nextValue}
-      >
-        {#if nextNumber}
-          {@render nextNumber(nextValue)}
-        {:else}
-          {nextValue}
-        {/if}
-      </button>
-    {:else}
-      <div class="empty"></div>
-    {/if}
+    <button
+      disabled={nextValue === undefined}
+      type="button"
+      onmousedown={(event) => startHoldButton(event, onNext)}
+      onmouseup={stopHoldButton}
+      onmouseleave={stopHoldButton}
+      onkeydown={(event) => onKeydown(event, onNext)}
+      data-value={nextValue}
+    >
+      {#if nextNumber}
+        {@render nextNumber(nextValue)}
+      {:else if nextValue}
+        {nextValue}
+      {:else}
+        -
+      {/if}
+    </button>
   </div>
   <div class="page-number step-next">
-    {#if stepNextValue}
-      <button
-        type="button"
-        disabled={stepNextValue === undefined}
-        onmousedown={(event) => startHoldButton(event, onStepNext)}
-        onmouseup={stopHoldButton}
-        onmouseleave={stopHoldButton}
-        onkeydown={(event) => onKeydown(event, onStepNext)}
-        data-value={stepNextValue}
-      >
-        {#if stepNextNumber}
-          {@render stepNextNumber(stepNextValue)}
-        {:else}
-          &gt;&gt;
-        {/if}
-      </button>
-    {:else}
-      <div class="empty"></div>
-    {/if}
+    <button
+      disabled={stepNextValue === undefined}
+      type="button"
+      onmousedown={(event) => startHoldButton(event, onStepNext)}
+      onmouseup={stopHoldButton}
+      onmouseleave={stopHoldButton}
+      onkeydown={(event) => onKeydown(event, onStepNext)}
+      data-value={stepNextValue}
+    >
+      {#if stepNextNumber}
+        {@render stepNextNumber(stepNextValue)}
+      {:else if stepNextValue}
+        &gt;&gt;
+      {:else}
+        -
+      {/if}
+    </button>
   </div>
   <div class="page-number last">
-    {#if lastValue}
-      <button
-        type="button"
-        onclick={() => onLast()}
-        onkeydown={(event) => onKeydown(event, onLast)}
-        data-value={lastValue}
-      >
-        {#if lastNumber}
-          {@render lastNumber(lastValue)}
-        {:else}
-          {lastValue}
-        {/if}
-      </button>
-    {:else}
-      <div class="empty"></div>
-    {/if}
+    <button
+      disabled={lastValue === undefined}
+      type="button"
+      onclick={() => onLast()}
+      onkeydown={(event) => onKeydown(event, onLast)}
+      data-value={lastValue}
+    >
+      {#if lastNumber}
+        {@render lastNumber(lastValue)}
+      {:else if lastValue}
+        {lastValue}
+      {:else}
+        -
+      {/if}
+    </button>
   </div>
 </div>
 
@@ -323,20 +327,27 @@
     user-select: none;
   }
 
-  .sterling-pagination button:hover {
+  .sterling-pagination button:not(:disabled):hover {
     background-color: var(--stsv-button__background-color--hover);
     border-color: transparent;
     color: var(--stsv-button__color--hover);
   }
 
-  .sterling-pagination button:active {
+  .sterling-pagination button:not(:disabled):active {
     background-color: var(--stsv-button__background-color--active);
     border-color: transparent;
     color: var(--stsv-button__color--active);
   }
 
-  .sterling-pagination button:focus-visible {
+  .sterling-pagination button:not(:disabled):focus-visible {
     border-color: var(--stsv-button__border-color--focus);
+  }
+
+  .sterling-pagination button:disabled {
+    cursor: not-allowed;
+    position: relative;
+    pointer-events: none;
+    color: var(--stsv-common__color--faint);
   }
 
   /* ----- input ----- */

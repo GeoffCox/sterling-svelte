@@ -59,43 +59,43 @@ export const paginationDoc: ComponentDoc = {
     },
     {
       name: 'firstNumber',
-      type: '(Snippet<[number]>) | undefined',
+      type: '(Snippet<[number | undefined]>) | undefined',
       default: 'undefined',
       comment: 'A snippet to render a page number at position 1.'
     },
     {
       name: 'stepPreviousNumber',
-      type: '(Snippet<[number]>) | undefined',
+      type: '(Snippet<[number | undefined]>) | undefined',
       default: 'undefined',
       comment: 'A snippet to render a page number at position 2. Defaults to <<.'
     },
     {
       name: 'previousNumber',
-      type: '(Snippet<[number]>) | undefined',
+      type: '(Snippet<[number | undefined]>) | undefined',
       default: 'undefined',
       comment: 'A snippet to render a page number at position 3.'
     },
     {
       name: 'currentNumber',
-      type: '(Snippet<[number]>) | undefined',
+      type: '(Snippet<[number | undefined]>) | undefined',
       default: 'undefined',
       comment: 'A snippet to render a page number at position 4. Defaults to an input.'
     },
     {
       name: 'nextNumber',
-      type: '(Snippet<[number]>) | undefined',
+      type: '(Snippet<[number | undefined]>) | undefined',
       default: 'undefined',
       comment: 'A snippet to render a page number at position 5.'
     },
     {
       name: 'stepNextNumber',
-      type: '(Snippet<[number]>) | undefined',
+      type: '(Snippet<[number | undefined]>) | undefined',
       default: 'undefined',
       comment: 'A snippet to render a page number at position 6. Defaults to >>.'
     },
     {
       name: 'lastNumber',
-      type: '(Snippet<[number]>) | undefined',
+      type: '(Snippet<[number | undefined]>) | undefined',
       default: 'undefined',
       comment: 'A snippet to render a page number at position 7.'
     }

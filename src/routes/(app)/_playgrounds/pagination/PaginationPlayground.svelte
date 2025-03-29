@@ -14,10 +14,11 @@
   import StepNextIcon from './StepNextIcon.svelte';
   import type { ChangeEventHandler } from 'svelte/elements';
   import { countries } from '../../_shared/sampleData/countries';
+  import { get } from 'svelte/store';
 
   let itemCount: number = $state(countries.length);
   let itemRange: { index: number; count: number } = $state({ index: 0, count: 0 });
-  let page: number = $state(0);
+  let page: number = $state(1);
   let pageCount: number = $state(0);
   let pageSize: number = $state(7);
   let pageStep: number = $state(5);
@@ -27,19 +28,23 @@
 
   let code = $derived(getPlaygroundCode({ _class, itemCount, pageSize, pageStep }));
 
-  let currentPageItemCount: number = $derived(Math.min(pageSize, itemCount, itemRange.count));
+  let currentPageItemCount: number = $derived(Math.min(pageSize, itemCount, itemRange?.count || 0));
 
   let items: number[] = $derived(Array.from({ length: currentPageItemCount }, (_, i) => i + 1));
 
   const onInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    const inputValue = event.currentTarget.value;
-    if (inputValue.length > 0) {
-      const newPage = parseInt(inputValue, 10);
-      page = newPage;
-    } else {
-      page = 0;
+    if (customPageNumbers) {
+      const inputValue = event.currentTarget.value;
+      if (inputValue.length > 0) {
+        const newPage = parseInt(inputValue, 10);
+        page = newPage;
+      } else {
+        page = 0;
+      }
     }
   };
+
+  $inspect(page, 'playground page');
 </script>
 
 <Playground {code}>
@@ -66,7 +71,7 @@
           onChange={(value, itemrange) =>
             console.log(`Pagination onChange value:${value} itemrange:${itemrange}`)}
         >
-          {#snippet firstNumber(value: number)}
+          {#snippet firstNumber(value?: number)}
             <div class="circle-number">{value}</div>
           {/snippet}
           {#snippet stepPreviousNumber()}
@@ -74,13 +79,13 @@
               <StepPreviousIcon width="1em" height="1em" />
             </div>
           {/snippet}
-          {#snippet previousNumber(value: number)}
+          {#snippet previousNumber(value?: number)}
             <div class="circle-number">{value}</div>
           {/snippet}
-          {#snippet currentNumber(currentValue: number)}
+          {#snippet currentNumber(currentValue?: number)}
             <Input value={currentValue} class="circle-input" onchange={onInputChange} />
           {/snippet}
-          {#snippet nextNumber(value: number)}
+          {#snippet nextNumber(value?: number)}
             <div class="circle-number">{value}</div>
           {/snippet}
           {#snippet stepNextNumber()}
@@ -88,7 +93,7 @@
               <StepNextIcon width="1em" height="1em" />
             </div>
           {/snippet}
-          {#snippet lastNumber(value: number)}
+          {#snippet lastNumber(value?: number)}
             <div class="circle-number">{value}</div>
           {/snippet}
         </Pagination>
@@ -113,15 +118,12 @@
     </Label>
     <Label text="page">
       <div class="slider">
-        <Slider bind:value={page} min={1} max={pageCount} step={1} />
+        <Slider bind:value={page} min={1} max={pageCount || 1} step={1} />
         <div>{page}</div>
       </div>
     </Label>
     <Label text="pageSize">
-      <div class="slider">
-        <Slider bind:value={pageSize} min={1} max={itemCount > 0 ? itemCount : 1} step={1} />
-      </div>
-      <div>{pageSize}</div>
+      <Input type="number" bind:value={pageSize} />
     </Label>
     <Label text="pageStep">
       <Input type="number" bind:value={pageStep} />
