@@ -17,7 +17,6 @@
   }: Props = $props();
 
   const addVariant = (value: string) => {
-    console.log('addVariant', value);
     _class += ` ${value}`;
   };
 

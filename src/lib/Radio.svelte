@@ -43,18 +43,6 @@
     inputRef?.focus(options);
   };
 
-  // ----- Event Handlers ----- //
-
-  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    console.log('onChange', e);
-    // if ((e.currentTarget && e.currentTarget.checked) || (e.target && e.target.checked)) {
-    //   group = value;
-    // }
-  };
-
-  $effect(() => {
-    console.log(id, '-checked', checked);
-  });
 </script>
 
 <!--

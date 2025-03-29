@@ -90,7 +90,6 @@
         placement: floatingUIPlacement,
         middleware
       });
-      console.log('popupPosition', popupPosition);
     } else {
       popupPosition = { x: 0, y: 0 };
     }

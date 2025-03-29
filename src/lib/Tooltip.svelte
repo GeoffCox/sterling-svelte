@@ -30,8 +30,6 @@
     !!children ? (originRef?.previousElementSibling as HTMLElement) : undefined
   );
 
-  $inspect({ reference });
-
   const show = () => {
     if (!disabled) {
       open = true;
