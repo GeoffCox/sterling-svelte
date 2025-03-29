@@ -15,7 +15,7 @@
   $: types = data.docs.types;
 </script>
 
-<div>
+<div class="component-doc">
   <h1>{docs.name}</h1>
   <div>{docs.description}</div>
 
@@ -28,7 +28,7 @@
   {#if props || events || methods}
     <h2>Members</h2>
     {#if props}
-      <table>
+      <table class="members">
         <thead>
           <tr>
             <th></th>
@@ -45,7 +45,7 @@
               <td class="name">{item.name}</td>
               <td class="type">{item.type || ''}</td>
               <td class="default">{item.default || ''}</td>
-              <td class="comments">{item.comment || ''}</td>
+              <td class="comment">{item.comment || ''}</td>
             </tr>
           {/each}
         </tbody>
@@ -53,7 +53,7 @@
       <br />
     {/if}
     {#if events}
-      <table>
+      <table class="events">
         <thead>
           <tr>
             <th></th>
@@ -68,7 +68,7 @@
               <td class="icon"><CodeEventIcon /></td>
               <td class="name">{item.name}</td>
               <td class="data">{item.data || ''}</td>
-              <td class="comments">{item.comment || ''}</td>
+              <td class="comment">{item.comment || ''}</td>
             </tr>
           {/each}
         </tbody>
@@ -76,7 +76,7 @@
       <br />
     {/if}
     {#if methods}
-      <table>
+      <table class="methods">
         <thead>
           <tr>
             <th></th>
@@ -93,7 +93,7 @@
               <td class="name">{item.name}</td>
               <td class="params">{item.params || ''}</td>
               <td class="return">{item.returnType || ''}</td>
-              <td class="comments">{item.comment || ''}</td>
+              <td class="comment">{item.comment || ''}</td>
             </tr>
           {/each}
         </tbody>
@@ -103,7 +103,7 @@
   {/if}
   {#if types}
     <h2>Types</h2>
-    <table>
+    <table class="types">
       <thead>
         <tr>
           <th></th>
@@ -118,7 +118,7 @@
             <td class="icon"><CodeTypeIcon /></td>
             <td class="name">{item.name}</td>
             <td class="definition">{item.definition || ''}</td>
-            <td class="comments">{item.comment || ''}</td>
+            <td class="comment">{item.comment || ''}</td>
           </tr>
         {/each}
       </tbody>
@@ -127,7 +127,7 @@
   {/if}
   {#if docs.comments}
     <h2>Considerations</h2>
-    <ul>
+    <ul class="considerations">
       {#each docs.comments as comment}
         <li>{comment}</li>
       {/each}
@@ -135,15 +135,20 @@
   {/if}
   {#if docs.anatomy}
     <h2>Anatomy</h2>
-    <pre>{docs.anatomy}</pre>
+    <pre class="anatomy">{docs.anatomy}</pre>
   {/if}
 </div>
 
 <style>
+  .component-doc {
+    padding: 1em;
+    font-size: 0.9em;
+    overflow: hidden;
+  }
+
   table {
     width: 100%;
   }
-
   .icon {
     width: 24px;
     height: 24px;

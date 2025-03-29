@@ -104,12 +104,6 @@
         </div>
         <div class="subtitle">
           A modern, accessible, lightweight UI component library for Svelte.
-          <div class="breaking-news">
-            Exciting News! sterling-svelte 2.0 is out and built on Svelte 5! Read all about it
-            <Link variant="text-underline" href="https://geoffcox.github.io/docs/sterling-svelte"
-              >here</Link
-            >!
-          </div>
         </div>
         <div class="mode">
           <ModeSlider bind:mode />
@@ -136,9 +130,7 @@
         </div>
       </div>
       <div class="content">
-        <div class="content-container">
-          <slot />
-        </div>
+        <slot />
       </div>
     </div>
   </div>
@@ -164,7 +156,7 @@
     font-family: 'Atkinson Hyperlegible', sans-serif;
     /* font-family: 'Open Sans', sans-serif;  */
     margin: 0;
-    padding: 1em;
+    padding: 0;
     min-height: 100vh;
     overflow: hidden;
   }
@@ -281,8 +273,8 @@
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas: 'header header' 'nav content';
-    align-items: stretch;
-    align-content: stretch;
+    place-items: stretch;
+    place-content: stretch;
     padding: 0;
     color: var(--stsv-common__color);
     overflow: hidden;
@@ -312,15 +304,6 @@
   .header .subtitle {
     grid-area: subtitle;
     font-size: 0.9em;
-  }
-
-  .breaking-news {
-    background-color: var(--stsv-status--warning__background-color);
-    border-color: var(--stsv-status--warning__border-color);
-    border-width: 2px;
-    color: var(--stsv-status--warning__color);
-    padding: 1em;
-    margin-top: 0.5em;
   }
 
   .header .mode {

@@ -63,17 +63,15 @@
 
 <Playground {code}>
   {#snippet component()}
-    <div slot="component">
-      <Switch
-        bind:checked
-        class={variant}
-        {disabled}
-        offLabel={customLabels ? ColdLabel : offText}
-        onLabel={customLabels ? HotLabel : onText}
-        {vertical}
-        onchange={onSwitchChange}
-      />
-    </div>
+    <Switch
+      bind:checked
+      class={variant}
+      {disabled}
+      offLabel={customLabels ? ColdLabel : offText}
+      onLabel={customLabels ? HotLabel : onText}
+      {vertical}
+      onchange={onSwitchChange}
+    />
   {/snippet}
   {#snippet props()}
     <Checkbox bind:checked>checked</Checkbox>

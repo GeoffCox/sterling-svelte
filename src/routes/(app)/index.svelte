@@ -4,7 +4,7 @@
   import { base } from '$app/paths';
 </script>
 
-<div>
+<div class="overview">
   <h1>Overview</h1>
 
   <p>Welcome to sterling-svelte, a UI component library built for Svelte!</p>
@@ -59,3 +59,9 @@
   Contributors are welcome! Create a work item on GitHub if you find a bug or have a feature
   request. Create a PR to contribute a component, feature, or fix.
 </div>
+
+<style>
+  .overview {
+    max-width: 900px;
+  }
+</style>
