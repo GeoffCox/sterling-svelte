@@ -189,13 +189,16 @@
     width: calc(100% - 0.25em);
   }
 
-  :global(.circle-input input) {
+  :global(.circle-input input:not(:disabled)) {
     border-radius: 10000px;
     aspect-ratio: 1 / 1;
+    text-align: center;
+    padding: 0;
+  }
+
+  :global(.circle-input input:not(:disabled):not(:hover):not(:focus-visible)) {
     background-color: var(--stsv-button__background-color--blue);
     border-bottom-color: var(--stsv-button__border-color--blue);
     color: var(--stsv-button__color--blue);
-    text-align: center;
-    padding: 0;
   }
 </style>

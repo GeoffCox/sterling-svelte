@@ -16,13 +16,6 @@ Raises an event anytime the user clicks outside the bounds of the element.
   <code>{preBlocks.clickOutside}</code>
 </pre>
 
-<h2>extraClass</h2>
-
-Appends an extra class value to the class prop. Typically used by components to support adding the
-class prop to an existing class name.
-
-<pre>{preBlocks.extraClass}</pre>
-
 <h2>forwardEvents</h2>
 
 Forwards native and svelte component events from one component to another. Useful when you need to
@@ -42,3 +35,10 @@ move an element outside of its parent so it can float above it.
 Keeps the keyboard focus within the children of an element by handling 'Tab' keyboard events.
 
 <pre>{preBlocks.trapKeyboardFocus}</pre>
+
+<h2>DEPRECATED: extraClass</h2>
+
+Appends an extra class value to the class prop. Typically used by components to support adding the
+class prop to an existing class name.
+
+<pre>{preBlocks.extraClass}</pre>
