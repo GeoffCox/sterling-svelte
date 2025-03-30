@@ -10,11 +10,12 @@
   import Button from './Button.svelte';
   import Menu from './Menu.svelte';
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
-  import { idGenerator } from './idGenerator';
   import Popover from './Popover.svelte';
   import { clickOutside } from './actions/clickOutside';
   import type { PopoverPlacement } from './Popover.types';
   import { mergeClasses } from './mergeClasses';
+
+  const uuid = $props.id();
 
   type Props = HTMLButtonAttributes & {
     items: Snippet;
@@ -41,7 +42,7 @@
     ...rest
   }: Props = $props();
 
-  const instanceId = idGenerator.nextId('MenuButton');
+  const instanceId = `MenuButton-${uuid}`;
 
   let buttonRef: Button;
   let openValues: string[] = $state([]);

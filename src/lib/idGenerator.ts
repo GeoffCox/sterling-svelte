@@ -4,6 +4,7 @@ const next = () => {
   return ++id;
 };
 
+/** @deprecated Use $props.id() instead */
 export const idGenerator = {
   next,
   nextId: (prefix?: string) => {

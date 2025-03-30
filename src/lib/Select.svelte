@@ -4,11 +4,12 @@
   import { tick, type Snippet } from 'svelte';
 
   import { clickOutside } from './actions/clickOutside';
-  import { idGenerator } from './idGenerator';
   import List from './List.svelte';
   import Popover from './Popover.svelte';
   import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
   import { mergeClasses } from './mergeClasses';
+
+  const uuid = $props.id();
 
   type DeprecatedProps = {
     /** @deprecated Use icon instead */
@@ -50,7 +51,7 @@
   icon = icon || buttonSnippet;
   value = value || valueSnippet;
 
-  const popupId = idGenerator.nextId('Select-popup');
+  const popoverId = `Select-Popover-${uuid}`;
 
   // ----- State ----- //
 
@@ -209,7 +210,7 @@
 
 <div
   bind:this={selectRef}
-  aria-controls={popupId}
+  aria-controls={popoverId}
   aria-haspopup="listbox"
   aria-expanded={open}
   class={mergeClasses('sterling-select', _class)}
@@ -242,7 +243,7 @@
       <div class="chevron"></div>
     {/if}
   </div>
-  <Popover reference={selectRef} bind:open id={popupId} conditionalRender={false}>
+  <Popover id={popoverId} reference={selectRef} bind:open conditionalRender={false}>
     <div class={mergeClasses('sterling-select-popup-content', 'sterling-select-content', _class)}>
       <List
         bind:this={listRef}

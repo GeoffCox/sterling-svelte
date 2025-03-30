@@ -7,13 +7,14 @@
   import { setContext } from 'svelte';
 
   import { clickOutside } from './actions/clickOutside';
-  import { idGenerator } from './idGenerator';
 
   import { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
   import { isElementEnabledMenuItem } from './MenuItem.utils';
   import type { HTMLAttributes } from 'svelte/elements';
   import { mergeClasses } from './mergeClasses';
+
+  const uuid = $props.id();
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     onClose?: (value: string) => void;
@@ -23,7 +24,7 @@
 
   let { class: _class, children, onClose, onOpen, onSelect, ...rest }: Props = $props();
 
-  const rootValue = idGenerator.nextId('MenuBar');
+  const rootValue = `MenuBar-${uuid}`;
   let openValues: string[] = $state([]);
   let prevOpenValue: string | undefined = $state();
 

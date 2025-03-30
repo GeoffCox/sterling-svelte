@@ -3,10 +3,11 @@
 <script lang="ts">
   import type { HTMLInputAttributes } from 'svelte/elements';
 
-  import { idGenerator } from './idGenerator';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import type { Snippet } from 'svelte';
   import { mergeClasses } from './mergeClasses';
+
+  const uuid = $props.id();
 
   type LabelSnippet = Snippet<
     [{ checked: boolean | null | undefined; disabled: boolean | null | undefined; inputId: string }]
@@ -29,7 +30,7 @@
     ...rest
   }: Props = $props();
 
-  const inputId = id || idGenerator.nextId('Switch');
+  const inputId = id || `Switch-${uuid}`;
 
   let inputRef: HTMLInputElement;
 

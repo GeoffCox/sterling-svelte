@@ -3,9 +3,10 @@
 <script lang="ts">
   import type { ChangeEventHandler, HTMLInputAttributes } from 'svelte/elements';
 
-  import { idGenerator } from './idGenerator';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import { mergeClasses } from './mergeClasses';
+
+  const uuid = $props.id();
 
   type Props = HTMLInputAttributes & {
     group?: any | null;
@@ -25,7 +26,7 @@
 
   $effect(() => {
     if (children && id === undefined) {
-      id = idGenerator.nextId('Radio');
+      id = `Radio-${uuid}`;
     }
   });
 
@@ -42,7 +43,6 @@
   export const focus = (options?: FocusOptions) => {
     inputRef?.focus(options);
   };
-
 </script>
 
 <!--

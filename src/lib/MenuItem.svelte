@@ -5,7 +5,6 @@
 
   import { getContext, setContext, tick, type Snippet } from 'svelte';
 
-  import { idGenerator } from './idGenerator';
   import Menu from './Menu.svelte';
   import { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
   import type { MenuBarContext } from './MenuBar.types';
@@ -19,6 +18,8 @@
     MouseEventHandler
   } from 'svelte/elements';
   import { mergeClasses } from './mergeClasses';
+
+  const uuid = $props.id();
 
   type Props = HTMLButtonAttributes & {
     checked?: boolean | null;
@@ -54,7 +55,7 @@
 
   const menuBarContext = getContext<MenuBarContext>(MENU_BAR_CONTEXT_KEY) || {};
 
-  const instanceId = idGenerator.nextId('MenuItem');
+  const instanceId = `MenuItem-${uuid}`;
 
   let displayId = $derived(`${value}-display-${instanceId}`);
   let open = $derived(menuItemContext.openValues?.includes(value));

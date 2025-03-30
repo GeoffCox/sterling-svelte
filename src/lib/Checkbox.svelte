@@ -2,9 +2,10 @@
 
 <script lang="ts">
   import type { HTMLInputAttributes } from 'svelte/elements';
-  import { idGenerator } from './idGenerator';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import { mergeClasses } from './mergeClasses';
+
+  const uuid = $props.id();
 
   type Props = HTMLInputAttributes;
 
@@ -21,7 +22,7 @@
 
   $effect(() => {
     if (children && id === undefined) {
-      id = idGenerator.nextId('Checkbox');
+      id = `Checkbox-${uuid}`;
     }
   });
 
