@@ -1,14 +1,13 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { FormEventHandler, HTMLDialogAttributes } from 'svelte/elements';
   import { onMount, setContext, tick, type Snippet } from 'svelte';
+  import type { FormEventHandler, HTMLDialogAttributes } from 'svelte/elements';
 
-  import Button from './Button.svelte';
-  import type { PortalContext } from './Portal.types';
-  import { STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
   import { writable } from 'svelte/store';
-  import { mergeClasses } from './mergeClasses';
+  import Button from './Button.svelte';
+  import { STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
+  import type { PortalContext } from './Portal.types';
 
   const dialogFadeDuration = 250;
 
@@ -151,7 +150,7 @@
 
 <dialog
   bind:this={dialogRef}
-  class={mergeClasses('sterling-dialog', _class)}
+  class={['sterling-dialog', _class]}
   class:open
   class:closing
   {...rest}

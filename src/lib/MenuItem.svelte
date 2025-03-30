@@ -17,7 +17,6 @@
     KeyboardEventHandler,
     MouseEventHandler
   } from 'svelte/elements';
-  import { mergeClasses } from './mergeClasses';
 
   const uuid = $props.id();
 
@@ -400,7 +399,7 @@
   aria-expanded={open}
   aria-haspopup={!!children}
   aria-owns={menuId}
-  class={mergeClasses('sterling-menu-item', _class)}
+  class={['sterling-menu-item', _class]}
   class:using-keyboard={usingKeyboard}
   data-value={value}
   data-root-value={menuItemContext.rootValue}

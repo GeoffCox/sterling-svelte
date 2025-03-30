@@ -4,7 +4,6 @@
   import { tick } from 'svelte';
   import type { TextAreaResize } from './TextArea.types';
   import type { FormEventHandler, HTMLTextareaAttributes } from 'svelte/elements';
-  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLTextareaAttributes & {
     autoHeight?: boolean | null | undefined;
@@ -104,7 +103,7 @@
   };
 </script>
 
-<div class={mergeClasses('sterling-text-area', _class)} class:disabled>
+<div class={['sterling-text-area', _class]} class:disabled>
   <textarea
     bind:this={textAreaRef}
     bind:value

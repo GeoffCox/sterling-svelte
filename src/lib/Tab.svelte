@@ -7,7 +7,6 @@
   import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import type { HTMLButtonAttributes } from 'svelte/elements';
-  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLButtonAttributes & {
     value: string;
@@ -50,7 +49,7 @@
 <button
   bind:this={tabRef}
   aria-selected={selected}
-  class={mergeClasses('sterling-tab', _class)}
+  class={['sterling-tab', _class]}
   class:selected
   class:using-keyboard={$usingKeyboard}
   class:vertical={tabListContext.vertical}

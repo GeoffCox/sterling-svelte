@@ -4,7 +4,6 @@
   import type { HTMLAttributes, KeyboardEventHandler, PointerEventHandler } from 'svelte/elements';
 
   import { round } from 'lodash-es';
-  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null;
@@ -153,7 +152,7 @@
   aria-valuemin={min}
   aria-valuenow={value}
   aria-valuemax={max}
-  class={mergeClasses('sterling-slider', _class)}
+  class={['sterling-slider', _class]}
   class:disabled
   class:horizontal={!vertical}
   class:vertical

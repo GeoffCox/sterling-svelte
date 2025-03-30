@@ -3,7 +3,6 @@
 <script lang="ts">
   import type { AriaAttributes, HTMLAttributes } from 'svelte/elements';
   import type { ProgressOrientation } from './Progress.types';
-  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null;
@@ -47,7 +46,7 @@
 <!-- svelte-ignore a11y_role_supports_aria_props -->
 <div
   aria-orientation={vertical ? 'vertical' : 'horizontal'}
-  class={mergeClasses('sterling-progress', _class)}
+  class={['sterling-progress', _class]}
   class:disabled
   class:horizontal={!vertical}
   class:vertical

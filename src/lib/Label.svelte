@@ -5,7 +5,6 @@
   import Tooltip from './Tooltip.svelte';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import type { HTMLLabelAttributes, MouseEventHandler } from 'svelte/elements';
-  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLLabelAttributes & {
     forwardClick?: boolean | null;
@@ -96,7 +95,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <label
   bind:this={labelRef}
-  class={mergeClasses('sterling-label', _class)}
+  class={['sterling-label', _class]}
   class:using-keyboard={$usingKeyboard}
   for={_for}
   {...rest}

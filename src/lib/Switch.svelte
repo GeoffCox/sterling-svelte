@@ -5,7 +5,6 @@
 
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import type { Snippet } from 'svelte';
-  import { mergeClasses } from './mergeClasses';
 
   const uuid = $props.id();
 
@@ -58,7 +57,7 @@
 </script>
 
 <div
-  class={mergeClasses('sterling-switch', _class)}
+  class={['sterling-switch', _class]}
   class:checked
   class:disabled
   class:vertical

@@ -3,7 +3,6 @@
 <script lang="ts">
   import type { HTMLInputAttributes } from 'svelte/elements';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
-  import { mergeClasses } from './mergeClasses';
 
   const uuid = $props.id();
 
@@ -46,7 +45,7 @@
 	A styled HTML input type=checkbox element.
 -->
 <div
-  class={mergeClasses('sterling-checkbox', _class)}
+  class={['sterling-checkbox', _class]}
   class:checked
   class:disabled
   class:using-keyboard={$usingKeyboard}

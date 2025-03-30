@@ -3,7 +3,6 @@
 <script lang="ts">
   import type { HTMLInputAttributes } from 'svelte/elements';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
-  import { mergeClasses } from './mergeClasses';
 
   const uuid = $props.id();
 
@@ -65,15 +64,11 @@
 </script>
 
 {#if children}
-  <label class={mergeClasses('sterling-input-label', _class)} class:disabled for={id}>
+  <label class={['sterling-input-label', _class]} class:disabled for={id}>
     {@render children()}
   </label>
 {/if}
-<div
-  class={mergeClasses('sterling-input', _class)}
-  class:disabled
-  class:using-keyboard={$usingKeyboard}
->
+<div class={['sterling-input', _class]} class:disabled class:using-keyboard={$usingKeyboard}>
   <input
     bind:this={inputRef}
     class:using-keyboard={$usingKeyboard}

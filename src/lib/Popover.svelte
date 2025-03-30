@@ -15,7 +15,6 @@
   import type { PortalContext } from './Portal.types';
   import { STERLING_PORTAL_HOST_ID, STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
   import type { HTMLAttributes, KeyboardEventHandler } from 'svelte/elements';
-  import { mergeClasses } from './mergeClasses';
 
   // ----- Props ----- //
 
@@ -152,7 +151,7 @@
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div
       bind:this={popupRef}
-      class={mergeClasses('sterling-popover', _class)}
+      class={['sterling-popover', _class]}
       class:open
       class:top={popupPosition.placement === 'top'}
       class:top-start={popupPosition.placement === 'top-start'}

@@ -7,7 +7,6 @@
   import List from './List.svelte';
   import Popover from './Popover.svelte';
   import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
-  import { mergeClasses } from './mergeClasses';
 
   const uuid = $props.id();
 
@@ -213,7 +212,7 @@
   aria-controls={popoverId}
   aria-haspopup="listbox"
   aria-expanded={open}
-  class={mergeClasses('sterling-select', _class)}
+  class={['sterling-select', _class]}
   class:disabled
   role="combobox"
   tabindex="0"
@@ -244,7 +243,7 @@
     {/if}
   </div>
   <Popover id={popoverId} reference={selectRef} bind:open conditionalRender={false}>
-    <div class={mergeClasses('sterling-select-popup-content', 'sterling-select-content', _class)}>
+    <div class={['sterling-select-popup-content', 'sterling-select-content', _class]}>
       <List
         bind:this={listRef}
         {disabled}
@@ -253,7 +252,7 @@
         onkeydown={onListKeydown}
         onSelect={onListSelect}
         tabindex={open ? 0 : -1}
-        class={mergeClasses('composed', listClass)}
+        class={['composed', listClass]}
       >
         {#if children}
           {@render children()}

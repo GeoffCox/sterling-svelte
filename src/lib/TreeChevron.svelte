@@ -3,7 +3,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { HTMLAttributes } from 'svelte/elements';
-  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     expanded?: boolean | null | undefined;
@@ -32,7 +31,7 @@
 </script>
 
 <div
-  class={mergeClasses('sterling-tree-chevron', _class)}
+  class={['sterling-tree-chevron', _class]}
   class:leaf={!hasChildren}
   class:animate
   class:expanded

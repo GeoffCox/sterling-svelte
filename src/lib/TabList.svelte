@@ -6,7 +6,6 @@
 
   import type { TabListContext } from './TabList.types';
   import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
-  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null;
@@ -242,7 +241,7 @@
 <div
   aria-orientation={vertical ? 'vertical' : 'horizontal'}
   bind:this={tabListRef}
-  class={mergeClasses('sterling-tab-list', _class)}
+  class={['sterling-tab-list', _class]}
   class:disabled
   class:vertical
   role="tablist"

@@ -298,7 +298,8 @@
     grid-row-start: 1;
     grid-column-start: 1;
     background-color: transparent;
-    background-image: repeating-linear-gradient(
+    background-image:
+      repeating-linear-gradient(
         45deg,
         var(--stsv-common__color) 25%,
         transparent 25%,

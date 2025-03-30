@@ -12,7 +12,6 @@
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
   import { isElementEnabledMenuItem } from './MenuItem.utils';
   import type { HTMLAttributes } from 'svelte/elements';
-  import { mergeClasses } from './mergeClasses';
 
   const uuid = $props.id();
 
@@ -138,7 +137,7 @@
 
 <div
   bind:this={menuBarRef}
-  class={mergeClasses('sterling-menu-bar', _class)}
+  class={['sterling-menu-bar', _class]}
   role="menubar"
   tabindex="-1"
   {...rest}

@@ -13,7 +13,6 @@
   import Popover from './Popover.svelte';
   import { clickOutside } from './actions/clickOutside';
   import type { PopoverPlacement } from './Popover.types';
-  import { mergeClasses } from './mergeClasses';
 
   const uuid = $props.id();
 
@@ -139,7 +138,7 @@
   aria-expanded={!!open}
   aria-haspopup={!!children}
   aria-owns={menuId}
-  class={mergeClasses('sterling-menu-button', _class)}
+  class={['sterling-menu-button', _class]}
   data-value={value}
   data-root-value={value}
   {...rest}

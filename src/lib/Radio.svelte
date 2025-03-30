@@ -4,7 +4,6 @@
   import type { ChangeEventHandler, HTMLInputAttributes } from 'svelte/elements';
 
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
-  import { mergeClasses } from './mergeClasses';
 
   const uuid = $props.id();
 
@@ -50,7 +49,7 @@
 	A styled HTML input type=radio element with optional label.
 -->
 <div
-  class={mergeClasses('sterling-radio', _class)}
+  class={['sterling-radio', _class]}
   class:checked
   class:disabled
   class:using-keyboard={$usingKeyboard}

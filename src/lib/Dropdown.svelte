@@ -6,11 +6,10 @@
 
   import Popover from './Popover.svelte';
 
+  import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
   import { clickOutside } from './actions/clickOutside';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
-  import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
-  import { mergeClasses } from './mergeClasses';
 
   const uuid = $props.id();
 
@@ -122,7 +121,7 @@
   aria-controls={popoverId}
   aria-haspopup={true}
   aria-expanded={open}
-  class={mergeClasses('sterling-dropdown', _class)}
+  class={['sterling-dropdown', _class]}
   class:disabled
   class:open
   class:using-keyboard={$usingKeyboard}
@@ -152,7 +151,7 @@
 
   <Popover id={popoverId} reference={dropdownRef} open={!disabled && open} placement="bottom-start">
     <div
-      class={mergeClasses('sterling-dropdown-popup-content', 'sterling-dropdown-content', _class)}
+      class={['sterling-dropdown-popup-content', 'sterling-dropdown-content', _class]}
       transition:slideMotion|global={{ duration: 200 }}
       bind:this={popupContentRef}
     >

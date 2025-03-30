@@ -2,7 +2,6 @@
 
 <script lang="ts">
   import type { HTMLAnchorAttributes } from 'svelte/elements';
-  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLAnchorAttributes & {
     disabled?: boolean | null;
@@ -25,7 +24,7 @@
   };
 </script>
 
-<a bind:this={linkRef} class={mergeClasses('sterling-link', _class)} class:disabled {...rest}>
+<a bind:this={linkRef} class={['sterling-link', _class]} class:disabled {...rest}>
   {#if children}
     {@render children()}
   {/if}

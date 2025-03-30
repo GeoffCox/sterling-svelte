@@ -12,7 +12,6 @@
   import { TREE_CONTEXT_KEY } from './Tree.constants';
   import TreeChevron from './TreeChevron.svelte';
   import { TREE_ITEM_CONTEXT_KEY } from './TreeItem.constants';
-  import { mergeClasses } from './mergeClasses';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null | undefined;
@@ -357,7 +356,7 @@
   bind:this={treeItemRef}
   aria-selected={selected ? true : undefined}
   aria-expanded={expanded}
-  class={mergeClasses('sterling-tree-item', _class)}
+  class={['sterling-tree-item', _class]}
   class:disabled={_disabled}
   class:expanded
   class:item-disabled={disabled}
