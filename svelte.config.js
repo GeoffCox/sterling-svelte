@@ -1,6 +1,6 @@
 import autoAdapter from '@sveltejs/adapter-auto';
 import staticAdapter from '@sveltejs/adapter-static';
-import preprocess from 'svelte-preprocess';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 const dev = process.env.NODE_ENV === 'development';
 const publishing = process.env.STERLING_SVELTE_PUBLISH === 'true';
@@ -12,9 +12,9 @@ const routes = publishing ? 'src/routes/(app)' : 'src/routes';
 const config = {
   // Consult https://kit.svelte.dev/docs/integrations#preprocessors
   // for more information about preprocessors
-  preprocess: [preprocess()],
+  preprocess: [vitePreprocess()],
   kit: {
-    adapter: publishing ? staticAdapter() : autoAdapter(),
+    adapter: staticAdapter(),
     paths: {
       base: pathsBase,
       relative: false

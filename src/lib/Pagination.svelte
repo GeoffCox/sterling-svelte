@@ -286,13 +286,6 @@
     min-width: calc(var(--page-number-width, 1ch) + 1em);
   }
 
-  .sterling-pagination .empty {
-    appearance: none;
-    border: 2px solid transparent;
-    box-sizing: border-box;
-    min-width: calc(var(--page-number-width, 1ch) + 1em);
-  }
-
   /* ----- button ----- */
 
   .sterling-pagination button {
