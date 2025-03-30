@@ -1,7 +1,9 @@
 <h1>Changelog</h1>
 
 <h2>2.0.1</h2>
-<p>No breaking changes: where props and classes were added, existing ones were not removed.</p>
+<p>
+  <b>No breaking changes</b> where props and classes were added, existing ones were not removed.
+</p>
 
 <h3>Dropdown</h3>
 <ul>
@@ -74,6 +76,12 @@
 <h3>Documentation</h3>
 <ul>
   <li>Better described the HTML structure with classes in anatomy section for each component.</li>
+</ul>
+<h3>Other changes</h3>
+<ul>
+  <li>Deprecated idGenerator in favor of $props.id()</li>
+  <li>Deprecated the extraClass action in favor of built-in clsx class merging</li>
+  <li>Removed some leftover console.log and $inspect calls from debugging</li>
 </ul>
 
 <h2>2.0.0</h2>

@@ -1,17 +1,15 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
+  import Button from '$lib/Button.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
-
-  import { coffeeTree } from '../../_shared/sampleData/coffeeTree';
-
-  import Button from '$lib/Button.svelte';
-  import CoffeeTreeItem from './CoffeeTreeItem.svelte';
   import Label from '$lib/Label.svelte';
   import Tree from '$lib/Tree.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import { coffeeTree } from '../../_shared/sampleData/coffeeTree';
   import Playground from '../Playground.svelte';
+  import CoffeeTreeItem from './CoffeeTreeItem.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');

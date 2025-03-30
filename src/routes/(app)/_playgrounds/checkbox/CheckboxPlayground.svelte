@@ -2,10 +2,10 @@
 
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
-  import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
-  import Playground from '../Playground.svelte';
+  import Label from '$lib/Label.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled: boolean | undefined | null = $state(false);

@@ -1,7 +1,6 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { getContext, onMount, tick } from 'svelte';
   import {
     autoUpdate,
     computePosition,
@@ -10,11 +9,12 @@
     type ComputePositionReturn,
     type Placement
   } from '@floating-ui/dom';
+  import { getContext, tick } from 'svelte';
+  import type { HTMLAttributes, KeyboardEventHandler } from 'svelte/elements';
   import { portal } from './actions/portal';
   import type { PopoverPlacement } from './Popover.types';
+  import { STERLING_PORTAL_CONTEXT_ID, STERLING_PORTAL_HOST_ID } from './Portal.constants';
   import type { PortalContext } from './Portal.types';
-  import { STERLING_PORTAL_HOST_ID, STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
-  import type { HTMLAttributes, KeyboardEventHandler } from 'svelte/elements';
 
   // ----- Props ----- //
 

@@ -1,15 +1,15 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
+  import type { ListContext } from '$lib';
   import Checkbox from '$lib/Checkbox.svelte';
-  import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
+  import Label from '$lib/Label.svelte';
+  import { LIST_CONTEXT_KEY } from '$lib/List.constants';
   import ListItem from '$lib/ListItem.svelte';
   import { setContext } from 'svelte';
-  import type { ListContext } from '$lib';
-  import { LIST_CONTEXT_KEY } from '$lib/List.constants';
-  import Label from '$lib/Label.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');

@@ -1,4 +1,3 @@
-import type { Writable } from 'svelte/store';
 import type { MENU_ITEM_ROLES } from './MenuItem.constants';
 
 type MenuItemRoleTuple = typeof MENU_ITEM_ROLES;

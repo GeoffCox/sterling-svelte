@@ -1,7 +1,7 @@
 <script>
+  import { base } from '$app/paths';
   import Link from '$lib/Link.svelte';
   import Gallery from './Gallery.svelte';
-  import { base } from '$app/paths';
 </script>
 
 <div class="overview">

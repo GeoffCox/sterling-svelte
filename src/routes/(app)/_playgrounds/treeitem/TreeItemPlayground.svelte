@@ -1,19 +1,18 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
+  import type { TreeContext, TreeItemContext } from '$lib';
   import Checkbox from '$lib/Checkbox.svelte';
-  import Playground from '../Playground.svelte';
-
-  import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
+  import Label from '$lib/Label.svelte';
   import Slider from '$lib/Slider.svelte';
-  import TreeItem from '$lib/TreeItem.svelte';
   import { TREE_CONTEXT_KEY } from '$lib/Tree.constants';
   import { TREE_ITEM_CONTEXT_KEY } from '$lib/TreeItem.constants';
+  import TreeItem from '$lib/TreeItem.svelte';
   import { setContext } from 'svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
-  import type { TreeContext, TreeItemContext } from '$lib';
 
   let _class = $state('');
   let depth = $state(0);

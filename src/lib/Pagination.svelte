@@ -343,6 +343,12 @@
     color: var(--stsv-common__color--faint);
   }
 
+  @media (prefers-reduced-motion) {
+    .sterling-pagination button {
+      transition: none;
+    }
+  }
+
   /* ----- input ----- */
 
   .sterling-pagination input {
@@ -391,7 +397,6 @@
     outline: none;
   }
   @media (prefers-reduced-motion) {
-    .sterling-pagination button,
     .sterling-pagination input {
       transition: none;
     }

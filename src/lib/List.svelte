@@ -3,9 +3,8 @@
 <script lang="ts">
   import { setContext } from 'svelte';
   import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
-
-  import type { ListContext } from './List.types';
   import { LIST_CONTEXT_KEY } from './List.constants';
+  import type { ListContext } from './List.types';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   type Props = HTMLAttributes<HTMLDivElement> & {

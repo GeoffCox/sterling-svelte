@@ -1,15 +1,13 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { MenuItemContext } from './MenuItem.types';
-
   import { getContext } from 'svelte';
+  import type { HTMLAttributes } from 'svelte/elements';
   import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
-
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
+  import type { MenuItemContext } from './MenuItem.types';
   import { isElementEnabledMenuItem, isElementMenuItem } from './MenuItem.utils';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
-  import type { HTMLAttributes } from 'svelte/elements';
 
   type Props = HTMLAttributes<HTMLDivElement>;
 

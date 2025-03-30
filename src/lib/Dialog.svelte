@@ -3,7 +3,6 @@
 <script lang="ts">
   import { onMount, setContext, tick, type Snippet } from 'svelte';
   import type { FormEventHandler, HTMLDialogAttributes } from 'svelte/elements';
-
   import { writable } from 'svelte/store';
   import Button from './Button.svelte';
   import { STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';

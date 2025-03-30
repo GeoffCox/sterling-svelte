@@ -3,11 +3,9 @@
 <script lang="ts">
   import { setContext } from 'svelte';
   import type { HTMLAttributes } from 'svelte/elements';
-
-  import type { TreeContext } from './Tree.types';
-
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import { TREE_CONTEXT_KEY } from './Tree.constants';
+  import type { TreeContext } from './Tree.types';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null;

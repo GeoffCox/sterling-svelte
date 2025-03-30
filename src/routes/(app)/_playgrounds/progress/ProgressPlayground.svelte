@@ -2,18 +2,13 @@
 
 <script lang="ts">
   import type { FormEventHandler } from 'svelte/elements';
-
   import Checkbox from '$lib/Checkbox.svelte';
   import Progress from '$lib/Progress.svelte';
   import Slider from '$lib/Slider.svelte';
-
-  import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
-  import Select from '$lib/Select.svelte';
-  import type { ProgressOrientation } from '$lib/Progress.types';
-  import ListItem from '$lib/ListItem.svelte';
   import Label from '$lib/Label.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');

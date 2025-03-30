@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Checkbox, Input, Label, Progress, Radio, Switch } from '$lib';
+  import { Button, Checkbox, Input, Label, Progress, Radio } from '$lib';
 </script>
 
 <div class="gallery">

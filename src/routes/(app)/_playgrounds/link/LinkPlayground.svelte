@@ -1,16 +1,15 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import SvelteIcon from '../../_shared/icons/SvelteIcon.svelte';
-  import Playground from '../Playground.svelte';
-
+  import { base } from '$app/paths';
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import Link from '$lib/Link.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import SvelteIcon from '../../_shared/icons/SvelteIcon.svelte';
+  import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
-  import { base } from '$app/paths';
 
   let _class = $state('');
   let disabled: boolean | undefined | null = $state(false);

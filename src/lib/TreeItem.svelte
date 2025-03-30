@@ -1,17 +1,16 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
+  import { getContext, setContext, type Snippet } from 'svelte';
   import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
   import type { SlideParams, TransitionConfig } from 'svelte/transition';
-  import type { TreeContext } from './Tree.types';
-  import type { TreeItemContext } from './TreeItem.types';
-
-  import { getContext, setContext, type Snippet } from 'svelte';
   import { slide } from 'svelte/transition';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
   import { TREE_CONTEXT_KEY } from './Tree.constants';
+  import type { TreeContext } from './Tree.types';
   import TreeChevron from './TreeChevron.svelte';
   import { TREE_ITEM_CONTEXT_KEY } from './TreeItem.constants';
+  import type { TreeItemContext } from './TreeItem.types';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null | undefined;

@@ -2,9 +2,9 @@
 
 <script lang="ts">
   import { type Snippet } from 'svelte';
+  import type { HTMLLabelAttributes, MouseEventHandler } from 'svelte/elements';
   import Tooltip from './Tooltip.svelte';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
-  import type { HTMLLabelAttributes, MouseEventHandler } from 'svelte/elements';
 
   type Props = HTMLLabelAttributes & {
     forwardClick?: boolean | null;

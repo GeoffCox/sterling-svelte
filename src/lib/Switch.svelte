@@ -1,10 +1,9 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { HTMLInputAttributes } from 'svelte/elements';
-
-  import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import type { Snippet } from 'svelte';
+  import type { HTMLInputAttributes } from 'svelte/elements';
+  import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   const uuid = $props.id();
 

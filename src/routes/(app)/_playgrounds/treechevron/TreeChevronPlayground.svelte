@@ -2,10 +2,9 @@
 
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
-  import Playground from '../Playground.svelte';
-
   import TreeChevron from '$lib/TreeChevron.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let expanded = $state(false);

@@ -1,12 +1,11 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import Playground from '../Playground.svelte';
-
-  import MenuItem from '$lib/MenuItem.svelte';
   import MenuBar from '$lib/MenuBar.svelte';
+  import MenuItem from '$lib/MenuItem.svelte';
   import MenuSeparator from '$lib/MenuSeparator.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');

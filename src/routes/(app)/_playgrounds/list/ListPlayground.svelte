@@ -2,16 +2,16 @@
 
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
-  import Playground from '../Playground.svelte';
-  import List from '$lib/List.svelte';
   import Input from '$lib/Input.svelte';
-  import { countries } from '../../_shared/sampleData/countries';
+  import Label from '$lib/Label.svelte';
+  import List from '$lib/List.svelte';
   import ListItem from '$lib/ListItem.svelte';
   import { debounce } from 'lodash-es';
-  import Label from '$lib/Label.svelte';
-  import VariantInput from '../../_shared/ClassInput.svelte';
-  import { getPlaygroundCode } from './getPlaygroundCode';
   import type { ChangeEventHandler } from 'svelte/elements';
+  import VariantInput from '../../_shared/ClassInput.svelte';
+  import { countries } from '../../_shared/sampleData/countries';
+  import Playground from '../Playground.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled: boolean | undefined | null = $state(false);
   let horizontal: boolean | undefined | null = $state(false);

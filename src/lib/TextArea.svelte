@@ -2,8 +2,8 @@
 
 <script lang="ts">
   import { tick } from 'svelte';
-  import type { TextAreaResize } from './TextArea.types';
   import type { FormEventHandler, HTMLTextareaAttributes } from 'svelte/elements';
+  import type { TextAreaResize } from './TextArea.types';
 
   type Props = HTMLTextareaAttributes & {
     autoHeight?: boolean | null | undefined;

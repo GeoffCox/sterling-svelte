@@ -1,19 +1,19 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { applyLightDarkMode } from '$lib';
-  import { onMount } from 'svelte';
-  import Link from '$lib/Link.svelte';
-  import HamburgerIcon from './_shared/icons/HamburgerIcon.svelte';
-  import GitHubIcon from './_shared/icons/GitHubIcon.svelte';
-  import ModeSlider from './_shared/ModeSlider.svelte';
-  import Nav from './_shared/Nav.svelte';
-  import Dropdown from '$lib/Dropdown.svelte';
   import { navigating } from '$app/stores';
-  import '@geoffcox/sterling-svelte-themes/sterling.css';
-  // import '../../../../sterling-svelte-themes/css/sterling.css';
+  import { applyLightDarkMode } from '$lib';
+  import Dropdown from '$lib/Dropdown.svelte';
+  import Link from '$lib/Link.svelte';
   import '@fontsource/atkinson-hyperlegible';
   import '@fontsource/source-code-pro';
+  import '@geoffcox/sterling-svelte-themes/sterling.css';
+  import { onMount } from 'svelte';
+  import GitHubIcon from './_shared/icons/GitHubIcon.svelte';
+  import HamburgerIcon from './_shared/icons/HamburgerIcon.svelte';
+  import ModeSlider from './_shared/ModeSlider.svelte';
+  import Nav from './_shared/Nav.svelte';
+  // import '../../../../sterling-svelte-themes/css/sterling.css';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',

@@ -1,22 +1,20 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { MenuItemContext, MenuItemRole } from './MenuItem.types';
-
   import { getContext, setContext, tick, type Snippet } from 'svelte';
-
-  import Menu from './Menu.svelte';
-  import { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
-  import type { MenuBarContext } from './MenuBar.types';
-  import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
-  import { isElementEnabledMenuItem } from './MenuItem.utils';
-  import Popover from './Popover.svelte';
-  import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import type {
     HTMLButtonAttributes,
     KeyboardEventHandler,
     MouseEventHandler
   } from 'svelte/elements';
+  import Menu from './Menu.svelte';
+  import { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
+  import type { MenuBarContext } from './MenuBar.types';
+  import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
+  import type { MenuItemContext, MenuItemRole } from './MenuItem.types';
+  import { isElementEnabledMenuItem } from './MenuItem.utils';
+  import Popover from './Popover.svelte';
+  import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   const uuid = $props.id();
 

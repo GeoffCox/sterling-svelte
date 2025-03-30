@@ -2,11 +2,10 @@
 
 <script lang="ts">
   import { getContext } from 'svelte';
-
-  import type { TabListContext } from './TabList.types';
-  import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
-  import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import type { HTMLButtonAttributes } from 'svelte/elements';
+  import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
+  import type { TabListContext } from './TabList.types';
+  import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   type Props = HTMLButtonAttributes & {
     value: string;

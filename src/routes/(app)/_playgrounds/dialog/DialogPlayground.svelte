@@ -1,16 +1,15 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import Playground from '../Playground.svelte';
-
   import Button from '$lib/Button.svelte';
-  import Dialog from '$lib/Dialog.svelte';
-  import Select from '$lib/Select.svelte';
-  import ListItem from '$lib/ListItem.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
+  import Dialog from '$lib/Dialog.svelte';
+  import ListItem from '$lib/ListItem.svelte';
+  import Select from '$lib/Select.svelte';
   import { tick } from 'svelte';
-  import { getPlaygroundCode } from './getPlaygroundCode';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import Playground from '../Playground.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
 
   const options = [
     { value: 'outside', text: 'Go outside and play' },

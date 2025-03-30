@@ -2,11 +2,10 @@
 
 <script lang="ts">
   import { tick, type Snippet } from 'svelte';
-
+  import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
   import { clickOutside } from './actions/clickOutside';
   import List from './List.svelte';
   import Popover from './Popover.svelte';
-  import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
 
   const uuid = $props.id();
 

@@ -3,13 +3,13 @@
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
-  import Switch from '$lib/Switch.svelte';
-  import ChillIcon from './ChillIcon.svelte';
-  import HeatIcon from './HeatIcon.svelte';
   import Label from '$lib/Label.svelte';
+  import Switch from '$lib/Switch.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
   import Playground from '../Playground.svelte';
+  import ChillIcon from './ChillIcon.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
+  import HeatIcon from './HeatIcon.svelte';
 
   let checked: boolean | null | undefined = $state(false);
   let disabled: boolean | null | undefined = $state(false);

@@ -1,18 +1,16 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { random } from 'lodash-es';
-
   import Button from '$lib/Button.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
+  import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import ListItem from '$lib/ListItem.svelte';
-  import Input from '$lib/Input.svelte';
   import Select from '$lib/Select.svelte';
-
-  import Playground from '../Playground.svelte';
-  import { countries } from '../../_shared/sampleData/countries';
+  import { random } from 'lodash-es';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import { countries } from '../../_shared/sampleData/countries';
+  import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let open: boolean | undefined | null = $state(false);

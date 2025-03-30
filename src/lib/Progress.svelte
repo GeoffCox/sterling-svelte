@@ -1,8 +1,7 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { AriaAttributes, HTMLAttributes } from 'svelte/elements';
-  import type { ProgressOrientation } from './Progress.types';
+  import type { HTMLAttributes } from 'svelte/elements';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null;

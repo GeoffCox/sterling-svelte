@@ -2,16 +2,16 @@
 
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
-  import Playground from '../Playground.svelte';
   import Input from '$lib/Input.svelte';
-  import Tooltip from '$lib/Tooltip.svelte';
+  import Label from '$lib/Label.svelte';
   import ListItem from '$lib/ListItem.svelte';
+  import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
+  import type { PopoverPlacement } from '$lib/Popover.types';
   import Select from '$lib/Select.svelte';
   import Slider from '$lib/Slider.svelte';
-  import Label from '$lib/Label.svelte';
-  import type { PopoverPlacement } from '$lib/Popover.types';
-  import { POPOVER_PLACEMENTS } from '$lib/Popover.constants';
+  import Tooltip from '$lib/Tooltip.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');

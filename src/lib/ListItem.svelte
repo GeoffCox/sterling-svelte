@@ -3,7 +3,6 @@
 <script lang="ts">
   import { getContext } from 'svelte';
   import type { HTMLAttributes } from 'svelte/elements';
-
   import { LIST_CONTEXT_KEY } from './List.constants';
   import type { ListContext } from './List.types';
 

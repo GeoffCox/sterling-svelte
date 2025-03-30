@@ -3,9 +3,8 @@
 <script lang="ts">
   import { setContext } from 'svelte';
   import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
-
-  import type { TabListContext } from './TabList.types';
   import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
+  import type { TabListContext } from './TabList.types';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null;

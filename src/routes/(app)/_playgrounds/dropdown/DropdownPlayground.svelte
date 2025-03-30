@@ -2,15 +2,13 @@
 
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
-
-  import Playground from '../Playground.svelte';
-
   import Dropdown from '$lib/Dropdown.svelte';
-  import Switch from '$lib/Switch.svelte';
   import Label from '$lib/Label.svelte';
   import Slider from '$lib/Slider.svelte';
-  import AnimatedProgress from './AnimatedProgress.svelte';
+  import Switch from '$lib/Switch.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import Playground from '../Playground.svelte';
+  import AnimatedProgress from './AnimatedProgress.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let disabled: boolean | null | undefined = $state(false);

@@ -1,10 +1,10 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import Radio from '$lib/Radio.svelte';
-  import Playground from '../Playground.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
+  import Radio from '$lib/Radio.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');

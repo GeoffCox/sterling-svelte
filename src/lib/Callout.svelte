@@ -1,7 +1,6 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { getContext, tick } from 'svelte';
   import {
     arrow,
     autoUpdate,
@@ -11,13 +10,14 @@
     type ComputePositionReturn,
     type Placement
   } from '@floating-ui/dom';
-  import { portal } from './actions/portal';
-  import type { PopoverPlacement } from './Popover.types';
-  import { type FadeParams, type TransitionConfig, fade } from 'svelte/transition';
-  import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
-  import type { PortalContext } from './Portal.types';
-  import { STERLING_PORTAL_HOST_ID, STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
+  import { getContext, tick } from 'svelte';
   import type { HTMLAttributes, KeyboardEventHandler } from 'svelte/elements';
+  import { fade, type FadeParams, type TransitionConfig } from 'svelte/transition';
+  import { portal } from './actions/portal';
+  import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
+  import type { PopoverPlacement } from './Popover.types';
+  import { STERLING_PORTAL_CONTEXT_ID, STERLING_PORTAL_HOST_ID } from './Portal.constants';
+  import type { PortalContext } from './Portal.types';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     conditionalRender?: boolean | null;

@@ -3,13 +3,11 @@
 <script lang="ts">
   import { type Snippet } from 'svelte';
   import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
-
-  import Popover from './Popover.svelte';
-
   import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
   import { clickOutside } from './actions/clickOutside';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import Popover from './Popover.svelte';
 
   const uuid = $props.id();
 

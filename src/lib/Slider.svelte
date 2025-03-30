@@ -1,9 +1,8 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { HTMLAttributes, KeyboardEventHandler, PointerEventHandler } from 'svelte/elements';
-
   import { round } from 'lodash-es';
+  import type { HTMLAttributes, KeyboardEventHandler, PointerEventHandler } from 'svelte/elements';
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     disabled?: boolean | null;

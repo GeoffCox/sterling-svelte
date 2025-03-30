@@ -1,20 +1,18 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import Playground from '../Playground.svelte';
-
   import Checkbox from '$lib/Checkbox.svelte';
-  import Label from '$lib/Label.svelte';
   import Input from '$lib/Input.svelte';
-  import VariantInput from '../../_shared/ClassInput.svelte';
-  import { getPlaygroundCode } from './getPlaygroundCode';
+  import Label from '$lib/Label.svelte';
   import Pagination from '$lib/Pagination.svelte';
   import Slider from '$lib/Slider.svelte';
-  import StepPreviousIcon from './StepPreviousIcon.svelte';
-  import StepNextIcon from './StepNextIcon.svelte';
   import type { ChangeEventHandler } from 'svelte/elements';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { countries } from '../../_shared/sampleData/countries';
-  import { get } from 'svelte/store';
+  import Playground from '../Playground.svelte';
+  import { getPlaygroundCode } from './getPlaygroundCode';
+  import StepNextIcon from './StepNextIcon.svelte';
+  import StepPreviousIcon from './StepPreviousIcon.svelte';
 
   let itemCount: number = $state(countries.length);
   let itemRange: { index: number; count: number } = $state({ index: 0, count: 0 });

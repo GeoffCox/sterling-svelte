@@ -2,9 +2,7 @@
 
 <script lang="ts">
   import { onMount, type Snippet } from 'svelte';
-
   import Callout from './Callout.svelte';
-  import type { PopoverPlacement } from './Popover.types';
   import type { CalloutProps } from './Callout.types';
 
   type Props = Omit<CalloutProps, 'reference'> & {

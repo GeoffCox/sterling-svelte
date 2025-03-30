@@ -1,12 +1,12 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import Slider from '$lib/Slider.svelte';
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
-  import Playground from '../Playground.svelte';
   import Label from '$lib/Label.svelte';
+  import Slider from '$lib/Slider.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
+  import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let value = $state(0);

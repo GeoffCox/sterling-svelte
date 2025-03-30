@@ -1,17 +1,14 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { HTMLButtonAttributes } from 'svelte/elements';
-
-  import type { MenuItemContext } from './MenuItem.types';
-
   import { setContext, tick, type Snippet } from 'svelte';
-
+  import type { HTMLButtonAttributes } from 'svelte/elements';
+  import { clickOutside } from './actions/clickOutside';
   import Button from './Button.svelte';
   import Menu from './Menu.svelte';
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
+  import type { MenuItemContext } from './MenuItem.types';
   import Popover from './Popover.svelte';
-  import { clickOutside } from './actions/clickOutside';
   import type { PopoverPlacement } from './Popover.types';
 
   const uuid = $props.id();

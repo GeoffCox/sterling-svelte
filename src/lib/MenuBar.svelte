@@ -1,17 +1,14 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { MenuBarContext } from './MenuBar.types';
-  import type { MenuItemContext } from './MenuItem.types';
-
   import { setContext } from 'svelte';
-
-  import { clickOutside } from './actions/clickOutside';
-
-  import { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
-  import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
-  import { isElementEnabledMenuItem } from './MenuItem.utils';
   import type { HTMLAttributes } from 'svelte/elements';
+  import { clickOutside } from './actions/clickOutside';
+  import { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
+  import type { MenuBarContext } from './MenuBar.types';
+  import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
+  import type { MenuItemContext } from './MenuItem.types';
+  import { isElementEnabledMenuItem } from './MenuItem.utils';
 
   const uuid = $props.id();
 
