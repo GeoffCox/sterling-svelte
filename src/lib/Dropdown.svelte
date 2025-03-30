@@ -12,7 +12,6 @@
   import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import { mergeClasses } from './mergeClasses';
-  import { merge } from 'lodash-es';
 
   const popupId = idGenerator.nextId('Dropdown-popup');
 
@@ -143,8 +142,8 @@
     {/if}
   </div>
   <div class="button icon">
-    {#if buttonIcon}
-      {@render buttonIcon()}
+    {#if icon}
+      {@render icon()}
     {:else}
       <div class="chevron"></div>
     {/if}
