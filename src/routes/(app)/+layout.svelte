@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import { applyLightDarkMode } from '$lib';
   import { onMount } from 'svelte';
@@ -10,6 +12,8 @@
   import { navigating } from '$app/stores';
   import '@geoffcox/sterling-svelte-themes/sterling.css';
   // import '../../../../sterling-svelte-themes/css/sterling.css';
+  import '@fontsource/atkinson-hyperlegible';
+  import '@fontsource/source-code-pro';
 
   const themes: Record<string, string> = {
     auto: 'automatic light/dark',
@@ -19,17 +23,19 @@
     fluentLight: 'fluent-ui-esque (light)'
   };
 
-  let mounted = false;
-  let currentTheme = 'auto';
+  let { children } = $props();
 
-  let mode = 'auto';
-  let hamburgerOpen = false;
+  let mounted = $state(false);
+  let currentTheme = $state('auto');
 
-  $: {
+  let mode = $state('auto');
+  let hamburgerOpen = $state(false);
+
+  $effect(() => {
     if ($navigating !== null) {
       hamburgerOpen = false;
     }
-  }
+  });
 
   const parseCookie = () => {
     const pairs = document.cookie.split(';');
@@ -71,7 +77,9 @@
     currentTheme = getThemeCookie() || currentTheme;
   };
 
-  $: mounted && setThemeCookie(currentTheme);
+  $effect(() => {
+    mounted && setThemeCookie(currentTheme);
+  });
 
   onMount(() => {
     mounted = true;
@@ -115,11 +123,11 @@
         </div>
         <div class="hamburger-menu">
           <Dropdown bind:open={hamburgerOpen} class="composed">
-            <svelte:fragment slot="icon">
+            {#snippet icon()}
               <div class="hamburger-icon">
                 <HamburgerIcon />
               </div>
-            </svelte:fragment>
+            {/snippet}
             <div class="hamburger-nav"><Nav /></div>
           </Dropdown>
         </div>
@@ -130,7 +138,7 @@
         </div>
       </div>
       <div class="content">
-        <slot />
+        {@render children()}
       </div>
     </div>
   </div>
@@ -138,9 +146,6 @@
 
 <style>
   /* ----- Global ----- */
-  @import '@fontsource/atkinson-hyperlegible';
-  @import '@fontsource/open-sans';
-  @import '@fontsource/source-code-pro';
 
   :global(:root) {
     color: var(--stsv-common__color);
@@ -191,14 +196,12 @@
 
   :global(code) {
     font-family: 'Source Code Pro', monospace;
-    font-weight: bold;
     color: var(--stsv-common__color);
     background-color: var(--stsv-common__background-color--secondary);
   }
 
   :global(pre) {
     font-family: 'Source Code Pro', monospace;
-    font-weight: bold;
     color: var(--stsv-common__color);
     background-color: var(--stsv-common__background-color--faint);
     border: 1px solid var(--stsv-common__background-color--secondary);
