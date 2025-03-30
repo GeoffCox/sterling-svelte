@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Input from '$lib/Input.svelte';
   import TextArea from '$lib/TextArea.svelte';
@@ -11,15 +13,15 @@
   import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let _class = '';
-  let disabled = false;
-  let placeholder = '';
-  let autoHeight = false;
-  let value = '';
+  let _class = $state('');
+  let disabled = $state(false);
+  let placeholder = $state('');
+  let autoHeight = $state(false);
+  let value = $state('');
 
-  let resize: TextAreaResize = 'none';
+  let resize: TextAreaResize = $state('none');
 
-  $: code = getPlaygroundCode({ autoHeight, disabled, placeholder, resize, _class });
+  let code = $derived(getPlaygroundCode({ autoHeight, disabled, placeholder, resize, _class }));
 </script>
 
 <Playground {code}>

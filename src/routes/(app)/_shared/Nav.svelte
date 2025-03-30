@@ -1,6 +1,8 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import { base } from '$app/paths';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import Link from '$lib/Link.svelte';
 
   type NavItem = {
@@ -93,7 +95,7 @@
       <div class="section-name">{section.name}</div>
       <div class="items">
         {#each section.items as item}
-          {#if $page.url.pathname === item.url}
+          {#if page.url.pathname === item.url}
             <Link href={`${base}${item.url}`}>{item.name}</Link>
           {:else}
             <Link class="ghost" href={`${base}${item.url}`}>{item.name}</Link>

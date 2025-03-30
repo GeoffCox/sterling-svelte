@@ -1,17 +1,23 @@
-<script>
+<svelte:options runes={true} />
+
+<script lang="ts">
   import Button from '$lib/Button.svelte';
   import Slider from '$lib/Slider.svelte';
   import AutoModeIcon from './icons/AutoModeIcon.svelte';
   import DarkModeIcon from './icons/DarkModeIcon.svelte';
   import LightModeIcon from './icons/LightModeIcon.svelte';
 
-  export let mode = 'auto';
+  type Props = {
+    mode: 'auto' | 'light' | 'dark';
+  };
 
-  let value = mode === 'auto' ? 1 : mode === 'light' ? 0 : 2;
+  let { mode = $bindable('auto') }: Props = $props();
 
-  $: {
-    mode = value === 1 ? 'auto' : value === 0 ? 'light ' : 'dark';
-  }
+  let value = $state(mode === 'auto' ? 1 : mode === 'light' ? 0 : 2);
+
+  $effect(() => {
+    mode = value === 1 ? 'auto' : value === 0 ? 'light' : 'dark';
+  });
 </script>
 
 <div class="mode-select">

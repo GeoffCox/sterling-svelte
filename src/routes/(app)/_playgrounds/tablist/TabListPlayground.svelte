@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
@@ -8,12 +10,12 @@
   import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let _class = '';
-  let disabled = false;
-  let selectedValue: string | undefined;
-  let vertical = false;
+  let _class = $state('');
+  let disabled = $state(false);
+  let selectedValue: string | undefined = $state();
+  let vertical = $state(false);
 
-  $: code = getPlaygroundCode({ disabled, _class: _class, vertical });
+  let code = $derived(getPlaygroundCode({ disabled, _class: _class, vertical }));
 </script>
 
 <Playground {code}>

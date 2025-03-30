@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';

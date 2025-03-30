@@ -60,7 +60,6 @@
     "package": "svelte-kit sync && svelte-package && publint",
     "preview": "vite preview",
     "test": "npm run test:integration && npm run test:unit",
-    "test:integration": "playwright test",
     "test:unit": "vitest"
   },
   "peerDependencies": {
@@ -72,7 +71,6 @@
     "@fontsource/atkinson-hyperlegible": "^5.1.1",
     "@fontsource/source-code-pro": "^4.5.14",
     "@geoffcox/sterling-svelte-themes": "^1.0.3",
-    "@sveltejs/adapter-auto": "^5.0.0",
     "@sveltejs/adapter-static": "^3.0.8",
     "@sveltejs/kit": "^2.16.0",
     "@sveltejs/package": "^2.0.0",

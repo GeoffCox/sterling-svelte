@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
@@ -9,28 +11,30 @@
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let checked: boolean | null | undefined = false;
-  let disabled: boolean | null | undefined = false;
-  let offText: string | undefined = 'Off';
-  let onText: string | undefined = 'On';
-  let customLabels: boolean | null | undefined = false;
-  let variant = '';
-  let vertical: boolean | null | undefined = false;
+  let checked: boolean | null | undefined = $state(false);
+  let disabled: boolean | null | undefined = $state(false);
+  let offText: string | undefined = $state('Off');
+  let onText: string | undefined = $state('On');
+  let customLabels: boolean | null | undefined = $state(false);
+  let variant = $state('');
+  let vertical: boolean | null | undefined = $state(false);
 
   const onSwitchChange = (e: Event) => {
     const switchEvent = e as any;
     console.log(`change: ${switchEvent.currentTarget?.checked}`);
   };
 
-  $: code = getPlaygroundCode({
-    checked,
-    disabled,
-    offLabelText: offText,
-    onLabelText: onText,
-    customLabels,
-    _class: variant,
-    vertical
-  });
+  let code = $derived(
+    getPlaygroundCode({
+      checked,
+      _class: variant,
+      disabled,
+      offLabelText: offText,
+      onLabelText: onText,
+      customLabels,
+      vertical
+    })
+  );
 </script>
 
 {#snippet ColdLabel({

@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
@@ -12,11 +14,11 @@
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let _class = '';
-  let disabled = false;
-  let expandedValues: string[] = [];
-  let expandedValuesText: string;
-  let selectedValue: string | undefined = undefined;
+  let _class = $state('');
+  let disabled = $state(false);
+  let expandedValues: string[] = $state([]);
+  let expandedValuesText: string = $state('');
+  let selectedValue: string | undefined = $state();
 
   const getExpandedValues = () => {
     expandedValuesText = expandedValues.join(',');
@@ -26,10 +28,12 @@
     expandedValues = expandedValuesText.split(',').filter(Boolean);
   };
 
-  $: code = getPlaygroundCode({
-    _class,
-    disabled
-  });
+  let code = $derived(
+    getPlaygroundCode({
+      _class,
+      disabled
+    })
+  );
 </script>
 
 <Playground {code}>

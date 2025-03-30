@@ -11,7 +11,7 @@ npm install @geoffcox/sterling-svelte
 ## Documentation
 
 The project builds the documentation for the library as a SvelteKit application.
-See the published version of the [documentation](https://geoffcox.github.io/demos/sterling-svelte/).
+See the published version of the [documentation](https://geoffcox.github.io/docs/sterling-svelte/).
 
 ## Repository
 

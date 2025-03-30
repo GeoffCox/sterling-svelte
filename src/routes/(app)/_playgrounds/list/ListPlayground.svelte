@@ -1,8 +1,6 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
   import Checkbox from '$lib/Checkbox.svelte';
   import Playground from '../Playground.svelte';
   import List from '$lib/List.svelte';
@@ -13,6 +11,7 @@
   import Label from '$lib/Label.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
+  import type { ChangeEventHandler } from 'svelte/elements';
 
   let disabled: boolean | undefined | null = $state(false);
   let horizontal: boolean | undefined | null = $state(false);
@@ -30,14 +29,16 @@
   );
 
   const updateSelectedValue = debounce((value?: string) => {
-    selectedValue = value;
+    if (selectedValue !== value) {
+      selectedValue = value;
+    }
   }, 500);
 
-  run(() => {
-    updateSelectedValue(selectedValueText);
-  });
+  const onSelectedValueInputChanged: ChangeEventHandler<HTMLInputElement> = (event) => {
+    updateSelectedValue(event.currentTarget.value);
+  };
 
-  run(() => {
+  $effect(() => {
     selectedValueText = selectedValue;
   });
 </script>
@@ -64,7 +65,7 @@
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={horizontal}>horizontal</Checkbox>
     <Label text="selectedValue">
-      <Input bind:value={selectedValueText} />
+      <Input value={selectedValueText} oninput={onSelectedValueInputChanged} />
     </Label>
     <VariantInput bind:class={variant} sterlingClasses={['composed']} />
   {/snippet}
