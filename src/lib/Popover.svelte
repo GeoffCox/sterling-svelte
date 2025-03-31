@@ -47,9 +47,7 @@
   let bodyHeight = $state(0);
   let resizeObserver: ResizeObserver | undefined = undefined;
 
-  const { portalHost: contextPortalHost } = getContext<PortalContext>(
-    STERLING_PORTAL_CONTEXT_ID
-  ) || {
+  const portalContext = getContext<PortalContext>(STERLING_PORTAL_CONTEXT_ID) || {
     portalHost: undefined
   };
 
@@ -59,7 +57,7 @@
     await tick();
 
     // use the host set from context, usually set from a Dialog
-    let host = $contextPortalHost;
+    let host = portalContext.portalHost;
 
     // use or create the sterling portal host
     if (!host && globalThis?.document) {

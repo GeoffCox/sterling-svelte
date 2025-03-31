@@ -40,10 +40,19 @@
   // svelte-ignore non_reactive_update
   let closing = false;
 
-  const portalHostStore = writable<HTMLElement | undefined>(undefined);
+  let portalHost: HTMLElement | undefined = $state(undefined);
+
+  let portalContext: PortalContext = {
+    get portalHost() {
+      return portalHost;
+    },
+    set portalHost(host: HTMLElement | undefined) {
+      portalHost = host;
+    }
+  };
 
   // ----- Context ----- //
-  setContext<PortalContext>(STERLING_PORTAL_CONTEXT_ID, { portalHost: portalHostStore });
+  setContext<PortalContext>(STERLING_PORTAL_CONTEXT_ID, portalContext);
 
   // ----- Event Handlers ----- //
 
@@ -135,14 +144,14 @@
     updateDialog(open);
 
     // Use the dialog for any element portals
-    portalHostStore.set(dialogRef);
+    portalContext.portalHost = dialogRef;
 
     dialogRef.addEventListener('cancel', onCancel);
 
     return () => {
       dialogRef?.removeEventListener('cancel', onCancel);
 
-      portalHostStore.set(undefined);
+      portalContext.portalHost = undefined;
     };
   });
 </script>
