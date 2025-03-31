@@ -28,7 +28,7 @@
   let mounted = $state(false);
   let currentTheme = $state('auto');
 
-  let mode = $state('auto');
+  let mode: 'auto' | 'light' | 'dark' = $state('auto');
   let hamburgerOpen = $state(false);
 
   $effect(() => {
