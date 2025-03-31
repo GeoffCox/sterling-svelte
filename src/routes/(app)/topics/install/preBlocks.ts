@@ -18,7 +18,7 @@ export const preBlocks = {
   htmlLightDark: `<html class="light-mode"></html>`,
   importLightDark: `import { applyLightDarkMode } from '@geoffcox/sterling-svelte';
 
-// TODO: Provide UI to toggle this between auto, light, or dark.
+// Just like this site does, you can provide UI to toggle this between modes.
 let mode = $state('auto');`,
   useLightDark: `<div use:applyLightDarkMode={{atDocumentRoot: true, mode}}>
   ...
