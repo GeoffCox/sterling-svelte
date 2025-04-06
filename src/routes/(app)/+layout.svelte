@@ -2,33 +2,20 @@
 
 <script lang="ts">
   import { navigating } from '$app/stores';
-  import { applyLightDarkMode } from '$lib';
   import Dropdown from '$lib/Dropdown.svelte';
   import Link from '$lib/Link.svelte';
   import '@fontsource/atkinson-hyperlegible';
   import '@fontsource/source-code-pro';
-  import '@geoffcox/sterling-svelte-themes/sterling.css';
+  import '@geoffcox/sterling-svelte-themes/sterling-light-dark.css';
   import { onMount } from 'svelte';
   import GitHubIcon from './_shared/icons/GitHubIcon.svelte';
   import HamburgerIcon from './_shared/icons/HamburgerIcon.svelte';
-  import ModeSlider from './_shared/ModeSlider.svelte';
+  import ColorSchemeSlider from './_shared/ColorSchemeSlider.svelte';
   import Nav from './_shared/Nav.svelte';
   // import '../../../../sterling-svelte-themes/css/sterling.css';
 
-  const themes: Record<string, string> = {
-    auto: 'automatic light/dark',
-    light: 'light',
-    dark: 'dark',
-    ocean: 'ocean (dark)',
-    fluentLight: 'fluent-ui-esque (light)'
-  };
-
   let { children } = $props();
 
-  let mounted = $state(false);
-  let currentTheme = $state('auto');
-
-  let mode: 'auto' | 'light' | 'dark' = $state('auto');
   let hamburgerOpen = $state(false);
 
   $effect(() => {
@@ -36,73 +23,9 @@
       hamburgerOpen = false;
     }
   });
-
-  const parseCookie = () => {
-    const pairs = document.cookie.split(';');
-
-    const result: Record<string, string> = {};
-
-    pairs.forEach((pair) => {
-      const nameValue = pair.split('=');
-      if (nameValue[0]) {
-        result[nameValue[0]] = nameValue[1] ?? '';
-      }
-    });
-
-    return result;
-  };
-
-  const defaultCookieExpiresMs = 30 * 24 * 60 * 60 * 1000;
-  const setCookie = (name: string, value: string, expiresMs: number = defaultCookieExpiresMs) => {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + expiresMs);
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
-  };
-
-  const getThemeCookie = () => {
-    if (document) {
-      const cookies = parseCookie();
-      return cookies['sterling-docs-theme'];
-    }
-    return '';
-  };
-
-  const setThemeCookie = (themeName: string) => {
-    if (document) {
-      setCookie('sterling-docs-theme', themeName);
-    }
-  };
-
-  const loadThemeFromCookie = () => {
-    currentTheme = getThemeCookie() || currentTheme;
-  };
-
-  $effect(() => {
-    mounted && setThemeCookie(currentTheme);
-  });
-
-  onMount(() => {
-    mounted = true;
-    loadThemeFromCookie();
-  });
-
-  const onNavMenuSelect = (event: CustomEvent<any>) => {
-    const url = event.detail.value;
-    window.location.href = url;
-  };
-
-  const onThemeSelect = (event: CustomEvent<any>) => {
-    currentTheme = event.detail.value;
-  };
 </script>
 
-<div
-  class="root"
-  use:applyLightDarkMode={{
-    atDocumentRoot: true,
-    mode: mode === 'auto' ? 'auto' : mode === 'dark' ? 'dark' : 'light'
-  }}
->
+<div class="root">
   <div class="spa">
     <div class="layout">
       <div class="header">
@@ -114,7 +37,7 @@
           A modern, accessible, lightweight UI component library for Svelte.
         </div>
         <div class="mode">
-          <ModeSlider bind:mode />
+          <ColorSchemeSlider />
         </div>
         <div class="github">
           <Link href="http://github.com/GeoffCox/sterling-svelte" class="ghost">
