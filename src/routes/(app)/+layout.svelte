@@ -6,13 +6,12 @@
   import Link from '$lib/Link.svelte';
   import '@fontsource/atkinson-hyperlegible';
   import '@fontsource/source-code-pro';
-  import '@geoffcox/sterling-svelte-themes/sterling-light-dark.css';
-  import { onMount } from 'svelte';
+  import '@geoffcox/sterling-svelte-themes/sterling.css';
+  // import '../../../../sterling-svelte-themes/css/sterling.css';
+  import ColorSchemeSlider from './_shared/ColorSchemeSlider.svelte';
   import GitHubIcon from './_shared/icons/GitHubIcon.svelte';
   import HamburgerIcon from './_shared/icons/HamburgerIcon.svelte';
-  import ColorSchemeSlider from './_shared/ColorSchemeSlider.svelte';
   import Nav from './_shared/Nav.svelte';
-  // import '../../../../sterling-svelte-themes/css/sterling.css';
 
   let { children } = $props();
 
@@ -37,7 +36,7 @@
           A modern, accessible, lightweight UI component library for Svelte.
         </div>
         <div class="mode">
-          <ColorSchemeSlider />
+          <ColorSchemeSlider cookieName="sterling-docs-color-scheme" />
         </div>
         <div class="github">
           <Link href="http://github.com/GeoffCox/sterling-svelte" class="ghost">

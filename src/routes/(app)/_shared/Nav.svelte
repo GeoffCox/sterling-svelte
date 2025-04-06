@@ -28,6 +28,10 @@
           url: '/topics/install'
         },
         {
+          name: 'Sterling Theme',
+          url: '/topics/theme'
+        },
+        {
           name: 'Architecture',
           url: '/topics/architecture'
         },
@@ -38,10 +42,6 @@
         {
           name: 'Change Log',
           url: '/topics/changelog'
-        },
-        {
-          name: 'Sterling Theme',
-          url: '/topics/theme'
         }
       ]
     },

@@ -15,15 +15,15 @@ export const preBlocks = {
   npmInstallThemes: `npm install @geoffcox/sterling-svelte-themes`,
   yarnInstallThemes: `yarn add @geoffcox/sterling-svelte-themes`,
   importCss: `import '@geoffcox/sterling-svelte-themes/sterling.css';`,
-  htmlLightDark: `<html class="light-mode"></html>`,
-  importLightDark: `import { applyLightDarkMode } from '@geoffcox/sterling-svelte';
+  replExample: `<script>
+  import {Button} from '@geoffcox/sterling-svelte';
+</script>
 
-// Just like this site does, you can provide UI to toggle this between modes.
-let mode = $state('auto');`,
-  useLightDark: `<div use:applyLightDarkMode={{atDocumentRoot: true, mode}}>
-  ...
-</div>`,
-  replImport: `<svelte:head>
+<svelte:head>
   <link href="https://unpkg.com/@geoffcox/sterling-svelte-themes/css/sterling.css" rel="stylesheet">
-</svelte:head>`
+</svelte:head>
+
+<div class="sterling-theme">
+  <Button>Hello sterling-svelte</Button>
+</div>`
 };

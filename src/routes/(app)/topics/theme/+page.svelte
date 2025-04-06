@@ -8,8 +8,8 @@
 <div class="topic-page">
   <h1>Sterling Theme</h1>
 
-  The Sterling theme provides modern, elegant, and accessible styles with light and dark mode
-  variations.
+  The Sterling theme provides modern, elegant, and accessible styles supporting light and dark mode
+  automatically.
 
   <p>
     The <Link href="https://www.npmjs.com/package/@geoffcox/sterling-svelte-themes" target="_blank"
@@ -17,20 +17,59 @@
     >
     package provides the Sterling theme.
   </p>
+  <h2>Installation</h2>
   <p>
-    You can follow the steps in the
+    See the the steps in the
     <Link href={`${base}/topics/install`}>Installation</Link> documentation for adding the Sterling Theme.
     Also read the
-    <Link href={`${base}/topics/architecture#ArchitectureThemeReady`}
-      >Architecture - Theme Ready</Link
-    > to understand how sterling-svelte components make styling easier.
+    <Link href={`${base}/topics/architecture#ArchitectureThemeReady`}>Theme Ready</Link> section in the
+    Architecture topic to understand how sterling-svelte components make styling easier.
   </p>
 
+  <h2>Light and Dark Modes</h2>
+
+  <p>
+    CSS variables now use the light-dark() function to select different colors depending on the
+    color-scheme set at the document root.
+  </p>
+  <p>
+    To manually switch between light or dark modes, the colorScheme action is provided to make it
+    easy.
+  </p>
+
+  <h2>Variations</h2>
+
+  <p>
+    Some component CSS have special classes to provide for visual variations. For example, Button
+    has:
+  </p>
+
+  <ul>
+    <li><b>Shapes:&nbsp;</b><code>capsule</code>, <code>circular</code>, <code>square</code></li>
+    <li><b>Emphasis:&nbsp;</b><code>secondary</code>, <code>tool</code></li>
+    <li>
+      <b>Colors:&nbsp;</b><code>blue</code>, <code>green</code>, <code>orange</code>,
+      <code>red</code>
+    </li>
+  </ul>
+
+  <p>You can mix and match classes.</p>
+  <div>
+    <Button class="capsule green">capsule green</Button>
+    <Button class="secondary square">secondary square</Button>
+    <Button class="circular tool red">circular tool red</Button>
+  </div>
+
   <h2>CSS Variables</h2>
+
+  <p>
+    The Sterling theme uses CSS variables to provide consistent styling and easy customization. The
+    CSS variables are available to use or override in your own components.
+  </p>
   <ul>
     <li>CSS variables are prefixed with <code>--stsv-</code></li>
     <li>
-      Naming follows the <Link href="https://getbem.com/introduction/" target="_blank"
+      Names follow the <Link href="https://getbem.com/introduction/" target="_blank"
         >Block**Element**Modifier (BEM)</Link
       >
       convention. For example, Button CSS uses these variables:
@@ -47,35 +86,6 @@
       </ul>
     </li>
   </ul>
-
-  <h2>Light and Dark Modes</h2>
-
-  <p>
-    CSS variables are set to different values based on the <code>light-mode</code> class or
-    <code>dark-mode</code> class being set on a div, the body element, or html element.
-  </p>
-
-  <h2>Variations</h2>
-
-  <p>
-    Some component CSS have special classes to provide for visual variations. For example, Button
-    has several:
-  </p>
-
-  <ul>
-    <li><code>capsule</code>, <code>circular</code>, <code>square</code> - shapes</li>
-    <li><code>secondary</code>, <code>tool</code> - usage/location</li>
-    <li><code>blue</code>, <code>green</code>, <code>orange</code>, <code>red</code> - colors</li>
-  </ul>
-
-  <p>You can mix and match classes.</p>
-  <div>
-    <Button class="capsule green">capsule green</Button>
-    <Button class="secondary square">secondary square</Button>
-    <Button class="circular tool red">circular tool red</Button>
-  </div>
-
-  <h2>Values</h2>
 
   <h3>Common</h3>
 

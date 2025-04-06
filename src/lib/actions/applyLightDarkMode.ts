@@ -19,6 +19,7 @@ const clearModes = (element: HTMLElement) => {
   element.classList.remove(...modes);
 };
 
+/** @deprecated Use colorScheme action instead with sterling-svelte-themes 2.x */
 export const applyLightDarkMode = (node: HTMLElement, params?: Params) => {
   let mode = params?.mode || 'auto';
   let prefersDark = false;

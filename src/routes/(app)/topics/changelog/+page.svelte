@@ -1,7 +1,15 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
-  <h2>2.0.1</h2>
+  <h2>2.0.4</h2>
+
+  <h3>ColorScheme Action (NEW)</h3>
+  <ul>
+    <li>Added colorScheme action to support sterling-svelte-themes 2.0.</li>
+    <li>Deprecated applyLightDarkMode action.</li>
+  </ul>
+
+  <h2>2.0.3</h2>
   <p>
     <b>No breaking changes</b> where props and classes were added, existing ones were not removed.
   </p>
@@ -84,6 +92,12 @@
     <li>Deprecated the extraClass action in favor of built-in clsx class merging</li>
     <li>Removed some leftover console.log and $inspect calls from debugging</li>
   </ul>
+
+  <h2>2.0.2 (Bad version)</h2>
+  <p>The build script failed and a empty version was published.</p>
+
+  <h2>2.0.1</h2>
+  <p>2.x release from main branch</p>
 
   <h2>2.0.0</h2>
   <h3>Breaking changes due to converting to Svelte 5</h3>

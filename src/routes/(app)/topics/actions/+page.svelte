@@ -13,9 +13,14 @@
 
   Raises an event anytime the user clicks outside the bounds of the element.
 
-  <pre>
-  <code>{preBlocks.clickOutside}</code>
-</pre>
+  <pre>{preBlocks.clickOutside}</pre>
+
+  <h2>colorScheme</h2>
+
+  Sets the color-scheme on the document root element. It can be applied at any div in the
+  application. The value set should be 'light dark', 'light', or 'dark'.
+
+  <pre>{preBlocks.clickOutside}</pre>
 
   <h2>forwardEvents</h2>
 
@@ -37,7 +42,14 @@
 
   <pre>{preBlocks.trapKeyboardFocus}</pre>
 
-  <h2>DEPRECATED: extraClass</h2>
+  <h2>applyLightDarkMode (DEPRECATED)</h2>
+
+  When using sterling-svelte-themes 2.0 or later, you should use the colorScheme action instead.
+  Sets light-mode or dark-mode classes on the node or optionally on the root document element.
+
+  <pre>{preBlocks.applyLightDarkMode}</pre>
+
+  <h2>extraClass (DEPRECATED)</h2>
 
   Appends an extra class value to the class prop. Typically used by components to support adding the
   class prop to an existing class name.

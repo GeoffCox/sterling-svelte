@@ -1,16 +1,29 @@
 // Svelte has a bug where it will think some Svelte code within string literals is code
 
-import { trapKeyboardFocus } from '$lib';
-
 // when placed within a .svelte file.  They are placed here as a workaround.
 export const preBlocks = {
-  clickOutside: `<script lang="ts">
-      import { clickOutside, type ClickOutsideEvent } from '@geoffcox/sterling-svelte';
+  applyLightDarkMode: `<script lang="ts">
+  import { applyLightDarkMode } from '@geoffcox/sterling-svelte';
+</script>
 
-      const onClickOutside = (event: ClickOutsideEvent) => {
-        // do something here
-      };
-    </script>
+<div use:applyLightDarkMode={{ mode: 'auto', atDocumentRoot: true }}>
+  <!-- content here -->
+</div>
+`,
+  colorScheme: `<script lang="ts">
+  import { colorScheme } from '@geoffcox/sterling-svelte';
+</script>
+
+<div use:colorScheme={{ value: 'light dark' }}>
+  <!-- content here -->
+</div>
+`,
+  clickOutside: `<script lang="ts">
+  import { clickOutside, type ClickOutsideEvent } from '@geoffcox/sterling-svelte';
+  const onClickOutside = (event: ClickOutsideEvent) => {
+    // do something here
+  };
+</script>
 
 <div use:clickOutside on:click_outside={onClickOutside}>
   <!-- content here -->

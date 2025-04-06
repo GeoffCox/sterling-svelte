@@ -53,8 +53,8 @@
 
   const loadColorScheme = () => {
     if (globalThis.document && cookieName) {
-      const cookies = parseCookies();
-      colorScheme = cookies['sterling-docs-color-scheme'] || colorScheme;
+      colorScheme = getCookie(cookieName) || colorScheme;
+      console.log('loadColorScheme', colorScheme);
     }
   };
 
@@ -143,5 +143,6 @@
     grid-area: slider;
     justify-self: stretch;
     margin: 0 0.85em;
+    padding: 0 17px;
   }
 </style>
