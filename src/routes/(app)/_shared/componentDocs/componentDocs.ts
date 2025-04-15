@@ -1,5 +1,5 @@
 import type { ComponentDoc } from './types';
-import { makeExtendsComment, commonProps } from './commonDoc';
+import { makeExtendsComment } from './commonDoc';
 
 import { buttonDoc } from './buttonDoc';
 import { calloutDoc } from './calloutDoc';

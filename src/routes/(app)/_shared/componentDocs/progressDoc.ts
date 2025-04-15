@@ -1,4 +1,4 @@
-import { makeExtendsComment, commonProps } from './commonDoc';
+import { makeExtendsComment } from './commonDoc';
 import type { ComponentDoc } from './types';
 import ProgressPlayground from '../../_playgrounds/progress/ProgressPlayground.svelte';
 

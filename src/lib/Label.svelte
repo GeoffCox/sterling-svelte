@@ -117,7 +117,7 @@
     </div>
   {/if}
   {#if required && requiredIndicator && requiredReason}
-    <Tooltip>
+    <Tooltip class="sterling-label-tooltip">
       <div class="required">
         {@render stringOrSnippet(requiredIndicator)}
       </div>

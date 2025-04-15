@@ -1,6 +1,24 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.5</h2>
+
+  <h3>TextArea</h3>
+  <ul>
+    <li>Removed empty string default for value to support undefined.</li>
+  </ul>
+
+  <h3>Tooltip</h3>
+  <ul>
+    <li>Fixed issue with mouse leave debounce.</li>
+  </ul>
+
+  <h3>Label</h3>
+  <ul>
+    <li>Moved tooltip upwards from required indicator to avoid mouse hover conflicts.</li>
+    <li>Added sterling-label-tooltip class to requiredReason tooltip to support styling.</li>
+  </ul>
+
   <h2>2.0.4</h2>
 
   <h3>ColorScheme Action (NEW)</h3>
@@ -31,10 +49,30 @@
       </ul>
     </li>
   </ul>
-  <h3>Slider</h3>
+
+  <h3>MenuItem</h3>
   <ul>
-    <li>Fixed thumb from starting a drag operation when dragged perpendicular to the slider.</li>
+    <li>
+      Added snippet support to text and shortcut props.
+      <ul>
+        <li>text: string | Snippet</li>
+        <li>shortcut: string | Snippet</li>
+      </ul>
+    </li>
+    <li>Ensured each child div is present in MenuItem's default item.</li>
+    <li>
+      Added class="default-item" to MenuItem's default item.
+      <ul>
+        <li>sterling-menu-item-display -&gt; default-item</li>
+      </ul>
+    </li>
   </ul>
+
+  <h3>Pagination *NEW*</h3>
+  <ul>
+    <li>Added Pagination component</li>
+  </ul>
+
   <h3>Select</h3>
   <ul>
     <li>
@@ -57,31 +95,17 @@
       </ul>
     </li>
   </ul>
+
+  <h3>Slider</h3>
+  <ul>
+    <li>Fixed thumb from starting a drag operation when dragged perpendicular to the slider.</li>
+  </ul>
+
   <h3>Tooltip</h3>
   <ul>
     <li>Added sterling-tooltip-callout class to allow styling of the callout.</li>
   </ul>
-  <h3>MenuItem</h3>
-  <ul>
-    <li>
-      Added snippet support to text and shortcut props.
-      <ul>
-        <li>text: string | Snippet</li>
-        <li>shortcut: string | Snippet</li>
-      </ul>
-    </li>
-    <li>Ensured each child div is present in MenuItem's default item.</li>
-    <li>
-      Added class="default-item" to MenuItem's default item.
-      <ul>
-        <li>sterling-menu-item-display -&gt; default-item</li>
-      </ul>
-    </li>
-  </ul>
-  <h3>Pagination *NEW*</h3>
-  <ul>
-    <li>Added Pagination component</li>
-  </ul>
+
   <h3>Documentation</h3>
   <ul>
     <li>Better described the HTML structure with classes in anatomy section for each component.</li>

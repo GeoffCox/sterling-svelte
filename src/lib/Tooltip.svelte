@@ -27,20 +27,28 @@
     !!children ? (originRef?.previousElementSibling as HTMLElement) : undefined
   );
 
+  let delayShowTimeout: NodeJS.Timeout | undefined;
+
   const show = () => {
     if (!disabled) {
       open = true;
     }
   };
 
-  const hide = () => (open = false);
+  const hide = () => {
+    delayShowTimeout && clearTimeout(delayShowTimeout);
+    open = false;
+  };
 
   const delayShow = () => {
-    hoverDelayMilliseconds === 0
-      ? show()
-      : setTimeout(() => {
-          show();
-        }, hoverDelayMilliseconds);
+    if (hoverDelayMilliseconds === 0) {
+      show();
+    } else {
+      delayShowTimeout && clearTimeout(delayShowTimeout);
+      delayShowTimeout = setTimeout(() => {
+        show();
+      }, hoverDelayMilliseconds);
+    }
   };
 
   $effect(() => {
@@ -84,7 +92,13 @@
 
 {@render children?.()}
 <div class={['sterling-tooltip-origin', _class]} bind:this={originRef}></div>
-<Callout class={['sterling-tooltip-callout', _class]} {open} {reference} {...rest}>
+<Callout
+  class={['sterling-tooltip-callout', _class]}
+  {open}
+  {reference}
+  mainAxisOffset={8}
+  {...rest}
+>
   {#if tip}
     {#if typeof tip === 'string'}
       {tip}

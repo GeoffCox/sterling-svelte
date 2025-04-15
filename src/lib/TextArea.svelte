@@ -15,7 +15,7 @@
   let {
     class: _class,
     disabled = false,
-    value = $bindable(''),
+    value = $bindable(),
     autoHeight = false,
     resize = $bindable('none'),
     style,

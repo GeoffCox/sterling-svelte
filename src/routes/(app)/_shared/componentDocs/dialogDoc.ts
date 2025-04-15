@@ -1,4 +1,4 @@
-import { makeExtendsComment, commonProps } from './commonDoc';
+import { makeExtendsComment } from './commonDoc';
 import type { ComponentDoc } from './types';
 import DialogPlayground from '../../_playgrounds/dialog/DialogPlayground.svelte';
 
@@ -37,7 +37,7 @@ export const dialogDoc: ComponentDoc = {
     },
     {
       name: 'header',
-      type: 'Snippet| undefined',
+      type: 'Snippet | undefined',
       default: 'undefined',
       comment: 'The header within the dialog content. Defaults to headerTitle and close button.'
     },
@@ -58,8 +58,7 @@ export const dialogDoc: ComponentDoc = {
       type: 'string | undefined',
       default: "''",
       comment: 'A value indicates OK, empty indicates cancellation.'
-    },
-    commonProps.variant
+    }
   ],
   anatomy: `<dialog class="sterling-dialog">
   <form>

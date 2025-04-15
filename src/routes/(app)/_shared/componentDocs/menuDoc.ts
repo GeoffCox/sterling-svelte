@@ -1,5 +1,5 @@
 import MenuPlayground from '../../_playgrounds/menu/MenuPlayground.svelte';
-import { makeExtendsComment, commonProps } from './commonDoc';
+import { makeExtendsComment } from './commonDoc';
 import type { ComponentDoc } from './types';
 
 export const menuDoc: ComponentDoc = {

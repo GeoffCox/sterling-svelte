@@ -17,7 +17,7 @@
   let disabled = $state(false);
   let placeholder = $state('');
   let autoHeight = $state(false);
-  let value = $state('');
+  let value = $state();
 
   let resize: TextAreaResize = $state('none');
 

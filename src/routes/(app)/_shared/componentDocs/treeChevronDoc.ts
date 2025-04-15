@@ -1,4 +1,4 @@
-import { makeExtendsComment, commonProps } from './commonDoc';
+import { makeExtendsComment } from './commonDoc';
 import type { ComponentDoc } from './types';
 import TreeChevronPlayground from '../../_playgrounds/treechevron/TreeChevronPlayground.svelte';
 
