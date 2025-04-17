@@ -12,11 +12,25 @@ export const labelDoc: ComponentDoc = {
   ],
   props: [
     {
+      name: 'formValidation',
+      type: 'boolean',
+      default: 'false',
+      comment: `If true, then the message will be set using form validation on the child component.
+The required indicator will be displayed if the child component is required.`
+    },
+    {
       name: 'forwardClick',
       type: 'string',
       default: 'false',
-      comment:
-        'If true, clicking the label invokes a click on the content. Typically used when for/id pairs are not present.'
+      comment: `If true, clicking the label invokes a click on the content.
+Typically used when for/id pairs are not present.`
+    },
+    {
+      name: 'onValidation',
+      type: 'LabelValidationCallback | undefined',
+      default: 'undefined',
+      comment: `Raised when form validation is checked.
+Provides control over the validation message and class.`
     },
     {
       name: 'message',
@@ -47,6 +61,21 @@ export const labelDoc: ComponentDoc = {
       type: 'string | Snippet',
       default: "''",
       comment: 'The text to display in the label.'
+    }
+  ],
+  types: [
+    {
+      name: 'LabelValidationCallback',
+      definition:
+        '(validity: ValidityState,validationMessage: string) => LabelValidationResult | undefined',
+      comment: `The validity and validation message are provided by form validaiton on the child component.`
+    },
+    {
+      name: 'LabelValidationResult',
+      definition:
+        '{valid: boolean; validationClass?: string; validationMessage?: Snippet | string;}',
+      comment: `The validation class will be applied to the label.
+The validation message will be displayed as the message.`
     }
   ],
   anatomy: `<label class="sterling-label">

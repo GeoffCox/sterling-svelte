@@ -11,6 +11,7 @@
   let _class = $state('');
   let disabled: boolean | undefined | null = $state(false);
   let forwardClick: boolean | undefined | null = $state(false);
+  let formValidation: boolean | undefined | null = $state(false);
   let message = $state('');
   let required: boolean | undefined | null = $state(false);
   let requiredReason = $state('');
@@ -20,6 +21,7 @@
 
   let code = $derived(
     getPlaygroundCode({
+      formValidation,
       forwardClick,
       message,
       required,
@@ -33,24 +35,33 @@
 
 <Playground {code}>
   {#snippet component()}
-    <Label
-      for={useFor ? 'target' : undefined}
-      {forwardClick}
-      {message}
-      {required}
-      {requiredReason}
-      {text}
-      {requiredIndicator}
-      class={_class}
-    >
-      <Input id="target" {disabled} class={_class.includes('boxed') ? 'composed' : undefined} />
-    </Label>
+    <form>
+      <Label
+        for={useFor ? 'target' : undefined}
+        {forwardClick}
+        {formValidation}
+        {message}
+        {required}
+        {requiredReason}
+        {text}
+        {requiredIndicator}
+        class={_class}
+      >
+        <Input
+          id="target"
+          {disabled}
+          class={_class.includes('boxed') ? 'composed' : undefined}
+          required={true}
+        />
+      </Label>
+    </form>
   {/snippet}
   {#snippet props()}
     <VariantInput
       bind:class={_class}
       sterlingClasses={['boxed', 'vertical', 'info', 'success', 'warning', 'error']}
     />
+    <Checkbox bind:checked={formValidation}>formValidation</Checkbox>
     <Checkbox bind:checked={forwardClick}>forwardClick</Checkbox>
     <Checkbox bind:checked={required}>required</Checkbox>
     <Label text="text">

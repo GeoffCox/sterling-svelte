@@ -1,6 +1,5 @@
-import type { LabelStatus } from '$lib';
-
 export const getPlaygroundCode = (props: {
+  formValidation?: boolean | null;
   forwardClick?: boolean | null;
   message: string;
   required?: boolean | null;
@@ -15,6 +14,11 @@ export const getPlaygroundCode = (props: {
   if (!props._class) {
     propList.push(`vertical="${props._class}"`);
   }
+
+  if (props.formValidation) {
+    propList.push(`formValidation`);
+  }
+
   if (props.forwardClick) {
     propList.push(`forwardClick`);
   }

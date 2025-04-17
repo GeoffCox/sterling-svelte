@@ -1,6 +1,13 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.6</h2>
+  <ul>
+    <li>Added support for form validation to set message and class.</li>
+    <li>Added support for form validation to show required indicator.</li>
+  </ul>
+  <h3>Label</h3>
+
   <h2>2.0.5</h2>
 
   <h3>TextArea</h3>

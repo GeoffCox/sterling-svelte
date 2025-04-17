@@ -7,9 +7,8 @@ export const listDoc: ComponentDoc = {
   description: 'An scrollable set of items where a single item can be selected.',
   comments: [
     'Use the children to provide list items.',
-    'A list item is identified by having data-value and role="listitem" properties. Any content without these properties, will not participate in selection. This allows you to mix in other content with list items such as search boxes, group headers, or decorations.',
+    'A list item is identified by having data-value and role="listitem" properties. Any content without these properties will not participate in selection. This allows mixing in other components like search boxes, group headers, or decorations.',
     'If no item is selected, selectNextItem selects the first item in the list and selectPreviousItem selects the last item in the list.',
-    'A container wraps the children to allow scrolling when the list dimensions are not set and take up available room.',
     makeExtendsComment('HTMLDivElement')
   ],
   props: [

@@ -158,4 +158,9 @@
   .definition {
     white-space: pre;
   }
+
+  .comment {
+    white-space: pre;
+    text-wrap: wrap;
+  }
 </style>
