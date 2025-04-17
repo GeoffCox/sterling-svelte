@@ -1,24 +1,14 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { onMount, setContext, tick, type Snippet } from 'svelte';
-  import type { FormEventHandler, HTMLDialogAttributes } from 'svelte/elements';
-  import { writable } from 'svelte/store';
+  import { onMount, setContext, tick } from 'svelte';
+  import type { FormEventHandler } from 'svelte/elements';
   import Button from './Button.svelte';
   import { STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
   import type { PortalContext } from './Portal.types';
+  import type { DialogProps } from './Dialog.types';
 
   const dialogFadeDuration = 250;
-
-  type Props = HTMLDialogAttributes & {
-    backdropCloses?: boolean | null | undefined;
-    body?: Snippet;
-    content?: Snippet;
-    footer?: Snippet;
-    header?: Snippet;
-    returnValue?: string;
-    headerTitle?: string | Snippet;
-  };
 
   let {
     backdropCloses = false,
@@ -31,7 +21,7 @@
     returnValue = $bindable(''),
     headerTitle,
     ...rest
-  }: Props = $props();
+  }: DialogProps = $props();
 
   let dialogRef: HTMLDialogElement;
   let contentRef: HTMLDivElement;

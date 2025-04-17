@@ -2,14 +2,14 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { HTMLAttributes } from 'svelte/elements';
+  import type { TreeChevronProps } from './TreeChevron.types';
 
-  type Props = HTMLAttributes<HTMLDivElement> & {
-    expanded?: boolean | null | undefined;
-    hasChildren?: boolean | null | undefined;
-  };
-
-  let { class: _class, expanded = false, hasChildren = false, ...rest }: Props = $props();
+  let {
+    class: _class,
+    expanded = false,
+    hasChildren = false,
+    ...rest
+  }: TreeChevronProps = $props();
 
   let previousExpanded = expanded;
   let mounted = false;

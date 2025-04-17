@@ -1,21 +1,10 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { Snippet } from 'svelte';
-  import type { HTMLInputAttributes } from 'svelte/elements';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import type { SwitchProps } from './Switch.types';
 
   const uuid = $props.id();
-
-  type LabelSnippet = Snippet<
-    [{ checked: boolean | null | undefined; disabled: boolean | null | undefined; inputId: string }]
-  >;
-
-  type Props = HTMLInputAttributes & {
-    offLabel?: string | LabelSnippet;
-    onLabel?: string | LabelSnippet;
-    vertical?: boolean | null | undefined;
-  };
 
   let {
     checked = $bindable(false),
@@ -26,7 +15,7 @@
     onLabel,
     vertical,
     ...rest
-  }: Props = $props();
+  }: SwitchProps = $props();
 
   const inputId = id || `Switch-${uuid}`;
 

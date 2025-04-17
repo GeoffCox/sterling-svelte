@@ -1,11 +1,9 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { HTMLButtonAttributes } from 'svelte/elements';
+  import type { ButtonProps } from './Button.types';
 
-  type Props = HTMLButtonAttributes;
-
-  let { children, class: _class, ...rest }: Props = $props();
+  let { children, class: _class, ...rest }: ButtonProps = $props();
 
   let buttonRef: HTMLButtonElement;
 

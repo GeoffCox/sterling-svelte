@@ -1,15 +1,7 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { HTMLAttributes } from 'svelte/elements';
-
-  type Props = HTMLAttributes<HTMLDivElement> & {
-    disabled?: boolean | null;
-    max?: number;
-    percent?: number;
-    value?: number;
-    vertical?: boolean | null;
-  };
+  import type { ProgressProps } from './Progress.types';
 
   let {
     class: _class,
@@ -19,7 +11,7 @@
     value = $bindable(0),
     vertical,
     ...rest
-  }: Props = $props();
+  }: ProgressProps = $props();
 
   //----- State ----- //
 

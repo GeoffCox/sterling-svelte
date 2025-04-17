@@ -10,19 +10,9 @@
   import type { MenuItemContext } from './MenuItem.types';
   import Popover from './Popover.svelte';
   import type { PopoverPlacement } from './Popover.types';
+  import type { MenuButtonProps } from './MenuButton.types';
 
   const uuid = $props.id();
-
-  type Props = HTMLButtonAttributes & {
-    items: Snippet;
-    menuClass?: string;
-    onOpen?: (value: string) => void;
-    onClose?: (value: string) => void;
-    onSelect?: (value: string) => void;
-    open?: boolean | null | undefined;
-    popoverPlacement?: PopoverPlacement;
-    value?: string;
-  };
 
   let {
     children,
@@ -36,7 +26,7 @@
     popoverPlacement = 'bottom-start',
     value,
     ...rest
-  }: Props = $props();
+  }: MenuButtonProps = $props();
 
   const instanceId = `MenuButton-${uuid}`;
 

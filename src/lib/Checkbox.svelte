@@ -1,12 +1,10 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { HTMLInputAttributes } from 'svelte/elements';
+  import type { CheckboxProps } from './Checkbox.types';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   const uuid = $props.id();
-
-  type Props = HTMLInputAttributes;
 
   let {
     id,
@@ -15,7 +13,7 @@
     class: _class,
     disabled = $bindable(false),
     ...rest
-  }: Props = $props();
+  }: CheckboxProps = $props();
 
   let inputRef: HTMLInputElement;
 

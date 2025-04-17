@@ -2,16 +2,12 @@
 
 <script lang="ts">
   import { getContext } from 'svelte';
-  import type { HTMLButtonAttributes } from 'svelte/elements';
   import { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
   import type { TabListContext } from './TabList.types';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import type { TabProps } from './Tab.types';
 
-  type Props = HTMLButtonAttributes & {
-    value: string;
-  };
-
-  let { children, class: _class, disabled = false, value, ...rest }: Props = $props();
+  let { children, class: _class, disabled = false, value, ...rest }: TabProps = $props();
 
   let tabRef: HTMLButtonElement;
 

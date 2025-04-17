@@ -1,11 +1,9 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { HTMLAttributes } from 'svelte/elements';
+  import type { MenuSeparatorProps } from './MenuSeparator.types';
 
-  type Props = HTMLAttributes<HTMLDivElement>;
-
-  let { class: _class, ...rest }: Props = $props();
+  let { class: _class, ...rest }: MenuSeparatorProps = $props();
 </script>
 
 <div class={['sterling-menu-separator', _class]} role="separator" {...rest}></div>

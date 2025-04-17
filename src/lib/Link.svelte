@@ -1,13 +1,9 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { HTMLAnchorAttributes } from 'svelte/elements';
+  import type { LinkProps } from './Link.types';
 
-  type Props = HTMLAnchorAttributes & {
-    disabled?: boolean | null;
-  };
-
-  let { children, class: _class, disabled, ...rest }: Props = $props();
+  let { children, class: _class, disabled, ...rest }: LinkProps = $props();
 
   let linkRef: HTMLAnchorElement;
 

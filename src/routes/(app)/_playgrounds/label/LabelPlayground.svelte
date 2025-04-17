@@ -9,7 +9,7 @@
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');
-  let disabled: boolean | undefined | null = $state(false);
+  let childDisabled: boolean | undefined | null = $state(false);
   let forwardClick: boolean | undefined | null = $state(false);
   let formValidation: boolean | undefined | null = $state(false);
   let message = $state('');
@@ -18,6 +18,10 @@
   let requiredIndicator = $state('*');
   let text = $state('sterling-svelte');
   let useFor: boolean | undefined | null = $state(true);
+  let childRequired = $state(true);
+  let childMinLength = $state(false);
+  let childMaxLength = $state(false);
+  let childPattern = $state(false);
 
   let code = $derived(
     getPlaygroundCode({
@@ -49,9 +53,12 @@
       >
         <Input
           id="target"
-          {disabled}
+          disabled={childDisabled}
           class={_class.includes('boxed') ? 'composed' : undefined}
-          required={true}
+          required={childRequired}
+          minlength={childMinLength ? 5 : undefined}
+          maxlength={childMaxLength ? 15 : undefined}
+          pattern={childPattern ? '[0-9]{3}-[0-9]{3}-[0-9]{4}' : undefined}
         />
       </Label>
     </form>
@@ -80,7 +87,11 @@
     </Label>
   {/snippet}
   {#snippet tweaks()}
-    <Checkbox bind:checked={disabled}>Input child disabled</Checkbox>
     <Checkbox bind:checked={useFor}>use <i>for</i> and <i>id</i> association</Checkbox>
+    <Checkbox bind:checked={childDisabled}>Input child disabled</Checkbox>
+    <Checkbox bind:checked={childMinLength}>Input child minlength=5</Checkbox>
+    <Checkbox bind:checked={childMaxLength}>Input child maxlength=15</Checkbox>
+    <Checkbox bind:checked={childRequired}>Input child required</Checkbox>
+    <Checkbox bind:checked={childPattern}>Input child pattern=###-###-####</Checkbox>
   {/snippet}
 </Playground>

@@ -86,7 +86,7 @@ export const selectDoc: ComponentDoc = {
     {@render icon()}
   </div>
   <Popover>
-    <div class="sterling-select-popup-content">
+    <div class="sterling-select-content">
       <List>
         {@render children()}
       </List>

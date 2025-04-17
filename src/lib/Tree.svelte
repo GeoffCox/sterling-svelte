@@ -2,18 +2,9 @@
 
 <script lang="ts">
   import { setContext } from 'svelte';
-  import type { HTMLAttributes } from 'svelte/elements';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import { TREE_CONTEXT_KEY } from './Tree.constants';
-  import type { TreeContext } from './Tree.types';
-
-  type Props = HTMLAttributes<HTMLDivElement> & {
-    disabled?: boolean | null;
-    expandedValues?: string[];
-    selectedValue?: string;
-    onExpandCollapse?: (expandedValues: string[]) => void;
-    onSelect?: (selectedValue: string | undefined) => void;
-  };
+  import type { TreeContext, TreeProps } from './Tree.types';
 
   let {
     children,
@@ -24,7 +15,7 @@
     onSelect,
     selectedValue = $bindable(undefined),
     ...rest
-  }: Props = $props();
+  }: TreeProps = $props();
 
   let treeRef: HTMLDivElement;
 

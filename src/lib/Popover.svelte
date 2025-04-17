@@ -10,23 +10,13 @@
     type Placement
   } from '@floating-ui/dom';
   import { getContext, tick } from 'svelte';
-  import type { HTMLAttributes, KeyboardEventHandler } from 'svelte/elements';
+  import type { KeyboardEventHandler } from 'svelte/elements';
   import { portal } from './actions/portal';
-  import type { PopoverPlacement } from './Popover.types';
   import { STERLING_PORTAL_CONTEXT_ID, STERLING_PORTAL_HOST_ID } from './Portal.constants';
   import type { PortalContext } from './Portal.types';
+  import type { PopoverProps } from './Popover.types';
 
   // ----- Props ----- //
-
-  type Props = HTMLAttributes<HTMLDivElement> & {
-    conditionalRender?: boolean;
-    crossAxisOffset?: number;
-    mainAxisOffset?: number;
-    open?: boolean | null;
-    placement?: PopoverPlacement;
-    portalHost?: HTMLElement;
-    reference?: HTMLElement;
-  };
 
   let {
     children,
@@ -39,7 +29,7 @@
     reference,
     class: _class,
     ...rest
-  }: Props = $props();
+  }: PopoverProps = $props();
 
   let popupRef: HTMLDivElement | undefined = $state(undefined);
   let popupPosition: Partial<ComputePositionReturn> = $state({ x: 0, y: 0 });

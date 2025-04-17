@@ -1,14 +1,10 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { HTMLInputAttributes } from 'svelte/elements';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
+  import type { RadioProps } from './Radio.types';
 
   const uuid = $props.id();
-
-  type Props = HTMLInputAttributes & {
-    group?: any | null;
-  };
 
   let {
     id,
@@ -18,7 +14,7 @@
     disabled = false,
     group = $bindable(),
     ...rest
-  }: Props = $props();
+  }: RadioProps = $props();
 
   let inputRef: HTMLInputElement;
 

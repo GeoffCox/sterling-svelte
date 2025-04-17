@@ -8,7 +8,7 @@
   import ListItem from '$lib/ListItem.svelte';
   import Select from '$lib/Select.svelte';
   import TextArea from '$lib/TextArea.svelte';
-  import type { TextAreaResize } from '$lib/TextArea.types';
+  import type { TextAreaProps, TextAreaResize } from '$lib/TextArea.types';
   import VariantInput from '../../_shared/ClassInput.svelte';
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
@@ -17,7 +17,7 @@
   let disabled = $state(false);
   let placeholder = $state('');
   let autoHeight = $state(false);
-  let value = $state();
+  let value: TextAreaProps['value'] = $state();
 
   let resize: TextAreaResize = $state('none');
 

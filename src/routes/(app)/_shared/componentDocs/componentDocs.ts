@@ -1,6 +1,7 @@
 import type { ComponentDoc } from './types';
 import { makeExtendsComment } from './commonDoc';
 
+import { autocompleteDoc } from './autocompleteDoc';
 import { buttonDoc } from './buttonDoc';
 import { calloutDoc } from './calloutDoc';
 import { checkboxDoc } from './checkboxDoc';
@@ -32,6 +33,7 @@ import { treeChevronDoc } from './treeChevronDoc';
 import { treeItemDoc } from './treeItemDoc';
 
 export const componentDocs: Record<string, ComponentDoc> = {
+  autocomplete: autocompleteDoc,
   button: buttonDoc,
   callout: calloutDoc,
   checkbox: checkboxDoc,

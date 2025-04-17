@@ -1,35 +1,18 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { getContext, setContext, tick, type Snippet } from 'svelte';
-  import type {
-    HTMLButtonAttributes,
-    KeyboardEventHandler,
-    MouseEventHandler
-  } from 'svelte/elements';
+  import { getContext, setContext, tick } from 'svelte';
+  import type { KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
   import Menu from './Menu.svelte';
   import { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
   import type { MenuBarContext } from './MenuBar.types';
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
-  import type { MenuItemContext, MenuItemRole } from './MenuItem.types';
+  import type { MenuItemContext, MenuItemProps } from './MenuItem.types';
   import { isElementEnabledMenuItem } from './MenuItem.utils';
   import Popover from './Popover.svelte';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   const uuid = $props.id();
-
-  type Props = HTMLButtonAttributes & {
-    checked?: boolean | null;
-    item?: Snippet;
-    menuClass?: string;
-    onClose?: (value: string) => void;
-    onOpen?: (value: string) => void;
-    onSelect?: (value: string) => void;
-    role?: MenuItemRole;
-    shortcut?: string | Snippet;
-    text?: string | Snippet;
-    value: string;
-  };
 
   let {
     checked,
@@ -46,7 +29,7 @@
     shortcut,
     value,
     ...rest
-  }: Props = $props();
+  }: MenuItemProps = $props();
 
   const menuItemContext = getContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY) || {};
 

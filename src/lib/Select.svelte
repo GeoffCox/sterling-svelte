@@ -1,33 +1,14 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { tick, type Snippet } from 'svelte';
-  import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
+  import { tick } from 'svelte';
+  import type { KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
   import { clickOutside } from './actions/clickOutside';
   import List from './List.svelte';
   import Popover from './Popover.svelte';
+  import type { SelectProps } from './Select.types';
 
   const uuid = $props.id();
-
-  type DeprecatedProps = {
-    /** @deprecated Use icon instead */
-    buttonSnippet?: Snippet;
-
-    /** @deprecated Use value instead */
-    valueSnippet?: Snippet<[string | undefined]>;
-  };
-
-  type Props = HTMLAttributes<HTMLDivElement> &
-    DeprecatedProps & {
-      disabled?: boolean | null;
-      icon?: Snippet;
-      listClass?: string;
-      onPending?: (value?: string) => void;
-      onSelect?: (value?: string) => void;
-      open?: boolean | null;
-      selectedValue?: string;
-      value?: string | Snippet<[string | undefined]>;
-    };
 
   let {
     children,
@@ -43,7 +24,7 @@
     buttonSnippet,
     valueSnippet,
     ...rest
-  }: Props = $props();
+  }: SelectProps = $props();
 
   // backwards compatibility
   icon = icon || buttonSnippet;

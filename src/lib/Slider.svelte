@@ -2,18 +2,8 @@
 
 <script lang="ts">
   import { round } from 'lodash-es';
-  import type { HTMLAttributes, KeyboardEventHandler, PointerEventHandler } from 'svelte/elements';
-
-  type Props = HTMLAttributes<HTMLDivElement> & {
-    disabled?: boolean | null;
-    min?: number;
-    max?: number;
-    precision?: number;
-    step?: number;
-    value?: number;
-    vertical?: boolean | null;
-    onChange?: (value: number) => void;
-  };
+  import type { KeyboardEventHandler, PointerEventHandler } from 'svelte/elements';
+  import type { SliderProps } from './Slider.types';
 
   let {
     class: _class,
@@ -26,7 +16,7 @@
     value = $bindable(0),
     vertical,
     ...rest
-  }: Props = $props();
+  }: SliderProps = $props();
 
   let sliderRef: HTMLDivElement;
 

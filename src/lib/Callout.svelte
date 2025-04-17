@@ -18,16 +18,7 @@
   import type { PopoverPlacement } from './Popover.types';
   import { STERLING_PORTAL_CONTEXT_ID, STERLING_PORTAL_HOST_ID } from './Portal.constants';
   import type { PortalContext } from './Portal.types';
-
-  type Props = HTMLAttributes<HTMLDivElement> & {
-    conditionalRender?: boolean | null;
-    crossAxisOffset?: number;
-    mainAxisOffset?: number;
-    open?: boolean | null;
-    placement?: PopoverPlacement;
-    portalHost?: HTMLElement;
-    reference?: HTMLElement | null;
-  };
+  import type { CalloutProps } from './Callout.types';
 
   let {
     children,
@@ -40,7 +31,7 @@
     reference,
     class: _class,
     ...rest
-  }: Props = $props();
+  }: CalloutProps = $props();
 
   let popupRef: HTMLDivElement | undefined = $state(undefined);
   let arrowRef: HTMLDivElement | undefined = $state(undefined);

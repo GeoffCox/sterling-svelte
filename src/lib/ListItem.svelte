@@ -2,16 +2,11 @@
 
 <script lang="ts">
   import { getContext } from 'svelte';
-  import type { HTMLAttributes } from 'svelte/elements';
   import { LIST_CONTEXT_KEY } from './List.constants';
   import type { ListContext } from './List.types';
+  import type { ListItemProps } from './ListItem.types';
 
-  type Props = HTMLAttributes<HTMLDivElement> & {
-    disabled?: boolean | null;
-    value?: string;
-  };
-
-  let { children, class: _class, disabled, value, ...rest }: Props = $props();
+  let { children, class: _class, disabled, value, ...rest }: ListItemProps = $props();
 
   const listContext = getContext<ListContext>(LIST_CONTEXT_KEY);
 

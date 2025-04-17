@@ -2,17 +2,10 @@
 
 <script lang="ts">
   import { setContext } from 'svelte';
-  import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
+  import type { KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
   import { LIST_CONTEXT_KEY } from './List.constants';
-  import type { ListContext } from './List.types';
+  import type { ListContext, ListProps } from './List.types';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
-
-  type Props = HTMLAttributes<HTMLDivElement> & {
-    disabled?: boolean | null;
-    horizontal?: boolean | null;
-    selectedValue?: string;
-    onSelect?: (value?: string) => void;
-  };
 
   let {
     children,
@@ -22,7 +15,7 @@
     selectedValue = $bindable(),
     onSelect,
     ...rest
-  }: Props = $props();
+  }: ListProps = $props();
 
   let listRef: HTMLDivElement;
   let lastSelectedItemRef: HTMLElement;

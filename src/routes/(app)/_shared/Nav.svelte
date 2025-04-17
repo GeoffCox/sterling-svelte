@@ -48,6 +48,7 @@
     {
       name: 'COMPONENTS',
       items: [
+        { name: 'Autocomplete', url: '/components/autocomplete' },
         { name: 'Button', url: '/components/button' },
         { name: 'Callout', url: '/components/callout' },
         { name: 'Checkbox', url: '/components/checkbox' },

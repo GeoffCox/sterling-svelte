@@ -2,16 +2,14 @@
 
 <script lang="ts">
   import { getContext } from 'svelte';
-  import type { HTMLAttributes } from 'svelte/elements';
   import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
   import type { MenuItemContext } from './MenuItem.types';
   import { isElementEnabledMenuItem, isElementMenuItem } from './MenuItem.utils';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
+  import type { MenuProps } from './Menu.types';
 
-  type Props = HTMLAttributes<HTMLDivElement>;
-
-  let { children, class: _class, ...rest }: Props = $props();
+  let { children, class: _class, ...rest }: MenuProps = $props();
 
   let menuRef: HTMLDivElement;
   let menuItemsRef: HTMLDivElement;

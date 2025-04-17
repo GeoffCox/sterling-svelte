@@ -9,13 +9,13 @@ export const switchDoc: ComponentDoc = {
   props: [
     {
       name: 'offLabel',
-      type: 'string | LabelSnippet | undefined',
+      type: 'string | SwitchLabelSnippet | undefined',
       default: 'undefined',
       comment: 'The text or snippet to display for the off position.'
     },
     {
       name: 'onLabel',
-      type: 'string | LabelSnippet | undefined',
+      type: 'string | SwitchLabelSnippet | undefined',
       default: 'undefined',
       comment: 'The text or snippet to display for the on position..'
     },
@@ -28,7 +28,7 @@ export const switchDoc: ComponentDoc = {
   ],
   types: [
     {
-      name: 'LabelSnippet',
+      name: 'SwitchLabelSnippet',
       definition: `Snippet<[{ 
   checked: boolean | null | undefined; 
   disabled: boolean | null | undefined; 

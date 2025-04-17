@@ -47,7 +47,7 @@
         onSelect={() => console.log('Tree.onSelect selectedValue:', selectedValue)}
       >
         {#each coffeeTree as coffeeItem}
-          <CoffeeTreeItem {coffeeItem} variant={_class} />
+          <CoffeeTreeItem {coffeeItem} class={_class} />
         {/each}
       </Tree>
     </div>

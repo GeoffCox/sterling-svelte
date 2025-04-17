@@ -2,23 +2,16 @@
 
 <script lang="ts">
   import { setContext } from 'svelte';
-  import type { HTMLAttributes } from 'svelte/elements';
   import { clickOutside } from './actions/clickOutside';
   import { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
-  import type { MenuBarContext } from './MenuBar.types';
+  import type { MenuBarContext, MenuBarProps } from './MenuBar.types';
   import { MENU_ITEM_CONTEXT_KEY } from './MenuItem.constants';
   import type { MenuItemContext } from './MenuItem.types';
   import { isElementEnabledMenuItem } from './MenuItem.utils';
 
   const uuid = $props.id();
 
-  type Props = HTMLAttributes<HTMLDivElement> & {
-    onClose?: (value: string) => void;
-    onOpen?: (value: string) => void;
-    onSelect?: (value: string) => void;
-  };
-
-  let { class: _class, children, onClose, onOpen, onSelect, ...rest }: Props = $props();
+  let { class: _class, children, onClose, onOpen, onSelect, ...rest }: MenuBarProps = $props();
 
   const rootValue = `MenuBar-${uuid}`;
   let openValues: string[] = $state([]);

@@ -1,34 +1,17 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { type Snippet } from 'svelte';
-  import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
+  import type { KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
   import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
   import { clickOutside } from './actions/clickOutside';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import Popover from './Popover.svelte';
+  import type { DropdownProps } from './Dropdown.types';
 
   const uuid = $props.id();
 
   const popoverId = `Dropdown-Popover-${uuid}`;
-
-  type DeprecatedProps = {
-    /** @deprecated Use icon instead. */
-    button?: Snippet;
-    /** @deprecated Use icon instead. */
-    buttonIcon?: Snippet;
-  };
-
-  type Props = HTMLAttributes<HTMLDivElement> &
-    DeprecatedProps & {
-      disabled?: boolean | null | undefined;
-      open?: boolean | null | undefined;
-      stayOpenOnClickAway?: boolean | null | undefined;
-      onOpen?: (open: boolean | null | undefined) => void;
-      icon?: Snippet;
-      value?: string | Snippet;
-    };
 
   let {
     button,
@@ -42,7 +25,7 @@
     stayOpenOnClickAway = false,
     value,
     ...rest
-  }: Props = $props();
+  }: DropdownProps = $props();
 
   icon = icon || buttonIcon || button;
 

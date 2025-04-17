@@ -2,11 +2,23 @@
   <h1>Changelog</h1>
 
   <h2>2.0.6</h2>
+
+  <h3>Autocomplete *NEW*</h3>
   <ul>
-    <li>Added support for form validation to set message and class.</li>
-    <li>Added support for form validation to show required indicator.</li>
+    <li>Added Autocomplete component</li>
   </ul>
+
   <h3>Label</h3>
+  <ul>
+    <li>Added optional form validation to set message and class.</li>
+    <li>Added optional form validation to show required indicator.</li>
+  </ul>
+
+  <h3>Component Props</h3>
+
+  <ul>
+    <li>Exported all component props types to allow for better composition outside the library.</li>
+  </ul>
 
   <h2>2.0.5</h2>
 

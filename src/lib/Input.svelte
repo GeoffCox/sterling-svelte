@@ -1,12 +1,10 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import type { HTMLInputAttributes } from 'svelte/elements';
+  import type { InputProps } from './Input.types';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   const uuid = $props.id();
-
-  type Props = HTMLInputAttributes;
 
   let {
     id,
@@ -15,7 +13,7 @@
     disabled = false,
     value = $bindable(undefined),
     ...rest
-  }: Props = $props();
+  }: InputProps = $props();
 
   let inputRef: HTMLInputElement;
 

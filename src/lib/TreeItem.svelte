@@ -1,8 +1,8 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { getContext, setContext, type Snippet } from 'svelte';
-  import type { HTMLAttributes, KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
+  import { getContext, setContext } from 'svelte';
+  import type { KeyboardEventHandler, MouseEventHandler } from 'svelte/elements';
   import type { SlideParams, TransitionConfig } from 'svelte/transition';
   import { slide } from 'svelte/transition';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
@@ -10,14 +10,7 @@
   import type { TreeContext } from './Tree.types';
   import TreeChevron from './TreeChevron.svelte';
   import { TREE_ITEM_CONTEXT_KEY } from './TreeItem.constants';
-  import type { TreeItemContext } from './TreeItem.types';
-
-  type Props = HTMLAttributes<HTMLDivElement> & {
-    disabled?: boolean | null | undefined;
-    icon?: Snippet;
-    label?: string | Snippet;
-    value: string;
-  };
+  import type { TreeItemContext, TreeItemProps } from './TreeItem.types';
 
   let {
     children,
@@ -28,7 +21,7 @@
     style,
     value,
     ...rest
-  }: Props = $props();
+  }: TreeItemProps = $props();
 
   const slideNoOp = (node: Element, params?: SlideParams): TransitionConfig => {
     return { delay: 0, duration: 0 };
