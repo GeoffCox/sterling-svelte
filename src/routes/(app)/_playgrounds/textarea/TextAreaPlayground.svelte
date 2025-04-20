@@ -33,8 +33,8 @@
       {placeholder}
       bind:resize
       class={_class}
-      oninput={(e) => console.log('TextArea.oninput event:', e)}
-      onchange={(e) => console.log('TextArea.onchange event:', e)}
+      oninput={(e) => console.log('<TextArea> oninput')}
+      onchange={(e) => console.log('<TextArea> onchange')}
     />
   {/snippet}
   {#snippet props()}

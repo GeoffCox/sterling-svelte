@@ -72,9 +72,9 @@
       value="file"
       class={variant}
       menuClass={menuVariant}
-      onClose={(value) => console.log(`MenuButton.onClose value:${value}`)}
-      onOpen={(value) => console.log(`MenuButton.onOpen value:${value}`)}
-      onSelect={(value) => console.log(`MenuButton.onSelect value:${value}`)}
+      onClose={(value) => console.log(`<MenuButton> onClose value:${value}`)}
+      onOpen={(value) => console.log(`<MenuButton> onOpen value:${value}`)}
+      onSelect={(value) => console.log(`<MenuButton> onSelect value:${value}`)}
       items={menuItems}
     >
       File

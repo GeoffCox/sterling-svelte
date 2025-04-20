@@ -43,7 +43,7 @@
         {step}
         bind:value
         {vertical}
-        onChange={(value) => console.log(`change value:${value}`)}
+        onChange={(value) => console.log(`<Slider> onChange value:${value}`)}
       />
     </div>
   {/snippet}

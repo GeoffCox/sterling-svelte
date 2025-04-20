@@ -16,9 +16,9 @@
 <Playground {code}>
   {#snippet component()}
     <MenuBar
-      onClose={(value) => console.log(`MenuBar.onClose value:${value}`)}
-      onOpen={(value) => console.log(`MenuBar.onOpen value:${value}`)}
-      onSelect={(value) => console.log(`MenuBar.onSelect value:${value}`)}
+      onClose={(value) => console.log(`<MenuBar> onClose value:${value}`)}
+      onOpen={(value) => console.log(`<MenuBar> onOpen value:${value}`)}
+      onSelect={(value) => console.log(`<MenuBar> onSelect value:${value}`)}
       class={_class}
     >
       <MenuItem value="file" text="File">

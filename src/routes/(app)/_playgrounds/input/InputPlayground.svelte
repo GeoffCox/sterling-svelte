@@ -25,8 +25,8 @@
         {placeholder}
         class={_class}
         bind:value
-        oninput={() => console.log('input')}
-        onchange={() => console.log('change')}>{text}</Input
+        oninput={() => console.log('<Input> oninput')}
+        onchange={() => console.log('<Input> onchange')}>{text}</Input
       >
     {:else}
       <Input
@@ -34,8 +34,8 @@
         {placeholder}
         class={_class}
         bind:value
-        oninput={() => console.log('input')}
-        onchange={() => console.log('change')}
+        oninput={() => console.log('<Input> oninput')}
+        onchange={() => console.log('<Input> onchange')}
       />
     {/if}
   {/snippet}

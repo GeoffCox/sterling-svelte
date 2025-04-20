@@ -1,6 +1,19 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.7</h2>
+
+  <h3>Slider</h3>
+  <ul>
+    <li>Removed unnecessary min/max clamping</li>
+    <li>Fixed to immediately ensure valid value on component instantiation</li>
+  </ul>
+
+  <h3>Tooltip</h3>
+  <ul>
+    <li>Added missing onOpen event</li>
+  </ul>
+
   <h2>2.0.6</h2>
 
   <h3>Autocomplete *NEW*</h3>

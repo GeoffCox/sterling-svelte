@@ -31,7 +31,7 @@
       {disabled}
       {stayOpenOnClickAway}
       class={_class}
-      onOpen={(value) => console.log(`open: ${value}`)}
+      onOpen={(value) => console.log(`<Dropdown> onOpen value:${value}`)}
     >
       {#snippet value()}
         <div class="value">

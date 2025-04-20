@@ -52,7 +52,7 @@
         {horizontal}
         class={variant}
         onSelect={(value) => {
-          console.log(`select:${value}`);
+          console.log(`<List> onSelect value:${value}`);
         }}
       >
         {#each countries as country}

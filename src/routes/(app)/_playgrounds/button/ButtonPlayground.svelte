@@ -21,7 +21,7 @@
 <Playground {code}>
   {#snippet component()}
     <div class="component">
-      <Button {disabled} class={_class} onclick={() => console.log('Button onclick')}>
+      <Button {disabled} class={_class} onclick={() => console.log('<Button> onclick')}>
         {#if withIcon}
           <SvelteIcon />
         {/if}

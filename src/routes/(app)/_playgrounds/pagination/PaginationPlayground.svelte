@@ -41,8 +41,6 @@
       }
     }
   };
-
-  $inspect(page, 'playground page');
 </script>
 
 <Playground {code}>
@@ -66,8 +64,8 @@
           bind:pageCount
           {pageSize}
           pageStep={pageStep > 0 ? pageStep : undefined}
-          onChange={(value, itemrange) =>
-            console.log(`Pagination onChange value:${value} itemrange:${itemrange}`)}
+          onChange={(value, itemRange) =>
+            console.log(`<Pagination> onChange value:${value} itemRange:${itemRange}`)}
         >
           {#snippet firstNumber(value?: number)}
             <div class="circle-number">{value}</div>
@@ -104,8 +102,8 @@
           bind:pageCount
           {pageSize}
           pageStep={pageStep > 0 ? pageStep : undefined}
-          onChange={(value, itemrange) =>
-            console.log(`Pagination onChange value:${value} itemrange:${itemrange}`)}
+          onChange={(value, itemRange) =>
+            console.log(`<Pagination> onChange value:${value} itemRange:${itemRange}`)}
         />
       {/if}
     </div>

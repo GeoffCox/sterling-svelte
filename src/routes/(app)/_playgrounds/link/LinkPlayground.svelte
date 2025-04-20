@@ -30,7 +30,7 @@
 
 <Playground {code}>
   {#snippet component()}
-    <Link {disabled} {href} class={_class} onclick={() => console.log('<Link> on:click')}>
+    <Link {disabled} {href} class={_class} onclick={() => console.log('<Link> onclick')}>
       {#if withIcon}
         <SvelteIcon />
       {/if}

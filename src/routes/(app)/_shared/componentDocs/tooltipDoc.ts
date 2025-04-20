@@ -21,6 +21,12 @@ export const tooltipDoc: ComponentDoc = {
       comment: 'The duration of mouse hover before showing the tooltip.'
     },
     {
+      name: 'onOpen',
+      type: '(open: boolean | null | undefined) => void',
+      default: 'undefined',
+      comment: 'Called when the tooltip opens or closes'
+    },
+    {
       name: 'tip',
       type: 'string | Snippet | undefined',
       default: 'undefined',

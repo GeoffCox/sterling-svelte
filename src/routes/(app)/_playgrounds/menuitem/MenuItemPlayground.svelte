@@ -35,13 +35,13 @@
     rootValue: 'root',
     closeContainingMenu: () => {},
     onOpen: (value) => {
-      console.log(`MenuItem.onOpen value:${value}`);
+      console.log(`<MenuItem> onOpen value:${value}`);
     },
     onClose: (value) => {
-      console.log(`MenuItem.onClose value:${value}`);
+      console.log(`<MenuItem> onClose value:${value}`);
     },
     onSelect: (value) => {
-      console.log(`MenuItem.onSelect value:${value}`);
+      console.log(`<MenuItem> onSelect value:${value}`);
     }
   });
 
@@ -70,9 +70,9 @@
         {shortcut}
         {value}
         class={_class}
-        onClose={(value) => console.log(`<MenuItem> onclose value'${value}'`)}
-        onOpen={(value) => console.log(`<MenuItem> onopen value:'${value}'`)}
-        onSelect={(value) => console.log(`<MenuItem> onselect value:'${value}'`)}
+        onClose={(value) => console.log(`<MenuItem> onClose value'${value}'`)}
+        onOpen={(value) => console.log(`<MenuItem> onOpen value:'${value}'`)}
+        onSelect={(value) => console.log(`<MenuItem> onSelect value:'${value}'`)}
       >
         <MenuItem value="1" text="One" />
         <MenuItem value="2" text="Two" />
@@ -88,9 +88,9 @@
         {text}
         class={_class}
         {menuClass}
-        onClose={(value) => console.log(`<MenuItem> onclose value'${value}'`)}
-        onOpen={(value) => console.log(`<MenuItem> onopen value:'${value}'`)}
-        onSelect={(value) => console.log(`<MenuItem> onselect value:'${value}'`)}
+        onClose={(value) => console.log(`<MenuItem> onClose value'${value}'`)}
+        onOpen={(value) => console.log(`<MenuItem> onOpen value:'${value}'`)}
+        onSelect={(value) => console.log(`<MenuItem> onSelect value:'${value}'`)}
       />
     {/if}
   {/snippet}

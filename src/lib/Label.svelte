@@ -108,8 +108,6 @@
     targetRequired = targetRef && 'required' in targetRef && !!targetRef.required;
   };
 
-  $inspect(targetRequired);
-
   const onTargetAttributeChanged: MutationCallback = (mutations) => {
     if (
       mutations.findIndex(

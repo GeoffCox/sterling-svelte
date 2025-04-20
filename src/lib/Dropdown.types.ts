@@ -11,9 +11,9 @@ type DeprecatedProps = {
 export type DropdownProps = HTMLAttributes<HTMLDivElement> &
   DeprecatedProps & {
     disabled?: boolean | null | undefined;
+    icon?: Snippet;
+    onOpen?: (open: boolean | null | undefined) => void;
     open?: boolean | null | undefined;
     stayOpenOnClickAway?: boolean | null | undefined;
-    onOpen?: (open: boolean | null | undefined) => void;
-    icon?: Snippet;
     value?: string | Snippet;
   };

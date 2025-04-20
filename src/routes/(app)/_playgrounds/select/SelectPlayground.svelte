@@ -34,10 +34,10 @@
       bind:open
       bind:selectedValue
       onSelect={(value) => {
-        console.log(`Select.onSelect value:${value}`);
+        console.log(`<Select> onSelect value:${value}`);
       }}
       onPending={(value) => {
-        console.log(`Select.onPending value:${value}`);
+        console.log(`<Select> onPending value:${value}`);
       }}
     >
       {#each items as item}

@@ -18,19 +18,11 @@
 <Playground {code}>
   {#snippet component()}
     {#if text}
-      <Checkbox
-        {disabled}
-        class={_class}
-        onchange={(event) =>
-          console.log(`Checkbox onchange checked:${event.currentTarget.checked}`)}>{text}</Checkbox
+      <Checkbox {disabled} class={_class} onchange={() => console.log(`<Checkbox> onchange`)}
+        >{text}</Checkbox
       >
     {:else}
-      <Checkbox
-        {disabled}
-        class={_class}
-        onchange={(event) =>
-          console.log(`Checkbox onchange checked:${event.currentTarget.checked}`)}
-      />
+      <Checkbox {disabled} class={_class} onchange={() => console.log(`<Checkbox> onchange`)} />
     {/if}
   {/snippet}
   {#snippet props()}

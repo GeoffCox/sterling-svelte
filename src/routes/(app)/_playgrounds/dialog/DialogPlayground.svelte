@@ -44,12 +44,12 @@
 
   const onDialogCancel = async () => {
     await tick();
-    console.log(`Dialog oncancel returnValue:${returnValue} selectedValue:${selectedValue}`);
+    console.log(`<Dialog> oncancel returnValue:${returnValue} selectedValue:${selectedValue}`);
   };
 
   const onDialogClose = async () => {
     await tick();
-    console.log(`Dialog onclose returnValue:${returnValue} selectedValue:${selectedValue}`);
+    console.log(`<Dialog> onclose returnValue:${returnValue} selectedValue:${selectedValue}`);
   };
 
   let code = $derived(getPlaygroundCode({ backdropCloses, formSubmit, _class: _close }));

@@ -26,7 +26,7 @@
       class={_class}
       {vertical}
       onSelect={(value) => {
-        console.log(`TabList.onSelect value:${value}`);
+        console.log(`<TabList> onSelect value:${value}`);
       }}
     >
       <Tab value="First">First</Tab>

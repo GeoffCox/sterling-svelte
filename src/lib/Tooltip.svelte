@@ -10,6 +10,7 @@
     class: _class,
     disabled = false,
     hoverDelayMilliseconds = 1000,
+    onOpen,
     open = $bindable(false),
     tip,
     ...rest
@@ -44,6 +45,10 @@
       }, hoverDelayMilliseconds);
     }
   };
+
+  $effect(() => {
+    onOpen?.(open);
+  });
 
   $effect(() => {
     if (disabled) {

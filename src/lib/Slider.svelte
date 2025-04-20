@@ -18,6 +18,21 @@
     ...rest
   }: SliderProps = $props();
 
+  const ensureValueValid = () => {
+    const clamped = Math.max(min, Math.min(max, value));
+    const newValue = precision !== undefined ? round(clamped, precision) : clamped;
+    if (value !== newValue) {
+      value = newValue;
+    }
+  };
+
+  // ensure incoming value is valid to avoid effect lag
+  if (min > max) {
+    console.warn('The slider min is greater than max.');
+  }
+
+  ensureValueValid();
+
   let sliderRef: HTMLDivElement;
 
   export const blur = () => {
@@ -32,27 +47,13 @@
     sliderRef?.parentElement?.focus(options);
   };
 
-  let ratio = $derived((value - min) / (max - min));
+  let ratio = $derived(max - min > 0 ? (value - min) / (max - min) : 0);
 
+  // when value changes, ensure it is valid right away
   const setValue = (newValue: number) => {
     const clamped = Math.max(min, Math.min(max, newValue));
     value = precision !== undefined ? round(clamped, precision) : clamped;
   };
-
-  // ensure min <= max
-  $effect(() => {
-    if (min > max) {
-      min = max;
-    }
-  });
-
-  $effect(() => {
-    const clamped = Math.max(min, Math.min(max, value));
-    const newValue = precision !== undefined ? round(clamped, precision) : clamped;
-    if (value !== newValue) {
-      value = newValue;
-    }
-  });
 
   const setValueByOffset = (offset: number) => {
     if (sliderSize > 0) {
@@ -61,6 +62,10 @@
       setValue(newValue);
     }
   };
+
+  $effect(() => {
+    ensureValueValid();
+  });
 
   // Raise change event when value changes
   $effect(() => {

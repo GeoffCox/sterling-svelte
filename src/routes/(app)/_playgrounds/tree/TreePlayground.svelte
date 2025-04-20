@@ -43,8 +43,8 @@
         bind:expandedValues
         class={_class}
         onExpandCollapse={(expandedValues) =>
-          console.log('Tree.onExpandCollapse expandedValue:', expandedValues)}
-        onSelect={() => console.log('Tree.onSelect selectedValue:', selectedValue)}
+          console.log(`<Tree> onExpandCollapse expandedValues:${expandedValues.join(',')}`)}
+        onSelect={(selectedValue) => console.log(`<Tree> onSelect selectedValue:${selectedValue}`)}
       >
         {#each coffeeTree as coffeeItem}
           <CoffeeTreeItem {coffeeItem} class={_class} />

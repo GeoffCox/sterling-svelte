@@ -34,8 +34,8 @@
     <Autocomplete
       class={_class}
       {filter}
-      onchange={() => console.log('change')}
-      oninput={() => console.log('input')}
+      onchange={() => console.log('<Autocomplete> onchange')}
+      oninput={() => console.log('<Autocomplete> oninput')}
       bind:value
       values={countries}
     />

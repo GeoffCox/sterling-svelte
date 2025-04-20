@@ -54,7 +54,6 @@
   const loadColorScheme = () => {
     if (globalThis.document && cookieName) {
       colorScheme = getCookie(cookieName) || colorScheme;
-      console.log('loadColorScheme', colorScheme);
     }
   };
 

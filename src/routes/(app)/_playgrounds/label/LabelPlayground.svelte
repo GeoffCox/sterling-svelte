@@ -4,6 +4,7 @@
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
+  import type { LabelValidationCallback } from '$lib/Label.types';
   import VariantInput from '../../_shared/ClassInput.svelte';
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
@@ -35,6 +36,13 @@
       variant: _class
     })
   );
+
+  const onValidation: LabelValidationCallback = (validity, validationMessage) => {
+    console.log(
+      `<Label> onValidation validity.valid:${validity.valid} validationMessage:${validationMessage}`
+    );
+    return undefined;
+  };
 </script>
 
 <Playground {code}>
@@ -42,6 +50,7 @@
     <form>
       <Label
         for={useFor ? 'target' : undefined}
+        class={_class}
         {forwardClick}
         {formValidation}
         {message}
@@ -49,7 +58,7 @@
         {requiredReason}
         {text}
         {requiredIndicator}
-        class={_class}
+        {onValidation}
       >
         <Input
           id="target"

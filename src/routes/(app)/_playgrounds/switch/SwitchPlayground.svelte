@@ -19,11 +19,6 @@
   let variant = $state('');
   let vertical: boolean | null | undefined = $state(false);
 
-  const onSwitchChange = (e: Event) => {
-    const switchEvent = e as any;
-    console.log(`change: ${switchEvent.currentTarget?.checked}`);
-  };
-
   let code = $derived(
     getPlaygroundCode({
       checked,
@@ -74,7 +69,8 @@
       offLabel={customLabels ? ColdLabel : offText}
       onLabel={customLabels ? HotLabel : onText}
       {vertical}
-      onchange={onSwitchChange}
+      onchange={() => console.log(`<Switch> onchange`)}
+      oninput={() => console.log(`<Switch> oninput`)}
     />
   {/snippet}
   {#snippet props()}

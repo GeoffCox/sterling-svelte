@@ -46,6 +46,7 @@
         {disabled}
         {hoverDelayMilliseconds}
         {mainAxisOffset}
+        onOpen={(value) => console.log(`<Tooltip> onOpen value:${value}`)}
         bind:open
         {placement}
       >
