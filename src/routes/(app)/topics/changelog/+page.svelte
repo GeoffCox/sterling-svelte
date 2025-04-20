@@ -1,6 +1,13 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.8</h2>
+
+  <h3>Radio</h3>
+  <ul>
+    <li>Fixed bug with checked being initially set on hidden input.</li>
+  </ul>
+
   <h2>2.0.7</h2>
 
   <h3>Slider</h3>

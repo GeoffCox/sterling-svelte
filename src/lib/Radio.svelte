@@ -50,7 +50,7 @@
   class:using-keyboard={$usingKeyboard}
 >
   <div class="container">
-    <input bind:this={inputRef} checked {disabled} bind:group {id} type="radio" {...rest} />
+    <input bind:this={inputRef} {checked} {disabled} bind:group {id} type="radio" {...rest} />
     <div class="indicator"></div>
   </div>
   {#if children}
