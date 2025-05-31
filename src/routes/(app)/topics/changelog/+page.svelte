@@ -1,6 +1,22 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.10</h2>
+
+  <h3>Slider</h3>
+  <ul>
+    <li>Fixed bugs with keyboard arrow keys not properly handling reverse.</li>
+  </ul>
+
+  <h2>2.0.9</h2>
+
+  <h3>Slider</h3>
+  <ul>
+    <li>
+      Added reverse property. When true the directon of the slider from min to max is reversed.
+    </li>
+  </ul>
+
   <h2>2.0.8</h2>
 
   <h3>Radio</h3>

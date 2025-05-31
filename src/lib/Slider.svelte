@@ -12,6 +12,7 @@
     max = 100,
     onChange,
     precision = 0,
+    reverse,
     step = 1,
     value = $bindable(0),
     vertical,
@@ -87,9 +88,17 @@
     if (!disabled) {
       event.currentTarget.setPointerCapture(event.pointerId);
       if (vertical) {
-        setValueByOffset(sliderRef.getBoundingClientRect().bottom - event.y);
+        if (reverse) {
+          setValueByOffset(event.y - sliderRef.getBoundingClientRect().top);
+        } else {
+          setValueByOffset(sliderRef.getBoundingClientRect().bottom - event.y);
+        }
       } else {
-        setValueByOffset(event.x - sliderRef.getBoundingClientRect().left);
+        if (reverse) {
+          setValueByOffset(sliderRef.getBoundingClientRect().right - event.x);
+        } else {
+          setValueByOffset(event.x - sliderRef.getBoundingClientRect().left);
+        }
       }
       event.preventDefault();
       focus();
@@ -101,9 +110,17 @@
   const onPointerMove: PointerEventHandler<HTMLDivElement> = (event) => {
     if (!disabled && event.currentTarget.hasPointerCapture(event.pointerId)) {
       if (vertical) {
-        setValueByOffset(sliderRef.getBoundingClientRect().bottom - event.y);
+        if (reverse) {
+          setValueByOffset(event.y - sliderRef.getBoundingClientRect().top);
+        } else {
+          setValueByOffset(sliderRef.getBoundingClientRect().bottom - event.y);
+        }
       } else {
-        setValueByOffset(event.x - sliderRef.getBoundingClientRect().left);
+        if (reverse) {
+          setValueByOffset(sliderRef.getBoundingClientRect().right - event.x);
+        } else {
+          setValueByOffset(event.x - sliderRef.getBoundingClientRect().left);
+        }
       }
       event.preventDefault();
     }
@@ -122,19 +139,32 @@
 
   const onKeyDown: KeyboardEventHandler<HTMLDivElement> = (event) => {
     if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey) {
-      switch (event.code) {
-        case 'ArrowDown':
-        case 'ArrowLeft':
-          setValue(value - step);
-          event.preventDefault();
-          event.stopPropagation();
-          return;
-        case 'ArrowRight':
-        case 'ArrowUp':
-          setValue(value + step);
-          event.preventDefault();
-          event.stopPropagation();
-          return;
+      let change = 0;
+
+      if (vertical) {
+        switch (event.code) {
+          case 'ArrowDown':
+            change = reverse ? step : -step;
+            break;
+          case 'ArrowUp':
+            change = reverse ? -step : step;
+            break;
+        }
+      } else {
+        switch (event.code) {
+          case 'ArrowLeft':
+            change = reverse ? step : -step;
+            break;
+          case 'ArrowRight':
+            change = reverse ? -step : step;
+            break;
+        }
+      }
+
+      if (change !== 0) {
+        setValue(value + change);
+        event.preventDefault();
+        event.stopPropagation();
       }
     }
     rest?.onkeydown?.(event);
@@ -149,6 +179,7 @@
   class={['sterling-slider', _class]}
   class:disabled
   class:horizontal={!vertical}
+  class:reverse
   class:vertical
   role="slider"
   tabindex={!disabled ? 0 : undefined}
@@ -163,15 +194,10 @@
     bind:this={sliderRef}
     bind:clientWidth={sliderWidth}
     bind:clientHeight={sliderHeight}
+    style={`--valueOffset: ${valueOffset}px`}
   >
     <div class="track"></div>
-    <div
-      class="fill"
-      style={vertical ? `height: ${valueOffset}px` : `width: ${valueOffset}px`}
-    ></div>
-    <div
-      class="thumb"
-      style={vertical ? `bottom: ${valueOffset}px` : `left: ${valueOffset}px`}
-    ></div>
+    <div class="fill"></div>
+    <div class="thumb"></div>
   </div>
 </div>

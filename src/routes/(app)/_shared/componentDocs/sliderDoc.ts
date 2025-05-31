@@ -26,12 +26,6 @@ export const sliderDoc: ComponentDoc = {
       comment: 'The minimum value of the slider.'
     },
     {
-      name: 'step',
-      type: 'number | undefined',
-      default: '1',
-      comment: 'The amount the value changes by pressing arrow keys.'
-    },
-    {
       name: 'onChange',
       type: '(value: number) => void',
       default: 'undefined',
@@ -42,6 +36,18 @@ export const sliderDoc: ComponentDoc = {
       type: 'number | undefined',
       default: 'undefined',
       comment: 'The number of decimal places to round the value'
+    },
+    {
+      name: 'reverse',
+      type: 'boolean | null | undefined',
+      default: 'false',
+      comment: 'When true, the slider direction from min to max is reversed.'
+    },
+    {
+      name: 'step',
+      type: 'number | undefined',
+      default: '1',
+      comment: 'The amount the value changes by pressing arrow keys.'
     },
     {
       name: 'value',

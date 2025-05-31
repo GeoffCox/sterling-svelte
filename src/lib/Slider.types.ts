@@ -5,6 +5,7 @@ export type SliderProps = HTMLAttributes<HTMLDivElement> & {
   min?: number;
   max?: number;
   precision?: number;
+  reverse?: boolean | null;
   step?: number;
   value?: number;
   vertical?: boolean | null;

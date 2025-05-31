@@ -14,6 +14,7 @@
   let min = $state(0);
   let max = $state(100);
   let precision: number = $state(0);
+  let reverse = $state(false);
   let step: number = $state(1);
   let _class = $state('');
   let vertical = $state(false);
@@ -24,6 +25,7 @@
       min,
       max,
       precision,
+      reverse,
       step,
       _class,
       vertical
@@ -40,6 +42,7 @@
         {max}
         {min}
         {precision}
+        {reverse}
         {step}
         bind:value
         {vertical}
@@ -58,6 +61,7 @@
     <Label text="precision">
       <Input type="number" bind:value={precision} />
     </Label>
+    <Checkbox bind:checked={reverse}>reverse</Checkbox>
     <Label text="step">
       <Input type="number" bind:value={step} />
     </Label>

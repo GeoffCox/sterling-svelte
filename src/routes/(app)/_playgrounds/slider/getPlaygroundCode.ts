@@ -4,6 +4,7 @@ export const getPlaygroundCode = (props: {
   max: number;
   min: number;
   precision: number | undefined;
+  reverse: boolean;
   step: number;
   vertical: boolean;
 }) => {
@@ -19,6 +20,9 @@ export const getPlaygroundCode = (props: {
   }
   if (props.min !== 0) {
     propList.push(`min="${props.min}"`);
+  }
+  if (props.reverse) {
+    propList.push(`reverse`);
   }
   if (props.step !== 1) {
     propList.push(`step="${props.step}"`);
