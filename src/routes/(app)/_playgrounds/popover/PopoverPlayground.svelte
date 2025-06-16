@@ -77,9 +77,9 @@
 <style>
   .popover-text {
     background-color: var(--stsv-common__background-color);
-    border-color: var(--stsv-input__border-color);
-    border-style: solid;
-    border-width: 2px;
+    border-color: var(--stsv-common__border-color);
+    border-style: dotted;
+    border-width: var(--stsv-common__border-width);
     color: var(--stsv-common__color);
     padding: 1em;
   }

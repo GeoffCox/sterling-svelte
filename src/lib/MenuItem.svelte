@@ -381,7 +381,7 @@
   aria-haspopup={!!children}
   aria-owns={menuId}
   class={['sterling-menu-item', _class]}
-  class:using-keyboard={usingKeyboard}
+  class:using-keyboard={$usingKeyboard}
   data-value={value}
   data-root-value={menuItemContext.rootValue}
   {disabled}

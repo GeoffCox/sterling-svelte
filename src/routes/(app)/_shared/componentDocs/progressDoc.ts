@@ -8,12 +8,6 @@ export const progressDoc: ComponentDoc = {
   comments: [makeExtendsComment('HTMLDivElement')],
   props: [
     {
-      name: 'disabled',
-      type: 'boolean | null | undefined',
-      default: 'false',
-      comment: 'When true, the progress bar is disabled.'
-    },
-    {
       name: 'max',
       type: 'number | undefined',
       default: '100',
@@ -36,6 +30,12 @@ export const progressDoc: ComponentDoc = {
       type: 'boolean | null | undefined',
       default: 'undefined',
       comment: 'When true, the progress bar is displayed vertically.'
+    },
+    {
+      name: 'disabled',
+      type: 'boolean | null | undefined',
+      default: 'false',
+      comment: 'Deprecated. Progress is not interactive and should not have disabled state.'
     }
   ],
   types: [

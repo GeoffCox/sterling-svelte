@@ -6,6 +6,7 @@ export type ProgressOrientation = ProgressOrientationTuple[number];
 import type { HTMLAttributes } from 'svelte/elements';
 
 export type ProgressProps = HTMLAttributes<HTMLDivElement> & {
+  /** @deprecated Progress is not interactive and should not have disabled state. */
   disabled?: boolean | null;
   max?: number;
   percent?: number;

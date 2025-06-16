@@ -8,6 +8,7 @@
   import { isElementEnabledMenuItem, isElementMenuItem } from './MenuItem.utils';
   import { prefersReducedMotion } from './mediaQueries/prefersReducedMotion';
   import type { MenuProps } from './Menu.types';
+  import { linear } from 'svelte/easing';
 
   let { children, class: _class, ...rest }: MenuProps = $props();
 
@@ -91,8 +92,8 @@
   class:open
   data-root-value={rootValue}
   tabindex="-1"
-  in:slideMotion|global={{ duration: 300 }}
-  out:slideMotion|global={{ duration: 100 }}
+  in:slideMotion|global={{ delay: 10, duration: 250, easing: linear, axis: 'y' }}
+  out:slideMotion|global={{ delay: 10, duration: 250, easing: linear, axis: 'y' }}
   {...rest}
 >
   <div bind:this={menuItemsRef} class="menu-items">

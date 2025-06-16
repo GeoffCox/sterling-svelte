@@ -1,6 +1,16 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.11</h2>
+
+  <h3>Checkbox</h3>
+  <ul>
+    <li>Fixed disabled mistakenly bindable. Changed not bindable.</li>
+    <li>Added using-keyboard conditional class to Slider.</li>
+    <li>Fix display issue in Pagination when item count is zero.</li>
+    <li>Deprecated disable on Progress as it is not interactive.</li>
+  </ul>
+
   <h2>2.0.10</h2>
 
   <h3>Slider</h3>

@@ -11,7 +11,7 @@
     children,
     checked = $bindable(false),
     class: _class,
-    disabled = $bindable(false),
+    disabled = false,
     ...rest
   }: CheckboxProps = $props();
 

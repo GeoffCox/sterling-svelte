@@ -4,6 +4,7 @@
   import { round } from 'lodash-es';
   import type { KeyboardEventHandler, PointerEventHandler } from 'svelte/elements';
   import type { SliderProps } from './Slider.types';
+  import { usingKeyboard } from './mediaQueries/usingKeyboard';
 
   let {
     class: _class,
@@ -180,6 +181,7 @@
   class:disabled
   class:horizontal={!vertical}
   class:reverse
+  class:using-keyboard={$usingKeyboard}
   class:vertical
   role="slider"
   tabindex={!disabled ? 0 : undefined}

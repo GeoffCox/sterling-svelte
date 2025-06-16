@@ -202,11 +202,9 @@
     {#if _page}
       {#if currentNumber}
         {@render currentNumber(_page)}
-      {:else}
+      {:else if itemCount > 0}
         <input disabled={_page === undefined} value={_page} onchange={onInputChange} />
       {/if}
-    {:else}
-      -
     {/if}
   </div>
   <div class="page-number next">
