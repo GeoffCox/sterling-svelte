@@ -35,7 +35,7 @@ export const sliderDoc: ComponentDoc = {
       name: 'precision',
       type: 'number | undefined',
       default: 'undefined',
-      comment: 'The number of decimal places to round the value'
+      comment: 'The number of decimal places to round the value.'
     },
     {
       name: 'reverse',

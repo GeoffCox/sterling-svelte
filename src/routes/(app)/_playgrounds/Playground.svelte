@@ -81,6 +81,7 @@
 
   .configuration {
     border-right: 1px dashed var(--stsv-common__border-color);
+    align-self: stretch;
     padding: 1em;
   }
 

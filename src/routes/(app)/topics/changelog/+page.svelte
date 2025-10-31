@@ -1,6 +1,13 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.12</h2>
+
+  <h3>Splitter</h3>
+  <ul>
+    <li>Addedx Splitter component to allow dynamic resizing of 2 panes.</li>
+  </ul>
+
   <h2>2.0.11</h2>
 
   <h3>Checkbox</h3>

@@ -58,6 +58,7 @@ export type { ProgressOrientation, ProgressProps } from './Progress.types';
 export type { RadioProps } from './Radio.types';
 export type { SelectProps } from './Select.types';
 export type { SliderProps } from './Slider.types';
+export type { SplitterProps } from './Splitter.types';
 export type { SwitchProps } from './Switch.types';
 export type { TabListContext, TabListProps } from './TabList.types';
 export type { TabProps } from './Tab.types';
@@ -90,6 +91,7 @@ import Progress from './Progress.svelte';
 import Radio from './Radio.svelte';
 import Select from './Select.svelte';
 import Slider from './Slider.svelte';
+import Splitter from './Splitter.svelte';
 import Switch from './Switch.svelte';
 import Tab from './Tab.svelte';
 import TabList from './TabList.svelte';
@@ -122,6 +124,7 @@ export {
   Radio,
   Select,
   Slider,
+  Splitter,
   Switch,
   Tab,
   TabList,

@@ -1,5 +1,4 @@
 import type { ComponentDoc } from './types';
-import { makeExtendsComment } from './commonDoc';
 
 import { autocompleteDoc } from './autocompleteDoc';
 import { buttonDoc } from './buttonDoc';
@@ -23,6 +22,7 @@ import { progressDoc } from './progressDoc';
 import { radioDoc } from './radioDoc';
 import { selectDoc } from './selectDoc';
 import { sliderDoc } from './sliderDoc';
+import { splitterDoc } from './splitterDoc';
 import { switchDoc } from './switchDoc';
 import { tabDoc } from './tabDoc';
 import { tabListDoc } from './tabListDoc';
@@ -55,6 +55,7 @@ export const componentDocs: Record<string, ComponentDoc> = {
   radio: radioDoc,
   select: selectDoc,
   slider: sliderDoc,
+  splitter: splitterDoc,
   switch: switchDoc,
   tab: tabDoc,
   tablist: tabListDoc,

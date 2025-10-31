@@ -70,6 +70,7 @@
         { name: 'Radio', url: '/components/radio' },
         { name: 'Select', url: '/components/select' },
         { name: 'Slider', url: '/components/slider' },
+        { name: 'Splitter', url: '/components/splitter' },
         { name: 'Switch', url: '/components/switch' },
         { name: 'Tab', url: '/components/tab' },
         { name: 'TabList', url: '/components/tablist' },
