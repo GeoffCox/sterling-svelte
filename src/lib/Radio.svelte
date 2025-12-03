@@ -13,6 +13,7 @@
     class: _class,
     disabled = false,
     group = $bindable(),
+    value,
     ...rest
   }: RadioProps = $props();
 
@@ -22,6 +23,11 @@
     if (children && id === undefined) {
       id = `Radio-${uuid}`;
     }
+  });
+
+  $effect(() => {
+    // checked isn't set by input type="radio"
+    checked = group === value;
   });
 
   // ----- Methods ----- //
@@ -50,7 +56,16 @@
   class:using-keyboard={$usingKeyboard}
 >
   <div class="container">
-    <input bind:this={inputRef} {checked} {disabled} bind:group {id} type="radio" {...rest} />
+    <input
+      bind:this={inputRef}
+      {checked}
+      {disabled}
+      bind:group
+      {id}
+      type="radio"
+      {value}
+      {...rest}
+    />
     <div class="indicator"></div>
   </div>
   {#if children}

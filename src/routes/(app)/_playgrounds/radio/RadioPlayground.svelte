@@ -54,10 +54,10 @@
     </div>
   {/snippet}
   {#snippet props()}
-    <VariantInput bind:class={_class} />
+    <VariantInput bind:class={_class} sterlingClasses={['button']} />
   {/snippet}
   {#snippet tweaks()}
-    <Checkbox bind:checked={disabled}>disable 2nd item</Checkbox>
+    <Checkbox bind:checked={disabled}>Disable 2nd item</Checkbox>
   {/snippet}
 </Playground>
 

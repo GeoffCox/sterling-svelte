@@ -27,7 +27,7 @@
   {/snippet}
   {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <VariantInput bind:class={_class} />
+    <VariantInput bind:class={_class} sterlingClasses={['button']} />
   {/snippet}
   {#snippet snippets()}
     <Label text="children">
