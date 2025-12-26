@@ -9,7 +9,7 @@
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let value = $state(0);
+  let value: number | undefined = $state(0);
   let disabled = $state(false);
   let min = $state(0);
   let max = $state(100);
@@ -18,6 +18,8 @@
   let step: number = $state(1);
   let _class = $state('');
   let vertical = $state(false);
+  let noValue = $state(false);
+  let previousValue: number | undefined = 0;
 
   let code = $derived(
     getPlaygroundCode({
@@ -44,7 +46,7 @@
         {precision}
         {reverse}
         {step}
-        bind:value
+        bind:value={() => (noValue ? undefined : value), (v) => (value = v)}
         {vertical}
         onChange={(value) => console.log(`<Slider> onChange value:${value}`)}
       />
@@ -71,6 +73,10 @@
     <VariantInput bind:class={_class} sterlingClasses={['composed']} />
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   {/snippet}
+  {#snippet tweaks()}
+    <Checkbox bind:checked={noValue}>Unset value</Checkbox>
+  {/snippet}
+  }
 </Playground>
 
 <style>

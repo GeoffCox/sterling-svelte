@@ -9,7 +9,7 @@
   let {
     id,
     children,
-    checked = $bindable(false),
+    checked,
     class: _class,
     disabled = false,
     group = $bindable(),
@@ -23,11 +23,6 @@
     if (children && id === undefined) {
       id = `Radio-${uuid}`;
     }
-  });
-
-  $effect(() => {
-    // checked isn't set by input type="radio"
-    checked = group === value;
   });
 
   // ----- Methods ----- //
@@ -51,7 +46,7 @@
 -->
 <div
   class={['sterling-radio', _class]}
-  class:checked
+  class:checked={group === value}
   class:disabled
   class:using-keyboard={$usingKeyboard}
 >

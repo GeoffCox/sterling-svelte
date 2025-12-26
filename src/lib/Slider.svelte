@@ -15,16 +15,18 @@
     precision = 0,
     reverse,
     step = 1,
-    value = $bindable(0),
+    value = $bindable(),
     vertical,
     ...rest
   }: SliderProps = $props();
 
   const ensureValueValid = () => {
-    const clamped = Math.max(min, Math.min(max, value));
-    const newValue = precision !== undefined ? round(clamped, precision) : clamped;
-    if (value !== newValue) {
-      value = newValue;
+    if (value !== undefined) {
+      const clamped = Math.max(min, Math.min(max, value));
+      const newValue = precision !== undefined ? round(clamped, precision) : clamped;
+      if (value !== newValue) {
+        value = newValue;
+      }
     }
   };
 
@@ -49,7 +51,7 @@
     sliderRef?.parentElement?.focus(options);
   };
 
-  let ratio = $derived(max - min > 0 ? (value - min) / (max - min) : 0);
+  let ratio = $derived(value !== undefined && max - min > 0 ? (value - min) / (max - min) : 0);
 
   // when value changes, ensure it is valid right away
   const setValue = (newValue: number) => {
@@ -71,7 +73,7 @@
 
   // Raise change event when value changes
   $effect(() => {
-    onChange?.(value);
+    value && onChange?.(value);
   });
 
   // ----- Size tracking ----- //
@@ -139,7 +141,7 @@
   };
 
   const onKeyDown: KeyboardEventHandler<HTMLDivElement> = (event) => {
-    if (!disabled && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+    if (!disabled && value !== undefined && !event.ctrlKey && !event.shiftKey && !event.altKey) {
       let change = 0;
 
       if (vertical) {
@@ -180,6 +182,7 @@
   class={['sterling-slider', _class]}
   class:disabled
   class:horizontal={!vertical}
+  class:no-value={value === undefined}
   class:reverse
   class:using-keyboard={$usingKeyboard}
   class:vertical

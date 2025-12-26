@@ -1,6 +1,21 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.14</h2>
+
+  <h3>Radio</h3>
+  <ul>
+    <li>Reverted previous fix.</li>
+    <li>Fixed issue with checked being bound rather than just initial value.</li>
+    <li>Fixed issue with checked class not being in sync with group and value.</li>
+  </ul>
+
+  <h3>Slider</h3>
+  <ul>
+    <li>Added support for value to be undefined.</li>
+    <li>Add CSS support with no-value class applied when value is undefined.</li>
+  </ul>
+
   <h2>2.0.13</h2>
 
   <h3>Radio</h3>
