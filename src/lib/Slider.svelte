@@ -73,7 +73,7 @@
 
   // Raise change event when value changes
   $effect(() => {
-    value && onChange?.(value);
+    onChange?.(value);
   });
 
   // ----- Size tracking ----- //
@@ -165,7 +165,7 @@
       }
 
       if (change !== 0) {
-        setValue(value + change);
+        setValue((value || 0) + change);
         event.preventDefault();
         event.stopPropagation();
       }

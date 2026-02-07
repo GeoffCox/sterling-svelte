@@ -1,6 +1,7 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
+  import { Button } from '$lib';
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
@@ -18,8 +19,6 @@
   let step: number = $state(1);
   let _class = $state('');
   let vertical = $state(false);
-  let noValue = $state(false);
-  let previousValue: number | undefined = 0;
 
   let code = $derived(
     getPlaygroundCode({
@@ -46,7 +45,7 @@
         {precision}
         {reverse}
         {step}
-        bind:value={() => (noValue ? undefined : value), (v) => (value = v)}
+        bind:value
         {vertical}
         onChange={(value) => console.log(`<Slider> onChange value:${value}`)}
       />
@@ -74,9 +73,8 @@
     <Checkbox bind:checked={vertical}>vertical</Checkbox>
   {/snippet}
   {#snippet tweaks()}
-    <Checkbox bind:checked={noValue}>Unset value</Checkbox>
-  {/snippet}
-  }
+    <Button onclick={() => (value = undefined)}>Unset value</Button>
+  {/snippet}s
 </Playground>
 
 <style>

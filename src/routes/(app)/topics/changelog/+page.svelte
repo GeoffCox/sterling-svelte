@@ -1,6 +1,20 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.16</h2>
+
+  <h3>Slider</h3>
+  <ul>
+    <li>Fixed issue onChange not raised when value is zero.</li>
+  </ul>
+
+  <h2>2.0.15</h2>
+
+  <h3>Radio</h3>
+  <ul>
+    <li>Fixed issue with bind:group not working when nested in custom component.</li>
+  </ul>
+
   <h2>2.0.14</h2>
 
   <h3>Radio</h3>

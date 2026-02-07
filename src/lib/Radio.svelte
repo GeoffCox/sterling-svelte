@@ -1,15 +1,16 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
+  import type { ChangeEventHandler } from 'svelte/elements';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import type { RadioProps } from './Radio.types';
+  import { onMount } from 'svelte';
 
   const uuid = $props.id();
 
   let {
     id,
     children,
-    checked,
     class: _class,
     disabled = false,
     group = $bindable(),
@@ -25,8 +26,6 @@
     }
   });
 
-  // ----- Methods ----- //
-
   export const blur = () => {
     inputRef?.blur();
   };
@@ -37,6 +36,12 @@
 
   export const focus = (options?: FocusOptions) => {
     inputRef?.focus(options);
+  };
+
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (e.currentTarget.checked) {
+      group = value;
+    }
   };
 </script>
 
@@ -53,13 +58,14 @@
   <div class="container">
     <input
       bind:this={inputRef}
-      {checked}
+      checked={group === value}
       {disabled}
-      bind:group
+      {group}
       {id}
       type="radio"
       {value}
       {...rest}
+      onchange={onChange}
     />
     <div class="indicator"></div>
   </div>

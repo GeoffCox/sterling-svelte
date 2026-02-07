@@ -10,7 +10,7 @@
   let _class = $state('');
   let disabled: boolean | null | undefined = $state(false);
   let name = 'choices';
-  let selectedValue = $state('item-1');
+  let selectedValue = $state('item-2');
 
   let code = $derived(getPlaygroundCode({ name, _class }));
 </script>

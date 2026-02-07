@@ -9,5 +9,5 @@ export type SliderProps = HTMLAttributes<HTMLDivElement> & {
   step?: number;
   value?: number;
   vertical?: boolean | null;
-  onChange?: (value: number) => void;
+  onChange?: (value?: number) => void;
 };

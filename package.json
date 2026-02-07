@@ -1,6 +1,6 @@
 {
   "name": "@geoffcox/sterling-svelte",
-  "version": "2.0.14",
+  "version": "2.0.16",
   "author": "Geoff Cox",
   "description": "A modern, accessible, and lightweight component library for Svelte.",
   "license": "MIT",

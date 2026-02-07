@@ -2,8 +2,9 @@
 
 <script lang="ts">
   import { onMount, type Snippet } from 'svelte';
+  import type { HTMLAttributes } from 'svelte/elements';
 
-  type Props = {
+  type Props = HTMLAttributes<HTMLDivElement> & {
     code?: string;
     component: Snippet;
     props?: Snippet;
