@@ -61,7 +61,6 @@ export const dialogDoc: ComponentDoc = {
     }
   ],
   anatomy: `<dialog class="sterling-dialog">
-  <form>
     <div class="content">
       {#if content}
         {@render content()}
@@ -87,7 +86,6 @@ export const dialogDoc: ComponentDoc = {
         </div>
       {/if}
     </div>
-  </form>
 </dialog>`,
   usage: DialogPlayground
 };
