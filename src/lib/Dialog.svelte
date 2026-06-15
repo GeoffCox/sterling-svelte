@@ -2,7 +2,6 @@
 
 <script lang="ts">
   import { onMount, setContext, tick } from 'svelte';
-  import type { FormEventHandler } from 'svelte/elements';
   import Button from './Button.svelte';
   import { STERLING_PORTAL_CONTEXT_ID } from './Portal.constants';
   import type { PortalContext } from './Portal.types';
@@ -25,7 +24,6 @@
 
   let dialogRef: HTMLDialogElement;
   let contentRef: HTMLDivElement;
-  let formRef: HTMLFormElement;
 
   // svelte-ignore non_reactive_update
   let closing = false;
@@ -103,29 +101,6 @@
     return false;
   };
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-    // Submitting a form instantly hides the dialog.
-    // The dialog.close event is not cancellable, but form.submit is.
-    // To allow animation with closeDialog, this event is canceled.
-    // The form is resubmitted after the dialog closes to ensure the form is in the correct state.
-    const anyEvent = event as unknown as any;
-    if (anyEvent?.submitter.type === 'submit') {
-      if (dialogRef.open) {
-        const eventSubmitter = anyEvent?.submitter;
-        returnValue = eventSubmitter?.value ?? '';
-        closeDialog();
-        setTimeout(() => {
-          formRef.requestSubmit(eventSubmitter);
-        }, dialogFadeDuration);
-        event.preventDefault();
-        return false;
-      }
-    } else {
-      event.preventDefault();
-      return false;
-    }
-  };
-
   $effect(() => {
     updateDialog(open);
   });
@@ -153,39 +128,37 @@
   class:closing
   {...rest}
 >
-  <form method="dialog" bind:this={formRef} onsubmit={onSubmit}>
-    <div class="content" bind:this={contentRef}>
-      {#if content}
-        {@render content()}
-      {:else}
-        <div class="header">
-          {#if header}
-            {@render header()}
-          {:else}
-            <div class="title">
-              {#if headerTitle}
-                {#if typeof headerTitle === 'string'}
-                  {headerTitle}
-                {:else}
-                  {@render headerTitle()}
-                {/if}
+  <div class="content" bind:this={contentRef}>
+    {#if content}
+      {@render content()}
+    {:else}
+      <div class="header">
+        {#if header}
+          {@render header()}
+        {:else}
+          <div class="title">
+            {#if headerTitle}
+              {#if typeof headerTitle === 'string'}
+                {headerTitle}
+              {:else}
+                {@render headerTitle()}
               {/if}
-            </div>
-            <div class="close">
-              <Button class="circular tool" onclick={() => closeDialog()}>
-                <div class="close-x"></div>
-              </Button>
-            </div>
-          {/if}
-        </div>
-        <div class="body">
-          {@render body?.()}
-        </div>
-        <div class="separator"></div>
-        <div class="footer">
-          {@render footer?.()}
-        </div>
-      {/if}
-    </div>
-  </form>
+            {/if}
+          </div>
+          <div class="close">
+            <Button class="circular tool" onclick={() => closeDialog()}>
+              <div class="close-x"></div>
+            </Button>
+          </div>
+        {/if}
+      </div>
+      <div class="body">
+        {@render body?.()}
+      </div>
+      <div class="separator"></div>
+      <div class="footer">
+        {@render footer?.()}
+      </div>
+    {/if}
+  </div>
 </dialog>

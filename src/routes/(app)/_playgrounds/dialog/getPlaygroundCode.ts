@@ -1,6 +1,5 @@
 export const getPlaygroundCode = (props: {
   backdropCloses: boolean | null | undefined;
-  formSubmit: boolean | null | undefined;
   _class: string;
 }) => {
   const propList: string[] = [];

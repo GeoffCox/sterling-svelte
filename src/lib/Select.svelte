@@ -222,7 +222,13 @@
       <div class="chevron"></div>
     {/if}
   </div>
-  <Popover id={popoverId} reference={selectRef} bind:open conditionalRender={false}>
+  <Popover
+    id={popoverId}
+    placement="bottom-start"
+    reference={selectRef}
+    bind:open
+    conditionalRender={false}
+  >
     <div class={['sterling-select-popup-content', 'sterling-select-content', _class]}>
       <List
         bind:this={listRef}

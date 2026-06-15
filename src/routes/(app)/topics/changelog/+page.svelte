@@ -1,6 +1,18 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.17</h2>
+
+  <h3>Dialog</h3>
+  <ul>
+    <li>Removed form element. It interfered with Dialog when within an existing form.</li>
+  </ul>
+
+  <h3>Select</h3>
+  <ul>
+    <li>Fixed issue where placement hint was missing on the Popover.</li>
+  </ul>
+
   <h2>2.0.16</h2>
 
   <h3>Slider</h3>

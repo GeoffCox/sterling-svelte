@@ -24,8 +24,6 @@
   let returnValue = $state('');
   let _close = $state('');
 
-  let formSubmit: boolean | null | undefined = $state(false);
-
   let selectedValue = $state(options[0].value);
 
   const showDialog = () => {
@@ -52,7 +50,7 @@
     console.log(`<Dialog> onclose returnValue:${returnValue} selectedValue:${selectedValue}`);
   };
 
-  let code = $derived(getPlaygroundCode({ backdropCloses, formSubmit, _class: _close }));
+  let code = $derived(getPlaygroundCode({ backdropCloses, _class: _close }));
 </script>
 
 <Playground {code}>
@@ -74,7 +72,7 @@
             {#snippet value()}
               <span>{options.find((x) => x.value === selectedValue)?.text}</span>
             {/snippet}
-            {#each options as option}
+            {#each options as option (option.value)}
               <ListItem value={option.value}>{option.text}</ListItem>
             {/each}
           </Select>
@@ -82,13 +80,8 @@
       {/snippet}
       {#snippet footer()}
         <div class="footer">
-          {#if formSubmit}
-            <Button type="submit" value="OK">OK</Button>
-            <Button type="submit" value="">Cancel</Button>
-          {:else}
-            <Button onclick={() => onOK()}>OK</Button>
-            <Button onclick={() => onCancel()}>Cancel</Button>
-          {/if}
+          <Button onclick={() => onOK()}>OK</Button>
+          <Button onclick={() => onCancel()}>Cancel</Button>
         </div>
       {/snippet}
     </Dialog>
@@ -96,9 +89,6 @@
   {#snippet props()}
     <Checkbox bind:checked={backdropCloses}>backdropCloses</Checkbox>
     <VariantInput bind:class={_close} sterlingClasses={[]} />
-  {/snippet}
-  {#snippet tweaks()}
-    <Checkbox bind:checked={formSubmit}>Use form submit</Checkbox>
   {/snippet}
 </Playground>
 
