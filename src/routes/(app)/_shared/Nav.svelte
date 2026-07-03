@@ -92,11 +92,11 @@
 </script>
 
 <div class="nav">
-  {#each sections as section}
+  {#each sections as section (section.name)}
     <div class="section">
       <div class="section-name">{section.name}</div>
       <div class="items">
-        {#each section.items as item}
+        {#each section.items as item (item.name)}
           {#if page.url.pathname === item.url}
             <Link href={`${base}${item.url}`}>{item.name}</Link>
           {:else}

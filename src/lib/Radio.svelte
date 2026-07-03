@@ -4,7 +4,6 @@
   import type { ChangeEventHandler } from 'svelte/elements';
   import { usingKeyboard } from './mediaQueries/usingKeyboard';
   import type { RadioProps } from './Radio.types';
-  import { onMount } from 'svelte';
 
   const uuid = $props.id();
 

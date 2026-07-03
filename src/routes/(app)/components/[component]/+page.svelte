@@ -39,7 +39,7 @@
           </tr>
         </thead>
         <tbody>
-          {#each props as item}
+          {#each props as item (item.name)}
             <tr>
               <td class="icon"><CodePropertyIcon /></td>
               <td class="name">{item.name}</td>
@@ -63,7 +63,7 @@
           </tr>
         </thead>
         <tbody>
-          {#each events as item}
+          {#each events as item (item.name)}
             <tr>
               <td class="icon"><CodeEventIcon /></td>
               <td class="name">{item.name}</td>
@@ -87,7 +87,7 @@
           </tr>
         </thead>
         <tbody>
-          {#each methods as item}
+          {#each methods as item (item.name)}
             <tr>
               <td class="icon"><CodeMethodIcon /></td>
               <td class="name">{item.name}</td>
@@ -113,7 +113,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each types as item}
+        {#each types as item (item.name)}
           <tr>
             <td class="icon"><CodeTypeIcon /></td>
             <td class="name">{item.name}</td>
@@ -128,7 +128,7 @@
   {#if docs.comments}
     <h2>Considerations</h2>
     <ul class="considerations">
-      {#each docs.comments as comment}
+      {#each docs.comments as comment (comment)}
         <li>{comment}</li>
       {/each}
     </ul>
