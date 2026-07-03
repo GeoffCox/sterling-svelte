@@ -6,8 +6,8 @@
   import Link from '$lib/Link.svelte';
   import '@fontsource/atkinson-hyperlegible';
   import '@fontsource/source-code-pro';
-  import '@geoffcox/sterling-svelte-themes/sterling.css';
-  // import '../../../../sterling-svelte-themes/css/sterling.css';
+  // import '@geoffcox/sterling-svelte-themes/sterling.css';
+  import '../../../../sterling-svelte-themes/css/sterling.css';
   import ColorSchemeSlider from './_shared/ColorSchemeSlider.svelte';
   import GitHubIcon from './_shared/icons/GitHubIcon.svelte';
   import HamburgerIcon from './_shared/icons/HamburgerIcon.svelte';

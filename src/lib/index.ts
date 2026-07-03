@@ -24,6 +24,7 @@ export { LIST_CONTEXT_KEY } from './List.constants';
 export { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
 export { MENU_ITEM_CONTEXT_KEY, MENU_ITEM_ROLES } from './MenuItem.constants';
 export { POPOVER_PLACEMENTS } from './Popover.constants';
+export { POPOVER2_ANCHOR_ORIGINS, POPOVER2_PLACEMENTS } from './Popover2.constants';
 export { PROGRESS_ORIENTATIONS } from './Progress.constants';
 export { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
 export { TEXT_AREA_RESIZES } from './TextArea.constants';
@@ -55,6 +56,7 @@ export type { MenuSeparatorProps } from './MenuSeparator.types';
 export type { PaginationProps } from './Pagination.types';
 export type { PopoverPlacement, PopoverProps } from './Popover.types';
 export type { ProgressOrientation, ProgressProps } from './Progress.types';
+export type { Popover2AnchorOrigin, Popover2Placement, Popover2Props } from './Popover2.types';
 export type { RadioProps } from './Radio.types';
 export type { SelectProps } from './Select.types';
 export type { SliderProps } from './Slider.types';
@@ -87,6 +89,7 @@ import MenuItem from './MenuItem.svelte';
 import MenuSeparator from './MenuSeparator.svelte';
 import Pagination from './Pagination.svelte';
 import Popover from './Popover.svelte';
+import Popover2 from './Popover2.svelte';
 import Progress from './Progress.svelte';
 import Radio from './Radio.svelte';
 import Select from './Select.svelte';
@@ -120,6 +123,7 @@ export {
   MenuSeparator,
   Pagination,
   Popover,
+  Popover2,
   Progress,
   Radio,
   Select,

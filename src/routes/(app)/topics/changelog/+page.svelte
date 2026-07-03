@@ -1,6 +1,19 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.18</h2>
+
+  <h3>New - Popover2</h3>
+  <ul>
+    <li>Uses the browser Popover API rather than floating-ui</li>
+  </ul>
+
+  <h3>Dependency Updates</h3>
+  <ul>
+    <li>Updated to latest Svelte 5.56.4</li>
+    <li>Updated associated Svelte related dependencies and tools</li>
+    <li>Updated to Typescript 6</li>
+  </ul>
   <h2>2.0.17</h2>
 
   <h3>Dialog</h3>

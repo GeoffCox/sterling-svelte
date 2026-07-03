@@ -18,6 +18,7 @@ import { menuItemDoc } from './menuItemDoc';
 import { menuSeparatorDoc } from './menuSeparatorDoc';
 import { paginationDoc } from './paginationDoc';
 import { popoverDoc } from './popoverDoc';
+import { popover2Doc } from './popover2Doc';
 import { progressDoc } from './progressDoc';
 import { radioDoc } from './radioDoc';
 import { selectDoc } from './selectDoc';
@@ -51,6 +52,7 @@ export const componentDocs: Record<string, ComponentDoc> = {
   menuseparator: menuSeparatorDoc,
   pagination: paginationDoc,
   popover: popoverDoc,
+  popover2: popover2Doc,
   progress: progressDoc,
   radio: radioDoc,
   select: selectDoc,
