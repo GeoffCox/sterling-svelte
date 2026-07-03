@@ -112,7 +112,7 @@
     <Label text="itemCount">
       <Input type="number" bind:value={itemCount} />
     </Label>
-    <Label text="page">
+    <Label class="slider-label" text="page">
       <div class="slider">
         <Slider bind:value={page} min={1} max={pageCount || 1} step={1} />
         <div>{page}</div>
@@ -152,12 +152,19 @@
     border: var(--stsv-common__color--faint) 1px solid;
     min-height: 130px;
   }
+  :global(.sterling-label.slider-label) {
+    align-items: start;
+  }
+
   .slider {
     display: grid;
     grid-template-rows: auto auto;
-    justify-items: stretch;
-    align-items: stretch;
+    justify-items: center;
     font-size: 0.8em;
+  }
+
+  .slider :global(.sterling-slider) {
+    width: 200px;
   }
 
   .circle-number {

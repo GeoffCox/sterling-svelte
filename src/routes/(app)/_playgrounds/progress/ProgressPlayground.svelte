@@ -57,7 +57,7 @@
     <Label text="max">
       <Input bind:value={max} onchange={onMaxChange} />
     </Label>
-    <Label text="value">
+    <Label class="slider-label" text="value">
       <div class="slider">
         <Slider bind:value min={0} {max} precision={0} />
         <div>{value}</div>
@@ -92,10 +92,18 @@
     height: 100px;
   }
 
+  :global(.sterling-label.slider-label) {
+    align-items: start;
+  }
+
   .slider {
     display: grid;
     grid-template-rows: auto auto;
     justify-items: center;
     font-size: 0.8em;
+  }
+
+  .slider :global(.sterling-slider) {
+    width: 200px;
   }
 </style>

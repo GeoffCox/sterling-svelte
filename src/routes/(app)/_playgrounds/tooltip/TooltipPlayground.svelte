@@ -58,20 +58,20 @@
     </div>
   {/snippet}
   {#snippet props()}
-    <Label text="crossAxisOffset">
+    <Label class="slider-label" text="crossAxisOffset">
       <div class="slider">
         <Slider min={-25} max={25} precision={0} bind:value={crossAxisOffset} />
         <div>{crossAxisOffset}</div>
       </div>
     </Label>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Label text={`hoverDelayMilliseconds`}>
+    <Label class="slider-label" text={`hoverDelayMilliseconds`}>
       <div class="slider">
         <Slider bind:value={hoverDelayMilliseconds} min={0} max={3000} precision={0} />
         <div>{hoverDelayMilliseconds}</div>
       </div>
     </Label>
-    <Label text="mainAxisOffset">
+    <Label class="slider-label" text="mainAxisOffset">
       <div class="slider">
         <Slider min={-25} max={25} precision={0} bind:value={mainAxisOffset} />
         <div>{mainAxisOffset}</div>
@@ -100,11 +100,19 @@
     padding: 0.75em 1.5em;
   }
 
+  :global(.sterling-label.slider-label) {
+    align-items: start;
+  }
+
   .slider {
     display: grid;
     grid-template-rows: auto auto;
     justify-items: center;
     font-size: 0.8em;
+  }
+
+  .slider :global(.sterling-slider) {
+    width: 200px;
   }
 
   .reference {
