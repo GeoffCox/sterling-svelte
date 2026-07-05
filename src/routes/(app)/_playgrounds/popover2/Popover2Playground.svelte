@@ -11,63 +11,59 @@
   import type { Popover2AnchorOrigin, Popover2Placement } from '$lib/Popover2.types';
   import Select from '$lib/Select.svelte';
   import Slider from '$lib/Slider.svelte';
+  import { onMount } from 'svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
+  let _class = $state('');
   let horizontalOffset = $state(0);
   let verticalOffset = $state(0);
   let open = $state(false);
-  let lightDismiss = $state(false);
-  let anchorToInvoker = $state(false);
-  let anchorOrigin: Popover2AnchorOrigin = $state('auto');
+  let lightDismiss = $state(true);
   let placement: Popover2Placement = $state('top-left');
+  let anchorOrigin: Popover2AnchorOrigin = $state('auto');
+  let anchorToInvoker = $state(false);
   let text = $state('sterling-svelte');
-  let _class = $state('');
+
+  let toggleButtonElement = $state<HTMLButtonElement | undefined | null>();
 
   let code = $derived(
     getPlaygroundCode({
       _class,
-      crossAxisOffset: horizontalOffset,
-      mainAxisOffset: verticalOffset,
+      lightDismiss,
       placement,
+      anchorOrigin,
+      horizontalOffset: horizontalOffset,
+      verticalOffset: verticalOffset,
       text
     })
   );
+
+  onMount(() => {
+    toggleButtonElement = document.querySelector('#PopoverToggleButton');
+  });
 </script>
 
 <Playground {code}>
   {#snippet component()}
     <div>
       <div class="reference">The reference anchor for positioning the popover.</div>
-      <Button popovertarget="PlaygroundPopover">Toggle</Button>
+      <Button id="PopoverToggleButton" popovertarget="PlaygroundPopover">Toggle</Button>
       <Popover2
         id="PlaygroundPopover"
         bind:open
-        {anchorOrigin}
         {placement}
+        {anchorOrigin}
         {lightDismiss}
         {horizontalOffset}
         {verticalOffset}
         anchorCssName={anchorToInvoker ? undefined : '--playground-popover-anchor'}
+        invokerElement={anchorToInvoker ? toggleButtonElement : undefined}
         class={_class}
       >
         <div class="popover-text">{text}</div>
       </Popover2>
-      <Button popovertarget="OtherPopover">Open Other Popover</Button>
-      <!-- <Popover2
-        id="OtherPopover"
-        bind:open
-        {anchorOrigin}
-        {placement}
-        lightDismiss={true}
-        {horizontalOffset}
-        {verticalOffset}
-        anchorCssName={anchorToInvoker ? undefined : '--playground-popover-anchor'}
-        class={_class}
-      >
-        <div id="OtherPopover" class="other-popover" popover="auto">This is another popover</div>
-      </Popover2> -->
     </div>
   {/snippet}
   {#snippet props()}
@@ -99,7 +95,7 @@
         <div>{verticalOffset}</div>
       </div>
     </Label>
-    <VariantInput bind:class={_class} sterlingClasses={[]} />
+    <VariantInput bind:class={_class} sterlingClasses={['callout']} />
   {/snippet}
   {#snippet tweaks()}
     <Checkbox bind:checked={anchorToInvoker}>Anchor to invoker (toggle button)</Checkbox>
@@ -123,12 +119,17 @@
   }
 
   .popover-text {
+    color: var(--stsv-common__color);
+    padding: 0.25em;
+    height: fit-content;
+  }
+
+  :global(.sterling-popover-2:not(.callout) .popover-text) {
     background-color: var(--stsv-common__background-color);
     border-color: var(--stsv-common__border-color);
-    border-style: dotted;
+    border-style: dashed;
     border-width: var(--stsv-common__border-width);
     color: var(--stsv-common__color);
-    padding: 1em;
   }
 
   :global(.sterling-label.slider-label) {

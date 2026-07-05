@@ -2,16 +2,17 @@
   import { onMount } from 'svelte';
   import type { Popover2AnchorOrigin, Popover2Props } from './Popover2.types';
   import { on } from 'svelte/events';
-  import { getPopoverOffsets, splitNonant } from './popover2.utils';
+  import { getPopoverOffsets } from './popover2.utils';
 
   let {
     open = $bindable(),
     lightDismiss = true,
-    placement = 'middle-center',
-    anchorCssName,
+    placement = 'center-center',
     anchorOrigin = 'auto',
     horizontalOffset = 0,
     verticalOffset = 0,
+    anchorCssName,
+    invokerElement,
     class: _class,
     children,
     ...rest
@@ -26,7 +27,9 @@
 
   $effect(() => {
     if (open && popoverElement) {
-      popoverElement.showPopover();
+      invokerElement
+        ? popoverElement.showPopover({ source: invokerElement })
+        : popoverElement.showPopover();
     } else {
       popoverElement.hidePopover();
     }
@@ -47,8 +50,6 @@
 
   let popoverTranslate = $derived(getPopoverOffsets(_anchorOrigin, placement));
 
-  //#region class
-
   let popoverClass = $derived([
     'sterling-popover-2',
     lightDismiss ? 'light-dismiss' : undefined,
@@ -56,18 +57,12 @@
     _class
   ]);
 
-  //#endregion
-
-  //#region style
-
   let anchorIdentCssVar = $derived(anchorCssName ? `--anchor-ident:${anchorCssName};` : '');
 
   let offsetXCssVar = $derived(`--offset-x:calc(${popoverTranslate.x} + ${horizontalOffset}px);`);
   let offsetYCssVar = $derived(`--offset-y:calc(${popoverTranslate.y} + ${verticalOffset}px);`);
 
   let popoverStyle = $derived(`${anchorIdentCssVar} ${offsetXCssVar} ${offsetYCssVar}`);
-
-  //#endregion
 </script>
 
 <div
@@ -79,5 +74,7 @@
   popover={lightDismiss ? 'auto' : 'manual'}
   {...rest}
 >
-  {@render children?.()}
+  <div class="content">
+    {@render children?.()}
+  </div>
 </div>

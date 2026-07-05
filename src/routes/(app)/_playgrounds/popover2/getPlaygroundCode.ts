@@ -1,40 +1,52 @@
-import type { PopoverPlacement } from '$lib';
+import type { Popover2AnchorOrigin, Popover2Placement } from '$lib';
 
 export const getPlaygroundCode = (props: {
   _class: string;
-  crossAxisOffset: number;
-  mainAxisOffset: number;
-  placement: PopoverPlacement;
+  lightDismiss?: boolean;
+  horizontalOffset: number;
+  verticalOffset: number;
+  placement: Popover2Placement;
+  anchorOrigin: Popover2AnchorOrigin;
   text: string;
 }) => {
   const propList: string[] = [];
 
+  propList.push(`id="MyPopover"`);
+  propList.push(`bind:open`);
+
   if (props._class) {
     propList.push(`class="${props._class.trim()}"`);
   }
-  if (props.crossAxisOffset !== 0) {
-    propList.push(`crossAxisOffset="${props.crossAxisOffset}"`);
+  if (props.horizontalOffset !== 0) {
+    propList.push(`horizontalOffset="${props.horizontalOffset}"`);
   }
-  if (props.mainAxisOffset !== 0) {
-    propList.push(`mainAxisOffset="${props.mainAxisOffset}"`);
+  if (props.verticalOffset !== 0) {
+    propList.push(`verticalOffset="${props.verticalOffset}"`);
   }
-  if (props.placement !== 'top-start') {
+  if (!props.lightDismiss) {
+    propList.push(`lightDismiss="false"`);
+  }
+  if (props.placement) {
     propList.push(`placement="${props.placement}"`);
   }
+  if (props.anchorOrigin) {
+    propList.push(`anchorOrigin="${props.anchorOrigin}"`);
+  }
 
-  const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';
+  const propsText = propList.length > 0 ? `${propList.join(' ')}` : '';
 
   return `<script lang="ts">
-  import { Popover } from '@geoffcox/sterling-svelte';
+  import { Popover2 } from '@geoffcox/sterling-svelte';
 
-  let reference: HTMLElement;
-
+  let open = $state(false);
 </script>
 
-<div bind:this={reference}>Anchor for the popover position.</div>
+<div class="my-anchor">Anchor for the popover.</div>
 
-<Popover${propsText} bind:open {reference}>
-  ${props.text}
-</Popover>
+<Button popovertarget="MyPopover">Toggle</Button>
+
+<Popover2 ${propsText}>
+ ${props.text}
+</Popover2>
 `;
 };

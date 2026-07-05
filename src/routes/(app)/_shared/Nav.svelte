@@ -51,6 +51,7 @@
         { name: 'Autocomplete', url: '/components/autocomplete' },
         { name: 'Button', url: '/components/button' },
         { name: 'Callout', url: '/components/callout' },
+        { name: 'Callout2', url: '/components/callout2' },
         { name: 'Checkbox', url: '/components/checkbox' },
         { name: 'Dialog', url: '/components/dialog' },
         { name: 'Dropdown', url: '/components/dropdown' },

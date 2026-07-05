@@ -1,32 +1,16 @@
 import type { ComponentDoc } from './types';
 import Popover2Playground from '../../_playgrounds/popover2/Popover2Playground.svelte';
+import { makeExtendsComment } from './commonDoc';
 
 export const popover2Doc: ComponentDoc = {
   name: 'Popover 2',
-  description: 'An element that floats abover other content.',
+  description: 'An element that floats above other content.',
   comments: [
-    'Floats content above the page via use:portal. Elements are moved to the end of the `body` element so they appear above them in the z-order.',
-    'Popover does not provide any styling (background, border, etc.) around the floating content.'
+    'Uses the browser Popover API to place content on top of other content.',
+    'Popover contains a content div to ensure styling the content contend with popover placement.',
+    makeExtendsComment('HTMLDivElement')
   ],
   props: [
-    {
-      name: 'conditionalRender',
-      type: 'boolean | null | undefined',
-      default: 'true',
-      comment: 'When true, content is rendered only when the popover is open.'
-    },
-    {
-      name: 'crossAxisOffset',
-      type: 'number',
-      default: '0',
-      comment: 'The offset along the side of the reference element.'
-    },
-    {
-      name: 'mainAxisOffset',
-      type: 'number',
-      default: '0',
-      comment: 'The offset towards or away from the side of the reference element.'
-    },
     {
       name: 'open',
       type: 'boolean | null | undefined',
@@ -34,34 +18,69 @@ export const popover2Doc: ComponentDoc = {
       comment: 'When true, the popover is open and visible.'
     },
     {
+      name: 'lightDismiss',
+      type: 'boolean | null | undefined',
+      default: 'true',
+      comment:
+        'When true, this popover closes when another element is clicked or focused. Also closes when another popover opens.'
+    },
+    {
       name: 'placement',
-      type: 'PopoverPlacement | undefined',
-      default: "'top-start'",
-      comment: 'How the popover should be positioned relative to the reference element.'
+      type: 'Popover2Placement | undefined',
+      default: "'center-center'",
+      comment:
+        'How the popover should be positioned (vertically-horizontally) relative to anchor point.'
     },
     {
-      name: 'portalHost',
-      type: 'HTMLElement | undefined',
-      default: 'undefined',
-      comment: 'The host container for the callout.'
+      name: 'anchorOrigin',
+      type: 'Popover2AnchorOrigin | undefined',
+      default: "'auto'",
+      comment:
+        "Which anchor point in a 3x3 grid should be used as the origin. When 'auto', anchorOrigin is set to match the placement value."
     },
     {
-      name: 'reference',
-      type: 'HTMLElement | undefined',
+      name: 'anchorCssName',
+      type: 'string | undefined',
       default: 'undefined',
-      comment: 'The reference to the element anchoring the position of the popover.'
+      comment:
+        'The CSS anchor-name value used as the anchor element for the popover. When not provided, the element with popovertarget is used.'
+    },
+    {
+      name: 'horizontalOffset',
+      type: 'number',
+      default: '0',
+      comment: 'The how many pixels to move the popover left (negative) or right (positive).'
+    },
+    {
+      name: 'verticalOffset',
+      type: 'number',
+      default: '0',
+      comment: 'The how many pixels to move the popover up (negative) or down (positive).'
+    },
+    {
+      name: 'invokerElement',
+      type: 'HTMLElement | null | undefined',
+      default: 'undefined',
+      comment:
+        'The element that controls opening/closing the popover. Prefer to use HTML popovertarget attribute instead.'
     }
   ],
   types: [
     {
-      name: 'PopoverPlacement',
+      name: 'Popover2Placement',
       definition:
-        "'top-start' | 'top' | 'top-end' | 'right-start' | 'right' | 'right-end' | 'bottom-end' | 'bottom' | 'bottom-start' | 'left-end' | 'left' | 'left-start'"
+        "'top-left' | 'top-center' | 'top-right' | 'center-left' | 'center-center' | 'center-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'"
+    },
+    {
+      name: 'Popover2AnchorOrigin',
+      definition:
+        "'auto' | 'top-left' | 'top-center' | 'top-right' | 'center-left' | 'center-center' | 'center-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'"
     }
   ],
-  anatomy: `<div class="sterling-popover-portal">
-  <div class="sterling-popover">
-    {@render children()}
+  anatomy: `<div class="sterling-popover-2">
+    <div class="content">
+      {@render children()}
+    </div>
   </div>
 </div>`,
   usage: Popover2Playground

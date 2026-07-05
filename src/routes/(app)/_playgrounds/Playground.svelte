@@ -6,7 +6,7 @@
 
   type Props = HTMLAttributes<HTMLDivElement> & {
     code?: string;
-    component: Snippet;
+    component?: Snippet;
     props?: Snippet;
     snippets?: Snippet;
     tweaks?: Snippet;
@@ -48,7 +48,7 @@
       {/if}
     </div>
     <div class="component">
-      {@render component()}
+      {@render component?.()}
     </div>
   {/if}
   {#if code}

@@ -1,6 +1,10 @@
-import type { Popover2AnchorOrigin, Popover2Placement, PopoverNonant } from './Popover2.types';
+import type { POPOVER2_NONANTS } from './Popover2.constants';
+import type { Popover2AnchorOrigin, Popover2Placement } from './Popover2.types';
 
-export const splitNonant = (nonant: PopoverNonant) => {
+type Popover2NonantTuple = typeof POPOVER2_NONANTS;
+type Popover2Nonant = Popover2NonantTuple[number];
+
+const splitNonant = (nonant: Popover2Nonant) => {
   const result = nonant.split('-');
   return {
     horizontal: result[1] as 'left' | 'center' | 'right',

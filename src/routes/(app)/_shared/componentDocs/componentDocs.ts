@@ -3,6 +3,7 @@ import type { ComponentDoc } from './types';
 import { autocompleteDoc } from './autocompleteDoc';
 import { buttonDoc } from './buttonDoc';
 import { calloutDoc } from './calloutDoc';
+import { callout2Doc } from './callout2Doc';
 import { checkboxDoc } from './checkboxDoc';
 import { dialogDoc } from './dialogDoc';
 import { dropdownDoc } from './dropdownDoc';
@@ -37,6 +38,7 @@ export const componentDocs: Record<string, ComponentDoc> = {
   autocomplete: autocompleteDoc,
   button: buttonDoc,
   callout: calloutDoc,
+  callout2: callout2Doc,
   checkbox: checkboxDoc,
   dialog: dialogDoc,
   dropdown: dropdownDoc,
