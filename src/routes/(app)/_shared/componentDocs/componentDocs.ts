@@ -30,6 +30,7 @@ import { tabDoc } from './tabDoc';
 import { tabListDoc } from './tabListDoc';
 import { textAreaDoc } from './textAreaDoc';
 import { tooltipDoc } from './tooltipDoc';
+import { tooltip2Doc } from './tooltip2Doc';
 import { treeDoc } from './treeDoc';
 import { treeChevronDoc } from './treeChevronDoc';
 import { treeItemDoc } from './treeItemDoc';
@@ -65,6 +66,7 @@ export const componentDocs: Record<string, ComponentDoc> = {
   tablist: tabListDoc,
   textarea: textAreaDoc,
   tooltip: tooltipDoc,
+  tooltip2: tooltip2Doc,
   tree: treeDoc,
   treechevron: treeChevronDoc,
   treeitem: treeItemDoc

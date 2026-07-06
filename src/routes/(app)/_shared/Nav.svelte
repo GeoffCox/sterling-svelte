@@ -78,6 +78,7 @@
         { name: 'TabList', url: '/components/tablist' },
         { name: 'TextArea', url: '/components/textarea' },
         { name: 'Tooltip', url: '/components/tooltip' },
+        { name: 'Tooltip2', url: '/components/tooltip2' },
         { name: 'Tree', url: '/components/tree' },
         { name: 'TreeChevron', url: '/components/treechevron' },
         { name: 'TreeItem', url: '/components/treeitem' }
