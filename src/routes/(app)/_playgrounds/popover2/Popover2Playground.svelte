@@ -16,6 +16,14 @@
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
+  const ANCHOR_MODES = ['reference', 'popovertarget', 'invoker'];
+
+  const ANCHOR_MODE_NAMES = [
+    'Reference element (anchorElement)',
+    'Toggle button (popovertarget)',
+    'Toggle (invokerElement)'
+  ];
+
   let _class = $state('');
   let horizontalOffset = $state(0);
   let verticalOffset = $state(0);
@@ -23,9 +31,11 @@
   let lightDismiss = $state(true);
   let placement: Popover2Placement = $state('top-left');
   let anchorOrigin: Popover2AnchorOrigin = $state('auto');
-  let anchorToInvoker = $state(false);
+  let anchorMode = $state('reference');
+  let anchorViaPopoverTarget = $state(false);
   let text = $state('sterling-svelte');
 
+  let referenceElement = $state<HTMLDivElement | undefined>();
   let toggleButtonElement = $state<HTMLButtonElement | undefined | null>();
 
   let code = $derived(
@@ -47,27 +57,30 @@
 
 <Playground {code}>
   {#snippet component()}
-    <div>
-      <div class="reference">The reference anchor for positioning the popover.</div>
+    <div class="container">
+      <div bind:this={referenceElement} class="reference">
+        The reference anchor for positioning the popover.
+      </div>
       <Button id="PopoverToggleButton" popovertarget="PlaygroundPopover">Toggle</Button>
       <Popover2
         id="PlaygroundPopover"
+        anchorElement={anchorMode === 'reference' ? referenceElement : undefined}
         bind:open
         {placement}
         {anchorOrigin}
         {lightDismiss}
         {horizontalOffset}
         {verticalOffset}
-        anchorCssName={anchorToInvoker ? undefined : '--playground-popover-anchor'}
-        invokerElement={anchorToInvoker ? toggleButtonElement : undefined}
+        invokerElement={anchorMode === 'invoker' ? toggleButtonElement : undefined}
         class={_class}
       >
+        <!-- anchorCssName={anchorToInvoker ? undefined : '--playground-popover-anchor'} -->
         <div class="popover-text">{text}</div>
       </Popover2>
     </div>
   {/snippet}
   {#snippet props()}
-    <Checkbox bind:checked={open}>open</Checkbox>
+    <Checkbox bind:checked={open} disabled={anchorViaPopoverTarget}>open</Checkbox>
     <Checkbox bind:checked={lightDismiss}>lightDismiss</Checkbox>
     <Label text="placement">
       <Select bind:selectedValue={placement}>
@@ -83,22 +96,43 @@
         {/each}
       </Select>
     </Label>
-    <Label class="slider-label" text="horizontalOffset">
+    <div class="offset-sliders">
+      <Label class="slider-label" text="horizontalOffset" for="HorizontalOffsetSlider" />
       <div class="slider">
-        <Slider min={-100} max={100} precision={0} bind:value={horizontalOffset} />
+        <Slider
+          id="HorizontalOffsetSlider"
+          min={-100}
+          max={100}
+          precision={0}
+          bind:value={horizontalOffset}
+        />
         <div>{horizontalOffset}</div>
       </div>
-    </Label>
-    <Label class="slider-label" text="verticalOffset">
+      <Label class="slider-label" text="verticalOffset" for="VerticalOffsetSlider" />
       <div class="slider">
-        <Slider min={-100} max={100} precision={0} bind:value={verticalOffset} />
+        <Slider
+          id="VerticalOffsetSlider"
+          min={-100}
+          max={100}
+          precision={0}
+          bind:value={verticalOffset}
+        />
         <div>{verticalOffset}</div>
       </div>
-    </Label>
-    <VariantInput bind:class={_class} sterlingClasses={['callout']} />
+    </div>
+    <VariantInput bind:class={_class} sterlingClasses={['callout', 'fade']} />
   {/snippet}
   {#snippet tweaks()}
-    <Checkbox bind:checked={anchorToInvoker}>Anchor to invoker (toggle button)</Checkbox>
+    <Label text="Anchor To">
+      <Select bind:selectedValue={anchorMode}>
+        {#snippet value()}
+          {ANCHOR_MODE_NAMES[ANCHOR_MODES.indexOf(anchorMode)]}
+        {/snippet}
+        {#each ANCHOR_MODES as anchorModeItem, index (anchorModeItem)}
+          <ListItem value={anchorModeItem}>{ANCHOR_MODE_NAMES[index]}</ListItem>
+        {/each}
+      </Select>
+    </Label>
     <Label text="popover (text)">
       <Input bind:value={text} />
     </Label>
@@ -106,16 +140,21 @@
 </Playground>
 
 <style>
+  .container {
+    padding: 100px;
+  }
+
   .reference {
     padding: 1em;
     background-color: var(--stsv-common__background-color--secondary);
     width: 300px;
     height: 150px;
+    min-width: 300px;
+    min-height: 150px;
     display: grid;
     place-items: center;
     align-items: center;
-    margin: 2em;
-    anchor-name: --playground-popover-anchor;
+    /* anchor-name: --playground-popover-anchor; */
   }
 
   .popover-text {
@@ -134,6 +173,19 @@
 
   :global(.sterling-label.slider-label) {
     align-items: start;
+  }
+
+  .offset-sliders {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    align-items: start;
+    justify-items: start;
+    row-gap: 1em;
+  }
+
+  .offset-sliders :global(.slider-label) {
+    margin-top: 0.25em;
   }
 
   .slider {

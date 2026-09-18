@@ -12,12 +12,12 @@ type Popover2PlacementTuple = typeof POPOVER2_PLACEMENTS;
 export type Popover2Placement = Popover2PlacementTuple[number];
 
 export type Popover2Props = HTMLAttributes<HTMLDivElement> & {
-  open?: boolean | null;
-  lightDismiss?: boolean | null;
-  placement?: Popover2Placement;
+  anchorElement?: HTMLElement;
   anchorOrigin?: Popover2AnchorOrigin;
   horizontalOffset?: number;
-  verticalOffset?: number;
-  anchorCssName?: string;
   invokerElement?: HTMLElement | null;
+  lightDismiss?: boolean | null;
+  open?: boolean | null;
+  placement?: Popover2Placement;
+  verticalOffset?: number;
 };
