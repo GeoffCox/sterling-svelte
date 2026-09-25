@@ -1,36 +1,38 @@
-import type { Popover2AnchorOrigin, Popover2Placement } from '$lib';
+import type { Popover2Nonant } from '$lib';
 
 export const getPlaygroundCode = (props: {
   _class: string;
   lightDismiss?: boolean;
-  horizontalOffset: number;
-  verticalOffset: number;
-  placement: Popover2Placement;
-  anchorOrigin: Popover2AnchorOrigin;
+  offsetX: number;
+  offsetY: number;
+  placement: Popover2Nonant;
+  anchorOrigin: 'auto' | Popover2Nonant;
   text: string;
 }) => {
   const propList: string[] = [];
 
-  propList.push(`id="MyPopover"`);
-  propList.push(`bind:open`);
+  propList.push(`id="ExamplePopover"`);
 
   if (props._class) {
     propList.push(`class="${props._class.trim()}"`);
   }
-  if (props.horizontalOffset !== 0) {
-    propList.push(`horizontalOffset="${props.horizontalOffset}"`);
-  }
-  if (props.verticalOffset !== 0) {
-    propList.push(`verticalOffset="${props.verticalOffset}"`);
+
+  propList.push(`{anchor}`);
+
+  if (props.anchorOrigin && props.anchorOrigin !== 'auto') {
+    propList.push(`anchorOrigin="${props.anchorOrigin}"`);
   }
   if (!props.lightDismiss) {
     propList.push(`lightDismiss="false"`);
   }
+  if (props.offsetX !== undefined) {
+    propList.push(`offsetX="${props.offsetX}"`);
+  }
+  if (props.offsetY !== undefined) {
+    propList.push(`offsetY="${props.offsetY}"`);
+  }
   if (props.placement) {
     propList.push(`placement="${props.placement}"`);
-  }
-  if (props.anchorOrigin) {
-    propList.push(`anchorOrigin="${props.anchorOrigin}"`);
   }
 
   const propsText = propList.length > 0 ? `${propList.join(' ')}` : '';
@@ -38,12 +40,12 @@ export const getPlaygroundCode = (props: {
   return `<script lang="ts">
   import { Popover2 } from '@geoffcox/sterling-svelte';
 
-  let open = $state(false);
+  let anchor = $state<HTMLDivElement>();
 </script>
 
-<div class="my-anchor">Anchor for the popover.</div>
+<div bind:this={anchor}>(anchor div)</div>
 
-<Button popovertarget="MyPopover">Toggle</Button>
+<Button popovertarget="ExamplePopover">Toggle</Button>
 
 <Popover2 ${propsText}>
  ${props.text}

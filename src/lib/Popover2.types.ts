@@ -1,23 +1,16 @@
 import type { HTMLAttributes } from 'svelte/elements';
-import type {
-  POPOVER2_ANCHOR_ORIGINS,
-  POPOVER2_NONANTS,
-  POPOVER2_PLACEMENTS
-} from './Popover2.constants';
+import type { POPOVER2_NONANTS } from './Popover2.constants';
 
-type Popover2AnchorOriginTuple = typeof POPOVER2_ANCHOR_ORIGINS;
-export type Popover2AnchorOrigin = Popover2AnchorOriginTuple[number];
-
-type Popover2PlacementTuple = typeof POPOVER2_PLACEMENTS;
-export type Popover2Placement = Popover2PlacementTuple[number];
+type Popover2NonantTuple = typeof POPOVER2_NONANTS;
+export type Popover2Nonant = Popover2NonantTuple[number];
 
 export type Popover2Props = HTMLAttributes<HTMLDivElement> & {
-  anchorElement?: HTMLElement;
-  anchorOrigin?: Popover2AnchorOrigin;
-  horizontalOffset?: number;
-  invokerElement?: HTMLElement | null;
+  anchor?: HTMLElement | null;
+  anchorOrigin?: Popover2Nonant | 'auto';
+  invoker?: HTMLElement | null;
   lightDismiss?: boolean | null;
+  offsetX?: number;
+  offsetY?: number;
   open?: boolean | null;
-  placement?: Popover2Placement;
-  verticalOffset?: number;
+  placement?: Popover2Nonant;
 };

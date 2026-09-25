@@ -1,7 +1,7 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { POPOVER2_PLACEMENTS, type Popover2Placement } from '$lib';
+  import { POPOVER2_NONANTS, type Popover2Nonant } from '$lib';
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
@@ -17,7 +17,7 @@
   let disabled = $state(false);
   let hoverDelayMilliseconds = $state(1000);
   let open = $state(true);
-  let placement: Popover2Placement = $state('top-center');
+  let placement: Popover2Nonant = $state('top-center');
   let text = $state('sterling-svelte');
 
   let code = $derived(
@@ -60,7 +60,7 @@
     <Checkbox bind:checked={open}>open</Checkbox>
     <Label text="placement">
       <Select bind:selectedValue={placement}>
-        {#each POPOVER2_PLACEMENTS as placementItem}
+        {#each POPOVER2_NONANTS as placementItem}
           <ListItem value={placementItem}>{placementItem}</ListItem>
         {/each}
       </Select>
