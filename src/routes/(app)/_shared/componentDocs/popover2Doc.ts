@@ -6,10 +6,19 @@ export const popover2Doc: ComponentDoc = {
   name: 'Popover 2',
   description: 'An element that floats above other content.',
   comments: [
-    'Uses the browser Popover API to place the popover on the top layer. A unique anchor-name will be set on the anchor element to connect to the popover for positioning.',
+    'Uses the browser Popover API to place the popover on the top layer.',
+    'This component manages the anchor-name and position-anchor to connect the anchor to the popover.',
+    'The position-try CSS for popovers does not currently work so this component implement position flipping.',
     makeExtendsComment('HTMLDivElement')
   ],
   props: [
+    {
+      name: 'allowFlip',
+      type: 'Popover2FlipAxis | undefined',
+      default: 'undefined',
+      comment:
+        'Which axis/axes allow the popover to flip to the other side when there is not enough space.'
+    },
     {
       name: 'anchor',
       type: 'HTMLElement | null | undefined',
@@ -18,10 +27,9 @@ export const popover2Doc: ComponentDoc = {
     },
     {
       name: 'anchorOrigin',
-      type: 'Popover2AnchorOrigin | undefined',
+      type: 'Popover2Nonant | undefined',
       default: "'auto'",
-      comment:
-        "The point in a 3x3 grid on the anchor that should be used as the origin. When 'auto', anchorOrigin follows placement."
+      comment: 'The point in a 3x3 grid on the anchor that should be used as the origin.'
     },
     {
       name: 'invoker',
@@ -57,29 +65,28 @@ export const popover2Doc: ComponentDoc = {
     },
     {
       name: 'placement',
-      type: 'Popover2Placement | undefined',
-      default: "'center-center'",
+      type: "'auto'| Popover2Nonant | undefined",
+      default: "'center'",
       comment:
-        'How the popover should be positioned (vertically-horizontally) relative to anchor point.'
+        "How the popover should be positioned relative to anchor point. When 'auto', placement follows anchorOrigin."
     }
   ],
   types: [
     {
-      name: 'Popover2Placement',
+      name: 'Popover2Nonant',
       definition:
-        "'top-left' | 'top' | 'top-right' | 'left' | 'center' | 'right' | 'bottom-left' | 'bottom' | 'bottom-right'"
+        "'top-left' | 'top' | 'top-right' | 'left' | 'center' | 'right' | 'bottom-left' | 'bottom' | 'bottom-right'",
+      comment: 'A nonant is like quadrant but 3x3 rather than 2x2.'
     },
     {
-      name: 'Popover2AnchorOrigin',
-      definition:
-        "'auto' | 'top-left' | 'top' | 'top-right' | 'left' | 'center' | 'right' | 'bottom-left' | 'bottom' | 'bottom-right'"
+      name: 'Popover2FlipAxis',
+      definition: "'none' | 'x' | 'y' | 'both'"
     }
   ],
   anatomy: `<div 
-  class="sterling-popover-2 --anchor-ident:anchor-123 --offset-x:calc(0% + 15px); --offset-y:calc(0% + 0px);"
+  class="sterling-popover-2 light-dismiss has-anchor-ident"
+  style="--anchor-ident:anchor-123 --offset-x:calc(0% + 15px); --offset-y:calc(0% + 0px);"
   data-placement="top-left"
-  data-flipped-x="false"
-  data-flipped-y="false"
   data-anchor-origin="top-left"
   popover="auto">
     <div class="content">

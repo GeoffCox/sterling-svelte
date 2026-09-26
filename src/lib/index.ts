@@ -24,7 +24,7 @@ export { LIST_CONTEXT_KEY } from './List.constants';
 export { MENU_BAR_CONTEXT_KEY } from './MenuBar.constants';
 export { MENU_ITEM_CONTEXT_KEY, MENU_ITEM_ROLES } from './MenuItem.constants';
 export { POPOVER_PLACEMENTS } from './Popover.constants';
-export { POPOVER2_NONANTS } from './Popover2.constants';
+export { POPOVER2_FLIP_AXIS, POPOVER2_NONANTS } from './Popover2.constants';
 export { PROGRESS_ORIENTATIONS } from './Progress.constants';
 export { TAB_LIST_CONTEXT_KEY } from './TabList.constants';
 export { TEXT_AREA_RESIZES } from './TextArea.constants';
@@ -56,7 +56,7 @@ export type { MenuSeparatorProps } from './MenuSeparator.types';
 export type { PaginationProps } from './Pagination.types';
 export type { PopoverPlacement, PopoverProps } from './Popover.types';
 export type { ProgressOrientation, ProgressProps } from './Progress.types';
-export type { Popover2Nonant, Popover2Props } from './Popover2.types';
+export type { Popover2FlipAxis, Popover2Nonant, Popover2Props } from './Popover2.types';
 export type { RadioProps } from './Radio.types';
 export type { SelectProps } from './Select.types';
 export type { SliderProps } from './Slider.types';
@@ -77,6 +77,7 @@ import Callout from './Callout.svelte';
 import Checkbox from './Checkbox.svelte';
 import Dialog from './Dialog.svelte';
 import Dropdown from './Dropdown.svelte';
+import Dropdown2 from './Dropdown2.svelte';
 import Input from './Input.svelte';
 import Label from './Label.svelte';
 import Link from './Link.svelte';
@@ -111,6 +112,7 @@ export {
   Checkbox,
   Dialog,
   Dropdown,
+  Dropdown2,
   Input,
   Label,
   Link,

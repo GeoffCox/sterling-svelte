@@ -10,3 +10,5 @@ export const POPOVER2_NONANTS = [
   'bottom',
   'bottom-right'
 ];
+
+export const POPOVER2_FLIP_AXIS = ['none', 'x', 'y', 'both'];

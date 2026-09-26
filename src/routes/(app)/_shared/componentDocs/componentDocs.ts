@@ -7,6 +7,7 @@ import { callout2Doc } from './callout2Doc';
 import { checkboxDoc } from './checkboxDoc';
 import { dialogDoc } from './dialogDoc';
 import { dropdownDoc } from './dropdownDoc';
+import { dropdown2Doc } from './dropdown2Doc';
 import { inputDoc } from './inputDoc';
 import { labelDoc } from './labelDoc';
 import { linkDoc } from './linkDoc';
@@ -43,6 +44,7 @@ export const componentDocs: Record<string, ComponentDoc> = {
   checkbox: checkboxDoc,
   dialog: dialogDoc,
   dropdown: dropdownDoc,
+  dropdown2: dropdown2Doc,
   input: inputDoc,
   label: labelDoc,
   link: linkDoc,

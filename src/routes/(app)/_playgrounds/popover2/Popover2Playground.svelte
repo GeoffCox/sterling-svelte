@@ -6,9 +6,9 @@
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import ListItem from '$lib/ListItem.svelte';
-  import { POPOVER2_NONANTS } from '$lib/Popover2.constants';
+  import { POPOVER2_FLIP_AXIS, POPOVER2_NONANTS } from '$lib';
   import Popover2 from '$lib/Popover2.svelte';
-  import type { Popover2Nonant } from '$lib/Popover2.types';
+  import { type Popover2FlipAxis, type Popover2Nonant } from '$lib';
   import Select from '$lib/Select.svelte';
   import Slider from '$lib/Slider.svelte';
   import { onMount } from 'svelte';
@@ -17,15 +17,17 @@
   import { getPlaygroundCode } from './getPlaygroundCode';
   import Radio from '$lib/Radio.svelte';
 
-  const ANCHOR_NONANTS = ['auto', ...POPOVER2_NONANTS];
+  const PLACEMENT_NONANTS = ['auto', ...POPOVER2_NONANTS];
+  const ANCHOR_ORIGIN_NONANTS = POPOVER2_NONANTS;
 
   let _class = $state('');
-  let anchorOrigin: Popover2Nonant | 'auto' = $state('auto');
+  let anchorOrigin: Popover2Nonant = $state('top-left');
   let lightDismiss = $state(false);
   let offsetX = $state(0);
   let offsetY = $state(0);
   let open = $state(false);
-  let placement: Popover2Nonant = $state('top-left');
+  let placement: 'auto' | Popover2Nonant = $state('auto');
+  let allowFlip = $state<Popover2FlipAxis>('both');
   let text = $state('sterling-svelte');
 
   let anchorElement = $state<HTMLDivElement | undefined>();
@@ -60,6 +62,7 @@
         id="PlaygroundPopover"
         anchor={anchorTo === 'anchor' ? anchorElement : undefined}
         invoker={anchorTo === 'invoker' ? toggleButtonElement : undefined}
+        {allowFlip}
         {anchorOrigin}
         {lightDismiss}
         {offsetX}
@@ -74,17 +77,17 @@
   {#snippet props()}
     <Checkbox bind:checked={open} disabled={anchorTo === 'popovertarget'}>open</Checkbox>
     <Checkbox bind:checked={lightDismiss}>lightDismiss</Checkbox>
-    <Label text="placement">
-      <Select bind:selectedValue={placement}>
-        {#each POPOVER2_NONANTS as placementItem (placementItem)}
-          <ListItem value={placementItem}>{placementItem}</ListItem>
+    <Label text="anchorOrigin">
+      <Select bind:selectedValue={anchorOrigin}>
+        {#each ANCHOR_ORIGIN_NONANTS as anchorOriginItem (anchorOriginItem)}
+          <ListItem value={anchorOriginItem}>{anchorOriginItem}</ListItem>
         {/each}
       </Select>
     </Label>
-    <Label text="anchorOrigin">
-      <Select bind:selectedValue={anchorOrigin}>
-        {#each ANCHOR_NONANTS as anchorOriginItem (anchorOriginItem)}
-          <ListItem value={anchorOriginItem}>{anchorOriginItem}</ListItem>
+    <Label text="placement">
+      <Select bind:selectedValue={placement}>
+        {#each PLACEMENT_NONANTS as placementItem (placementItem)}
+          <ListItem value={placementItem}>{placementItem}</ListItem>
         {/each}
       </Select>
     </Label>
@@ -106,6 +109,13 @@
         <div>{offsetY}</div>
       </div>
     </div>
+    <Label text="allowFlip">
+      <Select bind:selectedValue={allowFlip}>
+        {#each POPOVER2_FLIP_AXIS as flipAxis (flipAxis)}
+          <ListItem value={flipAxis}>{flipAxis}</ListItem>
+        {/each}
+      </Select>
+    </Label>
     <VariantInput bind:class={_class} sterlingClasses={['callout']} />
   {/snippet}
   {#snippet tweaks()}

@@ -1,8 +1,8 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
+  import { Dropdown2 } from '$lib';
   import Checkbox from '$lib/Checkbox.svelte';
-  import Dropdown from '$lib/Dropdown.svelte';
   import Label from '$lib/Label.svelte';
   import Slider from '$lib/Slider.svelte';
   import Switch from '$lib/Switch.svelte';
@@ -13,7 +13,7 @@
 
   let disabled: boolean | null | undefined = $state(false);
   let open: boolean | null | undefined = $state(false);
-  let stayOpenOnClickAway: boolean | null | undefined = $state(false);
+  let lightDismiss: boolean | null | undefined = $state(true);
   let _class = $state('');
 
   let progress = $state(50);
@@ -21,15 +21,15 @@
   let reverse = $state(false);
   let speed = $state(75);
 
-  let code = $derived(getPlaygroundCode({ disabled, stayOpenOnClickAway, _class: _class }));
+  let code = $derived(getPlaygroundCode({ disabled, lightDismiss, _class: _class }));
 </script>
 
 <Playground {code}>
   {#snippet component()}
-    <Dropdown
+    <Dropdown2
       bind:open
       {disabled}
-      {stayOpenOnClickAway}
+      {lightDismiss}
       class={_class}
       onOpen={(value) => console.log(`<Dropdown> onOpen value:${value}`)}
     >
@@ -46,12 +46,12 @@
             <Slider bind:value={speed} precision={0} />
           </Label>
         </div>
-      </div></Dropdown
+      </div></Dropdown2
     >
   {/snippet}
   {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
-    <Checkbox bind:checked={stayOpenOnClickAway}>stayOpenOnClickAway</Checkbox>
+    <Checkbox bind:checked={lightDismiss}>lightDismiss</Checkbox>
     <VariantInput bind:class={_class} />
   {/snippet}
 </Playground>
@@ -72,7 +72,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    width: 300px;
+    min-width: 300px;
     padding: 1em;
     row-gap: 1em;
   }

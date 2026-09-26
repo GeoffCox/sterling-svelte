@@ -3,19 +3,25 @@
   import { on } from 'svelte/events';
 
   import type { Popover2Props } from './Popover2.types';
-  import { formatNonat, getPopoverOffsets, splitNonant } from './popover2.utils';
+  import {
+    formatNonat,
+    getPlacementPercentOffsets,
+    getPopoverPosition,
+    splitNonant
+  } from './popover2.utils';
 
   let {
     anchor,
-    anchorOrigin = 'auto',
+    anchorOrigin = 'top-left',
     children,
     class: _class,
+    allowFlip = 'both',
     invoker,
     lightDismiss = true,
     offsetX = 0,
     offsetY = 0,
     open = $bindable(),
-    placement = 'center',
+    placement = 'auto',
     ...rest
   }: Popover2Props = $props();
 
@@ -26,96 +32,135 @@
 
   let resolvedAnchor = $derived.by(() => {
     open;
-
     if (anchor) {
-      console.log('anchor = anchor');
       return anchor;
     }
     if (invoker) {
-      console.log('resolved anchor = invoker');
       return invoker;
     }
     if (popoverElement?.id) {
       const foundInvoker =
         document.querySelector<HTMLElement>(`[popovertarget="${popoverElement?.id}"]`) || undefined;
       if (foundInvoker) {
-        console.log('anchor = popovertarget (maybe)', { foundInvoker });
         return foundInvoker;
       }
     }
     return undefined;
   });
 
-  let resolvedPlacement = $derived(placement);
-  let resolvedAnchorOrigin = $derived(anchorOrigin === 'auto' ? resolvedPlacement : anchorOrigin);
-  let flippedX = $derived(false);
-  let flippedY = $derived(false);
-  let popoverTranslate = $derived(getPopoverOffsets(resolvedAnchorOrigin, resolvedPlacement));
+  let resolvedAnchorOrigin = $derived(anchorOrigin);
+  let resolvedPlacement = $derived(placement === 'auto' ? resolvedAnchorOrigin : placement);
+  let allowFlipX = $derived(allowFlip === 'both' || allowFlip === 'x');
+  let allowFlipY = $derived(allowFlip === 'both' || allowFlip === 'y');
+  let popoverOffsets = $derived(
+    getPlacementPercentOffsets(resolvedAnchorOrigin, resolvedPlacement)
+  );
 
   /**
-   * Calculates the available space around the anchor and determines
-   * if the popover will fit in the desired placement (accounting for offsets).
-   * Flips placement on the X or Y axis if there is not enough space and the
-   * popover is more likely to fit in a flipped placement.
+   * Calculates if the popover will fit in the viewport.
+   * If not, the anchor origin is flipped to the other side.
+   * If the anchor origin is flipped, the placement is flipped inside-to-inside
+   * or outside-to-outside.
    */
-  const resolvePlacement = () => {
-    let newPlacement = placement;
-    let newXFlipped = false;
-    let newYFlipped = false;
+  const resolvePosition = async () => {
+    const realPlacement = placement === 'auto' ? anchorOrigin : placement;
 
     if (open && popoverElement && resolvedAnchor) {
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
 
-      const popoverRect = popoverElement.getBoundingClientRect();
       const anchorRect = resolvedAnchor.getBoundingClientRect();
-      const spaceAbove = anchorRect.top;
-      const spaceBelow = viewportHeight - anchorRect.bottom;
-      const spaceLeft = anchorRect.left;
-      const spaceRight = viewportWidth - anchorRect.right;
+      let { horizontal: anchorOriginX, vertical: anchorOriginY } = splitNonant(anchorOrigin);
 
-      let { vertical, horizontal } = splitNonant(placement);
+      const sizeRect = popoverElement.getBoundingClientRect();
+      const popoverSize = { width: sizeRect.width, height: sizeRect.height };
+      const popoverOffset = { x: offsetX, y: offsetY };
+      const popoverRect = getPopoverPosition(
+        anchorOrigin,
+        anchorRect,
+        realPlacement,
+        popoverSize,
+        popoverOffset
+      );
+      let { horizontal: placementX, vertical: placementY } = splitNonant(realPlacement);
 
-      switch (horizontal) {
-        case 'left':
-          newXFlipped = popoverRect.width + offsetX > spaceLeft && spaceRight > spaceLeft;
-          horizontal = newXFlipped ? 'right' : 'left';
-          break;
-        case 'right':
-          newXFlipped = popoverRect.width + offsetX > spaceRight && spaceLeft > spaceRight;
-          horizontal = newXFlipped ? 'left' : 'right';
-          break;
+      if (allowFlipY) {
+        if (popoverRect.top < 0) {
+          if (anchorOriginY === 'top') {
+            anchorOriginY = 'bottom';
+            switch (placementY) {
+              case 'top':
+                placementY = 'bottom';
+                break;
+              case 'bottom':
+                placementY = 'top';
+                break;
+            }
+          }
+        } else if (popoverRect.bottom > viewportHeight) {
+          console.log('no space below');
+          if (anchorOriginY === 'bottom') {
+            anchorOriginY = 'top';
+            switch (placementY) {
+              case 'top':
+                placementY = 'bottom';
+                break;
+              case 'bottom':
+                placementY = 'top';
+                break;
+            }
+          }
+        }
       }
 
-      switch (vertical) {
-        case 'top':
-          newYFlipped = popoverRect.height - offsetY > spaceAbove && spaceBelow > spaceAbove;
-          vertical = newYFlipped ? 'bottom' : 'top';
-          break;
-        case 'bottom':
-          newYFlipped = popoverRect.height + offsetY > spaceBelow && spaceAbove > spaceBelow;
-          vertical = newYFlipped ? 'top' : 'bottom';
-          break;
+      if (allowFlipX) {
+        if (popoverRect.left < 0) {
+          console.log('no space left');
+          if (anchorOriginX === 'left') {
+            anchorOriginX = 'right';
+            switch (placementX) {
+              case 'left':
+                placementX = 'right';
+                break;
+              case 'right':
+                placementX = 'left';
+                break;
+            }
+          }
+        } else if (popoverRect.right > viewportWidth) {
+          console.log('no space right');
+          if (anchorOriginX === 'right') {
+            anchorOriginX = 'left';
+            switch (placementX) {
+              case 'left':
+                placementX = 'right';
+                break;
+              case 'right':
+                placementX = 'left';
+                break;
+            }
+          }
+        }
       }
-      newPlacement = formatNonat(vertical, horizontal);
+
+      resolvedAnchorOrigin = formatNonat({ horizontal: anchorOriginX, vertical: anchorOriginY });
+      resolvedPlacement = formatNonat({ horizontal: placementX, vertical: placementY });
     }
-
-    resolvedPlacement = newPlacement;
-    flippedX = newXFlipped;
-    flippedY = newYFlipped;
   };
 
   // keep the calculated placement up-to-date
   $effect(() => {
-    open;
-    placement;
+    allowFlip;
     anchor;
-    resolvedAnchor;
     anchorOrigin;
     invoker;
     offsetX;
     offsetY;
-    resolvePlacement();
+    open;
+    placement;
+    popoverOffsets;
+    resolvedAnchor;
+    resolvePosition();
   });
 
   // show/hide the popover
@@ -136,11 +181,9 @@
 
   const setAnchorName = (element?: HTMLElement | null) => {
     if (setAnchorNameElement && setAnchorNameElement !== element) {
-      console.log('clearing anchor name');
       setAnchorNameElement.style.removeProperty('anchor-name');
     }
     if (element && element.style.anchorName !== anchorIdent) {
-      console.log('setting anchor name on anchor element', { anchorIdent });
       element.style.anchorName = anchorIdent;
       setAnchorNameElement = element;
     }
@@ -151,7 +194,7 @@
     setAnchorName(anchor);
   });
 
-  const resizeObserver = new ResizeObserver(resolvePlacement);
+  const resizeObserver = new ResizeObserver(resolvePosition);
   let observedAnchor: HTMLElement | undefined;
 
   // keep observing the resolved anchor for resize
@@ -173,18 +216,17 @@
     if (popoverElement) {
       // keep open in sync with popover state
       offToggleEvent = on(popoverElement, 'toggle', (event) => {
-        console.log('event source', event.source);
         open = event.newState === 'open';
       });
 
       resizeObserver.observe(popoverElement);
     }
 
-    offScrollEvent = on(window, 'scroll', resolvePlacement, {
+    offScrollEvent = on(window, 'scroll', resolvePosition, {
       capture: true,
       passive: true
     });
-    offResizeEvent = on(window, 'resize', resolvePlacement, { passive: true });
+    offResizeEvent = on(window, 'resize', resolvePosition, { passive: true });
 
     return () => {
       if (setAnchorNameElement) {
@@ -203,13 +245,9 @@
   let anchorIdentCssVar = $derived(`--anchor-ident:${anchorIdent};`);
 
   // the offset flips with the placement to position it the same relative distance
-  let offsetXCssVar = $derived(
-    `--offset-x:calc(${popoverTranslate.x} ${flippedX ? '-' : '+'} ${offsetX}px);`
-  );
+  let offsetXCssVar = $derived(`--offset-x:calc(${popoverOffsets.x} + ${offsetX}px);`);
   // the offset flips with the placement to position it the same relative distance
-  let offsetYCssVar = $derived(
-    `--offset-y:calc(${popoverTranslate.y} ${flippedY ? '-' : '+'} ${offsetY}px);`
-  );
+  let offsetYCssVar = $derived(`--offset-y:calc(${popoverOffsets.y} + ${offsetY}px);`);
   let popoverStyle = $derived(`${anchorIdentCssVar} ${offsetXCssVar} ${offsetYCssVar}`);
 
   //#endregion
@@ -219,13 +257,11 @@
   class={[
     'sterling-popover-2',
     lightDismiss ? 'light-dismiss' : undefined,
-    anchor && !invoker ? 'with-anchor' : '',
+    anchor && !invoker ? 'has-anchor-ident' : '',
     _class
   ]}
   style={popoverStyle}
   data-placement={resolvedPlacement}
-  data-flipped-x={flippedX}
-  data-flipped-y={flippedY}
   data-anchor-origin={resolvedAnchorOrigin}
   bind:this={popoverElement}
   popover={lightDismiss ? 'auto' : 'manual'}

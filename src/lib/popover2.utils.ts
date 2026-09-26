@@ -3,9 +3,24 @@ import type { Popover2Nonant } from './Popover2.types';
 type NonantVertical = 'top' | 'center' | 'bottom';
 type NonantHorizontal = 'left' | 'center' | 'right';
 
-export const splitNonant = (
-  nonant: Popover2Nonant
-): { vertical: NonantVertical; horizontal: NonantHorizontal } => {
+type SplitNonant = {
+  vertical: NonantVertical;
+  horizontal: NonantHorizontal;
+};
+
+type Point = {
+  x: number;
+  y: number;
+};
+
+type Offset = Point;
+
+type Size = {
+  width: number;
+  height: number;
+};
+
+export const splitNonant = (nonant: Popover2Nonant): SplitNonant => {
   switch (nonant) {
     case 'top-left':
       return { vertical: 'top', horizontal: 'left' };
@@ -30,7 +45,7 @@ export const splitNonant = (
   }
 };
 
-export const formatNonat = (vertical: NonantVertical, horizontal: NonantHorizontal) => {
+export const formatNonat = ({ vertical, horizontal }: SplitNonant) => {
   if (vertical === 'center' && horizontal === 'center') {
     return 'center';
   }
@@ -43,9 +58,9 @@ export const formatNonat = (vertical: NonantVertical, horizontal: NonantHorizont
   return `${vertical}-${horizontal}`;
 };
 
-const getOffsetX = (
-  anchorOriginX: 'left' | 'center' | 'right',
-  placementX: 'left' | 'center' | 'right'
+const getPlacementPercentOffsetX = (
+  anchorOriginX: NonantHorizontal,
+  placementX: NonantHorizontal
 ) => {
   switch (anchorOriginX) {
     case 'left':
@@ -83,10 +98,7 @@ const getOffsetX = (
   }
 };
 
-const getOffsetY = (
-  anchorOriginY: 'top' | 'center' | 'bottom',
-  placementY: 'top' | 'center' | 'bottom'
-) => {
+const getPlacementOffsetPercentY = (anchorOriginY: NonantVertical, placementY: NonantVertical) => {
   switch (anchorOriginY) {
     case 'top':
       switch (placementY) {
@@ -123,12 +135,15 @@ const getOffsetY = (
   }
 };
 
-export const getPopoverOffsets = (anchorOrigin: Popover2Nonant, placement: Popover2Nonant) => {
+export const getPlacementPercentOffsets = (
+  anchorOrigin: Popover2Nonant,
+  placement: Popover2Nonant
+) => {
   const { horizontal: anchorOriginX, vertical: anchorOriginY } = splitNonant(anchorOrigin);
   const { horizontal: placementX, vertical: placementY } = splitNonant(placement);
 
-  const translateX = getOffsetX(anchorOriginX, placementX);
-  const translateY = getOffsetY(anchorOriginY, placementY);
+  const translateX = getPlacementPercentOffsetX(anchorOriginX, placementX);
+  const translateY = getPlacementOffsetPercentY(anchorOriginY, placementY);
 
   return {
     x: translateX,
@@ -136,34 +151,144 @@ export const getPopoverOffsets = (anchorOrigin: Popover2Nonant, placement: Popov
   };
 };
 
+export const getNonantPoint = (rect: DOMRect, nonant: Popover2Nonant) => {
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+
+  switch (nonant) {
+    case 'top-left':
+      return {
+        x: rect.left,
+        y: rect.top
+      };
+    case 'top':
+      return {
+        x: cx,
+        y: rect.top
+      };
+    case 'top-right':
+      return {
+        x: rect.right,
+        y: rect.top
+      };
+    case 'left':
+      return {
+        x: rect.left,
+        y: cy
+      };
+    case 'center':
+      return {
+        x: cx,
+        y: cy
+      };
+    case 'right':
+      return {
+        x: rect.right,
+        y: cy
+      };
+    case 'bottom-left':
+      return {
+        x: rect.left,
+        y: rect.bottom
+      };
+    case 'bottom':
+      return {
+        x: cx,
+        y: rect.bottom
+      };
+    case 'bottom-right':
+      return {
+        x: rect.right,
+        y: rect.bottom
+      };
+    default:
+      return {
+        x: cx,
+        y: cy
+      };
+  }
+};
+
+const getOffsetPixelsX = (placementX: NonantHorizontal, width: number) => {
+  switch (placementX) {
+    case 'left':
+      return -width;
+    case 'right':
+      return 0;
+    case 'center':
+    default:
+      return -width / 2;
+  }
+};
+
+const getOffsetPixelsY = (placementY: NonantVertical, height: number) => {
+  switch (placementY) {
+    case 'top':
+      return -height;
+    case 'bottom':
+      return 0;
+    case 'center':
+    default:
+      return -height / 2;
+  }
+};
+
+const getPlacementPixelOffsets = (placement: Popover2Nonant, size: Size) => {
+  const { horizontal, vertical } = splitNonant(placement);
+
+  const translateX = getOffsetPixelsX(horizontal, size.width);
+  const translateY = getOffsetPixelsY(vertical, size.height);
+
+  return {
+    x: translateX,
+    y: translateY
+  };
+};
+
+/**
+ * Calculates where a popover rect will appear relative to an anchor
+ * given an anchor origin, placement, and offsets
+ */
+export const getPopoverPosition = (
+  anchorOrigin: Popover2Nonant,
+  anchorRect: DOMRect,
+  placement: Popover2Nonant,
+  popoverSize: Size,
+  offset: Offset
+) => {
+  const anchorPoint = getNonantPoint(anchorRect, anchorOrigin);
+
+  const placementOffset = getPlacementPixelOffsets(placement, popoverSize);
+
+  const x = anchorPoint.x + placementOffset.x + offset.x;
+  const y = anchorPoint.y + placementOffset.y + offset.y;
+
+  return new DOMRectReadOnly(x, y, popoverSize.width, popoverSize.height);
+};
+
 export const getOppositeNonant = (value: Popover2Nonant) => {
   switch (value) {
     case 'top-left':
       return 'bottom-right';
-    case 'top-center':
-      return 'bottom-center';
+    case 'top':
+      return 'bottom';
     case 'top-right':
       return 'bottom-left';
-    case 'center-left':
-      return 'center-right';
-    case 'center-center':
-      return 'center-center';
-    case 'center-right':
-      return 'center-left';
+    case 'left':
+      return 'right';
+    case 'center':
+      return 'center';
+    case 'right':
+      return 'left';
     case 'bottom-left':
       return 'top-right';
-    case 'bottom-center':
-      return 'top-center';
+    case 'bottom':
+      return 'top';
     case 'bottom-right':
       return 'top-left';
     default:
       return value;
   }
-};
-
-type Point = {
-  x: number;
-  y: number;
 };
 
 export const getFlippedAxes = (
@@ -178,12 +303,12 @@ export const getFlippedAxes = (
   let xFlipped = false;
   switch (placement) {
     case 'top-left':
-    case 'center-left':
+    case 'left':
     case 'bottom-left':
       xFlipped = pcx > anchorPoint.x;
       break;
     case 'top-right':
-    case 'center-right':
+    case 'right':
     case 'bottom-right':
       xFlipped = pcx < anchorPoint.x;
       break;
@@ -194,12 +319,12 @@ export const getFlippedAxes = (
   let yFlipped = false;
   switch (placement) {
     case 'top-left':
-    case 'top-center':
+    case 'top':
     case 'top-right':
       yFlipped = pcy > anchorPoint.y;
       break;
     case 'bottom-left':
-    case 'bottom-center':
+    case 'bottom':
     case 'bottom-right':
       yFlipped = pcy < anchorPoint.y;
       break;
@@ -211,62 +336,4 @@ export const getFlippedAxes = (
     xFlipped,
     yFlipped
   };
-};
-
-export const getNonantPoint = (rect: DOMRect, nonant: Popover2Nonant) => {
-  const cx = rect.left + rect.width / 2;
-  const cy = rect.top + rect.height / 2;
-
-  switch (nonant) {
-    case 'top-left':
-      return {
-        x: rect.left,
-        y: rect.top
-      };
-    case 'top-center':
-      return {
-        x: cx,
-        y: rect.top
-      };
-    case 'top-right':
-      return {
-        x: rect.right,
-        y: rect.top
-      };
-    case 'center-left':
-      return {
-        x: rect.left,
-        y: cy
-      };
-    case 'center-center':
-      return {
-        x: cx,
-        y: cy
-      };
-    case 'center-right':
-      return {
-        x: rect.right,
-        y: cy
-      };
-    case 'bottom-left':
-      return {
-        x: rect.left,
-        y: rect.bottom
-      };
-    case 'bottom-center':
-      return {
-        x: cx,
-        y: rect.bottom
-      };
-    case 'bottom-right':
-      return {
-        x: rect.right,
-        y: rect.bottom
-      };
-    default:
-      return {
-        x: cx,
-        y: cy
-      };
-  }
 };

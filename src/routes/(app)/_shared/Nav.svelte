@@ -51,7 +51,6 @@
         { name: 'Autocomplete', url: '/components/autocomplete' },
         { name: 'Button', url: '/components/button' },
         { name: 'Callout', url: '/components/callout' },
-        { name: 'Callout2', url: '/components/callout2' },
         { name: 'Checkbox', url: '/components/checkbox' },
         { name: 'Dialog', url: '/components/dialog' },
         { name: 'Dropdown', url: '/components/dropdown' },
@@ -67,7 +66,6 @@
         { name: 'MenuSeparator', url: '/components/menuseparator' },
         { name: 'Pagination', url: '/components/pagination' },
         { name: 'Popover', url: '/components/popover' },
-        { name: 'Popover2', url: '/components/popover2' },
         { name: 'Progress', url: '/components/progress' },
         { name: 'Radio', url: '/components/radio' },
         { name: 'Select', url: '/components/select' },
@@ -78,10 +76,18 @@
         { name: 'TabList', url: '/components/tablist' },
         { name: 'TextArea', url: '/components/textarea' },
         { name: 'Tooltip', url: '/components/tooltip' },
-        { name: 'Tooltip2', url: '/components/tooltip2' },
         { name: 'Tree', url: '/components/tree' },
         { name: 'TreeChevron', url: '/components/treechevron' },
         { name: 'TreeItem', url: '/components/treeitem' }
+      ]
+    },
+    {
+      name: 'PREVIEW COMPONENTS',
+      items: [
+        { name: 'Callout2', url: '/components/callout2' },
+        { name: 'Dropdown2', url: '/components/dropdown2' },
+        { name: 'Popover2', url: '/components/popover2' },
+        { name: 'Tooltip2', url: '/components/tooltip2' }
       ]
     },
     {
