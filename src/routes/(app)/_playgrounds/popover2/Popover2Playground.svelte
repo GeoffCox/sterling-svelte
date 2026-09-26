@@ -17,8 +17,8 @@
   import { getPlaygroundCode } from './getPlaygroundCode';
   import Radio from '$lib/Radio.svelte';
 
-  const PLACEMENT_NONANTS = ['auto', ...POPOVER2_NONANTS];
   const ANCHOR_ORIGIN_NONANTS = POPOVER2_NONANTS;
+  const PLACEMENT_NONANTS = ['auto', ...POPOVER2_NONANTS];
 
   let _class = $state('');
   let anchorOrigin: Popover2Nonant = $state('top-left');

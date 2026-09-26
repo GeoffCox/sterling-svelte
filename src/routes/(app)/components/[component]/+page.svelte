@@ -34,6 +34,7 @@
             <th></th>
             <th>Property Name</th>
             <th>Type</th>
+            <th>Bindable</th>
             <th>Default</th>
             <th>Comment</th>
           </tr>
@@ -44,6 +45,7 @@
               <td class="icon"><CodePropertyIcon /></td>
               <td class="name">{item.name}</td>
               <td class="type">{item.type || ''}</td>
+              <td class="bindable">{item.bindable ? 'yes' : 'no'}</td>
               <td class="default">{item.default || ''}</td>
               <td class="comment">{item.comment || ''}</td>
             </tr>

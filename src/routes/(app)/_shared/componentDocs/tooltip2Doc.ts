@@ -1,39 +1,23 @@
-import { makeExtendsComment } from './commonDoc';
 import type { ComponentDoc } from './types';
 import Tooltip2Playground from '../../_playgrounds/tooltip2/Tooltip2Playground.svelte';
 
 export const tooltip2Doc: ComponentDoc = {
-  name: 'Tooltip2',
-  description:
-    'A floating box of content that is automatically shown when the mouse hovers over the element.',
-  comments: [
-    'Includes <Popover2> props, events, and methods except anchorCssName and invokerMethod.'
-  ],
+  name: 'Popover2 Tooltip',
+  description: 'The popoverHover action replaces Tooltip as its own component.',
+  comments: [],
   props: [
     {
-      name: 'disabled',
-      type: 'boolean | null | undefined',
-      default: 'false',
-      comment: 'When true, the tooltip is disabled and will not be shown.'
-    },
-    {
-      name: 'hoverDelayMilliseconds',
+      name: 'delayMilliseconds',
       type: 'number | undefined',
       default: '1000 (1 second)',
-      comment: 'The mouse hover duration before showing the tooltip.'
+      comment: 'The mouse hover duration before showing the popover.'
     },
     {
-      name: 'tip',
-      type: 'string | Snippet | undefined',
+      name: 'popovertarget',
+      type: 'string',
       default: 'undefined',
-      comment: 'The content to display as the tooltip.'
+      comment: 'The id of the Popover2.'
     }
   ],
-  anatomy: `<div class="sterling-tooltip>
-  {@render children()}
-</div>
-<Popover2 class="callout">
-  {@render tip()}
-</Callout>`,
   usage: Tooltip2Playground
 };

@@ -7,6 +7,7 @@ export { clickOutside } from './actions/clickOutside';
 export { colorScheme } from './actions/colorScheme';
 export { extraClass } from './actions/extraClass';
 export { forwardEvents } from './actions/forwardEvents';
+export { popoverHover } from './actions/popoverHover';
 export { portal } from './actions/portal';
 export { trapKeyboardFocus } from './actions/trapKeyboardFocus';
 

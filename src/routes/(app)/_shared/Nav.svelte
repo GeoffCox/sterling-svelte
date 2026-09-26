@@ -87,7 +87,7 @@
         { name: 'Callout2', url: '/components/callout2' },
         { name: 'Dropdown2', url: '/components/dropdown2' },
         { name: 'Popover2', url: '/components/popover2' },
-        { name: 'Tooltip2', url: '/components/tooltip2' }
+        { name: 'Popover2 Tooltip', url: '/components/tooltip2' }
       ]
     },
     {

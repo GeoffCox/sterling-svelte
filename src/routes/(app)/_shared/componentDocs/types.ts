@@ -11,6 +11,7 @@ export type TypeDoc = MemberDoc & {
 
 export type PropDoc = MemberDoc & {
   type?: string;
+  bindable?: boolean;
   default?: string;
 };
 

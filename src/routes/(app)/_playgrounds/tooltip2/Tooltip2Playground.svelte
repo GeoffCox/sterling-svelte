@@ -1,30 +1,33 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { POPOVER2_NONANTS, type Popover2Nonant } from '$lib';
+  import { POPOVER2_NONANTS, popoverHover, type Popover2Nonant } from '$lib';
   import Checkbox from '$lib/Checkbox.svelte';
   import Input from '$lib/Input.svelte';
   import Label from '$lib/Label.svelte';
   import ListItem from '$lib/ListItem.svelte';
+  import Popover2 from '$lib/Popover2.svelte';
   import Select from '$lib/Select.svelte';
   import Slider from '$lib/Slider.svelte';
-  import Tooltip2 from '$lib/Tooltip2.svelte';
   import VariantInput from '../../_shared/ClassInput.svelte';
   import Playground from '../Playground.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let _class = $state('');
+  const ANCHOR_ORIGIN_NONANTS = POPOVER2_NONANTS;
+  const PLACEMENT_NONANTS = ['auto', ...POPOVER2_NONANTS];
+
+  let _class = $state('callout');
+  let anchorOrigin: Popover2Nonant = $state('top-left');
   let disabled = $state(false);
-  let hoverDelayMilliseconds = $state(1000);
-  let open = $state(true);
-  let placement: Popover2Nonant = $state('top-center');
+  let delayMilliseconds = $state(1000);
+  let placement: 'auto' | Popover2Nonant = $state('auto');
   let text = $state('sterling-svelte');
 
   let code = $derived(
     getPlaygroundCode({
       _class,
       disabled,
-      hoverDelayMilliseconds,
+      hoverDelayMilliseconds: delayMilliseconds,
       placement,
       text
     })
@@ -34,46 +37,51 @@
 <Playground {code}>
   {#snippet component()}
     <div class="container">
-      <Tooltip2
-        class={_class}
-        {disabled}
-        {hoverDelayMilliseconds}
-        onOpen={(value) => console.log(`<Tooltip> onOpen value:${value}`)}
-        bind:open
-        {placement}
+      <div
+        class="hover-anchor"
+        use:popoverHover={{
+          popoverTarget: 'TooltipPopover',
+          delayMilliseconds: delayMilliseconds
+        }}
       >
-        <div class="reference">The reference anchor for positioning the Tooltip.</div>
-        {#snippet tip()}
-          <div class="tip-text">{text}</div>
-        {/snippet}
-      </Tooltip2>
+        Hover over me
+      </div>
     </div>
   {/snippet}
   {#snippet props()}
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Label class="slider-label" text={`hoverDelayMilliseconds`}>
       <div class="slider">
-        <Slider bind:value={hoverDelayMilliseconds} min={0} max={3000} precision={0} />
-        <div>{hoverDelayMilliseconds}</div>
+        <Slider bind:value={delayMilliseconds} min={0} max={3000} precision={0} />
+        <div>{delayMilliseconds}</div>
       </div>
     </Label>
-    <Checkbox bind:checked={open}>open</Checkbox>
+    <Label text="anchorOrigin">
+      <Select bind:selectedValue={anchorOrigin}>
+        {#each ANCHOR_ORIGIN_NONANTS as anchorOriginItem (anchorOriginItem)}
+          <ListItem value={anchorOriginItem}>{anchorOriginItem}</ListItem>
+        {/each}
+      </Select>
+    </Label>
     <Label text="placement">
       <Select bind:selectedValue={placement}>
-        {#each POPOVER2_NONANTS as placementItem}
+        {#each PLACEMENT_NONANTS as placementItem (placementItem)}
           <ListItem value={placementItem}>{placementItem}</ListItem>
         {/each}
       </Select>
     </Label>
-
     <VariantInput labelText="class" bind:class={_class} />
   {/snippet}
-  {#snippet snippets()}
-    <Label text="children">
+  {#snippet tweaks()}
+    <Label text="popover (text)">
       <Input bind:value={text} />
     </Label>
   {/snippet}
 </Playground>
+
+<Popover2 id="TooltipPopover" class={_class} {anchorOrigin} {placement}>
+  <div class="tip-text">{text}</div>
+</Popover2>
 
 <style>
   .container {
@@ -99,7 +107,7 @@
     width: 200px;
   }
 
-  .reference {
+  .hover-anchor {
     padding: 1em;
     background-color: var(--stsv-common__background-color--secondary);
     width: 300px;

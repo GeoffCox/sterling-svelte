@@ -194,22 +194,23 @@
     setAnchorName(anchor);
   });
 
-  const resizeObserver = new ResizeObserver(resolvePosition);
+  let resizeObserver: ResizeObserver | undefined;
   let observedAnchor: HTMLElement | undefined;
 
   // keep observing the resolved anchor for resize
   $effect(() => {
     if (observedAnchor) {
-      resizeObserver.unobserve(observedAnchor);
+      resizeObserver?.unobserve(observedAnchor);
       observedAnchor = undefined;
     }
     if (resolvedAnchor) {
-      resizeObserver.observe(resolvedAnchor);
+      resizeObserver?.observe(resolvedAnchor);
       observedAnchor = resolvedAnchor;
     }
   });
 
   onMount(() => {
+    resizeObserver = new ResizeObserver(resolvePosition);
     let offToggleEvent: () => void;
     let offScrollEvent: () => void;
     let offResizeEvent: () => void;
@@ -233,7 +234,8 @@
         setAnchorNameElement.style.removeProperty('anchor-name');
       }
 
-      resizeObserver.disconnect();
+      resizeObserver?.disconnect();
+      resizeObserver = undefined;
       offResizeEvent?.();
       offScrollEvent?.();
       offToggleEvent?.();

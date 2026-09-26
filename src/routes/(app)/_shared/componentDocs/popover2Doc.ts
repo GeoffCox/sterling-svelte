@@ -60,6 +60,7 @@ export const popover2Doc: ComponentDoc = {
     {
       name: 'open',
       type: 'boolean | null | undefined',
+      bindable: true,
       default: 'false',
       comment: 'When true, the popover is open and visible.'
     },

@@ -11,8 +11,8 @@ export const getPlaygroundCode = (props: {
   if (props.disabled) {
     propList.push(`disabled`);
   }
-  if (props.lightDismiss) {
-    propList.push(`lightDismiss`);
+  if (props.lightDismiss !== true) {
+    propList.push(`lightDismiss={${props.lightDismiss}}`);
   }
 
   propList.push('bind:open');
