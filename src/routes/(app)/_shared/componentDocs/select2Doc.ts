@@ -1,0 +1,98 @@
+import { makeExtendsComment } from './commonDoc';
+import type { ComponentDoc } from './types';
+import Select2Playground from '../../_playgrounds/select2/Select2Playground.svelte';
+
+export const select2Doc: ComponentDoc = {
+  name: 'Select2',
+  description: 'A value and a button to open/close a list of choices.',
+  comments: [
+    'Select2 uses Popover2',
+    'Due to lack of styling capabilities with <select>, the Select component does not use <select>',
+    makeExtendsComment('HTMLDivElement')
+  ],
+  props: [
+    {
+      name: 'disabled',
+      type: 'boolean | null | undefined',
+      default: 'false',
+      comment: "When true, the select's button is disabled and list is closed."
+    },
+    {
+      name: 'icon',
+      type: 'Snippet | undefined',
+      default: 'undefined',
+      comment: 'The snippet to render the icon. Defaults to a chevron.'
+    },
+    {
+      name: 'listClass',
+      type: 'string | undefined',
+      default: 'undefined',
+      comment: 'Additional class names to apply to the list.'
+    },
+    {
+      name: 'onPending',
+      type: '(value: string) => void',
+      default: 'undefined',
+      comment: 'Called when a value is selected in the list but not yet committed.'
+    },
+    {
+      name: 'onSelect',
+      type: '(value: string) => void',
+      default: 'undefined',
+      comment: 'Called when a value is selected.'
+    },
+    {
+      name: 'open',
+      type: 'boolean | null | undefined',
+      default: 'false',
+      comment: "When true, the select's dropdown is open."
+    },
+    {
+      name: 'selectedValue',
+      type: 'string | undefined',
+      default: 'undefined',
+      comment: 'The value of the selected item.'
+    },
+    {
+      name: 'value',
+      type: 'Snippet<[string | undefined]> | string | undefined',
+      default: 'undefined',
+      comment:
+        'The string or snippet to display the value. The snippet is passed the selected value. If undefined, the selectedValue is displayed.'
+    },
+    {
+      name: 'buttonSnippet',
+      type: 'Snippet | undefined',
+      default: 'undefined',
+      comment: 'Deprecated. Use icon instead.'
+    },
+    {
+      name: 'valueSnippet',
+      type: 'Snippet<[string | undefined]> | undefined',
+      default: 'undefined',
+      comment: 'Deprecated. Use value instead.'
+    }
+  ],
+  methods: [
+    {
+      name: 'scrollToSelectedItem',
+      comment: 'Scrolls to the selected item.'
+    }
+  ],
+  anatomy: `<div class="sterling-select-2">
+  <div class="value">
+    {@render value()}
+  </div>
+  <div class="icon">
+    {@render icon()}
+  </div>
+  <Popover>
+    <div class="sterling-select-2-content">
+      <List>
+        {@render children()}
+      </List>
+    </div>
+  </Popover>
+</div>`,
+  usage: Select2Playground
+};

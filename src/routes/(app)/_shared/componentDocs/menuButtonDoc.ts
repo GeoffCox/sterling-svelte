@@ -38,7 +38,7 @@ export const menuButtonDoc: ComponentDoc = {
     {
       name: 'onSelect',
       type: '(value: string) => void',
-      comment: 'Called when a descendant a menu item is selected.'
+      comment: 'Called when a descendant menu item is selected.'
     },
     {
       name: 'popoverPlacement',

@@ -46,6 +46,7 @@ export type { ListItemProps } from './ListItem.types';
 export type { ListContext, ListProps } from './List.types';
 export type { MenuBarContext, MenuBarProps } from './MenuBar.types';
 export type { MenuButtonProps } from './MenuButton.types';
+export type { MenuButton2Props } from './MenuButton2.types';
 export type {
   MenuItemContext,
   MenuItemRegistration,
@@ -73,6 +74,7 @@ export type { TreeContext, TreeProps } from './Tree.types';
 
 // ----- components ----- //
 import Autocomplete from './Autocomplete.svelte';
+import Autocomplete2 from './Autocomplete2.svelte';
 import Button from './Button.svelte';
 import Callout from './Callout.svelte';
 import Checkbox from './Checkbox.svelte';
@@ -86,8 +88,11 @@ import List from './List.svelte';
 import ListItem from './ListItem.svelte';
 import Menu from './Menu.svelte';
 import MenuBar from './MenuBar.svelte';
+import MenuBar2 from './MenuBar2.svelte';
 import MenuButton from './MenuButton.svelte';
+import MenuButton2 from './MenuButton2.svelte';
 import MenuItem from './MenuItem.svelte';
+import MenuItem2 from './MenuItem2.svelte';
 import MenuSeparator from './MenuSeparator.svelte';
 import Pagination from './Pagination.svelte';
 import Popover from './Popover.svelte';
@@ -95,6 +100,7 @@ import Popover2 from './Popover2.svelte';
 import Progress from './Progress.svelte';
 import Radio from './Radio.svelte';
 import Select from './Select.svelte';
+import Select2 from './Select2.svelte';
 import Slider from './Slider.svelte';
 import Splitter from './Splitter.svelte';
 import Switch from './Switch.svelte';
@@ -108,6 +114,7 @@ import TreeItem from './TreeItem.svelte';
 
 export {
   Autocomplete,
+  Autocomplete2,
   Button,
   Callout,
   Checkbox,
@@ -121,8 +128,11 @@ export {
   ListItem,
   Menu,
   MenuBar,
+  MenuBar2,
   MenuButton,
+  MenuButton2,
   MenuItem,
+  MenuItem2,
   MenuSeparator,
   Pagination,
   Popover,
@@ -130,6 +140,7 @@ export {
   Progress,
   Radio,
   Select,
+  Select2,
   Slider,
   Splitter,
   Switch,

@@ -29,6 +29,12 @@
 
   <pre>{preBlocks.forwardEvents}</pre>
 
+  <h2>popoverHover</h2>
+
+  Opens a popover when the mouse hovers over the element.
+
+  <pre>{preBlocks.popoverHover}</pre>
+
   <h2>portal</h2>
 
   Makes the element a child of the target element. Useful in scenarios like menus when you want to

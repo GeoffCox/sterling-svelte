@@ -54,6 +54,17 @@ export const preBlocks = {
 <div bind:this={targetRef} on:click={onClick}>sterling-svelte</div>
 <button use:forwardEvents={ target: targetRef, events: ['click']}>Click Me<button>
 `,
+  popoverHover: `<script lang="ts">
+  import { popoverHover } from '@geoffcox/sterling-svelte';
+</script>
+
+<div use:popoverHover={{popovertarget:'MyPopover',delayMilliseconds:750}}>
+  <!-- content here -->
+</div>
+<Popover2 id="MyPopover">
+  <!-- content here -->
+</Popover2>
+`,
   portal: `<script lang="ts">
   import { portal } from '@geoffcox/sterling-svelte';
 </script>

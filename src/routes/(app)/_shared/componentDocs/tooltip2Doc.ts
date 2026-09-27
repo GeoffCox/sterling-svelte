@@ -2,7 +2,7 @@ import type { ComponentDoc } from './types';
 import Tooltip2Playground from '../../_playgrounds/tooltip2/Tooltip2Playground.svelte';
 
 export const tooltip2Doc: ComponentDoc = {
-  name: 'Popover2 Tooltip',
+  name: 'Popover2/Tooltip',
   description: 'The popoverHover action replaces Tooltip as its own component.',
   comments: [],
   props: [

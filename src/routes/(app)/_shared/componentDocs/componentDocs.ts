@@ -1,6 +1,7 @@
 import type { ComponentDoc } from './types';
 
 import { autocompleteDoc } from './autocompleteDoc';
+import { autocomplete2Doc } from './autocomplete2Doc';
 import { buttonDoc } from './buttonDoc';
 import { calloutDoc } from './calloutDoc';
 import { callout2Doc } from './callout2Doc';
@@ -15,7 +16,9 @@ import { listDoc } from './listDoc';
 import { listItemDoc } from './listItemDoc';
 import { menuDoc } from './menuDoc';
 import { menuBarDoc } from './menuBarDoc';
+import { menuBar2Doc } from './menuBar2Doc';
 import { menuButtonDoc } from './menuButtonDoc';
+import { menuButton2Doc } from './menuButton2Doc';
 import { menuItemDoc } from './menuItemDoc';
 import { menuSeparatorDoc } from './menuSeparatorDoc';
 import { paginationDoc } from './paginationDoc';
@@ -24,6 +27,7 @@ import { popover2Doc } from './popover2Doc';
 import { progressDoc } from './progressDoc';
 import { radioDoc } from './radioDoc';
 import { selectDoc } from './selectDoc';
+import { select2Doc } from './select2Doc';
 import { sliderDoc } from './sliderDoc';
 import { splitterDoc } from './splitterDoc';
 import { switchDoc } from './switchDoc';
@@ -38,6 +42,7 @@ import { treeItemDoc } from './treeItemDoc';
 
 export const componentDocs: Record<string, ComponentDoc> = {
   autocomplete: autocompleteDoc,
+  autocomplete2: autocomplete2Doc,
   button: buttonDoc,
   callout: calloutDoc,
   callout2: callout2Doc,
@@ -52,7 +57,9 @@ export const componentDocs: Record<string, ComponentDoc> = {
   listitem: listItemDoc,
   menu: menuDoc,
   menubar: menuBarDoc,
+  menubar2: menuBar2Doc,
   menubutton: menuButtonDoc,
+  menubutton2: menuButton2Doc,
   menuitem: menuItemDoc,
   menuseparator: menuSeparatorDoc,
   pagination: paginationDoc,
@@ -61,6 +68,7 @@ export const componentDocs: Record<string, ComponentDoc> = {
   progress: progressDoc,
   radio: radioDoc,
   select: selectDoc,
+  select2: select2Doc,
   slider: sliderDoc,
   splitter: splitterDoc,
   switch: switchDoc,

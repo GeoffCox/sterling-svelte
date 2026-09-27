@@ -74,7 +74,7 @@
   aria-controls={popoverId}
   aria-haspopup={true}
   aria-expanded={open}
-  class={['sterling-dropdown2', _class]}
+  class={['sterling-dropdown-2', _class]}
   class:disabled
   class:open
   class:using-keyboard={$usingKeyboard}
@@ -111,7 +111,7 @@
   anchorOrigin="bottom-left"
   placement="bottom-right"
 >
-  <div class={['sterling-dropdown2-content', _class]}>
+  <div class={['sterling-dropdown-2-content', _class]}>
     {@render children?.()}
   </div>
 </Popover2>

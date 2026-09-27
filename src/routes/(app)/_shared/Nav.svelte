@@ -84,10 +84,14 @@
     {
       name: 'PREVIEW COMPONENTS',
       items: [
-        { name: 'Callout2', url: '/components/callout2' },
+        { name: 'Autocomplete2', url: '/components/autocomplete2' },
         { name: 'Dropdown2', url: '/components/dropdown2' },
+        { name: 'MenuBar2', url: '/components/menubar2' },
+        { name: 'MenuButton2', url: '/components/menubutton2' },
         { name: 'Popover2', url: '/components/popover2' },
-        { name: 'Popover2 Tooltip', url: '/components/tooltip2' }
+        { name: 'Popover2/Callout', url: '/components/callout2' },
+        { name: 'Popover2/Tooltip', url: '/components/tooltip2' },
+        { name: 'Select2', url: '/components/select2' }
       ]
     },
     {

@@ -12,32 +12,25 @@
 
   let { children, class: _class, ...rest }: MenuProps = $props();
 
-  let menuRef: HTMLDivElement;
-  let menuItemsRef: HTMLDivElement;
-
-  const noSlide = (node: Element, params?: SlideParams): TransitionConfig => {
-    return { delay: 0, duration: 0 };
-  };
-
-  let slideMotion = $derived(!$prefersReducedMotion ? slide : noSlide);
-
+  let menuElement: HTMLDivElement;
+  let itemsElement: HTMLDivElement;
   const { rootValue = undefined } = getContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY);
 
   const isElementInThisMenu = (candidate: Element) => {
-    return candidate && candidate.closest('[role="menu"]') === menuRef;
+    return candidate && candidate.closest('[role="menu"]') === menuElement;
   };
 
   //#region focus
   export const focus = (options?: FocusOptions) => {
-    menuRef?.focus(options);
+    menuElement?.focus(options);
   };
 
   export const blur = () => {
-    menuRef?.blur();
+    menuElement?.blur();
   };
 
   export const focusFirstMenuItem = () => {
-    let candidate: Element | undefined | null = menuItemsRef?.firstElementChild;
+    let candidate: Element | undefined | null = itemsElement?.firstElementChild;
     while (candidate && !isElementEnabledMenuItem(candidate)) {
       candidate = candidate.nextElementSibling;
     }
@@ -50,7 +43,7 @@
     let candidate = document.activeElement;
 
     if (candidate && isElementMenuItem(candidate) && isElementInThisMenu(candidate)) {
-      candidate = menuItemsRef?.previousElementSibling;
+      candidate = itemsElement?.previousElementSibling;
       while (candidate && !isElementEnabledMenuItem(candidate)) {
         candidate = candidate.previousElementSibling;
       }
@@ -63,7 +56,7 @@
     let candidate = document.activeElement;
 
     if (candidate && isElementMenuItem(candidate) && isElementInThisMenu(candidate)) {
-      candidate = menuItemsRef?.nextElementSibling;
+      candidate = itemsElement?.nextElementSibling;
       while (candidate && !isElementEnabledMenuItem(candidate)) {
         candidate = candidate.nextElementSibling;
       }
@@ -73,7 +66,7 @@
   };
 
   export const focusLastMenuItem = () => {
-    let candidate: Element | undefined | null = menuItemsRef?.lastElementChild;
+    let candidate: Element | undefined | null = itemsElement?.lastElementChild;
     while (candidate && !isElementEnabledMenuItem(candidate)) {
       candidate = candidate.previousElementSibling;
     }
@@ -86,17 +79,15 @@
 </script>
 
 <div
-  bind:this={menuRef}
+  bind:this={menuElement}
   class={['sterling-menu', _class]}
   role="menu"
   class:open
   data-root-value={rootValue}
   tabindex="-1"
-  in:slideMotion|global={{ delay: 10, duration: 250, easing: linear, axis: 'y' }}
-  out:slideMotion|global={{ delay: 10, duration: 250, easing: linear, axis: 'y' }}
   {...rest}
 >
-  <div bind:this={menuItemsRef} class="menu-items">
+  <div bind:this={itemsElement} class="menu-items">
     {#if children}
       {@render children()}
     {/if}

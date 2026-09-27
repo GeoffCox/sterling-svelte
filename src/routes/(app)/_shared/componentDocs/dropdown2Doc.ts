@@ -5,10 +5,7 @@ import DropdownPlayground from '../../_playgrounds/dropdown2/Dropdown2Playground
 export const dropdown2Doc: ComponentDoc = {
   name: 'Dropdown2',
   description: 'A value and associated button to open/close a floating content box.',
-  comments: [
-    'Uses the Popover2 component for the dropdown content.',
-    makeExtendsComment('HTMLDivElement')
-  ],
+  comments: ['Dropdown2 uses Popover2.', makeExtendsComment('HTMLDivElement')],
   props: [
     {
       name: 'allowFlip',
@@ -56,7 +53,7 @@ export const dropdown2Doc: ComponentDoc = {
       comment: 'The value to display.'
     }
   ],
-  anatomy: `<div class="sterling-dropdown2">
+  anatomy: `<div class="sterling-dropdown-2">
   <div class="value">
     {@render value()}>
   </div>
@@ -65,7 +62,7 @@ export const dropdown2Doc: ComponentDoc = {
   </div>
 </div>
 <Popover2>
-  <div class="sterling-dropdown2-content">
+  <div class="sterling-dropdown-2-content">
     {@render children()}
   </div>
 </Popover>`,

@@ -3,9 +3,13 @@
 
   <h2>2.0.18</h2>
 
-  <h3>New - Popover2</h3>
+  <h3>PREVIEW - Popover2</h3>
   <ul>
     <li>Uses the browser Popover API rather than floating-ui</li>
+    <li>
+      Autocomplete2, Dropdown2, MenuBar2, MenuButton2, Popover2/Callout, Popover2/Tooltip, and
+      Select2 are versions of these components that use Popover2.
+    </li>
   </ul>
 
   <h3>Dependency Updates</h3>

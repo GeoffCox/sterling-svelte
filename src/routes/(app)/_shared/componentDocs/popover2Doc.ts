@@ -6,8 +6,8 @@ export const popover2Doc: ComponentDoc = {
   name: 'Popover 2',
   description: 'An element that floats above other content.',
   comments: [
-    'Uses the browser Popover API to place the popover on the top layer.',
-    'This component manages the anchor-name and position-anchor to connect the anchor to the popover.',
+    'Uses the w3c standard Popover API to place the popover on the top layer.',
+    'This component manages CSS anchor-name and position-anchor properties to connect the specified anchor to the popover.',
     'The position-try CSS for popovers does not currently work so this component implement position flipping.',
     makeExtendsComment('HTMLDivElement')
   ],
@@ -69,7 +69,7 @@ export const popover2Doc: ComponentDoc = {
       type: "'auto'| Popover2Nonant | undefined",
       default: "'center'",
       comment:
-        "How the popover should be positioned relative to anchor point. When 'auto', placement follows anchorOrigin."
+        "How the popover should be positioned relative to the anchor point. When 'auto', placement follows anchorOrigin."
     }
   ],
   types: [
@@ -93,7 +93,6 @@ export const popover2Doc: ComponentDoc = {
     <div class="content">
       {@render children?.()}
     </div>
-  </div>
 </div>`,
   usage: Popover2Playground
 };
