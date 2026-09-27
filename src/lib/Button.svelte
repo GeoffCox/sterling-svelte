@@ -5,22 +5,22 @@
 
   let { children, class: _class, ...rest }: ButtonProps = $props();
 
-  let buttonRef: HTMLButtonElement;
+  let buttonElement = $state<HTMLButtonElement>();
 
   export const click = () => {
-    buttonRef?.click();
+    buttonElement?.click();
   };
 
   export const blur = () => {
-    buttonRef?.blur();
+    buttonElement?.blur();
   };
 
   export const focus = (options?: FocusOptions) => {
-    buttonRef?.focus(options);
+    buttonElement?.focus(options);
   };
 </script>
 
-<button bind:this={buttonRef} class={['sterling-button', _class]} type="button" {...rest}>
+<button bind:this={buttonElement} class={['sterling-button', _class]} type="button" {...rest}>
   {#if children}
     {@render children()}
   {/if}
