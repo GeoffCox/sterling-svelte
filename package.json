@@ -1,6 +1,6 @@
 {
   "name": "@geoffcox/sterling-svelte",
-  "version": "2.0.18",
+  "version": "2.0.19",
   "author": "Geoff Cox",
   "description": "A modern, accessible, and lightweight component library for Svelte.",
   "license": "MIT",
@@ -73,7 +73,7 @@
     "@eslint/js": "^10.0.1",
     "@fontsource/atkinson-hyperlegible": "^5.1.1",
     "@fontsource/source-code-pro": "^4.5.14",
-    "@geoffcox/sterling-svelte-themes": "^2.0.16",
+    "@geoffcox/sterling-svelte-themes": "^2.0.19",
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.63.0",
     "@sveltejs/package": "^2.5.8",

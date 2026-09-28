@@ -20,6 +20,7 @@ import { menuBar2Doc } from './menuBar2Doc';
 import { menuButtonDoc } from './menuButtonDoc';
 import { menuButton2Doc } from './menuButton2Doc';
 import { menuItemDoc } from './menuItemDoc';
+import { menuItem2Doc } from './menuItem2Doc';
 import { menuSeparatorDoc } from './menuSeparatorDoc';
 import { paginationDoc } from './paginationDoc';
 import { popoverDoc } from './popoverDoc';
@@ -61,6 +62,7 @@ export const componentDocs: Record<string, ComponentDoc> = {
   menubutton: menuButtonDoc,
   menubutton2: menuButton2Doc,
   menuitem: menuItemDoc,
+  menuitem2: menuItem2Doc,
   menuseparator: menuSeparatorDoc,
   pagination: paginationDoc,
   popover: popoverDoc,

@@ -10,9 +10,16 @@ export const dropdown2Doc: ComponentDoc = {
     {
       name: 'allowFlip',
       type: 'Popover2FlipAxis | undefined',
-      default: 'undefined',
+      default: "'both'",
       comment:
         'Which axis/axes allow the dropdown content to flip to the other side when there is not enough space.'
+    },
+    {
+      name: 'anchorOrigin',
+      type: 'Popover2Nonant | undefined',
+      default: "'bottom-left'",
+      comment:
+        'The point in a 3x3 grid on the anchor that should be used as the origin for the dropdown.'
     },
     {
       name: 'disabled',
@@ -25,7 +32,7 @@ export const dropdown2Doc: ComponentDoc = {
       type: 'boolean | null | undefined',
       default: 'true',
       comment:
-        'When true, the dropdown content closes when another element is clicked or focused. Also closes when another dropdown opens.'
+        'When true, the dropdown closes when another element is clicked or focused. Also closes when another dropdown opens.'
     },
     {
       name: 'icon',
@@ -40,11 +47,30 @@ export const dropdown2Doc: ComponentDoc = {
       comment: 'Called when the dropdown opens or closes'
     },
     {
+      name: 'offsetX',
+      type: 'number',
+      default: '0',
+      comment: 'The how many pixels to move the dropdown left (negative) or right (positive).'
+    },
+    {
+      name: 'offsetY',
+      type: 'number',
+      default: '0',
+      comment: 'The how many pixels to move the dropdown up (negative) or down (positive).'
+    },
+    {
       name: 'open',
       type: 'boolean | null | undefined',
       bindable: true,
       default: 'false',
       comment: 'When true, the dropdown is open'
+    },
+    {
+      name: 'placement',
+      type: "'auto'| Popover2Nonant | undefined",
+      default: "'bottom-right'",
+      comment:
+        "How the dropdown should be positioned relative to the anchor point. When 'auto', placement follows anchorOrigin."
     },
     {
       name: 'value',

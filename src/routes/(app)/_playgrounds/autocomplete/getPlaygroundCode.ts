@@ -10,8 +10,8 @@ export const getPlaygroundCode = (props: { _class: string }) => {
   const propsText = propList.length > 0 ? ` ${propList.join(' ')}` : '';
 
   return `<script lang="ts">
-  import { Input } from '@geoffcox/sterling-svelte';
+  import { Autocomplete } from '@geoffcox/sterling-svelte';
 </script>
 
-<Input${propsText} />`;
+<Autocomplete${propsText} />`;
 };

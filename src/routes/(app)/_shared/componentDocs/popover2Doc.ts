@@ -15,7 +15,7 @@ export const popover2Doc: ComponentDoc = {
     {
       name: 'allowFlip',
       type: 'Popover2FlipAxis | undefined',
-      default: 'undefined',
+      default: "'both'",
       comment:
         'Which axis/axes allow the popover to flip to the other side when there is not enough space.'
     },
@@ -29,7 +29,8 @@ export const popover2Doc: ComponentDoc = {
       name: 'anchorOrigin',
       type: 'Popover2Nonant | undefined',
       default: "'auto'",
-      comment: 'The point in a 3x3 grid on the anchor that should be used as the origin.'
+      comment:
+        'The point in a 3x3 grid on the anchor that should be used as the origin for the popover.'
     },
     {
       name: 'invoker',

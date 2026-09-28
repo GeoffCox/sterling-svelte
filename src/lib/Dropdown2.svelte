@@ -12,13 +12,17 @@
 
   let {
     allowFlip = 'both',
+    anchorOrigin = 'bottom-left',
     class: _class,
     children,
     disabled = false,
     icon,
+    lightDismiss = true,
     open = $bindable(false),
     onOpen,
-    lightDismiss = true,
+    offsetX,
+    offsetY,
+    placement = 'bottom-right',
     value,
     ...rest
   }: Dropdown2Props = $props();
@@ -106,10 +110,12 @@
   id={popoverId}
   {allowFlip}
   anchor={dropdownElement}
+  {anchorOrigin}
   {lightDismiss}
+  {offsetX}
+  {offsetY}
   bind:open
-  anchorOrigin="bottom-left"
-  placement="bottom-right"
+  {placement}
 >
   <div class={['sterling-dropdown-2-content', _class]}>
     {@render children?.()}

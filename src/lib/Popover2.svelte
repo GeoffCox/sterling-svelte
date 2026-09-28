@@ -86,6 +86,7 @@
 
       if (allowFlipY) {
         if (popoverRect.top < 0) {
+          // console.log('no space above');
           if (anchorOriginY === 'top') {
             anchorOriginY = 'bottom';
             switch (placementY) {
@@ -98,7 +99,7 @@
             }
           }
         } else if (popoverRect.bottom > viewportHeight) {
-          console.log('no space below');
+          // console.log('no space below');
           if (anchorOriginY === 'bottom') {
             anchorOriginY = 'top';
             switch (placementY) {
@@ -115,7 +116,7 @@
 
       if (allowFlipX) {
         if (popoverRect.left < 0) {
-          console.log('no space left');
+          // console.log('no space left');
           if (anchorOriginX === 'left') {
             anchorOriginX = 'right';
             switch (placementX) {
@@ -128,7 +129,7 @@
             }
           }
         } else if (popoverRect.right > viewportWidth) {
-          console.log('no space right');
+          // console.log('no space right');
           if (anchorOriginX === 'right') {
             anchorOriginX = 'left';
             switch (placementX) {

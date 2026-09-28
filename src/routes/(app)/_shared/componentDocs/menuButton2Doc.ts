@@ -19,10 +19,24 @@ export const menuButton2Doc: ComponentDoc = {
         'Which axis/axes allow the menu to flip to the other side when there is not enough space.'
     },
     {
+      name: 'anchorOrigin',
+      type: 'Popover2Nonant | undefined',
+      default: "'bottom-left'",
+      comment:
+        'The point in a 3x3 grid on the anchor that should be used as the origin for the menu.'
+    },
+    {
       name: 'items',
       type: 'Snippet | undefined',
       default: 'undefined',
       comment: 'The items to display in the menu.'
+    },
+    {
+      name: 'lightDismiss',
+      type: 'boolean | null | undefined',
+      default: 'true',
+      comment:
+        'When true, the menu closes when another element is clicked or focused. Also closes when another dropdown opens.'
     },
     {
       name: 'menuClass',
@@ -31,17 +45,16 @@ export const menuButton2Doc: ComponentDoc = {
       comment: 'Additional class names to apply to the menu.'
     },
     {
-      name: 'menuAnchorOrigin',
-      type: 'Popover2Nonant | undefined',
-      default: "'bottom-left'",
-      comment: 'The point in a 3x3 grid on the button that should be used as the origin.'
+      name: 'offsetX',
+      type: 'number',
+      default: '0',
+      comment: 'The how many pixels to move the menu left (negative) or right (positive).'
     },
     {
-      name: 'menuPlacement',
-      type: "'auto'| Popover2Nonant | undefined",
-      default: "'bottom-right'",
-      comment:
-        "How the menu should be positioned relative to the anchor point. When 'auto', placement follows anchorOrigin."
+      name: 'offsetY',
+      type: 'number',
+      default: '0',
+      comment: 'The how many pixels to move the menu up (negative) or down (positive).'
     },
     {
       name: 'open',
@@ -64,6 +77,13 @@ export const menuButton2Doc: ComponentDoc = {
       name: 'onSelect',
       type: '(value: string) => void',
       comment: 'Called when a descendant menu item is selected.'
+    },
+    {
+      name: 'placement',
+      type: "'auto'| Popover2Nonant | undefined",
+      default: "'bottom-right'",
+      comment:
+        "How the menu should be positioned relative to the anchor point. When 'auto', placement follows anchorOrigin."
     },
     {
       name: 'value',

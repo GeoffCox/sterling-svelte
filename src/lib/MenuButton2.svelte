@@ -16,16 +16,19 @@
 
   let {
     allowFlip = 'both',
+    anchorOrigin = 'bottom-left',
     children,
     class: _class,
     items,
+    lightDismiss = true,
     menuClass,
+    offsetX,
+    offsetY,
     open = $bindable(false),
     onClose,
     onOpen,
     onSelect,
-    menuAnchorOrigin = 'bottom-left',
-    menuPlacement = 'bottom-right',
+    placement = 'bottom-right',
     value,
     ...rest
   }: MenuButton2Props = $props();
@@ -122,9 +125,12 @@
 <Popover2
   id={popoverId}
   {allowFlip}
-  anchorOrigin={menuAnchorOrigin}
+  {anchorOrigin}
+  {lightDismiss}
+  {offsetX}
+  {offsetY}
   bind:open
-  placement={menuPlacement}
+  {placement}
 >
   <Menu bind:this={menuRef} id={menuId} class={menuClass}>
     {@render items?.()}

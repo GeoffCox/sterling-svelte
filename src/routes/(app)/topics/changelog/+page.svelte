@@ -1,8 +1,13 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
-  <h2>2.0.18</h2>
+  <h2>2.0.19</h2>
+  <ul>
+    <li>Updated Dropdown2 and MenuButton2 with more control over the popover.</li>
+    <li>Added docs for MenuItem2</li>
+  </ul>
 
+  <h2>2.0.18</h2>
   <h3>PREVIEW - Popover2</h3>
   <ul>
     <li>Uses the browser Popover API rather than floating-ui</li>
@@ -11,48 +16,42 @@
       Select2 are versions of these components that use Popover2.
     </li>
   </ul>
-
   <h3>Dependency Updates</h3>
   <ul>
     <li>Updated to latest Svelte 5.56.4</li>
     <li>Updated associated Svelte related dependencies and tools</li>
     <li>Updated to Typescript 6</li>
   </ul>
-  <h2>2.0.17</h2>
 
+  <h2>2.0.17</h2>
   <h3>Dialog</h3>
   <ul>
     <li>Removed form element. It interfered with Dialog when within an existing form.</li>
   </ul>
-
   <h3>Select</h3>
   <ul>
     <li>Fixed issue where placement hint was missing on the Popover.</li>
   </ul>
 
   <h2>2.0.16</h2>
-
   <h3>Slider</h3>
   <ul>
     <li>Fixed issue onChange not raised when value is zero.</li>
   </ul>
 
   <h2>2.0.15</h2>
-
   <h3>Radio</h3>
   <ul>
     <li>Fixed issue with bind:group not working when nested in custom component.</li>
   </ul>
 
   <h2>2.0.14</h2>
-
   <h3>Radio</h3>
   <ul>
     <li>Reverted previous fix.</li>
     <li>Fixed issue with checked being bound rather than just initial value.</li>
     <li>Fixed issue with checked class not being in sync with group and value.</li>
   </ul>
-
   <h3>Slider</h3>
   <ul>
     <li>Added support for value to be undefined.</li>
@@ -60,21 +59,18 @@
   </ul>
 
   <h2>2.0.13</h2>
-
   <h3>Radio</h3>
   <ul>
     <li>Fixed issue with checked class not being in sync with group and value.</li>
   </ul>
 
   <h2>2.0.12</h2>
-
   <h3>Splitter</h3>
   <ul>
     <li>Added Splitter component to allow dynamic resizing of 2 panes.</li>
   </ul>
 
   <h2>2.0.11</h2>
-
   <h3>Checkbox</h3>
   <ul>
     <li>Fixed disabled mistakenly bindable. Changed not bindable.</li>
@@ -84,14 +80,12 @@
   </ul>
 
   <h2>2.0.10</h2>
-
   <h3>Slider</h3>
   <ul>
     <li>Fixed bugs with keyboard arrow keys not properly handling reverse.</li>
   </ul>
 
   <h2>2.0.9</h2>
-
   <h3>Slider</h3>
   <ul>
     <li>
@@ -100,56 +94,46 @@
   </ul>
 
   <h2>2.0.8</h2>
-
   <h3>Radio</h3>
   <ul>
     <li>Fixed bug with checked being initially set on hidden input.</li>
   </ul>
 
   <h2>2.0.7</h2>
-
   <h3>Slider</h3>
   <ul>
     <li>Removed unnecessary min/max clamping</li>
     <li>Fixed to immediately ensure valid value on component instantiation</li>
   </ul>
-
   <h3>Tooltip</h3>
   <ul>
     <li>Added missing onOpen event</li>
   </ul>
 
   <h2>2.0.6</h2>
-
   <h3>Autocomplete *NEW*</h3>
   <ul>
     <li>Added Autocomplete component</li>
   </ul>
-
   <h3>Label</h3>
   <ul>
     <li>Added optional form validation to set message and class.</li>
     <li>Added optional form validation to show required indicator.</li>
   </ul>
-
   <h3>Component Props</h3>
-
   <ul>
     <li>Exported all component props types to allow for better composition outside the library.</li>
   </ul>
 
   <h2>2.0.5</h2>
-
   <h3>TextArea</h3>
   <ul>
     <li>Removed empty string default for value to support undefined.</li>
   </ul>
-
   <h3>Tooltip</h3>
   <ul>
     <li>Fixed issue with mouse leave debounce.</li>
   </ul>
-
   <h3>Label</h3>
   <ul>
     <li>Moved tooltip upwards from required indicator to avoid mouse hover conflicts.</li>
@@ -157,7 +141,6 @@
   </ul>
 
   <h2>2.0.4</h2>
-
   <h3>ColorScheme Action (NEW)</h3>
   <ul>
     <li>Added colorScheme action to support sterling-svelte-themes 2.0.</li>
@@ -168,7 +151,6 @@
   <p>
     <b>No breaking changes</b> where props and classes were added, existing ones were not removed.
   </p>
-
   <h3>Dropdown</h3>
   <ul>
     <li>
@@ -186,7 +168,6 @@
       </ul>
     </li>
   </ul>
-
   <h3>MenuItem</h3>
   <ul>
     <li>
@@ -204,12 +185,10 @@
       </ul>
     </li>
   </ul>
-
   <h3>Pagination *NEW*</h3>
   <ul>
     <li>Added Pagination component</li>
   </ul>
-
   <h3>Select</h3>
   <ul>
     <li>
@@ -232,17 +211,14 @@
       </ul>
     </li>
   </ul>
-
   <h3>Slider</h3>
   <ul>
     <li>Fixed thumb from starting a drag operation when dragged perpendicular to the slider.</li>
   </ul>
-
   <h3>Tooltip</h3>
   <ul>
     <li>Added sterling-tooltip-callout class to allow styling of the callout.</li>
   </ul>
-
   <h3>Documentation</h3>
   <ul>
     <li>Better described the HTML structure with classes in anatomy section for each component.</li>
