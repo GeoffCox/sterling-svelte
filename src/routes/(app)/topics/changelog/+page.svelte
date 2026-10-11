@@ -1,6 +1,11 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.20</h2>
+  <ul>
+    <li>Added RangeSlider</li>
+  </ul>
+
   <h2>2.0.19</h2>
   <ul>
     <li>Updated Dropdown2 and MenuButton2 with more control over the popover.</li>

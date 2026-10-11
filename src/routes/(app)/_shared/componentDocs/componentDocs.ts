@@ -27,6 +27,7 @@ import { popoverDoc } from './popoverDoc';
 import { popover2Doc } from './popover2Doc';
 import { progressDoc } from './progressDoc';
 import { radioDoc } from './radioDoc';
+import { rangeSliderDoc } from './rangeSliderDoc';
 import { selectDoc } from './selectDoc';
 import { select2Doc } from './select2Doc';
 import { sliderDoc } from './sliderDoc';
@@ -69,6 +70,7 @@ export const componentDocs: Record<string, ComponentDoc> = {
   popover2: popover2Doc,
   progress: progressDoc,
   radio: radioDoc,
+  rangeslider: rangeSliderDoc,
   select: selectDoc,
   select2: select2Doc,
   slider: sliderDoc,

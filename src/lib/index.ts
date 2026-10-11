@@ -60,6 +60,7 @@ export type { PopoverPlacement, PopoverProps } from './Popover.types';
 export type { ProgressOrientation, ProgressProps } from './Progress.types';
 export type { Popover2FlipAxis, Popover2Nonant, Popover2Props } from './Popover2.types';
 export type { RadioProps } from './Radio.types';
+export type { RangeSliderProps } from './RangeSlider.types';
 export type { SelectProps } from './Select.types';
 export type { SliderProps } from './Slider.types';
 export type { SplitterProps } from './Splitter.types';
@@ -99,6 +100,7 @@ import Popover from './Popover.svelte';
 import Popover2 from './Popover2.svelte';
 import Progress from './Progress.svelte';
 import Radio from './Radio.svelte';
+import RangeSlider from './RangeSlider.svelte';
 import Select from './Select.svelte';
 import Select2 from './Select2.svelte';
 import Slider from './Slider.svelte';
@@ -139,6 +141,7 @@ export {
   Popover2,
   Progress,
   Radio,
+  RangeSlider,
   Select,
   Select2,
   Slider,

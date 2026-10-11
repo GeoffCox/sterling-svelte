@@ -68,6 +68,7 @@
         { name: 'Popover', url: '/components/popover' },
         { name: 'Progress', url: '/components/progress' },
         { name: 'Radio', url: '/components/radio' },
+        { name: 'RangeSlider', url: '/components/rangeslider' },
         { name: 'Select', url: '/components/select' },
         { name: 'Slider', url: '/components/slider' },
         { name: 'Splitter', url: '/components/splitter' },
