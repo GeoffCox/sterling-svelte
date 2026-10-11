@@ -1,7 +1,14 @@
 <svelte:options runes={true} />
 
 <script lang="ts">
-  import { Dropdown2 } from '$lib';
+  import {
+    Dropdown2,
+    ListItem,
+    POPOVER2_NONANTS,
+    Select,
+    type Popover2FlipAxis,
+    type Popover2Nonant
+  } from '$lib';
   import Checkbox from '$lib/Checkbox.svelte';
   import Label from '$lib/Label.svelte';
   import Slider from '$lib/Slider.svelte';
@@ -11,10 +18,19 @@
   import AnimatedProgress from './AnimatedProgress.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
-  let disabled: boolean | null | undefined = $state(false);
-  let open: boolean | null | undefined = $state(false);
-  let lightDismiss: boolean | null | undefined = $state(true);
+  const ANCHOR_ORIGIN_NONANTS = POPOVER2_NONANTS;
+  const PLACEMENT_NONANTS = ['auto', ...POPOVER2_NONANTS];
+
   let _class = $state('');
+
+  let allowFlip = $state<Popover2FlipAxis>('both');
+  let anchorOrigin: Popover2Nonant = $state('bottom-left');
+  let disabled: boolean | null | undefined = $state(false);
+  let lightDismiss = $state(true);
+  let offsetX = $state(0);
+  let offsetY = $state(0);
+  let open: boolean | null | undefined = $state(false);
+  let placement: 'auto' | Popover2Nonant = $state('bottom-right');
 
   let progress = $state(50);
   let animate = $state(false);
@@ -27,9 +43,12 @@
 <Playground {code}>
   {#snippet component()}
     <Dropdown2
-      bind:open
+      {allowFlip}
+      {anchorOrigin}
       {disabled}
       {lightDismiss}
+      bind:open
+      {placement}
       class={_class}
       onOpen={(value) => console.log(`<Dropdown> onOpen value:${value}`)}
     >
@@ -50,6 +69,20 @@
     >
   {/snippet}
   {#snippet props()}
+    <Label text="anchorOrigin">
+      <Select bind:selectedValue={anchorOrigin}>
+        {#each ANCHOR_ORIGIN_NONANTS as anchorOriginItem (anchorOriginItem)}
+          <ListItem value={anchorOriginItem}>{anchorOriginItem}</ListItem>
+        {/each}
+      </Select>
+    </Label>
+    <Label text="placement">
+      <Select bind:selectedValue={placement}>
+        {#each PLACEMENT_NONANTS as placementItem (placementItem)}
+          <ListItem value={placementItem}>{placementItem}</ListItem>
+        {/each}
+      </Select>
+    </Label>
     <Checkbox bind:checked={disabled}>disabled</Checkbox>
     <Checkbox bind:checked={lightDismiss}>lightDismiss</Checkbox>
     <VariantInput bind:class={_class} />

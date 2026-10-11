@@ -21,13 +21,13 @@
   const PLACEMENT_NONANTS = ['auto', ...POPOVER2_NONANTS];
 
   let _class = $state('');
+  let allowFlip = $state<Popover2FlipAxis>('both');
   let anchorOrigin: Popover2Nonant = $state('top-left');
   let lightDismiss = $state(false);
   let offsetX = $state(0);
   let offsetY = $state(0);
   let open = $state(false);
   let placement: 'auto' | Popover2Nonant = $state('auto');
-  let allowFlip = $state<Popover2FlipAxis>('both');
   let text = $state('sterling-svelte');
 
   let anchorElement = $state<HTMLDivElement | undefined>();
