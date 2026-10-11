@@ -1,7 +1,7 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
-  <h2>2.0.20</h2>
+  <h2>2.0.21 / 2.0.20</h2>
   <ul>
     <li>Added RangeSlider</li>
   </ul>
