@@ -7,6 +7,7 @@
   };
 
   let {
+    class: _class,
     horizontal,
     initialPrimarySize,
     minPrimarySize,
@@ -147,7 +148,7 @@
 </script>
 
 <div
-  class={['sterling-splitter', horizontal ? 'horizontal' : 'vertical']}
+  class={['sterling-splitter', horizontal ? 'horizontal' : 'vertical', _class]}
   bind:clientWidth
   bind:clientHeight
   style={splitStyle}
