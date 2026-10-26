@@ -17,7 +17,7 @@
     ...rest
   }: SwitchProps = $props();
 
-  const inputId = id || `Switch-${uuid}`;
+  const inputId = $derived(id || `Switch-${uuid}`);
 
   let inputRef: HTMLInputElement;
 

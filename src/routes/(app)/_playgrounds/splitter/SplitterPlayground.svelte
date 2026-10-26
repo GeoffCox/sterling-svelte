@@ -6,6 +6,7 @@
   import Label from '$lib/Label.svelte';
   import Splitter from '$lib/Splitter.svelte';
   import Playground from '../Playground.svelte';
+  import VariantInput from '../../_shared/ClassInput.svelte';
   import { getPlaygroundCode } from './getPlaygroundCode';
 
   let _class = $state('');
@@ -40,7 +41,7 @@
 {/snippet}
 
 {#snippet exampleNested_Level4()}
-  <Splitter initialPrimarySize="50%" resetOnDoubleClick>
+  <Splitter class={_class} initialPrimarySize="50%" resetOnDoubleClick>
     {#snippet primary()}
       <div class="primary">
         {@render backgroundX()}
@@ -57,7 +58,7 @@
 {/snippet}
 
 {#snippet exampleNested_Level3()}
-  <Splitter initialPrimarySize="66%" resetOnDoubleClick>
+  <Splitter class={_class} initialPrimarySize="66%" resetOnDoubleClick>
     {#snippet primary()}
       {@render exampleNested_Level4()}
     {/snippet}
@@ -71,7 +72,7 @@
 {/snippet}
 
 {#snippet exampleNested_Level2()}
-  <Splitter horizontal initialPrimarySize="50%" resetOnDoubleClick>
+  <Splitter class={_class} horizontal initialPrimarySize="50%" resetOnDoubleClick>
     {#snippet primary()}
       <div class="primary">
         {@render backgroundX()}
@@ -87,7 +88,7 @@
 {/snippet}
 
 {#snippet exampleNested_Level1()}
-  <Splitter initialPrimarySize="30%" resetOnDoubleClick>
+  <Splitter class={_class} initialPrimarySize="30%" resetOnDoubleClick>
     {#snippet primary()}
       <div class="primary">
         {@render backgroundX()}
@@ -144,6 +145,7 @@
       <Input bind:value={minSecondarySize} />
     </Label>
     <Checkbox bind:checked={resetOnDoubleClick}>resetOnDoubleClick</Checkbox>
+    <VariantInput bind:class={_class} sterlingClasses={['composed']} />
   {/snippet}
   {#snippet tweaks()}
     <Checkbox bind:checked={showNestedExample}>Show Nested Example</Checkbox>
@@ -154,11 +156,12 @@
   .splitter-container {
     width: 800px;
     height: 400px;
-    background: var(--stsv-common__background-color--secondary);
+    background: var(--stsv-common__background-color);
   }
 
   .primary,
   .secondary {
+    background: var(--stsv-common__background-color--secondary);
     position: relative;
     display: flex;
     align-items: center;

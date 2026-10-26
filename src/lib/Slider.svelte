@@ -31,9 +31,11 @@
   };
 
   // ensure incoming value is valid to avoid effect lag
-  if (min > max) {
-    console.warn('The slider min is greater than max.');
-  }
+  $effect(() => {
+    if (min > max) {
+      console.warn('The slider min is greater than max.');
+    }
+  });
 
   ensureValueValid();
 

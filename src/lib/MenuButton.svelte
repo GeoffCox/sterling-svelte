@@ -101,7 +101,7 @@
 
   // ----- Context ----- //
 
-  setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, {
+  const menuItemContext: MenuItemContext = {
     depth: 1,
     get openValues() {
       return openValues;
@@ -109,14 +109,24 @@
     set openValues(value: string[]) {
       openValues = value;
     },
-    rootValue: value,
+    get rootValue() {
+      return value;
+    },
     closeContainingMenu: () => {
       open = false;
     },
-    onOpen,
-    onClose,
-    onSelect
-  });
+    get onClose() {
+      return onClose;
+    },
+    get onOpen() {
+      return onClose;
+    },
+    get onSelect() {
+      return onClose;
+    }
+  };
+
+  setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, menuItemContext);
 </script>
 
 <Button

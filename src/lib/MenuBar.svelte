@@ -116,10 +116,18 @@
     set openValues(value: string[]) {
       openValues = value;
     },
-    rootValue,
-    onClose,
-    onOpen,
-    onSelect
+    get rootValue() {
+      return rootValue;
+    },
+    get onClose() {
+      return onClose;
+    },
+    get onOpen() {
+      return onClose;
+    },
+    get onSelect() {
+      return onClose;
+    }
   };
 
   setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, menuItemContext);

@@ -20,23 +20,17 @@
   let listRef: HTMLDivElement;
   let lastSelectedItemRef: HTMLElement;
 
-  let listContext = $state({
-    disabled,
-    selectedValue,
-    horizontal
-  });
-
-  $effect(() => {
-    listContext.disabled = disabled;
-  });
-
-  $effect(() => {
-    listContext.horizontal = horizontal;
-  });
-
-  $effect(() => {
-    listContext.selectedValue = selectedValue;
-  });
+  const listContext: ListContext = {
+    get disabled() {
+      return disabled;
+    },
+    get horizontal() {
+      return horizontal;
+    },
+    get selectedValue() {
+      return selectedValue;
+    }
+  };
 
   setContext<ListContext>(LIST_CONTEXT_KEY, listContext);
 

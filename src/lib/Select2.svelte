@@ -27,8 +27,8 @@
   }: SelectProps = $props();
 
   // backwards compatibility
-  icon = icon || buttonSnippet;
-  value = value || valueSnippet;
+  let _icon = $derived(icon || buttonSnippet);
+  let _value = $derived(value || valueSnippet);
 
   const popoverId = `Select-Popover-${uuid}`;
 
@@ -202,11 +202,11 @@
   onkeydown={onSelectKeydown}
 >
   <div class="value">
-    {#if value}
-      {#if typeof value === 'string'}
-        {value}
+    {#if _value}
+      {#if typeof _value === 'string'}
+        {_value}
       {:else}
-        {@render value(selectedValue)}
+        {@render _value(selectedValue)}
       {/if}
     {:else if selectedValue}
       {selectedValue}
@@ -216,8 +216,8 @@
   </div>
   <!-- button class was initially incorrect, so leaving it here for now -->
   <div class="button icon">
-    {#if icon}
-      {@render icon()}
+    {#if _icon}
+      {@render _icon()}
     {:else}
       <div class="chevron"></div>
     {/if}

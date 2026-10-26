@@ -39,7 +39,8 @@
 
   let displayId = $derived(`${value}-display-${instanceId}`);
   let open = $derived(menuItemContext.openValues?.includes(value));
-  let prevOpen = $state(menuItemContext.openValues?.includes(value));
+  // svelte-ignore state_referenced_locally
+  let prevOpen = menuItemContext.openValues?.includes(value);
   let menuId = $derived(`${value}-menu-${instanceId}`);
 
   let menuItemRef: HTMLButtonElement | undefined = $state();
@@ -330,8 +331,12 @@
     set openValues(value: string[]) {
       menuItemContext.openValues = value;
     },
-    rootValue: menuItemContext.rootValue || value,
-    depth: menuItemContext.depth ? menuItemContext.depth + 1 : 1,
+    get rootValue() {
+      return menuItemContext.rootValue || value;
+    },
+    get depth() {
+      return menuItemContext.depth ? menuItemContext.depth + 1 : 1;
+    },
     closeContainingMenu: closeMenu,
     onOpen: raiseOpen,
     onClose: raiseClose,

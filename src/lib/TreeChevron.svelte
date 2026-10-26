@@ -11,6 +11,7 @@
     ...rest
   }: TreeChevronProps = $props();
 
+  // svelte-ignore state_referenced_locally
   let previousExpanded = expanded;
   let mounted = false;
 

@@ -10,10 +10,11 @@
 
   const listContext = getContext<ListContext>(LIST_CONTEXT_KEY);
 
-  let selected = $state(listContext.selectedValue === value);
-
   // Using $derived would be preferred, but this helps avoid
   // updates to every list item when selectedValue changes.
+  // svelte-ignore state_referenced_locally
+  let selected = $state(listContext.selectedValue === value);
+
   $effect(() => {
     if (listContext.selectedValue === value && !selected) {
       selected = true;

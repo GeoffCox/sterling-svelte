@@ -13,13 +13,14 @@
 
   const tabListContext = getContext<TabListContext>(TAB_LIST_CONTEXT_KEY);
 
+  // Using $derived would be preferred, but this helps avoid
+  // updates to every tab when selectedValue changes.
+  // let selected = $derived(tabContext.selectedValue === value);
+  // svelte-ignore state_referenced_locally
   let selected = $state(tabListContext.selectedValue === value);
 
   let _disabled = $derived(tabListContext.disabled || disabled);
 
-  // Using $derived would be preferred, but this helps avoid
-  // updates to every tab when selectedValue changes.
-  // let selected = $derived(tabContext.selectedValue === value);
   $effect(() => {
     if (tabListContext.selectedValue === value && !selected) {
       selected = true;

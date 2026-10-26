@@ -27,13 +27,11 @@
     ...rest
   }: DropdownProps = $props();
 
-  icon = icon || buttonIcon || button;
-
-  // svelte-ignore non_reactive_update
   let dropdownRef: HTMLDivElement | undefined = $state(undefined);
 
-  // svelte-ignore non_reactive_update
   let popupContentRef: HTMLDivElement | undefined = $state(undefined);
+
+  let _icon = $derived(icon || buttonIcon || button);
 
   // ----- Reactions ----- //
 
@@ -123,8 +121,8 @@
     {/if}
   </div>
   <div class="button icon">
-    {#if icon}
-      {@render icon()}
+    {#if _icon}
+      {@render _icon()}
     {:else}
       <div class="chevron"></div>
     {/if}

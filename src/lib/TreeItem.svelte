@@ -44,6 +44,7 @@
 
   // Using $derived would be preferred, but this helps avoid
   // updates to every tree item when expandedValues changes.
+  // svelte-ignore state_referenced_locally
   let expanded = $state(treeContext.expandedValues?.includes(value));
   $effect(() => {
     let expandedCandidate = treeContext.expandedValues?.includes(value);
@@ -54,6 +55,7 @@
 
   // Using $derived would be preferred, but this helps avoid
   // updates to every list item when selectedValue changes.
+  // svelte-ignore state_referenced_locally
   let selected = $state(treeContext.selectedValue === value);
   $effect(() => {
     if (treeContext.selectedValue === value && !selected) {
