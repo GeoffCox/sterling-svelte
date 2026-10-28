@@ -1,6 +1,12 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.22</h2>
+  <ul>
+    <li>Autocomplete2 - Fixed to remove a warning about reactivityg</li>
+    <li>Updated colorScheme action and ColorSchemeSlider to work properly with lighningcss.</li>
+  </ul>
+
   <h2>2.0.21 / 2.0.20</h2>
   <ul>
     <li>Added RangeSlider</li>
