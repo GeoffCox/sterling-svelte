@@ -3,20 +3,44 @@ type Params = {
 };
 
 const getRootColorScheme = () => {
-  return globalThis.document?.documentElement?.style.getPropertyValue('color-scheme');
-};
-
-const setRootColorScheme = (value: string) => {
-  globalThis.document?.documentElement?.style.setProperty('color-scheme', value);
+  const root = globalThis.document?.documentElement;
+  return root?.style.getPropertyValue('color-scheme');
 };
 
 const clearRootColorScheme = () => {
-  globalThis.document?.documentElement?.style.removeProperty('color-scheme');
+  const root = globalThis.document?.documentElement;
+
+  root?.style.removeProperty('color-scheme');
+  root?.classList.remove('light', 'dark');
+  root?.removeAttribute('data-theme');
+};
+
+const setRootColorScheme = (value?: string) => {
+  if (value) {
+    const root = globalThis.document?.documentElement;
+    if (value === 'light') {
+      root?.style.setProperty('color-scheme', 'light only');
+      root?.classList.remove('dark');
+      root?.classList.add(value);
+      root?.setAttribute('data-theme', value);
+    } else if (value === 'dark') {
+      root?.style.setProperty('color-scheme', 'dark only');
+      root?.classList.remove('light');
+      root?.classList.add(value);
+      root?.setAttribute('data-theme', value);
+    } else {
+      clearRootColorScheme();
+    }
+  } else {
+    clearRootColorScheme();
+  }
 };
 
 export const colorScheme = (_node: HTMLElement, params?: Params) => {
   const originalValue = getRootColorScheme();
-  setRootColorScheme(params?.value || 'light dark');
+
+  const colorScheme = params?.value && params.value !== 'light dark' ? params.value : undefined;
+  setRootColorScheme(colorScheme);
 
   return {
     destroy() {
@@ -27,7 +51,8 @@ export const colorScheme = (_node: HTMLElement, params?: Params) => {
       }
     },
     update(params?: Params) {
-      setRootColorScheme(params?.value || 'light dark');
+      const colorScheme = params?.value && params.value !== 'light dark' ? params.value : undefined;
+      setRootColorScheme(colorScheme);
     }
   };
 };

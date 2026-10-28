@@ -43,7 +43,10 @@
     cookieName?: string;
   };
 
-  let { colorScheme = $bindable('light dark'), cookieName }: Props = $props();
+  const colorSchemes = ['light', 'light dark', 'dark'];
+  const defaultColorSchemeIndex = 1;
+
+  let { colorScheme = $bindable(colorSchemes[1]), cookieName }: Props = $props();
 
   const saveColorScheme = (value: string) => {
     if (globalThis.document && cookieName) {
@@ -57,23 +60,20 @@
     }
   };
 
-  let sliderValue = $derived(colorScheme === 'light dark' ? 1 : colorScheme === 'light' ? 0 : 2);
+  const toSliderValue = (colorScheme: string) => {
+    const index = colorSchemes.indexOf(colorScheme);
+    return index !== -1 ? index : defaultColorSchemeIndex;
+  };
 
-  const onSliderChange = (value: number) => {
-    switch (value) {
-      case 0:
-        colorScheme = 'light';
-        break;
-      case 1:
-        colorScheme = 'light dark';
-        break;
-      case 2:
-        colorScheme = 'dark';
-        break;
-      default:
-        colorScheme = 'light dark';
-        break;
-    }
+  const toColorScheme = (sliderValue: number) => {
+    return colorSchemes[sliderValue] || colorSchemes[defaultColorSchemeIndex];
+  };
+
+  let sliderValue = $derived(toSliderValue(colorScheme));
+
+  const setSliderValue = (value: number) => {
+    sliderValue = value;
+    colorScheme = toColorScheme(sliderValue);
   };
 
   onMount(() => {
@@ -103,7 +103,13 @@
   </div>
 
   <div class="slider">
-    <Slider min={0} max={2} step={1} precision={0} value={sliderValue} onChange={onSliderChange} />
+    <Slider
+      min={0}
+      max={2}
+      step={1}
+      precision={0}
+      bind:value={() => sliderValue, (value) => setSliderValue(value)}
+    />
   </div>
 </div>
 
