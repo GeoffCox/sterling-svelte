@@ -36,7 +36,7 @@
   let list: List | undefined = $state();
 
   let open = $state(false);
-  let filteredValues = $state(values);
+  let filteredValues = $derived(filter(values, inputValue));
   let selectedListValue: string | undefined = $state();
 
   // if the filters items do not include the selectedValue, clear it
@@ -44,11 +44,6 @@
     if (selectedListValue && !filteredValues.includes(selectedListValue)) {
       selectedListValue = undefined;
     }
-  });
-
-  // if the filter, value, or inputValue changes, update the filteredValues
-  $effect(() => {
-    filteredValues = filter(values, inputValue);
   });
 
   const onFocus: FocusEventHandler<HTMLInputElement> = (event) => {
