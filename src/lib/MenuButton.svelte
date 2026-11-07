@@ -115,14 +115,14 @@
     closeContainingMenu: () => {
       open = false;
     },
-    get onClose() {
-      return onClose;
+    onOpen: (value) => {
+      onOpen?.(value);
     },
-    get onOpen() {
-      return onClose;
+    onClose: (value) => {
+      onClose?.(value);
     },
-    get onSelect() {
-      return onClose;
+    onSelect: (value) => {
+      onSelect?.(value);
     }
   };
 

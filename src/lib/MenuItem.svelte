@@ -338,9 +338,15 @@
       return menuItemContext.depth ? menuItemContext.depth + 1 : 1;
     },
     closeContainingMenu: closeMenu,
-    onOpen: raiseOpen,
-    onClose: raiseClose,
-    onSelect: raiseSelect
+    onOpen: (value) => {
+      raiseOpen(value);
+    },
+    onClose: (value) => {
+      raiseClose(value);
+    },
+    onSelect: (value) => {
+      raiseSelect(value);
+    }
   };
 
   setContext<MenuItemContext>(MENU_ITEM_CONTEXT_KEY, menuItemChildContext);

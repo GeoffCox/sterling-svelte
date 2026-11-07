@@ -70,9 +70,6 @@
         {shortcut}
         {value}
         class={_class}
-        onClose={(value) => console.log(`<MenuItem> onClose value'${value}'`)}
-        onOpen={(value) => console.log(`<MenuItem> onOpen value:'${value}'`)}
-        onSelect={(value) => console.log(`<MenuItem> onSelect value:'${value}'`)}
       >
         <MenuItem value="1" text="One" />
         <MenuItem value="2" text="Two" />
@@ -88,9 +85,6 @@
         {text}
         class={_class}
         {menuClass}
-        onClose={(value) => console.log(`<MenuItem> onClose value'${value}'`)}
-        onOpen={(value) => console.log(`<MenuItem> onOpen value:'${value}'`)}
-        onSelect={(value) => console.log(`<MenuItem> onSelect value:'${value}'`)}
       />
     {/if}
   {/snippet}

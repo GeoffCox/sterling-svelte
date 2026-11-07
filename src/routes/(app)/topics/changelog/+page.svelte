@@ -1,9 +1,18 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.23</h2>
+  <ul>
+    <li>MenuBar - Fixed bug introduced with reactivity warning fix</li>
+    <li>MenuButton - Fixed bug introduced with reactivity warning fix</li>
+    <li>MenuItem - Fixed bug introduced with reactivity warning fix</li>
+    <li>MenuItem2 - Fixed bug introduced with reactivity warning fix</li>
+    <li>MenuButton - Fixed bug introduced with reactivity warning fix</li>
+  </ul>
+
   <h2>2.0.22</h2>
   <ul>
-    <li>Autocomplete2 - Fixed to remove a warning about reactivityg</li>
+    <li>(Multiple) - Fixed to remove a warning about reactivity</li>
     <li>Updated colorScheme action and ColorSchemeSlider to work properly with lighningcss.</li>
   </ul>
 
