@@ -50,7 +50,16 @@
   let startPrimarySize: number | undefined = $state();
   let dragging: boolean = $state(false);
 
-  let primarySize = $derived(percent !== undefined ? `${percent}%` : initialPrimarySize);
+  let primarySize = $derived.by(() => {
+    if (primary && secondary) {
+      return percent !== undefined ? `${percent}%` : initialPrimarySize;
+    } else if (primary) {
+      return '100%';
+    } else if (secondary) {
+      return '0%';
+    }
+    return initialPrimarySize;
+  });
 
   let splitCssVars = $derived({
     '--primary-size': `${primarySize || '50%'}`,
@@ -161,22 +170,26 @@
     {@render primary?.()}
   </div>
   <!-- svelte-ignore a11y_no_static_element_interactions -->
-  <div
-    class="split"
-    bind:clientWidth={splitterClientWidth}
-    bind:clientHeight={splitterClientHeight}
-    onpointerdown={onPointerDown}
-    onpointermove={onPointerMove}
-    onpointerup={onPointerUp}
-    ondblclick={onDoubleClick}
-    onkeydown={onKeyDown}
-  >
-    {#if split}
-      {@render split()}
-    {:else}
-      <div class="default-split-line"></div>
-    {/if}
-  </div>
+  {#if primary && secondary}
+    <div
+      class="split"
+      bind:clientWidth={splitterClientWidth}
+      bind:clientHeight={splitterClientHeight}
+      onpointerdown={onPointerDown}
+      onpointermove={onPointerMove}
+      onpointerup={onPointerUp}
+      ondblclick={onDoubleClick}
+      onkeydown={onKeyDown}
+    >
+      {#if split}
+        {@render split()}
+      {:else}
+        <div class="default-split-line"></div>
+      {/if}
+    </div>
+  {:else}
+    <div class="no-split"></div>
+  {/if}
   <div
     class="secondary"
     bind:clientWidth={secondaryClientWidth}

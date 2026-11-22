@@ -1,6 +1,11 @@
 <div class="topic-page">
   <h1>Changelog</h1>
 
+  <h2>2.0.24</h2>
+  <ul>
+    <li>Splitter - added support for not passing primary or secondary</li>
+  </ul>
+
   <h2>2.0.23</h2>
   <ul>
     <li>MenuBar - Fixed bug introduced with reactivity warning fix</li>

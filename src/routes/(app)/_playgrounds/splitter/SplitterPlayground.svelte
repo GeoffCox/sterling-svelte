@@ -16,6 +16,8 @@
   let minSecondarySize = $state('');
   let resetOnDoubleClick = $state(true);
   let showNestedExample = $state(false);
+  let noPrimary = $state(false);
+  let noSecondary = $state(false);
 
   let code = $derived(
     getPlaygroundCode({
@@ -40,66 +42,73 @@
   </svg>
 {/snippet}
 
-{#snippet exampleNested_Level4()}
-  <Splitter class={_class} initialPrimarySize="50%" resetOnDoubleClick>
-    {#snippet primary()}
-      <div class="primary">
-        {@render backgroundX()}
-        <span class="pane-label">3</span>
-      </div>
-    {/snippet}
-    {#snippet secondary()}
-      <div class="secondary">
-        {@render backgroundX()}
-        <span class="pane-label">4</span>
-      </div>
-    {/snippet}
-  </Splitter>
+{#snippet pane(label: string)}
+  <div class="pane">
+    {@render backgroundX()}
+    <span class="pane-label">{label}</span>
+  </div>
 {/snippet}
 
-{#snippet exampleNested_Level3()}
-  <Splitter class={_class} initialPrimarySize="66%" resetOnDoubleClick>
-    {#snippet primary()}
-      {@render exampleNested_Level4()}
-    {/snippet}
-    {#snippet secondary()}
-      <div class="secondary">
-        {@render backgroundX()}
-        <span class="pane-label">5</span>
-      </div>
-    {/snippet}
-  </Splitter>
+{#snippet pane1()}
+  {@render pane('1')}
 {/snippet}
 
-{#snippet exampleNested_Level2()}
-  <Splitter class={_class} horizontal initialPrimarySize="50%" resetOnDoubleClick>
-    {#snippet primary()}
-      <div class="primary">
-        {@render backgroundX()}
-        <span class="pane-label">2</span>
-      </div>
-    {/snippet}
-    {#snippet secondary()}
-      <div class="secondary">
-        {@render exampleNested_Level3()}
-      </div>
-    {/snippet}
-  </Splitter>
+{#snippet pane2()}
+  {@render pane('2')}
 {/snippet}
 
-{#snippet exampleNested_Level1()}
-  <Splitter class={_class} initialPrimarySize="30%" resetOnDoubleClick>
-    {#snippet primary()}
-      <div class="primary">
-        {@render backgroundX()}
-        <span class="pane-label">1</span>
-      </div>
-    {/snippet}
-    {#snippet secondary()}
-      <div class="primary">
-        {@render exampleNested_Level2()}
-      </div>
-    {/snippet}
+{#snippet pane3()}
+  {@render pane('3')}
+{/snippet}
+
+{#snippet pane4()}
+  {@render pane('4')}
+{/snippet}
+
+{#snippet pane5()}
+  {@render pane('5')}
+{/snippet}
+
+{#snippet nestedLevel4()}
+  <Splitter
+    class={_class}
+    initialPrimarySize="50%"
+    resetOnDoubleClick
+    primary={noPrimary ? undefined : pane3}
+    secondary={noSecondary ? undefined : pane4}
+  ></Splitter>
+{/snippet}
+
+{#snippet nestedLevel3()}
+  <Splitter
+    class={_class}
+    initialPrimarySize="66%"
+    resetOnDoubleClick
+    primary={noPrimary ? undefined : nestedLevel4}
+    secondary={noSecondary ? undefined : pane5}
+  ></Splitter>
+{/snippet}
+
+{#snippet nestedLevel2()}
+  <Splitter
+    class={_class}
+    horizontal
+    initialPrimarySize="50%"
+    resetOnDoubleClick
+    primary={noPrimary ? undefined : pane2}
+    secondary={noSecondary ? undefined : nestedLevel3}
+  ></Splitter>
+{/snippet}
+
+{#snippet nested()}
+  <Splitter
+    class={_class}
+    initialPrimarySize="30%"
+    resetOnDoubleClick
+    primary={noPrimary ? undefined : pane1}
+    secondary={noSecondary ? undefined : nestedLevel2}
+  >
+    >
   </Splitter>
 {/snippet}
 
@@ -114,22 +123,11 @@
           {resetOnDoubleClick}
           {horizontal}
           class={_class}
-        >
-          {#snippet primary()}
-            <div class="primary">
-              {@render backgroundX()}
-              <span class="pane-label">1</span>
-            </div>
-          {/snippet}
-          {#snippet secondary()}
-            <div class="secondary">
-              {@render backgroundX()}
-              <span class="pane-label">2</span>
-            </div>
-          {/snippet}
-        </Splitter>
+          primary={noPrimary ? undefined : pane1}
+          secondary={noSecondary ? undefined : pane2}
+        ></Splitter>
       {:else}
-        {@render exampleNested_Level1()}
+        {@render nested()}
       {/if}
     </div>
   {/snippet}
@@ -149,6 +147,8 @@
   {/snippet}
   {#snippet tweaks()}
     <Checkbox bind:checked={showNestedExample}>Show Nested Example</Checkbox>
+    <Checkbox bind:checked={noPrimary}>No primary</Checkbox>
+    <Checkbox bind:checked={noSecondary}>No secondary</Checkbox>
   {/snippet}
 </Playground>
 
@@ -159,8 +159,7 @@
     background: var(--stsv-common__background-color);
   }
 
-  .primary,
-  .secondary {
+  .pane {
     background: var(--stsv-common__background-color--secondary);
     position: relative;
     display: flex;
